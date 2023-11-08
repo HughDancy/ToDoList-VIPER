@@ -20,6 +20,7 @@
 		D86D45222AFB982300894774 /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D45212AFB982300894774 /* ToDoItem.swift */; };
 		D86D45242AFB986E00894774 /* ToDoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D45232AFB986E00894774 /* ToDoStore.swift */; };
 		D86D45262AFB9ADD00894774 /* ToDoListsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D45252AFB9ADD00894774 /* ToDoListsProtocols.swift */; };
+		D86D452A2AFB9EBD00894774 /* ToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D45292AFB9EBD00894774 /* ToDoListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		D86D45212AFB982300894774 /* ToDoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
 		D86D45232AFB986E00894774 /* ToDoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoStore.swift; sourceTree = "<group>"; };
 		D86D45252AFB9ADD00894774 /* ToDoListsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListsProtocols.swift; sourceTree = "<group>"; };
+		D86D45292AFB9EBD00894774 /* ToDoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +179,7 @@
 		D86D451C2AFB971600894774 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D86D45292AFB9EBD00894774 /* ToDoListViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D86D452A2AFB9EBD00894774 /* ToDoListViewController.swift in Sources */,
 				D86D44E62AFB932E00894774 /* ViewController.swift in Sources */,
 				D86D44E22AFB932E00894774 /* AppDelegate.swift in Sources */,
 				D86D45242AFB986E00894774 /* ToDoStore.swift in Sources */,
