@@ -13,11 +13,30 @@ class ToDoCell: UITableViewCell {
     static let reuseIdentifier = "ToDoCell"
     
     //MARK: - Elements
+    private lazy var checkImage: UIImageView = {
+        let circleImage = UIImage(systemName: "circle")
+        let doneImage = UIImage(systemName: "checkmark.circle")
+        let imageView = UIImageView(image: circleImage, highlightedImage: doneImage)
+        imageView.isHighlighted = false
+        imageView.tintColor = .systemGreen
+        
+        return imageView
+    }()
+    
+    private lazy var doneButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.backgroundColor = .clear
+        button.tintColor = .clear
+        button.addTarget(self, action: #selector(makeItDone), for: .touchDown)
+        
+        return button
+    }()
+    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 19, weight: .bold)
+        label.textColor = .systemCyan
         label.numberOfLines = 0
-        
         return label
     }()
     
@@ -42,18 +61,32 @@ class ToDoCell: UITableViewCell {
     
     //MARK: - Setup Elements
     private func setupHierarchy() {
+        contentView.addSubview(doneButton)
+        contentView.addSubview(checkImage)
         contentView.addSubview(titleLabel)
         contentView.addSubview(bodyLabel)
     }
     
     private func setupLayout() {
+        doneButton.snp.makeConstraints { make in
+            make.top.leading.bottom.equalTo(contentView.safeAreaLayoutGuide).inset(10)
+            make.width.equalTo(45)
+        }
+        
+        checkImage.snp.makeConstraints { make in
+            make.top.leading.bottom.equalTo(contentView.safeAreaLayoutGuide).inset(10)
+            make.width.equalTo(45)
+        }
+        
         titleLabel.snp.makeConstraints { make in
-            make.top.leading.equalTo(contentView.safeAreaLayoutGuide).inset(10)
+            make.top.equalTo(contentView.safeAreaLayoutGuide.snp.top).offset(10)
+            make.leading.equalTo(checkImage.snp.trailing).offset(15)
         }
         
         bodyLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
-            make.leading.trailing.equalTo(contentView.safeAreaLayoutGuide).inset(10)
+            make.leading.equalTo(checkImage.snp.trailing).offset(15)
+            make.trailing.equalTo(contentView.safeAreaLayoutGuide).inset(10)
             make.bottom.equalTo(contentView.safeAreaLayoutGuide.snp.bottom).inset(5)
         }
     }
@@ -63,6 +96,14 @@ class ToDoCell: UITableViewCell {
         bodyLabel.text = model.content
     }
     
+    @objc func makeItDone() {
+        if checkImage.isHighlighted {
+            checkImage.isHighlighted = false
+        } else {
+            checkImage.isHighlighted = true
+        }
+    }
+
     override func prepareForReuse() {
         titleLabel.text = nil
         bodyLabel.text = nil

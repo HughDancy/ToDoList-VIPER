@@ -14,9 +14,9 @@ final class ToDoStore {
     static let shared = ToDoStore()
     
     public private(set) var toDos: [ToDoItem] = [
-        ToDoItem(title: "Focus", content: "Decide on what you want to focus in your life"),
-        ToDoItem(title: "Value", content: "Decide on what values are meaningful in your life"),
-        ToDoItem(title: "Action", content: "Decide on what you should do to achieve empowering life")
+        ToDoItem(title: "Focus", content: "Time: - 15:00"),
+        ToDoItem(title: "Value", content: "Time: - 16:00"),
+        ToDoItem(title: "Action", content: "Time: - 18:00")
     ]
     
     func addToDo(_ toDo: ToDoItem) {
