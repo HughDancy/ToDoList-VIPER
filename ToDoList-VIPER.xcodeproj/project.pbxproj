@@ -21,6 +21,7 @@
 		D86D45242AFB986E00894774 /* ToDoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D45232AFB986E00894774 /* ToDoStore.swift */; };
 		D86D45262AFB9ADD00894774 /* ToDoListsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D45252AFB9ADD00894774 /* ToDoListsProtocols.swift */; };
 		D86D452A2AFB9EBD00894774 /* ToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D45292AFB9EBD00894774 /* ToDoListViewController.swift */; };
+		D86D452C2AFCAAAF00894774 /* ToDoListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D452B2AFCAAAF00894774 /* ToDoListPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		D86D45232AFB986E00894774 /* ToDoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoStore.swift; sourceTree = "<group>"; };
 		D86D45252AFB9ADD00894774 /* ToDoListsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListsProtocols.swift; sourceTree = "<group>"; };
 		D86D45292AFB9EBD00894774 /* ToDoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewController.swift; sourceTree = "<group>"; };
+		D86D452B2AFCAAAF00894774 /* ToDoListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +189,7 @@
 		D86D451D2AFB972200894774 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				D86D452B2AFCAAAF00894774 /* ToDoListPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 				D86D45242AFB986E00894774 /* ToDoStore.swift in Sources */,
 				D86D45222AFB982300894774 /* ToDoItem.swift in Sources */,
 				D86D44EC2AFB932E00894774 /* ToDoList_VIPER.xcdatamodeld in Sources */,
+				D86D452C2AFCAAAF00894774 /* ToDoListPresenter.swift in Sources */,
 				D86D45262AFB9ADD00894774 /* ToDoListsProtocols.swift in Sources */,
 				D86D44E42AFB932E00894774 /* SceneDelegate.swift in Sources */,
 			);
