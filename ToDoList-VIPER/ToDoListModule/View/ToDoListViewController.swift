@@ -23,6 +23,7 @@ class ToDoListViewController: UITableViewController {
         let largeAddImage = UIImage(systemName: "plus.circle.fill", withConfiguration: largeConfig)
         button.setImage(largeAddImage, for: .normal)
         button.imageView?.contentMode = .scaleAspectFill
+        button.addTarget(self, action: #selector(addToDo), for: .touchDown)
         return button
     }()
     
@@ -77,8 +78,10 @@ class ToDoListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        
         cell.textLabel?.text = toDos[indexPath.row].title
-        cell.detailTextLabel?.text = toDos[indexPath.row].content
+//        cell.detailTextLabel?.text = toDos[indexPath.row].content
+        cell.detailTextLabel?.text = "Body"
         
         return cell
     }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D80F38722AFCDF12004A408F /* ToDoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F38712AFCDF12004A408F /* ToDoCell.swift */; };
 		D851385A2AFCC9C4004136D7 /* ToDoListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85138592AFCC9C4004136D7 /* ToDoListRouter.swift */; };
 		D86D44E22AFB932E00894774 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D44E12AFB932E00894774 /* AppDelegate.swift */; };
 		D86D44E42AFB932E00894774 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D44E32AFB932E00894774 /* SceneDelegate.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D80F38712AFCDF12004A408F /* ToDoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoCell.swift; sourceTree = "<group>"; };
 		D85138592AFCC9C4004136D7 /* ToDoListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListRouter.swift; sourceTree = "<group>"; };
 		D86D44DE2AFB932E00894774 /* ToDoList-VIPER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ToDoList-VIPER.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D86D44E12AFB932E00894774 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +94,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D80F38702AFCDEFA004A408F /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				D80F38712AFCDF12004A408F /* ToDoCell.swift */,
+			);
+			path = CustomCell;
+			sourceTree = "<group>";
+		};
 		D86D44D52AFB932E00894774 = {
 			isa = PBXGroup;
 			children = (
@@ -185,6 +195,7 @@
 		D86D451C2AFB971600894774 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D80F38702AFCDEFA004A408F /* CustomCell */,
 				D86D45292AFB9EBD00894774 /* ToDoListViewController.swift */,
 			);
 			path = View;
@@ -365,6 +376,7 @@
 				D86D45222AFB982300894774 /* ToDoItem.swift in Sources */,
 				D86D44EC2AFB932E00894774 /* ToDoList_VIPER.xcdatamodeld in Sources */,
 				D86D452E2AFCAD3B00894774 /* ToDoListInteractor.swift in Sources */,
+				D80F38722AFCDF12004A408F /* ToDoCell.swift in Sources */,
 				D86D452C2AFCAAAF00894774 /* ToDoListPresenter.swift in Sources */,
 				D86D45262AFB9ADD00894774 /* ToDoListsProtocols.swift in Sources */,
 				D851385A2AFCC9C4004136D7 /* ToDoListRouter.swift in Sources */,

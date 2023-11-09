@@ -15,9 +15,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        let navVc = UINavigationController(rootViewController: ToDoListViewController())
-        let vc = ViewController()
-        window?.rootViewController = navVc
+        let toDoListView = ToDoListRouter.createToDoListModule()
+        window?.rootViewController = toDoListView
         window?.makeKeyAndVisible()
     }
 

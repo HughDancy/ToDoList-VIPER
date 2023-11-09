@@ -11,19 +11,18 @@ class ToDoListRouter: ToDoListRouterProtocol {
     
     
     static func createToDoListModule() -> UIViewController {
-        
         let presenter: ToDoListPresenterProtocol & ToDoListInteractorOutputProtocol = ToDoListPresenter()
         let interactor: ToDoListInteractorInputProtocol = ToDoListInteractor()
         let router = ToDoListRouter()
         let vc = ToDoListViewController()
+        let navCon = UINavigationController(rootViewController: vc)
         
         vc.presenter = presenter
         presenter.view = vc
         presenter.interactor = interactor
         presenter.router = router
         interactor.presenter = presenter
-        let navCon = UINavigationController(rootViewController: vc)
-        
+      
         return navCon
     }
     
