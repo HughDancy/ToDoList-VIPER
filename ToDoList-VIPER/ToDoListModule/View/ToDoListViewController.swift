@@ -47,7 +47,9 @@ class ToDoListViewController: UITableViewController {
     }
     
     private func setupView() {
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+//        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        self.tableView.register(ToDoCell.self, forCellReuseIdentifier: ToDoCell.reuseIdentifier)
+        self.tableView.showsVerticalScrollIndicator = false
     }
     
     @objc func addToDo() {
@@ -77,13 +79,14 @@ class ToDoListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: ToDoCell.reuseIdentifier, for: indexPath) as? ToDoCell
         
-        cell.textLabel?.text = toDos[indexPath.row].title
+//        cell.textLabel?.text = toDos[indexPath.row].title
 //        cell.detailTextLabel?.text = toDos[indexPath.row].content
-        cell.detailTextLabel?.text = "Body"
+//        cell.detailTextLabel?.text = "Body"
+        cell?.setupElements(with: toDos[indexPath.row])
         
-        return cell
+        return cell ?? UITableViewCell()
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
