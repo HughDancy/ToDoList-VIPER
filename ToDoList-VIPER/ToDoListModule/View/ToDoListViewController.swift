@@ -23,7 +23,6 @@ class ToDoListViewController: UITableViewController {
         let largeAddImage = UIImage(systemName: "plus.circle.fill", withConfiguration: largeConfig)
         button.setImage(largeAddImage, for: .normal)
         button.imageView?.contentMode = .scaleAspectFill
-
         return button
     }()
     
@@ -35,15 +34,8 @@ class ToDoListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupRightBarButton()
-        view.backgroundColor = .yellow
-        title = "Table"
-        
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        setupView()
+        view.backgroundColor = .systemBackground
     }
     
     //MARK: - Setup NavBar Button
@@ -51,78 +43,69 @@ class ToDoListViewController: UITableViewController {
         let menuBarItem = UIBarButtonItem(customView: addButton)
         self.navigationItem.rightBarButtonItem = menuBarItem
         navigationController?.navigationBar.prefersLargeTitles = true
-        
+    }
+    
+    private func setupView() {
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
     }
     
     @objc func addToDo() {
-        print("whoa")
+        let alertController = UIAlertController(title: "Add Todo Item", message: "Enter title and content", preferredStyle: .alert)
+        alertController.addTextField(configurationHandler: nil)
+        alertController.addTextField(configurationHandler: nil)
+        alertController.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { [weak self](_) in
+            let titleText = alertController.textFields![0].text ?? ""
+            let contentText = alertController.textFields![1].text ?? ""
+            guard !titleText.isEmpty else { return }
+            let todoItem = ToDoItem(title: titleText, content: contentText)
+            self?.presenter?.addToDo(todoItem)
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alertController, animated: true, completion: nil)
     }
     
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return toDos.count
     }
     
-    /*
-     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-     let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-     
-     // Configure the cell...
-     
-     return cell
-     }
-     */
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        cell.textLabel?.text = toDos[indexPath.row].title
+        cell.detailTextLabel?.text = toDos[indexPath.row].content
+        
+        return cell
+    }
     
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let toDo = toDos[indexPath.row]
+        presenter?.showToDoDetail(toDo)
+    }
     
-    /*
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     // Delete the row from the data source
-     tableView.deleteRows(at: [indexPath], with: .fade)
-     } else if editingStyle == .insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let toDo = toDos[indexPath.row]
+            presenter?.removeToDo(toDo)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+}
+
+//MARK: - ToDoListViewProtocol Extension
+extension ToDoListViewController: ToDoListViewProtocol {
+    func showToDos(_ toDos: [ToDoItem]) {
+        self.toDos = toDos
+    }
     
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
+    func showErrorMessage(_ message: String) {
+        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alertController, animated: true, completion: nil)
+    }
 }
