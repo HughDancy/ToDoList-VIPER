@@ -47,7 +47,6 @@ class ToDoListViewController: UITableViewController {
     }
     
     private func setupView() {
-//        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         self.tableView.register(ToDoCell.self, forCellReuseIdentifier: ToDoCell.reuseIdentifier)
         self.tableView.showsVerticalScrollIndicator = false
     }
@@ -80,10 +79,6 @@ class ToDoListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ToDoCell.reuseIdentifier, for: indexPath) as? ToDoCell
-        
-//        cell.textLabel?.text = toDos[indexPath.row].title
-//        cell.detailTextLabel?.text = toDos[indexPath.row].content
-//        cell.detailTextLabel?.text = "Body"
         cell?.setupElements(with: toDos[indexPath.row])
         
         return cell ?? UITableViewCell()
@@ -97,8 +92,9 @@ class ToDoListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let toDo = toDos[indexPath.row]
-            presenter?.removeToDo(toDo)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            presenter?.removeToDo(toDo)
+
         }
     }
 }
