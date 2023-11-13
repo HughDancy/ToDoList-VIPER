@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D80F38722AFCDF12004A408F /* ToDoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F38712AFCDF12004A408F /* ToDoCell.swift */; };
+		D851385A2AFCC9C4004136D7 /* ToDoListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85138592AFCC9C4004136D7 /* ToDoListRouter.swift */; };
 		D86D44E22AFB932E00894774 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D44E12AFB932E00894774 /* AppDelegate.swift */; };
 		D86D44E42AFB932E00894774 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D44E32AFB932E00894774 /* SceneDelegate.swift */; };
 		D86D44E62AFB932E00894774 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D44E52AFB932E00894774 /* ViewController.swift */; };
@@ -17,6 +19,12 @@
 		D86D45062AFB933000894774 /* ToDoList_VIPERUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D45052AFB933000894774 /* ToDoList_VIPERUITests.swift */; };
 		D86D45082AFB933000894774 /* ToDoList_VIPERUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D45072AFB933000894774 /* ToDoList_VIPERUITestsLaunchTests.swift */; };
 		D86D45162AFB947B00894774 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D86D45152AFB947B00894774 /* SnapKit */; };
+		D86D45222AFB982300894774 /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D45212AFB982300894774 /* ToDoItem.swift */; };
+		D86D45242AFB986E00894774 /* ToDoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D45232AFB986E00894774 /* ToDoStore.swift */; };
+		D86D45262AFB9ADD00894774 /* ToDoListsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D45252AFB9ADD00894774 /* ToDoListsProtocols.swift */; };
+		D86D452A2AFB9EBD00894774 /* ToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D45292AFB9EBD00894774 /* ToDoListViewController.swift */; };
+		D86D452C2AFCAAAF00894774 /* ToDoListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D452B2AFCAAAF00894774 /* ToDoListPresenter.swift */; };
+		D86D452E2AFCAD3B00894774 /* ToDoListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D452D2AFCAD3B00894774 /* ToDoListInteractor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +45,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D80F38712AFCDF12004A408F /* ToDoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoCell.swift; sourceTree = "<group>"; };
+		D85138592AFCC9C4004136D7 /* ToDoListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListRouter.swift; sourceTree = "<group>"; };
 		D86D44DE2AFB932E00894774 /* ToDoList-VIPER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ToDoList-VIPER.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D86D44E12AFB932E00894774 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D86D44E32AFB932E00894774 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -50,6 +60,12 @@
 		D86D45012AFB933000894774 /* ToDoList-VIPERUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ToDoList-VIPERUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D86D45052AFB933000894774 /* ToDoList_VIPERUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoList_VIPERUITests.swift; sourceTree = "<group>"; };
 		D86D45072AFB933000894774 /* ToDoList_VIPERUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoList_VIPERUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D86D45212AFB982300894774 /* ToDoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
+		D86D45232AFB986E00894774 /* ToDoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoStore.swift; sourceTree = "<group>"; };
+		D86D45252AFB9ADD00894774 /* ToDoListsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListsProtocols.swift; sourceTree = "<group>"; };
+		D86D45292AFB9EBD00894774 /* ToDoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewController.swift; sourceTree = "<group>"; };
+		D86D452B2AFCAAAF00894774 /* ToDoListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListPresenter.swift; sourceTree = "<group>"; };
+		D86D452D2AFCAD3B00894774 /* ToDoListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListInteractor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +94,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D80F38702AFCDEFA004A408F /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				D80F38712AFCDF12004A408F /* ToDoCell.swift */,
+			);
+			path = CustomCell;
+			sourceTree = "<group>";
+		};
 		D86D44D52AFB932E00894774 = {
 			isa = PBXGroup;
 			children = (
@@ -101,13 +125,11 @@
 		D86D44E02AFB932E00894774 /* ToDoList-VIPER */ = {
 			isa = PBXGroup;
 			children = (
-				D86D44E12AFB932E00894774 /* AppDelegate.swift */,
-				D86D44E32AFB932E00894774 /* SceneDelegate.swift */,
+				D86D451B2AFB970400894774 /* Entitys */,
+				D86D45192AFB96F200894774 /* ToDoListModule */,
+				D86D45182AFB967D00894774 /* Resources */,
+				D86D45172AFB966800894774 /* App */,
 				D86D44E52AFB932E00894774 /* ViewController.swift */,
-				D86D44ED2AFB933000894774 /* Assets.xcassets */,
-				D86D44EF2AFB933000894774 /* LaunchScreen.storyboard */,
-				D86D44F22AFB933000894774 /* Info.plist */,
-				D86D44EA2AFB932E00894774 /* ToDoList_VIPER.xcdatamodeld */,
 			);
 			path = "ToDoList-VIPER";
 			sourceTree = "<group>";
@@ -127,6 +149,88 @@
 				D86D45072AFB933000894774 /* ToDoList_VIPERUITestsLaunchTests.swift */,
 			);
 			path = "ToDoList-VIPERUITests";
+			sourceTree = "<group>";
+		};
+		D86D45172AFB966800894774 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				D86D44E12AFB932E00894774 /* AppDelegate.swift */,
+				D86D44E32AFB932E00894774 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		D86D45182AFB967D00894774 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D86D44ED2AFB933000894774 /* Assets.xcassets */,
+				D86D44EF2AFB933000894774 /* LaunchScreen.storyboard */,
+				D86D44F22AFB933000894774 /* Info.plist */,
+				D86D44EA2AFB932E00894774 /* ToDoList_VIPER.xcdatamodeld */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D86D45192AFB96F200894774 /* ToDoListModule */ = {
+			isa = PBXGroup;
+			children = (
+				D86D45202AFB974500894774 /* Protocols */,
+				D86D451C2AFB971600894774 /* View */,
+				D86D451F2AFB973700894774 /* Interactor */,
+				D86D451D2AFB972200894774 /* Presenter */,
+				D86D451E2AFB972F00894774 /* Router */,
+			);
+			path = ToDoListModule;
+			sourceTree = "<group>";
+		};
+		D86D451B2AFB970400894774 /* Entitys */ = {
+			isa = PBXGroup;
+			children = (
+				D86D45212AFB982300894774 /* ToDoItem.swift */,
+				D86D45232AFB986E00894774 /* ToDoStore.swift */,
+			);
+			path = Entitys;
+			sourceTree = "<group>";
+		};
+		D86D451C2AFB971600894774 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D80F38702AFCDEFA004A408F /* CustomCell */,
+				D86D45292AFB9EBD00894774 /* ToDoListViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D86D451D2AFB972200894774 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				D86D452B2AFCAAAF00894774 /* ToDoListPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		D86D451E2AFB972F00894774 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				D85138592AFCC9C4004136D7 /* ToDoListRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		D86D451F2AFB973700894774 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				D86D452D2AFCAD3B00894774 /* ToDoListInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		D86D45202AFB974500894774 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				D86D45252AFB9ADD00894774 /* ToDoListsProtocols.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,9 +369,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D86D452A2AFB9EBD00894774 /* ToDoListViewController.swift in Sources */,
 				D86D44E62AFB932E00894774 /* ViewController.swift in Sources */,
 				D86D44E22AFB932E00894774 /* AppDelegate.swift in Sources */,
+				D86D45242AFB986E00894774 /* ToDoStore.swift in Sources */,
+				D86D45222AFB982300894774 /* ToDoItem.swift in Sources */,
 				D86D44EC2AFB932E00894774 /* ToDoList_VIPER.xcdatamodeld in Sources */,
+				D86D452E2AFCAD3B00894774 /* ToDoListInteractor.swift in Sources */,
+				D80F38722AFCDF12004A408F /* ToDoCell.swift in Sources */,
+				D86D452C2AFCAAAF00894774 /* ToDoListPresenter.swift in Sources */,
+				D86D45262AFB9ADD00894774 /* ToDoListsProtocols.swift in Sources */,
+				D851385A2AFCC9C4004136D7 /* ToDoListRouter.swift in Sources */,
 				D86D44E42AFB932E00894774 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -444,7 +556,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9KN879RV4D;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "ToDoList-VIPER/Info.plist";
+				INFOPLIST_FILE = "ToDoList-VIPER/Resources/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -471,7 +583,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9KN879RV4D;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "ToDoList-VIPER/Info.plist";
+				INFOPLIST_FILE = "ToDoList-VIPER/Resources/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

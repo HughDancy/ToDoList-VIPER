@@ -15,8 +15,8 @@ var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
-        let vc = ViewController()
-        window?.rootViewController = vc
+        let toDoListView = ToDoListRouter.createToDoListModule()
+        window?.rootViewController = toDoListView
         window?.makeKeyAndVisible()
         return true
     }
