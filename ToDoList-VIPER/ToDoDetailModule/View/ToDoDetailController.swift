@@ -17,6 +17,7 @@ class ToDoDetailController: UIViewController {
         let label = UITextField()
         label.borderStyle = .none
         label.isUserInteractionEnabled = false
+        label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
         
         return label
     }()
@@ -25,6 +26,7 @@ class ToDoDetailController: UIViewController {
         let label = UITextField()
         label.borderStyle = .none
         label.isUserInteractionEnabled = false
+        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         
         return label
     }()
@@ -89,12 +91,13 @@ class ToDoDetailController: UIViewController {
     
     private func setupLayout() {
         titleLabel.snp.makeConstraints { make in
-            make.top.leading.equalTo(view.safeAreaLayoutGuide).offset(10)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
+            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(20)
         }
         
         contentLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(10)
-            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(10)
+            make.top.equalTo(titleLabel.snp.bottom).offset(15)
+            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(20)
         }
         
         editButton.snp.makeConstraints { make in
@@ -109,6 +112,7 @@ class ToDoDetailController: UIViewController {
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(10)
             make.height.equalTo(40)
             make.width.equalTo(view.frame.width / 3)
+
         }
         
         deleteButton.snp.makeConstraints { make in
@@ -123,6 +127,7 @@ class ToDoDetailController: UIViewController {
         editButton.isHidden = true
         saveButton.isHidden = false
         titleLabel.isUserInteractionEnabled = true
+        titleLabel.becomeFirstResponder()
         contentLabel.isUserInteractionEnabled = true
     }
 
