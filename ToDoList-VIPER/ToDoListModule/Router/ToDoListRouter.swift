@@ -26,8 +26,10 @@ class ToDoListRouter: ToDoListRouterProtocol {
         return navCon
     }
     
-    func presentToDoDetailScreen(from view: ToDoListViewProtocol, for: ToDoItem) {
-//        let toDoDeatailVc = ToDoDetailRouter.
+    func presentToDoDetailScreen(from view: ToDoListViewProtocol, for toDoItem: ToDoItem) {
+        let toDoDeatailVc = ToDoDetailRouter.createToDoDetailModule(with: toDoItem)
+        guard let viewController = view as? UIViewController else { return }
+        viewController.navigationController?.pushViewController(toDoDeatailVc, animated: true)
     }
     
     
