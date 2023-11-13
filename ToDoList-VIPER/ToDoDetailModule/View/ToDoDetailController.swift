@@ -104,7 +104,7 @@ class ToDoDetailController: UIViewController {
         saveButton.snp.makeConstraints { make in
             make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(20)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(10)
-            make.height.equalTo(40)
+            make.height.equalTo(43)
             make.width.equalTo(50)
         }
         
