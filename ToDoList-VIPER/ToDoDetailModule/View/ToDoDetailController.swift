@@ -36,6 +36,7 @@ class ToDoDetailController: UIViewController {
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
+        button.titleLabel?.textAlignment = .center
         button.addTarget(self, action: #selector(editToDo), for: .touchDown)
         
         return button
@@ -50,6 +51,7 @@ class ToDoDetailController: UIViewController {
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(saveToDo), for: .touchDown)
         button.isHidden = true
+        button.titleLabel?.textAlignment = .center
         return button
     }()
     
@@ -60,6 +62,7 @@ class ToDoDetailController: UIViewController {
         button.backgroundColor = .systemRed
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
+        button.titleLabel?.textAlignment = .center
         button.addTarget(self, action: #selector(deleteToDo), for: .touchDown)
         
         return button
@@ -98,21 +101,21 @@ class ToDoDetailController: UIViewController {
             make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(20)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(10)
             make.height.equalTo(40)
-            make.width.equalTo(50)
+            make.width.equalTo(view.frame.width / 3)
         }
         
         saveButton.snp.makeConstraints { make in
             make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(20)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(10)
             make.height.equalTo(40)
-            make.width.equalTo(50)
+            make.width.equalTo(view.frame.width / 3)
         }
         
         deleteButton.snp.makeConstraints { make in
             make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).inset(20)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(10)
             make.height.equalTo(40)
-            make.width.equalTo(50)
+            make.width.equalTo(view.frame.width / 3)
         }
     }
     
