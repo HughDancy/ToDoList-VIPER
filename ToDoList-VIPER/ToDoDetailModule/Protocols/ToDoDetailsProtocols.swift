@@ -38,7 +38,7 @@ protocol TodoDetailInteractorOutputProtocol: AnyObject {
     
     //INTERACTOR -> PRESENTER
     func didDeleteToDo()
-    func didEditToDo(title: String, content: String)
+    func didEditToDo(_ toDoItem: ToDoItem)
 }
 
 protocol ToDoDetailRouterProtocol: AnyObject {

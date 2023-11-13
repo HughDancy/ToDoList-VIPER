@@ -27,6 +27,7 @@
 		D86D452E2AFCAD3B00894774 /* ToDoListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D452D2AFCAD3B00894774 /* ToDoListInteractor.swift */; };
 		D8E9F8702B01F84F00A3F3FC /* ToDoDetailsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F86F2B01F84F00A3F3FC /* ToDoDetailsProtocols.swift */; };
 		D8E9F8722B01FAFB00A3F3FC /* ToDoDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8712B01FAFB00A3F3FC /* ToDoDetailController.swift */; };
+		D8E9F8742B02178E00A3F3FC /* ToDoDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8732B02178E00A3F3FC /* ToDoDetailPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,7 @@
 		D86D452D2AFCAD3B00894774 /* ToDoListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListInteractor.swift; sourceTree = "<group>"; };
 		D8E9F86F2B01F84F00A3F3FC /* ToDoDetailsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoDetailsProtocols.swift; sourceTree = "<group>"; };
 		D8E9F8712B01FAFB00A3F3FC /* ToDoDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoDetailController.swift; sourceTree = "<group>"; };
+		D8E9F8732B02178E00A3F3FC /* ToDoDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoDetailPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,6 +262,7 @@
 		D8E9F86B2B01F81E00A3F3FC /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				D8E9F8732B02178E00A3F3FC /* ToDoDetailPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -431,6 +434,7 @@
 				D8E9F8702B01F84F00A3F3FC /* ToDoDetailsProtocols.swift in Sources */,
 				D86D45222AFB982300894774 /* ToDoItem.swift in Sources */,
 				D86D44EC2AFB932E00894774 /* ToDoList_VIPER.xcdatamodeld in Sources */,
+				D8E9F8742B02178E00A3F3FC /* ToDoDetailPresenter.swift in Sources */,
 				D86D452E2AFCAD3B00894774 /* ToDoListInteractor.swift in Sources */,
 				D80F38722AFCDF12004A408F /* ToDoCell.swift in Sources */,
 				D86D452C2AFCAAAF00894774 /* ToDoListPresenter.swift in Sources */,
