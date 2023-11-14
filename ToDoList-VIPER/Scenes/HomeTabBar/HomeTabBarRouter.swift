@@ -19,7 +19,7 @@ final class HomeTabBarRouter: HomeTabBarRouterProtocol {
         
         planned.tabBarItem = plannedItem
         
-        let executed = ViewController()
+        let executed = ExecuteToDoRouter.createToDoListModule()
         let execudetItem = UITabBarItem(title: "Выполненно",
                                         image: UIImage(systemName: "circle.badge.checkmark"),
                                         selectedImage: UIImage(systemName: "circle.badge.checkmark.fill"))

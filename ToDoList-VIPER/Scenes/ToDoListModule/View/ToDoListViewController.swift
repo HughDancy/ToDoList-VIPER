@@ -81,8 +81,7 @@ class ToDoListViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: ToDoCell.reuseIdentifier, for: indexPath) as? ToDoCell
         cell?.setupElements(with: toDos[indexPath.row])
         cell?.doneCheckDelegate = self
-        self.doneToDo(with: indexPath.row)
-        
+    
         return cell ?? UITableViewCell()
     }
     
