@@ -103,7 +103,7 @@ class ToDoCell: UITableViewCell {
             checkImage.isHighlighted = false
         } else {
             checkImage.isHighlighted = true
-            doneCheckDelegate?.doneToDo()
+//            doneCheckDelegate?.doneToDo(<#ToDoItem#>)
         }
     }
 

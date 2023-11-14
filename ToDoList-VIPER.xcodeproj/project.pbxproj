@@ -35,6 +35,7 @@
 		D8E9F8892B0370FE00A3F3FC /* ExecuteProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8882B0370FE00A3F3FC /* ExecuteProtocols.swift */; };
 		D8E9F88B2B03768900A3F3FC /* ExecuteToDoInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F88A2B03768900A3F3FC /* ExecuteToDoInteractor.swift */; };
 		D8E9F88D2B0377AE00A3F3FC /* ExecuteToDoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F88C2B0377AE00A3F3FC /* ExecuteToDoPresenter.swift */; };
+		D8E9F88F2B0378B800A3F3FC /* ExecuteToDoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F88E2B0378B800A3F3FC /* ExecuteToDoController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,7 @@
 		D8E9F8882B0370FE00A3F3FC /* ExecuteProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExecuteProtocols.swift; sourceTree = "<group>"; };
 		D8E9F88A2B03768900A3F3FC /* ExecuteToDoInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExecuteToDoInteractor.swift; sourceTree = "<group>"; };
 		D8E9F88C2B0377AE00A3F3FC /* ExecuteToDoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExecuteToDoPresenter.swift; sourceTree = "<group>"; };
+		D8E9F88E2B0378B800A3F3FC /* ExecuteToDoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExecuteToDoController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -363,6 +365,7 @@
 		D8E9F8862B0370C600A3F3FC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D8E9F88E2B0378B800A3F3FC /* ExecuteToDoController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -531,6 +534,7 @@
 				D86D452C2AFCAAAF00894774 /* ToDoListPresenter.swift in Sources */,
 				D8E9F87E2B0353B500A3F3FC /* HomeTabBarRouterProtocol.swift in Sources */,
 				D86D45262AFB9ADD00894774 /* ToDoListsProtocols.swift in Sources */,
+				D8E9F88F2B0378B800A3F3FC /* ExecuteToDoController.swift in Sources */,
 				D851385A2AFCC9C4004136D7 /* ToDoListRouter.swift in Sources */,
 				D86D44E42AFB932E00894774 /* SceneDelegate.swift in Sources */,
 			);

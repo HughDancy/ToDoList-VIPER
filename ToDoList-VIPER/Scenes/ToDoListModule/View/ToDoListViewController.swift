@@ -81,6 +81,7 @@ class ToDoListViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: ToDoCell.reuseIdentifier, for: indexPath) as? ToDoCell
         cell?.setupElements(with: toDos[indexPath.row])
         cell?.doneCheckDelegate = self
+        self.doneToDo(toDos[indexPath.row])
         
         return cell ?? UITableViewCell()
     }
@@ -114,9 +115,7 @@ extension ToDoListViewController: ToDoListViewProtocol {
 }
 
 extension ToDoListViewController: ToDoDoneProtocol {
-    func doneToDo() {
-        print("This ToDo is done")
+    func doneToDo(_ toDo: ToDoItem) {
+        presenter?.doneToDo(toDo)
     }
-    
-    
 }
