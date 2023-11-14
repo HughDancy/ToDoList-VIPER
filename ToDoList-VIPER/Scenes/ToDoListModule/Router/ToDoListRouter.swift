@@ -28,9 +28,8 @@ class ToDoListRouter: ToDoListRouterProtocol {
     
     func presentToDoDetailScreen(from view: ToDoListViewProtocol, for toDoItem: ToDoItem) {
         let toDoDeatailVc = ToDoDetailRouter.createToDoDetailModule(with: toDoItem)
+        toDoDeatailVc.hidesBottomBarWhenPushed = true
         guard let viewController = view as? UIViewController else { return }
         viewController.navigationController?.pushViewController(toDoDeatailVc, animated: true)
     }
-    
-    
 }
