@@ -80,6 +80,7 @@ class ToDoListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ToDoCell.reuseIdentifier, for: indexPath) as? ToDoCell
         cell?.setupElements(with: toDos[indexPath.row])
+        cell?.doneCheckDelegate = self
         
         return cell ?? UITableViewCell()
     }
@@ -110,4 +111,12 @@ extension ToDoListViewController: ToDoListViewProtocol {
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alertController, animated: true, completion: nil)
     }
+}
+
+extension ToDoListViewController: ToDoDoneProtocol {
+    func doneToDo() {
+        print("This ToDo is done")
+    }
+    
+    
 }

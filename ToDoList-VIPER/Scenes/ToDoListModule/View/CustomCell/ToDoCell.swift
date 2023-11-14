@@ -10,6 +10,7 @@ import SnapKit
 
 class ToDoCell: UITableViewCell {
     
+    var doneCheckDelegate: ToDoDoneProtocol?
     static let reuseIdentifier = "ToDoCell"
     
     //MARK: - Elements
@@ -51,6 +52,7 @@ class ToDoCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
+        self.doneCheckDelegate = ToDoListViewController()
         setupHierarchy()
         setupLayout()
     }
@@ -101,6 +103,7 @@ class ToDoCell: UITableViewCell {
             checkImage.isHighlighted = false
         } else {
             checkImage.isHighlighted = true
+            doneCheckDelegate?.doneToDo()
         }
     }
 

@@ -52,3 +52,7 @@ protocol ToDoListRouterProtocol: AnyObject {
     //PRESENTER->ROUTER
     func presentToDoDetailScreen(from view: ToDoListViewProtocol, for: ToDoItem)
 }
+
+protocol ToDoDoneProtocol: AnyObject {
+    func doneToDo()
+}
