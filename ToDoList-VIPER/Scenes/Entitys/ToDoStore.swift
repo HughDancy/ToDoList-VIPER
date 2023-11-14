@@ -19,6 +19,8 @@ final class ToDoStore {
         ToDoItem(title: "Action", content: "Time: - 18:00", date: "14.11.2023")
     ]
     
+    public private(set) var executeToDos: [ToDoItem] = []
+    
     func addToDo(_ toDo: ToDoItem) {
         toDos.append(toDo)
     }
@@ -26,6 +28,13 @@ final class ToDoStore {
     func removeToDo(_ toDo: ToDoItem) {
         if let index = toDos.firstIndex(where: { $0 === toDo }) {
             toDos.remove(at: index)
+        }
+    }
+    
+    func doneToDo(_ toDo: ToDoItem) {
+        if let index = toDos.firstIndex(where: { $0 === toDo }) {
+            toDos.remove(at: index)
+            executeToDos.append(toDo)
         }
     }
 }
