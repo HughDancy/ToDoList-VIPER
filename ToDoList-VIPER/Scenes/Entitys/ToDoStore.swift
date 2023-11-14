@@ -37,4 +37,10 @@ final class ToDoStore {
             executeToDos.append(toDo)
         }
     }
+    
+    func removeExecuteToDo(_ toDo: ToDoItem) {
+        if let index = executeToDos.firstIndex(where: { $0 === toDo}) {
+            executeToDos.remove(at: index)
+        }
+    }
 }
