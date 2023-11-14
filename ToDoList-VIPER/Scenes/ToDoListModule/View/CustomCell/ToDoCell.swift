@@ -12,6 +12,7 @@ class ToDoCell: UITableViewCell {
     
     var doneCheckDelegate: ToDoDoneProtocol?
     static let reuseIdentifier = "ToDoCell"
+    var numberOfRow = -1
     
     //MARK: - Elements
     private lazy var checkImage: UIImageView = {
@@ -103,7 +104,7 @@ class ToDoCell: UITableViewCell {
             checkImage.isHighlighted = false
         } else {
             checkImage.isHighlighted = true
-//            doneCheckDelegate?.doneToDo(<#ToDoItem#>)
+            doneCheckDelegate?.doneToDo(with: self.numberOfRow)
         }
     }
 

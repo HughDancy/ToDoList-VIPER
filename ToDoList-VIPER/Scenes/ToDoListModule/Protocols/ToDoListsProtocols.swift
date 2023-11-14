@@ -56,5 +56,5 @@ protocol ToDoListRouterProtocol: AnyObject {
 }
 
 protocol ToDoDoneProtocol: AnyObject {
-    func doneToDo(_ toDo: ToDoItem)
+    func doneToDo(with index: Int)
 }
