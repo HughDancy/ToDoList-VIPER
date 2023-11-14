@@ -20,7 +20,6 @@ protocol ExecuteToDoPresenterProtocol: AnyObject {
     
     //VIEW -> PRESENTER
     func viewWillAppear()
-    func showToDoDetail(_ toDoItem: ToDoItem)
     func removeToDo(_ toDoItem: ToDoItem)
 }
 
