@@ -59,7 +59,7 @@ class ToDoListViewController: UITableViewController {
             let titleText = alertController.textFields![0].text ?? ""
             let contentText = alertController.textFields![1].text ?? ""
             guard !titleText.isEmpty else { return }
-            let todoItem = ToDoItem(title: titleText, content: contentText)
+            let todoItem = ToDoItem(title: titleText, content: contentText, date: "14.11.2023")
             self?.presenter?.addToDo(todoItem)
         }))
         
