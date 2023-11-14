@@ -30,6 +30,8 @@
 		D8E9F8742B02178E00A3F3FC /* ToDoDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8732B02178E00A3F3FC /* ToDoDetailPresenter.swift */; };
 		D8E9F8762B021B7800A3F3FC /* ToDoDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8752B021B7800A3F3FC /* ToDoDetailInteractor.swift */; };
 		D8E9F8782B021C3C00A3F3FC /* ToDoDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8772B021C3C00A3F3FC /* ToDoDetailRouter.swift */; };
+		D8E9F87C2B03537A00A3F3FC /* HomeTabBarRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F87B2B03537A00A3F3FC /* HomeTabBarRouter.swift */; };
+		D8E9F87E2B0353B500A3F3FC /* HomeTabBarRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F87D2B0353B500A3F3FC /* HomeTabBarRouterProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +78,8 @@
 		D8E9F8732B02178E00A3F3FC /* ToDoDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoDetailPresenter.swift; sourceTree = "<group>"; };
 		D8E9F8752B021B7800A3F3FC /* ToDoDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoDetailInteractor.swift; sourceTree = "<group>"; };
 		D8E9F8772B021C3C00A3F3FC /* ToDoDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoDetailRouter.swift; sourceTree = "<group>"; };
+		D8E9F87B2B03537A00A3F3FC /* HomeTabBarRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarRouter.swift; sourceTree = "<group>"; };
+		D8E9F87D2B0353B500A3F3FC /* HomeTabBarRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarRouterProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,9 +139,7 @@
 		D86D44E02AFB932E00894774 /* ToDoList-VIPER */ = {
 			isa = PBXGroup;
 			children = (
-				D8E9F8692B01F80300A3F3FC /* ToDoDetailModule */,
-				D86D451B2AFB970400894774 /* Entitys */,
-				D86D45192AFB96F200894774 /* ToDoListModule */,
+				D8E9F8792B03532000A3F3FC /* Scenes */,
 				D86D45182AFB967D00894774 /* Resources */,
 				D86D45172AFB966800894774 /* App */,
 				D86D44E52AFB932E00894774 /* ViewController.swift */,
@@ -296,6 +298,26 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		D8E9F8792B03532000A3F3FC /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				D8E9F87A2B03536800A3F3FC /* HomeTabBar */,
+				D86D45192AFB96F200894774 /* ToDoListModule */,
+				D86D451B2AFB970400894774 /* Entitys */,
+				D8E9F8692B01F80300A3F3FC /* ToDoDetailModule */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		D8E9F87A2B03536800A3F3FC /* HomeTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				D8E9F87B2B03537A00A3F3FC /* HomeTabBarRouter.swift */,
+				D8E9F87D2B0353B500A3F3FC /* HomeTabBarRouterProtocol.swift */,
+			);
+			path = HomeTabBar;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -443,9 +465,11 @@
 				D86D44EC2AFB932E00894774 /* ToDoList_VIPER.xcdatamodeld in Sources */,
 				D8E9F8742B02178E00A3F3FC /* ToDoDetailPresenter.swift in Sources */,
 				D8E9F8762B021B7800A3F3FC /* ToDoDetailInteractor.swift in Sources */,
+				D8E9F87C2B03537A00A3F3FC /* HomeTabBarRouter.swift in Sources */,
 				D86D452E2AFCAD3B00894774 /* ToDoListInteractor.swift in Sources */,
 				D80F38722AFCDF12004A408F /* ToDoCell.swift in Sources */,
 				D86D452C2AFCAAAF00894774 /* ToDoListPresenter.swift in Sources */,
+				D8E9F87E2B0353B500A3F3FC /* HomeTabBarRouterProtocol.swift in Sources */,
 				D86D45262AFB9ADD00894774 /* ToDoListsProtocols.swift in Sources */,
 				D851385A2AFCC9C4004136D7 /* ToDoListRouter.swift in Sources */,
 				D86D44E42AFB932E00894774 /* SceneDelegate.swift in Sources */,

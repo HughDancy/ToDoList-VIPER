@@ -73,11 +73,11 @@ class ToDoDetailController: UIViewController {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        tabBarController?.tabBar.isHidden = true
         presenter?.viewDidLoad()
         view.backgroundColor = .systemBackground
         setupHierarchy()
         setupLayout()
-        
     }
     
     //MARK: - Setup Outlets
