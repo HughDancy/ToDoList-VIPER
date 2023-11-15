@@ -30,7 +30,7 @@ class ExecuteToDoController: UITableViewController {
     //MARK: - Setup Elements
     private func setupView() {
         view.backgroundColor = .systemBackground
-        title = "Завершенные"
+        title = "Завершено"
         navigationController?.navigationBar.prefersLargeTitles = true
         self.tableView.register(ToDoCell.self, forCellReuseIdentifier: ToDoCell.reuseIdentifier)
         self.tableView.showsVerticalScrollIndicator = false
