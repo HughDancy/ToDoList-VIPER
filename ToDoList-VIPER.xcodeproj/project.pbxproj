@@ -38,6 +38,7 @@
 		D8E9F88F2B0378B800A3F3FC /* ExecuteToDoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F88E2B0378B800A3F3FC /* ExecuteToDoController.swift */; };
 		D8E9F8912B037EEE00A3F3FC /* ExecuteToDoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8902B037EEE00A3F3FC /* ExecuteToDoRouter.swift */; };
 		D8E9F8992B04BD6200A3F3FC /* AddToDoProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8982B04BD6200A3F3FC /* AddToDoProtocols.swift */; };
+		D8E9F89B2B04BF1700A3F3FC /* AddToDoInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F89A2B04BF1700A3F3FC /* AddToDoInteractor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,7 @@
 		D8E9F88E2B0378B800A3F3FC /* ExecuteToDoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExecuteToDoController.swift; sourceTree = "<group>"; };
 		D8E9F8902B037EEE00A3F3FC /* ExecuteToDoRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExecuteToDoRouter.swift; sourceTree = "<group>"; };
 		D8E9F8982B04BD6200A3F3FC /* AddToDoProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToDoProtocols.swift; sourceTree = "<group>"; };
+		D8E9F89A2B04BF1700A3F3FC /* AddToDoInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToDoInteractor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -413,6 +415,7 @@
 		D8E9F8952B04BD2E00A3F3FC /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				D8E9F89A2B04BF1700A3F3FC /* AddToDoInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -576,6 +579,7 @@
 				D86D45242AFB986E00894774 /* ToDoStore.swift in Sources */,
 				D8E9F8782B021C3C00A3F3FC /* ToDoDetailRouter.swift in Sources */,
 				D8E9F8702B01F84F00A3F3FC /* ToDoDetailsProtocols.swift in Sources */,
+				D8E9F89B2B04BF1700A3F3FC /* AddToDoInteractor.swift in Sources */,
 				D86D45222AFB982300894774 /* ToDoItem.swift in Sources */,
 				D86D44EC2AFB932E00894774 /* ToDoList_VIPER.xcdatamodeld in Sources */,
 				D8E9F8742B02178E00A3F3FC /* ToDoDetailPresenter.swift in Sources */,
