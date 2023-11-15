@@ -34,6 +34,8 @@ class ToDoListViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Запланировано"
+        navigationController?.navigationBar.prefersLargeTitles = true
         setupRightBarButton()
         setupView()
         view.backgroundColor = .systemBackground
@@ -59,7 +61,7 @@ class ToDoListViewController: UITableViewController {
             let titleText = alertController.textFields![0].text ?? ""
             let contentText = alertController.textFields![1].text ?? ""
             guard !titleText.isEmpty else { return }
-            let todoItem = ToDoItem(title: titleText, content: contentText)
+            let todoItem = ToDoItem(title: titleText, content: contentText, date: "14.11.2023")
             self?.presenter?.addToDo(todoItem)
         }))
         
@@ -80,7 +82,9 @@ class ToDoListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ToDoCell.reuseIdentifier, for: indexPath) as? ToDoCell
         cell?.setupElements(with: toDos[indexPath.row])
-        
+        cell?.doneCheckDelegate = self
+        cell?.numberOfRow = indexPath.row
+    
         return cell ?? UITableViewCell()
     }
     
@@ -92,9 +96,10 @@ class ToDoListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let toDo = toDos[indexPath.row]
-//            tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.beginUpdates()
+            tableView.deleteRows(at: [indexPath], with: .fade)
             presenter?.removeToDo(toDo)
-
+            tableView.endUpdates()
         }
     }
 }
@@ -109,5 +114,16 @@ extension ToDoListViewController: ToDoListViewProtocol {
         let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alertController, animated: true, completion: nil)
+    }
+}
+
+extension ToDoListViewController: ToDoDoneProtocol {
+    func doneToDo(with index: Int) {
+        print(index)
+        let pathIndex = IndexPath(item: index, section: 0)
+        tableView.beginUpdates()
+        presenter?.doneToDo(toDos[index])
+        tableView.deleteRows(at: [pathIndex], with: .middle)
+        tableView.endUpdates()
     }
 }

@@ -30,6 +30,10 @@ final class ToDoListPresenter: ToDoListPresenterProtocol {
     func removeToDo(_ toDoItem: ToDoItem) {
         interactor?.deleteToDo(toDoItem)
     }
+    
+    func doneToDo(_ toDoItem: ToDoItem) {
+        interactor?.doneToDo(toDoItem)
+    }
 }
 
 extension ToDoListPresenter: ToDoListInteractorOutputProtocol {

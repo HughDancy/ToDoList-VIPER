@@ -10,7 +10,9 @@ import SnapKit
 
 class ToDoCell: UITableViewCell {
     
+    weak var doneCheckDelegate: ToDoDoneProtocol?
     static let reuseIdentifier = "ToDoCell"
+    var numberOfRow = -1
     
     //MARK: - Elements
     private lazy var checkImage: UIImageView = {
@@ -96,17 +98,22 @@ class ToDoCell: UITableViewCell {
         bodyLabel.text = model.content
     }
     
+    func executeToDo() {
+        checkImage.isHighlighted = true
+        doneButton.isHidden = true
+    }
+    
     @objc func makeItDone() {
-        if checkImage.isHighlighted {
-            checkImage.isHighlighted = false
-        } else {
+        if checkImage.isHighlighted == false  {
             checkImage.isHighlighted = true
+            doneCheckDelegate?.doneToDo(with: self.numberOfRow)
         }
     }
 
     override func prepareForReuse() {
         titleLabel.text = nil
         bodyLabel.text = nil
+        checkImage.isHighlighted = false
     }
     
 }
