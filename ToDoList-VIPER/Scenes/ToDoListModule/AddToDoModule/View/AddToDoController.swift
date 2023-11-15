@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 class AddToDoController: UIViewController, AddToDoViewProtocol {
-
+    
     var presenter: AddToDoPresenterProtocol?
     
     //MARK: - Elements
@@ -23,8 +23,8 @@ class AddToDoController: UIViewController, AddToDoViewProtocol {
         button.addTarget(self, action: #selector(addNewTask), for: .touchDown)
         return button
     }()
-
- 
+    
+    
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,7 +77,7 @@ class AddToDoController: UIViewController, AddToDoViewProtocol {
         let toDoItem = ToDoItem(title: taskName, content: description, date: "25.11.2023")
         presenter?.addToDo(toDoItem)
     }
-
-
-
+    
+    
+    
 }

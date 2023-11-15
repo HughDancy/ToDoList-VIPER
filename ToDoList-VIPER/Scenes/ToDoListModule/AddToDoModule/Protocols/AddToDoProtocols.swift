@@ -22,7 +22,7 @@ protocol AddToDoPresenterProtocol: AnyObject {
 }
 
 protocol AddToDoInteractorInputProtocol: AnyObject {
-    var presenter: AddToDoInteractorOutputProtocol? { get set }
+    var presenter: AddToDoPresenterProtocol? { get set }
     
     //PRESENTER -> INTERACTOR
     func saveToDo(_ toDoItem: ToDoItem)

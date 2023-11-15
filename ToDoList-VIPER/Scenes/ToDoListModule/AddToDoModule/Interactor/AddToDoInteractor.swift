@@ -8,7 +8,7 @@
 import Foundation
 
 class AddToDoInteractor: AddToDoInteractorInputProtocol {
-    var presenter: AddToDoInteractorOutputProtocol?
+    var presenter: AddToDoPresenterProtocol?
     var toDoStore = ToDoStore.shared
     var toDos: [ToDoItem] {
         return toDoStore.toDos
@@ -16,7 +16,7 @@ class AddToDoInteractor: AddToDoInteractorInputProtocol {
     
     func saveToDo(_ toDoItem: ToDoItem) {
         toDoStore.addToDo(toDoItem)
-        presenter?.didAddToDo(toDoItem)
+        presenter?.addToDo(toDoItem)
     }
     
     

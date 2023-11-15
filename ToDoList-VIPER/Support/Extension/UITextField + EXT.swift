@@ -15,6 +15,7 @@ extension UITextField {
         textField.leftView = view
         textField.leftViewMode = .always
         textField.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        textField.backgroundColor = .systemGray6
             
         return textField
     }
