@@ -100,9 +100,7 @@ class ToDoCell: UITableViewCell {
     }
     
     @objc func makeItDone() {
-        if checkImage.isHighlighted {
-            checkImage.isHighlighted = false
-        } else {
+        if checkImage.isHighlighted == false  {
             checkImage.isHighlighted = true
             doneCheckDelegate?.doneToDo(with: self.numberOfRow)
         }
@@ -111,6 +109,7 @@ class ToDoCell: UITableViewCell {
     override func prepareForReuse() {
         titleLabel.text = nil
         bodyLabel.text = nil
+        checkImage.isHighlighted = false
     }
     
 }

@@ -33,8 +33,8 @@ final class ToDoStore {
     
     func doneToDo(_ toDo: ToDoItem) {
         if let index = toDos.firstIndex(where: { $0 === toDo }) {
-            toDos.remove(at: index)
             executeToDos.append(toDo)
+            toDos.remove(at: index)
         }
     }
     
