@@ -10,7 +10,7 @@ import SnapKit
 
 class ToDoCell: UITableViewCell {
     
-    var doneCheckDelegate: ToDoDoneProtocol?
+    weak var doneCheckDelegate: ToDoDoneProtocol?
     static let reuseIdentifier = "ToDoCell"
     var numberOfRow = -1
     
@@ -53,7 +53,6 @@ class ToDoCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
-        self.doneCheckDelegate = ToDoListViewController()
         setupHierarchy()
         setupLayout()
     }
@@ -97,6 +96,11 @@ class ToDoCell: UITableViewCell {
     func setupElements(with model: ToDoItem) {
         titleLabel.text = model.title
         bodyLabel.text = model.content
+    }
+    
+    func executeToDo() {
+        checkImage.isHighlighted = true
+        doneButton.isHidden = true
     }
     
     @objc func makeItDone() {

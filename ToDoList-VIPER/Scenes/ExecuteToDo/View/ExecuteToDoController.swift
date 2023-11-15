@@ -50,7 +50,7 @@ class ExecuteToDoController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ToDoCell.reuseIdentifier, for: indexPath) as? ToDoCell
         cell?.setupElements(with: executeToDos[indexPath.row])
-        
+        cell?.executeToDo()
         return cell ?? UITableViewCell()
     }
 }
