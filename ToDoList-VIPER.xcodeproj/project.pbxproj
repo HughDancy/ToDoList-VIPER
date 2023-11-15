@@ -37,6 +37,7 @@
 		D8E9F88D2B0377AE00A3F3FC /* ExecuteToDoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F88C2B0377AE00A3F3FC /* ExecuteToDoPresenter.swift */; };
 		D8E9F88F2B0378B800A3F3FC /* ExecuteToDoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F88E2B0378B800A3F3FC /* ExecuteToDoController.swift */; };
 		D8E9F8912B037EEE00A3F3FC /* ExecuteToDoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8902B037EEE00A3F3FC /* ExecuteToDoRouter.swift */; };
+		D8E9F8992B04BD6200A3F3FC /* AddToDoProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8982B04BD6200A3F3FC /* AddToDoProtocols.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,7 @@
 		D8E9F88C2B0377AE00A3F3FC /* ExecuteToDoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExecuteToDoPresenter.swift; sourceTree = "<group>"; };
 		D8E9F88E2B0378B800A3F3FC /* ExecuteToDoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExecuteToDoController.swift; sourceTree = "<group>"; };
 		D8E9F8902B037EEE00A3F3FC /* ExecuteToDoRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExecuteToDoRouter.swift; sourceTree = "<group>"; };
+		D8E9F8982B04BD6200A3F3FC /* AddToDoProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToDoProtocols.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +199,7 @@
 		D86D45192AFB96F200894774 /* ToDoListModule */ = {
 			isa = PBXGroup;
 			children = (
+				D8E9F8922B04BD1500A3F3FC /* AddToDoModule */,
 				D8E9F8692B01F80300A3F3FC /* ToDoDetailModule */,
 				D86D45202AFB974500894774 /* Protocols */,
 				D86D451C2AFB971600894774 /* View */,
@@ -381,6 +384,54 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		D8E9F8922B04BD1500A3F3FC /* AddToDoModule */ = {
+			isa = PBXGroup;
+			children = (
+				D8E9F8972B04BD5100A3F3FC /* Protocols */,
+				D8E9F8962B04BD4C00A3F3FC /* View */,
+				D8E9F8952B04BD2E00A3F3FC /* Interactor */,
+				D8E9F8942B04BD2800A3F3FC /* Presenter */,
+				D8E9F8932B04BD2100A3F3FC /* Router */,
+			);
+			path = AddToDoModule;
+			sourceTree = "<group>";
+		};
+		D8E9F8932B04BD2100A3F3FC /* Router */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		D8E9F8942B04BD2800A3F3FC /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		D8E9F8952B04BD2E00A3F3FC /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		D8E9F8962B04BD4C00A3F3FC /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D8E9F8972B04BD5100A3F3FC /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				D8E9F8982B04BD6200A3F3FC /* AddToDoProtocols.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -541,6 +592,7 @@
 				D8E9F88F2B0378B800A3F3FC /* ExecuteToDoController.swift in Sources */,
 				D851385A2AFCC9C4004136D7 /* ToDoListRouter.swift in Sources */,
 				D86D44E42AFB932E00894774 /* SceneDelegate.swift in Sources */,
+				D8E9F8992B04BD6200A3F3FC /* AddToDoProtocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
