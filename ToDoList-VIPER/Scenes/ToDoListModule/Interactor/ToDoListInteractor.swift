@@ -31,5 +31,6 @@ class ToDoListInteractor: ToDoListInteractorInputProtocol {
     
     func doneToDo(_ toDoItem: ToDoItem) {
         toDoStore.doneToDo(toDoItem)
+        presenter?.didRemoveToDo(toDoItem)
     }
 }

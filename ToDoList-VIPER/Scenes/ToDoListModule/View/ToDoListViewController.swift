@@ -118,7 +118,10 @@ extension ToDoListViewController: ToDoListViewProtocol {
 extension ToDoListViewController: ToDoDoneProtocol {
     func doneToDo(with index: Int) {
         print(index)
+        let pathIndex = IndexPath(item: index, section: 0)
+        tableView.beginUpdates()
         presenter?.doneToDo(toDos[index])
-//        tableView.deleteRows(at: IndexPath, with: .fade)
+        tableView.deleteRows(at: [pathIndex], with: .middle)
+        tableView.endUpdates()
     }
 }
