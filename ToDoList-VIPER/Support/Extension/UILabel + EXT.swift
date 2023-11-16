@@ -8,10 +8,11 @@
 import UIKit
 
 extension UILabel {
-    static func createToDoLabel(fontSize: CGFloat, weight: UIFont.Weight) -> UILabel {
+    static func createToDoLabel(fontSize: CGFloat, weight: UIFont.Weight, title: String) -> UILabel {
         let label = UILabel()
+        label.text = title
         label.font = UIFont.systemFont(ofSize: fontSize, weight: weight)
-        label.textColor = .systemPink
+        label.textColor = .systemBlue
         label.textAlignment = .left
         return label
     }

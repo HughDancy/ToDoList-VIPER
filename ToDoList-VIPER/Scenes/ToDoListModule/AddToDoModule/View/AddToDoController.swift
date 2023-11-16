@@ -13,9 +13,9 @@ class AddToDoController: UIViewController, AddToDoViewProtocol {
     var presenter: AddToDoPresenterProtocol?
     
     //MARK: - Elements
-    private lazy var taskLabel = UILabel.createToDoLabel(fontSize: 20, weight: .bold)
-    private lazy var descriptionLabel = UILabel.createToDoLabel(fontSize: 20, weight: .bold)
-    private lazy var dateLabel = UILabel.createToDoLabel(fontSize: 20, weight: .bold)
+    private lazy var taskLabel = UILabel.createToDoLabel(fontSize: 20, weight: .bold, title: "Задача")
+    private lazy var descriptionLabel = UILabel.createToDoLabel(fontSize: 20, weight: .bold, title: "Описание")
+    private lazy var dateLabel = UILabel.createToDoLabel(fontSize: 20, weight: .bold, title: "Дата")
     private lazy var taskNameField = UITextField.createToDoTextField()
     private lazy var descriptionTaskField = UITextField.createToDoTextField()
     private lazy var addButton: UIButton =  {
@@ -23,15 +23,6 @@ class AddToDoController: UIViewController, AddToDoViewProtocol {
         button.addTarget(self, action: #selector(addNewTask), for: .touchDown)
         return button
     }()
-    
-    private lazy var label: UILabel = {
-       let label = UILabel()
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 19, weight: .bold)
-        label.text = "Hello"
-        return label
-    }()
-    
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -47,6 +38,7 @@ class AddToDoController: UIViewController, AddToDoViewProtocol {
         view.addSubview(taskNameField)
         view.addSubview(descriptionLabel)
         view.addSubview(descriptionTaskField)
+        view.addSubview(dateLabel)
         view.addSubview(addButton)
     }
     
@@ -74,8 +66,13 @@ class AddToDoController: UIViewController, AddToDoViewProtocol {
             make.height.equalTo(35)
         }
         
+        dateLabel.snp.makeConstraints { make in
+            make.top.equalTo(descriptionTaskField.snp.bottom).offset(10)
+            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(15)
+        }
+        
         addButton.snp.makeConstraints { make in
-            make.top.equalTo(descriptionLabel.snp.bottom).offset(25)
+            make.top.equalTo(dateLabel.snp.bottom).offset(25)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.height.equalTo(35)
         }
@@ -87,7 +84,6 @@ class AddToDoController: UIViewController, AddToDoViewProtocol {
         let toDoItem = ToDoItem(title: taskName, content: description, date: "25.11.2023")
         presenter?.addToDo(toDoItem)
         presenter?.goBack()
-//        presenter?.router?.navigateBackToListViewController(from: self)
     }
     
     
