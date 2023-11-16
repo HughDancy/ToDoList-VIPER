@@ -25,7 +25,7 @@ final class AddToDoRouter: AddToDoRouterProtocol {
     
     func navigateBackToListViewController(from view: AddToDoViewProtocol) {
         guard let view = view as? UIViewController else { return }
-        view.navigationController?.popViewController(animated: true)
+        view.dismiss(animated: true)
     }
     
 }

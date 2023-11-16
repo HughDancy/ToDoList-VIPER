@@ -31,7 +31,7 @@ protocol AddToDoInteractorInputProtocol: AnyObject {
 
 protocol AddToDoInteractorOutputProtocol: AnyObject {
     //INTERACTOR -> PRESENTER
-    func didAddToDo(_ toDoItem: ToDoItem)
+    func backToMain()
 }
 
 protocol AddToDoRouterProtocol: AnyObject {

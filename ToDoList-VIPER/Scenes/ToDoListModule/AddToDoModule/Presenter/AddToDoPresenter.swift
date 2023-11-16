@@ -24,4 +24,14 @@ final class AddToDoPresenter: AddToDoPresenterProtocol {
     }
 }
 
+extension AddToDoPresenter: AddToDoInteractorOutputProtocol {
+    func backToMain() {
+        if let view = view {
+            router?.navigateBackToListViewController(from: view)
+        }
+    }
+    
+    
+}
+
 
