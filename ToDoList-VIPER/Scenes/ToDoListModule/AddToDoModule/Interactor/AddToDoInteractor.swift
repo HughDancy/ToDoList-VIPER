@@ -16,8 +16,8 @@ class AddToDoInteractor: AddToDoInteractorInputProtocol {
     
     func saveToDo(_ toDoItem: ToDoItem) {
         toDoStore.addToDo(toDoItem)
-        presenter?.addToDo(toDoItem)
+//        presenter?.addToDo(toDoItem)
     }
-    
-    
 }
+
+

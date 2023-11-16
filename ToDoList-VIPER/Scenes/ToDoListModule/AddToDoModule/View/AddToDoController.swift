@@ -83,7 +83,7 @@ class AddToDoController: UIViewController, AddToDoViewProtocol {
               let description = descriptionTaskField.text else { return }
         let toDoItem = ToDoItem(title: taskName, content: description, date: "25.11.2023")
         presenter?.addToDo(toDoItem)
-        presenter?.goBack()
+//        presenter?.goBack()
     }
     
     
