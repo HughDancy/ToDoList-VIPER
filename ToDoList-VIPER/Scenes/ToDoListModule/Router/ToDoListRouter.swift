@@ -36,6 +36,7 @@ class ToDoListRouter: ToDoListRouterProtocol {
         let addToDoVc = AddToDoRouter.createAddToDoModule()
         guard let viewController = view as? UIViewController else { return }
         addToDoVc.modalPresentationStyle = .formSheet
+        addToDoVc.preferredContentSize = .init(width: 300, height: 300)
         viewController.present(addToDoVc, animated: true)
     }
 }

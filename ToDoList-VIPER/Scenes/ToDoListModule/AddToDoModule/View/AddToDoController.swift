@@ -79,11 +79,19 @@ class AddToDoController: UIViewController, AddToDoViewProtocol {
     }
     
     @objc func addNewTask() {
-        guard let taskName = taskNameField.text,
-              let description = descriptionTaskField.text else { return }
-        let toDoItem = ToDoItem(title: taskName, content: description, date: "25.11.2023")
-        presenter?.addToDo(toDoItem)
-//        presenter?.goBack()
+        if taskNameField.text?.isEmpty != true && descriptionTaskField.text?.isEmpty != true {
+            let toDoItem = ToDoItem(title: taskNameField.text ?? "Default", content: descriptionTaskField.text ?? "Default", date: "25.11.2023")
+            presenter?.addToDo(toDoItem)
+        } else {
+            let alertVc = UIAlertController(title: "Ошибка",
+                                            message: "Вы не заполнили как минимум одно из обязательных полей для добавления задачи",
+                                            preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "Ok", style: .cancel)
+            alertVc.addAction(alertAction)
+            self.present(alertVc, animated: true)
+        }
+       
+
     }
     
     
