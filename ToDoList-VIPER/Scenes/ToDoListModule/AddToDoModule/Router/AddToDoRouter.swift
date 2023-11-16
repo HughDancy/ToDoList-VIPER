@@ -13,7 +13,6 @@ final class AddToDoRouter: AddToDoRouterProtocol {
         let view = AddToDoController()
         let interactor: AddToDoInteractorInputProtocol = AddToDoInteractor()
         let router: AddToDoRouterProtocol = AddToDoRouter()
-        let navVc = UINavigationController(rootViewController: view)
         
         view.presenter = presenter
         presenter.view = view
@@ -21,8 +20,12 @@ final class AddToDoRouter: AddToDoRouterProtocol {
         presenter.router = router
         interactor.presenter = presenter
         
-        return navVc
+        return view
     }
     
+    func navigateBackToListViewController(from view: AddToDoViewProtocol) {
+        guard let view = view as? UIViewController else { return }
+        view.navigationController?.popViewController(animated: true)
+    }
     
 }

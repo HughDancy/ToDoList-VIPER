@@ -22,6 +22,7 @@ protocol ToDoListPresenterProtocol: AnyObject {
     //VIEW -> PRESENTER
     func viewWillAppear()
     func showToDoDetail(_ toDoItem: ToDoItem)
+    func showAddToDo()
     func addToDo(_ toDoItem: ToDoItem)
     func removeToDo(_ toDoItem: ToDoItem)
     func doneToDo(_ toDoItem: ToDoItem)
@@ -53,6 +54,7 @@ protocol ToDoListRouterProtocol: AnyObject {
     
     //PRESENTER->ROUTER
     func presentToDoDetailScreen(from view: ToDoListViewProtocol, for: ToDoItem)
+    func goAddToDoScreen(from view: ToDoListViewProtocol)
 }
 
 protocol ToDoDoneProtocol: AnyObject {

@@ -24,12 +24,21 @@ class AddToDoController: UIViewController, AddToDoViewProtocol {
         return button
     }()
     
+    private lazy var label: UILabel = {
+       let label = UILabel()
+        label.textColor = .black
+        label.font = UIFont.systemFont(ofSize: 19, weight: .bold)
+        label.text = "Hello"
+        return label
+    }()
+    
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
         setupHierarchy()
-        setupHierarchy()
+        setupLayout()
     }
     
     //MARK: - Setup Elements
@@ -42,6 +51,7 @@ class AddToDoController: UIViewController, AddToDoViewProtocol {
     }
     
     private func setupLayout() {
+        
         taskLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(25)
             make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(15)
@@ -76,6 +86,8 @@ class AddToDoController: UIViewController, AddToDoViewProtocol {
               let description = descriptionTaskField.text else { return }
         let toDoItem = ToDoItem(title: taskName, content: description, date: "25.11.2023")
         presenter?.addToDo(toDoItem)
+        presenter?.goBack()
+//        presenter?.router?.navigateBackToListViewController(from: self)
     }
     
     

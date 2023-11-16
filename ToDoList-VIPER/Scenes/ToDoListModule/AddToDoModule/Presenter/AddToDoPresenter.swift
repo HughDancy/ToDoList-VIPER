@@ -8,6 +8,7 @@
 import Foundation
 
 final class AddToDoPresenter: AddToDoPresenterProtocol {
+  
     weak var view: AddToDoViewProtocol?
     var interactor: AddToDoInteractorInputProtocol?
     var router: AddToDoRouterProtocol?
@@ -15,5 +16,11 @@ final class AddToDoPresenter: AddToDoPresenterProtocol {
     func addToDo(_ toDoItem: ToDoItem) {
         interactor?.saveToDo(toDoItem)
     }
+    
+    func goBack() {
+        guard let view = view else { return }
+        router?.navigateBackToListViewController(from: view)
+    }
 }
+
 

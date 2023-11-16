@@ -11,6 +11,7 @@ extension UILabel {
     static func createToDoLabel(fontSize: CGFloat, weight: UIFont.Weight) -> UILabel {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: fontSize, weight: weight)
+        label.textColor = .systemPink
         label.textAlignment = .left
         return label
     }

@@ -8,8 +8,7 @@
 import UIKit
 
 class ToDoListRouter: ToDoListRouterProtocol {
-    
-    
+  
     static func createToDoListModule() -> UIViewController {
         let presenter: ToDoListPresenterProtocol & ToDoListInteractorOutputProtocol = ToDoListPresenter()
         let interactor: ToDoListInteractorInputProtocol = ToDoListInteractor()
@@ -31,5 +30,12 @@ class ToDoListRouter: ToDoListRouterProtocol {
         toDoDeatailVc.hidesBottomBarWhenPushed = true
         guard let viewController = view as? UIViewController else { return }
         viewController.navigationController?.pushViewController(toDoDeatailVc, animated: true)
+    }
+    
+    func goAddToDoScreen(from view: ToDoListViewProtocol) {
+        let addToDoVc = AddToDoRouter.createAddToDoModule()
+        guard let viewController = view as? UIViewController else { return }
+        addToDoVc.modalPresentationStyle = .formSheet
+        viewController.present(addToDoVc, animated: true)
     }
 }

@@ -18,6 +18,7 @@ protocol AddToDoPresenterProtocol: AnyObject {
     
     //VIEW -> PRESENTER
     func addToDo(_ toDoItem: ToDoItem)
+    func goBack()
 
 }
 
@@ -35,5 +36,5 @@ protocol AddToDoInteractorOutputProtocol: AnyObject {
 
 protocol AddToDoRouterProtocol: AnyObject {
     static func createAddToDoModule() -> UIViewController
-    
+    func navigateBackToListViewController(from view: AddToDoViewProtocol)
 }
