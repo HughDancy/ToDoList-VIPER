@@ -8,6 +8,7 @@
 import Foundation
 
 final class ToDoListPresenter: ToDoListPresenterProtocol {
+  
     //MARK: - Elemetns
     weak var view: ToDoListViewProtocol?
     var interactor: ToDoListInteractorInputProtocol?
@@ -23,8 +24,9 @@ final class ToDoListPresenter: ToDoListPresenterProtocol {
         router?.presentToDoDetailScreen(from: view, for: toDoItem)
     }
     
-    func addToDo(_ toDoItem: ToDoItem) {
-        interactor?.saveToDo(toDoItem)
+    func showAddToDo() {
+        guard let view = view else { return }
+        router?.goAddToDoScreen(from: view)
     }
     
     func removeToDo(_ toDoItem: ToDoItem) {
@@ -37,10 +39,6 @@ final class ToDoListPresenter: ToDoListPresenterProtocol {
 }
 
 extension ToDoListPresenter: ToDoListInteractorOutputProtocol {
-    func didAddToDo(_ toDoItem: ToDoItem) {
-        interactor?.retriveToDos()
-    }
-    
     func didRemoveToDo(_ toDoItem: ToDoItem) {
         interactor?.retriveToDos()
     }
@@ -48,10 +46,4 @@ extension ToDoListPresenter: ToDoListInteractorOutputProtocol {
     func didRetriveToDos(_ toDoItems: [ToDoItem]) {
         view?.showToDos(toDoItems)
     }
-    
-    func onError(_ error: String) {
-        view?.showErrorMessage(error)
-    }
-    
-    
 }

@@ -19,11 +19,6 @@ class ToDoListInteractor: ToDoListInteractorInputProtocol {
         presenter?.didRetriveToDos(toDos)
     }
     
-    func saveToDo(_ toDoItem: ToDoItem) {
-        toDoStore.addToDo(toDoItem)
-        presenter?.didAddToDo(toDoItem)
-    }
-    
     func deleteToDo(_ toDoItem: ToDoItem) {
         toDoStore.removeToDo(toDoItem)
         presenter?.didRemoveToDo(toDoItem)

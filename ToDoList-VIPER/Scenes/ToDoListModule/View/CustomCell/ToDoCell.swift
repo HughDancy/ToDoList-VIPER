@@ -95,7 +95,7 @@ class ToDoCell: UITableViewCell {
     
     func setupElements(with model: ToDoItem) {
         titleLabel.text = model.title
-        bodyLabel.text = model.content
+        bodyLabel.text = model.date
     }
     
     func executeToDo() {
