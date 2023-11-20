@@ -46,6 +46,7 @@
 		D8E9F8A72B04D58900A3F3FC /* UIButton + EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8A62B04D58900A3F3FC /* UIButton + EXT.swift */; };
 		D8E9F8A92B04D96600A3F3FC /* AddToDoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8A82B04D96600A3F3FC /* AddToDoRouter.swift */; };
 		D8E9F8AF2B0B40FE00A3F3FC /* UIDatePicker + EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8AE2B0B40FE00A3F3FC /* UIDatePicker + EXT.swift */; };
+		D8E9F8B12B0B47FB00A3F3FC /* DateFormatter + EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8B02B0B47FB00A3F3FC /* DateFormatter + EXT.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +109,7 @@
 		D8E9F8A62B04D58900A3F3FC /* UIButton + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton + EXT.swift"; sourceTree = "<group>"; };
 		D8E9F8A82B04D96600A3F3FC /* AddToDoRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToDoRouter.swift; sourceTree = "<group>"; };
 		D8E9F8AE2B0B40FE00A3F3FC /* UIDatePicker + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDatePicker + EXT.swift"; sourceTree = "<group>"; };
+		D8E9F8B02B0B47FB00A3F3FC /* DateFormatter + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter + EXT.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -468,6 +470,7 @@
 				D8E9F8A42B04D32B00A3F3FC /* UITextField + EXT.swift */,
 				D8E9F8A62B04D58900A3F3FC /* UIButton + EXT.swift */,
 				D8E9F8AE2B0B40FE00A3F3FC /* UIDatePicker + EXT.swift */,
+				D8E9F8B02B0B47FB00A3F3FC /* DateFormatter + EXT.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -614,6 +617,7 @@
 				D8E9F8722B01FAFB00A3F3FC /* ToDoDetailController.swift in Sources */,
 				D8E9F89D2B04BFAB00A3F3FC /* AddToDoPresenter.swift in Sources */,
 				D8E9F89F2B04C06300A3F3FC /* AddToDoController.swift in Sources */,
+				D8E9F8B12B0B47FB00A3F3FC /* DateFormatter + EXT.swift in Sources */,
 				D86D44E22AFB932E00894774 /* AppDelegate.swift in Sources */,
 				D86D45242AFB986E00894774 /* ToDoStore.swift in Sources */,
 				D8E9F8782B021C3C00A3F3FC /* ToDoDetailRouter.swift in Sources */,

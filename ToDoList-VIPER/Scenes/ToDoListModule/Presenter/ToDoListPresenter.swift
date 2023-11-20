@@ -29,10 +29,6 @@ final class ToDoListPresenter: ToDoListPresenterProtocol {
         router?.goAddToDoScreen(from: view)
     }
     
-    func addToDo(_ toDoItem: ToDoItem) {
-        interactor?.saveToDo(toDoItem)
-    }
-    
     func removeToDo(_ toDoItem: ToDoItem) {
         interactor?.deleteToDo(toDoItem)
     }
@@ -43,10 +39,6 @@ final class ToDoListPresenter: ToDoListPresenterProtocol {
 }
 
 extension ToDoListPresenter: ToDoListInteractorOutputProtocol {
-    func didAddToDo(_ toDoItem: ToDoItem) {
-        interactor?.retriveToDos()
-    }
-    
     func didRemoveToDo(_ toDoItem: ToDoItem) {
         interactor?.retriveToDos()
     }
@@ -54,10 +46,4 @@ extension ToDoListPresenter: ToDoListInteractorOutputProtocol {
     func didRetriveToDos(_ toDoItems: [ToDoItem]) {
         view?.showToDos(toDoItems)
     }
-    
-    func onError(_ error: String) {
-        view?.showErrorMessage(error)
-    }
-    
-    
 }

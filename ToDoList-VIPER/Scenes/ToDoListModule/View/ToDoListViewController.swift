@@ -48,6 +48,7 @@ class ToDoListViewController: UITableViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
+    //MARK: - Setup Elements
     private func setupView() {
         self.tableView.register(ToDoCell.self, forCellReuseIdentifier: ToDoCell.reuseIdentifier)
         self.tableView.showsVerticalScrollIndicator = false
@@ -96,17 +97,10 @@ extension ToDoListViewController: ToDoListViewProtocol {
     func showToDos(_ toDos: [ToDoItem]) {
         self.toDos = toDos
     }
-    
-    func showErrorMessage(_ message: String) {
-        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alertController, animated: true, completion: nil)
-    }
 }
 
 extension ToDoListViewController: ToDoDoneProtocol {
     func doneToDo(with index: Int) {
-        print(index)
         let pathIndex = IndexPath(item: index, section: 0)
         tableView.beginUpdates()
         presenter?.doneToDo(toDos[index])
