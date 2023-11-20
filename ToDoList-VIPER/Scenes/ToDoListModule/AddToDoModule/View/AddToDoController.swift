@@ -13,12 +13,16 @@ class AddToDoController: UIViewController, AddToDoViewProtocol {
     var presenter: AddToDoPresenterProtocol?
     
     //MARK: - Elements
-    private lazy var taskLabel = UILabel.createToDoLabel(fontSize: 20, weight: .bold, title: "Задача")
+    private lazy var taskLabel =  UILabel.createToDoLabel(fontSize: 20, weight: .bold, title: "Задача")
     private lazy var descriptionLabel = UILabel.createToDoLabel(fontSize: 20, weight: .bold, title: "Описание")
     private lazy var dateLabel = UILabel.createToDoLabel(fontSize: 20, weight: .bold, title: "Дата")
-    private lazy var taskNameField = UITextField.createToDoTextField()
+    private lazy var taskNameField: UITextField = {
+        let taskName = UITextField.createToDoTextField()
+        taskName.becomeFirstResponder()
+        return taskName
+    }()
     private lazy var descriptionTaskField = UITextField.createToDoTextField()
-    private lazy var toDoCalendar = UICalendarView.createToDoCalendar()
+    private lazy var datePicker = UIDatePicker.createToDoPicker()
     private lazy var addButton: UIButton =  {
         let button = UIButton.createToDoButton(title: "Добавить", backColor: .systemBlue, tintColor: .white)
         button.addTarget(self, action: #selector(addNewTask), for: .touchDown)
@@ -40,12 +44,11 @@ class AddToDoController: UIViewController, AddToDoViewProtocol {
         view.addSubview(descriptionLabel)
         view.addSubview(descriptionTaskField)
         view.addSubview(dateLabel)
-        view.addSubview(toDoCalendar)
+        view.addSubview(datePicker)
         view.addSubview(addButton)
     }
     
     private func setupLayout() {
-        
         taskLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(25)
             make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(15)
@@ -73,14 +76,14 @@ class AddToDoController: UIViewController, AddToDoViewProtocol {
             make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(15)
         }
         
-        toDoCalendar.snp.makeConstraints { make in
+        datePicker.snp.makeConstraints { make in
             make.top.equalTo(dateLabel.snp.bottom).offset(5)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(15)
             make.height.equalTo(view.frame.height / 2)
         }
         
         addButton.snp.makeConstraints { make in
-            make.top.equalTo(toDoCalendar.snp.bottom).offset(25)
+            make.top.equalTo(datePicker.snp.bottom).offset(25)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.height.equalTo(35)
         }
@@ -88,7 +91,11 @@ class AddToDoController: UIViewController, AddToDoViewProtocol {
     
     @objc func addNewTask() {
         if taskNameField.text?.isEmpty != true && descriptionTaskField.text?.isEmpty != true {
-            let toDoItem = ToDoItem(title: taskNameField.text ?? "Default", content: descriptionTaskField.text ?? "Default", date: "25.11.2023")
+            let dateFormater = DateFormatter()
+            dateFormater.dateStyle = .medium
+            let date = dateFormater.string(from: datePicker.date)
+            print(date)
+            let toDoItem = ToDoItem(title: taskNameField.text ?? "Default", content: descriptionTaskField.text ?? "Default", date: date)
             presenter?.addToDo(toDoItem)
         } else {
             let alertVc = UIAlertController(title: "Ошибка",
@@ -99,5 +106,6 @@ class AddToDoController: UIViewController, AddToDoViewProtocol {
             self.present(alertVc, animated: true)
         }
     }
+    
 }
 
