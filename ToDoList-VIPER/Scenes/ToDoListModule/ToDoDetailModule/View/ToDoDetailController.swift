@@ -17,8 +17,17 @@ class ToDoDetailController: UIViewController {
         let label = UITextField()
         label.borderStyle = .none
         label.isUserInteractionEnabled = false
-        label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 55, weight: .bold)
+        label.textColor = .systemBlue
         
+        return label
+    }()
+    
+    private lazy var descripTionLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 30, weight: .semibold)
+        label.textAlignment = .left
+        label.text = "Описание: "
         return label
     }()
     
@@ -70,6 +79,15 @@ class ToDoDetailController: UIViewController {
         return button
     }()
     
+    private lazy var buttonsStack: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.spacing = 10
+        
+        return stackView
+    }()
+    
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,6 +101,7 @@ class ToDoDetailController: UIViewController {
     //MARK: - Setup Outlets
     private func setupHierarchy() {
         view.addSubview(titleLabel)
+        view.addSubview(descripTionLabel)
         view.addSubview(contentLabel)
         view.addSubview(editButton)
         view.addSubview(saveButton)
@@ -95,31 +114,32 @@ class ToDoDetailController: UIViewController {
             make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(20)
         }
         
+        descripTionLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(20)
+        }
+        
         contentLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(15)
+            make.top.equalTo(descripTionLabel.snp.bottom).offset(15)
             make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(20)
         }
         
         editButton.snp.makeConstraints { make in
-            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(20)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(10)
+            make.centerY.equalTo(view.safeAreaLayoutGuide.snp.centerY).offset(170)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.height.equalTo(40)
-            make.width.equalTo(view.frame.width / 3)
         }
         
         saveButton.snp.makeConstraints { make in
-            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(20)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(10)
+            make.centerY.equalTo(view.safeAreaLayoutGuide.snp.centerY).offset(170)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.height.equalTo(40)
-            make.width.equalTo(view.frame.width / 3)
-
         }
         
         deleteButton.snp.makeConstraints { make in
-            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).inset(20)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(10)
+            make.top.equalTo(editButton.snp.bottom).offset(10)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.height.equalTo(40)
-            make.width.equalTo(view.frame.width / 3)
         }
     }
     
@@ -130,7 +150,7 @@ class ToDoDetailController: UIViewController {
         titleLabel.becomeFirstResponder()
         contentLabel.isUserInteractionEnabled = true
     }
-
+    
     @objc func deleteToDo() {
         presenter?.deleteToDo()
     }

@@ -99,6 +99,7 @@ extension ToDoListViewController: ToDoListViewProtocol {
     }
 }
 
+//MARK: - ToDoDoneProtocol Extension
 extension ToDoListViewController: ToDoDoneProtocol {
     func doneToDo(with index: Int) {
         let pathIndex = IndexPath(item: index, section: 0)
