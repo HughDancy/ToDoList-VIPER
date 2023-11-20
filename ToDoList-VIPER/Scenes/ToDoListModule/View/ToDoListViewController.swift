@@ -55,23 +55,9 @@ class ToDoListViewController: UITableViewController {
     
     @objc func addToDo() {
         self.presenter?.showAddToDo()
-//        let alertController = UIAlertController(title: "Add Todo Item", message: "Enter title and content", preferredStyle: .alert)
-//        alertController.addTextField(configurationHandler: nil)
-//        alertController.addTextField(configurationHandler: nil)
-//        alertController.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { [weak self](_) in
-//            let titleText = alertController.textFields![0].text ?? ""
-//            let contentText = alertController.textFields![1].text ?? ""
-//            guard !titleText.isEmpty else { return }
-//            let todoItem = ToDoItem(title: titleText, content: contentText, date: "14.11.2023")
-//            self?.presenter?.addToDo(todoItem)
-//        }))
-//        
-//        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-//        present(alertController, animated: true, completion: nil)
     }
     
     // MARK: - Table view data source
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }

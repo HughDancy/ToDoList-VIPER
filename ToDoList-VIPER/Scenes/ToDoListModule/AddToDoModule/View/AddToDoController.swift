@@ -18,6 +18,7 @@ class AddToDoController: UIViewController, AddToDoViewProtocol {
     private lazy var dateLabel = UILabel.createToDoLabel(fontSize: 20, weight: .bold, title: "Дата")
     private lazy var taskNameField = UITextField.createToDoTextField()
     private lazy var descriptionTaskField = UITextField.createToDoTextField()
+    private lazy var toDoCalendar = UICalendarView.createToDoCalendar()
     private lazy var addButton: UIButton =  {
         let button = UIButton.createToDoButton(title: "Добавить", backColor: .systemBlue, tintColor: .white)
         button.addTarget(self, action: #selector(addNewTask), for: .touchDown)
@@ -39,6 +40,7 @@ class AddToDoController: UIViewController, AddToDoViewProtocol {
         view.addSubview(descriptionLabel)
         view.addSubview(descriptionTaskField)
         view.addSubview(dateLabel)
+        view.addSubview(toDoCalendar)
         view.addSubview(addButton)
     }
     
@@ -71,8 +73,14 @@ class AddToDoController: UIViewController, AddToDoViewProtocol {
             make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(15)
         }
         
+        toDoCalendar.snp.makeConstraints { make in
+            make.top.equalTo(dateLabel.snp.bottom).offset(5)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(15)
+            make.height.equalTo(view.frame.height / 2)
+        }
+        
         addButton.snp.makeConstraints { make in
-            make.top.equalTo(dateLabel.snp.bottom).offset(25)
+            make.top.equalTo(toDoCalendar.snp.bottom).offset(25)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.height.equalTo(35)
         }
@@ -90,10 +98,6 @@ class AddToDoController: UIViewController, AddToDoViewProtocol {
             alertVc.addAction(alertAction)
             self.present(alertVc, animated: true)
         }
-       
-
     }
-    
-    
-    
 }
+
