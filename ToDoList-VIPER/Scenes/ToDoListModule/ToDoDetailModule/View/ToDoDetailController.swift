@@ -125,19 +125,22 @@ class ToDoDetailController: UIViewController {
         }
         
         editButton.snp.makeConstraints { make in
-            make.centerY.equalTo(view.safeAreaLayoutGuide.snp.centerY).offset(170)
+//            make.centerY.equalTo(view.safeAreaLayoutGuide.snp.centerY).offset(170)
+            make.bottom.equalTo(deleteButton.snp.top).offset(-15)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.height.equalTo(40)
         }
         
         saveButton.snp.makeConstraints { make in
-            make.centerY.equalTo(view.safeAreaLayoutGuide.snp.centerY).offset(170)
+//            make.centerY.equalTo(view.safeAreaLayoutGuide.snp.centerY).offset(170)
+            make.bottom.equalTo(deleteButton.snp.top).offset(-15)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.height.equalTo(40)
         }
         
         deleteButton.snp.makeConstraints { make in
-            make.top.equalTo(editButton.snp.bottom).offset(10)
+//            make.top.equalTo(editButton.snp.bottom).offset(10)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(25)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.height.equalTo(40)
         }
