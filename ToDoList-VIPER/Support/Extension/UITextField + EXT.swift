@@ -28,29 +28,4 @@ extension UITextField {
         label.textColor = .systemBlue
         return label
     }
-    
-    static func createTextField(with screen: ScreensEnam) -> UITextField {
-        switch screen {
-        case .addToDo:
-            let textField = UITextField()
-            textField.borderStyle = .roundedRect
-            let view = UIView(frame: CGRect(x: 0, y: 0, width: 13, height: 0))
-            textField.leftView = view
-            textField.leftViewMode = .always
-            textField.font = UIFont.systemFont(ofSize: 14, weight: .medium)
-            textField.backgroundColor = .systemGray6
-            return textField
-        case .detailToDO:
-            let label = UITextField()
-            label.borderStyle = .none
-            label.isUserInteractionEnabled = false
-            label.font = UIFont.systemFont(ofSize: 55, weight: .bold)
-            label.textColor = .systemBlue
-            return label
-        default:
-            let textField = UITextField()
-            textField.placeholder = "Temponary textField, change method in UITextField + EXT file"
-            return textField
-        }
-    }
 }
