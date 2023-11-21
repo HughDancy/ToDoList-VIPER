@@ -35,6 +35,7 @@ protocol AddToDoInteractorOutputProtocol: AnyObject {
 }
 
 protocol AddToDoRouterProtocol: AnyObject {
-    static func createAddToDoModule() -> UIViewController
+    static func createAddToDoModule(with parrentView: ToDoListViewProtocol) -> UIViewController
     func navigateBackToListViewController(from view: AddToDoViewProtocol)
 }
+

@@ -8,13 +8,14 @@
 import UIKit
 
 final class AddToDoRouter: AddToDoRouterProtocol {
-    static func createAddToDoModule() -> UIViewController {
+    static func createAddToDoModule(with parrentView: ToDoListViewProtocol) -> UIViewController {
         let presenter: AddToDoPresenter = AddToDoPresenter()
         let view = AddToDoController()
         let interactor: AddToDoInteractorInputProtocol = AddToDoInteractor()
         let router: AddToDoRouterProtocol = AddToDoRouter()
         
         view.presenter = presenter
+        view.parrentView = parrentView
         presenter.view = view
         presenter.interactor = interactor
         presenter.router = router

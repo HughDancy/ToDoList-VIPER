@@ -41,6 +41,10 @@ class ToDoListViewController: UITableViewController {
         view.backgroundColor = .systemBackground
     }
     
+    deinit {
+        print("ToDoListController is ☠️")
+    }
+    
     //MARK: - Setup NavBar Button
     private func setupRightBarButton() {
         let menuBarItem = UIBarButtonItem(customView: addButton)

@@ -33,7 +33,7 @@ class ToDoListRouter: ToDoListRouterProtocol {
     }
     
     func goAddToDoScreen(from view: ToDoListViewProtocol) {
-        let addToDoVc = AddToDoRouter.createAddToDoModule()
+        let addToDoVc = AddToDoRouter.createAddToDoModule(with: view)
         guard let viewController = view as? UIViewController else { return }
         addToDoVc.modalPresentationStyle = .formSheet
         viewController.present(addToDoVc, animated: true)
