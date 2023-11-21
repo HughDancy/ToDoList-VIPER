@@ -19,4 +19,13 @@ extension UITextField {
             
         return textField
     }
+    
+    static func createDetailTextField(textSize: CGFloat, weight: UIFont.Weight, color: UIColor, borderStyle: BorderStyle, interaction: Bool) -> UITextField {
+        let label = UITextField()
+        label.borderStyle = .none
+        label.isUserInteractionEnabled = false
+        label.font = UIFont.systemFont(ofSize: textSize, weight: weight)
+        label.textColor = .systemBlue
+        return label
+    }
 }

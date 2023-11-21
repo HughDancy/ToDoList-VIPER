@@ -41,6 +41,10 @@ class ToDoListViewController: UITableViewController {
         view.backgroundColor = .systemBackground
     }
     
+    deinit {
+        print("ToDoListController is ☠️")
+    }
+    
     //MARK: - Setup NavBar Button
     private func setupRightBarButton() {
         let menuBarItem = UIBarButtonItem(customView: addButton)
@@ -99,6 +103,7 @@ extension ToDoListViewController: ToDoListViewProtocol {
     }
 }
 
+//MARK: - ToDoDoneProtocol Extension
 extension ToDoListViewController: ToDoDoneProtocol {
     func doneToDo(with index: Int) {
         let pathIndex = IndexPath(item: index, section: 0)

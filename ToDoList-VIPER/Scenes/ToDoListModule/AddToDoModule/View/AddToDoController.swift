@@ -11,6 +11,7 @@ import SnapKit
 class AddToDoController: UIViewController, AddToDoViewProtocol {
     
     var presenter: AddToDoPresenterProtocol?
+    var parrentView: ToDoListViewProtocol?
     
     //MARK: - Elements
     private lazy var taskLabel =  UILabel.createToDoLabel(fontSize: 20, weight: .bold, title: "Задача")
@@ -35,6 +36,10 @@ class AddToDoController: UIViewController, AddToDoViewProtocol {
         view.backgroundColor = .systemBackground
         setupHierarchy()
         setupLayout()
+    }
+    
+    deinit {
+        print("AddToDoController is ☠️")
     }
     
     //MARK: - Setup Elements
@@ -95,6 +100,7 @@ class AddToDoController: UIViewController, AddToDoViewProtocol {
                                     content: descriptionTaskField.text ?? "Default",
                                     date: DateFormatter.createMediumDate(from: datePicker.date))
             presenter?.addToDo(toDoItem)
+            parrentView?.presenter?.viewWillAppear()
         } else {
             let alertVc = UIAlertController(title: "Ошибка",
                                             message: "Вы не заполнили как минимум одно из обязательных полей для добавления задачи",

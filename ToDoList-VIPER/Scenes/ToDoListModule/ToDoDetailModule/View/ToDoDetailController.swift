@@ -13,22 +13,48 @@ class ToDoDetailController: UIViewController {
     var presenter: ToDoDetailPresenterProtocol?
     
     //MARK: - Outlets
-    private lazy var titleLabel: UITextField = {
-        let label = UITextField()
-        label.borderStyle = .none
-        label.isUserInteractionEnabled = false
-        label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
-        
+    private lazy var titleLabel: UITextView = {
+        let textView = UITextView()
+        textView.font = UIFont.systemFont(ofSize: 45, weight: .bold)
+        textView.textColor = .systemBlue
+        textView.isScrollEnabled = false
+        textView.isUserInteractionEnabled = false
+        return textView
+    }()
+    
+    private lazy var timeLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 25, weight: .semibold)
+        label.textAlignment = .left
+        label.text = "Дата: "
         return label
     }()
     
-    private lazy var contentLabel: UITextField = {
-        let label = UITextField()
-        label.borderStyle = .none
-        label.isUserInteractionEnabled = false
-        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+    private lazy var datePicker: UIDatePicker = {
+        let picker = UIDatePicker()
+        picker.datePickerMode = .date
+        picker.preferredDatePickerStyle = .compact
+        picker.locale = .current
+        picker.isUserInteractionEnabled = false
         
+        return picker
+    }()
+    
+    private lazy var descripTionLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 25, weight: .semibold)
+        label.textAlignment = .left
+        label.text = "Описание: "
         return label
+    }()
+    
+    private lazy var contentTextView: UITextView = {
+        let textView = UITextView()
+        textView.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        textView.isEditable = false
+        textView.isScrollEnabled = false
+        
+        return textView
     }()
     
     private lazy var editButton: UIButton = {
@@ -83,7 +109,10 @@ class ToDoDetailController: UIViewController {
     //MARK: - Setup Outlets
     private func setupHierarchy() {
         view.addSubview(titleLabel)
-        view.addSubview(contentLabel)
+        view.addSubview(timeLabel)
+        view.addSubview(datePicker)
+        view.addSubview(descripTionLabel)
+        view.addSubview(contentTextView)
         view.addSubview(editButton)
         view.addSubview(saveButton)
         view.addSubview(deleteButton)
@@ -93,44 +122,58 @@ class ToDoDetailController: UIViewController {
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
             make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(20)
+            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).inset(20)
         }
         
-        contentLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(15)
+        timeLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
             make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(20)
+        }
+        
+        datePicker.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.leading.equalTo(timeLabel.snp.trailing).offset(10)
+        }
+        
+        descripTionLabel.snp.makeConstraints { make in
+            make.top.equalTo(timeLabel.snp.bottom).offset(13)
+            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(20)
+        }
+        
+        contentTextView.snp.makeConstraints { make in
+            make.top.equalTo(descripTionLabel.snp.bottom).offset(1)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
         }
         
         editButton.snp.makeConstraints { make in
-            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(20)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(10)
+            make.bottom.equalTo(deleteButton.snp.top).offset(-15)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.height.equalTo(40)
-            make.width.equalTo(view.frame.width / 3)
         }
         
         saveButton.snp.makeConstraints { make in
-            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(20)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(10)
+            make.bottom.equalTo(deleteButton.snp.top).offset(-15)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.height.equalTo(40)
-            make.width.equalTo(view.frame.width / 3)
-
         }
         
         deleteButton.snp.makeConstraints { make in
-            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).inset(20)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(10)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(25)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.height.equalTo(40)
-            make.width.equalTo(view.frame.width / 3)
         }
     }
     
+    //MARK: - Button's Action's
     @objc func editToDo() {
         editButton.isHidden = true
         saveButton.isHidden = false
-        titleLabel.isUserInteractionEnabled = true
+        titleLabel.isEditable = true
         titleLabel.becomeFirstResponder()
-        contentLabel.isUserInteractionEnabled = true
+        contentTextView.isEditable = true
+        datePicker.isUserInteractionEnabled = true
     }
-
+    
     @objc func deleteToDo() {
         presenter?.deleteToDo()
     }
@@ -138,17 +181,18 @@ class ToDoDetailController: UIViewController {
     @objc func saveToDo() {
         saveButton.isHidden = true
         editButton.isHidden = false
-        titleLabel.isUserInteractionEnabled = false
-        contentLabel.isUserInteractionEnabled = false
-        presenter?.editToDo(title: titleLabel.text ?? "", content: contentLabel.text ?? "")
+        titleLabel.isEditable = false
+        contentTextView.isEditable = false
+        datePicker.isUserInteractionEnabled = false
+        presenter?.editToDo(title: titleLabel.text ?? "", content: contentTextView.text ?? "")
         
     }
-    
 }
 
+    //MARK: - ToDoDetail Protocol Extension
 extension ToDoDetailController: ToDoDetailViewProtocol {
     func showToDo(_ toDo: ToDoItem) {
         titleLabel.text = toDo.title
-        contentLabel.text = toDo.content
+        contentTextView.text = toDo.content
     }
 }
