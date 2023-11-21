@@ -167,9 +167,9 @@ class ToDoDetailController: UIViewController {
     @objc func editToDo() {
         editButton.isHidden = true
         saveButton.isHidden = false
-        titleLabel.isUserInteractionEnabled = true
+        titleLabel.isEditable = true
         titleLabel.becomeFirstResponder()
-//        contentLabel.isUserInteractionEnabled = true
+        contentTextView.isEditable = true
         datePicker.isUserInteractionEnabled = true
     }
     
@@ -180,8 +180,8 @@ class ToDoDetailController: UIViewController {
     @objc func saveToDo() {
         saveButton.isHidden = true
         editButton.isHidden = false
-        titleLabel.isUserInteractionEnabled = false
-//        contentLabel.isUserInteractionEnabled = false
+        titleLabel.isEditable = false
+        contentTextView.isEditable = false 
         datePicker.isUserInteractionEnabled = false
         presenter?.editToDo(title: titleLabel.text ?? "", content: contentTextView.text ?? "")
         
