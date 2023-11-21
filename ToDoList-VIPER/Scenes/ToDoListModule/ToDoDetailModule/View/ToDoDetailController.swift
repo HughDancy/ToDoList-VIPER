@@ -13,14 +13,23 @@ class ToDoDetailController: UIViewController {
     var presenter: ToDoDetailPresenterProtocol?
     
     //MARK: - Outlets
-    private lazy var titleLabel: UITextField = {
-        let label = UITextField()
-        label.borderStyle = .none
-        label.isUserInteractionEnabled = false
-        label.font = UIFont.systemFont(ofSize: 55, weight: .bold)
-        label.textColor = .systemBlue
-        
+    private lazy var titleLabel = UITextField.createTextField(with: ScreensEnam.detailToDO)
+    
+    private lazy var timeLabel: UILabel = {
+       let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 30, weight: .semibold)
+        label.textAlignment = .left
+        label.text = "Дата: "
         return label
+    }()
+    
+    private lazy var datePicker: UIDatePicker = {
+        let picker = UIDatePicker()
+        picker.datePickerMode = .date
+        picker.preferredDatePickerStyle = .compact
+        picker.locale = .current
+        
+        return picker
     }()
     
     private lazy var descripTionLabel: UILabel = {
@@ -101,6 +110,8 @@ class ToDoDetailController: UIViewController {
     //MARK: - Setup Outlets
     private func setupHierarchy() {
         view.addSubview(titleLabel)
+        view.addSubview(timeLabel)
+        view.addSubview(datePicker)
         view.addSubview(descripTionLabel)
         view.addSubview(contentLabel)
         view.addSubview(editButton)
@@ -114,8 +125,18 @@ class ToDoDetailController: UIViewController {
             make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(20)
         }
         
-        descripTionLabel.snp.makeConstraints { make in
+        timeLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(20)
+        }
+        
+        datePicker.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(12)
+            make.leading.equalTo(timeLabel.snp.trailing).offset(10)
+        }
+        
+        descripTionLabel.snp.makeConstraints { make in
+            make.top.equalTo(timeLabel.snp.bottom).offset(10)
             make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(20)
         }
         
