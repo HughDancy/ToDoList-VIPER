@@ -13,14 +13,13 @@ class ToDoDetailController: UIViewController {
     var presenter: ToDoDetailPresenterProtocol?
     
     //MARK: - Outlets
-    private lazy var titleLabel: UITextField = {
-        let label = UITextField()
-        label.borderStyle = .none
-        label.isUserInteractionEnabled = false
-        label.font = UIFont.systemFont(ofSize: 45, weight: .bold)
-        label.textColor = .systemBlue
-        
-        return label
+    private lazy var titleLabel: UITextView = {
+       let textView = UITextView()
+        textView.font = UIFont.systemFont(ofSize: 45, weight: .bold)
+        textView.textColor = .systemBlue
+        textView.isScrollEnabled = false
+        textView.isUserInteractionEnabled = false
+        return textView
     }()
     
     private lazy var timeLabel: UILabel = {
@@ -49,18 +48,11 @@ class ToDoDetailController: UIViewController {
         return label
     }()
     
-//    private lazy var contentLabel: UITextField = {
-//        let label = UITextField()
-//        label.borderStyle = .none
-//        label.isUserInteractionEnabled = false
-//        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-//        
-//        return label
-//    }()
     private lazy var contentTextView: UITextView = {
        let textView = UITextView()
         textView.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         textView.isEditable = false
+        textView.isScrollEnabled = false
         
         return textView
     }()
@@ -121,7 +113,6 @@ class ToDoDetailController: UIViewController {
         view.addSubview(datePicker)
         view.addSubview(descripTionLabel)
         view.addSubview(contentTextView)
-//        view.addSubview(contentLabel)
         view.addSubview(editButton)
         view.addSubview(saveButton)
         view.addSubview(deleteButton)
@@ -152,30 +143,21 @@ class ToDoDetailController: UIViewController {
         contentTextView.snp.makeConstraints { make in
             make.top.equalTo(descripTionLabel.snp.bottom).offset(10)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
-            make.height.equalTo(150)
         }
         
-//        contentLabel.snp.makeConstraints { make in
-//            make.top.equalTo(descripTionLabel.snp.bottom).offset(15)
-//            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(20)
-//        }
-        
         editButton.snp.makeConstraints { make in
-//            make.centerY.equalTo(view.safeAreaLayoutGuide.snp.centerY).offset(170)
             make.bottom.equalTo(deleteButton.snp.top).offset(-15)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.height.equalTo(40)
         }
         
         saveButton.snp.makeConstraints { make in
-//            make.centerY.equalTo(view.safeAreaLayoutGuide.snp.centerY).offset(170)
             make.bottom.equalTo(deleteButton.snp.top).offset(-15)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.height.equalTo(40)
         }
         
         deleteButton.snp.makeConstraints { make in
-//            make.top.equalTo(editButton.snp.bottom).offset(10)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(25)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.height.equalTo(40)
