@@ -25,7 +25,7 @@ final class ToDoStorage {
     private lazy var viewContext: NSManagedObjectContext = persistentContainer.viewContext
     
     //MARK: - CoreData create new ToDoObject
-    private func createNewToDo(title: String, content: String, date: Date, done: Bool) {
+    func createNewToDo(title: String, content: String, date: Date, done: Bool) {
         let newToDo = ToDoObject(context: viewContext)
         newToDo.title = title
         newToDo.descriptionTitle = content
@@ -47,18 +47,29 @@ final class ToDoStorage {
         do {
             try viewContext.save()
         }
-         catch {
+        catch {
             
         }
     }
     
     //MARK: - CoreData edit ToDoObject
-    func editToDoObject(item: ToDoObject, newTitle: String, newDescription: String, newDate: Date) {
+    private func editToDoObject(item: ToDoObject, newTitle: String, newDescription: String, newDate: Date) {
         item.title = newTitle
         item.descriptionTitle = newDescription
         item.date = newDate
         item.dateTitle = DateFormatter.createMediumDate(from: newDate)
         
+        do {
+            try viewContext.save()
+        }
+        catch {
+            
+        }
+    }
+    
+    //MARK: - CoreData Done ToDoObject
+    func doneToDo(item: ToDoObject) {
+        item.doneStatus = true
         do {
             try viewContext.save()
         }
@@ -73,7 +84,7 @@ final class ToDoStorage {
         let objects = try! viewContext.fetch(fetchRequest)
         return objects
     }
-
+    
     //MARK: - CoreData Saving support
     func saveContext () {
         let context = persistentContainer.viewContext
@@ -86,5 +97,5 @@ final class ToDoStorage {
             }
         }
     }
-
+    
 }

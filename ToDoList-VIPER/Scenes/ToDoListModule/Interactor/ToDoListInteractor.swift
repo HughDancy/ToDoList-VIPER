@@ -9,6 +9,7 @@ import Foundation
 
 class ToDoListInteractor: ToDoListInteractorInputProtocol {
     weak var presenter: ToDoListInteractorOutputProtocol?
+    var storage = ToDoStorage.instance
     var toDoStore = ToDoStore.shared
     var toDos: [ToDoItem] {
         return toDoStore.toDos
