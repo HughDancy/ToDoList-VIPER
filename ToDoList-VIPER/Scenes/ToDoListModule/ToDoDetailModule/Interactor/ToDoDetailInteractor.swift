@@ -9,19 +9,19 @@ import Foundation
 
 class ToDoDetailInteractor: TodoDetailInteractorInputProtocol {
     weak var presenter: TodoDetailInteractorOutputProtocol?
-    var toDoStore = ToDoStore.shared
-    var toDoItem: ToDoItem?
+    var storage = ToDoStorage.instance
+    var toDoItem: ToDoObject?
     
     func deleteToDo() {
         guard let toDoItem = toDoItem else { return }
-        toDoStore.removeToDo(toDoItem)
+        storage.deleteToDoObject(item: toDoItem)
         presenter?.didDeleteToDo()
     }
     
     func editToDo(title: String, content: String) {
         guard let toDoItem = toDoItem else { return }
         toDoItem.title = title
-        toDoItem.content = content
+        toDoItem.descriptionTitle = content
         presenter?.didEditToDo(toDoItem)
     }
     

@@ -79,7 +79,7 @@ final class ToDoStorage {
     }
     
     //MARK: - CoreData fetch
-    func fetchUsers() -> [NSManagedObject] {
+    func fetchUsers() -> [ToDoObject] {
         let fetchRequest: NSFetchRequest<ToDoObject> = ToDoObject.fetchRequest()
         let objects = try! viewContext.fetch(fetchRequest)
         return objects

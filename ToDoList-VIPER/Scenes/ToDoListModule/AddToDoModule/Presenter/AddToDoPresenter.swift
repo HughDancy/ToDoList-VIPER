@@ -8,15 +8,12 @@
 import Foundation
 
 final class AddToDoPresenter: AddToDoPresenterProtocol {
-  
     weak var view: AddToDoViewProtocol?
     var interactor: AddToDoInteractorInputProtocol?
     var router: AddToDoRouterProtocol?
     
-    func addToDo(_ toDoItem: ToDoItem) {
-        interactor?.saveToDo(toDoItem)
-        
-        
+    func addToDo(title: String, content: String, date: Date, done: Bool) {
+        interactor?.saveToDo(title: title, content: content, date: date, done: done)
     }
     
     func goBack() {

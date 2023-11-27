@@ -35,7 +35,7 @@ extension ToDoDetailPresenter: TodoDetailInteractorOutputProtocol {
         }
     }
     
-    func didEditToDo(_ toDoItem: ToDoItem) {
+    func didEditToDo(_ toDoItem: ToDoObject) {
         view?.showToDo(toDoItem)
     }
 }

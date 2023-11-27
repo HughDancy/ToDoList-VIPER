@@ -96,10 +96,14 @@ class AddToDoController: UIViewController, AddToDoViewProtocol {
     
     @objc func addNewTask() {
         if taskNameField.text?.isEmpty != true && descriptionTaskField.text?.isEmpty != true {
-            let toDoItem = ToDoItem(title: taskNameField.text ?? "Default", 
-                                    content: descriptionTaskField.text ?? "Default",
-                                    date: DateFormatter.createMediumDate(from: datePicker.date))
-            presenter?.addToDo(toDoItem)
+//            let toDoItem = ToDoItem(title: taskNameField.text ?? "Default", 
+//                                    content: descriptionTaskField.text ?? "Default",
+//                                    date: DateFormatter.createMediumDate(from: datePicker.date))
+            
+            presenter?.addToDo(title: taskNameField.text ?? "Default",
+                               content: descriptionTaskField.text ?? "Default",
+                               date: datePicker.date,
+                               done: false)
             parrentView?.presenter?.viewWillAppear()
         } else {
             let alertVc = UIAlertController(title: "Ошибка",

@@ -11,7 +11,7 @@ class ToDoListViewController: UITableViewController {
     
     //MARK: - Elements
     var presenter: ToDoListPresenterProtocol?
-    var toDos: [ToDoItem] = [] {
+    var toDos: [ToDoObject] = [] {
         didSet {
             tableView.reloadData()
         }
@@ -98,7 +98,7 @@ class ToDoListViewController: UITableViewController {
 
 //MARK: - ToDoListViewProtocol Extension
 extension ToDoListViewController: ToDoListViewProtocol {
-    func showToDos(_ toDos: [ToDoItem]) {
+    func showToDos(_ toDos: [ToDoObject]) {
         self.toDos = toDos
     }
 }

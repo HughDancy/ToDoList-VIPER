@@ -191,8 +191,8 @@ class ToDoDetailController: UIViewController {
 
     //MARK: - ToDoDetail Protocol Extension
 extension ToDoDetailController: ToDoDetailViewProtocol {
-    func showToDo(_ toDo: ToDoItem) {
+    func showToDo(_ toDo: ToDoObject) {
         titleLabel.text = toDo.title
-        contentTextView.text = toDo.content
+        contentTextView.text = toDo.descriptionTitle
     }
 }
