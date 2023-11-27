@@ -21,7 +21,7 @@ protocol ToDoDetailPresenterProtocol: AnyObject {
     
     //VIEW -> PRESENTER
     func viewDidLoad()
-    func editToDo(title: String, content: String)
+    func editToDo(title: String, content: String, date: Date)
     func deleteToDo()
 }
 
@@ -31,7 +31,7 @@ protocol TodoDetailInteractorInputProtocol: AnyObject {
     
     //PRESENTER -> INTERACTOR
     func deleteToDo()
-    func editToDo(title: String, content: String)
+    func editToDo(title: String, content: String, date: Date)
 }
 
 protocol TodoDetailInteractorOutputProtocol: AnyObject {

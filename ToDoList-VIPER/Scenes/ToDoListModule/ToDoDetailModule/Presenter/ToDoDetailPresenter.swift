@@ -19,8 +19,8 @@ class ToDoDetailPresenter: ToDoDetailPresenterProtocol {
         }
     }
     
-    func editToDo(title: String, content: String) {
-        interactor?.editToDo(title: title, content: content)
+    func editToDo(title: String, content: String, date: Date) {
+        interactor?.editToDo(title: title, content: content, date: date)
     }
     
     func deleteToDo() {
