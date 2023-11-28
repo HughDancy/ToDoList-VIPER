@@ -59,8 +59,8 @@ class ToDoListController: UIViewController {
     
     //MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
-        presenter?.viewWillAppear()
         super.viewWillAppear(animated)
+        presenter?.viewWillAppear()
     }
     
     override func viewDidLoad() {
@@ -121,17 +121,12 @@ class ToDoListController: UIViewController {
 
     //MARK: - TableView Delegate Extension
 extension ToDoListController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return toDos.count
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let toDo = toDos[indexPath.row]
-        presenter?.showToDoDetail(toDo)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -142,13 +137,19 @@ extension ToDoListController: UITableViewDelegate, UITableViewDataSource {
         return cell ?? UITableViewCell()
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let toDo = toDos[indexPath.row]
+        presenter?.showToDoDetail(toDo)
+    }
+    
+  
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let toDo = toDos[indexPath.row]
             tableView.beginUpdates()
             presenter?.removeToDo(toDo)
             tableView.deleteRows(at: [indexPath], with: .fade)
-            
             tableView.endUpdates()
         }
     }
