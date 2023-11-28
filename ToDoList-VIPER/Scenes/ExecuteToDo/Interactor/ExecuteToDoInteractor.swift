@@ -18,6 +18,6 @@ class ExecuteToDoInteractor: ExecuteToDoInteractorInputProtocol {
     
     func deleteToDo(_ toDoItem: ToDoObject) {
         storage.deleteToDoObject(item: toDoItem)
-        presenter?.didRemoveToDo(toDoItem)
+        presenter?.didRemoveToDo()
     }
 }

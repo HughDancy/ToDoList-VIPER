@@ -142,8 +142,6 @@ extension ToDoListController: UITableViewDelegate, UITableViewDataSource {
         presenter?.showToDoDetail(toDo)
     }
     
-  
-    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let toDo = toDos[indexPath.row]

@@ -22,8 +22,8 @@ class ExecuteToDoPresenter: ExecuteToDoPresenterProtocol {
 }
 
 extension ExecuteToDoPresenter:  ExecuteToDoInteractorOutputProtocol {
-    func didRemoveToDo(_ toDoItem: ToDoObject) {
-        interactor?.deleteToDo(toDoItem)
+    func didRemoveToDo() {
+        interactor?.retriveToDos()
     }
     
     func didRetriveToDos(_ toDoItems: [ToDoObject]) {
