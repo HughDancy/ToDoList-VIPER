@@ -53,7 +53,7 @@ final class ToDoStorage {
     }
     
     //MARK: - CoreData edit ToDoObject
-    private func editToDoObject(item: ToDoObject, newTitle: String, newDescription: String, newDate: Date) {
+    func editToDoObject(item: ToDoObject, newTitle: String, newDescription: String, newDate: Date) {
         item.title = newTitle
         item.descriptionTitle = newDescription
         item.date = newDate

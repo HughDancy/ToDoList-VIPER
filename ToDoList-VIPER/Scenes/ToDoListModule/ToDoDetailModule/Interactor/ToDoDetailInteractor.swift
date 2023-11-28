@@ -20,8 +20,10 @@ class ToDoDetailInteractor: TodoDetailInteractorInputProtocol {
     
     func editToDo(title: String, content: String, date: Date) {
         guard let toDoItem = toDoItem else { return }
-        toDoItem.title = title
-        toDoItem.descriptionTitle = content
+//        toDoItem.title = title
+//        toDoItem.descriptionTitle = content
+//        toDoItem.date  = date
+        
         presenter?.didEditToDo(toDoItem)
     }
     
