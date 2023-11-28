@@ -20,7 +20,7 @@ class ToDoCell: UITableViewCell {
         let doneImage = UIImage(systemName: "checkmark.circle")
         let imageView = UIImageView(image: circleImage, highlightedImage: doneImage)
         imageView.isHighlighted = false
-        imageView.tintColor = .systemGreen
+        imageView.tintColor = .systemBlue
         
         return imageView
     }()
@@ -100,12 +100,14 @@ class ToDoCell: UITableViewCell {
     
     func executeToDo() {
         checkImage.isHighlighted = true
+        checkImage.tintColor = .systemGreen
         doneButton.isHidden = true
     }
     
     @objc func makeItDone() {
         if checkImage.isHighlighted == false  {
             checkImage.isHighlighted = true
+            checkImage.tintColor = .systemGreen
             doneCheckDelegate?.doneToDo(with: self.numberOfRow)
         }
     }
