@@ -11,7 +11,7 @@ class ExecuteToDoController: UITableViewController {
     
     //MARK: - Elements
     var presenter: ExecuteToDoPresenterProtocol?
-    var executeToDos: [ToDoItem] = [] {
+    var executeToDos: [ToDoObject] = [] {
         didSet {
             tableView.reloadData()
         }
@@ -49,14 +49,14 @@ class ExecuteToDoController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ToDoCell.reuseIdentifier, for: indexPath) as? ToDoCell
-//        cell?.setupElements(with: executeToDos[indexPath.row])
+        cell?.setupElements(with: executeToDos[indexPath.row])
         cell?.executeToDo()
         return cell ?? UITableViewCell()
     }
 }
 
 extension ExecuteToDoController: ExecuteToDoViewProtocol {
-    func showExcuteToDos(_ toDo: [ToDoItem]) {
+    func showExcuteToDos(_ toDo: [ToDoObject]) {
         self.executeToDos = toDo
     }
 }

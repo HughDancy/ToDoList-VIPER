@@ -9,18 +9,15 @@ import UIKit
 
 class ExecuteToDoInteractor: ExecuteToDoInteractorInputProtocol {
     var presenter: ExecuteToDoInteractorOutputProtocol?
-    var toDoStore = ToDoStore.shared
-    var toDos: [ToDoItem] {
-        return toDoStore.executeToDos
-    }
-    
+    var storage = ToDoStorage.instance
     
     func retriveToDos() {
-        presenter?.didRetriveToDos(toDos)
+        let doneToDos = storage.fetchUsers().filter { $0.doneStatus == true }
+        presenter?.didRetriveToDos(doneToDos)
     }
     
-    func deleteToDo(_ toDoItem: ToDoItem) {
-        toDoStore.removeExecuteToDo(toDoItem)
+    func deleteToDo(_ toDoItem: ToDoObject) {
+        storage.deleteToDoObject(item: toDoItem)
         presenter?.didRemoveToDo(toDoItem)
     }
 }

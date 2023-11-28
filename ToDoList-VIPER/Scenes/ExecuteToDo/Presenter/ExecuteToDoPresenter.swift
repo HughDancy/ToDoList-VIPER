@@ -16,17 +16,17 @@ class ExecuteToDoPresenter: ExecuteToDoPresenterProtocol {
         interactor?.retriveToDos()
     }
     
-    func removeToDo(_ toDoItem: ToDoItem) {
+    func removeToDo(_ toDoItem: ToDoObject) {
         interactor?.deleteToDo(toDoItem)
     }
 }
 
 extension ExecuteToDoPresenter:  ExecuteToDoInteractorOutputProtocol {
-    func didRemoveToDo(_ toDoItem: ToDoItem) {
+    func didRemoveToDo(_ toDoItem: ToDoObject) {
         interactor?.deleteToDo(toDoItem)
     }
     
-    func didRetriveToDos(_ toDoItems: [ToDoItem]) {
+    func didRetriveToDos(_ toDoItems: [ToDoObject]) {
         view?.showExcuteToDos(toDoItems)
     }
     
