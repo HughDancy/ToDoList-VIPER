@@ -188,10 +188,6 @@ class ToDoDetailController: UIViewController {
         print(datePicker.date)
         
     }
-    
-    @objc func printPickDate() {
-        print(datePicker.date)
-    }
 }
 
     //MARK: - ToDoDetail Protocol Extension

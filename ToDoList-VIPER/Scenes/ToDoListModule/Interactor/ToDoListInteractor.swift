@@ -18,7 +18,8 @@ class ToDoListInteractor: ToDoListInteractorInputProtocol {
     
     func retriveToDos() {
         let toDos = storage.fetchUsers()
-        presenter?.didRetriveToDos(toDos)
+        let plannedToDos = toDos.filter { $0.doneStatus == false}
+        presenter?.didRetriveToDos(plannedToDos)
     }
     
     func deleteToDo(_ toDoItem: ToDoObject) {
