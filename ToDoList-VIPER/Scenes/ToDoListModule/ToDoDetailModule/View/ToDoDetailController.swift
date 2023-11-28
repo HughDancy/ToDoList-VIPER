@@ -184,15 +184,17 @@ class ToDoDetailController: UIViewController {
         titleLabel.isEditable = false
         contentTextView.isEditable = false
         datePicker.isUserInteractionEnabled = false
-        presenter?.editToDo(title: titleLabel.text ?? "", content: contentTextView.text ?? "")
+        presenter?.editToDo(title: titleLabel.text ?? "", content: contentTextView.text ?? "", date: datePicker.date)
+        print(datePicker.date)
         
     }
 }
 
     //MARK: - ToDoDetail Protocol Extension
 extension ToDoDetailController: ToDoDetailViewProtocol {
-    func showToDo(_ toDo: ToDoItem) {
+    func showToDo(_ toDo: ToDoObject) {
         titleLabel.text = toDo.title
-        contentTextView.text = toDo.content
+        contentTextView.text = toDo.descriptionTitle
+        datePicker.date = toDo.date ?? Date()
     }
 }

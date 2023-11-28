@@ -11,7 +11,7 @@ class ExecuteToDoController: UITableViewController {
     
     //MARK: - Elements
     var presenter: ExecuteToDoPresenterProtocol?
-    var executeToDos: [ToDoItem] = [] {
+    var executeToDos: [ToDoObject] = [] {
         didSet {
             tableView.reloadData()
         }
@@ -56,7 +56,7 @@ class ExecuteToDoController: UITableViewController {
 }
 
 extension ExecuteToDoController: ExecuteToDoViewProtocol {
-    func showExcuteToDos(_ toDo: [ToDoItem]) {
+    func showExcuteToDos(_ toDo: [ToDoObject]) {
         self.executeToDos = toDo
     }
 }

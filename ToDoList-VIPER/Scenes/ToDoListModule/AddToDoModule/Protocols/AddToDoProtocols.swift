@@ -17,7 +17,7 @@ protocol AddToDoPresenterProtocol: AnyObject {
     var router: AddToDoRouterProtocol? { get set }
     
     //VIEW -> PRESENTER
-    func addToDo(_ toDoItem: ToDoItem)
+    func addToDo(title: String, content: String, date: Date, done: Bool)
     func goBack()
 
 }
@@ -26,7 +26,7 @@ protocol AddToDoInteractorInputProtocol: AnyObject {
     var presenter: AddToDoPresenterProtocol? { get set }
     
     //PRESENTER -> INTERACTOR
-    func saveToDo(_ toDoItem: ToDoItem)
+    func saveToDo(title: String, content: String, date: Date, done: Bool)
 }
 
 protocol AddToDoInteractorOutputProtocol: AnyObject {

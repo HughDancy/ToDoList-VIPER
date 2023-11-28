@@ -11,7 +11,7 @@ class ToDoListViewController: UITableViewController {
     
     //MARK: - Elements
     var presenter: ToDoListPresenterProtocol?
-    var toDos: [ToDoItem] = [] {
+    var toDos: [ToDoObject] = [] {
         didSet {
             tableView.reloadData()
         }
@@ -98,7 +98,7 @@ class ToDoListViewController: UITableViewController {
 
 //MARK: - ToDoListViewProtocol Extension
 extension ToDoListViewController: ToDoListViewProtocol {
-    func showToDos(_ toDos: [ToDoItem]) {
+    func showToDos(_ toDos: [ToDoObject]) {
         self.toDos = toDos
     }
 }
@@ -109,7 +109,7 @@ extension ToDoListViewController: ToDoDoneProtocol {
         let pathIndex = IndexPath(item: index, section: 0)
         tableView.beginUpdates()
         presenter?.doneToDo(toDos[index])
-        tableView.deleteRows(at: [pathIndex], with: .middle)
+        tableView.deleteRows(at: [pathIndex], with: .fade)
         tableView.endUpdates()
     }
 }

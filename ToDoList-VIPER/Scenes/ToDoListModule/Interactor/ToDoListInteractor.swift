@@ -9,23 +9,26 @@ import Foundation
 
 class ToDoListInteractor: ToDoListInteractorInputProtocol {
     weak var presenter: ToDoListInteractorOutputProtocol?
-    var toDoStore = ToDoStore.shared
-    var toDos: [ToDoItem] {
-        return toDoStore.toDos
-    }
+    var storage = ToDoStorage.instance
+//    var toDoStore = ToDoStore.shared
+//    var toDos: [ToDoItem] {
+//        return toDoStore.toDos
+//    }
     
     
     func retriveToDos() {
-        presenter?.didRetriveToDos(toDos)
+        let toDos = storage.fetchUsers()
+        let plannedToDos = toDos.filter { $0.doneStatus == false}
+        presenter?.didRetriveToDos(plannedToDos)
     }
     
-    func deleteToDo(_ toDoItem: ToDoItem) {
-        toDoStore.removeToDo(toDoItem)
+    func deleteToDo(_ toDoItem: ToDoObject) {
+        storage.deleteToDoObject(item: toDoItem)
         presenter?.didRemoveToDo(toDoItem)
     }
     
-    func doneToDo(_ toDoItem: ToDoItem) {
-        toDoStore.doneToDo(toDoItem)
+    func doneToDo(_ toDoItem: ToDoObject) {
+        storage.doneToDo(item: toDoItem)
         presenter?.didRemoveToDo(toDoItem)
     }
 }

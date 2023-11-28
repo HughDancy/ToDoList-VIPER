@@ -14,7 +14,7 @@ class ToDoDetailRouter: ToDoDetailRouterProtocol {
         view.navigationController?.popViewController(animated: true)
     }
     
-    static func createToDoDetailModule(with toDo: ToDoItem) -> UIViewController {
+    static func createToDoDetailModule(with toDo: ToDoObject) -> UIViewController {
         let view = ToDoDetailController()
         let presenter: ToDoDetailPresenterProtocol & TodoDetailInteractorOutputProtocol = ToDoDetailPresenter()
         let interactor: TodoDetailInteractorInputProtocol = ToDoDetailInteractor()

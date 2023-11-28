@@ -10,7 +10,7 @@ import UIKit
 protocol ToDoListViewProtocol: AnyObject {
     var presenter: ToDoListPresenterProtocol? { get set }
     
-    func showToDos(_ toDos: [ToDoItem])
+    func showToDos(_ toDos: [ToDoObject])
 }
 
 protocol ToDoListPresenterProtocol: AnyObject {
@@ -20,10 +20,10 @@ protocol ToDoListPresenterProtocol: AnyObject {
     
     //VIEW -> PRESENTER
     func viewWillAppear()
-    func showToDoDetail(_ toDoItem: ToDoItem)
+    func showToDoDetail(_ toDoItem: ToDoObject)
     func showAddToDo()
-    func removeToDo(_ toDoItem: ToDoItem)
-    func doneToDo(_ toDoItem: ToDoItem)
+    func removeToDo(_ toDoItem: ToDoObject)
+    func doneToDo(_ toDoItem: ToDoObject)
 }
 
 protocol ToDoListInteractorInputProtocol: AnyObject {
@@ -31,22 +31,22 @@ protocol ToDoListInteractorInputProtocol: AnyObject {
     
     //PRESENTER -> INTERACTOR
     func retriveToDos()
-    func deleteToDo(_ toDoItem: ToDoItem)
-    func doneToDo(_ toDoItem: ToDoItem)
+    func deleteToDo(_ toDoItem: ToDoObject)
+    func doneToDo(_ toDoItem: ToDoObject)
 }
 
 protocol ToDoListInteractorOutputProtocol: AnyObject {
     
     //INTERACTOR -> PRESENTER
-    func didRemoveToDo(_ toDoItem: ToDoItem)
-    func didRetriveToDos(_ toDoItems: [ToDoItem])
+    func didRemoveToDo(_ toDoItem: ToDoObject)
+    func didRetriveToDos(_ toDoItems: [ToDoObject])
 }
 
 protocol ToDoListRouterProtocol: AnyObject {
     static func createToDoListModule() -> UIViewController
     
     //PRESENTER->ROUTER
-    func presentToDoDetailScreen(from view: ToDoListViewProtocol, for: ToDoItem)
+    func presentToDoDetailScreen(from view: ToDoListViewProtocol, for: ToDoObject)
     func goAddToDoScreen(from view: ToDoListViewProtocol)
 }
 
