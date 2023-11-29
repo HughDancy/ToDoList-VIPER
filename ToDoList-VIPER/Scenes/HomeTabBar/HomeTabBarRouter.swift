@@ -19,7 +19,7 @@ final class HomeTabBarRouter: HomeTabBarRouterProtocol {
         
         planned.tabBarItem = plannedItem
         
-        let overdue = ViewController()
+        let overdue = OverdueToDoRouter.createOverdueModule()
         let overdueItem = UITabBarItem(title: "Просроченно",
                                        image: UIImage(systemName: "square.stack.3d.up.slash"),
                                        selectedImage: UIImage(systemName: "square.stack.3d.up.slash.fill"))

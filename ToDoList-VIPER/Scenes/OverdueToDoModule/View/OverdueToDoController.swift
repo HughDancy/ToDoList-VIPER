@@ -70,7 +70,7 @@ class OverdueToDoController: UIViewController {
         
         wellDoneImage.snp.makeConstraints { make in
             make.centerY.equalTo(view.safeAreaLayoutGuide.snp.centerY)
-            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(40)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(50)
             make.height.equalTo(view.bounds.height / 4)
         }
         
@@ -84,9 +84,11 @@ class OverdueToDoController: UIViewController {
         if toDos[0].isEmpty && toDos[1].isEmpty && toDos[2].isEmpty {
             wellDoneImage.isHidden = false
             wellDoneLabel.isHidden = false
+            tableView.isHidden = true
         } else {
             wellDoneImage.isHidden = true
             wellDoneLabel.isHidden = true
+            tableView.isHidden = false
         }
     }
 }
