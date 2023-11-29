@@ -33,7 +33,7 @@ protocol ExecuteToDoInteractorInputProtocol: AnyObject {
 
 protocol ExecuteToDoInteractorOutputProtocol: AnyObject {
     //INTERACTOR -> PRESENTER
-    func didRemoveToDo(_ toDoItem: ToDoObject)
+    func didRemoveToDo()
     func didRetriveToDos(_ toDoItems: [ToDoObject])
 
 }

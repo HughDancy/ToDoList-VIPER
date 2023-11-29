@@ -53,6 +53,16 @@ class ExecuteToDoController: UITableViewController {
         cell?.executeToDo()
         return cell ?? UITableViewCell()
     }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let toDo = executeToDos[indexPath.row]
+            tableView.beginUpdates()
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            presenter?.removeToDo(toDo)
+            tableView.endUpdates()
+        }
+    }
 }
 
 extension ExecuteToDoController: ExecuteToDoViewProtocol {

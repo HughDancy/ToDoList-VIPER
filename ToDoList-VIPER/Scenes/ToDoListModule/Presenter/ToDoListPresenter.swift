@@ -43,7 +43,7 @@ extension ToDoListPresenter: ToDoListInteractorOutputProtocol {
         interactor?.retriveToDos()
     }
     
-    func didRetriveToDos(_ toDoItems: [ToDoObject]) {
+    func didRetriveToDos(_ toDoItems: [[ToDoObject]]) {
         view?.showToDos(toDoItems)
     }
 }

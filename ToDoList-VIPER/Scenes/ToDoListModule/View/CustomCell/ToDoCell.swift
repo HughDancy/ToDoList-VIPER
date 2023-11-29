@@ -12,6 +12,7 @@ class ToDoCell: UITableViewCell {
     
     weak var doneCheckDelegate: ToDoDoneProtocol?
     static let reuseIdentifier = "ToDoCell"
+    var numberOfSection = -1
     var numberOfRow = -1
     
     //MARK: - Elements
@@ -20,7 +21,7 @@ class ToDoCell: UITableViewCell {
         let doneImage = UIImage(systemName: "checkmark.circle")
         let imageView = UIImageView(image: circleImage, highlightedImage: doneImage)
         imageView.isHighlighted = false
-        imageView.tintColor = .systemGreen
+        imageView.tintColor = .systemBlue
         
         return imageView
     }()
@@ -100,13 +101,15 @@ class ToDoCell: UITableViewCell {
     
     func executeToDo() {
         checkImage.isHighlighted = true
+        checkImage.tintColor = .systemGreen
         doneButton.isHidden = true
     }
     
     @objc func makeItDone() {
         if checkImage.isHighlighted == false  {
             checkImage.isHighlighted = true
-            doneCheckDelegate?.doneToDo(with: self.numberOfRow)
+            checkImage.tintColor = .systemGreen
+            doneCheckDelegate?.doneToDo(with: self.numberOfRow, and: self.numberOfSection)
         }
     }
 
@@ -114,6 +117,7 @@ class ToDoCell: UITableViewCell {
         titleLabel.text = nil
         bodyLabel.text = nil
         checkImage.isHighlighted = false
+        checkImage.tintColor = .systemBlue
     }
     
 }

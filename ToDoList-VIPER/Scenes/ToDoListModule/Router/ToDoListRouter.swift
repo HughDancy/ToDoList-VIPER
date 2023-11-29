@@ -13,7 +13,8 @@ class ToDoListRouter: ToDoListRouterProtocol {
         let presenter: ToDoListPresenterProtocol & ToDoListInteractorOutputProtocol = ToDoListPresenter()
         let interactor: ToDoListInteractorInputProtocol = ToDoListInteractor()
         let router = ToDoListRouter()
-        let vc = ToDoListViewController()
+//        let vc = ToDoListViewController()
+        let vc = ToDoListController()
         let navCon = UINavigationController(rootViewController: vc)
         
         vc.presenter = presenter

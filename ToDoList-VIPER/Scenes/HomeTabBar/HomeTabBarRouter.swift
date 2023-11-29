@@ -32,7 +32,7 @@ final class HomeTabBarRouter: HomeTabBarRouterProtocol {
         configuarations.tabBarItem = configurationsItem
         
         tabBar.viewControllers = [planned, executed, configuarations]
-        tabBar.tabBar.tintColor = .systemIndigo
+        tabBar.tabBar.tintColor = .systemBlue
         
         return tabBar
     }
