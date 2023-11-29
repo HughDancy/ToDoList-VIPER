@@ -22,7 +22,11 @@ class AddToDoController: UIViewController, AddToDoViewProtocol {
         taskName.becomeFirstResponder()
         return taskName
     }()
-    private lazy var descriptionTaskField = UITextField.createToDoTextField()
+    private lazy var descriptionTaskField: UITextField = {
+      let textField  = UITextField.createToDoTextField()
+        textField.returnKeyType = .done
+        return textField
+    }()
     private lazy var datePicker = UIDatePicker.createToDoPicker()
     private lazy var addButton: UIButton =  {
         let button = UIButton.createToDoButton(title: "Добавить", backColor: .systemBlue, tintColor: .white)
