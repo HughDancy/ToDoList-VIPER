@@ -9,12 +9,13 @@ import UIKit
 import SnapKit
 
 class OverdueToDoController: UIViewController {
-
+    
     //MARK: - Elements
     var presenter: OverduePresenterProtocol?
     var toDos: [[ToDoObject]] = [[]] {
         didSet {
             tableView.reloadData()
+            setupHideWellDone()
         }
     }
     
@@ -48,6 +49,7 @@ class OverdueToDoController: UIViewController {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
         title = "Просроченные"
         navigationController?.navigationBar.prefersLargeTitles = true
         setupHierarchy()
@@ -56,31 +58,85 @@ class OverdueToDoController: UIViewController {
     
     //MARK: - Setup Elements
     private func setupHierarchy() {
-        
+        view.addSubview(tableView)
+        view.addSubview(wellDoneImage)
+        view.addSubview(wellDoneLabel)
     }
     
     private func setupLayout() {
+        tableView.snp.makeConstraints { make in
+            make.top.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
         
+        wellDoneImage.snp.makeConstraints { make in
+            make.centerY.equalTo(view.safeAreaLayoutGuide.snp.centerY)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(40)
+            make.height.equalTo(view.bounds.height / 4)
+        }
+        
+        wellDoneLabel.snp.makeConstraints { make in
+            make.top.equalTo(wellDoneImage.snp.bottom).offset(10)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(30)
+        }
     }
-
-
-
+    
+    private func setupHideWellDone() {
+        if toDos[0].isEmpty && toDos[1].isEmpty && toDos[2].isEmpty {
+            wellDoneImage.isHidden = false
+            wellDoneLabel.isHidden = false
+        } else {
+            wellDoneImage.isHidden = true
+            wellDoneLabel.isHidden = true
+        }
+    }
 }
-
 
 //MARK: - TableView Delegate Extension
 extension OverdueToDoController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return toDos.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return toDos[section].count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return "Вчера"
+        case 1:
+            return "Позавчера"
+        default:
+            return "Ранее"
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: ToDoCell.reuseIdentifier, for: indexPath) as? ToDoCell
+        cell?.setupElements(with: toDos[indexPath.section][indexPath.row])
+        cell?.numberOfSection = indexPath.section
+        cell?.numberOfRow = indexPath.row
+        cell?.doneCheckDelegate = self
         
-        return cell
+        return cell ?? UITableViewCell()
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let toDo = toDos[indexPath.section][indexPath.row]
+        presenter?.showToDetail(toDo)
+    }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let toDo = toDos[indexPath.section][indexPath.row]
+            tableView.beginUpdates()
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            presenter?.removeToDo(toDo)
+            
+            tableView.endUpdates()
+        }
+    }
 }
 
 //MARK: - OverdueViewProtocol Extension
@@ -88,6 +144,15 @@ extension OverdueToDoController: OverdueViewProtocol {
     func showToDos(_ toDos: [[ToDoObject]]) {
         self.toDos = toDos
     }
-    
-    
+}
+
+//MARK: - DoneToDoDelegate
+extension OverdueToDoController: ToDoDoneProtocol {
+    func doneToDo(with index: Int, and section: Int) {
+        let pathIndex = IndexPath(item: index, section: section)
+        tableView.beginUpdates()
+        presenter?.doneToDo(toDos[section][index])
+        tableView.deleteRows(at: [pathIndex], with: .fade)
+        tableView.endUpdates()
+    }
 }

@@ -165,7 +165,6 @@ extension ToDoListController: UITableViewDelegate, UITableViewDataSource {
             tableView.endUpdates()
         }
     }
-    
 }
 
 //MARK: - ToDoListViewProtocol Extension
