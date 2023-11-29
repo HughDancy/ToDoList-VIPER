@@ -10,16 +10,13 @@ import Foundation
 class ToDoListInteractor: ToDoListInteractorInputProtocol {
     weak var presenter: ToDoListInteractorOutputProtocol?
     var storage = ToDoStorage.instance
-//    var toDoStore = ToDoStore.shared
-//    var toDos: [ToDoItem] {
-//        return toDoStore.toDos
-//    }
+
     
     
     func retriveToDos() {
-        let toDos = storage.fetchUsers()
-        let plannedToDos = toDos.filter { $0.doneStatus == false}
-        presenter?.didRetriveToDos(plannedToDos)
+        let alltoDos = storage.fetchUsers().filter { $0.doneStatus == false}
+        let sortedToDos = alltoDos.sorted { $0.date?.compare($1.date ?? Date()) == .orderedAscending }
+        presenter?.didRetriveToDos(sortedToDos)
     }
     
     func deleteToDo(_ toDoItem: ToDoObject) {
