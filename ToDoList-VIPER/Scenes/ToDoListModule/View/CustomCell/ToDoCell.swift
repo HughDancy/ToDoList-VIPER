@@ -12,6 +12,7 @@ class ToDoCell: UITableViewCell {
     
     weak var doneCheckDelegate: ToDoDoneProtocol?
     static let reuseIdentifier = "ToDoCell"
+    var numberOfSection = -1
     var numberOfRow = -1
     
     //MARK: - Elements
@@ -108,7 +109,7 @@ class ToDoCell: UITableViewCell {
         if checkImage.isHighlighted == false  {
             checkImage.isHighlighted = true
             checkImage.tintColor = .systemGreen
-            doneCheckDelegate?.doneToDo(with: self.numberOfRow)
+            doneCheckDelegate?.doneToDo(with: self.numberOfRow, and: self.numberOfSection)
         }
     }
 

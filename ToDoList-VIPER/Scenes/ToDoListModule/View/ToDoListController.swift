@@ -12,7 +12,7 @@ class ToDoListController: UIViewController {
     
     //MARK: - Element's
     var presenter: ToDoListPresenterProtocol?
-    var toDos: [ToDoObject] = [] {
+    var toDos: [[ToDoObject]] = [[]] {
         didSet {
             tableView.reloadData()
             setupNoToDo()
@@ -122,29 +122,30 @@ class ToDoListController: UIViewController {
     //MARK: - TableView Delegate Extension
 extension ToDoListController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return toDos.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return toDos.count
+        return toDos[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ToDoCell.reuseIdentifier, for: indexPath) as? ToDoCell
-        cell?.setupElements(with: toDos[indexPath.row])
+        cell?.setupElements(with: toDos[indexPath.section][indexPath.row])
         cell?.doneCheckDelegate = self
         cell?.numberOfRow = indexPath.row
+        cell?.numberOfSection = indexPath.section
         return cell ?? UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let toDo = toDos[indexPath.row]
+        let toDo = toDos[indexPath.section][indexPath.row]
         presenter?.showToDoDetail(toDo)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let toDo = toDos[indexPath.row]
+            let toDo = toDos[indexPath.section][indexPath.row]
             tableView.beginUpdates()
             presenter?.removeToDo(toDo)
             tableView.deleteRows(at: [indexPath], with: .fade)
@@ -157,18 +158,19 @@ extension ToDoListController: UITableViewDelegate, UITableViewDataSource {
 //MARK: - ToDoListViewProtocol Extension
 extension ToDoListController: ToDoListViewProtocol {
     
-    func showToDos(_ toDos: [ToDoObject]) {
+    func showToDos(_ toDos: [[ToDoObject]]) {
         self.toDos = toDos
+        print(self.toDos)
           
     }
 }
 
 //MARK: - DoneToDoProtocol
 extension ToDoListController: ToDoDoneProtocol {
-    func doneToDo(with index: Int) {
-        let pathIndex = IndexPath(item: index, section: 0)
+    func doneToDo(with index: Int, and section: Int) {
+        let pathIndex = IndexPath(item: index, section: section)
         tableView.beginUpdates()
-        presenter?.doneToDo(toDos[index])
+        presenter?.doneToDo(toDos[section][index])
         tableView.deleteRows(at: [pathIndex], with: .fade)
         tableView.endUpdates()
     }

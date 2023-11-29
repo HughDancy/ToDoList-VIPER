@@ -10,7 +10,7 @@ import UIKit
 protocol ToDoListViewProtocol: AnyObject {
     var presenter: ToDoListPresenterProtocol? { get set }
     
-    func showToDos(_ toDos: [ToDoObject])
+    func showToDos(_ toDos: [[ToDoObject]])
 }
 
 protocol ToDoListPresenterProtocol: AnyObject {
@@ -39,7 +39,7 @@ protocol ToDoListInteractorOutputProtocol: AnyObject {
     
     //INTERACTOR -> PRESENTER
     func didRemoveToDo(_ toDoItem: ToDoObject)
-    func didRetriveToDos(_ toDoItems: [ToDoObject])
+    func didRetriveToDos(_ toDoItems: [[ToDoObject]])
 }
 
 protocol ToDoListRouterProtocol: AnyObject {
@@ -51,5 +51,5 @@ protocol ToDoListRouterProtocol: AnyObject {
 }
 
 protocol ToDoDoneProtocol: AnyObject {
-    func doneToDo(with index: Int)
+    func doneToDo(with index: Int, and section: Int)
 }
