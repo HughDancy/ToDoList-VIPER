@@ -129,6 +129,18 @@ extension ToDoListController: UITableViewDelegate, UITableViewDataSource {
         return toDos[section].count
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return "Сегодня"
+        case 1:
+            return "Завтра"
+        default:
+            return "Позже"
+        }
+    }
+    
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ToDoCell.reuseIdentifier, for: indexPath) as? ToDoCell
         cell?.setupElements(with: toDos[indexPath.section][indexPath.row])
