@@ -25,7 +25,7 @@ protocol OverduePresenterProtocol: AnyObject {
 }
 
 protocol OverdueInteractorInputProtocol: AnyObject {
-    var presenter: OverduePresenterProtocol? { get set }
+    var presenter: OverdueInteractorOutputProtocol? { get set }
     
     //PRESENTER -> Intreractor
     func retriveToDos()
