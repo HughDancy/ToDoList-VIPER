@@ -104,7 +104,7 @@ class ToDoListController: UIViewController {
     }
     
     private func setupNoToDo() {
-        if toDos.isEmpty {
+        if toDos.isEmpty  {
             noToDoImage.isHidden = false
             noToDoLabel.isHidden = false
         } else {
@@ -159,8 +159,9 @@ extension ToDoListController: UITableViewDelegate, UITableViewDataSource {
         if editingStyle == .delete {
             let toDo = toDos[indexPath.section][indexPath.row]
             tableView.beginUpdates()
-            presenter?.removeToDo(toDo)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            presenter?.removeToDo(toDo)
+            
             tableView.endUpdates()
         }
     }

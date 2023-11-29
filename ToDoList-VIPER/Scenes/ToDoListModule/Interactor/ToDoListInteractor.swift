@@ -17,19 +17,17 @@ class ToDoListInteractor: ToDoListInteractorInputProtocol {
         var toDosToSend = [[ToDoObject]]()
         let todoay = DateFormatter.createMediumDate(from: Date.today)
         let tommorow = DateFormatter.createMediumDate(from: Date.tomorrow)
+        
         let alltoDos = storage.fetchUsers().filter { $0.doneStatus == false}
-        let sortedToDos = alltoDos.sorted { $0.date?.compare($1.date ?? Date()) == .orderedAscending }
+
         let toDayToDos = alltoDos.filter { $0.dateTitle == todoay }
         let tommorowToDos = alltoDos.filter { $0.dateTitle == tommorow }
-        let anotherToDos = sortedToDos.filter { $0.dateTitle != todoay && $0.dateTitle != tommorow }
+        let anotherToDos = alltoDos.filter { $0.dateTitle != todoay && $0.dateTitle != tommorow }
         let sortedAnotherToDos = anotherToDos.sorted { $0.date?.compare($1.date ?? Date()) == .orderedAscending }
         toDosToSend.append(toDayToDos)
         toDosToSend.append(tommorowToDos)
         toDosToSend.append(sortedAnotherToDos)
-        for i in sortedAnotherToDos {
-            print(i.date)
-        }
-        print(Date.today)
+        
         presenter?.didRetriveToDos(toDosToSend)
     }
     

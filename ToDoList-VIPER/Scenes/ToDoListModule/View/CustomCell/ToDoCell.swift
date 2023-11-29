@@ -117,6 +117,7 @@ class ToDoCell: UITableViewCell {
         titleLabel.text = nil
         bodyLabel.text = nil
         checkImage.isHighlighted = false
+        checkImage.tintColor = .systemBlue
     }
     
 }
