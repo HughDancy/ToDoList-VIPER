@@ -19,12 +19,17 @@ class AddToDoController: UIViewController, AddToDoViewProtocol {
     private lazy var dateLabel = UILabel.createToDoLabel(fontSize: 20, weight: .bold, title: "Дата")
     private lazy var taskNameField: UITextField = {
         let taskName = UITextField.createToDoTextField()
+        taskName.tag = 0
+        taskName.delegate = self
+        taskName.returnKeyType = .done
         taskName.becomeFirstResponder()
         return taskName
     }()
     private lazy var descriptionTaskField: UITextField = {
       let textField  = UITextField.createToDoTextField()
+        textField.tag = 1
         textField.returnKeyType = .done
+        textField.delegate = self
         return textField
     }()
     private lazy var datePicker = UIDatePicker.createToDoPicker()
@@ -119,5 +124,23 @@ class AddToDoController: UIViewController, AddToDoViewProtocol {
         }
     }
     
+}
+
+//MARK: - TextField Delegte
+extension AddToDoController: UITextFieldDelegate  {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        let nextTag = textField.tag + 1
+
+        if let nextResponder = self.view.viewWithTag(nextTag) {
+            nextResponder.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
+        return true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }
 
