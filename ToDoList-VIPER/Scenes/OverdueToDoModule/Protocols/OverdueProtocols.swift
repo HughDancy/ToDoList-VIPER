@@ -44,5 +44,5 @@ protocol OverdueRouterProtocol: AnyObject {
     static func createOverdueModule() -> UIViewController
     
     //PRESENTER -> ROUTER
-    func presentToDoDetailScreen(from view: OverdueViewProtocol, for: ToDoObject)
+    func presentToDoDetailScreen(from view: OverdueViewProtocol, for item: ToDoObject)
 }
