@@ -8,7 +8,7 @@
 import Foundation
 
 final class OverduePresenter: OverduePresenterProtocol {
-    var view: OverdueViewProtocol?
+    weak var view: OverdueViewProtocol?
     var interactor: OverdueInteractorInputProtocol?
     var router: OverdueRouterProtocol?
     

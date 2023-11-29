@@ -8,7 +8,7 @@
 import Foundation
 
 final class OverdueInteractor: OverdueInteractorInputProtocol {
-    var presenter: OverdueInteractorOutputProtocol?
+    weak var presenter: OverdueInteractorOutputProtocol?
     var storage = ToDoStorage.instance
     
     func retriveToDos() {
