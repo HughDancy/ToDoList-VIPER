@@ -38,7 +38,7 @@ class OverdueToDoController: UIViewController {
     
     private lazy var wellDoneLabel: UILabel = {
         let label = UILabel()
-        label.text = "У Вас отсутствуют просроченные задачи"
+        label.text = "У Вас отсутствуют просроченные задачи. Так держать!"
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         label.textColor = .systemBlue
         label.textAlignment = .center
@@ -86,14 +86,16 @@ class OverdueToDoController: UIViewController {
     }
     
     private func setupHideWellDone() {
-        if toDos[0].isEmpty && toDos[1].isEmpty && toDos[2].isEmpty {
+        if ToDoObjectSorter.sortByVoid(object: toDos) {
             wellDoneImage.isHidden = false
             wellDoneLabel.isHidden = false
             tableView.isHidden = true
+            tableView.tableHeaderView?.isHidden = true
         } else {
             wellDoneImage.isHidden = true
             wellDoneLabel.isHidden = true
             tableView.isHidden = false
+            tableView.tableHeaderView?.isHidden = false
         }
     }
 }

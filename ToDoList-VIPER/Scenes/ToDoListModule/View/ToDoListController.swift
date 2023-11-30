@@ -66,7 +66,7 @@ class ToDoListController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        title = "Звпланировано"
+        title = "Запланировано"
         navigationController?.navigationBar.prefersLargeTitles = true
         setupHierarchy()
         setupLayout()
@@ -104,7 +104,7 @@ class ToDoListController: UIViewController {
     }
     
     private func setupNoToDo() {
-        if toDos.isEmpty  {
+        if ToDoObjectSorter.sortByVoid(object: toDos) {
             noToDoImage.isHidden = false
             noToDoLabel.isHidden = false
         } else {
