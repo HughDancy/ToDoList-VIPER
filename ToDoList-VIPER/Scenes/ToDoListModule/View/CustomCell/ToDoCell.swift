@@ -106,7 +106,8 @@ class ToDoCell: UITableViewCell {
     }
     
     func overdueToDo() {
-        
+        checkImage.tintColor = .systemRed
+        checkImage.image = UIImage(systemName: "xmark.circle")
     }
     
     @objc func makeItDone() {
