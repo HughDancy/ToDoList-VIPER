@@ -11,7 +11,7 @@ class ExecuteToDoController: UITableViewController {
     
     //MARK: - Elements
     var presenter: ExecuteToDoPresenterProtocol?
-    var executeToDos: [ToDoObject] = [] {
+    var executeToDos: [[ToDoObject]] = [[]] {
         didSet {
             tableView.reloadData()
         }
@@ -35,28 +35,38 @@ class ExecuteToDoController: UITableViewController {
         self.tableView.register(ToDoCell.self, forCellReuseIdentifier: ToDoCell.reuseIdentifier)
         self.tableView.showsVerticalScrollIndicator = false
     }
-    
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return executeToDos.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return executeToDos.count
+        return executeToDos[section].count
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return "Сегодня"
+        case 1:
+            return "Вчера"
+        default:
+            return "Ранее"
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ToDoCell.reuseIdentifier, for: indexPath) as? ToDoCell
-        cell?.setupElements(with: executeToDos[indexPath.row])
+        cell?.setupElements(with: executeToDos[indexPath.section][indexPath.row])
         cell?.executeToDo()
         return cell ?? UITableViewCell()
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let toDo = executeToDos[indexPath.row]
+            let toDo = executeToDos[indexPath.section][indexPath.row]
             tableView.beginUpdates()
             tableView.deleteRows(at: [indexPath], with: .fade)
             presenter?.removeToDo(toDo)
@@ -66,7 +76,7 @@ class ExecuteToDoController: UITableViewController {
 }
 
 extension ExecuteToDoController: ExecuteToDoViewProtocol {
-    func showExcuteToDos(_ toDo: [ToDoObject]) {
+    func showExcuteToDos(_ toDo: [[ToDoObject]]) {
         self.executeToDos = toDo
     }
 }

@@ -10,7 +10,7 @@ import UIKit
 protocol ExecuteToDoViewProtocol: AnyObject {
     var presenter: ExecuteToDoPresenterProtocol? { get set }
     
-    func showExcuteToDos(_ toDo: [ToDoObject])
+    func showExcuteToDos(_ toDo: [[ToDoObject]])
 }
 
 protocol ExecuteToDoPresenterProtocol: AnyObject {
@@ -34,7 +34,7 @@ protocol ExecuteToDoInteractorInputProtocol: AnyObject {
 protocol ExecuteToDoInteractorOutputProtocol: AnyObject {
     //INTERACTOR -> PRESENTER
     func didRemoveToDo()
-    func didRetriveToDos(_ toDoItems: [ToDoObject])
+    func didRetriveToDos(_ toDoItems: [[ToDoObject]])
 
 }
 

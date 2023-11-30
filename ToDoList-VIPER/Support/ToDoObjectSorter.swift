@@ -62,12 +62,14 @@ final class ToDoObjectSorter {
         case .completed:
             let now = Calendar.current.dateComponents(in: .current, from: Date())
             let today = DateFormatter.createMediumDate(from: Date.today)
-            let yesterdayDate = DateComponents(year: now.year, month: now.month, day: now.day! - 1)
-            let yesterday = DateFormatter.createMediumDate(from: yesterdayDate.date ?? Date())
+            let yesterday = DateComponents(year: now.year, month: now.month, day: now.day! - 1)
+            let dateYesterday = Calendar.current.date(from: yesterday)!
+            let yesterdayTitile = DateFormatter.createMediumDate(from: dateYesterday)
+      
             
             let todayDoneToDos = object.filter({ $0.dateTitle == today })
-            let yesterdayDoneToDos = object.filter({ $0.dateTitle == yesterday  })
-            let earlierDoneToDos = object.filter({ $0.dateTitle != today && $0.dateTitle != yesterday && $0.date ?? Date() < Date.today})
+            let yesterdayDoneToDos = object.filter({ $0.dateTitle == yesterdayTitile})
+            let earlierDoneToDos = object.filter({ $0.dateTitle != today && $0.dateTitle != yesterdayTitile && $0.date ?? Date() < Date.today})
                                          .sorted { $0.date?.compare($1.date ?? Date()) == .orderedAscending }
             outputMatrix.append(todayDoneToDos)
             outputMatrix.append(yesterdayDoneToDos)
