@@ -38,7 +38,7 @@ final class ToDoObjectSorter {
             outputMatrix.append(tommorowToDos)
             outputMatrix.append(anotherToDos)
             return outputMatrix
-        case .overdue, .completed:
+        case .overdue:
             let now = Calendar.current.dateComponents(in: .current, from: Date())
             let yesterday = DateComponents(year: now.year, month: now.month, day: now.day! - 1)
             let dayBeforeYesterday = DateComponents(year: now.year, month: now.month, day: now.day! - 2)
@@ -58,6 +58,20 @@ final class ToDoObjectSorter {
             outputMatrix.append(yesterdayToDos)
             outputMatrix.append(dayBeforeYesterdayToDos)
             outputMatrix.append(anotherOverdueToDos)
+            return outputMatrix
+        case .completed:
+            let now = Calendar.current.dateComponents(in: .current, from: Date())
+            let today = DateFormatter.createMediumDate(from: Date.today)
+            let yesterdayDate = DateComponents(year: now.year, month: now.month, day: now.day! - 1)
+            let yesterday = DateFormatter.createMediumDate(from: yesterdayDate.date ?? Date())
+            
+            let todayDoneToDos = object.filter({ $0.dateTitle == today })
+            let yesterdayDoneToDos = object.filter({ $0.dateTitle == yesterday  })
+            let earlierDoneToDos = object.filter({ $0.dateTitle != today && $0.dateTitle != yesterday && $0.date ?? Date() < Date.today})
+                                         .sorted { $0.date?.compare($1.date ?? Date()) == .orderedAscending }
+            outputMatrix.append(todayDoneToDos)
+            outputMatrix.append(yesterdayDoneToDos)
+            outputMatrix.append(earlierDoneToDos)
             return outputMatrix
         }
     }
