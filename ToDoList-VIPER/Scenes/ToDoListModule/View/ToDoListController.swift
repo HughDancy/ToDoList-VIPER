@@ -172,8 +172,6 @@ extension ToDoListController: ToDoListViewProtocol {
     
     func showToDos(_ toDos: [[ToDoObject]]) {
         self.toDos = toDos
-        print(self.toDos)
-          
     }
 }
 

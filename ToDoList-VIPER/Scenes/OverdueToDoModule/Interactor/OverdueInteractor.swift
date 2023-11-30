@@ -27,11 +27,12 @@ final class OverdueInteractor: OverdueInteractorInputProtocol {
                                      .sorted { $0.date?.compare($1.date ?? Date()) == .orderedAscending }
         let dayBeforeYesterdayToDos = allToDos.filter({ $0.dateTitle == dayBeforeYesterdayTitle })
                                               .sorted { $0.date?.compare($1.date ?? Date()) == .orderedAscending }
-        let anotherOverdueToDos = allToDos.filter({ $0.dateTitle != yesterdayTitle && $0.dateTitle != dayBeforeYesterdayTitle && $0.dateTitle != todayTitle })
+        let anotherOverdueToDos = allToDos.filter({ $0.dateTitle != yesterdayTitle && $0.dateTitle != dayBeforeYesterdayTitle && $0.date ?? Date() < Date.today && $0.date ?? Date() < Date.tomorrow})
                                            .sorted { $0.date?.compare($1.date ?? Date()) == .orderedAscending }
         toDosForSend.append(yesterdayToDos)
         toDosForSend.append(dayBeforeYesterdayToDos)
         toDosForSend.append(anotherOverdueToDos)
+        print(toDosForSend)
         presenter?.didRetriveToDos(toDosForSend)
     }
     

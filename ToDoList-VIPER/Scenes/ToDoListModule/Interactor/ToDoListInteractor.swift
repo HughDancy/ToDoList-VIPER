@@ -22,7 +22,7 @@ class ToDoListInteractor: ToDoListInteractorInputProtocol {
 
         let toDayToDos = alltoDos.filter { $0.dateTitle == todoay }
         let tommorowToDos = alltoDos.filter { $0.dateTitle == tommorow }
-        let anotherToDos = alltoDos.filter { $0.dateTitle != todoay && $0.dateTitle != tommorow }
+        let anotherToDos = alltoDos.filter { $0.dateTitle != todoay && $0.dateTitle != tommorow && $0.date ?? Date() > Date.today}
         let sortedAnotherToDos = anotherToDos.sorted { $0.date?.compare($1.date ?? Date()) == .orderedAscending }
         toDosToSend.append(toDayToDos)
         toDosToSend.append(tommorowToDos)

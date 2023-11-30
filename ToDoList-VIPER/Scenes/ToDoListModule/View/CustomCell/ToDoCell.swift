@@ -105,6 +105,10 @@ class ToDoCell: UITableViewCell {
         doneButton.isHidden = true
     }
     
+    func overdueToDo() {
+        
+    }
+    
     @objc func makeItDone() {
         if checkImage.isHighlighted == false  {
             checkImage.isHighlighted = true
