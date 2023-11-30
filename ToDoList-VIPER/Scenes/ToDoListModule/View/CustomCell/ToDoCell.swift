@@ -84,6 +84,7 @@ class ToDoCell: UITableViewCell {
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(contentView.safeAreaLayoutGuide.snp.top).offset(10)
             make.leading.equalTo(checkImage.snp.trailing).offset(15)
+            make.trailing.equalTo(contentView.safeAreaLayoutGuide.snp.trailing).inset(15)
         }
         
         bodyLabel.snp.makeConstraints { make in

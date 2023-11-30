@@ -43,7 +43,6 @@ final class ToDoObjectSorter {
             let yesterday = DateComponents(year: now.year, month: now.month, day: now.day! - 1)
             let dayBeforeYesterday = DateComponents(year: now.year, month: now.month, day: now.day! - 2)
             let todayTitle = DateFormatter.createMediumDate(from: Date.today)
-            let tommorrowTitle = DateFormatter.createMediumDate(from: Date.tomorrow)
             let dateYesterday = Calendar.current.date(from: yesterday)!
             let dateDayBedoreYesterday = Calendar.current.date(from: dayBeforeYesterday)!
             let yesterdayTitle = DateFormatter.createMediumDate(from: dateYesterday)
@@ -54,7 +53,7 @@ final class ToDoObjectSorter {
             let dayBeforeYesterdayToDos = object.filter({ $0.dateTitle == dayBeforeYesterdayTitle })
                                                   .sorted { $0.date?.compare($1.date ?? Date()) == .orderedAscending }
             let anotherOverdueToDos = object.filter({ $0.dateTitle != yesterdayTitle && $0.dateTitle != dayBeforeYesterdayTitle &&
-                                                        $0.dateTitle !=  todayTitle && $0.date ?? Date() < Date.tomorrow})
+                $0.date ?? Date() <  Date.today && $0.dateTitle != todayTitle})
                                                .sorted { $0.date?.compare($1.date ?? Date()) == .orderedAscending }
             outputMatrix.append(yesterdayToDos)
             outputMatrix.append(dayBeforeYesterdayToDos)

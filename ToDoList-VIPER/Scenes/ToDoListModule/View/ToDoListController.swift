@@ -107,9 +107,13 @@ class ToDoListController: UIViewController {
         if ToDoObjectSorter.sortByVoid(object: toDos) {
             noToDoImage.isHidden = false
             noToDoLabel.isHidden = false
+            tableView.isHidden = true
+            tableView.tableHeaderView?.isHidden = true
         } else {
             noToDoImage.isHidden = true
             noToDoLabel.isHidden = true
+            tableView.isHidden = false
+            tableView.tableHeaderView?.isHidden = false
         }
     }
     
