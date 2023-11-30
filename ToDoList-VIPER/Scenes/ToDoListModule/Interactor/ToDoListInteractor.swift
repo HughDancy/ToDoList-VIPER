@@ -15,6 +15,7 @@ class ToDoListInteractor: ToDoListInteractorInputProtocol {
     
     func retriveToDos() {
         var toDosToSend = [[ToDoObject]]()
+        
         let todoay = DateFormatter.createMediumDate(from: Date.today)
         let tommorow = DateFormatter.createMediumDate(from: Date.tomorrow)
         

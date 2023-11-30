@@ -24,23 +24,21 @@ final class ToDoObjectSorter {
     }
     
     static func sortByStatus(object: [ToDoObject], and toDoType: ToDoType) -> [[ToDoObject]] {
-        let alltoDos = object.filter { $0.doneStatus == false }
         var outputMatrix = [[ToDoObject]]()
-        
         switch toDoType {
         case .upcoming:
             let todoay = DateFormatter.createMediumDate(from: Date.today)
             let tommorow = DateFormatter.createMediumDate(from: Date.tomorrow)
        
-            let toDayToDos = alltoDos.filter { $0.dateTitle == todoay }
-            let tommorowToDos = alltoDos.filter { $0.dateTitle == tommorow }
-            let anotherToDos = alltoDos.filter { $0.dateTitle != todoay && $0.dateTitle != tommorow && $0.date ?? Date() > Date.today}
-            let sortedAnotherToDos = anotherToDos.sorted { $0.date?.compare($1.date ?? Date()) == .orderedAscending }
+            let toDayToDos = object.filter { $0.dateTitle == todoay }
+            let tommorowToDos = object.filter { $0.dateTitle == tommorow }
+            let anotherToDos = object.filter { $0.dateTitle != todoay && $0.dateTitle != tommorow && $0.date ?? Date() > Date.today}
+                                     .sorted { $0.date?.compare($1.date ?? Date()) == .orderedAscending }
             outputMatrix.append(toDayToDos)
             outputMatrix.append(tommorowToDos)
-            outputMatrix.append(sortedAnotherToDos)
+            outputMatrix.append(anotherToDos)
             return outputMatrix
-        case .overdue:
+        case .overdue, .completed:
             let now = Calendar.current.dateComponents(in: .current, from: Date())
             let yesterday = DateComponents(year: now.year, month: now.month, day: now.day! - 1)
             let dayBeforeYesterday = DateComponents(year: now.year, month: now.month, day: now.day! - 2)
@@ -49,33 +47,11 @@ final class ToDoObjectSorter {
             let yesterdayTitle = DateFormatter.createMediumDate(from: dateYesterday)
             let dayBeforeYesterdayTitle = DateFormatter.createMediumDate(from: dateDayBedoreYesterday)
             
-            let yesterdayToDos = alltoDos.filter({ $0.dateTitle == yesterdayTitle })
+            let yesterdayToDos = object.filter({ $0.dateTitle == yesterdayTitle })
                                          .sorted { $0.date?.compare($1.date ?? Date()) == .orderedAscending }
-            let dayBeforeYesterdayToDos = alltoDos.filter({ $0.dateTitle == dayBeforeYesterdayTitle })
+            let dayBeforeYesterdayToDos = object.filter({ $0.dateTitle == dayBeforeYesterdayTitle })
                                                   .sorted { $0.date?.compare($1.date ?? Date()) == .orderedAscending }
-            let anotherOverdueToDos = alltoDos.filter({ $0.dateTitle != yesterdayTitle &&
-                                                                $0.dateTitle != dayBeforeYesterdayTitle &&
-                                                                $0.date ?? Date() < Date.today && $0.date ?? Date() < Date.tomorrow})
-                                               .sorted { $0.date?.compare($1.date ?? Date()) == .orderedAscending }
-            outputMatrix.append(yesterdayToDos)
-            outputMatrix.append(dayBeforeYesterdayToDos)
-            outputMatrix.append(anotherOverdueToDos)
-            return outputMatrix
-        case .completed:
-            let allToDo = object.filter { $0.doneStatus == true }
-            let now = Calendar.current.dateComponents(in: .current, from: Date())
-            let yesterday = DateComponents(year: now.year, month: now.month, day: now.day! - 1)
-            let dayBeforeYesterday = DateComponents(year: now.year, month: now.month, day: now.day! - 2)
-            let dateYesterday = Calendar.current.date(from: yesterday)!
-            let dateDayBedoreYesterday = Calendar.current.date(from: dayBeforeYesterday)!
-            let yesterdayTitle = DateFormatter.createMediumDate(from: dateYesterday)
-            let dayBeforeYesterdayTitle = DateFormatter.createMediumDate(from: dateDayBedoreYesterday)
-            
-            let yesterdayToDos = allToDo.filter({ $0.dateTitle == yesterdayTitle })
-                                         .sorted { $0.date?.compare($1.date ?? Date()) == .orderedAscending }
-            let dayBeforeYesterdayToDos = allToDo.filter({ $0.dateTitle == dayBeforeYesterdayTitle })
-                                                  .sorted { $0.date?.compare($1.date ?? Date()) == .orderedAscending }
-            let anotherOverdueToDos = allToDo.filter({ $0.dateTitle != yesterdayTitle &&
+            let anotherOverdueToDos = object.filter({ $0.dateTitle != yesterdayTitle &&
                                                                 $0.dateTitle != dayBeforeYesterdayTitle &&
                                                                 $0.date ?? Date() < Date.today && $0.date ?? Date() < Date.tomorrow})
                                                .sorted { $0.date?.compare($1.date ?? Date()) == .orderedAscending }
