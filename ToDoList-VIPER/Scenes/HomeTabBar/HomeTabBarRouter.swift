@@ -31,7 +31,8 @@ final class HomeTabBarRouter: HomeTabBarRouterProtocol {
                                         selectedImage: UIImage(systemName: "circle.badge.checkmark.fill"))
         executed.tabBarItem = execudetItem
         
-        let configuarations = ViewController()
+        let configuarations = OptionsViewController()
+//        ViewController()
         let configurationsItem = UITabBarItem(title: "Настройки",
                                               image: UIImage(systemName: "gear.circle"),
                                               selectedImage: UIImage(systemName: "gear.circle.fill"))
