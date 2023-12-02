@@ -1,60 +1,49 @@
 //
-//  ToDoListController.swift
+//  OverdueToDoController.swift
 //  ToDoList-VIPER
 //
-//  Created by Борис Киселев on 28.11.2023.
+//  Created by Борис Киселев on 29.11.2023.
 //
 
 import UIKit
 import SnapKit
 
-class ToDoListController: UIViewController {
+class OverdueToDoController: UIViewController {
     
-    //MARK: - Element's
-    var presenter: ToDoListPresenterProtocol?
+    //MARK: - Elements
+    var presenter: OverduePresenterProtocol?
     var toDos: [[ToDoObject]] = [[]] {
         didSet {
             tableView.reloadData()
-            setupNoToDo()
+            setupHideWellDone()
         }
     }
     
     private lazy var tableView: UITableView = {
-        let table = UITableView(frame: .zero, style: .plain)
-        table.register(ToDoCell.self, forCellReuseIdentifier: ToDoCell.reuseIdentifier)
-        table.showsVerticalScrollIndicator = false
-        table.delegate = self
-        table.dataSource = self
-        
-        return table
+        let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.register(ToDoCell.self, forCellReuseIdentifier: ToDoCell.reuseIdentifier)
+        tableView.showsVerticalScrollIndicator = false
+        tableView.delegate = self
+        tableView.dataSource = self
+        return tableView
     }()
     
-    private lazy var noToDoImage: UIImageView = {
+    private lazy var wellDoneImage: UIImageView = {
         let imageView = UIImageView()
-        let image = UIImage(systemName: "tray")
-        imageView.image = image
+        let picture = UIImage(systemName: "hand.thumbsup.fill")
+        imageView.image = picture
         imageView.tintColor = .systemBlue
         return imageView
     }()
     
-    private lazy var noToDoLabel: UILabel = {
+    private lazy var wellDoneLabel: UILabel = {
         let label = UILabel()
-        label.text = "У Вас отсутствуют заплаинрованные задачи"
+        label.text = "У Вас отсутствуют просроченные задачи. Так держать!"
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         label.textColor = .systemBlue
         label.textAlignment = .center
         label.numberOfLines = 0
         return label
-    }()
-    
-    private lazy var addToDoButton: UIButton = {
-        let button = UIButton(type: .custom)
-        let largeConfig = UIImage.SymbolConfiguration(pointSize: 30, weight: .bold, scale: .large)
-        let largeAddImage = UIImage(systemName: "plus.circle.fill", withConfiguration: largeConfig)
-        button.setImage(largeAddImage, for: .normal)
-        button.imageView?.contentMode = .scaleAspectFill
-        button.addTarget(self, action: #selector(addToDo), for: .touchDown)
-        return button
     }()
     
     //MARK: - Lifecycle
@@ -66,18 +55,17 @@ class ToDoListController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        title = "Запланировано"
+        title = "Просроченные"
         navigationController?.navigationBar.prefersLargeTitles = true
         setupHierarchy()
         setupLayout()
-        setupRightBarButton()
     }
     
-    //MARK: - Setup Element's
+    //MARK: - Setup Elements
     private func setupHierarchy() {
         view.addSubview(tableView)
-        view.addSubview(noToDoImage)
-        view.addSubview(noToDoLabel)
+        view.addSubview(wellDoneImage)
+        view.addSubview(wellDoneLabel)
     }
     
     private func setupLayout() {
@@ -85,46 +73,35 @@ class ToDoListController: UIViewController {
             make.top.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         
-        noToDoImage.snp.makeConstraints { make in
+        wellDoneImage.snp.makeConstraints { make in
             make.centerY.equalTo(view.safeAreaLayoutGuide.snp.centerY)
-            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(40)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(50)
             make.height.equalTo(view.bounds.height / 4)
         }
         
-        noToDoLabel.snp.makeConstraints { make in
-            make.top.equalTo(noToDoImage.snp.bottom).offset(10)
+        wellDoneLabel.snp.makeConstraints { make in
+            make.top.equalTo(wellDoneImage.snp.bottom).offset(10)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(30)
         }
     }
     
-    private func setupRightBarButton() {
-        let menuBarItem = UIBarButtonItem(customView: addToDoButton)
-        self.navigationItem.rightBarButtonItem = menuBarItem
-        navigationController?.navigationBar.prefersLargeTitles = true
-    }
-    
-    private func setupNoToDo() {
+    private func setupHideWellDone() {
         if ToDoObjectSorter.sortByVoid(object: toDos) {
-            noToDoImage.isHidden = false
-            noToDoLabel.isHidden = false
+            wellDoneImage.isHidden = false
+            wellDoneLabel.isHidden = false
             tableView.isHidden = true
             tableView.tableHeaderView?.isHidden = true
         } else {
-            noToDoImage.isHidden = true
-            noToDoLabel.isHidden = true
+            wellDoneImage.isHidden = true
+            wellDoneLabel.isHidden = true
             tableView.isHidden = false
             tableView.tableHeaderView?.isHidden = false
         }
     }
-    
-    //MARK: - Button Action
-    @objc func addToDo() {
-        self.presenter?.showAddToDo()
-    }
 }
 
-    //MARK: - TableView Delegate Extension
-extension ToDoListController: UITableViewDelegate, UITableViewDataSource {
+//MARK: - TableView Delegate Extension
+extension OverdueToDoController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return toDos.count
     }
@@ -136,27 +113,28 @@ extension ToDoListController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "Сегодня"
+            return "Вчера"
         case 1:
-            return "Завтра"
+            return "Позавчера"
         default:
-            return "Позже"
+            return "Ранее"
         }
     }
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ToDoCell.reuseIdentifier, for: indexPath) as? ToDoCell
         cell?.setupElements(with: toDos[indexPath.section][indexPath.row])
-        cell?.doneCheckDelegate = self
-        cell?.numberOfRow = indexPath.row
+        cell?.overdueToDo()
         cell?.numberOfSection = indexPath.section
+        cell?.numberOfRow = indexPath.row
+        cell?.doneCheckDelegate = self
+        
         return cell ?? UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let toDo = toDos[indexPath.section][indexPath.row]
-        presenter?.showToDoDetail(toDo)
+        presenter?.showToDetail(toDo)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -171,16 +149,15 @@ extension ToDoListController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-//MARK: - ToDoListViewProtocol Extension
-extension ToDoListController: ToDoListViewProtocol {
-    
+//MARK: - OverdueViewProtocol Extension
+extension OverdueToDoController: OverdueViewProtocol {
     func showToDos(_ toDos: [[ToDoObject]]) {
         self.toDos = toDos
     }
 }
 
-//MARK: - DoneToDoProtocol
-extension ToDoListController: ToDoDoneProtocol {
+//MARK: - DoneToDoDelegate
+extension OverdueToDoController: ToDoDoneProtocol {
     func doneToDo(with index: Int, and section: Int) {
         let pathIndex = IndexPath(item: index, section: section)
         tableView.beginUpdates()

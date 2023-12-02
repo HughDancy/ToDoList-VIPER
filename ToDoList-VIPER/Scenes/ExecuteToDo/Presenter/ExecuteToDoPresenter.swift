@@ -26,7 +26,7 @@ extension ExecuteToDoPresenter:  ExecuteToDoInteractorOutputProtocol {
         interactor?.retriveToDos()
     }
     
-    func didRetriveToDos(_ toDoItems: [ToDoObject]) {
+    func didRetriveToDos(_ toDoItems: [[ToDoObject]]) {
         view?.showExcuteToDos(toDoItems)
     }
     

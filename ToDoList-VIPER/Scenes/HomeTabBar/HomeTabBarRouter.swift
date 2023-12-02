@@ -14,10 +14,16 @@ final class HomeTabBarRouter: HomeTabBarRouterProtocol {
         let planned = ToDoListRouter.createToDoListModule()
         planned.hidesBottomBarWhenPushed = false
         let plannedItem = UITabBarItem(title: "Запланировано",
-                                       image: UIImage(systemName: "list.bullet.clipboard"),
-                                       selectedImage: UIImage(systemName: "list.bullet.clipboard.fill"))
+                                       image: UIImage(systemName: "square.3.layers.3d"),
+                                       selectedImage: UIImage(systemName: "square.3.layers.3d.top.filled"))
         
         planned.tabBarItem = plannedItem
+        
+        let overdue = OverdueToDoRouter.createOverdueModule()
+        let overdueItem = UITabBarItem(title: "Просроченно",
+                                       image: UIImage(systemName: "square.stack.3d.up.slash"),
+                                       selectedImage: UIImage(systemName: "square.stack.3d.up.slash.fill"))
+        overdue.tabBarItem = overdueItem
         
         let executed = ExecuteToDoRouter.createToDoListModule()
         let execudetItem = UITabBarItem(title: "Выполненно",
@@ -31,7 +37,7 @@ final class HomeTabBarRouter: HomeTabBarRouterProtocol {
                                               selectedImage: UIImage(systemName: "gear.circle.fill"))
         configuarations.tabBarItem = configurationsItem
         
-        tabBar.viewControllers = [planned, executed, configuarations]
+        tabBar.viewControllers = [planned, overdue,  executed, configuarations]
         tabBar.tabBar.tintColor = .systemBlue
         
         return tabBar

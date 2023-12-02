@@ -14,21 +14,9 @@ class ToDoListInteractor: ToDoListInteractorInputProtocol {
     
     
     func retriveToDos() {
-        var toDosToSend = [[ToDoObject]]()
-        let todoay = DateFormatter.createMediumDate(from: Date.today)
-        let tommorow = DateFormatter.createMediumDate(from: Date.tomorrow)
-        
-        let alltoDos = storage.fetchUsers().filter { $0.doneStatus == false}
-
-        let toDayToDos = alltoDos.filter { $0.dateTitle == todoay }
-        let tommorowToDos = alltoDos.filter { $0.dateTitle == tommorow }
-        let anotherToDos = alltoDos.filter { $0.dateTitle != todoay && $0.dateTitle != tommorow }
-        let sortedAnotherToDos = anotherToDos.sorted { $0.date?.compare($1.date ?? Date()) == .orderedAscending }
-        toDosToSend.append(toDayToDos)
-        toDosToSend.append(tommorowToDos)
-        toDosToSend.append(sortedAnotherToDos)
-        
-        presenter?.didRetriveToDos(toDosToSend)
+        let allToDos = storage.fetchUsers().filter { $0.doneStatus == false }
+        let outputToDos = ToDoObjectSorter.sortByStatus(object: allToDos, and: .upcoming)
+        presenter?.didRetriveToDos(outputToDos)
     }
     
     func deleteToDo(_ toDoItem: ToDoObject) {

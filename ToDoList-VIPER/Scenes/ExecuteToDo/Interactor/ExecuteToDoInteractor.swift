@@ -13,7 +13,8 @@ class ExecuteToDoInteractor: ExecuteToDoInteractorInputProtocol {
     
     func retriveToDos() {
         let doneToDos = storage.fetchUsers().filter { $0.doneStatus == true }
-        presenter?.didRetriveToDos(doneToDos)
+        let outputToDos = ToDoObjectSorter.sortByStatus(object: doneToDos, and: .completed)
+        presenter?.didRetriveToDos(outputToDos)
     }
     
     func deleteToDo(_ toDoItem: ToDoObject) {
