@@ -28,6 +28,7 @@
 		D8A18CD12B1B1C73003C6FB6 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A18CD02B1B1C73003C6FB6 /* OptionsViewController.swift */; };
 		D8A18CD42B1B1C8E003C6FB6 /* OptionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A18CD32B1B1C8E003C6FB6 /* OptionsCell.swift */; };
 		D8A18CD62B1B1CA2003C6FB6 /* OptionsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A18CD52B1B1CA2003C6FB6 /* OptionsHeader.swift */; };
+		D8A18CD82B205E59003C6FB6 /* OptionsItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A18CD72B205E59003C6FB6 /* OptionsItems.swift */; };
 		D8BF0D432B15ED2E00D1572E /* ToDoListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BF0D422B15ED2E00D1572E /* ToDoListController.swift */; };
 		D8E9F8702B01F84F00A3F3FC /* ToDoDetailsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F86F2B01F84F00A3F3FC /* ToDoDetailsProtocols.swift */; };
 		D8E9F8722B01FAFB00A3F3FC /* ToDoDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8712B01FAFB00A3F3FC /* ToDoDetailController.swift */; };
@@ -105,6 +106,7 @@
 		D8A18CD02B1B1C73003C6FB6 /* OptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
 		D8A18CD32B1B1C8E003C6FB6 /* OptionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsCell.swift; sourceTree = "<group>"; };
 		D8A18CD52B1B1CA2003C6FB6 /* OptionsHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsHeader.swift; sourceTree = "<group>"; };
+		D8A18CD72B205E59003C6FB6 /* OptionsItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsItems.swift; sourceTree = "<group>"; };
 		D8BF0D422B15ED2E00D1572E /* ToDoListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListController.swift; sourceTree = "<group>"; };
 		D8E9F86F2B01F84F00A3F3FC /* ToDoDetailsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoDetailsProtocols.swift; sourceTree = "<group>"; };
 		D8E9F8712B01FAFB00A3F3FC /* ToDoDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoDetailController.swift; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 				D86D45212AFB982300894774 /* ToDoItem.swift */,
 				D86D45232AFB986E00894774 /* ToDoStore.swift */,
 				D8E9F8BB2B109DB800A3F3FC /* ToDoStorage.swift */,
+				D8A18CD72B205E59003C6FB6 /* OptionsItems.swift */,
 			);
 			path = Entitys;
 			sourceTree = "<group>";
@@ -782,6 +785,7 @@
 				D8E9F8A92B04D96600A3F3FC /* AddToDoRouter.swift in Sources */,
 				D8E9F8742B02178E00A3F3FC /* ToDoDetailPresenter.swift in Sources */,
 				D8E9F8762B021B7800A3F3FC /* ToDoDetailInteractor.swift in Sources */,
+				D8A18CD82B205E59003C6FB6 /* OptionsItems.swift in Sources */,
 				D8E9F87C2B03537A00A3F3FC /* HomeTabBarRouter.swift in Sources */,
 				D8A18CD12B1B1C73003C6FB6 /* OptionsViewController.swift in Sources */,
 				D86D452E2AFCAD3B00894774 /* ToDoListInteractor.swift in Sources */,
