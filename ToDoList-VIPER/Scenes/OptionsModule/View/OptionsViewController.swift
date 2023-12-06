@@ -16,7 +16,8 @@ class OptionsViewController: UIViewController {
         table.delegate = self
         table.dataSource = self
         table.register(OptionsHeader.self, forHeaderFooterViewReuseIdentifier: OptionsHeader.reuseIdentifier)
-        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        table.register(OptionsCell.self, forCellReuseIdentifier: OptionsCell.reuseIdentifier)
+        table.separatorStyle = .none
         
         return table
     }()
@@ -67,16 +68,19 @@ extension OptionsViewController: UITableViewDelegate, UITableViewDataSource {
 //        return 10
 //    }
 //    
-    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 100
+//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 25
+        return OptionsItems.options.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = "Option \(indexPath.row)"
-        return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: OptionsCell.reuseIdentifier, for: indexPath) as? OptionsCell
+        cell?.setupElements(text: OptionsItems.options[indexPath.row].title, image: OptionsItems.options[indexPath.row].icon)
+        
+        return cell ?? UITableViewCell()
     }
     
     

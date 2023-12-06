@@ -20,8 +20,8 @@ struct OptionsItems {
 
 extension OptionsItems {
     static let options = [
-        OptionsItems(icon: "", title: OptionsTitles.lightDarkTheme.rawValue),
-        OptionsItems(icon: "", title: OptionsTitles.notifications.rawValue),
-        OptionsItems(icon: "", title: OptionsTitles.feedback.rawValue)
+        OptionsItems(icon: "theme", title: OptionsTitles.lightDarkTheme.rawValue),
+        OptionsItems(icon: "ring", title: OptionsTitles.notifications.rawValue),
+        OptionsItems(icon: "feedback", title: OptionsTitles.feedback.rawValue)
     ]
 }
