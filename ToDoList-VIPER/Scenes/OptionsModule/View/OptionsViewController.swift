@@ -9,6 +9,8 @@ import UIKit
 
 class OptionsViewController: UIViewController {
     
+    //MARK: - Elements
+    
     private lazy var tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .plain)
         table.delegate = self
@@ -18,6 +20,8 @@ class OptionsViewController: UIViewController {
         
         return table
     }()
+
+    //MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +33,7 @@ class OptionsViewController: UIViewController {
         
     }
     
+    //MARK: - Setup Elements
     private func setupHierarchy() {
         view.addSubview(tableView)
     }
@@ -46,6 +51,8 @@ class OptionsViewController: UIViewController {
 
 }
 
+//MARK: - TableDelegates extension
+
 extension OptionsViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -60,7 +67,7 @@ extension OptionsViewController: UITableViewDelegate, UITableViewDataSource {
 //        return 10
 //    }
 //    
-
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 25
