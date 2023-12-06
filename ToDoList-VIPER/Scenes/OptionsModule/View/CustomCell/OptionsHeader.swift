@@ -14,9 +14,10 @@ class OptionsHeader: UITableViewHeaderFooterView {
     //MARK: - Elements
     private lazy var avatar: UIImageView = {
         let avatar = UIImageView()
-        avatar.layer.cornerRadius = 50 / 2
+        avatar.layer.cornerRadius = 100 / 2
         avatar.clipsToBounds = true
         avatar.image = UIImage(named: "testAva")
+        avatar.contentMode = .scaleAspectFill
         
         return avatar
     }()
@@ -24,16 +25,17 @@ class OptionsHeader: UITableViewHeaderFooterView {
     private lazy var nicknameLabel: UILabel = {
        let label = UILabel()
         label.text = "Nickname user"
-        label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         label.textColor = .systemTeal
         return label
     }()
     
     private lazy var editButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "pencil.circle"), for: .normal)
+        let image = UIImage(named: "pencil")
+        button.setImage(UIImage(named: "pencil"), for: .normal)
         button.tintColor = .systemBlue
-        
+        button.addTarget(self, action: #selector(tapEdit), for: .touchDown)
         return button
     }()
     
@@ -59,24 +61,34 @@ class OptionsHeader: UITableViewHeaderFooterView {
     
     private func setupLayout() {
         avatar.snp.makeConstraints { make in
+            make.top.equalTo(contentView.safeAreaLayoutGuide.snp.top).offset(35)
             make.centerY.centerX.equalTo(contentView.safeAreaLayoutGuide)
-            make.height.width.equalTo(50)
+            make.height.width.equalTo(100)
         }
         
         nicknameLabel.snp.makeConstraints { make in
             make.top.equalTo(avatar.snp.bottom).offset(10)
-            make.centerY.equalTo(contentView.safeAreaLayoutGuide.snp.centerY)
+            make.centerX.equalTo(contentView.safeAreaLayoutGuide.snp.centerX)
         }
         
         editButton.snp.makeConstraints { make in
-            make.leading.equalTo(nicknameLabel.snp.trailing).offset(5)
+            make.top.equalTo(avatar.snp.bottom).offset(5)
+            make.leading.equalTo(nicknameLabel.snp.trailing).offset(10)
+            make.height.equalTo(25)
+            make.width.equalTo(25)
         }
         
+    }
+    
+    @objc func tapEdit() {
+        print("Start editing")
+    }
+    
         //MARK: - Refactor to setup elements with entity
         func setupElements() {
             
         }
-    }
+}
     
     /*
      // Only override draw() if you perform custom drawing.
@@ -86,4 +98,4 @@ class OptionsHeader: UITableViewHeaderFooterView {
      }
      */
     
-}
+

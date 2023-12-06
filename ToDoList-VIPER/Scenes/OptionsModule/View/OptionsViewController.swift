@@ -21,6 +21,8 @@ class OptionsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Настройки"
+        navigationController?.navigationBar.prefersLargeTitles = true
         view.backgroundColor = .systemBackground
         setupHierarchy()
         setupLayout()
@@ -35,6 +37,9 @@ class OptionsViewController: UIViewController {
         tableView.snp.makeConstraints { make in
             make.top.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
+        
+//        tableView.sectionHeaderHeight = UITableView.automaticDimension
+//        tableView.estimatedSectionHeaderHeight = 40
     }
 
    
@@ -51,12 +56,14 @@ extension OptionsViewController: UITableViewDelegate, UITableViewDataSource {
         return header
     }
     
-    func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-        return 100
-    }
+//    func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+//        return 10
+//    }
+//    
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 25
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
