@@ -61,14 +61,15 @@ class OptionsHeader: UITableViewHeaderFooterView {
     
     private func setupLayout() {
         avatar.snp.makeConstraints { make in
-            make.top.equalTo(contentView.safeAreaLayoutGuide.snp.top).offset(35)
-            make.centerY.centerX.equalTo(contentView.safeAreaLayoutGuide)
+            make.top.equalTo(contentView.safeAreaLayoutGuide.snp.top).offset(15)
+            make.centerX.equalTo(contentView.safeAreaLayoutGuide.snp.centerX)
             make.height.width.equalTo(100)
         }
         
         nicknameLabel.snp.makeConstraints { make in
             make.top.equalTo(avatar.snp.bottom).offset(10)
             make.centerX.equalTo(contentView.safeAreaLayoutGuide.snp.centerX)
+            make.bottom.equalTo(contentView.safeAreaLayoutGuide.snp.bottom).inset(20)
         }
         
         editButton.snp.makeConstraints { make in

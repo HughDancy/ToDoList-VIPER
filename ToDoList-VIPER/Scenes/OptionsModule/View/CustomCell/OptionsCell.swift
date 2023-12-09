@@ -25,7 +25,7 @@ class OptionsCell: UITableViewCell {
         
         return label
     }()
-    
+
     private lazy var  container: UIView = {
        let view = UIView()
         view.backgroundColor = .systemGray6
@@ -63,12 +63,14 @@ class OptionsCell: UITableViewCell {
             make.top.equalTo(container).inset(10)
             make.leading.equalTo(container.snp.leading).offset(10)
             make.height.width.equalTo(50)
+            make.bottom.equalTo(container.snp.bottom).inset(15)
         }
         
         title.snp.makeConstraints { make in
             make.top.equalTo(container.snp.top).offset(15)
-            make.centerX.equalTo(contentView.snp.centerX)
-            make.leading.equalTo(icon.snp.trailing).offset(10)
+            make.centerX.equalTo(container.snp.centerX)
+            make.bottom.equalTo(container.snp.bottom).inset(15)
+            make.leading.equalTo(icon.snp.trailing).offset(15)
         }
         
     }

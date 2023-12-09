@@ -65,7 +65,7 @@ extension OptionsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
 //    func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-//        return 10
+//        return 200
 //    }
 //    
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
