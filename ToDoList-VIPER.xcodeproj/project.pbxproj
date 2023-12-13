@@ -65,6 +65,7 @@
 		D8EF67812B29B634007FD016 /* OptionsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EF67802B29B634007FD016 /* OptionsProtocols.swift */; };
 		D8EF67832B29B7FC007FD016 /* OptionsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EF67822B29B7FC007FD016 /* OptionsPresenter.swift */; };
 		D8EF67852B29BB5E007FD016 /* OptionsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EF67842B29BB5E007FD016 /* OptionsInteractor.swift */; };
+		D8EF67872B29BD1C007FD016 /* OptionsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EF67862B29BD1C007FD016 /* OptionsRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +147,7 @@
 		D8EF67802B29B634007FD016 /* OptionsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsProtocols.swift; sourceTree = "<group>"; };
 		D8EF67822B29B7FC007FD016 /* OptionsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsPresenter.swift; sourceTree = "<group>"; };
 		D8EF67842B29BB5E007FD016 /* OptionsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsInteractor.swift; sourceTree = "<group>"; };
+		D8EF67862B29BD1C007FD016 /* OptionsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -334,6 +336,7 @@
 		D8A18CCB2B1B1C41003C6FB6 /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				D8EF67862B29BD1C007FD016 /* OptionsRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -786,6 +789,7 @@
 				D86D45242AFB986E00894774 /* ToDoStore.swift in Sources */,
 				D8E9F8782B021C3C00A3F3FC /* ToDoDetailRouter.swift in Sources */,
 				D8E9F8BA2B0CC0CB00A3F3FC /* ToDoObject+CoreDataProperties.swift in Sources */,
+				D8EF67872B29BD1C007FD016 /* OptionsRouter.swift in Sources */,
 				D8E9F8A52B04D32B00A3F3FC /* UITextField + EXT.swift in Sources */,
 				D8E9F8702B01F84F00A3F3FC /* ToDoDetailsProtocols.swift in Sources */,
 				D8E9F89B2B04BF1700A3F3FC /* AddToDoInteractor.swift in Sources */,

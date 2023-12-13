@@ -25,7 +25,11 @@ class OptionsViewController: UIViewController {
     }()
 
     //MARK: - Lifecycle
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter?.viewWillAppear()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Настройки"
@@ -74,15 +78,13 @@ extension OptionsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: OptionsCell.reuseIdentifier, for: indexPath) as? OptionsCell
-        cell?.setupElements(text: OptionsItems.options[indexPath.row].title, image: OptionsItems.options[indexPath.row].icon, index: indexPath.row)
+        cell?.setupElements(text: items[indexPath.row].title, image: items[indexPath.row].icon, index: indexPath.row)
         return cell ?? UITableViewCell()
     }
-    
-    
+
 }
 
 extension OptionsViewController: OptionsViewProtocol {
-
     func getOptionsData(items: [OptionsItems]) {
         self.items = items
     }

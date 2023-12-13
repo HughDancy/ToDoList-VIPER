@@ -5,7 +5,7 @@
 //  Created by Борис Киселев on 13.12.2023.
 //
 
-import Foundation
+import UIKit
 
 protocol OptionsViewProtocol: AnyObject {
     var presenter: OptionsPresenterProtocol? { get set }
@@ -40,7 +40,7 @@ protocol OptionsInteractorOutputProtocol: AnyObject {
 }
 
 protocol OptionsRouterProtocol: AnyObject {
-    static func createOptionsModule() -> ViewController
+    static func createOptionsModule() -> UIViewController
     
     //MARK: - PRESENTER -> ROUTER
     func goToUserOptions(from view: OptionsViewProtocol)

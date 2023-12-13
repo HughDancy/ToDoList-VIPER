@@ -32,14 +32,15 @@ final class HomeTabBarRouter: HomeTabBarRouterProtocol {
         executed.tabBarItem = execudetItem
         
         let testNavVa = UINavigationController(rootViewController: OptionsViewController())
-        let configuarations = testNavVa
+        let options = OptionsRouter.createOptionsModule()
+//        let configuarations = testNavVa
 //        ViewController()
         let configurationsItem = UITabBarItem(title: "Настройки",
                                               image: UIImage(systemName: "gear.circle"),
                                               selectedImage: UIImage(systemName: "gear.circle.fill"))
-        configuarations.tabBarItem = configurationsItem
+        options.tabBarItem = configurationsItem
         
-        tabBar.viewControllers = [planned, overdue,  executed, configuarations]
+        tabBar.viewControllers = [planned, overdue,  executed, options]
         tabBar.tabBar.tintColor = .systemBlue
         
         return tabBar
