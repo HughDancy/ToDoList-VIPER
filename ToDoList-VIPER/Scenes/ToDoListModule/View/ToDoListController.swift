@@ -34,6 +34,10 @@ class ToDoListController: UIViewController {
         let image = UIImage(systemName: "tray")
         imageView.image = image
         imageView.tintColor = .systemBlue
+        imageView.layer.shadowOffset = CGSizeMake(5, 5)
+        imageView.layer.shadowOpacity = 0.7
+        imageView.layer.shadowRadius = 5
+        imageView.layer.shadowColor = UIColor.systemGray.cgColor
         return imageView
     }()
     
