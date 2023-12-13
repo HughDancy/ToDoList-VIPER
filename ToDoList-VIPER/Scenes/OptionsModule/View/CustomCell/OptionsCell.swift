@@ -11,30 +11,37 @@ class OptionsCell: UITableViewCell {
     
     static let reuseIdentifier = "OptionsCell"
     var index = -1
-
+    
     //MARK: - Elements
     private lazy var icon: UIImageView = {
-       let icon = UIImageView()
+        let icon = UIImageView()
         
         return icon
     }()
     
     private lazy var title: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         
         return label
     }()
-
+    
     private lazy var  container: UIView = {
-       let view = UIView()
+        let view = UIView()
         view.backgroundColor = .systemGray6
         view.layer.cornerRadius = 10
         view.clipsToBounds = true
         return view
     }()
     
-   //MARK: - Init
+     private lazy var switcher: Switch =  {
+        let switcher = Switch()
+        switcher.offImage = UIImage(named: "nightSky")?.cgImage
+        switcher.onImage = UIImage(named: "daySky")?.cgImage
+        return switcher
+    }()
+    
+    //MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = .systemBackground
@@ -52,6 +59,7 @@ class OptionsCell: UITableViewCell {
         contentView.addSubview(container)
         container.addSubview(icon)
         container.addSubview(title)
+        container.addSubview(switcher)
     }
     
     private func setupLayout() {
@@ -73,11 +81,26 @@ class OptionsCell: UITableViewCell {
             make.leading.equalTo(icon.snp.trailing).offset(15)
         }
         
+        switcher.snp.makeConstraints { make in
+            make.top.equalTo(container.snp.top).offset(15)
+            make.trailing.equalTo(container.safeAreaLayoutGuide.snp.trailing).inset(10)
+            make.height.equalTo(35)
+            make.width.equalTo(70)
+        }
+        
     }
     
-    func setupElements(text: String, image: String) {
+    func setupElements(text: String, image: String, index: Int) {
         title.text = text
         icon.image = UIImage(named: image)
+        setupSwitcher(index: index)
     }
     
+    private func setupSwitcher(index: Int) {
+        if index == 0 {
+            switcher.isHidden = false
+        } else {
+            switcher.isHidden = true
+        }
+    }
 }

@@ -160,11 +160,10 @@ class Switch: UIControl {
 
         contentsLayer.masksToBounds = true
         
-//        thumbLayer.backgroundColor = thumbTintColor.cgColor
         thumbLayer.backgroundColor = UIColor.white.withAlphaComponent(0).cgColor
         thumbLayer.fillMode = .forwards
     
-        thumbLayer.contents = UIImage(named: "son")?.cgImage
+        thumbLayer.contents = UIImage(named: "sun")?.cgImage
         thumbLayer.contentsGravity = CALayerContentsGravity.resizeAspectFill
         thumbLayer.masksToBounds = true
         thumbLayer.shadowColor = UIColor.gray.cgColor
@@ -243,7 +242,7 @@ class Switch: UIControl {
             thumbLayer.contentsGravity = CALayerContentsGravity.resizeAspectFill
             thumbLayer.masksToBounds = true
         } else {
-            thumbLayer.contents = UIImage(named: "son")?.cgImage
+            thumbLayer.contents = UIImage(named: "sun")?.cgImage
             thumbLayer.contentsGravity = CALayerContentsGravity.resizeAspectFill
             thumbLayer.masksToBounds = true
         }

@@ -75,8 +75,7 @@ extension OptionsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: OptionsCell.reuseIdentifier, for: indexPath) as? OptionsCell
-        cell?.setupElements(text: OptionsItems.options[indexPath.row].title, image: OptionsItems.options[indexPath.row].icon)
-        
+        cell?.setupElements(text: OptionsItems.options[indexPath.row].title, image: OptionsItems.options[indexPath.row].icon, index: indexPath.row)
         return cell ?? UITableViewCell()
     }
     
