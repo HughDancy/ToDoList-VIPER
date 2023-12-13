@@ -62,6 +62,7 @@
 		D8E9F8CE2B1767CB00A3F3FC /* OverdueToDoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8CD2B1767CB00A3F3FC /* OverdueToDoRouter.swift */; };
 		D8E9F8D02B18A56200A3F3FC /* ToDoObjectSorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8CF2B18A56200A3F3FC /* ToDoObjectSorter.swift */; };
 		D8EF677F2B29B1DB007FD016 /* Switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EF677E2B29B1DB007FD016 /* Switch.swift */; };
+		D8EF67812B29B634007FD016 /* OptionsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EF67802B29B634007FD016 /* OptionsProtocols.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -140,6 +141,7 @@
 		D8E9F8CD2B1767CB00A3F3FC /* OverdueToDoRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverdueToDoRouter.swift; sourceTree = "<group>"; };
 		D8E9F8CF2B18A56200A3F3FC /* ToDoObjectSorter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoObjectSorter.swift; sourceTree = "<group>"; };
 		D8EF677E2B29B1DB007FD016 /* Switch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Switch.swift; sourceTree = "<group>"; };
+		D8EF67802B29B634007FD016 /* OptionsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsProtocols.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -358,6 +360,7 @@
 		D8A18CCF2B1B1C60003C6FB6 /* Portocols */ = {
 			isa = PBXGroup;
 			children = (
+				D8EF67802B29B634007FD016 /* OptionsProtocols.swift */,
 			);
 			path = Portocols;
 			sourceTree = "<group>";
@@ -768,6 +771,7 @@
 				D8E9F89F2B04C06300A3F3FC /* AddToDoController.swift in Sources */,
 				D8EF677F2B29B1DB007FD016 /* Switch.swift in Sources */,
 				D8E9F8B12B0B47FB00A3F3FC /* DateFormatter + EXT.swift in Sources */,
+				D8EF67812B29B634007FD016 /* OptionsProtocols.swift in Sources */,
 				D86D44E22AFB932E00894774 /* AppDelegate.swift in Sources */,
 				D8E9F8C62B175AA500A3F3FC /* OverdueProtocols.swift in Sources */,
 				D8E9F8BC2B109DB800A3F3FC /* ToDoStorage.swift in Sources */,
