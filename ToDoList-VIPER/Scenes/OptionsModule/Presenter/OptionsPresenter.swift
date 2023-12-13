@@ -12,6 +12,9 @@ final class OptionsPresenter: OptionsPresenterProtocol {
     var interactor: OptionsInteractorProtcol?
     var router: OptionsRouterProtocol?
     
+    func viewWillAppear() {
+        interactor?.showOptionsItems()
+    }
     
     func changeTheme(with: Bool) {
         interactor?.changeUserTheme(with: with)

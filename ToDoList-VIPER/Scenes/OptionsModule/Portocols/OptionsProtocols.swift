@@ -9,6 +9,7 @@ import Foundation
 
 protocol OptionsViewProtocol: AnyObject {
     var presenter: OptionsPresenterProtocol? { get set }
+    func getOptionsData(items: [OptionsItems])
     
 }
 
@@ -18,6 +19,7 @@ protocol OptionsPresenterProtocol: AnyObject {
     var router: OptionsRouterProtocol? { get set }
     
     //MARK: - VIEW -> PRESENTER
+    func viewWillAppear()
     func changeTheme(with: Bool)
     func goToNotification()
     func goToFeedback()
@@ -28,6 +30,12 @@ protocol OptionsInteractorProtcol: AnyObject {
     
     //MARK: - PRESENTER -> INTERACTOR
     func changeUserTheme(with: Bool)
+    func showOptionsItems()
+}
+
+protocol OptionsInteractorOutputProtocol: AnyObject {
+    //MARK: - INTERACTOR -> PRESENTER
+    func showOptionsData(items: [OptionsItems])
 }
 
 protocol OptionsRouterProtocol: AnyObject {

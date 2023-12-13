@@ -8,6 +8,8 @@
 import UIKit
 
 class OptionsViewController: UIViewController {
+    var presenter: OptionsPresenterProtocol?
+    var items = [OptionsItems]()
     
     //MARK: - Elements
     
@@ -44,9 +46,6 @@ class OptionsViewController: UIViewController {
             make.top.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
-
-   
-
 }
 
 //MARK: - TableDelegates extension
@@ -80,4 +79,11 @@ extension OptionsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     
+}
+
+extension OptionsViewController: OptionsViewProtocol {
+
+    func getOptionsData(items: [OptionsItems]) {
+        self.items = items
+    }
 }
