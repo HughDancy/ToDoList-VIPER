@@ -61,6 +61,7 @@
 		D8E9F8CC2B1762FE00A3F3FC /* OverdueToDoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8CB2B1762FE00A3F3FC /* OverdueToDoController.swift */; };
 		D8E9F8CE2B1767CB00A3F3FC /* OverdueToDoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8CD2B1767CB00A3F3FC /* OverdueToDoRouter.swift */; };
 		D8E9F8D02B18A56200A3F3FC /* ToDoObjectSorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8CF2B18A56200A3F3FC /* ToDoObjectSorter.swift */; };
+		D8EF677F2B29B1DB007FD016 /* Switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EF677E2B29B1DB007FD016 /* Switch.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,6 +139,7 @@
 		D8E9F8CB2B1762FE00A3F3FC /* OverdueToDoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverdueToDoController.swift; sourceTree = "<group>"; };
 		D8E9F8CD2B1767CB00A3F3FC /* OverdueToDoRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverdueToDoRouter.swift; sourceTree = "<group>"; };
 		D8E9F8CF2B18A56200A3F3FC /* ToDoObjectSorter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoObjectSorter.swift; sourceTree = "<group>"; };
+		D8EF677E2B29B1DB007FD016 /* Switch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Switch.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -552,6 +554,7 @@
 			children = (
 				D8E9F8A12B04D22400A3F3FC /* Extension */,
 				D8E9F8CF2B18A56200A3F3FC /* ToDoObjectSorter.swift */,
+				D8EF677E2B29B1DB007FD016 /* Switch.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -763,6 +766,7 @@
 				D8E9F8CC2B1762FE00A3F3FC /* OverdueToDoController.swift in Sources */,
 				D8E9F89D2B04BFAB00A3F3FC /* AddToDoPresenter.swift in Sources */,
 				D8E9F89F2B04C06300A3F3FC /* AddToDoController.swift in Sources */,
+				D8EF677F2B29B1DB007FD016 /* Switch.swift in Sources */,
 				D8E9F8B12B0B47FB00A3F3FC /* DateFormatter + EXT.swift in Sources */,
 				D86D44E22AFB932E00894774 /* AppDelegate.swift in Sources */,
 				D8E9F8C62B175AA500A3F3FC /* OverdueProtocols.swift in Sources */,
