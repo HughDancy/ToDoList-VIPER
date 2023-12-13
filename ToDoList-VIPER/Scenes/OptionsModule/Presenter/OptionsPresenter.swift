@@ -9,7 +9,7 @@ import Foundation
 
 final class OptionsPresenter: OptionsPresenterProtocol {
     var view: OptionsViewProtocol?
-    var interactor: OptionsInteractorProtcol?
+    var interactor: OptionsInteractorInputProtcol?
     var router: OptionsRouterProtocol?
     
     func viewWillAppear() {
@@ -33,6 +33,14 @@ final class OptionsPresenter: OptionsPresenterProtocol {
     func goToUserOptions() {
         guard let view = view  else { return }
         router?.goToUserOptions(from: view)
+    }
+    
+    
+}
+
+extension OptionsPresenter: OptionsInteractorOutputProtocol {
+    func showOptionsData(items: [OptionsItems]) {
+        view?.getOptionsData(items: items)
     }
     
     

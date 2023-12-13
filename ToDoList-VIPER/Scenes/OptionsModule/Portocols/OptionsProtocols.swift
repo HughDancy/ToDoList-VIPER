@@ -15,7 +15,7 @@ protocol OptionsViewProtocol: AnyObject {
 
 protocol OptionsPresenterProtocol: AnyObject {
     var view: OptionsViewProtocol? { get set }
-    var interactor: OptionsInteractorProtcol? { get set }
+    var interactor: OptionsInteractorInputProtcol? { get set }
     var router: OptionsRouterProtocol? { get set }
     
     //MARK: - VIEW -> PRESENTER
@@ -26,7 +26,8 @@ protocol OptionsPresenterProtocol: AnyObject {
     func goToUserOptions()
 }
 
-protocol OptionsInteractorProtcol: AnyObject {
+protocol OptionsInteractorInputProtcol: AnyObject {
+    var presenter: OptionsInteractorOutputProtocol? { get set }
     
     //MARK: - PRESENTER -> INTERACTOR
     func changeUserTheme(with: Bool)
