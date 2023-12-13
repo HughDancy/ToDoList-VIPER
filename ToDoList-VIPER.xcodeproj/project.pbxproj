@@ -63,6 +63,7 @@
 		D8E9F8D02B18A56200A3F3FC /* ToDoObjectSorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8CF2B18A56200A3F3FC /* ToDoObjectSorter.swift */; };
 		D8EF677F2B29B1DB007FD016 /* Switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EF677E2B29B1DB007FD016 /* Switch.swift */; };
 		D8EF67812B29B634007FD016 /* OptionsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EF67802B29B634007FD016 /* OptionsProtocols.swift */; };
+		D8EF67832B29B7FC007FD016 /* OptionsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EF67822B29B7FC007FD016 /* OptionsPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,6 +143,7 @@
 		D8E9F8CF2B18A56200A3F3FC /* ToDoObjectSorter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoObjectSorter.swift; sourceTree = "<group>"; };
 		D8EF677E2B29B1DB007FD016 /* Switch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Switch.swift; sourceTree = "<group>"; };
 		D8EF67802B29B634007FD016 /* OptionsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsProtocols.swift; sourceTree = "<group>"; };
+		D8EF67822B29B7FC007FD016 /* OptionsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -337,6 +339,7 @@
 		D8A18CCC2B1B1C46003C6FB6 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				D8EF67822B29B7FC007FD016 /* OptionsPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -764,6 +767,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8E9F88B2B03768900A3F3FC /* ExecuteToDoInteractor.swift in Sources */,
+				D8EF67832B29B7FC007FD016 /* OptionsPresenter.swift in Sources */,
 				D86D44E62AFB932E00894774 /* ViewController.swift in Sources */,
 				D8E9F8722B01FAFB00A3F3FC /* ToDoDetailController.swift in Sources */,
 				D8E9F8CC2B1762FE00A3F3FC /* OverdueToDoController.swift in Sources */,

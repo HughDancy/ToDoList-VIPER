@@ -34,7 +34,7 @@ protocol OptionsRouterProtocol: AnyObject {
     static func createOptionsModule() -> ViewController
     
     //MARK: - PRESENTER -> ROUTER
-    func goToUserOptions()
-    func goToNotifications()
-    func goToFeedback()
+    func goToUserOptions(from view: OptionsViewProtocol)
+    func goToNotifications(from view: OptionsViewProtocol)
+    func goToFeedback(from view: OptionsViewProtocol)
 }
