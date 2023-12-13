@@ -43,9 +43,6 @@ class OptionsViewController: UIViewController {
         tableView.snp.makeConstraints { make in
             make.top.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
-        
-//        tableView.sectionHeaderHeight = UITableView.automaticDimension
-//        tableView.estimatedSectionHeaderHeight = 40
     }
 
    

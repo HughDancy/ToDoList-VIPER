@@ -21,7 +21,7 @@ class OptionsCell: UITableViewCell {
     
     private lazy var title: UILabel = {
        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 19, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         
         return label
     }()
@@ -62,7 +62,7 @@ class OptionsCell: UITableViewCell {
         icon.snp.makeConstraints { make in
             make.top.equalTo(container).inset(10)
             make.leading.equalTo(container.snp.leading).offset(10)
-            make.height.width.equalTo(50)
+            make.height.width.equalTo(40)
             make.bottom.equalTo(container.snp.bottom).inset(15)
         }
         
