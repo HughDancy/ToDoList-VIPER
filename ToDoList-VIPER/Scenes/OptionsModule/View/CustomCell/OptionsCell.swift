@@ -103,4 +103,8 @@ class OptionsCell: UITableViewCell {
             switcher.isHidden = true
         }
     }
+    
+    func changeTheme(presenter: OptionsPresenterProtocol) {
+        presenter.interactor?.changeUserTheme(with: switcher.isOn)
+    }
 }
