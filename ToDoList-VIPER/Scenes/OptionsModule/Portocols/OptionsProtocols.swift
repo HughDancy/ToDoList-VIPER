@@ -47,3 +47,7 @@ protocol OptionsRouterProtocol: AnyObject {
     func goToNotifications(from view: OptionsViewProtocol)
     func goToFeedback(from view: OptionsViewProtocol)
 }
+
+protocol SwitchThemeProtocol: AnyObject {
+    func changeUserTheme(with bool: Bool)
+}

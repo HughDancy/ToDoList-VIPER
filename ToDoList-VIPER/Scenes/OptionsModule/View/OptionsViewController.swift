@@ -28,12 +28,14 @@ class OptionsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter?.viewWillAppear()
+        view?.overrideUserInterfaceStyle = ToDoUserDefaults.shares.theme.getUserInterfaceStyle()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Настройки"
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.tintColor = .systemBackground
         view.backgroundColor = .systemBackground
         setupHierarchy()
         setupLayout()
@@ -79,6 +81,7 @@ extension OptionsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: OptionsCell.reuseIdentifier, for: indexPath) as? OptionsCell
         cell?.setupElements(text: items[indexPath.row].title, image: items[indexPath.row].icon, index: indexPath.row)
+        cell?.delegate = self
         return cell ?? UITableViewCell()
     }
 
@@ -87,5 +90,12 @@ extension OptionsViewController: UITableViewDelegate, UITableViewDataSource {
 extension OptionsViewController: OptionsViewProtocol {
     func getOptionsData(items: [OptionsItems]) {
         self.items = items
+    }
+}
+
+extension OptionsViewController: SwitchThemeProtocol {
+    func changeUserTheme(with bool: Bool) {
+        presenter?.changeTheme(with: bool)
+        view?.overrideUserInterfaceStyle = ToDoUserDefaults.shares.theme.getUserInterfaceStyle()
     }
 }

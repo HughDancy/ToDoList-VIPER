@@ -10,10 +10,15 @@ import Foundation
 final class OptionsInteractor: OptionsInteractorInputProtcol {
     var presenter: OptionsInteractorOutputProtocol?
     var optionsData = OptionsItems.options
+    var toDoUserDefaults = ToDoUserDefaults.shares
     
    
     func changeUserTheme(with: Bool) {
-        print(with)
+        if with {
+            toDoUserDefaults.theme = Theme(rawValue: "dark") ?? .dark
+        } else {
+            toDoUserDefaults.theme = Theme(rawValue: "light") ?? .light
+        }
     }
     
     func showOptionsItems() {

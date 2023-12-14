@@ -18,6 +18,7 @@ var window: UIWindow?
         let tabBar = HomeTabBarRouter.createHomeTabBar()
         window?.rootViewController = tabBar
         window?.makeKeyAndVisible()
+        window?.overrideUserInterfaceStyle = ToDoUserDefaults.shares.theme.getUserInterfaceStyle()
         return true
     }
 

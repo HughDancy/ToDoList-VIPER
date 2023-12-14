@@ -5,11 +5,20 @@
 //  Created by Борис Киселев on 13.12.2023.
 //
 
-import Foundation
+import UIKit
 
 enum Theme: String  {
    case light
    case dark
+    
+    func getUserInterfaceStyle() -> UIUserInterfaceStyle  {
+        switch self {
+        case .light:
+            return .light
+        case .dark:
+            return .dark
+        }
+    }
 }
 
 

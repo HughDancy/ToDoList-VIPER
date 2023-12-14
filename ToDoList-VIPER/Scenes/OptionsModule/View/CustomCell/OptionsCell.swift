@@ -11,6 +11,7 @@ class OptionsCell: UITableViewCell {
     
     static let reuseIdentifier = "OptionsCell"
     var index = -1
+    weak var delegate: SwitchThemeProtocol?
     
     //MARK: - Elements
     private lazy var icon: UIImageView = {
@@ -38,6 +39,7 @@ class OptionsCell: UITableViewCell {
         let switcher = Switch()
         switcher.offImage = UIImage(named: "nightSky")?.cgImage
         switcher.onImage = UIImage(named: "daySky")?.cgImage
+        switcher.addTarget(self, action: #selector(changeTheme), for: .touchUpInside)
         return switcher
     }()
     
@@ -47,6 +49,7 @@ class OptionsCell: UITableViewCell {
         self.backgroundColor = .systemBackground
         setupHierarchy()
         setupLayout()
+        configureIsOnSwitcher()
         self.selectionStyle = .none
     }
     
@@ -96,6 +99,14 @@ class OptionsCell: UITableViewCell {
         setupSwitcher(index: index)
     }
     
+    private func configureIsOnSwitcher() {
+        if ToDoUserDefaults.shares.theme.rawValue == "dark" {
+            switcher.isOn = true
+        } else {
+            switcher.isOn = false
+        }
+    }
+    
     private func setupSwitcher(index: Int) {
         if index == 0 {
             switcher.isHidden = false
@@ -104,7 +115,7 @@ class OptionsCell: UITableViewCell {
         }
     }
     
-    func changeTheme(presenter: OptionsPresenterProtocol) {
-        presenter.interactor?.changeUserTheme(with: switcher.isOn)
+    @objc func changeTheme() {
+       delegate?.changeUserTheme(with: switcher.isOn)
     }
 }
