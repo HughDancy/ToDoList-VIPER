@@ -67,6 +67,7 @@
 		D8EF67852B29BB5E007FD016 /* OptionsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EF67842B29BB5E007FD016 /* OptionsInteractor.swift */; };
 		D8EF67872B29BD1C007FD016 /* OptionsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EF67862B29BD1C007FD016 /* OptionsRouter.swift */; };
 		D8EF67892B29C2E6007FD016 /* ToDoUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EF67882B29C2E6007FD016 /* ToDoUserDefaults.swift */; };
+		D8EF67912B2C3F4C007FD016 /* UserOptionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EF67902B2C3F4C007FD016 /* UserOptionsController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,6 +151,7 @@
 		D8EF67842B29BB5E007FD016 /* OptionsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsInteractor.swift; sourceTree = "<group>"; };
 		D8EF67862B29BD1C007FD016 /* OptionsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsRouter.swift; sourceTree = "<group>"; };
 		D8EF67882B29C2E6007FD016 /* ToDoUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoUserDefaults.swift; sourceTree = "<group>"; };
+		D8EF67902B2C3F4C007FD016 /* UserOptionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOptionsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -676,6 +678,7 @@
 		D8EF678E2B2C3F06007FD016 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D8EF67902B2C3F4C007FD016 /* UserOptionsController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -851,6 +854,7 @@
 				D8A18CD42B1B1C8E003C6FB6 /* OptionsCell.swift in Sources */,
 				D8E9F8A92B04D96600A3F3FC /* AddToDoRouter.swift in Sources */,
 				D8E9F8742B02178E00A3F3FC /* ToDoDetailPresenter.swift in Sources */,
+				D8EF67912B2C3F4C007FD016 /* UserOptionsController.swift in Sources */,
 				D8E9F8762B021B7800A3F3FC /* ToDoDetailInteractor.swift in Sources */,
 				D8A18CD82B205E59003C6FB6 /* OptionsItems.swift in Sources */,
 				D8E9F87C2B03537A00A3F3FC /* HomeTabBarRouter.swift in Sources */,

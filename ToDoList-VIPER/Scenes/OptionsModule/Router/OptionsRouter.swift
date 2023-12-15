@@ -27,7 +27,10 @@ final class OptionsRouter: OptionsRouterProtocol {
     }
     
     func goToUserOptions(from view: OptionsViewProtocol) {
-        print(view)
+        let optionsViewController = UserOptionsController()
+        optionsViewController.hidesBottomBarWhenPushed = true
+        guard let viewController = view as? UIViewController else { return }
+        viewController.navigationController?.pushViewController(optionsViewController, animated: true)
     }
     
     func goToNotifications(from view: OptionsViewProtocol) {
