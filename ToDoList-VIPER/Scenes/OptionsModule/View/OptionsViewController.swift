@@ -8,6 +8,7 @@
 import UIKit
 
 class OptionsViewController: UIViewController {
+   
     var presenter: OptionsPresenterProtocol?
     var items = [OptionsItems]()
     
@@ -62,7 +63,8 @@ extension OptionsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: OptionsHeader.reuseIdentifier)
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: OptionsHeader.reuseIdentifier) as? OptionsHeader
+        header?.goUserOptionsDelegate = self
         return header
     }
     
@@ -97,5 +99,11 @@ extension OptionsViewController: SwitchThemeProtocol {
     func changeUserTheme(with bool: Bool) {
         presenter?.changeTheme(with: bool)
         view?.overrideUserInterfaceStyle = ToDoUserDefaults.shares.theme.getUserInterfaceStyle()
+    }
+}
+
+extension OptionsViewController: GoToUserOptionsProtocol {
+    func goToUserOptions() {
+        presenter?.goToUserOptions()
     }
 }

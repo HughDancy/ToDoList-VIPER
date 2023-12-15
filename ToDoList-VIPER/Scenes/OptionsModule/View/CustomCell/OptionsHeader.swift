@@ -10,6 +10,7 @@ import UIKit
 class OptionsHeader: UITableViewHeaderFooterView {
     
     static let reuseIdentifier = "OptionsHeader"
+    weak var goUserOptionsDelegate: GoToUserOptionsProtocol?
     
     //MARK: - Elements
     private lazy var avatar: UIImageView = {
@@ -44,7 +45,6 @@ class OptionsHeader: UITableViewHeaderFooterView {
             super.init(reuseIdentifier: reuseIdentifier)
             setupHierarchy()
             setupLayout()
-            
         }
         
         required init?(coder: NSCoder) {
@@ -82,7 +82,7 @@ class OptionsHeader: UITableViewHeaderFooterView {
     }
     
     @objc func tapEdit() {
-        print("Start editing")
+        goUserOptionsDelegate?.goToUserOptions()
     }
     
         //MARK: - Refactor to setup elements with entity

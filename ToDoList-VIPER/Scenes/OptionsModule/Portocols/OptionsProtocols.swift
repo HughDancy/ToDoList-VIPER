@@ -51,3 +51,7 @@ protocol OptionsRouterProtocol: AnyObject {
 protocol SwitchThemeProtocol: AnyObject {
     func changeUserTheme(with bool: Bool)
 }
+
+protocol GoToUserOptionsProtocol: AnyObject {
+    func goToUserOptions() 
+}
