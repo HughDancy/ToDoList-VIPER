@@ -326,6 +326,7 @@
 		D8A18CCA2B1B1C33003C6FB6 /* OptionsModule */ = {
 			isa = PBXGroup;
 			children = (
+				D8EF678A2B2C3EDF007FD016 /* UserOptions */,
 				D8A18CCF2B1B1C60003C6FB6 /* Portocols */,
 				D8A18CCE2B1B1C58003C6FB6 /* View */,
 				D8A18CCD2B1B1C4E003C6FB6 /* Interactor */,
@@ -635,6 +636,53 @@
 			isa = PBXGroup;
 			children = (
 				D8E9F8C52B175AA500A3F3FC /* OverdueProtocols.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		D8EF678A2B2C3EDF007FD016 /* UserOptions */ = {
+			isa = PBXGroup;
+			children = (
+				D8EF678F2B2C3F0B007FD016 /* Protocols */,
+				D8EF678E2B2C3F06007FD016 /* View */,
+				D8EF678D2B2C3EFE007FD016 /* Interactor */,
+				D8EF678C2B2C3EF8007FD016 /* Presenter */,
+				D8EF678B2B2C3EF1007FD016 /* Router */,
+			);
+			path = UserOptions;
+			sourceTree = "<group>";
+		};
+		D8EF678B2B2C3EF1007FD016 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		D8EF678C2B2C3EF8007FD016 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		D8EF678D2B2C3EFE007FD016 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		D8EF678E2B2C3F06007FD016 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D8EF678F2B2C3F0B007FD016 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			path = Protocols;
 			sourceTree = "<group>";
