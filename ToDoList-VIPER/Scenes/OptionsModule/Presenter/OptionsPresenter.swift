@@ -16,8 +16,8 @@ final class OptionsPresenter: OptionsPresenterProtocol {
         interactor?.showOptionsItems()
     }
     
-    func changeTheme(with: Bool) {
-        interactor?.changeUserTheme(with: with)
+    func changeTheme(with bool: Bool) {
+        interactor?.changeUserTheme(with: bool)
     }
     
     func goToNotification() {

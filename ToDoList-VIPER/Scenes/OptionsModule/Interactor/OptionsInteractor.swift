@@ -13,8 +13,8 @@ final class OptionsInteractor: OptionsInteractorInputProtcol {
     var toDoUserDefaults = ToDoUserDefaults.shares
     
    
-    func changeUserTheme(with: Bool) {
-        if with {
+    func changeUserTheme(with bool: Bool) {
+        if bool {
             toDoUserDefaults.theme = Theme(rawValue: "dark") ?? .dark
         } else {
             toDoUserDefaults.theme = Theme(rawValue: "light") ?? .light

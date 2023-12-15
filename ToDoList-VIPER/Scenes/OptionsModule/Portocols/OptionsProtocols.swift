@@ -20,7 +20,7 @@ protocol OptionsPresenterProtocol: AnyObject {
     
     //MARK: - VIEW -> PRESENTER
     func viewWillAppear()
-    func changeTheme(with: Bool)
+    func changeTheme(with bool: Bool)
     func goToNotification()
     func goToFeedback()
     func goToUserOptions()
@@ -30,7 +30,7 @@ protocol OptionsInteractorInputProtcol: AnyObject {
     var presenter: OptionsInteractorOutputProtocol? { get set }
     
     //MARK: - PRESENTER -> INTERACTOR
-    func changeUserTheme(with: Bool)
+    func changeUserTheme(with bool: Bool)
     func showOptionsItems()
 }
 
