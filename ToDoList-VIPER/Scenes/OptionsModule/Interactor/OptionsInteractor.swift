@@ -5,7 +5,7 @@
 //  Created by Борис Киселев on 13.12.2023.
 //
 
-import Foundation
+import UIKit
 
 final class OptionsInteractor: OptionsInteractorInputProtcol {
     var presenter: OptionsInteractorOutputProtocol?
@@ -18,6 +18,12 @@ final class OptionsInteractor: OptionsInteractorInputProtcol {
             toDoUserDefaults.theme = Theme(rawValue: "dark") ?? .dark
         } else {
             toDoUserDefaults.theme = Theme(rawValue: "light") ?? .light
+        }
+        
+        let allScenes = UIApplication.shared.connectedScenes
+        for scene in allScenes {
+            guard let windowScene = scene as? UIWindowScene else { continue }
+            windowScene.windows.forEach({$0.overrideUserInterfaceStyle = ToDoUserDefaults.shares.theme.getUserInterfaceStyle()})
         }
     }
     

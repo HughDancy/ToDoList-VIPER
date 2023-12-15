@@ -17,6 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         let tabBar = HomeTabBarRouter.createHomeTabBar()
         window?.rootViewController = tabBar
+        window?.overrideUserInterfaceStyle = ToDoUserDefaults.shares.theme.getUserInterfaceStyle()
         window?.makeKeyAndVisible()
     }
 

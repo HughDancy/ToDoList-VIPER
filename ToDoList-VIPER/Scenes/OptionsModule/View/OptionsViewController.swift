@@ -35,7 +35,7 @@ class OptionsViewController: UIViewController {
         super.viewDidLoad()
         title = "Настройки"
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.tintColor = .systemBackground
+        navigationController?.navigationBar.tintColor = .systemGroupedBackground
         view.backgroundColor = .systemBackground
         setupHierarchy()
         setupLayout()

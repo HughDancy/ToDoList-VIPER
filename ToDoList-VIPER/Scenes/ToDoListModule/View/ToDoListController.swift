@@ -65,6 +65,7 @@ class ToDoListController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter?.viewWillAppear()
+//        view.window?.overrideUserInterfaceStyle = ToDoUserDefaults.shares.theme.getUserInterfaceStyle()
     }
     
     override func viewDidLoad() {
@@ -75,6 +76,10 @@ class ToDoListController: UIViewController {
         setupHierarchy()
         setupLayout()
         setupRightBarButton()
+    }
+    
+    deinit {
+        print("ToDoListController is ☠️")
     }
     
     //MARK: - Setup Element's
