@@ -42,6 +42,7 @@ final class UserOptionsController: UIViewController {
         button.setTitle("Редактировать", for: .normal)
         button.backgroundColor = .clear
         button.tintColor = .systemBlue
+        button.addTarget(self, action: #selector(presentPicker), for: .touchDown)
         return button
     }()
     
@@ -51,6 +52,7 @@ final class UserOptionsController: UIViewController {
         nickname.borderStyle = .roundedRect
         nickname.backgroundColor = .systemGray6
         nickname.delegate = self
+        nickname.returnKeyType = .done
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
         nickname.leftView = view
         nickname.leftViewMode = .always
@@ -67,6 +69,12 @@ final class UserOptionsController: UIViewController {
         button.clipsToBounds = true
         
         return button
+    }()
+    
+    private lazy var imagePicker: UIImagePickerController = {
+       let imagePicker = UIImagePickerController()
+        
+        return imagePicker
     }()
     
     //MARK: - Lifecycle
@@ -123,6 +131,10 @@ final class UserOptionsController: UIViewController {
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(40)
             make.height.equalTo(35)
         }
+    }
+    
+    @objc func presentPicker() {
+        self.present(imagePicker, animated: true)
     }
 }
 
