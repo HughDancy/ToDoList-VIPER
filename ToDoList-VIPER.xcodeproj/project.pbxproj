@@ -29,6 +29,7 @@
 		D8A18CD62B1B1CA2003C6FB6 /* OptionsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A18CD52B1B1CA2003C6FB6 /* OptionsHeader.swift */; };
 		D8A18CD82B205E59003C6FB6 /* OptionsItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A18CD72B205E59003C6FB6 /* OptionsItems.swift */; };
 		D8BF0D432B15ED2E00D1572E /* ToDoListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BF0D422B15ED2E00D1572E /* ToDoListController.swift */; };
+		D8C917052B3E727D00EFC8C8 /* UserOptionsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C917042B3E727D00EFC8C8 /* UserOptionsProtocols.swift */; };
 		D8E9F8702B01F84F00A3F3FC /* ToDoDetailsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F86F2B01F84F00A3F3FC /* ToDoDetailsProtocols.swift */; };
 		D8E9F8722B01FAFB00A3F3FC /* ToDoDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8712B01FAFB00A3F3FC /* ToDoDetailController.swift */; };
 		D8E9F8742B02178E00A3F3FC /* ToDoDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8732B02178E00A3F3FC /* ToDoDetailPresenter.swift */; };
@@ -113,6 +114,7 @@
 		D8A18CD52B1B1CA2003C6FB6 /* OptionsHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsHeader.swift; sourceTree = "<group>"; };
 		D8A18CD72B205E59003C6FB6 /* OptionsItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsItems.swift; sourceTree = "<group>"; };
 		D8BF0D422B15ED2E00D1572E /* ToDoListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListController.swift; sourceTree = "<group>"; };
+		D8C917042B3E727D00EFC8C8 /* UserOptionsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOptionsProtocols.swift; sourceTree = "<group>"; };
 		D8E9F86F2B01F84F00A3F3FC /* ToDoDetailsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoDetailsProtocols.swift; sourceTree = "<group>"; };
 		D8E9F8712B01FAFB00A3F3FC /* ToDoDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoDetailController.swift; sourceTree = "<group>"; };
 		D8E9F8732B02178E00A3F3FC /* ToDoDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoDetailPresenter.swift; sourceTree = "<group>"; };
@@ -686,6 +688,7 @@
 		D8EF678F2B2C3F0B007FD016 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				D8C917042B3E727D00EFC8C8 /* UserOptionsProtocols.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -847,6 +850,7 @@
 				D8E9F8A52B04D32B00A3F3FC /* UITextField + EXT.swift in Sources */,
 				D8E9F8702B01F84F00A3F3FC /* ToDoDetailsProtocols.swift in Sources */,
 				D8E9F89B2B04BF1700A3F3FC /* AddToDoInteractor.swift in Sources */,
+				D8C917052B3E727D00EFC8C8 /* UserOptionsProtocols.swift in Sources */,
 				D86D45222AFB982300894774 /* ToDoItem.swift in Sources */,
 				D8E9F8B92B0CC0CB00A3F3FC /* ToDoObject+CoreDataClass.swift in Sources */,
 				D8E9F8CE2B1767CB00A3F3FC /* OverdueToDoRouter.swift in Sources */,
