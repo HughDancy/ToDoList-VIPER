@@ -67,12 +67,13 @@ final class UserOptionsController: UIViewController {
         button.tintColor = .white
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
-        
+        button.addTarget(self, action: #selector(saveChanges), for: .touchDown)
         return button
     }()
     
     private lazy var imagePicker: UIImagePickerController = {
        let imagePicker = UIImagePickerController()
+
         
         return imagePicker
     }()
@@ -133,8 +134,44 @@ final class UserOptionsController: UIViewController {
         }
     }
     
+    @objc func saveChanges() {
+        if userNickname.text != nil && userNickname.text != "" {
+            ToDoUserDefaults.shares.nickname = userNickname.text ?? ""
+        }
+        self.dismiss(animated: true)
+    }
+    
     @objc func presentPicker() {
-        self.present(imagePicker, animated: true)
+        let alertSheet = UIAlertController(title: "Choose the source", message: nil, preferredStyle: .alert)
+        var picker = UIImagePickerController()
+        let cameraAction = UIAlertAction(title: "Camera", style: .default) { (action) in
+            if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                    var imagePicker = UIImagePickerController()
+                    imagePicker.delegate = self
+                    imagePicker.sourceType = .camera;
+                    imagePicker.allowsEditing = false
+                    self.present(imagePicker, animated: true, completion: nil)
+                }
+        }
+        
+        let libraryAction = UIAlertAction(title: "Media Library", style: .default) { (action) in
+            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+                    var imagePicker = UIImagePickerController()
+                    imagePicker.delegate = self
+                    imagePicker.sourceType = .photoLibrary;
+                    imagePicker.allowsEditing = false
+                    self.present(imagePicker, animated: true, completion: nil)
+                }
+          
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        alertSheet.addAction(cameraAction)
+        alertSheet.addAction(libraryAction)
+        alertSheet.addAction(cancelAction)
+        self.present(alertSheet, animated: true)
+//        self.present(imagePicker, animated: true)
     }
 }
 
@@ -154,4 +191,8 @@ extension UserOptionsController: UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
+}
+
+extension UserOptionsController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
 }

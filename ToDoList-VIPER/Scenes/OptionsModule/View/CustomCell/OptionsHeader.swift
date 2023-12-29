@@ -86,8 +86,8 @@ class OptionsHeader: UITableViewHeaderFooterView {
     }
     
         //MARK: - Refactor to setup elements with entity
-        func setupElements() {
-            
+    func setupElements(with text: String) {
+        nicknameLabel.text = text
         }
 }
     

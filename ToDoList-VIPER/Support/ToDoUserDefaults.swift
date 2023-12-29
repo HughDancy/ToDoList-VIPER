@@ -33,4 +33,13 @@ struct ToDoUserDefaults {
             UserDefaults.standard.setValue(newValue.rawValue, forKey: "selectedTheme")
         }
     }
+    
+    var nickname: String {
+        get {
+            UserDefaults.standard.string(forKey: "userNickname") ?? "Nickname"
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: "userNickname")
+        }
+    }
 }

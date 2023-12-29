@@ -30,6 +30,7 @@ class OptionsViewController: UIViewController {
         super.viewWillAppear(animated)
         presenter?.viewWillAppear()
         view?.overrideUserInterfaceStyle = ToDoUserDefaults.shares.theme.getUserInterfaceStyle()
+        tableView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -62,9 +63,11 @@ extension OptionsViewController: UITableViewDelegate, UITableViewDataSource {
         return 1
     }
     
+    //MARK: - ПЕРЕДЕЛАТЬ МЕТОД ПОД РОУТЕР ИЛИ ВРЕМЕННОЕ ХРАНИЛИЩЕ ЧЕРЕЗ РОУТЕР
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: OptionsHeader.reuseIdentifier) as? OptionsHeader
         header?.goUserOptionsDelegate = self
+        header?.setupElements(with: ToDoUserDefaults.shares.nickname)
         return header
     }
     
