@@ -6,24 +6,39 @@
 //
 
 import UIKit
+import SnapKit
 
 class AnimationLoadingController: UIImagePickerController {
-
+    
+    //MARK: - Outlets
+    private lazy var loadingBackground: UIImageView = {
+        let imageView = UIImageView()
+        let picture = UIImage(named: "loadingBackground")
+        imageView.image = picture
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
+    
+    private lazy var loadingImage: UIImageView = {
+        let imageView = UIImageView()
+        let picture = UIImage(named: "loadingAnimate")
+        imageView.image = picture
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
+    
+    //MARK: - Lifecycle
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        view.sendSubviewToBack(loadingBackground)
+        view.addSubview(loadingImage)
+        
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
+    
+    
 }

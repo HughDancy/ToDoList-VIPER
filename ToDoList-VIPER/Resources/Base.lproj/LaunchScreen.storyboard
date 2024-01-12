@@ -20,29 +20,9 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ToDo List" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pxk-rM-Toe">
-                                <rect key="frame" x="103" y="394" width="186" height="64"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="01R-ak-D0e"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Rockwell-Bold" family="Rockwell" pointSize="31"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="c4q-8D-llC">
-                                <rect key="frame" x="163" y="688" width="66" height="20"/>
-                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="c4q-8D-llC" firstAttribute="top" secondItem="pxk-rM-Toe" secondAttribute="bottom" constant="230" id="2RG-Yc-thK"/>
-                            <constraint firstItem="c4q-8D-llC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="163" id="2jB-JV-etj"/>
-                            <constraint firstItem="pxk-rM-Toe" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="103" id="Ace-HN-MMu"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="pxk-rM-Toe" secondAttribute="trailing" constant="104" id="LMN-cL-yei"/>
-                            <constraint firstItem="pxk-rM-Toe" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="335" id="Mpz-k6-82t"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="c4q-8D-llC" secondAttribute="trailing" constant="164" id="enr-rm-jEH"/>
-                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -51,7 +31,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="loadingBackground" width="2780" height="2780"/>
+        <image name="loadingBackground" width="1024" height="768"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
