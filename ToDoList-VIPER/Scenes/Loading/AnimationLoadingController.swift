@@ -8,7 +8,12 @@
 import UIKit
 import SnapKit
 
-final class AnimationLoadingController: UIViewController {
+protocol AnimationLoadingControllerProtocol: AnyObject {
+    var router: AnimationScreenRouterProtocol? { get set }
+}
+
+final class AnimationLoadingController: UIViewController, AnimationLoadingControllerProtocol {
+     var router: AnimationScreenRouterProtocol?
     
     //MARK: - Outlets
     private lazy var loadingBackground: UIImageView = {
