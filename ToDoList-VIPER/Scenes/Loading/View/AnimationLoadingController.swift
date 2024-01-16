@@ -9,11 +9,12 @@ import UIKit
 import SnapKit
 
 protocol AnimationLoadingControllerProtocol: AnyObject {
-    var router: AnimationScreenRouterProtocol? { get set }
+    var router: AnimationLoadingRouterProtocol? { get set }
+    func presentNextScreen(view: UIViewController)
 }
 
-final class AnimationLoadingController: UIViewController, AnimationLoadingControllerProtocol {
-     var router: AnimationScreenRouterProtocol?
+final class AnimationLoadingController: UIViewController {
+     var router: AnimationLoadingRouterProtocol?
     
     //MARK: - Outlets
     private lazy var loadingBackground: UIImageView = {
@@ -110,5 +111,17 @@ final class AnimationLoadingController: UIViewController, AnimationLoadingContro
     }
     
     //MARK: - Next Path Method
+    
+}
+
+extension AnimationLoadingController: AnimationLoadingControllerProtocol {
+    func presentNextScreen(view: UIViewController) {
+        view.modalTransitionStyle = .crossDissolve
+        view.modalPresentationStyle = .fullScreen
+        self.present(view, animated: true)
+    }
+    
+   
+    
     
 }
