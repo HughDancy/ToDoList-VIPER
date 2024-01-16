@@ -9,21 +9,51 @@ import UIKit
 
 protocol AnimationLoadingRouterProtocol: AnyObject {
     static func createLoadingModule() -> UIViewController
-    func goToTheApp()
+    func goToTheApp(isNewUser: Bool, fromView: AnimationLoadingControllerProtocol)
 }
 
 final class AnimationLoadingRouter: AnimationLoadingRouterProtocol {
+   
     static func createLoadingModule() -> UIViewController {
         let vc = AnimationLoadingController()
-        vc.router = self
+        let presenter: AnimationLoadingPresenterProtocol = AnimationLoadingPresenter()
+        let interactor: AnimationLoadingInteractorInputProtocol = AnimationLoadingInteractor()
+        let router = AnimationLoadingRouter()
+        
+        vc.presenter = presenter
+        presenter.view = vc
+        presenter.interactor = interactor
+        presenter.router = router
+       
         return vc
     }
     
     
   
     
-    func goToTheApp() {
-      
+    func goToTheApp(isNewUser: Bool, fromView: AnimationLoadingControllerProtocol) {
+        if isNewUser == true {
+            guard let parrentView = fromView as? UIViewController else { return }
+            let view = MockViewController()
+           
+            view.modalTransitionStyle = .crossDissolve
+            view.modalPresentationStyle = .fullScreen
+            parrentView.present(view, animated: true)
+            (print("Is called ONE WAY"))
+//            let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
+//            appDelegate.window?.rootViewController = view
+        } else  {
+            guard let parrentView = fromView as? UIViewController else { return }
+            let view = HomeTabBarRouter.createHomeTabBar()
+            view.modalTransitionStyle = .crossDissolve
+            view.modalPresentationStyle = .fullScreen
+            parrentView.present(view, animated: true)
+            print("is called TWO WAY")
+//            let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
+//            appDelegate.window?.rootViewController = view
+           
+            
+        }
     }
 }
 

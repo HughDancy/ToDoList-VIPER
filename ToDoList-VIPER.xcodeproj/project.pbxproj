@@ -63,6 +63,7 @@
 		D8E9F8D02B18A56200A3F3FC /* ToDoObjectSorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8CF2B18A56200A3F3FC /* ToDoObjectSorter.swift */; };
 		D8F11C5E2B5660C900D2282D /* AnimationLoadingInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F11C5D2B5660C900D2282D /* AnimationLoadingInteractor.swift */; };
 		D8F11C602B5660DA00D2282D /* AnimationLoadingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F11C5F2B5660DA00D2282D /* AnimationLoadingPresenter.swift */; };
+		D8F11C622B5669AC00D2282D /* MockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F11C612B5669AC00D2282D /* MockViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,6 +143,7 @@
 		D8E9F8CF2B18A56200A3F3FC /* ToDoObjectSorter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoObjectSorter.swift; sourceTree = "<group>"; };
 		D8F11C5D2B5660C900D2282D /* AnimationLoadingInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationLoadingInteractor.swift; sourceTree = "<group>"; };
 		D8F11C5F2B5660DA00D2282D /* AnimationLoadingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationLoadingPresenter.swift; sourceTree = "<group>"; };
+		D8F11C612B5669AC00D2282D /* MockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +210,7 @@
 				D86D45182AFB967D00894774 /* Resources */,
 				D86D45172AFB966800894774 /* App */,
 				D86D44E52AFB932E00894774 /* ViewController.swift */,
+				D8F11C612B5669AC00D2282D /* MockViewController.swift */,
 			);
 			path = "ToDoList-VIPER";
 			sourceTree = "<group>";
@@ -761,6 +764,7 @@
 				D8E9F8722B01FAFB00A3F3FC /* ToDoDetailController.swift in Sources */,
 				D8900F172B55435A008E0E34 /* NewUserCheck.swift in Sources */,
 				D8900F152B5529C7008E0E34 /* AnimationLoadingRouter.swift in Sources */,
+				D8F11C622B5669AC00D2282D /* MockViewController.swift in Sources */,
 				D8E9F8CC2B1762FE00A3F3FC /* OverdueToDoController.swift in Sources */,
 				D8E9F89D2B04BFAB00A3F3FC /* AddToDoPresenter.swift in Sources */,
 				D8E9F89F2B04C06300A3F3FC /* AddToDoController.swift in Sources */,

@@ -7,6 +7,18 @@
 
 import Foundation
 
-final class AnimationLoadingInteractor {
+protocol AnimationLoadingInteractorInputProtocol: Any {
+    func checkTheUser() -> Bool
+}
+
+final class AnimationLoadingInteractor: AnimationLoadingInteractorInputProtocol {
     
+    func checkTheUser() -> Bool {
+        if NewUserCheck.shared.isNewUser() == true {
+            NewUserCheck.shared.setIsNotNewUser()
+            return true
+        } else {
+            return false
+        }
+    }
 }

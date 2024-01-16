@@ -9,12 +9,11 @@ import UIKit
 import SnapKit
 
 protocol AnimationLoadingControllerProtocol: AnyObject {
-    var router: AnimationLoadingRouterProtocol? { get set }
-    func presentNextScreen(view: UIViewController)
+    var presenter: AnimationLoadingPresenterProtocol? { get set }
 }
 
-final class AnimationLoadingController: UIViewController {
-     var router: AnimationLoadingRouterProtocol?
+final class AnimationLoadingController: UIViewController, AnimationLoadingControllerProtocol {
+     var presenter: AnimationLoadingPresenterProtocol?
     
     //MARK: - Outlets
     private lazy var loadingBackground: UIImageView = {
@@ -41,16 +40,22 @@ final class AnimationLoadingController: UIViewController {
     
     //MARK: - Lifecycle
     override func viewDidLayoutSubviews() {
+   
+        loadingImage.center = view.center
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         DispatchQueue.main.asyncAfter(deadline: .now()+0.5, execute: {
             self.animate()
         })
-        loadingImage.center = view.center
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupHierarcy()
         setupLayout()
+        
     }
     
     deinit {
@@ -96,32 +101,27 @@ final class AnimationLoadingController: UIViewController {
         UIView.animate(withDuration: 1.5, animations: {
             self.loadingImage.alpha = 0
             self.activityIndicator.stopAnimating()
-        }) { done  in
-            if done {
-                DispatchQueue.main.asyncAfter(deadline: .now()+0.5, execute: {
-                    let mainModule = HomeTabBarRouter.createHomeTabBar()
-                    
-                    mainModule.modalTransitionStyle = .crossDissolve
-                    mainModule.modalPresentationStyle = .fullScreen
-                    self.present(mainModule, animated: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                self.presenter?.goToNextScreen()
+            })
+        }) 
+//        { done  in
+//            if done {
+//                DispatchQueue.main.asyncAfter(deadline: .now()+0.0, execute: {
+//                    let mainModule = HomeTabBarRouter.createHomeTabBar()
+//                    
+//                    mainModule.modalTransitionStyle = .crossDissolve
+//                    mainModule.modalPresentationStyle = .fullScreen
+//                    self.present(mainModule, animated: true)
+//                    self.presenter?.goToNextScreen()
 //                    self.navigationController?.pushViewController(mainModule, animated: true)
-                })
-            }
-        }
+//                })
+//            }
+//        }
     }
     
     //MARK: - Next Path Method
     
 }
 
-extension AnimationLoadingController: AnimationLoadingControllerProtocol {
-    func presentNextScreen(view: UIViewController) {
-        view.modalTransitionStyle = .crossDissolve
-        view.modalPresentationStyle = .fullScreen
-        self.present(view, animated: true)
-    }
-    
-   
-    
-    
-}
+
