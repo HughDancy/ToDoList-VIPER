@@ -34,7 +34,8 @@ final class AnimationLoadingRouter: AnimationLoadingRouterProtocol {
     func goToTheApp(isNewUser: Bool, fromView: AnimationLoadingControllerProtocol) {
         if isNewUser == true {
             guard let parrentView = fromView as? UIViewController else { return }
-            let view = MockViewController()
+//            let view = MockViewController()
+            let view = WelcomeController()
            
             view.modalTransitionStyle = .crossDissolve
             view.modalPresentationStyle = .fullScreen
