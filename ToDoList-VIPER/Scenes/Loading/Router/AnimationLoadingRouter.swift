@@ -39,7 +39,7 @@ final class AnimationLoadingRouter: AnimationLoadingRouterProtocol {
             view.modalTransitionStyle = .crossDissolve
             view.modalPresentationStyle = .fullScreen
             parrentView.present(view, animated: true)
-            (print("Is called ONE WAY"))
+
 //            let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
 //            appDelegate.window?.rootViewController = view
         } else  {
@@ -48,7 +48,7 @@ final class AnimationLoadingRouter: AnimationLoadingRouterProtocol {
             view.modalTransitionStyle = .crossDissolve
             view.modalPresentationStyle = .fullScreen
             parrentView.present(view, animated: true)
-            print("is called TWO WAY")
+
 //            let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
 //            appDelegate.window?.rootViewController = view
            

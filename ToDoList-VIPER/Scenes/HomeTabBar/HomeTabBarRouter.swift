@@ -40,6 +40,9 @@ final class HomeTabBarRouter: HomeTabBarRouterProtocol {
         tabBar.viewControllers = [planned, overdue,  executed, configuarations]
         tabBar.tabBar.tintColor = .systemBlue
         
+        
+        let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
+        appDelegate.window?.rootViewController = tabBar
         return tabBar
     }
     
