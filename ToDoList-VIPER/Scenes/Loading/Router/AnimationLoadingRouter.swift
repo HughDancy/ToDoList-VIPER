@@ -35,11 +35,12 @@ final class AnimationLoadingRouter: AnimationLoadingRouterProtocol {
         if isNewUser == true {
             guard let parrentView = fromView as? UIViewController else { return }
 //            let view = MockViewController()
-            let view = WelcomeController()
+//            let view = WelcomeController()
+            let onboardingModule = OnboardingRouter.createOnboardingModule()
            
-            view.modalTransitionStyle = .crossDissolve
-            view.modalPresentationStyle = .fullScreen
-            parrentView.present(view, animated: true)
+            onboardingModule.modalTransitionStyle = .crossDissolve
+            onboardingModule.modalPresentationStyle = .fullScreen
+            parrentView.present(onboardingModule, animated: true)
 
 //            let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
 //            appDelegate.window?.rootViewController = view

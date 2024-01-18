@@ -7,7 +7,8 @@
 
 import UIKit
 
-class WelcomeController: UIViewController {
+class WelcomeController: UIViewController, WelcomeViewProtocol {
+    var presenter: OnboardingPresenterProtocol?
     
     //MARK: - Outlets
     private lazy var backgroundImage: UIImageView = {
@@ -40,6 +41,7 @@ class WelcomeController: UIViewController {
         button.backgroundColor = .systemCyan
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
+        button.addTarget(self, action: #selector(goToLoginScreen), for: .touchDown)
         return button
     }()
     
@@ -82,5 +84,9 @@ class WelcomeController: UIViewController {
         }
     }
     
+    //MARK: - Button function
+    @objc func goToLoginScreen() {
+        presenter?.goToLoginScreen()
+    }
     
 }

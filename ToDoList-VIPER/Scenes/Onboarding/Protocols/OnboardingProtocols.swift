@@ -28,5 +28,5 @@ protocol OnboardingInteractorProtocol: AnyObject {
 protocol OnboardingRouterProtocol: AnyObject {
     static func createOnboardingModule() -> UIViewController
     
-    func goToLoginScreen()
+    func goToLoginScreen(from view: WelcomeViewProtocol)
 }

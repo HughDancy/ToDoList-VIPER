@@ -12,6 +12,9 @@
 		D85C57E52B57C71900023B04 /* WelcomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C57E42B57C71900023B04 /* WelcomeController.swift */; };
 		D85C57E72B57CCA600023B04 /* OnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C57E62B57CCA600023B04 /* OnboardingPresenter.swift */; };
 		D85C57EA2B57CD1E00023B04 /* OnboardingProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C57E92B57CD1E00023B04 /* OnboardingProtocols.swift */; };
+		D85C57EC2B57D0AD00023B04 /* OnboardingInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C57EB2B57D0AD00023B04 /* OnboardingInteractor.swift */; };
+		D85C57EE2B57D16300023B04 /* OnboardingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C57ED2B57D16300023B04 /* OnboardingRouter.swift */; };
+		D85C57F02B57D28F00023B04 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C57EF2B57D28F00023B04 /* LoginController.swift */; };
 		D86D44E22AFB932E00894774 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D44E12AFB932E00894774 /* AppDelegate.swift */; };
 		D86D44E42AFB932E00894774 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D44E32AFB932E00894774 /* SceneDelegate.swift */; };
 		D86D44E62AFB932E00894774 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D44E52AFB932E00894774 /* ViewController.swift */; };
@@ -92,6 +95,9 @@
 		D85C57E42B57C71900023B04 /* WelcomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeController.swift; sourceTree = "<group>"; };
 		D85C57E62B57CCA600023B04 /* OnboardingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPresenter.swift; sourceTree = "<group>"; };
 		D85C57E92B57CD1E00023B04 /* OnboardingProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingProtocols.swift; sourceTree = "<group>"; };
+		D85C57EB2B57D0AD00023B04 /* OnboardingInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingInteractor.swift; sourceTree = "<group>"; };
+		D85C57ED2B57D16300023B04 /* OnboardingRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRouter.swift; sourceTree = "<group>"; };
+		D85C57EF2B57D28F00023B04 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		D86D44DE2AFB932E00894774 /* ToDoList-VIPER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ToDoList-VIPER.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D86D44E12AFB932E00894774 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D86D44E32AFB932E00894774 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -190,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				D85C57E42B57C71900023B04 /* WelcomeController.swift */,
+				D85C57EF2B57D28F00023B04 /* LoginController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -205,6 +212,7 @@
 		D85C57E22B57C6D100023B04 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				D85C57EB2B57D0AD00023B04 /* OnboardingInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -212,6 +220,7 @@
 		D85C57E32B57C6D900023B04 /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				D85C57ED2B57D16300023B04 /* OnboardingRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -816,6 +825,7 @@
 				D8900F152B5529C7008E0E34 /* AnimationLoadingRouter.swift in Sources */,
 				D8F11C622B5669AC00D2282D /* MockViewController.swift in Sources */,
 				D8E9F8CC2B1762FE00A3F3FC /* OverdueToDoController.swift in Sources */,
+				D85C57EC2B57D0AD00023B04 /* OnboardingInteractor.swift in Sources */,
 				D8E9F89D2B04BFAB00A3F3FC /* AddToDoPresenter.swift in Sources */,
 				D8E9F89F2B04C06300A3F3FC /* AddToDoController.swift in Sources */,
 				D8E9F8B12B0B47FB00A3F3FC /* DateFormatter + EXT.swift in Sources */,
@@ -825,6 +835,7 @@
 				D8F11C5E2B5660C900D2282D /* AnimationLoadingInteractor.swift in Sources */,
 				D86D45242AFB986E00894774 /* ToDoStore.swift in Sources */,
 				D8E9F8782B021C3C00A3F3FC /* ToDoDetailRouter.swift in Sources */,
+				D85C57F02B57D28F00023B04 /* LoginController.swift in Sources */,
 				D85C57EA2B57CD1E00023B04 /* OnboardingProtocols.swift in Sources */,
 				D8E9F8BA2B0CC0CB00A3F3FC /* ToDoObject+CoreDataProperties.swift in Sources */,
 				D8E9F8A52B04D32B00A3F3FC /* UITextField + EXT.swift in Sources */,
@@ -851,6 +862,7 @@
 				D8E9F8D02B18A56200A3F3FC /* ToDoObjectSorter.swift in Sources */,
 				D8E9F87E2B0353B500A3F3FC /* HomeTabBarRouterProtocol.swift in Sources */,
 				D86D45262AFB9ADD00894774 /* ToDoListsProtocols.swift in Sources */,
+				D85C57EE2B57D16300023B04 /* OnboardingRouter.swift in Sources */,
 				D8E9F8912B037EEE00A3F3FC /* ExecuteToDoRouter.swift in Sources */,
 				D8E9F8A72B04D58900A3F3FC /* UIButton + EXT.swift in Sources */,
 				D8E9F8C82B175D4500A3F3FC /* OverduePresenter.swift in Sources */,

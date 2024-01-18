@@ -7,6 +7,19 @@
 
 import Foundation
 
-final class OnboardingPresenter {
+final class OnboardingPresenter: OnboardingPresenterProtocol {
+    weak var view: WelcomeViewProtocol?
+    var interactor: OnboardingInteractorProtocol?
+    var router: OnboardingRouterProtocol?
+    
+    func goToLoginScreen() {
+        guard let view = view else { return }
+        router?.goToLoginScreen(from: view)
+    }
+    
+    func checkLogin(nick: String, password: String) {
+        interactor?.checkLogin(nick: nick, password: password)
+    }
+    
     
 }
