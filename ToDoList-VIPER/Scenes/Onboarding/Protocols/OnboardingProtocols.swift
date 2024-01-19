@@ -7,12 +7,12 @@
 
 import UIKit
 
-protocol WelcomeViewProtocol: AnyObject {
+protocol OnboardingViewProtocol: AnyObject {
     var presenter: OnboardingPresenterProtocol? { get set }
 }
 
 protocol OnboardingPresenterProtocol: AnyObject {
-    var view: WelcomeViewProtocol? { get set }
+    var view: OnboardingViewProtocol? { get set }
     var interactor: OnboardingInteractorProtocol? { get set }
     var router: OnboardingRouterProtocol? { get set }
     
@@ -28,5 +28,13 @@ protocol OnboardingInteractorProtocol: AnyObject {
 protocol OnboardingRouterProtocol: AnyObject {
     static func createOnboardingModule() -> UIViewController
     
-    func goToLoginScreen(from view: WelcomeViewProtocol)
+    func goToLoginScreen(from view: OnboardingViewProtocol)
+}
+
+enum OnboardingStates: String {
+    case welcome
+    case aboutApp
+    case addToDo
+    case featureToDo
+    case option
 }

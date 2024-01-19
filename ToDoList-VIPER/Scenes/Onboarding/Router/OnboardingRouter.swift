@@ -11,7 +11,7 @@ final class OnboardingRouter: OnboardingRouterProtocol {
    
     
     static func createOnboardingModule() -> UIViewController {
-        let view = WelcomeController()
+        let view = OnboardingController(transitionStyle: .scroll, navigationOrientation: .horizontal)
         let presenter: OnboardingPresenterProtocol = OnboardingPresenter()
         let interactor: OnboardingInteractorProtocol = OnboardingInteractor()
         let router = OnboardingRouter()
@@ -25,12 +25,11 @@ final class OnboardingRouter: OnboardingRouterProtocol {
         return navCon
     }
     
-    func goToLoginScreen(from view: WelcomeViewProtocol) {
+    func goToLoginScreen(from view: OnboardingViewProtocol) {
         guard let parrentView = view as? UIViewController else { return}
-        let loginController = LoginController()
-        parrentView.navigationController?.pushViewController(loginController, animated: true)
+//        let loginController = LoginController()
+//        parrentView.navigationController?.pushViewController(loginController, animated: true)
 //        parrentView.present(loginController, animated: true)
     }
-    
     
 }

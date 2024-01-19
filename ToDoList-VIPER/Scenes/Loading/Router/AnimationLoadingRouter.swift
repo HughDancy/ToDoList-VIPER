@@ -29,19 +29,15 @@ final class AnimationLoadingRouter: AnimationLoadingRouterProtocol {
     }
     
     
-  
-    
     func goToTheApp(isNewUser: Bool, fromView: AnimationLoadingControllerProtocol) {
         if isNewUser == true {
             guard let parrentView = fromView as? UIViewController else { return }
-//            let view = MockViewController()
-//            let view = WelcomeController()
+
             let onboardingModule = OnboardingRouter.createOnboardingModule()
            
             onboardingModule.modalTransitionStyle = .crossDissolve
             onboardingModule.modalPresentationStyle = .fullScreen
             parrentView.present(onboardingModule, animated: true)
-
 //            let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
 //            appDelegate.window?.rootViewController = view
         } else  {
@@ -49,12 +45,7 @@ final class AnimationLoadingRouter: AnimationLoadingRouterProtocol {
             let view = HomeTabBarRouter.createHomeTabBar()
             view.modalTransitionStyle = .crossDissolve
             view.modalPresentationStyle = .fullScreen
-            parrentView.present(view, animated: true)
-
-//            let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
-//            appDelegate.window?.rootViewController = view
-           
-            
+            parrentView.present(view, animated: true)  
         }
     }
 }

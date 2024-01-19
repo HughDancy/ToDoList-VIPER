@@ -15,7 +15,7 @@ final class AnimationLoadingInteractor: AnimationLoadingInteractorInputProtocol 
     
     func checkTheUser() -> Bool {
         if NewUserCheck.shared.isNewUser() == true {
-            NewUserCheck.shared.setIsNotNewUser()
+//            NewUserCheck.shared.setIsNotNewUser()
             return true
         } else {
             return false
