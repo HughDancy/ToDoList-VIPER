@@ -9,11 +9,10 @@ import UIKit
 
 final class OnboardingRouter: OnboardingRouterProtocol {
    
-    
     static func createOnboardingModule() -> UIViewController {
         let view = OnboardingController(transitionStyle: .scroll, navigationOrientation: .horizontal)
-        let presenter: OnboardingPresenterProtocol = OnboardingPresenter()
-        let interactor: OnboardingInteractorProtocol = OnboardingInteractor()
+        let presenter: OnboardingPresenterProtocol & OnboardingInteractorOutputProtocol = OnboardingPresenter()
+        let interactor: OnboardingInteractorInputProtocol = OnboardingInteractor()
         let router = OnboardingRouter()
         let navCon = UINavigationController(rootViewController: view)
         navCon.tabBarController?.tabBar.isHidden = true
@@ -21,11 +20,12 @@ final class OnboardingRouter: OnboardingRouterProtocol {
         presenter.view = view
         presenter.interactor = interactor
         presenter.router = router
+        interactor.presenter = presenter
     
         return navCon
     }
     
-    func goToLoginScreen(from view: OnboardingViewProtocol) {
+    func goToLoginModule(from view: OnboardingViewProtocol) {
         guard let parrentView = view as? UIViewController else { return}
 //        let loginController = LoginController()
 //        parrentView.navigationController?.pushViewController(loginController, animated: true)

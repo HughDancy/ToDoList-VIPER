@@ -9,26 +9,38 @@ import UIKit
 
 protocol OnboardingViewProtocol: AnyObject {
     var presenter: OnboardingPresenterProtocol? { get set }
+    
+    func getOnboardingData(_ data: [OnboardingItems])
 }
 
 protocol OnboardingPresenterProtocol: AnyObject {
     var view: OnboardingViewProtocol? { get set }
-    var interactor: OnboardingInteractorProtocol? { get set }
+    var interactor: OnboardingInteractorInputProtocol? { get set }
     var router: OnboardingRouterProtocol? { get set }
     
-    func goToLoginScreen()
-    func checkLogin(nick: String, password: String)
+    //VIEW -> PRESENTER
+    func viewWillAppear()
+    func goToLoginModule()
+    
     
 }
 
-protocol OnboardingInteractorProtocol: AnyObject {
-    func checkLogin(nick: String, password: String) -> Bool
+protocol OnboardingInteractorInputProtocol: AnyObject {
+    var presenter: OnboardingInteractorOutputProtocol? { get set }
+    
+    //PRESENTER -> INTERACTOR
+    func retriveData()
+}
+
+protocol OnboardingInteractorOutputProtocol: AnyObject {
+    //INTERACTOR -> PRESENTER
+    func didRetriveData(_ data: [OnboardingItems])
 }
 
 protocol OnboardingRouterProtocol: AnyObject {
     static func createOnboardingModule() -> UIViewController
     
-    func goToLoginScreen(from view: OnboardingViewProtocol)
+    func goToLoginModule(from view: OnboardingViewProtocol)
 }
 
 enum OnboardingStates: String {

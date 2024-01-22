@@ -7,10 +7,12 @@
 
 import Foundation
 
-final class OnboardingInteractor: OnboardingInteractorProtocol {
-    func checkLogin(nick: String, password: String) -> Bool {
-        return false
-    }
+final class OnboardingInteractor: OnboardingInteractorInputProtocol {
+    var presenter: OnboardingInteractorOutputProtocol?
+    let onboardingData = OnboardingItems.pagesData
     
+    func retriveData() {
+        presenter?.didRetriveData(onboardingData)
+    }
     
 }

@@ -9,17 +9,22 @@ import Foundation
 
 final class OnboardingPresenter: OnboardingPresenterProtocol {
     weak var view: OnboardingViewProtocol?
-    var interactor: OnboardingInteractorProtocol?
+    var interactor: OnboardingInteractorInputProtocol?
     var router: OnboardingRouterProtocol?
     
-    func goToLoginScreen() {
+    func goToLoginModule() {
         guard let view = view else { return }
-        router?.goToLoginScreen(from: view)
+        router?.goToLoginModule(from: view)
+    }
+
+    func viewWillAppear() {
+        interactor?.retriveData()
     }
     
-    func checkLogin(nick: String, password: String) {
-        interactor?.checkLogin(nick: nick, password: password)
+}
+
+extension OnboardingPresenter: OnboardingInteractorOutputProtocol {
+    func didRetriveData(_ data: [OnboardingItems]) {
+        view?.getOnboardingData(data)
     }
-    
-    
 }

@@ -115,11 +115,11 @@ class OnboardingPageController: UIViewController {
         }
     }
     
-    func setupElements(label: String, description: String, buttonText: String, image: UIImage?, state: OnboardingStates) {
-        welcomeLabel.text = label
-        descriptionLabel.text = description
-        nextScreenButton.setTitle(buttonText, for: .normal)
-        picture.image = image
-        self.state = state
+    func setupElements(with data: OnboardingItems) {
+        welcomeLabel.text = data.title
+        descriptionLabel.text = data.description
+        nextScreenButton.setTitle(data.buttonText, for: .normal)
+        picture.image = UIImage(named: data.imageName)
+        self.state = data.state
     }
 }

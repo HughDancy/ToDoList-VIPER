@@ -7,39 +7,53 @@
 
 import UIKit
 
-class OnboardingController: UIPageViewController, OnboardingViewProtocol {
+class OnboardingController: UIPageViewController {
  
     //MARK: - Elements
     var presenter: OnboardingPresenterProtocol?
+    private var data = [OnboardingItems]()
     private var pages = [OnboardingPageController]()
     private var currentPage = 0
     
     //MARK: - Life cycle
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter?.viewWillAppear()
+        setupPages()
+        print(data.count)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        //MARK: - REWRITE THIS
+      
         UserDefaults.standard.setValue(OnboardingStates.welcome.rawValue, forKey: "onboardingState")
-        setupPages()
         self.dataSource = self
-
-       
     }
     
     //MARK: - Setup onboarding pages
     private func setupPages() {
-        let pagesData: [(String,  String?, String, UIImage?, OnboardingStates)] = [
-            ("Welcome to ToDo List App", nil,"Begin", UIImage(named: "welcomeImage"), OnboardingStates.welcome),
-            ("Our App for youre everyday ToDos", "Make your ToDos in a simply order", "Next", nil, OnboardingStates.aboutApp),
-            ("Add new ToDo Simple!", "Just push plus button and fill the needed fields" ,"Next", nil, OnboardingStates.addToDo),
-            ("Customize your profile!", "We need to acces to your gallery, for avatar" ,"Next", nil, OnboardingStates.option)
-        ]
-        
-        for (label, description, buttonText, image, state) in pagesData {
+//        let pagesData: [(String,  String?, String, UIImage?, OnboardingStates)] = [
+//            ("Welcome to ToDo List App", nil,"Begin", UIImage(named: "welcomeImage"), OnboardingStates.welcome),
+//            ("Our App for youre everyday ToDos", "Make your ToDos in a simply order", "Next", nil, OnboardingStates.aboutApp),
+//            ("Add new ToDo Simple!", "Just push plus button and fill the needed fields" ,"Next", nil, OnboardingStates.addToDo),
+//            ("Customize your profile!", "We need to acces to your gallery, for avatar" ,"Next", nil, OnboardingStates.option)
+//        ]
+//        
+//        for (label, description, buttonText, image, state) in pagesData {
+//            let vc = OnboardingPageController()
+//            vc.setupElements(label: label, description: description ?? "", buttonText: buttonText, image: image, state: state )
+//            vc.nextScreenButton.addTarget(self, action: #selector(goToNextScreen), for: .touchDown)
+//            pages.append(vc)
+//        }
+
+        for item in data {
             let vc = OnboardingPageController()
-            vc.setupElements(label: label, description: description ?? "", buttonText: buttonText, image: image, state: state )
+            vc.setupElements(with: item)
             vc.nextScreenButton.addTarget(self, action: #selector(goToNextScreen), for: .touchDown)
             pages.append(vc)
         }
-
+        
         if let firstPage = pages.first(where: { page in
             page.state?.rawValue ?? OnboardingStates.welcome.rawValue == UserDefaults.standard.string(forKey: "onboardingState")
         })  {
@@ -55,10 +69,13 @@ class OnboardingController: UIPageViewController, OnboardingViewProtocol {
        
     }
     
-    //MARK: - Something
+}
 
-  
-
+//MARK: - OnboardingViewProtocol Extension
+extension OnboardingController: OnboardingViewProtocol {
+    func getOnboardingData(_ data: [OnboardingItems]) {
+        self.data = data
+    }
 }
 
    //MARK: - Page Controller delegate and data source Extension
