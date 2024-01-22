@@ -17,6 +17,7 @@ class OnboardingController: UIPageViewController, OnboardingViewProtocol {
     //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        UserDefaults.standard.setValue(OnboardingStates.welcome.rawValue, forKey: "onboardingState")
         setupPages()
         self.dataSource = self
 
@@ -28,7 +29,8 @@ class OnboardingController: UIPageViewController, OnboardingViewProtocol {
         let pagesData: [(String,  String?, String, UIImage?, OnboardingStates)] = [
             ("Welcome to ToDo List App", nil,"Begin", UIImage(named: "welcomeImage"), OnboardingStates.welcome),
             ("Our App for youre everyday ToDos", "Make your ToDos in a simply order", "Next", nil, OnboardingStates.aboutApp),
-            ("Add new ToDo Simple!", "Just push plus button and fill the needed fields" ,"Next", nil, OnboardingStates.addToDo)
+            ("Add new ToDo Simple!", "Just push plus button and fill the needed fields" ,"Next", nil, OnboardingStates.addToDo),
+            ("Customize your profile!", "We need to acces to your gallery, for avatar" ,"Next", nil, OnboardingStates.option)
         ]
         
         for (label, description, buttonText, image, state) in pagesData {
@@ -46,8 +48,11 @@ class OnboardingController: UIPageViewController, OnboardingViewProtocol {
     }
     
     @objc func goToNextScreen() {
-        self.setViewControllers([pages[currentPage + 1]], direction: .forward, animated: true)
-        currentPage = currentPage + 1
+        if currentPage + 1 < pages.count {
+            self.setViewControllers([pages[currentPage + 1]], direction: .forward, animated: true)
+            currentPage = currentPage + 1
+        }
+       
     }
     
     //MARK: - Something
@@ -56,13 +61,12 @@ class OnboardingController: UIPageViewController, OnboardingViewProtocol {
 
 }
 
-   //MARK: - Extension
+   //MARK: - Page Controller delegate and data source Extension
 extension OnboardingController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         if let index = pages.firstIndex(of: viewController as! OnboardingPageController) {
             if index > 0 {
                 self.currentPage = index - 1
-                print(currentPage)
                 return pages[index - 1]
             } else {
                 return nil

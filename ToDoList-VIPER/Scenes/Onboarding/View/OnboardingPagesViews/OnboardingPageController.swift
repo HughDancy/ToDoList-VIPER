@@ -36,6 +36,22 @@ class OnboardingPageController: UIViewController {
         return label
     }()
     
+    lazy var photoAndLibraryButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .systemCyan
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
+        button.setTitle("Разрешить доступ", for: .normal)
+        if UserDefaults.standard.string(forKey: "onboardingState") == OnboardingStates.option.rawValue {
+            button.isHidden = false
+        } else {
+            button.isHidden = true
+        }
+        
+        return button
+    }()
+    
     lazy var nextScreenButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitleColor(.white, for: .normal)
@@ -63,6 +79,8 @@ class OnboardingPageController: UIViewController {
         view.addSubview(picture)
         view.addSubview(welcomeLabel)
         view.addSubview(descriptionLabel)
+        view.addSubview(photoAndLibraryButton)
+        view.addSubview(photoAndLibraryButton)
         view.addSubview(nextScreenButton)
     }
     
@@ -83,6 +101,11 @@ class OnboardingPageController: UIViewController {
         descriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(welcomeLabel.snp.bottom).offset(10)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
+        }
+        
+        photoAndLibraryButton.snp.makeConstraints { make in
+            make.top.equalTo(descriptionLabel.snp.bottom).offset(30)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(40)
         }
         
         nextScreenButton.snp.makeConstraints { make in

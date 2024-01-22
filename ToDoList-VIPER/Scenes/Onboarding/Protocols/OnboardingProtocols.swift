@@ -36,5 +36,6 @@ enum OnboardingStates: String {
     case aboutApp
     case addToDo
     case featureToDo
+    case doneAndOvedueToDo
     case option
 }

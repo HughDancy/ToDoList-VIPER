@@ -34,7 +34,6 @@ final class AnimationLoadingRouter: AnimationLoadingRouterProtocol {
             guard let parrentView = fromView as? UIViewController else { return }
 
             let onboardingModule = OnboardingRouter.createOnboardingModule()
-           
             onboardingModule.modalTransitionStyle = .crossDissolve
             onboardingModule.modalPresentationStyle = .fullScreen
             parrentView.present(onboardingModule, animated: true)
