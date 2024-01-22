@@ -104,14 +104,16 @@ class OnboardingPageController: UIViewController {
         }
         
         photoAndLibraryButton.snp.makeConstraints { make in
-            make.top.equalTo(descriptionLabel.snp.bottom).offset(30)
+            make.top.equalTo(descriptionLabel.snp.bottom).offset(25)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(40)
+            make.height.equalTo(40)
         }
         
         nextScreenButton.snp.makeConstraints { make in
+            make.top.equalTo(photoAndLibraryButton.snp.bottom).offset(10)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(40)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(40)
-            make.height.equalTo(45)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(30)
+            make.height.equalTo(40)
         }
     }
     

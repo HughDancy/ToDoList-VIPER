@@ -20,38 +20,29 @@ class OnboardingController: UIPageViewController {
         super.viewWillAppear(animated)
         presenter?.viewWillAppear()
         setupPages()
-        print(data.count)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
         //MARK: - REWRITE THIS
-      
-        UserDefaults.standard.setValue(OnboardingStates.welcome.rawValue, forKey: "onboardingState")
+//        UserDefaults.standard.setValue(OnboardingStates.welcome.rawValue, forKey: "onboardingState")
         self.dataSource = self
     }
     
     //MARK: - Setup onboarding pages
     private func setupPages() {
-//        let pagesData: [(String,  String?, String, UIImage?, OnboardingStates)] = [
-//            ("Welcome to ToDo List App", nil,"Begin", UIImage(named: "welcomeImage"), OnboardingStates.welcome),
-//            ("Our App for youre everyday ToDos", "Make your ToDos in a simply order", "Next", nil, OnboardingStates.aboutApp),
-//            ("Add new ToDo Simple!", "Just push plus button and fill the needed fields" ,"Next", nil, OnboardingStates.addToDo),
-//            ("Customize your profile!", "We need to acces to your gallery, for avatar" ,"Next", nil, OnboardingStates.option)
-//        ]
-//        
-//        for (label, description, buttonText, image, state) in pagesData {
-//            let vc = OnboardingPageController()
-//            vc.setupElements(label: label, description: description ?? "", buttonText: buttonText, image: image, state: state )
-//            vc.nextScreenButton.addTarget(self, action: #selector(goToNextScreen), for: .touchDown)
-//            pages.append(vc)
-//        }
-
         for item in data {
             let vc = OnboardingPageController()
             vc.setupElements(with: item)
             vc.nextScreenButton.addTarget(self, action: #selector(goToNextScreen), for: .touchDown)
+            if vc.state == .option {
+                vc.photoAndLibraryButton.isHidden = false
+            } else {
+                vc.photoAndLibraryButton.isHidden = true
+            }
             pages.append(vc)
+            
         }
         
         if let firstPage = pages.first(where: { page in
@@ -66,9 +57,7 @@ class OnboardingController: UIPageViewController {
             self.setViewControllers([pages[currentPage + 1]], direction: .forward, animated: true)
             currentPage = currentPage + 1
         }
-       
     }
-    
 }
 
 //MARK: - OnboardingViewProtocol Extension
