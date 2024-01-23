@@ -38,6 +38,7 @@ class OnboardingController: UIPageViewController {
             vc.nextScreenButton.addTarget(self, action: #selector(goToNextScreen), for: .touchDown)
             if vc.state == .option {
                 vc.photoAndLibraryButton.isHidden = false
+                vc.photoAndLibraryButton.addTarget(self, action: #selector(presentRequest), for: .touchDown)
             } else {
                 vc.view.willRemoveSubview(vc.photoAndLibraryButton)
                 vc.photoAndLibraryButton.isHidden = true
@@ -58,6 +59,10 @@ class OnboardingController: UIPageViewController {
             self.setViewControllers([pages[currentPage + 1]], direction: .forward, animated: true)
             currentPage = currentPage + 1
         }
+    }
+    
+    @objc func presentRequest() {
+        presenter?.presentRequestAcess()
     }
 }
 

@@ -8,7 +8,7 @@
 import UIKit
 
 final class OnboardingRouter: OnboardingRouterProtocol {
-   
+  
     static func createOnboardingModule() -> UIViewController {
         let view = OnboardingController(transitionStyle: .scroll, navigationOrientation: .horizontal)
         let presenter: OnboardingPresenterProtocol & OnboardingInteractorOutputProtocol = OnboardingPresenter()
@@ -30,6 +30,22 @@ final class OnboardingRouter: OnboardingRouterProtocol {
 //        let loginController = LoginController()
 //        parrentView.navigationController?.pushViewController(loginController, animated: true)
 //        parrentView.present(loginController, animated: true)
+    }
+    
+    func presentRequestAcess(from view: OnboardingViewProtocol) {
+        guard let onboardingView = view as? UIViewController else { return }
+        let interactor: OnboardingInteractorInputProtocol = OnboardingInteractor()
+        let allertController = UIAlertController(title: "Разрешить доступ к медиа?",
+                                                 message: "Наше приложение использует камеру и медиа библиотеку только для выбора аватара Вашей учетной записи",
+                                                 preferredStyle: .alert)
+        let mediaAcessAction = UIAlertAction(title: "Разрешить доступ", style: .default) { action in
+            print(action)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Позже", style: .cancel)
+        allertController.addAction(mediaAcessAction)
+        allertController.addAction(cancelAction)
+        onboardingView.present(allertController, animated: true)
     }
     
 }

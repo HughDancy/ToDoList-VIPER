@@ -12,13 +12,18 @@ final class OnboardingPresenter: OnboardingPresenterProtocol {
     var interactor: OnboardingInteractorInputProtocol?
     var router: OnboardingRouterProtocol?
     
+    func viewWillAppear() {
+        interactor?.retriveData()
+    }
+    
     func goToLoginModule() {
         guard let view = view else { return }
         router?.goToLoginModule(from: view)
     }
-
-    func viewWillAppear() {
-        interactor?.retriveData()
+    
+    func presentRequestAcess() {
+        guard let view = view else { return }
+        router?.presentRequestAcess(from: view)
     }
     
 }

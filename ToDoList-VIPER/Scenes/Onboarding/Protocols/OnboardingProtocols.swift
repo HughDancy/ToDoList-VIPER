@@ -20,6 +20,7 @@ protocol OnboardingPresenterProtocol: AnyObject {
     
     //VIEW -> PRESENTER
     func viewWillAppear()
+    func presentRequestAcess()
     func goToLoginModule()
     
     
@@ -39,7 +40,7 @@ protocol OnboardingInteractorOutputProtocol: AnyObject {
 
 protocol OnboardingRouterProtocol: AnyObject {
     static func createOnboardingModule() -> UIViewController
-    
+    func presentRequestAcess(from view: OnboardingViewProtocol)
     func goToLoginModule(from view: OnboardingViewProtocol)
 }
 
