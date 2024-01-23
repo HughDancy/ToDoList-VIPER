@@ -39,7 +39,7 @@ final class OnboardingRouter: OnboardingRouterProtocol {
                                                  message: "Наше приложение использует камеру и медиа библиотеку только для выбора аватара Вашей учетной записи",
                                                  preferredStyle: .alert)
         let mediaAcessAction = UIAlertAction(title: "Разрешить доступ", style: .default) { action in
-            print(action)
+            interactor.checkPermissions()
         }
         
         let cancelAction = UIAlertAction(title: "Позже", style: .cancel)

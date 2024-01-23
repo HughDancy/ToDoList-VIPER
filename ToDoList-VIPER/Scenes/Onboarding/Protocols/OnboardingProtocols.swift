@@ -31,6 +31,7 @@ protocol OnboardingInteractorInputProtocol: AnyObject {
     
     //PRESENTER -> INTERACTOR
     func retriveData()
+    func checkPermissions()
 }
 
 protocol OnboardingInteractorOutputProtocol: AnyObject {
