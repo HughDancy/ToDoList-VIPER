@@ -39,6 +39,7 @@ class OnboardingController: UIPageViewController {
             if vc.state == .option {
                 vc.photoAndLibraryButton.isHidden = false
             } else {
+                vc.view.willRemoveSubview(vc.photoAndLibraryButton)
                 vc.photoAndLibraryButton.isHidden = true
             }
             pages.append(vc)

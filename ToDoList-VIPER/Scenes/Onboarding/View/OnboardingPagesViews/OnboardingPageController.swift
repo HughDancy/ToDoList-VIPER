@@ -32,7 +32,7 @@ class OnboardingPageController: UIViewController {
         let label = UILabel()
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         return label
     }()
     
@@ -43,12 +43,6 @@ class OnboardingPageController: UIViewController {
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
         button.setTitle("Разрешить доступ", for: .normal)
-        if UserDefaults.standard.string(forKey: "onboardingState") == OnboardingStates.option.rawValue {
-            button.isHidden = false
-        } else {
-            button.isHidden = true
-        }
-        
         return button
     }()
     
@@ -93,9 +87,10 @@ class OnboardingPageController: UIViewController {
         }
         
         welcomeLabel.snp.makeConstraints { make in
-            make.top.equalTo(picture.snp.bottom).offset(40)
+            make.top.equalTo(picture.snp.bottom).offset(30)
             make.centerX.equalTo(view.safeAreaLayoutGuide.snp.centerX)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(10)
+//            make.height.equalTo(40)
         }
         
         descriptionLabel.snp.makeConstraints { make in
@@ -104,13 +99,12 @@ class OnboardingPageController: UIViewController {
         }
         
         photoAndLibraryButton.snp.makeConstraints { make in
-            make.top.equalTo(descriptionLabel.snp.bottom).offset(25)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(40)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(80)
             make.height.equalTo(40)
         }
         
         nextScreenButton.snp.makeConstraints { make in
-            make.top.equalTo(photoAndLibraryButton.snp.bottom).offset(10)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(40)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(30)
             make.height.equalTo(40)
