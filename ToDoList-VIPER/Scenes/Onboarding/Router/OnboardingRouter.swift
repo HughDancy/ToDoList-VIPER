@@ -36,7 +36,7 @@ final class OnboardingRouter: OnboardingRouterProtocol {
         guard let onboardingView = view as? UIViewController else { return }
         let interactor: OnboardingInteractorInputProtocol = OnboardingInteractor()
         let allertController = UIAlertController(title: "Разрешить доступ к медиа?",
-                                                 message: "Наше приложение использует камеру и медиа библиотеку только для выбора аватара Вашей учетной записи",
+                                                 message: "Наше приложение использует камеру и медиа библиотеку только для выбора аватара Вашей учетной        записи",
                                                  preferredStyle: .alert)
         let mediaAcessAction = UIAlertAction(title: "Разрешить доступ", style: .default) { action in
             interactor.checkPermissions()

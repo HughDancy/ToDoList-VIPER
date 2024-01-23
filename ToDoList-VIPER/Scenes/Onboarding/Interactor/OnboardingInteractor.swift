@@ -7,6 +7,7 @@
 
 import Foundation
 import AVFoundation
+import Photos
 
 final class OnboardingInteractor: OnboardingInteractorInputProtocol {
     var presenter: OnboardingInteractorOutputProtocol?
@@ -17,25 +18,50 @@ final class OnboardingInteractor: OnboardingInteractorInputProtocol {
     }
     
     func checkPermissions() {
+      checkCameraAccess()
+        checkMediaAcces()
+        
+    }
+    
+    func checkCameraAccess() {
         let cameraStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
         switch cameraStatus {
         case .authorized:
             return
         case .denied:
             print("Acess denied")
+            abort()
         case .notDetermined:
             AVCaptureDevice.requestAccess(for: AVMediaType.video) { (authorized) in
                 if (!authorized) {
-                    print("Alredy authorized")
+                    abort()
                 }
             }
         case .restricted:
-            print("Restricted")
+            abort()
         @unknown default:
             fatalError()
         }
-        
-        print("Check permissions")
+    }
+    
+    func checkMediaAcces() {
+        let photoStatusAccess = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+        PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
+            switch status {
+            case .authorized:
+                print("Authorized")
+            case .denied:
+                print("Denied")
+            case .limited:
+                print("Limited")
+            case .notDetermined:
+                print("not determintd")
+            case .restricted:
+                print("restricted")
+            @unknown default:
+                fatalError()
+            }
+        }
     }
     
 }
