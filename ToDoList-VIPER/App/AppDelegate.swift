@@ -15,8 +15,10 @@ var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
-        let tabBar = HomeTabBarRouter.createHomeTabBar()
-        window?.rootViewController = tabBar
+//        let tabBar = HomeTabBarRouter.createHomeTabBar()
+        let loadingController = AnimationLoadingRouter.createLoadingModule()
+//        window?.rootViewController = tabBar
+        window?.rootViewController = loadingController
         window?.makeKeyAndVisible()
         return true
     }

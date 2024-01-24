@@ -1,0 +1,42 @@
+//
+//  OnboardingPresenter.swift
+//  ToDoList-VIPER
+//
+//  Created by Борис Киселев on 17.01.2024.
+//
+
+import Foundation
+
+final class OnboardingPresenter: OnboardingPresenterProtocol {
+    weak var view: OnboardingViewProtocol?
+    var interactor: OnboardingInteractorInputProtocol?
+    var router: OnboardingRouterProtocol?
+    
+    func viewWillAppear() {
+        interactor?.retriveData()
+    }
+    
+    func goToLoginModule() {
+        guard let view = view else { return }
+        router?.goToLoginModule(from: view)
+    }
+    
+    func presentRequestAcess() {
+        guard let view = view else { return }
+        router?.presentRequestAcess(from: view)
+    }
+    
+    func checkAccess() {
+        interactor?.checkPermissions()
+    }
+}
+
+extension OnboardingPresenter: OnboardingInteractorOutputProtocol {
+    func didRetriveData(_ data: [OnboardingItems]) {
+        view?.getOnboardingData(data)
+    }
+    func goToOptions(with: String) {
+        guard let view = view else { return }
+        router?.openSettings(from: view, label: with)
+    }
+}
