@@ -23,7 +23,8 @@ protocol OnboardingPresenterProtocol: AnyObject {
     func presentRequestAcess()
     func goToLoginModule()
     
-    
+    //ROUTER -> PRESENTER
+    func checkAccess()
 }
 
 protocol OnboardingInteractorInputProtocol: AnyObject {
@@ -37,11 +38,15 @@ protocol OnboardingInteractorInputProtocol: AnyObject {
 protocol OnboardingInteractorOutputProtocol: AnyObject {
     //INTERACTOR -> PRESENTER
     func didRetriveData(_ data: [OnboardingItems])
+    func goToOptions(with label: String)
 }
 
 protocol OnboardingRouterProtocol: AnyObject {
+    var presenter: OnboardingPresenterProtocol? { get set }
+    
     static func createOnboardingModule() -> UIViewController
     func presentRequestAcess(from view: OnboardingViewProtocol)
+    func openSettings(from view: OnboardingViewProtocol, label: String)
     func goToLoginModule(from view: OnboardingViewProtocol)
 }
 

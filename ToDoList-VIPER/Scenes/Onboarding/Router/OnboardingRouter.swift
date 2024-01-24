@@ -8,7 +8,8 @@
 import UIKit
 
 final class OnboardingRouter: OnboardingRouterProtocol {
-  
+    var presenter: OnboardingPresenterProtocol?
+    
     static func createOnboardingModule() -> UIViewController {
         let view = OnboardingController(transitionStyle: .scroll, navigationOrientation: .horizontal)
         let presenter: OnboardingPresenterProtocol & OnboardingInteractorOutputProtocol = OnboardingPresenter()
@@ -20,32 +21,44 @@ final class OnboardingRouter: OnboardingRouterProtocol {
         presenter.view = view
         presenter.interactor = interactor
         presenter.router = router
+        router.presenter = presenter
         interactor.presenter = presenter
-    
+        
         return navCon
     }
     
     func goToLoginModule(from view: OnboardingViewProtocol) {
         guard let parrentView = view as? UIViewController else { return}
-//        let loginController = LoginController()
-//        parrentView.navigationController?.pushViewController(loginController, animated: true)
-//        parrentView.present(loginController, animated: true)
+        //        let loginController = LoginController()
+        //        parrentView.navigationController?.pushViewController(loginController, animated: true)
+        //        parrentView.present(loginController, animated: true)
     }
     
     func presentRequestAcess(from view: OnboardingViewProtocol) {
         guard let onboardingView = view as? UIViewController else { return }
         let interactor: OnboardingInteractorInputProtocol = OnboardingInteractor()
+        
         let allertController = UIAlertController(title: "Разрешить доступ к медиа?",
                                                  message: "Наше приложение использует камеру и медиа библиотеку только для выбора аватара Вашей учетной        записи",
                                                  preferredStyle: .alert)
-        let mediaAcessAction = UIAlertAction(title: "Разрешить доступ", style: .default) { action in
-            interactor.checkPermissions()
-        }
-        
-        let cancelAction = UIAlertAction(title: "Позже", style: .cancel)
-        allertController.addAction(mediaAcessAction)
-        allertController.addAction(cancelAction)
+        allertController.addAction(UIAlertAction(title: "Разрешить доступ", style: .default) { action in
+            self.presenter?.checkAccess()
+        })
+        allertController.addAction(UIAlertAction(title: "Позже", style: .cancel))
         onboardingView.present(allertController, animated: true)
+    }
+    
+    func openSettings(from view: OnboardingViewProtocol, label: String) {
+        guard let onboardingView = view as? UIViewController else { return }
+        let alert = UIAlertController(title: "Открыть настройки",
+                                      message: "Доступ к \(label) не предоставлен. Открыть настройки для предоставления доступа?",
+                                      preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Открыть настройки", style: .default, handler: { _ in
+            UIApplication.shared.open(NSURL(string: UIApplication.openSettingsURLString)! as URL, options: [:], completionHandler: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel))
+        onboardingView.present(alert, animated: true)
     }
     
 }

@@ -29,8 +29,7 @@ final class OnboardingInteractor: OnboardingInteractorInputProtocol {
         case .authorized:
             return
         case .denied:
-            print("Acess denied")
-            abort()
+            presenter?.goToOptions(with: "камере")
         case .notDetermined:
             AVCaptureDevice.requestAccess(for: AVMediaType.video) { (authorized) in
                 if (!authorized) {
@@ -45,13 +44,12 @@ final class OnboardingInteractor: OnboardingInteractorInputProtocol {
     }
     
     func checkMediaAcces() {
-        let photoStatusAccess = PHPhotoLibrary.authorizationStatus(for: .readWrite)
         PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
             switch status {
             case .authorized:
                 print("Authorized")
             case .denied:
-                print("Denied")
+                self.presenter?.goToOptions(with: "медиа библиотеке")
             case .limited:
                 print("Limited")
             case .notDetermined:
