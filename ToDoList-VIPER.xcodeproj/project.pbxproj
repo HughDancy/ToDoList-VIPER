@@ -16,6 +16,7 @@
 		D85C57EE2B57D16300023B04 /* OnboardingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C57ED2B57D16300023B04 /* OnboardingRouter.swift */; };
 		D85C58392B5A595400023B04 /* OnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C58382B5A595400023B04 /* OnboardingController.swift */; };
 		D85C583C2B5A771A00023B04 /* OnboardingItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C583B2B5A771A00023B04 /* OnboardingItems.swift */; };
+		D85C5DB02B614E2F00F548AA /* LoginProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C5DAF2B614E2F00F548AA /* LoginProtocols.swift */; };
 		D86D44E22AFB932E00894774 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D44E12AFB932E00894774 /* AppDelegate.swift */; };
 		D86D44E42AFB932E00894774 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D44E32AFB932E00894774 /* SceneDelegate.swift */; };
 		D86D44E62AFB932E00894774 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D44E52AFB932E00894774 /* ViewController.swift */; };
@@ -100,6 +101,7 @@
 		D85C57ED2B57D16300023B04 /* OnboardingRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRouter.swift; sourceTree = "<group>"; };
 		D85C58382B5A595400023B04 /* OnboardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingController.swift; sourceTree = "<group>"; };
 		D85C583B2B5A771A00023B04 /* OnboardingItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingItems.swift; sourceTree = "<group>"; };
+		D85C5DAF2B614E2F00F548AA /* LoginProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProtocols.swift; sourceTree = "<group>"; };
 		D86D44DE2AFB932E00894774 /* ToDoList-VIPER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ToDoList-VIPER.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D86D44E12AFB932E00894774 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D86D44E32AFB932E00894774 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -241,6 +243,54 @@
 				D85C57E42B57C71900023B04 /* OnboardingPageController.swift */,
 			);
 			path = OnboardingPagesViews;
+			sourceTree = "<group>";
+		};
+		D85C5DA92B614DC900F548AA /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				D85C5DAE2B614E0F00F548AA /* Protocols */,
+				D85C5DAD2B614E0700F548AA /* View */,
+				D85C5DAC2B614DFD00F548AA /* Interactor */,
+				D85C5DAB2B614DEE00F548AA /* Presenter */,
+				D85C5DAA2B614DE200F548AA /* Router */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		D85C5DAA2B614DE200F548AA /* Router */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		D85C5DAB2B614DEE00F548AA /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		D85C5DAC2B614DFD00F548AA /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		D85C5DAD2B614E0700F548AA /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D85C5DAE2B614E0F00F548AA /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				D85C5DAF2B614E2F00F548AA /* LoginProtocols.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		D86D44D52AFB932E00894774 = {
@@ -460,6 +510,7 @@
 		D8E9F8792B03532000A3F3FC /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				D85C5DA92B614DC900F548AA /* Login */,
 				D8900F0E2B51354B008E0E34 /* Loading */,
 				D8900F0F2B513558008E0E34 /* Onboarding */,
 				D8E9F87A2B03536800A3F3FC /* HomeTabBar */,
@@ -880,6 +931,7 @@
 				D8E9F8C82B175D4500A3F3FC /* OverduePresenter.swift in Sources */,
 				D8E9F88F2B0378B800A3F3FC /* ExecuteToDoController.swift in Sources */,
 				D8E9F8CA2B175E6900A3F3FC /* OverdueInteractor.swift in Sources */,
+				D85C5DB02B614E2F00F548AA /* LoginProtocols.swift in Sources */,
 				D851385A2AFCC9C4004136D7 /* ToDoListRouter.swift in Sources */,
 				D8F11C602B5660DA00D2282D /* AnimationLoadingPresenter.swift in Sources */,
 				D8E9F8AF2B0B40FE00A3F3FC /* UIDatePicker + EXT.swift in Sources */,
