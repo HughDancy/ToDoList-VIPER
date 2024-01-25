@@ -26,7 +26,7 @@ class OnboardingController: UIPageViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         //MARK: - REWRITE THIS
-//        UserDefaults.standard.setValue(OnboardingStates.welcome.rawValue, forKey: "onboardingState")
+        UserDefaults.standard.setValue(OnboardingStates.welcome.rawValue, forKey: "onboardingState")
         self.dataSource = self
     }
     
@@ -39,6 +39,7 @@ class OnboardingController: UIPageViewController {
             if vc.state == .option {
                 vc.photoAndLibraryButton.isHidden = false
                 vc.photoAndLibraryButton.addTarget(self, action: #selector(presentRequest), for: .touchDown)
+                vc.nextScreenButton.addTarget(self, action: #selector(goToLogin), for: .touchDown)
             } else {
                 vc.view.willRemoveSubview(vc.photoAndLibraryButton)
                 vc.photoAndLibraryButton.isHidden = true
@@ -63,6 +64,10 @@ class OnboardingController: UIPageViewController {
     
     @objc func presentRequest() {
         presenter?.presentRequestAcess()
+    }
+    
+    @objc func goToLogin() {
+        presenter?.goToLoginModule()
     }
 }
 
