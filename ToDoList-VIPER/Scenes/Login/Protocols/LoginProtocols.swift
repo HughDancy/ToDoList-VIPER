@@ -8,7 +8,7 @@
 import UIKit
 
 protocol LoginViewProtocol: AnyObject {
-    var presenter: OnboardingPresenterProtocol? { get set }
+    var presenter: LoginPresenterProtocol? { get set }
     
 }
 
