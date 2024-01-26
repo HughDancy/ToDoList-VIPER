@@ -10,9 +10,16 @@ import UIKit
 final class LoginRouter: LoginRouterProtocol {
     static func createLoginModule() -> UIViewController {
         let viewController = LoginController()
-        let navCon = UINavigationController(rootViewController: viewController)
+        let presenter: LoginPresenterProtocol & LoginInteractorOutputProtocol = LoginPresenter()
+        let interactor: LoginInteractorInputProtocol = LoginInteractor()
+        let router: LoginRouterProtocol = LoginRouter()
+        viewController.presenter = presenter
+        presenter.view = viewController
+        presenter.interactor = interactor
+        presenter.router = router
+        interactor.presenter = presenter
         
-        return navCon
+        return viewController
     }
     
     func goToRegistration(from view: LoginViewProtocol) {
