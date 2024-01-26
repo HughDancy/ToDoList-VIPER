@@ -74,6 +74,7 @@ final class LoginController: UIViewController, LoginViewProtocol {
         button.tintColor = .systemBlue
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
+        button.addTarget(self, action: #selector(registerUser), for: .touchDown)
         
         return button
     }()
@@ -88,12 +89,12 @@ final class LoginController: UIViewController, LoginViewProtocol {
     
     private lazy var googleLoginButton: UIButton = {
         let button = UIButton(type: .system)
-//        button.setImage(UIImage(named: "googleLogo"), for: .normal)
         button.setTitle("Войти через Google", for: .normal)
         button.backgroundColor = .systemGray6
         button.tintColor = .systemGray3
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
+        button.addTarget(self, action: #selector(googleLogin), for: .touchDown)
         return button
     }()
     
@@ -183,8 +184,21 @@ final class LoginController: UIViewController, LoginViewProtocol {
     
     //MARK: - Buttons action
     @objc func loginApp()  {
-        print("Log In")
         self.view.endEditing(true)
+        switch (loginField.text != nil) && (passwordField.text != nil) {
+          case (loginField.text == "") || (passwordField.text == ""):
+            if loginField.text == "" {
+                let animation = CABasicAnimation.createShakeAnimation(for: loginField, keyPath: "position")
+                loginField.layer.add(animation, forKey: "position")
+            } else {
+                let animation = CABasicAnimation.createShakeAnimation(for: passwordField, keyPath: "position")
+                passwordField.layer.add(animation, forKey: "position")
+            }
+        case loginField.text?.isValidEmail() == false:
+            print("Введен неверный email")
+        default:
+            break
+        }
     }
     
     @objc func registerUser() {
@@ -213,6 +227,7 @@ final class LoginController: UIViewController, LoginViewProtocol {
     }
 }
 
+//MARK: - TextField Delegate
 extension LoginController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let nextTag = textField.tag + 1
