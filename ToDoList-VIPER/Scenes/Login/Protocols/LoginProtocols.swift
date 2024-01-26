@@ -30,7 +30,7 @@ protocol LoginInteractorInputProtocol: AnyObject {
 
 protocol LoginInteractorOutputProtocol: AnyObject {
     //INTERACTOR -> PRESENTER
-    func getVerificationResult() -> Bool
+    func getVerificationResult(with: Bool)
 }
 
 protocol LoginRouterProtocol: AnyObject {

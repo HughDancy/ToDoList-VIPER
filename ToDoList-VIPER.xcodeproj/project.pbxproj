@@ -50,6 +50,8 @@
 		D8CCF2D92B62725400C1E358 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = D8CCF2D82B62725400C1E358 /* FirebaseStorage */; };
 		D8E840542B63A8F0005A0936 /* String + EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E840532B63A8F0005A0936 /* String + EXT.swift */; };
 		D8E840562B63AA69005A0936 /* CABasicAnimation + EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E840552B63AA69005A0936 /* CABasicAnimation + EXT.swift */; };
+		D8E840582B63B0AB005A0936 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E840572B63B0AB005A0936 /* LoginPresenter.swift */; };
+		D8E8405A2B63B148005A0936 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E840592B63B148005A0936 /* LoginInteractor.swift */; };
 		D8E9F8702B01F84F00A3F3FC /* ToDoDetailsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F86F2B01F84F00A3F3FC /* ToDoDetailsProtocols.swift */; };
 		D8E9F8722B01FAFB00A3F3FC /* ToDoDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8712B01FAFB00A3F3FC /* ToDoDetailController.swift */; };
 		D8E9F8742B02178E00A3F3FC /* ToDoDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8732B02178E00A3F3FC /* ToDoDetailPresenter.swift */; };
@@ -142,6 +144,8 @@
 		D8CCF2C52B62719500C1E358 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D8E840532B63A8F0005A0936 /* String + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + EXT.swift"; sourceTree = "<group>"; };
 		D8E840552B63AA69005A0936 /* CABasicAnimation + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CABasicAnimation + EXT.swift"; sourceTree = "<group>"; };
+		D8E840572B63B0AB005A0936 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginPresenter.swift; path = "ToDoList-VIPER/Support/Extension/LoginPresenter.swift"; sourceTree = SOURCE_ROOT; };
+		D8E840592B63B148005A0936 /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginInteractor.swift; path = "ToDoList-VIPER/Support/Extension/LoginInteractor.swift"; sourceTree = SOURCE_ROOT; };
 		D8E9F86F2B01F84F00A3F3FC /* ToDoDetailsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoDetailsProtocols.swift; sourceTree = "<group>"; };
 		D8E9F8712B01FAFB00A3F3FC /* ToDoDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoDetailController.swift; sourceTree = "<group>"; };
 		D8E9F8732B02178E00A3F3FC /* ToDoDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoDetailPresenter.swift; sourceTree = "<group>"; };
@@ -293,6 +297,7 @@
 		D85C5DAB2B614DEE00F548AA /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				D8E840572B63B0AB005A0936 /* LoginPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -300,6 +305,7 @@
 		D85C5DAC2B614DFD00F548AA /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				D8E840592B63B148005A0936 /* LoginInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -923,6 +929,7 @@
 				D8E9F88B2B03768900A3F3FC /* ExecuteToDoInteractor.swift in Sources */,
 				D85C57E72B57CCA600023B04 /* OnboardingPresenter.swift in Sources */,
 				D8E840542B63A8F0005A0936 /* String + EXT.swift in Sources */,
+				D8E8405A2B63B148005A0936 /* LoginInteractor.swift in Sources */,
 				D86D44E62AFB932E00894774 /* ViewController.swift in Sources */,
 				D8E9F8722B01FAFB00A3F3FC /* ToDoDetailController.swift in Sources */,
 				D8900F172B55435A008E0E34 /* NewUserCheck.swift in Sources */,
@@ -949,6 +956,7 @@
 				D85C57E52B57C71900023B04 /* OnboardingPageController.swift in Sources */,
 				D8E9F8B92B0CC0CB00A3F3FC /* ToDoObject+CoreDataClass.swift in Sources */,
 				D8E9F8CE2B1767CB00A3F3FC /* OverdueToDoRouter.swift in Sources */,
+				D8E840582B63B0AB005A0936 /* LoginPresenter.swift in Sources */,
 				D86D44EC2AFB932E00894774 /* ToDoList_VIPER.xcdatamodeld in Sources */,
 				D8E9F8A92B04D96600A3F3FC /* AddToDoRouter.swift in Sources */,
 				D8E9F8742B02178E00A3F3FC /* ToDoDetailPresenter.swift in Sources */,
