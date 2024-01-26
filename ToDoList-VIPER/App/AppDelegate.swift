@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import FirebaseCore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,7 @@ var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
 //        let tabBar = HomeTabBarRouter.createHomeTabBar()
+        FirebaseApp.configure()
         let loadingController = AnimationLoadingRouter.createLoadingModule()
 //        window?.rootViewController = tabBar
         window?.rootViewController = loadingController
