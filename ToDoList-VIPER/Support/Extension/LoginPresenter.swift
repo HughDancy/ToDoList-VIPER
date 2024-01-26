@@ -15,6 +15,20 @@ final class LoginPresenter: LoginPresenterProtocol {
     func chekTheLogin(login: String, password: String) {
         interactor?.checkAutorizationData(login: login, password: password)
     }
+    
+    func goToRegistration() {
+        guard let view = view else { return }
+        router?.goToRegistration(from: view)
+    }
 }
 
-
+extension LoginPresenter: LoginInteractorOutputProtocol {
+    func getVerificationResult(with: Bool) {
+        guard let view = view else { return }
+        if with == true {
+            self.router?.goToMainScreen(from: view)
+        } else {
+            self.router?.showWrongPasswordAllert(from: view)
+        }
+    }
+}

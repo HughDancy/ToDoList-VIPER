@@ -19,6 +19,7 @@ protocol LoginPresenterProtocol: AnyObject {
     
     //VIEW -> PRESENTER
     func chekTheLogin(login: String, password: String)
+    func goToRegistration()
 }
 
 protocol LoginInteractorInputProtocol: AnyObject {
@@ -35,5 +36,7 @@ protocol LoginInteractorOutputProtocol: AnyObject {
 
 protocol LoginRouterProtocol: AnyObject {
     static func createLoginModule() -> UIViewController
-    func goToMainScreen(from view: LoginViewProtocol, bool: Bool)
+    func goToRegistration(from view: LoginViewProtocol)
+    func goToMainScreen(from view: LoginViewProtocol)
+    func showWrongPasswordAllert(from view: LoginViewProtocol)
 }
