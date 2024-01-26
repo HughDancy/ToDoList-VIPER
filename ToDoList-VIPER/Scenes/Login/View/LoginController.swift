@@ -35,6 +35,7 @@ final class LoginController: UIViewController, LoginViewProtocol {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
         textField.leftView = view
         textField.leftViewMode = .always
+        textField.autocapitalizationType = .none
         textField.returnKeyType = .next
         textField.tag = 0
         textField.delegate = self
@@ -49,6 +50,8 @@ final class LoginController: UIViewController, LoginViewProtocol {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
         textField.leftView = view
         textField.leftViewMode = .always
+        textField.isSecureTextEntry = true
+        textField.autocapitalizationType = .none
         textField.returnKeyType = .done
         textField.tag = 1
         textField.delegate = self
@@ -197,7 +200,7 @@ final class LoginController: UIViewController, LoginViewProtocol {
         case loginField.text?.isValidEmail() == false:
             print("Введен неверный email")
         default:
-            break
+            presenter?.chekTheLogin(login: loginField.text ?? "", password: passwordField.text ?? "")
         }
     }
     

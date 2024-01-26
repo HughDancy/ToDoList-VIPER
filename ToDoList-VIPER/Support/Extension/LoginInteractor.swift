@@ -13,7 +13,7 @@ final class LoginInteractor: LoginInteractorInputProtocol {
     
     
     func checkAutorizationData(login: String, password: String) {
-        Auth.auth().signIn(withEmail: login, link: password) { dataResult, error in
+        Auth.auth().signIn(withEmail: login, password: password) { dataResult, error in
             if error != nil {
                 self.presenter?.getVerificationResult(with: false)
             } else {

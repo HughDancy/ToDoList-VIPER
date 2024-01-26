@@ -18,7 +18,7 @@ final class LoginRouter: LoginRouterProtocol {
         presenter.interactor = interactor
         presenter.router = router
         interactor.presenter = presenter
-        
+        viewController.navigationItem.hidesBackButton = true
         return viewController
     }
     
