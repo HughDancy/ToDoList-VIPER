@@ -53,6 +53,7 @@
 		D8E840582B63B0AB005A0936 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E840572B63B0AB005A0936 /* LoginPresenter.swift */; };
 		D8E8405A2B63B148005A0936 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E840592B63B148005A0936 /* LoginInteractor.swift */; };
 		D8E8405C2B63B2D1005A0936 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E8405B2B63B2D1005A0936 /* LoginRouter.swift */; };
+		D8E840642B677C31005A0936 /* RegistrationProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E840632B677C31005A0936 /* RegistrationProtocols.swift */; };
 		D8E9F8702B01F84F00A3F3FC /* ToDoDetailsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F86F2B01F84F00A3F3FC /* ToDoDetailsProtocols.swift */; };
 		D8E9F8722B01FAFB00A3F3FC /* ToDoDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8712B01FAFB00A3F3FC /* ToDoDetailController.swift */; };
 		D8E9F8742B02178E00A3F3FC /* ToDoDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8732B02178E00A3F3FC /* ToDoDetailPresenter.swift */; };
@@ -148,6 +149,7 @@
 		D8E840572B63B0AB005A0936 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginPresenter.swift; path = "ToDoList-VIPER/Support/Extension/LoginPresenter.swift"; sourceTree = SOURCE_ROOT; };
 		D8E840592B63B148005A0936 /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginInteractor.swift; path = "ToDoList-VIPER/Support/Extension/LoginInteractor.swift"; sourceTree = SOURCE_ROOT; };
 		D8E8405B2B63B2D1005A0936 /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginRouter.swift; path = "ToDoList-VIPER/Support/Extension/LoginRouter.swift"; sourceTree = SOURCE_ROOT; };
+		D8E840632B677C31005A0936 /* RegistrationProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationProtocols.swift; sourceTree = "<group>"; };
 		D8E9F86F2B01F84F00A3F3FC /* ToDoDetailsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoDetailsProtocols.swift; sourceTree = "<group>"; };
 		D8E9F8712B01FAFB00A3F3FC /* ToDoDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoDetailController.swift; sourceTree = "<group>"; };
 		D8E9F8732B02178E00A3F3FC /* ToDoDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoDetailPresenter.swift; sourceTree = "<group>"; };
@@ -536,6 +538,7 @@
 		D8E840622B677C09005A0936 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				D8E840632B677C31005A0936 /* RegistrationProtocols.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -982,6 +985,7 @@
 				D8E840542B63A8F0005A0936 /* String + EXT.swift in Sources */,
 				D8E8405A2B63B148005A0936 /* LoginInteractor.swift in Sources */,
 				D86D44E62AFB932E00894774 /* ViewController.swift in Sources */,
+				D8E840642B677C31005A0936 /* RegistrationProtocols.swift in Sources */,
 				D8E9F8722B01FAFB00A3F3FC /* ToDoDetailController.swift in Sources */,
 				D8900F172B55435A008E0E34 /* NewUserCheck.swift in Sources */,
 				D8900F152B5529C7008E0E34 /* AnimationLoadingRouter.swift in Sources */,
