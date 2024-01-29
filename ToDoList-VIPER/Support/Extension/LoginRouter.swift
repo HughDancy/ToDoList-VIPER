@@ -24,6 +24,8 @@ final class LoginRouter: LoginRouterProtocol {
     
     func goToRegistration(from view: LoginViewProtocol) {
         guard let view = view as? UIViewController else { return }
+        let registrationModule = RegistrationRouter.createRegistrationModule()
+        view.navigationController?.pushViewController(registrationModule, animated: true)
     }
     
     func goToMainScreen(from view: LoginViewProtocol) {

@@ -13,13 +13,13 @@ final class RegistrationRouter: RegistrationRouterProtocol {
         let presenter: RegistrationPresenterPtorocol & RegistrationInteractorOutputProtocol = RegistrationPresenter()
         let interactor: RegistrationInteractorInputProtocol = RegistrationInteractor()
         let router: RegistrationRouterProtocol = RegistrationRouter()
-        let navCon = UINavigationController(rootViewController: view)
+
         view.presenter = presenter
         presenter.view = view
         presenter.interactor = interactor
         presenter.rotuter = router
         interactor.presenter = presenter
-        return navCon
+        return view
     }
     
     func showAlert(with result: RegistrationStatus) {

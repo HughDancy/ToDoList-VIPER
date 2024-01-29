@@ -18,6 +18,15 @@ final class RegistrationController: UIViewController, RegistrationViewProtocol {
         scrollView.showsVerticalScrollIndicator = false
         return scrollView
     }()
+    
+    private lazy var image: UIImageView = {
+        let imageView = UIImageView()
+        let picture = UIImage(named: "registerImage")
+        imageView.image = picture
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
+    
     private lazy var createNewUserLabel: UILabel = {
         let label = UILabel()
         label.text = "Создайте аккаунт"
@@ -43,6 +52,7 @@ final class RegistrationController: UIViewController, RegistrationViewProtocol {
     //MARK: - Setup Elements
     private func setupHierarcy() {
         view.addSubview(containerView)
+        containerView.addSubview(image)
         containerView.addSubview(createNewUserLabel)
         containerView.addSubview(nameField)
         containerView.addSubview(emailField)
@@ -51,8 +61,22 @@ final class RegistrationController: UIViewController, RegistrationViewProtocol {
     }
     
     private func setupLayout() {
+        containerView.snp.makeConstraints { make in
+            make.centerX.equalTo(view.safeAreaLayoutGuide.snp.centerX)
+            make.centerY.equalTo(view.safeAreaLayoutGuide.snp.centerY)
+            make.width.equalTo(view.snp.width)
+            make.height.equalTo(view.snp.height)
+        }
+        
+        image.snp.makeConstraints { make in
+            make.top.equalTo(containerView.safeAreaLayoutGuide.snp.top).offset(20)
+            make.centerX.equalTo(containerView.safeAreaLayoutGuide.snp.centerX)
+            make.height.equalTo(view.bounds.size.height / 2.5)
+            make.width.equalTo(view.bounds.size.width / 1.5)
+        }
+        
         createNewUserLabel.snp.makeConstraints { make in
-            make.top.equalTo(containerView.safeAreaLayoutGuide.snp.top).offset(50)
+            make.top.equalTo(image.snp.bottom).offset(20)
             make.centerX.equalTo(containerView.safeAreaLayoutGuide.snp.centerX)
         }
         
@@ -75,9 +99,9 @@ final class RegistrationController: UIViewController, RegistrationViewProtocol {
         }
         
         registerButton.snp.makeConstraints { make in
-            make.bottom.equalTo(containerView.snp.bottom).inset(50)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(50)
             make.leading.trailing.equalTo(containerView.safeAreaLayoutGuide).inset(35)
-            make.height.equalTo(35)
+            make.height.equalTo(40)
         }
     }
     

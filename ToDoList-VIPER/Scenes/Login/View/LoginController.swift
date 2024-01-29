@@ -203,7 +203,7 @@ final class LoginController: UIViewController, LoginViewProtocol {
     }
     
     @objc func registerUser() {
-        print("Register new user")
+        presenter?.goToRegistration()
     }
     
     @objc func googleLogin() {
