@@ -56,6 +56,7 @@
 		D8E840642B677C31005A0936 /* RegistrationProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E840632B677C31005A0936 /* RegistrationProtocols.swift */; };
 		D8E840662B6780A6005A0936 /* RegistrationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E840652B6780A6005A0936 /* RegistrationPresenter.swift */; };
 		D8E840682B678183005A0936 /* RegistrationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E840672B678183005A0936 /* RegistrationInteractor.swift */; };
+		D8E8406A2B6781E9005A0936 /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E840692B6781E9005A0936 /* RegistrationController.swift */; };
 		D8E9F8702B01F84F00A3F3FC /* ToDoDetailsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F86F2B01F84F00A3F3FC /* ToDoDetailsProtocols.swift */; };
 		D8E9F8722B01FAFB00A3F3FC /* ToDoDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8712B01FAFB00A3F3FC /* ToDoDetailController.swift */; };
 		D8E9F8742B02178E00A3F3FC /* ToDoDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8732B02178E00A3F3FC /* ToDoDetailPresenter.swift */; };
@@ -154,6 +155,7 @@
 		D8E840632B677C31005A0936 /* RegistrationProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationProtocols.swift; sourceTree = "<group>"; };
 		D8E840652B6780A6005A0936 /* RegistrationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationPresenter.swift; sourceTree = "<group>"; };
 		D8E840672B678183005A0936 /* RegistrationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationInteractor.swift; sourceTree = "<group>"; };
+		D8E840692B6781E9005A0936 /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
 		D8E9F86F2B01F84F00A3F3FC /* ToDoDetailsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoDetailsProtocols.swift; sourceTree = "<group>"; };
 		D8E9F8712B01FAFB00A3F3FC /* ToDoDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoDetailController.swift; sourceTree = "<group>"; };
 		D8E9F8732B02178E00A3F3FC /* ToDoDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoDetailPresenter.swift; sourceTree = "<group>"; };
@@ -537,6 +539,7 @@
 		D8E840612B677C04005A0936 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D8E840692B6781E9005A0936 /* RegistrationController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1016,6 +1019,7 @@
 				D86D45222AFB982300894774 /* ToDoItem.swift in Sources */,
 				D85C57E52B57C71900023B04 /* OnboardingPageController.swift in Sources */,
 				D8E9F8B92B0CC0CB00A3F3FC /* ToDoObject+CoreDataClass.swift in Sources */,
+				D8E8406A2B6781E9005A0936 /* RegistrationController.swift in Sources */,
 				D8E9F8CE2B1767CB00A3F3FC /* OverdueToDoRouter.swift in Sources */,
 				D8E840582B63B0AB005A0936 /* LoginPresenter.swift in Sources */,
 				D86D44EC2AFB932E00894774 /* ToDoList_VIPER.xcdatamodeld in Sources */,

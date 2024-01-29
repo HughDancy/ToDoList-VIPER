@@ -15,10 +15,14 @@ final class RegistrationPresenter: RegistrationPresenterPtorocol {
     func registerNewUser(with name: String, email: String, password: String) {
         interactor?.registerNewUser(name: name, email: email, password: password)
     }
+    
+    func showAllert(status: RegistrationStatus) {
+        rotuter?.showAlert(with: status)
+    }
 }
 
 extension RegistrationPresenter: RegistrationInteractorOutputProtocol {
-    func getRegistrationResult(result: Bool)  {
+    func getRegistrationResult(result: RegistrationStatus)  {
         rotuter?.showAlert(with: result)
     }
 }

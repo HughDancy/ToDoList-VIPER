@@ -18,6 +18,7 @@ protocol RegistrationPresenterPtorocol: AnyObject {
     
     //VIEW -> PRESENTER
     func registerNewUser(with name: String, email: String, password: String)
+    func showAllert(status: RegistrationStatus)
 }
 
 protocol RegistrationInteractorInputProtocol: AnyObject {
@@ -29,12 +30,18 @@ protocol RegistrationInteractorInputProtocol: AnyObject {
 
 protocol RegistrationInteractorOutputProtocol: AnyObject {
     //INTERACTOR -> PRESENTER
-    func getRegistrationResult(result: Bool)
+    func getRegistrationResult(result: RegistrationStatus)
 }
 
 protocol RegistrationRouterProtocol: AnyObject {
     static func createRegistrationModule() -> UIViewController
-    func showAlert(with result: Bool)
+    func showAlert(with result: RegistrationStatus)
     func dismissRegister()
 }
 
+enum RegistrationStatus {
+    case complete
+    case error
+    case connectionLost
+    case emptyFields
+}

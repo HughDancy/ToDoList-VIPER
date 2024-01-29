@@ -28,4 +28,11 @@ extension UITextField {
         label.textColor = .systemBlue
         return label
     }
+    
+    static func createBasicTextField(textSize: CGFloat, weight: UIFont.Weight, borderStyle: BorderStyle) -> UITextField {
+        let textField = UITextField()
+        textField.borderStyle = borderStyle
+        textField.font = UIFont.systemFont(ofSize: textSize, weight: weight)
+        return textField
+    }
 }

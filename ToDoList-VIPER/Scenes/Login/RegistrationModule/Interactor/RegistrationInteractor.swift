@@ -11,6 +11,6 @@ final class RegistrationInteractor: RegistrationInteractorInputProtocol {
     var presenter: RegistrationInteractorOutputProtocol?
     
     func registerNewUser(name: String, email: String, password: String) {
-        presenter?.getRegistrationResult(result: true)
+        presenter?.getRegistrationResult(result: .complete)
     }
 }
