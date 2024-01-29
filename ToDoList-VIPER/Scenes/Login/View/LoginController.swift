@@ -84,19 +84,16 @@ final class LoginController: UIViewController, LoginViewProtocol {
     
     private lazy var orLabel: UILabel = {
         let label = UILabel()
-        label.text = "Или"
-        label.textColor = .systemGray4
+        label.text = "Или войти с помощью"
+        label.textColor = .systemGray2
         label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         return label
     }()
     
     private lazy var googleLoginButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Войти через Google", for: .normal)
-        button.backgroundColor = .systemGray6
-        button.tintColor = .systemGray3
-        button.layer.cornerRadius = 10
-        button.clipsToBounds = true
+        let button = UIButton(type: .custom)
+        let image = UIImage(named: "googleLogo")
+        button.setImage(image, for: .normal)
         button.addTarget(self, action: #selector(googleLogin), for: .touchDown)
         return button
     }()
@@ -133,7 +130,7 @@ final class LoginController: UIViewController, LoginViewProtocol {
         scrollView.addSubview(orLabel)
         scrollView.addSubview(googleLoginButton)
     }
-    
+
     private func setupLayout() {
         scrollView.snp.makeConstraints { make in
             make.centerX.equalTo(view.safeAreaLayoutGuide.snp.centerX)
@@ -164,7 +161,7 @@ final class LoginController: UIViewController, LoginViewProtocol {
         loginButton.snp.makeConstraints { make in
             make.top.equalTo(passwordField.snp.bottom).offset(40)
             make.leading.trailing.equalTo(scrollView.safeAreaLayoutGuide).inset(40)
-            make.height.equalTo(35)
+            make.height.equalTo(40)
         }
         
         registerButton.snp.makeConstraints { make in
@@ -180,8 +177,9 @@ final class LoginController: UIViewController, LoginViewProtocol {
         
         googleLoginButton.snp.makeConstraints { make in
             make.top.equalTo(orLabel.snp.bottom).offset(10)
-            make.leading.trailing.equalTo(scrollView.safeAreaLayoutGuide).inset(40)
-            make.height.equalTo(35)
+            make.centerX.equalTo(scrollView.snp.centerX)
+            make.width.equalTo(40)
+            make.height.equalTo(40)
         }
     }
     
