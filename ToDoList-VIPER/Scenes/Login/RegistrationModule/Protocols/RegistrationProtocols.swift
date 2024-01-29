@@ -36,7 +36,7 @@ protocol RegistrationInteractorOutputProtocol: AnyObject {
 protocol RegistrationRouterProtocol: AnyObject {
     static func createRegistrationModule() -> UIViewController
     func showAlert(with result: RegistrationStatus)
-    func dismissRegister()
+    func dismissRegister(from view: RegistrationViewProtocol)
 }
 
 enum RegistrationStatus {
