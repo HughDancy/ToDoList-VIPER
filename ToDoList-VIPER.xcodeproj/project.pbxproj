@@ -54,6 +54,8 @@
 		D8E8405A2B63B148005A0936 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E840592B63B148005A0936 /* LoginInteractor.swift */; };
 		D8E8405C2B63B2D1005A0936 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E8405B2B63B2D1005A0936 /* LoginRouter.swift */; };
 		D8E840642B677C31005A0936 /* RegistrationProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E840632B677C31005A0936 /* RegistrationProtocols.swift */; };
+		D8E840662B6780A6005A0936 /* RegistrationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E840652B6780A6005A0936 /* RegistrationPresenter.swift */; };
+		D8E840682B678183005A0936 /* RegistrationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E840672B678183005A0936 /* RegistrationInteractor.swift */; };
 		D8E9F8702B01F84F00A3F3FC /* ToDoDetailsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F86F2B01F84F00A3F3FC /* ToDoDetailsProtocols.swift */; };
 		D8E9F8722B01FAFB00A3F3FC /* ToDoDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8712B01FAFB00A3F3FC /* ToDoDetailController.swift */; };
 		D8E9F8742B02178E00A3F3FC /* ToDoDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8732B02178E00A3F3FC /* ToDoDetailPresenter.swift */; };
@@ -150,6 +152,8 @@
 		D8E840592B63B148005A0936 /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginInteractor.swift; path = "ToDoList-VIPER/Support/Extension/LoginInteractor.swift"; sourceTree = SOURCE_ROOT; };
 		D8E8405B2B63B2D1005A0936 /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginRouter.swift; path = "ToDoList-VIPER/Support/Extension/LoginRouter.swift"; sourceTree = SOURCE_ROOT; };
 		D8E840632B677C31005A0936 /* RegistrationProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationProtocols.swift; sourceTree = "<group>"; };
+		D8E840652B6780A6005A0936 /* RegistrationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationPresenter.swift; sourceTree = "<group>"; };
+		D8E840672B678183005A0936 /* RegistrationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationInteractor.swift; sourceTree = "<group>"; };
 		D8E9F86F2B01F84F00A3F3FC /* ToDoDetailsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoDetailsProtocols.swift; sourceTree = "<group>"; };
 		D8E9F8712B01FAFB00A3F3FC /* ToDoDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoDetailController.swift; sourceTree = "<group>"; };
 		D8E9F8732B02178E00A3F3FC /* ToDoDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoDetailPresenter.swift; sourceTree = "<group>"; };
@@ -517,6 +521,7 @@
 		D8E8405F2B677BE9005A0936 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				D8E840652B6780A6005A0936 /* RegistrationPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -524,6 +529,7 @@
 		D8E840602B677BFD005A0936 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				D8E840672B678183005A0936 /* RegistrationInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -1020,11 +1026,13 @@
 				D86D452E2AFCAD3B00894774 /* ToDoListInteractor.swift in Sources */,
 				D8900F112B5135F7008E0E34 /* AnimationLoadingController.swift in Sources */,
 				D8BF0D432B15ED2E00D1572E /* ToDoListController.swift in Sources */,
+				D8E840682B678183005A0936 /* RegistrationInteractor.swift in Sources */,
 				D8E9F88D2B0377AE00A3F3FC /* ExecuteToDoPresenter.swift in Sources */,
 				D8E9F8892B0370FE00A3F3FC /* ExecuteProtocols.swift in Sources */,
 				D8E9F8BE2B17427F00A3F3FC /* Date + EXT.swift in Sources */,
 				D85C58392B5A595400023B04 /* OnboardingController.swift in Sources */,
 				D80F38722AFCDF12004A408F /* ToDoCell.swift in Sources */,
+				D8E840662B6780A6005A0936 /* RegistrationPresenter.swift in Sources */,
 				D8E9F8A32B04D23900A3F3FC /* UILabel + EXT.swift in Sources */,
 				D86D452C2AFCAAAF00894774 /* ToDoListPresenter.swift in Sources */,
 				D8E9F8D02B18A56200A3F3FC /* ToDoObjectSorter.swift in Sources */,

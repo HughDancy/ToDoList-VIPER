@@ -29,11 +29,12 @@ protocol RegistrationInteractorInputProtocol: AnyObject {
 
 protocol RegistrationInteractorOutputProtocol: AnyObject {
     //INTERACTOR -> PRESENTER
-    func getRegistrationResult() -> Bool
+    func getRegistrationResult(result: Bool)
 }
 
 protocol RegistrationRouterProtocol: AnyObject {
     static func createRegistrationModule() -> UIViewController
-    func showAlert()
+    func showAlert(with result: Bool)
     func dismissRegister()
 }
+
