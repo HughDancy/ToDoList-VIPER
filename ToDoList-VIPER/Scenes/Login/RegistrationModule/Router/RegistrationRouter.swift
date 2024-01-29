@@ -28,6 +28,8 @@ final class RegistrationRouter: RegistrationRouterProtocol {
             print("complete")
         case .connectionLost:
             print("connection lost")
+        case .notValidEmail:
+            print("not valid email")
         case .emptyFields:
             print("Some fields are empty")
         case .error:

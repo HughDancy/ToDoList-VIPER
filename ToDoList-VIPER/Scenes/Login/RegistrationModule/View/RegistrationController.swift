@@ -139,7 +139,6 @@ final class RegistrationController: UIViewController, RegistrationViewProtocol {
         DispatchQueue.main.async {
             self.scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom:  ks.height - self.view.safeAreaInsets.bottom + 180, right: 0)
         }
-        print(ks)
     }
     
     @objc func keyboardWillHide(_ notification: NSNotification) {
@@ -148,12 +147,17 @@ final class RegistrationController: UIViewController, RegistrationViewProtocol {
     
     //MARK: - Button Action
     @objc func registerNewUser() {
-        if let name = nameField.text,
-           let email = emailField.text,
-           let password = passwordField.text {
-            presenter?.registerNewUser(with: name, email: email, password: password)
-        } else {
+        switch (nameField.text != nil) && (emailField.text != nil) && (passwordField.text != nil) {
+        case nameField.text == "" || emailField.text == "" || passwordField.text == "":
             presenter?.showAllert(status: .emptyFields)
+        case emailField.text?.isValidEmail() == false:
+            presenter?.showAllert(status: .notValidEmail)
+        default:
+            let name = nameField.text ?? "Temp"
+            let email = emailField.text ?? ""
+            let password = passwordField.text ?? ""
+            presenter?.registerNewUser(with: name, email: email, password: password)
+            
         }
     }
 }

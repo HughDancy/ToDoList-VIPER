@@ -42,6 +42,7 @@ protocol RegistrationRouterProtocol: AnyObject {
 enum RegistrationStatus {
     case complete
     case error
+    case notValidEmail
     case connectionLost
     case emptyFields
 }
