@@ -280,6 +280,7 @@
 		D85C5DA92B614DC900F548AA /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				D8E8405D2B677BCF005A0936 /* RegistrationModule */,
 				D85C5DAE2B614E0F00F548AA /* Protocols */,
 				D85C5DAD2B614E0700F548AA /* View */,
 				D85C5DAC2B614DFD00F548AA /* Interactor */,
@@ -490,6 +491,53 @@
 				D85C57E32B57C6D900023B04 /* Router */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		D8E8405D2B677BCF005A0936 /* RegistrationModule */ = {
+			isa = PBXGroup;
+			children = (
+				D8E840622B677C09005A0936 /* Protocols */,
+				D8E840612B677C04005A0936 /* View */,
+				D8E840602B677BFD005A0936 /* Interactor */,
+				D8E8405F2B677BE9005A0936 /* Presenter */,
+				D8E8405E2B677BE3005A0936 /* Router */,
+			);
+			path = RegistrationModule;
+			sourceTree = "<group>";
+		};
+		D8E8405E2B677BE3005A0936 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		D8E8405F2B677BE9005A0936 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		D8E840602B677BFD005A0936 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		D8E840612B677C04005A0936 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D8E840622B677C09005A0936 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		D8E9F8692B01F80300A3F3FC /* ToDoDetailModule */ = {
