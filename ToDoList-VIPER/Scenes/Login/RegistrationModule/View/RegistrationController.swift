@@ -10,8 +10,9 @@ import SnapKit
 
 final class RegistrationController: UIViewController, RegistrationViewProtocol {
     var presenter: RegistrationPresenterPtorocol?
+    
     //MARK: - Outlets
-    private lazy var containerView: UIScrollView = {
+    private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.isScrollEnabled = true
         scrollView.bounces = false
@@ -34,34 +35,47 @@ final class RegistrationController: UIViewController, RegistrationViewProtocol {
         return label
     }()
     
-    private lazy var nameField = UITextField.createBasicTextField(textSize: 14, weight: .semibold, borderStyle: .roundedRect)
-    private lazy var emailField = UITextField.createBasicTextField(textSize: 14, weight: .semibold, borderStyle: .roundedRect)
-    private lazy var passwordField = UITextField.createBasicTextField(textSize: 14, weight: .semibold, borderStyle: .roundedRect)
+    private lazy var nameField = UITextField.createBasicTextField(textSize: 14, weight: .semibold, borderStyle: .roundedRect, returnKey: .continue, tag: 0)
+    private lazy var emailField = UITextField.createBasicTextField(textSize: 14, weight: .semibold, borderStyle: .roundedRect, returnKey: .continue, tag: 1)
+    private lazy var passwordField = UITextField.createBasicTextField(textSize: 14, weight: .semibold, borderStyle: .roundedRect, returnKey: .done, tag: 2)
     private lazy var registerButton = UIButton.createToDoButton(title: "Зарегестироваться", backColor: .systemBlue, tintColor: .systemBackground)
     
     //MARK: - Lifecycle
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 200)
+        subscribeKeyboardEvents()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         registerButton.addTarget(self, action: #selector(registerNewUser), for: .touchDown)
+        scrollView.keyboardDismissMode = .interactive
         setupHierarcy()
+        setupElemenets()
         setupLayout()
-        
+      
     }
     
     //MARK: - Setup Elements
     private func setupHierarcy() {
-        view.addSubview(containerView)
-        containerView.addSubview(image)
-        containerView.addSubview(createNewUserLabel)
-        containerView.addSubview(nameField)
-        containerView.addSubview(emailField)
-        containerView.addSubview(passwordField)
-        containerView.addSubview(registerButton)
+        view.addSubview(scrollView)
+        scrollView.addSubview(image)
+        scrollView.addSubview(createNewUserLabel)
+        scrollView.addSubview(nameField)
+        scrollView.addSubview(emailField)
+        scrollView.addSubview(passwordField)
+        scrollView.addSubview(registerButton)
     }
     
     private func setupLayout() {
-        containerView.snp.makeConstraints { make in
+        scrollView.snp.makeConstraints { make in
             make.centerX.equalTo(view.safeAreaLayoutGuide.snp.centerX)
             make.centerY.equalTo(view.safeAreaLayoutGuide.snp.centerY)
             make.width.equalTo(view.snp.width)
@@ -69,40 +83,69 @@ final class RegistrationController: UIViewController, RegistrationViewProtocol {
         }
         
         image.snp.makeConstraints { make in
-            make.top.equalTo(containerView.safeAreaLayoutGuide.snp.top).offset(20)
-            make.centerX.equalTo(containerView.safeAreaLayoutGuide.snp.centerX)
-            make.height.equalTo(view.bounds.size.height / 2.5)
-            make.width.equalTo(view.bounds.size.width / 1.5)
+            make.top.equalTo(scrollView.safeAreaLayoutGuide.snp.top).offset(20)
+            make.centerX.equalTo(scrollView.safeAreaLayoutGuide.snp.centerX)
+//            make.height.equalTo(view.bounds.size.height / 2.5)
+//            make.width.equalTo(view.bounds.size.width / 1.5)
+            make.height.equalTo(view.frame.size.height / 3)
+            make.width.equalTo(view.frame.size.width * 0.5)
         }
         
         createNewUserLabel.snp.makeConstraints { make in
             make.top.equalTo(image.snp.bottom).offset(20)
-            make.centerX.equalTo(containerView.safeAreaLayoutGuide.snp.centerX)
+            make.centerX.equalTo(scrollView.safeAreaLayoutGuide.snp.centerX)
         }
         
         nameField.snp.makeConstraints { make in
             make.top.equalTo(createNewUserLabel.snp.bottom).offset(30)
-            make.leading.trailing.equalTo(containerView.safeAreaLayoutGuide).inset(30)
+            make.leading.trailing.equalTo(scrollView.safeAreaLayoutGuide).inset(30)
             make.height.equalTo(35)
         }
         
         emailField.snp.makeConstraints { make in
             make.top.equalTo(nameField.snp.bottom).offset(10)
-            make.leading.trailing.equalTo(containerView.safeAreaLayoutGuide).inset(30)
+            make.leading.trailing.equalTo(scrollView.safeAreaLayoutGuide).inset(30)
             make.height.equalTo(35)
         }
         
         passwordField.snp.makeConstraints { make in
             make.top.equalTo(emailField.snp.bottom).offset(10)
-            make.leading.trailing.equalTo(containerView.safeAreaLayoutGuide).inset(30)
+            make.leading.trailing.equalTo(scrollView.safeAreaLayoutGuide).inset(30)
             make.height.equalTo(35)
         }
         
         registerButton.snp.makeConstraints { make in
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(50)
-            make.leading.trailing.equalTo(containerView.safeAreaLayoutGuide).inset(35)
+            make.bottom.equalTo(scrollView.safeAreaLayoutGuide.snp.bottom).inset(50)
+            make.leading.trailing.equalTo(scrollView.safeAreaLayoutGuide).inset(35)
             make.height.equalTo(40)
         }
+    }
+    
+    private func setupElemenets() {
+        nameField.placeholder = "Имя"
+        emailField.placeholder = "Email адресс"
+        passwordField.placeholder = "Пароль"
+        nameField.delegate = self
+        emailField.delegate = self
+        passwordField.delegate = self
+    }
+    
+    //MARK: - ScrollView Keyboard function
+    func subscribeKeyboardEvents() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(_ notification: NSNotification) {
+        guard let ks = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        DispatchQueue.main.async {
+            self.scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom:  ks.height - self.view.safeAreaInsets.bottom + 110, right: 0)
+        }
+        print(ks)
+    }
+    
+    @objc func keyboardWillHide(_ notification: NSNotification) {
+        scrollView.contentInset = .zero
     }
     
     //MARK: - Button Action
@@ -114,6 +157,22 @@ final class RegistrationController: UIViewController, RegistrationViewProtocol {
         } else {
             presenter?.showAllert(status: .emptyFields)
         }
-        
+    }
+}
+
+extension RegistrationController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        let nextTag = textField.tag + 1
+
+        if let nextResponder = self.view.viewWithTag(nextTag) {
+            nextResponder.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
+        return true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 }

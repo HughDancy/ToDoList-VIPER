@@ -29,10 +29,15 @@ extension UITextField {
         return label
     }
     
-    static func createBasicTextField(textSize: CGFloat, weight: UIFont.Weight, borderStyle: BorderStyle) -> UITextField {
+    static func createBasicTextField(textSize: CGFloat, weight: UIFont.Weight, borderStyle: BorderStyle, returnKey: UIReturnKeyType, tag: Int) -> UITextField {
         let textField = UITextField()
         textField.borderStyle = borderStyle
         textField.font = UIFont.systemFont(ofSize: textSize, weight: weight)
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
+        textField.leftView = view
+        textField.leftViewMode = .always
+        textField.returnKeyType = returnKey
+        textField.tag = tag
         return textField
     }
 }

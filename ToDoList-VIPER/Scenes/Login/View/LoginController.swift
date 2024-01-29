@@ -221,6 +221,7 @@ final class LoginController: UIViewController, LoginViewProtocol {
         DispatchQueue.main.async {
             self.scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom:  ks.height - self.view.safeAreaInsets.bottom + 110, right: 0)
         }
+//        print(ks)
     }
     
     @objc func keyboardWillHide(_ notification: NSNotification) {
