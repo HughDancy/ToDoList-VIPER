@@ -83,10 +83,8 @@ final class RegistrationController: UIViewController, RegistrationViewProtocol {
         }
         
         image.snp.makeConstraints { make in
-            make.top.equalTo(scrollView.safeAreaLayoutGuide.snp.top).offset(20)
+            make.top.equalTo(scrollView.snp.top).offset(20)
             make.centerX.equalTo(scrollView.safeAreaLayoutGuide.snp.centerX)
-//            make.height.equalTo(view.bounds.size.height / 2.5)
-//            make.width.equalTo(view.bounds.size.width / 1.5)
             make.height.equalTo(view.frame.size.height / 3)
             make.width.equalTo(view.frame.size.width * 0.5)
         }
@@ -115,7 +113,7 @@ final class RegistrationController: UIViewController, RegistrationViewProtocol {
         }
         
         registerButton.snp.makeConstraints { make in
-            make.bottom.equalTo(scrollView.safeAreaLayoutGuide.snp.bottom).inset(50)
+            make.top.equalTo(passwordField.snp.bottom).offset(100)
             make.leading.trailing.equalTo(scrollView.safeAreaLayoutGuide).inset(35)
             make.height.equalTo(40)
         }
@@ -139,7 +137,7 @@ final class RegistrationController: UIViewController, RegistrationViewProtocol {
     @objc func keyboardWillShow(_ notification: NSNotification) {
         guard let ks = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
         DispatchQueue.main.async {
-            self.scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom:  ks.height - self.view.safeAreaInsets.bottom + 110, right: 0)
+            self.scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom:  ks.height - self.view.safeAreaInsets.bottom + 180, right: 0)
         }
         print(ks)
     }
