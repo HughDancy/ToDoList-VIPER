@@ -116,7 +116,10 @@ final class LoginController: UIViewController, LoginViewProtocol {
         scrollView.keyboardDismissMode = .interactive
         setupHierarchy()
         setupLayout()
-        
+    }
+    
+    deinit {
+        print("LoginController is ☠️")
     }
     
     //MARK: - Setup Outlets

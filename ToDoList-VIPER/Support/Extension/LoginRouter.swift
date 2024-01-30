@@ -31,6 +31,9 @@ final class LoginRouter: LoginRouterProtocol {
     func goToMainScreen(from view: LoginViewProtocol) {
         guard let view = view as? UIViewController else { return}
         let mainModule = HomeTabBarRouter.createHomeTabBar()
+//        view.navigationController?.pushViewController(mainModule, animated: true)
+        mainModule.modalTransitionStyle = .crossDissolve
+        mainModule.modalPresentationStyle = .fullScreen
         view.navigationController?.present(mainModule, animated: true)
         
     }

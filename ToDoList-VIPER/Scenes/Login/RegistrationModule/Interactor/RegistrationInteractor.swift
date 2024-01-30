@@ -15,9 +15,9 @@ final class RegistrationInteractor: RegistrationInteractorInputProtocol {
     
     func registerNewUser(name: String, email: String, password: String) {
         if name != "" && email != "" && password != "" {
-            Auth.auth().createUser(withEmail: email, password: password) { (result, error)in
-                if error == nil {
-                    print(error?.localizedDescription as Any)
+            Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+                if error != nil {
+                    print("Error is equal nill")
                 } else {
                     self.db.collection("users").addDocument(data: [
                         "email" : email,
@@ -25,7 +25,7 @@ final class RegistrationInteractor: RegistrationInteractorInputProtocol {
                         "password" : password,
                         "uid": result!.user.uid
                     ]) { error in
-                        if error == nil {
+                        if error != nil {
                             print("Error save new user in data base ")
                         } else {
                             self.presenter?.getRegistrationResult(result: .complete)

@@ -60,7 +60,10 @@ final class RegistrationController: UIViewController, RegistrationViewProtocol {
         setupHierarcy()
         setupElemenets()
         setupLayout()
-      
+    }
+    
+    deinit {
+        print("RegistrationController is ☠️")
     }
     
     //MARK: - Setup Elements
