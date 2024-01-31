@@ -14,7 +14,7 @@ final class RegistrationInteractor: RegistrationInteractorInputProtocol {
     let db = Firestore.firestore()
     
     func registerNewUser(name: String, email: String, password: String) {
-        if name != "" && email != "" && password != "" {
+        if name != "" || email != "" || password != "" {
             Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
                 if error != nil {
                     print("Error is equal nill")
@@ -33,6 +33,8 @@ final class RegistrationInteractor: RegistrationInteractorInputProtocol {
                     }
                 }
             }
+        } else {
+            presenter?.getRegistrationResult(result: .emptyFields)
         }
     }
 }

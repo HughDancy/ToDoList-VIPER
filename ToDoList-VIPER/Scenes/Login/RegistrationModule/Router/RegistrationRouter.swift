@@ -8,6 +8,8 @@
 import UIKit
 
 final class RegistrationRouter: RegistrationRouterProtocol {
+    var presenter: RegistrationPresenterPtorocol?
+    
     static func createRegistrationModule() -> UIViewController {
         let view = RegistrationController()
         let presenter: RegistrationPresenterPtorocol & RegistrationInteractorOutputProtocol = RegistrationPresenter()
@@ -19,21 +21,36 @@ final class RegistrationRouter: RegistrationRouterProtocol {
         presenter.interactor = interactor
         presenter.rotuter = router
         interactor.presenter = presenter
+        router.presenter = presenter
         return view
     }
     
-    func showAlert(with result: RegistrationStatus) {
+    func showAlert(with result: RegistrationStatus, and view: RegistrationViewProtocol) {
+        let alertController = UIAlertController(title: "", message: nil, preferredStyle: .alert)
+        guard let view = view as? UIViewController else { return }
         switch result {
         case .complete:
-            print("complete")
+            alertController.title = "Регистрация прошла успешно!"
+            alertController.addAction(UIAlertAction(title: "Ок", style: .default, handler: { _ in
+                self.presenter?.completeAndGoBack()
+            }))
+            view.present(alertController, animated: true)
         case .connectionLost:
-            print("connection lost")
+            alertController.title = "Проеврьте соединение с интернетом"
+            alertController.addAction(UIAlertAction(title: "Ок", style: .cancel))
+            view.present(alertController, animated: true)
         case .notValidEmail:
-            print("not valid email")
+            alertController.title = "Введен невалидный email. Пожалуйста, попробуйте снова"
+            alertController.addAction(UIAlertAction(title: "Ок", style: .cancel))
+            view.present(alertController, animated: true)
         case .emptyFields:
-            print("Some fields are empty")
+            alertController.title = "Вы не заполнили обязательные для регистрации поля"
+            alertController.addAction(UIAlertAction(title: "Ок", style: .cancel))
+            view.present(alertController, animated: true)
         case .error:
-            print("Some error")
+            alertController.title = "Обнаружена неизвестная ошибка. Пожалуйста, попробуйте снова"
+            alertController.addAction(UIAlertAction(title: "Ок", style: .cancel))
+            view.present(alertController, animated: true)
         }
     }
     

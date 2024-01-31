@@ -17,7 +17,13 @@ final class RegistrationPresenter: RegistrationPresenterPtorocol {
     }
     
     func showAllert(status: RegistrationStatus) {
-        rotuter?.showAlert(with: status)
+        guard let view = view else { return }
+        rotuter?.showAlert(with: status, and: view)
+    }
+    
+    func completeAndGoBack() {
+        guard let view = view else { return }
+        rotuter?.dismissRegister(from: view)
     }
 }
 
