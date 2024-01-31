@@ -38,6 +38,7 @@ extension UITextField {
         textField.leftViewMode = .always
         textField.returnKeyType = returnKey
         textField.tag = tag
+        textField.autocapitalizationType = .none
         return textField
     }
 }
