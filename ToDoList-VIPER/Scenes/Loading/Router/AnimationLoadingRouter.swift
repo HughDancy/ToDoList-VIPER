@@ -30,22 +30,30 @@ final class AnimationLoadingRouter: AnimationLoadingRouterProtocol {
     
     
     func goToTheApp(isNewUser: Bool, fromView: AnimationLoadingControllerProtocol) {
-        if isNewUser == true {
-            guard let parrentView = fromView as? UIViewController else { return }
-
-            let onboardingModule = OnboardingRouter.createOnboardingModule()
-            onboardingModule.modalTransitionStyle = .crossDissolve
-            onboardingModule.modalPresentationStyle = .fullScreen
-            parrentView.present(onboardingModule, animated: true)
+        guard let parrentView = fromView as? UIViewController else { return }
+       let viewContoller = AppConfigurator.configuator.configureApp()
+        viewContoller.modalTransitionStyle = .crossDissolve
+        viewContoller.modalPresentationStyle = .fullScreen
+        parrentView.present(viewContoller, animated: true)
+        let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
+        appDelegate.window?.rootViewController = viewContoller
+        
+//        if isNewUser == true {
+//            guard let parrentView = fromView as? UIViewController else { return }
+//
+//            let onboardingModule = OnboardingRouter.createOnboardingModule()
+//            onboardingModule.modalTransitionStyle = .crossDissolve
+//            onboardingModule.modalPresentationStyle = .fullScreen
+//            parrentView.present(onboardingModule, animated: true)
 //            let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
 //            appDelegate.window?.rootViewController = view
-        } else  {
-            guard let parrentView = fromView as? UIViewController else { return }
-            let view = HomeTabBarRouter.createHomeTabBar()
-            view.modalTransitionStyle = .crossDissolve
-            view.modalPresentationStyle = .fullScreen
-            parrentView.present(view, animated: true)  
-        }
+//        } else  {
+//            guard let parrentView = fromView as? UIViewController else { return }
+//            let view = HomeTabBarRouter.createHomeTabBar()
+//            view.modalTransitionStyle = .crossDissolve
+//            view.modalPresentationStyle = .fullScreen
+//            parrentView.present(view, animated: true)  
+//        }
     }
 }
 

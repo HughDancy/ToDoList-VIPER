@@ -8,7 +8,7 @@
 import UIKit
 
 final class OnboardingRouter: OnboardingRouterProtocol {
-    var presenter: OnboardingPresenterProtocol?
+   weak var presenter: OnboardingPresenterProtocol?
     
     static func createOnboardingModule() -> UIViewController {
         let view = OnboardingController(transitionStyle: .scroll, navigationOrientation: .horizontal)

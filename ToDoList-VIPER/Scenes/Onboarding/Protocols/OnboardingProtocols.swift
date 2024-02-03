@@ -57,4 +57,5 @@ enum OnboardingStates: String {
     case featureToDo
     case doneAndOvedueToDo
     case option
+    case login
 }

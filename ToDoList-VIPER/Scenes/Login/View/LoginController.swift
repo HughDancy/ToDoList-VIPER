@@ -102,6 +102,8 @@ final class LoginController: UIViewController, LoginViewProtocol {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 200)
+        presenter?.changeState()
+        UserDefaults.standard.setValue(OnboardingStates.login.rawValue, forKey: "onboardingState")
         subscribeKeyboardEvents()
     }
     
@@ -116,6 +118,7 @@ final class LoginController: UIViewController, LoginViewProtocol {
         scrollView.keyboardDismissMode = .interactive
         setupHierarchy()
         setupLayout()
+     
     }
     
     deinit {
@@ -224,7 +227,6 @@ final class LoginController: UIViewController, LoginViewProtocol {
         DispatchQueue.main.async {
             self.scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom:  ks.height - self.view.safeAreaInsets.bottom + 110, right: 0)
         }
-//        print(ks)
     }
     
     @objc func keyboardWillHide(_ notification: NSNotification) {

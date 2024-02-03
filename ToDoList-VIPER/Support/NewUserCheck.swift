@@ -17,4 +17,12 @@ final class NewUserCheck {
     func setIsNotNewUser()  {
         UserDefaults.standard.setValue(true, forKey: "isNewUser")
     }
+    
+    func isOnboardingFirstStart() -> Bool {
+        return !UserDefaults.standard.bool(forKey: "firstStartOnboarding")
+    }
+    
+    func setIsNotFirstStartOnboarding() {
+        return UserDefaults.standard.setValue(true, forKey: "firstStartOnboarding")
+    }
 }
