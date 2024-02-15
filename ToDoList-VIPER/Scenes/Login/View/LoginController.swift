@@ -58,13 +58,15 @@ final class LoginController: UIViewController, LoginViewProtocol {
         return textField
     }()
     
-    private lazy var loginButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Войти", for: .normal)
+    private lazy var loginButton: LoadingButton = {
+        let button = LoadingButton(type: .system)
+        button.originalButtonText = "Войти"
+//        button.setTitle("Войти", for: .normal)
         button.tintColor = .systemBackground
-        button.backgroundColor = .systemBlue
+        button.backgroundColor = .systemCyan
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
+        button.hideLoading()
         button.addTarget(self, action: #selector(loginApp), for: .touchDown)
         
         return button
@@ -74,7 +76,7 @@ final class LoginController: UIViewController, LoginViewProtocol {
         let button = UIButton(type: .system)
         button.setTitle("Зарегестрироваться", for: .normal)
         button.backgroundColor = .systemBackground
-        button.tintColor = .systemBlue
+        button.tintColor = .systemCyan
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(registerUser), for: .touchDown)
@@ -203,6 +205,7 @@ final class LoginController: UIViewController, LoginViewProtocol {
         case loginField.text?.isValidEmail() == false:
             print("Введен неверный email")
         default:
+            self.loginButton.showLoading()
             presenter?.chekTheLogin(login: loginField.text ?? "", password: passwordField.text ?? "")
         }
     }

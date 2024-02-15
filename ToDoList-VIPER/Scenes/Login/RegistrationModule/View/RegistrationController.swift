@@ -38,7 +38,18 @@ final class RegistrationController: UIViewController, RegistrationViewProtocol {
     private lazy var nameField = UITextField.createBasicTextField(textSize: 14, weight: .semibold, borderStyle: .roundedRect, returnKey: .continue, tag: 0)
     private lazy var emailField = UITextField.createBasicTextField(textSize: 14, weight: .semibold, borderStyle: .roundedRect, returnKey: .continue, tag: 1)
     private lazy var passwordField = UITextField.createBasicTextField(textSize: 14, weight: .semibold, borderStyle: .roundedRect, returnKey: .done, tag: 2)
-    private lazy var registerButton = UIButton.createToDoButton(title: "Зарегестироваться", backColor: .systemBlue, tintColor: .systemBackground)
+    
+    private lazy var registerButton: LoadingButton = {
+        let button = LoadingButton(type: .system)
+        button.originalButtonText = "Зарегестироваться"
+        button.tintColor = .systemBackground
+        button.backgroundColor = .systemCyan
+        button.hideLoading()
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
+        button.addTarget(self, action: #selector(registerNewUser), for: .touchDown)
+        return button
+    }()
     
     //MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
@@ -55,7 +66,6 @@ final class RegistrationController: UIViewController, RegistrationViewProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        registerButton.addTarget(self, action: #selector(registerNewUser), for: .touchDown)
         scrollView.keyboardDismissMode = .interactive
         setupHierarcy()
         setupElemenets()
@@ -159,8 +169,8 @@ final class RegistrationController: UIViewController, RegistrationViewProtocol {
             let name = nameField.text ?? "Temp"
             let email = emailField.text ?? ""
             let password = passwordField.text ?? ""
+            self.registerButton.showLoading()
             presenter?.registerNewUser(with: name, email: email, password: password)
-            
         }
     }
 }

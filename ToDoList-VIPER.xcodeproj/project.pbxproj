@@ -94,6 +94,7 @@
 		D8F11C5E2B5660C900D2282D /* AnimationLoadingInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F11C5D2B5660C900D2282D /* AnimationLoadingInteractor.swift */; };
 		D8F11C602B5660DA00D2282D /* AnimationLoadingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F11C5F2B5660DA00D2282D /* AnimationLoadingPresenter.swift */; };
 		D8F11C622B5669AC00D2282D /* MockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F11C612B5669AC00D2282D /* MockViewController.swift */; };
+		D8F33E322B7E17F70008FE91 /* LoadingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F33E312B7E17F70008FE91 /* LoadingButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -195,6 +196,7 @@
 		D8F11C5D2B5660C900D2282D /* AnimationLoadingInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationLoadingInteractor.swift; sourceTree = "<group>"; };
 		D8F11C5F2B5660DA00D2282D /* AnimationLoadingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationLoadingPresenter.swift; sourceTree = "<group>"; };
 		D8F11C612B5669AC00D2282D /* MockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockViewController.swift; sourceTree = "<group>"; };
+		D8F33E312B7E17F70008FE91 /* LoadingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -740,6 +742,7 @@
 		D8E9F8A02B04D21E00A3F3FC /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				D8F33E302B7E17E30008FE91 /* CustomClasses */,
 				D8E9F8A12B04D22400A3F3FC /* Extension */,
 				D8E9F8CF2B18A56200A3F3FC /* ToDoObjectSorter.swift */,
 				D8900F162B55435A008E0E34 /* NewUserCheck.swift */,
@@ -845,6 +848,14 @@
 				D8F11C5F2B5660DA00D2282D /* AnimationLoadingPresenter.swift */,
 			);
 			path = Presenter;
+			sourceTree = "<group>";
+		};
+		D8F33E302B7E17E30008FE91 /* CustomClasses */ = {
+			isa = PBXGroup;
+			children = (
+				D8F33E312B7E17F70008FE91 /* LoadingButton.swift */,
+			);
+			path = CustomClasses;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -994,6 +1005,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8F33E322B7E17F70008FE91 /* LoadingButton.swift in Sources */,
 				D86D452A2AFB9EBD00894774 /* ToDoListViewController.swift in Sources */,
 				D8E9F88B2B03768900A3F3FC /* ExecuteToDoInteractor.swift in Sources */,
 				D82B8B6E2B6B8CCB00A006F2 /* AppConfigurator.swift in Sources */,

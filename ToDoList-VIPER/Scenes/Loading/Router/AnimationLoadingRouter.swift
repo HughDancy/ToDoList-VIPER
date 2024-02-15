@@ -35,8 +35,8 @@ final class AnimationLoadingRouter: AnimationLoadingRouterProtocol {
         viewContoller.modalTransitionStyle = .crossDissolve
         viewContoller.modalPresentationStyle = .fullScreen
         parrentView.present(viewContoller, animated: true)
-//        let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
-//        appDelegate.window?.rootViewController = viewContoller
+        let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
+        appDelegate.window?.rootViewController = viewContoller
         
 //        if isNewUser == true {
 //            guard let parrentView = fromView as? UIViewController else { return }
