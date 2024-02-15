@@ -29,13 +29,15 @@ final class RegistrationPresenter: RegistrationPresenterPtorocol {
 
 extension RegistrationPresenter: RegistrationInteractorOutputProtocol {
     func getRegistrationResult(result: RegistrationStatus)  {
+        guard let view = self.view else { return }
         switch result {
         case .complete:
-            guard let view = self.view else { return }
-            self.rotuter?.dismissRegister(from: view)
+            self.rotuter?.showAlert(with: .complete, and: view)
+        case .error:
+            self.rotuter?.showAlert(with: .error, and: view)
         default:
             print("Something wrong")
         }
-//        rotuter?.showAlert(with: result)
+
     }
 }

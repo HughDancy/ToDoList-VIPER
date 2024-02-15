@@ -23,9 +23,10 @@ final class LoginInteractor: LoginInteractorInputProtocol {
     }
     
     func changeOnboardingState() {
-        UserDefaults.standard.setValue(OnboardingStates.login.rawValue, forKey: "onboardingState")
+//        UserDefaults.standard.setValue(OnboardingStates.login.rawValue, forKey: "onboardingState")
 //        UserDefaults.standard.set(OnboardingStates.login.rawValue, forKey: "onboardingState")
-        let state = UserDefaults.standard.string(forKey: "onboardingState")
-        print(state)
+//        let state = UserDefaults.standard.string(forKey: "onboardingState")
+        NewUserCheck.shared.setIsLoginScrren()
+      
     }
 }

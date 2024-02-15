@@ -103,7 +103,7 @@ final class LoginController: UIViewController, LoginViewProtocol {
         super.viewWillAppear(animated)
         scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 200)
         presenter?.changeState()
-        UserDefaults.standard.setValue(OnboardingStates.login.rawValue, forKey: "onboardingState")
+//        UserDefaults.standard.setValue(OnboardingStates.login.rawValue, forKey: "onboardingState")
         subscribeKeyboardEvents()
     }
     

@@ -17,7 +17,8 @@ final class RegistrationInteractor: RegistrationInteractorInputProtocol {
         if name != "" || email != "" || password != "" {
             Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
                 if error != nil {
-                    print("Error is equal nill")
+                    print("Error is not equal nill")
+                    self.presenter?.getRegistrationResult(result: .error)
                 } else {
                     self.db.collection("users").addDocument(data: [
                         "email" : email,

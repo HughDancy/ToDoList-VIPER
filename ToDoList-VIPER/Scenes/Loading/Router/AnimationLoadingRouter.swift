@@ -31,7 +31,7 @@ final class AnimationLoadingRouter: AnimationLoadingRouterProtocol {
     
     func goToTheApp(isNewUser: Bool, fromView: AnimationLoadingControllerProtocol) {
         guard let parrentView = fromView as? UIViewController else { return }
-       let viewContoller = AppConfigurator.configuator.configureApp()
+        let viewContoller = AppConfigurator.configuator.configureApp()
         viewContoller.modalTransitionStyle = .crossDissolve
         viewContoller.modalPresentationStyle = .fullScreen
         parrentView.present(viewContoller, animated: true)

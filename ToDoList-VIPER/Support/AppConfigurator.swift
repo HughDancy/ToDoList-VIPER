@@ -22,7 +22,7 @@ final class AppConfigurator {
     }
     
     private func startOnboardingModule() -> UIViewController {
-        let onboardingState = UserDefaults.standard.string(forKey: "onboardingState")
+        let onboardingState = NewUserCheck.shared.isLoginScreen()
         let firstLaunchOnboardingStatus = NewUserCheck.shared.isOnboardingFirstStart()
         print(onboardingState)
         if firstLaunchOnboardingStatus == true {
@@ -30,7 +30,7 @@ final class AppConfigurator {
             NewUserCheck.shared.setIsNotFirstStartOnboarding()
         }
         
-        if onboardingState == OnboardingStates.login.rawValue {
+        if onboardingState == false {
             let loginModule = LoginRouter.createLoginModule()
             return loginModule
         } else {

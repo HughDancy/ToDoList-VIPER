@@ -25,4 +25,12 @@ final class NewUserCheck {
     func setIsNotFirstStartOnboarding() {
         return UserDefaults.standard.setValue(true, forKey: "firstStartOnboarding")
     }
+    
+    func isLoginScreen() -> Bool {
+        return !UserDefaults.standard.bool(forKey: "isLoginScreen")
+    }
+    
+    func setIsLoginScrren() {
+        return UserDefaults.standard.setValue(true, forKey: "isLoginScreen")
+    }
 }
