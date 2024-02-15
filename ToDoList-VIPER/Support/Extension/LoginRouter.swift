@@ -33,10 +33,11 @@ final class LoginRouter: LoginRouterProtocol {
         guard let view = view as? UIViewController else { return}
         let mainModule = HomeTabBarRouter.createHomeTabBar()
 //        view.navigationController?.pushViewController(mainModule, animated: true)
-        mainModule.modalTransitionStyle = .crossDissolve
-        mainModule.modalPresentationStyle = .fullScreen
-        view.navigationController?.present(mainModule, animated: true)
-        
+//        mainModule.modalTransitionStyle = .crossDissolve
+//        mainModule.modalPresentationStyle = .fullScreen
+//        view.navigationController?.present(mainModule, animated: true)
+        NewUserCheck.shared.setIsNotNewUser()
+        view.navigationController?.pushViewController(mainModule, animated: true)
     }
     
     func showWrongPasswordAllert(from view: LoginViewProtocol) {

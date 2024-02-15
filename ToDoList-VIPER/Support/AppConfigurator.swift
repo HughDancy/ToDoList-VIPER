@@ -13,18 +13,22 @@ final class AppConfigurator {
     func configureApp() -> UIViewController {
         let isNewUser = NewUserCheck.shared.isNewUser()
         
+        print("you is new user? - \(isNewUser)")
+        
         switch isNewUser {
         case true:
-            return startOnboardingModule()
+            return  startOnboardingModule()
         case false:
             return startMainModule()
+           
+            
         }
     }
     
     private func startOnboardingModule() -> UIViewController {
         let onboardingState = NewUserCheck.shared.isLoginScreen()
         let firstLaunchOnboardingStatus = NewUserCheck.shared.isOnboardingFirstStart()
-        print(onboardingState)
+
         if firstLaunchOnboardingStatus == true {
             UserDefaults.standard.setValue(OnboardingStates.welcome.rawValue, forKey: "onboardingState")
             NewUserCheck.shared.setIsNotFirstStartOnboarding()
@@ -42,7 +46,7 @@ final class AppConfigurator {
     
     private func startMainModule() -> UIViewController {
         let mainModule = HomeTabBarRouter.createHomeTabBar()
-        NewUserCheck.shared.setIsNotNewUser()
+//        NewUserCheck.shared.setIsNotNewUser()
         return mainModule
     }
 }

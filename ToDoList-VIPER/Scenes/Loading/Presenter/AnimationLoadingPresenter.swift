@@ -22,7 +22,7 @@ final class AnimationLoadingPresenter: AnimationLoadingPresenterProtocol {
     
     func goToNextScreen() {
         guard let view = view else { return }
-        guard let newUserCheck = interactor?.checkTheUser() else { return }
-        router?.goToTheApp(isNewUser: newUserCheck, fromView: view )
+//        guard let newUserCheck = interactor?.checkTheUser() else { return }
+        router?.goToTheApp(fromView: view )
     }
 }

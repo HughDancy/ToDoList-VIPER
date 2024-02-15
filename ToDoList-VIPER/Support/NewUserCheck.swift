@@ -11,11 +11,13 @@ final class NewUserCheck {
     static let shared = NewUserCheck()
     
     func isNewUser() -> Bool {
-        return !UserDefaults.standard.bool(forKey: "isNewUser")
+        return !(UserDefaults.standard.value(forKey: "isNewUser") != nil)
     }
     
     func setIsNotNewUser()  {
-        UserDefaults.standard.setValue(true, forKey: "isNewUser")
+        
+        UserDefaults.standard.set(true, forKey: "isNewUser")
+        print((UserDefaults.standard.value(forKey: "isNewUser") != nil))
     }
     
     func isOnboardingFirstStart() -> Bool {

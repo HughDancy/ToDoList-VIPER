@@ -9,7 +9,7 @@ import UIKit
 
 protocol AnimationLoadingRouterProtocol: AnyObject {
     static func createLoadingModule() -> UIViewController
-    func goToTheApp(isNewUser: Bool, fromView: AnimationLoadingControllerProtocol)
+    func goToTheApp(fromView: AnimationLoadingControllerProtocol)
 }
 
 final class AnimationLoadingRouter: AnimationLoadingRouterProtocol {
@@ -29,14 +29,14 @@ final class AnimationLoadingRouter: AnimationLoadingRouterProtocol {
     }
     
     
-    func goToTheApp(isNewUser: Bool, fromView: AnimationLoadingControllerProtocol) {
+    func goToTheApp(fromView: AnimationLoadingControllerProtocol) {
         guard let parrentView = fromView as? UIViewController else { return }
         let viewContoller = AppConfigurator.configuator.configureApp()
         viewContoller.modalTransitionStyle = .crossDissolve
         viewContoller.modalPresentationStyle = .fullScreen
         parrentView.present(viewContoller, animated: true)
-        let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
-        appDelegate.window?.rootViewController = viewContoller
+//        let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
+//        appDelegate.window?.rootViewController = viewContoller
         
 //        if isNewUser == true {
 //            guard let parrentView = fromView as? UIViewController else { return }
