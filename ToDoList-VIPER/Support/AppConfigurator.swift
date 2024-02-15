@@ -32,7 +32,8 @@ final class AppConfigurator {
         
         if onboardingState == false {
             let loginModule = LoginRouter.createLoginModule()
-            return loginModule
+            let navLoginModule = UINavigationController(rootViewController: loginModule)
+            return navLoginModule
         } else {
             let onboardingModule = OnboardingRouter.createOnboardingModule()
             return onboardingModule

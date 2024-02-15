@@ -29,12 +29,8 @@ final class OnboardingRouter: OnboardingRouterProtocol {
     
     func goToLoginModule(from view: OnboardingViewProtocol) {
         guard let parrentView = view as? UIViewController else { return}
-//        let loginController = LoginController()
-        let loginModule = LoginRouter.createLoginModule()
+        let loginModule = LoginRouter.createLoginModule() 
         parrentView.navigationController?.pushViewController(loginModule, animated: true)
-        //        let loginController = LoginController()
-        //        parrentView.navigationController?.pushViewController(loginController, animated: true)
-        //        parrentView.present(loginController, animated: true)
     }
     
     func presentRequestAcess(from view: OnboardingViewProtocol) {
