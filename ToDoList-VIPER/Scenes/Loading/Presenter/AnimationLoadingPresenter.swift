@@ -13,6 +13,7 @@ protocol AnimationLoadingPresenterProtocol: AnyObject {
     var router: AnimationLoadingRouterProtocol? { get set }
     
     func goToNextScreen()
+    func changeRootController()
 }
 
 final class AnimationLoadingPresenter: AnimationLoadingPresenterProtocol {
@@ -24,5 +25,9 @@ final class AnimationLoadingPresenter: AnimationLoadingPresenterProtocol {
         guard let view = view else { return }
 //        guard let newUserCheck = interactor?.checkTheUser() else { return }
         router?.goToTheApp(fromView: view )
+    }
+    
+    func changeRootController() {
+        router?.changeRootContorller()
     }
 }

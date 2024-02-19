@@ -14,7 +14,16 @@ protocol AnimationLoadingControllerProtocol: AnyObject {
 
 final class AnimationLoadingController: UIViewController, AnimationLoadingControllerProtocol {
      var presenter: AnimationLoadingPresenterProtocol?
-    
+    static var keyWindow: UIWindow? {
+      let allScenes = UIApplication.shared.connectedScenes
+      for scene in allScenes {
+        guard let windowScene = scene as? UIWindowScene else { continue }
+        for window in windowScene.windows where window.isKeyWindow {
+           return window
+         }
+       }
+        return nil
+    }
     //MARK: - Outlets
     private lazy var loadingBackground: UIImageView = {
         let imageView = UIImageView()
@@ -104,7 +113,23 @@ final class AnimationLoadingController: UIViewController, AnimationLoadingContro
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                 self.presenter?.goToNextScreen()
             })
-        }) 
+        }) { (succes) in
+//            window.switchRootViewController(to: loginVC)
+//            let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
+//            appDelegate.window?.rootViewController = LoginRouter.createLoginModule()
+//            appDelegate.window?.makeKeyAndVisible()
+//            let allScenes = UIApplication.shared.connectedScenes
+//            let scene = allScenes.first { $0.activationState == .foregroundActive }
+//            if let windowScene = scene as? UIWindowScene {
+//                windowScene.keyWindow?.rootViewController = LoginRouter.createLoginModule()
+//            }
+            let vc = LoginRouter.createLoginModule()
+            let navVc = UINavigationController(rootViewController: vc)
+            let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate
+            sceneDelegate.window?.rootViewController = navVc
+        }
+        
+        
 //        { done  in
 //            if done {
 //                DispatchQueue.main.asyncAfter(deadline: .now()+0.0, execute: {
@@ -119,7 +144,6 @@ final class AnimationLoadingController: UIViewController, AnimationLoadingContro
 //            }
 //        }
     }
-    
     //MARK: - Next Path Method
     
 }

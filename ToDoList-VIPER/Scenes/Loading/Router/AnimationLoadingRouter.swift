@@ -10,10 +10,12 @@ import UIKit
 protocol AnimationLoadingRouterProtocol: AnyObject {
     static func createLoadingModule() -> UIViewController
     func goToTheApp(fromView: AnimationLoadingControllerProtocol)
+    func changeRootContorller()
 }
 
 final class AnimationLoadingRouter: AnimationLoadingRouterProtocol {
-   
+    private var currentControoler: UIViewController?
+    
     static func createLoadingModule() -> UIViewController {
         let vc = AnimationLoadingController()
         let presenter: AnimationLoadingPresenterProtocol = AnimationLoadingPresenter()
@@ -32,11 +34,13 @@ final class AnimationLoadingRouter: AnimationLoadingRouterProtocol {
     func goToTheApp(fromView: AnimationLoadingControllerProtocol) {
         guard let parrentView = fromView as? UIViewController else { return }
         let viewContoller = AppConfigurator.configuator.configureApp()
+        self.currentControoler = viewContoller
         viewContoller.modalTransitionStyle = .crossDissolve
         viewContoller.modalPresentationStyle = .fullScreen
         parrentView.present(viewContoller, animated: true)
-        let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
-        appDelegate.window?.rootViewController = viewContoller
+        
+ 
+
         
 //        if isNewUser == true {
 //            guard let parrentView = fromView as? UIViewController else { return }
@@ -54,6 +58,12 @@ final class AnimationLoadingRouter: AnimationLoadingRouterProtocol {
 //            view.modalPresentationStyle = .fullScreen
 //            parrentView.present(view, animated: true)  
 //        }
+    }
+    
+    func changeRootContorller() {
+        let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
+        appDelegate.window?.rootViewController = currentControoler
+        appDelegate.window?.makeKeyAndVisible()
     }
 }
 

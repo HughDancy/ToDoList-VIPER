@@ -8,8 +8,7 @@
 import UIKit
 
 final class RegistrationRouter: RegistrationRouterProtocol {
-    var presenter: RegistrationPresenterPtorocol?
-    
+
     static func createRegistrationModule() -> UIViewController {
         let view = RegistrationController()
         let presenter: RegistrationPresenterPtorocol & RegistrationInteractorOutputProtocol = RegistrationPresenter()
@@ -21,7 +20,6 @@ final class RegistrationRouter: RegistrationRouterProtocol {
         presenter.interactor = interactor
         presenter.rotuter = router
         interactor.presenter = presenter
-        router.presenter = presenter
         return view
     }
     
@@ -32,7 +30,8 @@ final class RegistrationRouter: RegistrationRouterProtocol {
         case .complete:
             alertController.title = "Регистрация прошла успешно!"
             alertController.addAction(UIAlertAction(title: "Ок", style: .default, handler: { _ in
-                self.presenter?.completeAndGoBack()
+//                view.dismiss(animated: true)
+                view.navigationController?.popToRootViewController(animated: true)
             }))
             view.present(alertController, animated: true)
         case .connectionLost:
@@ -54,8 +53,4 @@ final class RegistrationRouter: RegistrationRouterProtocol {
         }
     }
     
-    func dismissRegister(from view: RegistrationViewProtocol) {
-        guard let view = view as? UIViewController else { return }
-        view.dismiss(animated: true)
-    }
 }

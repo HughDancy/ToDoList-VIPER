@@ -41,7 +41,7 @@ final class RegistrationController: UIViewController, RegistrationViewProtocol {
     
     private lazy var registerButton: LoadingButton = {
         let button = LoadingButton(type: .system)
-        button.originalButtonText = "Зарегестироваться"
+        button.originalButtonText = "Зарегистироваться"
         button.tintColor = .systemBackground
         button.backgroundColor = .systemCyan
         button.hideLoading()
@@ -70,6 +70,15 @@ final class RegistrationController: UIViewController, RegistrationViewProtocol {
         setupHierarcy()
         setupElemenets()
         setupLayout()
+        let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
+        print(appDelegate.window?.rootViewController)
+        let allScenes = UIApplication.shared.connectedScenes
+        let scene = allScenes.first { $0.activationState == .foregroundActive }
+        if let sceneWindow = scene as? UIWindowScene {
+            print(sceneWindow.keyWindow?.rootViewController)
+        }
+       
+        
     }
     
     deinit {
