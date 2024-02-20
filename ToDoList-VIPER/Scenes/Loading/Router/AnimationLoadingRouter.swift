@@ -8,21 +8,23 @@
 import UIKit
 
 protocol AnimationLoadingRouterProtocol: AnyObject {
-    static func createLoadingModule() -> UIViewController
-    func goToTheApp(fromView: AnimationLoadingControllerProtocol)
-    func changeRootContorller()
+    static func createLoadingModule(_ nextViewController: UIViewController) -> UIViewController
+    func goToTheApp(fromView: AnimationLoadingControllerProtocol, to nextViewController: UIViewController)
+    func changeRootContorller(_ nextViewController: UIViewController)
 }
 
 final class AnimationLoadingRouter: AnimationLoadingRouterProtocol {
-    private var currentControoler: UIViewController?
+//    private var currentControoler: UIViewController?
     
-    static func createLoadingModule() -> UIViewController {
+    static func createLoadingModule(_ nextViewComtroller: UIViewController) -> UIViewController {
+//        let vc = AnimationLoadingController(nextViewComtroller)
         let vc = AnimationLoadingController()
         let presenter: AnimationLoadingPresenterProtocol = AnimationLoadingPresenter()
         let interactor: AnimationLoadingInteractorInputProtocol = AnimationLoadingInteractor()
         let router = AnimationLoadingRouter()
         
         vc.presenter = presenter
+        vc.nextScreen = nextViewComtroller
         presenter.view = vc
         presenter.interactor = interactor
         presenter.router = router
@@ -31,14 +33,14 @@ final class AnimationLoadingRouter: AnimationLoadingRouterProtocol {
     }
     
     
-    func goToTheApp(fromView: AnimationLoadingControllerProtocol) {
+    func goToTheApp(fromView: AnimationLoadingControllerProtocol, to nextViewController: UIViewController) {
         guard let parrentView = fromView as? UIViewController else { return }
-        let viewContoller = AppConfigurator.configuator.configureApp()
-        self.currentControoler = viewContoller
-        viewContoller.modalTransitionStyle = .crossDissolve
-        viewContoller.modalPresentationStyle = .fullScreen
-        parrentView.present(viewContoller, animated: true)
-        
+//        let viewContoller = AppConfigurator.configuator.configureApp()
+//        self.currentControoler = nextViewController
+        nextViewController.modalTransitionStyle = .crossDissolve
+        nextViewController.modalPresentationStyle = .fullScreen
+        parrentView.present(nextViewController, animated: true)
+//        self.changeRootContorller(nextViewController)
  
 
         
@@ -60,10 +62,9 @@ final class AnimationLoadingRouter: AnimationLoadingRouterProtocol {
 //        }
     }
     
-    func changeRootContorller() {
-        let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
-        appDelegate.window?.rootViewController = currentControoler
-        appDelegate.window?.makeKeyAndVisible()
+    func changeRootContorller(_ nextViewController: UIViewController) {
+        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate
+        sceneDelegate.window?.rootViewController = nextViewController
     }
 }
 

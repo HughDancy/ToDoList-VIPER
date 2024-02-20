@@ -5,15 +5,15 @@
 //  Created by Борис Киселев on 16.01.2024.
 //
 
-import Foundation
+import UIKit
 
 protocol AnimationLoadingPresenterProtocol: AnyObject {
     var view: AnimationLoadingControllerProtocol? { get set }
     var interactor: AnimationLoadingInteractorInputProtocol? { get set }
     var router: AnimationLoadingRouterProtocol? { get set }
     
-    func goToNextScreen()
-    func changeRootController()
+    func goToNextScreen(_ nextScreen: UIViewController)
+    func changeRootController(_ nextViewController: UIViewController)
 }
 
 final class AnimationLoadingPresenter: AnimationLoadingPresenterProtocol {
@@ -21,13 +21,12 @@ final class AnimationLoadingPresenter: AnimationLoadingPresenterProtocol {
     var interactor: AnimationLoadingInteractorInputProtocol?
     var router: AnimationLoadingRouterProtocol?
     
-    func goToNextScreen() {
+    func goToNextScreen(_ nextScreen: UIViewController) {
         guard let view = view else { return }
-//        guard let newUserCheck = interactor?.checkTheUser() else { return }
-        router?.goToTheApp(fromView: view )
+        router?.goToTheApp(fromView: view, to: nextScreen)
     }
     
-    func changeRootController() {
-        router?.changeRootContorller()
+    func changeRootController(_ nextViewController: UIViewController) {
+        router?.changeRootContorller(nextViewController)
     }
 }

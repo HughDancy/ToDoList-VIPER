@@ -13,13 +13,13 @@ final class AppConfigurator {
     func configureApp() -> UIViewController {
         let isNewUser = NewUserCheck.shared.isNewUser()
         
-        print("you is new user? - \(isNewUser)")
+//        print("you is new user? - \(isNewUser)")
         
         switch isNewUser {
         case true:
-            return  startOnboardingModule()
+            return AnimationLoadingRouter.createLoadingModule(startOnboardingModule())
         case false:
-            return startMainModule()
+            return AnimationLoadingRouter.createLoadingModule(startMainModule())
            
             
         }
@@ -39,6 +39,8 @@ final class AppConfigurator {
             let navLoginModule = UINavigationController(rootViewController: loginModule)
 //            let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
 //            appDelegate.window?.rootViewController = navLoginModule
+            let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate
+            sceneDelegate.window?.rootViewController = navLoginModule
             return navLoginModule
         } else {
             let onboardingModule = OnboardingRouter.createOnboardingModule()
@@ -48,7 +50,8 @@ final class AppConfigurator {
     
     private func startMainModule() -> UIViewController {
         let mainModule = HomeTabBarRouter.createHomeTabBar()
-//        NewUserCheck.shared.setIsNotNewUser()
+        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate
+        sceneDelegate.window?.rootViewController = mainModule
         return mainModule
     }
 }

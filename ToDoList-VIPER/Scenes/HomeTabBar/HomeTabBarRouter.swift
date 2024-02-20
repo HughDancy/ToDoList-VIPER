@@ -43,6 +43,7 @@ final class HomeTabBarRouter: HomeTabBarRouterProtocol {
         
 //        let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
 //        appDelegate.window?.rootViewController = tabBar
+      
         return tabBar
     }
     

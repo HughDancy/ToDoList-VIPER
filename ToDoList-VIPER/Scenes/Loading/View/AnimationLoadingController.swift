@@ -10,20 +10,13 @@ import SnapKit
 
 protocol AnimationLoadingControllerProtocol: AnyObject {
     var presenter: AnimationLoadingPresenterProtocol? { get set }
+    var nextScreen: UIViewController? { get set }
 }
 
 final class AnimationLoadingController: UIViewController, AnimationLoadingControllerProtocol {
      var presenter: AnimationLoadingPresenterProtocol?
-    static var keyWindow: UIWindow? {
-      let allScenes = UIApplication.shared.connectedScenes
-      for scene in allScenes {
-        guard let windowScene = scene as? UIWindowScene else { continue }
-        for window in windowScene.windows where window.isKeyWindow {
-           return window
-         }
-       }
-        return nil
-    }
+     var nextScreen: UIViewController?
+   
     //MARK: - Outlets
     private lazy var loadingBackground: UIImageView = {
         let imageView = UIImageView()
@@ -49,7 +42,6 @@ final class AnimationLoadingController: UIViewController, AnimationLoadingContro
     
     //MARK: - Lifecycle
     override func viewDidLayoutSubviews() {
-   
         loadingImage.center = view.center
     }
     
@@ -64,12 +56,21 @@ final class AnimationLoadingController: UIViewController, AnimationLoadingContro
         super.viewDidLoad()
         setupHierarcy()
         setupLayout()
-        
     }
     
     deinit {
         print("AnimationLoadingControoler is ☠️")
     }
+    
+    //MARK: - Init
+//    init(_ nextScreen: UIViewController) {
+//        self.nextScreen = nextScreen
+//        super.init(nibName: nil, bundle: nil)
+//    }
+//    
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
     
     //MARK: - Setup Outlets
     private func setupHierarcy() {
@@ -104,14 +105,18 @@ final class AnimationLoadingController: UIViewController, AnimationLoadingContro
                 width: size,
                 height: size
             )
-            
+    
         }
         
         UIView.animate(withDuration: 1.5, animations: {
             self.loadingImage.alpha = 0
             self.activityIndicator.stopAnimating()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-                self.presenter?.goToNextScreen()
+                guard let view = self.nextScreen else {
+                    print("Next Screen View Controller is not initialized")
+                    return
+                }
+                self.presenter?.goToNextScreen(view)
             })
         }) { (succes) in
 //            window.switchRootViewController(to: loginVC)
@@ -123,10 +128,15 @@ final class AnimationLoadingController: UIViewController, AnimationLoadingContro
 //            if let windowScene = scene as? UIWindowScene {
 //                windowScene.keyWindow?.rootViewController = LoginRouter.createLoginModule()
 //            }
-            let vc = LoginRouter.createLoginModule()
-            let navVc = UINavigationController(rootViewController: vc)
-            let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate
-            sceneDelegate.window?.rootViewController = navVc
+//            let vc = LoginRouter.createLoginModule()
+//            let navVc = UINavigationController(rootViewController: vc)
+//            let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate
+//            sceneDelegate.window?.rootViewController = navVc
+//            guard let view = self.nextScreen else {
+//                print("Next Screen View Controller is not initialized")
+//                return
+//            }
+//            self.presenter?.changeRootController(view)
         }
         
         
@@ -144,8 +154,6 @@ final class AnimationLoadingController: UIViewController, AnimationLoadingContro
 //            }
 //        }
     }
-    //MARK: - Next Path Method
-    
 }
 
 

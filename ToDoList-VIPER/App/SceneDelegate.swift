@@ -15,7 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        let loadingController = AnimationLoadingRouter.createLoadingModule()
+        let loadingController = AppConfigurator.configuator.configureApp()
         window?.rootViewController = loadingController
         window?.makeKeyAndVisible()
     }

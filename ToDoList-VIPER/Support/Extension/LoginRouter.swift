@@ -10,7 +10,7 @@ import UIKit
 final class LoginRouter: LoginRouterProtocol {
     static func createLoginModule() -> UIViewController {
         let viewController = LoginController()
-        let navController = UINavigationController(rootViewController: viewController)
+//        let navController = UINavigationController(rootViewController: viewController)
         let presenter: LoginPresenterProtocol & LoginInteractorOutputProtocol = LoginPresenter()
         let interactor: LoginInteractorInputProtocol = LoginInteractor()
         let router: LoginRouterProtocol = LoginRouter()
@@ -19,7 +19,7 @@ final class LoginRouter: LoginRouterProtocol {
         presenter.interactor = interactor
         presenter.router = router
         interactor.presenter = presenter
-        viewController.navigationItem.hidesBackButton = true
+//        viewController.navigationItem.hidesBackButton = true
         return viewController
     }
     
