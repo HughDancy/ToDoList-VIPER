@@ -32,6 +32,7 @@ final class RegistrationController: UIViewController, RegistrationViewProtocol {
         let label = UILabel()
         label.text = "Создайте аккаунт"
         label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
+        label.textColor = .systemCyan
         return label
     }()
     
@@ -70,15 +71,14 @@ final class RegistrationController: UIViewController, RegistrationViewProtocol {
         setupHierarcy()
         setupElemenets()
         setupLayout()
-        let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
-        print(appDelegate.window?.rootViewController)
-        let allScenes = UIApplication.shared.connectedScenes
-        let scene = allScenes.first { $0.activationState == .foregroundActive }
-        if let sceneWindow = scene as? UIWindowScene {
-            print(sceneWindow.keyWindow?.rootViewController)
-        }
-       
-        
+//        let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
+//        print(appDelegate.window?.rootViewController)
+//        let allScenes = UIApplication.shared.connectedScenes
+//        let scene = allScenes.first { $0.activationState == .foregroundActive }
+//        if let sceneWindow = scene as? UIWindowScene {
+//            print(sceneWindow.keyWindow?.rootViewController)
+//        }
+//
     }
     
     deinit {
@@ -119,25 +119,25 @@ final class RegistrationController: UIViewController, RegistrationViewProtocol {
         nameField.snp.makeConstraints { make in
             make.top.equalTo(createNewUserLabel.snp.bottom).offset(30)
             make.leading.trailing.equalTo(scrollView.safeAreaLayoutGuide).inset(30)
-            make.height.equalTo(35)
+            make.height.equalTo(45)
         }
         
         emailField.snp.makeConstraints { make in
             make.top.equalTo(nameField.snp.bottom).offset(10)
             make.leading.trailing.equalTo(scrollView.safeAreaLayoutGuide).inset(30)
-            make.height.equalTo(35)
+            make.height.equalTo(45)
         }
         
         passwordField.snp.makeConstraints { make in
             make.top.equalTo(emailField.snp.bottom).offset(10)
             make.leading.trailing.equalTo(scrollView.safeAreaLayoutGuide).inset(30)
-            make.height.equalTo(35)
+            make.height.equalTo(45)
         }
         
         registerButton.snp.makeConstraints { make in
             make.top.equalTo(passwordField.snp.bottom).offset(100)
             make.leading.trailing.equalTo(scrollView.safeAreaLayoutGuide).inset(35)
-            make.height.equalTo(40)
+            make.height.equalTo(45)
         }
     }
     
