@@ -36,9 +36,9 @@ final class RegistrationController: UIViewController, RegistrationViewProtocol {
         return label
     }()
     
-    private lazy var nameField = UITextField.createBasicTextField(textSize: 14, weight: .semibold, borderStyle: .roundedRect, returnKey: .continue, tag: 0)
-    private lazy var emailField = UITextField.createBasicTextField(textSize: 14, weight: .semibold, borderStyle: .roundedRect, returnKey: .continue, tag: 1)
-    private lazy var passwordField = UITextField.createBasicTextField(textSize: 14, weight: .semibold, borderStyle: .roundedRect, returnKey: .done, tag: 2)
+    private lazy var nameField = UITextField.createBasicTextField(textSize: 14, weight: .semibold, borderStyle: .none, returnKey: .continue, tag: 0)
+    private lazy var emailField = UITextField.createBasicTextField(textSize: 14, weight: .semibold, borderStyle: .none, returnKey: .continue, tag: 1)
+    private lazy var passwordField = UITextField.createBasicTextField(textSize: 14, weight: .semibold, borderStyle: .none, returnKey: .done, tag: 2)
     
     private lazy var registerButton: LoadingButton = {
         let button = LoadingButton(type: .system)
@@ -71,14 +71,20 @@ final class RegistrationController: UIViewController, RegistrationViewProtocol {
         setupHierarcy()
         setupElemenets()
         setupLayout()
-//        let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
-//        print(appDelegate.window?.rootViewController)
-//        let allScenes = UIApplication.shared.connectedScenes
-//        let scene = allScenes.first { $0.activationState == .foregroundActive }
-//        if let sceneWindow = scene as? UIWindowScene {
-//            print(sceneWindow.keyWindow?.rootViewController)
-//        }
-//
+        view.layoutIfNeeded()
+        //        let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
+        //        print(appDelegate.window?.rootViewController)
+        //        let allScenes = UIApplication.shared.connectedScenes
+        //        let scene = allScenes.first { $0.activationState == .foregroundActive }
+        //        if let sceneWindow = scene as? UIWindowScene {
+        //            print(sceneWindow.keyWindow?.rootViewController)
+        //        }
+        //
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setupBottomBorder()
     }
     
     deinit {
@@ -120,6 +126,7 @@ final class RegistrationController: UIViewController, RegistrationViewProtocol {
             make.top.equalTo(createNewUserLabel.snp.bottom).offset(30)
             make.leading.trailing.equalTo(scrollView.safeAreaLayoutGuide).inset(30)
             make.height.equalTo(45)
+            make.width.equalTo(100)
         }
         
         emailField.snp.makeConstraints { make in
@@ -148,6 +155,12 @@ final class RegistrationController: UIViewController, RegistrationViewProtocol {
         nameField.delegate = self
         emailField.delegate = self
         passwordField.delegate = self
+    }
+    
+    private func setupBottomBorder() {
+        nameField.addBottomLine(width: 1.5, color: .systemGray3)
+        emailField.addBottomLine(width: 1.5, color: .systemGray3)
+        passwordField.addBottomLine(width: 1.5, color: .systemGray3)
     }
     
     //MARK: - ScrollView Keyboard function
@@ -187,7 +200,7 @@ final class RegistrationController: UIViewController, RegistrationViewProtocol {
 extension RegistrationController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let nextTag = textField.tag + 1
-
+        
         if let nextResponder = self.view.viewWithTag(nextTag) {
             nextResponder.becomeFirstResponder()
         } else {
