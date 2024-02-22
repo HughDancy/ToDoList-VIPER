@@ -28,11 +28,14 @@ extension RegistrationPresenter: RegistrationInteractorOutputProtocol {
         switch result {
         case .complete:
             self.rotuter?.showAlert(with: .complete, and: view)
+        case .emptyFields:
+            self.rotuter?.showAlert(with: .emptyFields, and: view)
+        case .notValidEmail:
+            self.rotuter?.showAlert(with: .notValidEmail, and: view)
+        case .connectionLost:
+            self.rotuter?.showAlert(with: .connectionLost, and: view)
         case .error:
             self.rotuter?.showAlert(with: .error, and: view)
-        default:
-            print("Something wrong")
         }
-
     }
 }

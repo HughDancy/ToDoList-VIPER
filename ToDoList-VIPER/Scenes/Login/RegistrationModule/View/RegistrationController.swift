@@ -24,6 +24,7 @@ final class RegistrationController: UIViewController, RegistrationViewProtocol {
         let imageView = UIImageView()
         let picture = UIImage(named: "registerImage")
         imageView.image = picture
+        imageView.backgroundColor = .clear
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
@@ -183,10 +184,10 @@ final class RegistrationController: UIViewController, RegistrationViewProtocol {
     //MARK: - Button Action
     @objc func registerNewUser() {
         switch (nameField.text != nil) && (emailField.text != nil) && (passwordField.text != nil) {
-        case nameField.text == "" || emailField.text == "" || passwordField.text == "":
-            presenter?.showAllert(status: .emptyFields)
-        case emailField.text?.isValidEmail() == false:
-            presenter?.showAllert(status: .notValidEmail)
+//        case nameField.text == "" || emailField.text == "" || passwordField.text == "":
+//            presenter?.showAllert(status: .emptyFields)
+//        case emailField.text?.isValidEmail() == false:
+//            presenter?.showAllert(status: .notValidEmail)
         default:
             let name = nameField.text ?? "Temp"
             let email = emailField.text ?? ""
