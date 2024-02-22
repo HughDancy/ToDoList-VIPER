@@ -30,12 +30,16 @@ extension RegistrationPresenter: RegistrationInteractorOutputProtocol {
             self.rotuter?.showAlert(with: .complete, and: view)
         case .emptyFields:
             self.rotuter?.showAlert(with: .emptyFields, and: view)
+            self.view?.stopAnimateRegisterButton()
         case .notValidEmail:
             self.rotuter?.showAlert(with: .notValidEmail, and: view)
+            self.view?.stopAnimateRegisterButton()
         case .connectionLost:
             self.rotuter?.showAlert(with: .connectionLost, and: view)
+            self.view?.stopAnimateRegisterButton()
         case .error:
             self.rotuter?.showAlert(with: .error, and: view)
+            self.view?.stopAnimateRegisterButton()
         }
     }
 }

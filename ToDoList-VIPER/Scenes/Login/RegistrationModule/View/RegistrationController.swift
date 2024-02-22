@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class RegistrationController: UIViewController, RegistrationViewProtocol {
+final class RegistrationController: UIViewController {
     var presenter: RegistrationPresenterPtorocol?
     
     //MARK: - Outlets
@@ -92,7 +92,7 @@ final class RegistrationController: UIViewController, RegistrationViewProtocol {
         print("RegistrationController is ☠️")
     }
     
-    //MARK: - Setup Elements
+    //MARK: - Setup Hierarchy
     private func setupHierarcy() {
         view.addSubview(scrollView)
         scrollView.addSubview(image)
@@ -103,6 +103,7 @@ final class RegistrationController: UIViewController, RegistrationViewProtocol {
         scrollView.addSubview(registerButton)
     }
     
+    //MARK: - Setup Layout
     private func setupLayout() {
         scrollView.snp.makeConstraints { make in
             make.centerX.equalTo(view.safeAreaLayoutGuide.snp.centerX)
@@ -149,6 +150,7 @@ final class RegistrationController: UIViewController, RegistrationViewProtocol {
         }
     }
     
+    //MARK: - Setup Outlets
     private func setupElemenets() {
         nameField.placeholder = "Имя"
         emailField.placeholder = "Email адресс"
@@ -183,12 +185,7 @@ final class RegistrationController: UIViewController, RegistrationViewProtocol {
     
     //MARK: - Button Action
     @objc func registerNewUser() {
-        switch (nameField.text != nil) && (emailField.text != nil) && (passwordField.text != nil) {
-//        case nameField.text == "" || emailField.text == "" || passwordField.text == "":
-//            presenter?.showAllert(status: .emptyFields)
-//        case emailField.text?.isValidEmail() == false:
-//            presenter?.showAllert(status: .notValidEmail)
-        default:
+        if (nameField.text != nil) && (emailField.text != nil) && (passwordField.text != nil) {
             let name = nameField.text ?? "Temp"
             let email = emailField.text ?? ""
             let password = passwordField.text ?? ""
@@ -198,6 +195,14 @@ final class RegistrationController: UIViewController, RegistrationViewProtocol {
     }
 }
 
+    //MARK: - RegistrationViewProtocol Extension
+extension RegistrationController: RegistrationViewProtocol {
+    func stopAnimateRegisterButton() {
+        self.registerButton.hideLoading()
+    }
+}
+
+   //MARK: - UITextfield extension
 extension RegistrationController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let nextTag = textField.tag + 1

@@ -9,6 +9,7 @@ import UIKit
 
 protocol RegistrationViewProtocol: AnyObject {
     var presenter: RegistrationPresenterPtorocol? { get set }
+    func stopAnimateRegisterButton()
 }
 
 protocol RegistrationPresenterPtorocol: AnyObject {
@@ -18,7 +19,6 @@ protocol RegistrationPresenterPtorocol: AnyObject {
     
     //VIEW -> PRESENTER
     func registerNewUser(with name: String, email: String, password: String)
-    func showAllert(status: RegistrationStatus)
 }
 
 protocol RegistrationInteractorInputProtocol: AnyObject {
@@ -38,10 +38,4 @@ protocol RegistrationRouterProtocol: AnyObject {
     func showAlert(with result: RegistrationStatus, and view: RegistrationViewProtocol)
 }
 
-enum RegistrationStatus {
-    case complete
-    case error
-    case notValidEmail
-    case connectionLost
-    case emptyFields
-}
+

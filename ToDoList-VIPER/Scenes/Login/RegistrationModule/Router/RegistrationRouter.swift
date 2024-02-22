@@ -30,8 +30,6 @@ final class RegistrationRouter: RegistrationRouterProtocol {
         case .complete:
             alertController.title = "Регистрация прошла успешно!"
             alertController.addAction(UIAlertAction(title: "Ок", style: .default, handler: { _ in
-//                view.dismiss(animated: true)
-//                view.navigationController?.popToRootViewController(animated: true)
                 view.navigationController?.popViewController(animated: true)
             }))
             view.present(alertController, animated: true)
@@ -53,5 +51,4 @@ final class RegistrationRouter: RegistrationRouterProtocol {
             view.present(alertController, animated: true)
         }
     }
-    
 }

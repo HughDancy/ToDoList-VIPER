@@ -49,6 +49,8 @@
 		D8CCF2D52B62725400C1E358 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D8CCF2D42B62725400C1E358 /* FirebaseFirestoreSwift */; };
 		D8CCF2D72B62725400C1E358 /* FirebaseInstallations in Frameworks */ = {isa = PBXBuildFile; productRef = D8CCF2D62B62725400C1E358 /* FirebaseInstallations */; };
 		D8CCF2D92B62725400C1E358 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = D8CCF2D82B62725400C1E358 /* FirebaseStorage */; };
+		D8CE4B702B87362500E473AC /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CE4B6F2B87362500E473AC /* Reachability.swift */; };
+		D8CE4B722B8739D900E473AC /* RegistrationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CE4B712B8739D900E473AC /* RegistrationStatus.swift */; };
 		D8E840542B63A8F0005A0936 /* String + EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E840532B63A8F0005A0936 /* String + EXT.swift */; };
 		D8E840562B63AA69005A0936 /* CABasicAnimation + EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E840552B63AA69005A0936 /* CABasicAnimation + EXT.swift */; };
 		D8E840582B63B0AB005A0936 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E840572B63B0AB005A0936 /* LoginPresenter.swift */; };
@@ -151,6 +153,8 @@
 		D8900F162B55435A008E0E34 /* NewUserCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserCheck.swift; sourceTree = "<group>"; };
 		D8BF0D422B15ED2E00D1572E /* ToDoListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListController.swift; sourceTree = "<group>"; };
 		D8CCF2C52B62719500C1E358 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D8CE4B6F2B87362500E473AC /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		D8CE4B712B8739D900E473AC /* RegistrationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationStatus.swift; sourceTree = "<group>"; };
 		D8E840532B63A8F0005A0936 /* String + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + EXT.swift"; sourceTree = "<group>"; };
 		D8E840552B63AA69005A0936 /* CABasicAnimation + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CABasicAnimation + EXT.swift"; sourceTree = "<group>"; };
 		D8E840572B63B0AB005A0936 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginPresenter.swift; path = "ToDoList-VIPER/Support/Extension/LoginPresenter.swift"; sourceTree = SOURCE_ROOT; };
@@ -747,6 +751,7 @@
 				D8E9F8CF2B18A56200A3F3FC /* ToDoObjectSorter.swift */,
 				D8900F162B55435A008E0E34 /* NewUserCheck.swift */,
 				D82B8B6D2B6B8CCB00A006F2 /* AppConfigurator.swift */,
+				D8CE4B712B8739D900E473AC /* RegistrationStatus.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -854,6 +859,7 @@
 			isa = PBXGroup;
 			children = (
 				D8F33E312B7E17F70008FE91 /* LoadingButton.swift */,
+				D8CE4B6F2B87362500E473AC /* Reachability.swift */,
 			);
 			path = CustomClasses;
 			sourceTree = "<group>";
@@ -1012,6 +1018,7 @@
 				D85C57E72B57CCA600023B04 /* OnboardingPresenter.swift in Sources */,
 				D8E840542B63A8F0005A0936 /* String + EXT.swift in Sources */,
 				D8E8405A2B63B148005A0936 /* LoginInteractor.swift in Sources */,
+				D8CE4B702B87362500E473AC /* Reachability.swift in Sources */,
 				D86D44E62AFB932E00894774 /* ViewController.swift in Sources */,
 				D8E840642B677C31005A0936 /* RegistrationProtocols.swift in Sources */,
 				D8E9F8722B01FAFB00A3F3FC /* ToDoDetailController.swift in Sources */,
@@ -1052,6 +1059,7 @@
 				D8BF0D432B15ED2E00D1572E /* ToDoListController.swift in Sources */,
 				D8E840682B678183005A0936 /* RegistrationInteractor.swift in Sources */,
 				D8E9F88D2B0377AE00A3F3FC /* ExecuteToDoPresenter.swift in Sources */,
+				D8CE4B722B8739D900E473AC /* RegistrationStatus.swift in Sources */,
 				D8E9F8892B0370FE00A3F3FC /* ExecuteProtocols.swift in Sources */,
 				D8E9F8BE2B17427F00A3F3FC /* Date + EXT.swift in Sources */,
 				D85C58392B5A595400023B04 /* OnboardingController.swift in Sources */,
