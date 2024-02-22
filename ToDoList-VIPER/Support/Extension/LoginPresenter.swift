@@ -20,6 +20,10 @@ final class LoginPresenter: LoginPresenterProtocol {
         guard let view = view else { return }
         router?.goToRegistration(from: view)
     }
+    
+    func changeState() {
+        interactor?.changeOnboardingState()
+    }
 }
 
 extension LoginPresenter: LoginInteractorOutputProtocol {

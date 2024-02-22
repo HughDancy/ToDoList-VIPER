@@ -64,9 +64,10 @@ class OnboardingPageController: UIViewController {
         super.viewWillAppear(animated)
         UserDefaults.standard.setValue(state?.rawValue, forKey: "onboardingState")
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         setupHierarchy()
         setupLayout()
     }

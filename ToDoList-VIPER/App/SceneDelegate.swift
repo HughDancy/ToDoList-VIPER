@@ -15,9 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        let tabBar = HomeTabBarRouter.createHomeTabBar()
-        let loadingController = AnimationLoadingRouter.createLoadingModule()
-//        window?.rootViewController = tabBar
+        let loadingController = AppConfigurator.configuator.configureApp()
         window?.rootViewController = loadingController
         window?.makeKeyAndVisible()
     }

@@ -22,5 +22,7 @@ final class LoginInteractor: LoginInteractorInputProtocol {
         }
     }
     
-    
+    func changeOnboardingState() {
+        NewUserCheck.shared.setIsLoginScrren()
+    }
 }

@@ -10,6 +10,7 @@ import UIKit
 final class LoginRouter: LoginRouterProtocol {
     static func createLoginModule() -> UIViewController {
         let viewController = LoginController()
+//        let navController = UINavigationController(rootViewController: viewController)
         let presenter: LoginPresenterProtocol & LoginInteractorOutputProtocol = LoginPresenter()
         let interactor: LoginInteractorInputProtocol = LoginInteractor()
         let router: LoginRouterProtocol = LoginRouter()
@@ -24,13 +25,19 @@ final class LoginRouter: LoginRouterProtocol {
     
     func goToRegistration(from view: LoginViewProtocol) {
         guard let view = view as? UIViewController else { return }
+        let registrationModule = RegistrationRouter.createRegistrationModule()
+        view.navigationController?.pushViewController(registrationModule, animated: true)
     }
     
     func goToMainScreen(from view: LoginViewProtocol) {
         guard let view = view as? UIViewController else { return}
         let mainModule = HomeTabBarRouter.createHomeTabBar()
-        view.navigationController?.present(mainModule, animated: true)
-        
+//        view.navigationController?.pushViewController(mainModule, animated: true)
+//        mainModule.modalTransitionStyle = .crossDissolve
+//        mainModule.modalPresentationStyle = .fullScreen
+//        view.navigationController?.present(mainModule, animated: true)
+        NewUserCheck.shared.setIsNotNewUser()
+        view.navigationController?.pushViewController(mainModule, animated: true)
     }
     
     func showWrongPasswordAllert(from view: LoginViewProtocol) {

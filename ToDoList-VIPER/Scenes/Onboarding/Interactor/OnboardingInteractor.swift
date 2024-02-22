@@ -20,7 +20,6 @@ final class OnboardingInteractor: OnboardingInteractorInputProtocol {
     func checkPermissions() {
       checkCameraAccess()
         checkMediaAcces()
-        
     }
     
     func checkCameraAccess() {

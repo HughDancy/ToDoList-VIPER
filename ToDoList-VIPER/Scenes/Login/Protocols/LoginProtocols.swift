@@ -20,6 +20,7 @@ protocol LoginPresenterProtocol: AnyObject {
     //VIEW -> PRESENTER
     func chekTheLogin(login: String, password: String)
     func goToRegistration()
+    func changeState()
 }
 
 protocol LoginInteractorInputProtocol: AnyObject {
@@ -27,6 +28,7 @@ protocol LoginInteractorInputProtocol: AnyObject {
     
     //PRESENTER -> INTERACTOR
     func checkAutorizationData(login: String, password: String)
+    func changeOnboardingState()
 }
 
 protocol LoginInteractorOutputProtocol: AnyObject {

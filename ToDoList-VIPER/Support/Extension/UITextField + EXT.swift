@@ -28,4 +28,31 @@ extension UITextField {
         label.textColor = .systemBlue
         return label
     }
+    
+    static func createBasicTextField(textSize: CGFloat, weight: UIFont.Weight, borderStyle: BorderStyle, returnKey: UIReturnKeyType, tag: Int) -> UITextField {
+        let textField = UITextField()
+        textField.borderStyle = borderStyle
+        textField.font = UIFont.systemFont(ofSize: textSize, weight: weight)
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
+        textField.leftView = view
+        textField.leftViewMode = .always
+        textField.returnKeyType = returnKey
+        textField.tag = tag
+        textField.autocapitalizationType = .none
+        return textField
+    }
+
 }
+
+//MARK: - Add bottom border extension
+
+extension UITextField {
+    func addBottomLine(width: CGFloat, color: UIColor) {
+        var border = CALayer()
+        border.backgroundColor = color.cgColor
+        border.frame = CGRect(x: 0, y: self.frame.height - 3, width: self.frame.width, height: width)
+        self.layer.addSublayer(border)
+        self.layer.masksToBounds = true
+    }
+}
+
