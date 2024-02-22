@@ -102,8 +102,25 @@ final class LoginController: UIViewController, LoginViewProtocol {
         return button
     }()
     
+    private lazy var appleLoginButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setTitle("Войти через Apple", for: .normal)
+        button.tintColor = .systemBackground
+        button.backgroundColor = .systemGray4
+        button.addTarget(self, action: #selector(appleLogIn), for: .touchDown)
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
+        return button
+    }()
+    
     private lazy var googleImage: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "googleLogo"))
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
+    private lazy var appleImage: UIImageView = {
+       let imageView = UIImageView(image: UIImage(systemName: "apple.logo"))
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -144,6 +161,8 @@ final class LoginController: UIViewController, LoginViewProtocol {
         scrollView.addSubview(orLabel)
         googleLoginButton.addSubview(googleImage)
         scrollView.addSubview(googleLoginButton)
+        appleLoginButton.addSubview(appleImage)
+        scrollView.addSubview(appleLoginButton)
     }
 
     private func setupLayout() {
@@ -200,6 +219,18 @@ final class LoginController: UIViewController, LoginViewProtocol {
         googleImage.snp.makeConstraints { make in
             make.top.leading.bottom.equalTo(googleLoginButton.safeAreaLayoutGuide).inset(10)
         }
+        
+        appleLoginButton.snp.makeConstraints { make in
+            make.top.equalTo(googleLoginButton.snp.bottom).offset(10)
+            make.centerX.equalTo(scrollView.safeAreaLayoutGuide.snp.centerX)
+            make.leading.trailing.equalTo(scrollView.safeAreaLayoutGuide).inset(40)
+            make.height.equalTo(40)
+        }
+        
+        appleImage.snp.makeConstraints { make in
+            make.top.bottom.equalTo(appleLoginButton.safeAreaLayoutGuide).inset(10)
+            make.leading.equalTo(appleLoginButton.safeAreaLayoutGuide.snp.leading).offset(25)
+        }
     }
     
     //MARK: - Buttons action
@@ -228,6 +259,10 @@ final class LoginController: UIViewController, LoginViewProtocol {
     
     @objc func googleLogin() {
         print("You login with Google")
+    }
+    
+    @objc func appleLogIn() {
+        print("You login with Apple")
     }
     
     //MARK: - ScrollView keyboard functions
