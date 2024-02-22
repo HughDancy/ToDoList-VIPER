@@ -61,7 +61,6 @@ final class LoginController: UIViewController, LoginViewProtocol {
     private lazy var loginButton: LoadingButton = {
         let button = LoadingButton(type: .system)
         button.originalButtonText = "Войти"
-//        button.setTitle("Войти", for: .normal)
         button.tintColor = .systemBackground
         button.backgroundColor = .systemCyan
         button.layer.cornerRadius = 10
@@ -86,7 +85,7 @@ final class LoginController: UIViewController, LoginViewProtocol {
     
     private lazy var orLabel: UILabel = {
         let label = UILabel()
-        label.text = "Или войти с помощью"
+        label.text = "или"
         label.textColor = .systemGray2
         label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         return label
@@ -94,10 +93,19 @@ final class LoginController: UIViewController, LoginViewProtocol {
     
     private lazy var googleLoginButton: UIButton = {
         let button = UIButton(type: .custom)
-        let image = UIImage(named: "googleLogo")
-        button.setImage(image, for: .normal)
+        button.setTitle("Войти через Google", for: .normal)
+        button.tintColor = .systemBackground
+        button.backgroundColor = .systemGray4
         button.addTarget(self, action: #selector(googleLogin), for: .touchDown)
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
         return button
+    }()
+    
+    private lazy var googleImage: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "googleLogo"))
+        imageView.contentMode = .scaleAspectFit
+        return imageView
     }()
     
     //MARK: - Lifecycle
@@ -134,6 +142,7 @@ final class LoginController: UIViewController, LoginViewProtocol {
         scrollView.addSubview(loginButton)
         scrollView.addSubview(registerButton)
         scrollView.addSubview(orLabel)
+        googleLoginButton.addSubview(googleImage)
         scrollView.addSubview(googleLoginButton)
     }
 
@@ -180,12 +189,16 @@ final class LoginController: UIViewController, LoginViewProtocol {
             make.top.equalTo(registerButton.snp.bottom).offset(15)
             make.centerX.equalTo(scrollView.snp.centerX)
         }
-        
+
         googleLoginButton.snp.makeConstraints { make in
             make.top.equalTo(orLabel.snp.bottom).offset(10)
             make.centerX.equalTo(scrollView.snp.centerX)
-            make.width.equalTo(40)
+            make.leading.trailing.equalTo(scrollView.safeAreaLayoutGuide).inset(40)
             make.height.equalTo(40)
+        }
+        
+        googleImage.snp.makeConstraints { make in
+            make.top.leading.bottom.equalTo(googleLoginButton.safeAreaLayoutGuide).inset(10)
         }
     }
     
