@@ -29,7 +29,7 @@ final class LoginController: UIViewController, LoginViewProtocol {
     
     private lazy var loginField: UITextField = {
         let textField = UITextField()
-        textField.borderStyle = .roundedRect
+        textField.borderStyle = .none
         textField.placeholder = "Логин"
         textField.tintColor = .systemGray4
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
@@ -44,7 +44,7 @@ final class LoginController: UIViewController, LoginViewProtocol {
     
     private lazy var passwordField: UITextField = {
         let textField = UITextField()
-        textField.borderStyle = .roundedRect
+        textField.borderStyle = .none
         textField.placeholder = "Пароль"
         textField.tintColor = .systemGray4
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
@@ -144,13 +144,19 @@ final class LoginController: UIViewController, LoginViewProtocol {
         scrollView.keyboardDismissMode = .interactive
         setupHierarchy()
         setupLayout()
+        view.layoutIfNeeded()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setupTextFieldsBorder()
     }
     
     deinit {
         print("LoginController is ☠️")
     }
     
-    //MARK: - Setup Outlets
+    //MARK: - Setup Hierarchy
     private func setupHierarchy() {
         view.addSubview(scrollView)
         scrollView.addSubview(logoImage)
@@ -165,6 +171,7 @@ final class LoginController: UIViewController, LoginViewProtocol {
         scrollView.addSubview(appleLoginButton)
     }
 
+    //MARK: - Setup Layout
     private func setupLayout() {
         scrollView.snp.makeConstraints { make in
             make.centerX.equalTo(view.safeAreaLayoutGuide.snp.centerX)
@@ -231,6 +238,12 @@ final class LoginController: UIViewController, LoginViewProtocol {
             make.top.bottom.equalTo(appleLoginButton.safeAreaLayoutGuide).inset(10)
             make.leading.equalTo(appleLoginButton.safeAreaLayoutGuide.snp.leading).offset(25)
         }
+    }
+    
+    //MARK: - Setup textfields border
+    private func setupTextFieldsBorder() {
+        loginField.addBottomLine(width: 1.5, color: .systemGray3)
+        passwordField.addBottomLine(width: 1.5, color: .systemGray3)
     }
     
     //MARK: - Buttons action
