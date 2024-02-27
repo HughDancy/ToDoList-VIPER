@@ -271,6 +271,7 @@ final class LoginController: UIViewController, LoginViewProtocol {
     }
     
     @objc func googleLogin() {
+        presenter?.googleSingIn()
         print("You login with Google")
     }
     

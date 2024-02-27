@@ -20,6 +20,7 @@ protocol LoginPresenterProtocol: AnyObject {
     //VIEW -> PRESENTER
     func chekTheLogin(login: String, password: String)
     func goToRegistration()
+    func googleSingIn()
     func changeState()
 }
 
@@ -29,6 +30,7 @@ protocol LoginInteractorInputProtocol: AnyObject {
     //PRESENTER -> INTERACTOR
     func checkAutorizationData(login: String, password: String)
     func changeOnboardingState()
+    func googleLogIn(with: LoginViewProtocol)
 }
 
 protocol LoginInteractorOutputProtocol: AnyObject {

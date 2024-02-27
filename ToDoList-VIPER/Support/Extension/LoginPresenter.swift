@@ -24,6 +24,11 @@ final class LoginPresenter: LoginPresenterProtocol {
     func changeState() {
         interactor?.changeOnboardingState()
     }
+    
+    func googleSingIn() {
+        guard let view = view else { return }
+        interactor?.googleLogIn(with: view)
+    }
 }
 
 extension LoginPresenter: LoginInteractorOutputProtocol {

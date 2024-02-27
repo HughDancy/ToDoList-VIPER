@@ -41,6 +41,7 @@
 		D8BF0D432B15ED2E00D1572E /* ToDoListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BF0D422B15ED2E00D1572E /* ToDoListController.swift */; };
 		D8C19EC62B8DC3FF004BCDDD /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = D8C19EC52B8DC3FF004BCDDD /* GoogleSignIn */; };
 		D8C19EC82B8DC3FF004BCDDD /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D8C19EC72B8DC3FF004BCDDD /* GoogleSignInSwift */; };
+		D8C19ECE2B8DDC55004BCDDD /* credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = D8C19ECD2B8DDC55004BCDDD /* credentials.plist */; };
 		D8CCF2C62B62719500C1E358 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D8CCF2C52B62719500C1E358 /* GoogleService-Info.plist */; };
 		D8CCF2C92B62725400C1E358 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D8CCF2C82B62725400C1E358 /* FirebaseAnalytics */; };
 		D8CCF2CB2B62725400C1E358 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = D8CCF2CA2B62725400C1E358 /* FirebaseAnalyticsWithoutAdIdSupport */; };
@@ -154,6 +155,7 @@
 		D8900F142B5529C7008E0E34 /* AnimationLoadingRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationLoadingRouter.swift; sourceTree = "<group>"; };
 		D8900F162B55435A008E0E34 /* NewUserCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserCheck.swift; sourceTree = "<group>"; };
 		D8BF0D422B15ED2E00D1572E /* ToDoListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListController.swift; sourceTree = "<group>"; };
+		D8C19ECD2B8DDC55004BCDDD /* credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = credentials.plist; path = ../../../../../../Downloads/credentials.plist; sourceTree = "<group>"; };
 		D8CCF2C52B62719500C1E358 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D8CE4B6F2B87362500E473AC /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		D8CE4B712B8739D900E473AC /* RegistrationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationStatus.swift; sourceTree = "<group>"; };
@@ -420,6 +422,7 @@
 				D86D44EF2AFB933000894774 /* LaunchScreen.storyboard */,
 				D86D44F22AFB933000894774 /* Info.plist */,
 				D8CCF2C52B62719500C1E358 /* GoogleService-Info.plist */,
+				D8C19ECD2B8DDC55004BCDDD /* credentials.plist */,
 				D86D44EA2AFB932E00894774 /* ToDoList_VIPER.xcdatamodeld */,
 			);
 			path = Resources;
@@ -992,6 +995,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D86D44F12AFB933000894774 /* LaunchScreen.storyboard in Resources */,
+				D8C19ECE2B8DDC55004BCDDD /* credentials.plist in Resources */,
 				D86D44EE2AFB933000894774 /* Assets.xcassets in Resources */,
 				D8CCF2C62B62719500C1E358 /* GoogleService-Info.plist in Resources */,
 			);
@@ -1268,6 +1272,8 @@
 				DEVELOPMENT_TEAM = 9KN879RV4D;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ToDoList-VIPER/Resources/Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "\"Разрешить доступ к камере, чтобы использовать сделанное фото в качестве аватара?\"";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "\"Разрешить доступ к медиа библиотеки, чтобы использовать сохраненные фото в качестве аватара?\"";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1295,6 +1301,8 @@
 				DEVELOPMENT_TEAM = 9KN879RV4D;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ToDoList-VIPER/Resources/Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "\"Разрешить доступ к камере, чтобы использовать сделанное фото в качестве аватара?\"";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "\"Разрешить доступ к медиа библиотеки, чтобы использовать сохраненные фото в качестве аватара?\"";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

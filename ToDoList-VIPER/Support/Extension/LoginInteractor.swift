@@ -7,6 +7,8 @@
 
 import Foundation
 import FirebaseAuth
+import GoogleSignIn
+import GoogleSignInSwift
 
 final class LoginInteractor: LoginInteractorInputProtocol {
     var presenter: LoginInteractorOutputProtocol?
@@ -19,6 +21,19 @@ final class LoginInteractor: LoginInteractorInputProtocol {
             } else {
                 self.presenter?.getVerificationResult(with: true)
             }
+        }
+    }
+    
+    func googleLogIn(with: LoginViewProtocol) {
+        guard let viewController = with as? UIViewController else { return }
+        GIDSignIn.sharedInstance.signIn(withPresenting: viewController) { signInResult, error in
+            guard error == nil else {
+                print("some auth error in googleLogin method")
+                self.presenter?.getVerificationResult(with: false)
+                return
+            }
+            self.presenter?.getVerificationResult(with: true)
+            
         }
     }
     
