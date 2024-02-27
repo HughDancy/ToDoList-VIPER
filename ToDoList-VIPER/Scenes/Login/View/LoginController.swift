@@ -95,7 +95,7 @@ final class LoginController: UIViewController, LoginViewProtocol {
         let button = UIButton(type: .custom)
         button.setTitle("Войти через Google", for: .normal)
         button.tintColor = .systemBackground
-        button.backgroundColor = .systemGray4
+        button.backgroundColor = .systemGray3
         button.addTarget(self, action: #selector(googleLogin), for: .touchDown)
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
@@ -106,7 +106,7 @@ final class LoginController: UIViewController, LoginViewProtocol {
         let button = UIButton(type: .custom)
         button.setTitle("Войти через Apple", for: .normal)
         button.tintColor = .systemBackground
-        button.backgroundColor = .systemGray4
+        button.backgroundColor = .systemGray3
         button.addTarget(self, action: #selector(appleLogIn), for: .touchDown)
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
