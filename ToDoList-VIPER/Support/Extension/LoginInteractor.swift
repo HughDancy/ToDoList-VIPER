@@ -9,7 +9,6 @@ import Foundation
 import FirebaseAuth
 import GoogleSignIn
 import GoogleSignInSwift
-import AuthenticationServices
 
 final class LoginInteractor: LoginInteractorInputProtocol {
     var presenter: LoginInteractorOutputProtocol?
