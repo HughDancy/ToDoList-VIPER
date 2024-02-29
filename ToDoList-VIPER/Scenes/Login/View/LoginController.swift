@@ -33,8 +33,10 @@ final class LoginController: UIViewController, LoginViewProtocol {
         textField.placeholder = "Логин"
         textField.tintColor = .systemGray4
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
-        textField.leftView = view
-        textField.leftViewMode = .always
+        let icon = UIImageView(image: UIImage(systemName: "at"))
+        icon.contentMode = .scaleAspectFit
+        textField.leftView = icon
+        textField.leftViewMode = .unlessEditing
         textField.autocapitalizationType = .none
         textField.returnKeyType = .next
         textField.tag = 0
@@ -48,8 +50,10 @@ final class LoginController: UIViewController, LoginViewProtocol {
         textField.placeholder = "Пароль"
         textField.tintColor = .systemGray4
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
-        textField.leftView = view
-        textField.leftViewMode = .always
+        let icon = UIImageView(image: UIImage(systemName: "lock"))
+        icon.contentMode = .scaleAspectFit
+        textField.leftView = icon
+        textField.leftViewMode = .unlessEditing
         textField.isSecureTextEntry = true
         textField.autocapitalizationType = .none
         textField.returnKeyType = .done
