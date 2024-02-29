@@ -8,6 +8,7 @@
 import UIKit
 
 final class LoginRouter: LoginRouterProtocol {
+    
     static func createLoginModule() -> UIViewController {
         let viewController = LoginController()
 //        let navController = UINavigationController(rootViewController: viewController)
@@ -49,7 +50,17 @@ final class LoginRouter: LoginRouterProtocol {
         view.present(alertController, animated: true)
     }
     
-    
+    func signInWithApple(with controller: LoginViewProtocol) {
+        guard let view = controller as? UIViewController else { return }
+        let allertController = UIAlertController(title: "Сорян",
+                                                 message: """
+                                                 У меня пока нет платного аккаунта разработчика Apple, поэтому я не смог реализовать функцию SignIn with Apple.
+                                                 Воспользуйтесь обычной формой Sign In или "Войти с помощью Google". Спасибо за понимание!
+                                                 """,
+                                                 preferredStyle: .alert)
+        allertController.addAction(UIAlertAction(title: "Понятно", style: .cancel))
+        view.present(allertController, animated: true)
+    }
     
     
 }

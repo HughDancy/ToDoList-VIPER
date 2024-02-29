@@ -21,6 +21,7 @@ protocol LoginPresenterProtocol: AnyObject {
     func chekTheLogin(login: String, password: String)
     func goToRegistration()
     func googleSingIn()
+    func appleSignIn()
     func changeState()
 }
 
@@ -30,7 +31,7 @@ protocol LoginInteractorInputProtocol: AnyObject {
     //PRESENTER -> INTERACTOR
     func checkAutorizationData(login: String, password: String)
     func changeOnboardingState()
-    func googleLogIn(with: LoginViewProtocol)
+    func googleLogIn(with contoller: LoginViewProtocol)
 }
 
 protocol LoginInteractorOutputProtocol: AnyObject {
@@ -43,4 +44,5 @@ protocol LoginRouterProtocol: AnyObject {
     func goToRegistration(from view: LoginViewProtocol)
     func goToMainScreen(from view: LoginViewProtocol)
     func showWrongPasswordAllert(from view: LoginViewProtocol)
+    func signInWithApple(with: LoginViewProtocol)
 }

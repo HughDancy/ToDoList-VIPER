@@ -29,6 +29,11 @@ final class LoginPresenter: LoginPresenterProtocol {
         guard let view = view else { return }
         interactor?.googleLogIn(with: view)
     }
+    
+    func appleSignIn() {
+        guard let view = view else { return }
+        router?.signInWithApple(with: view)
+    }
 }
 
 extension LoginPresenter: LoginInteractorOutputProtocol {

@@ -272,10 +272,10 @@ final class LoginController: UIViewController, LoginViewProtocol {
     
     @objc func googleLogin() {
         presenter?.googleSingIn()
-        print("You login with Google")
     }
     
     @objc func appleLogIn() {
+        presenter?.appleSignIn()
         print("You login with Apple")
     }
     
@@ -314,3 +314,4 @@ extension LoginController: UITextFieldDelegate {
         self.view.endEditing(true)
     }
 }
+
