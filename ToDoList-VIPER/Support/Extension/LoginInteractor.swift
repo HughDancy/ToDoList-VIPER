@@ -14,12 +14,25 @@ final class LoginInteractor: LoginInteractorInputProtocol {
     var presenter: LoginInteractorOutputProtocol?
     
     
-    func checkAutorizationData(login: String, password: String) {
-        Auth.auth().signIn(withEmail: login, password: password) { dataResult, error in
-            if error != nil {
-                self.presenter?.getVerificationResult(with: false)
+    func checkAutorizationData(login: String?, password: String?) {
+        switch (login != nil) && (password != nil) {
+        case (login == "") || (password == ""):
+            if login == "" {
+                presenter?.getVerificationResult(with: .emptyLogin)
             } else {
-                self.presenter?.getVerificationResult(with: true)
+                presenter?.getVerificationResult(with: .emptyPassword)
+            }
+        case login?.isValidEmail() == false:
+            self.presenter?.getVerificationResult(with: .notValidEmail)
+        default:
+            guard let nickname = login,
+                  let pass = password else { return }
+            Auth.auth().signIn(withEmail: nickname, password: pass) { dataResult, error in
+                if error != nil {
+                    self.presenter?.getVerificationResult(with: .wrongEnteredData)
+                } else {
+                    self.presenter?.getVerificationResult(with: .success)
+                }
             }
         }
     }
@@ -29,11 +42,10 @@ final class LoginInteractor: LoginInteractorInputProtocol {
         GIDSignIn.sharedInstance.signIn(withPresenting: viewController) { signInResult, error in
             guard error == nil else {
                 print("some auth error in googleLogin method")
-                self.presenter?.getVerificationResult(with: false)
+                self.presenter?.getVerificationResult(with: .wrongEnteredData)
                 return
             }
-            self.presenter?.getVerificationResult(with: true)
-            
+            self.presenter?.getVerificationResult(with: .success)
         }
     }
     

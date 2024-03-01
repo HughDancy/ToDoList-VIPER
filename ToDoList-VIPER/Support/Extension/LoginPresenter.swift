@@ -12,7 +12,7 @@ final class LoginPresenter: LoginPresenterProtocol {
     var interactor: LoginInteractorInputProtocol?
     var router: LoginRouterProtocol?
     
-    func chekTheLogin(login: String, password: String) {
+    func chekTheLogin(login: String?, password: String?) {
         interactor?.checkAutorizationData(login: login, password: password)
     }
     
@@ -37,12 +37,29 @@ final class LoginPresenter: LoginPresenterProtocol {
 }
 
 extension LoginPresenter: LoginInteractorOutputProtocol {
-    func getVerificationResult(with: Bool) {
+    func getVerificationResult(with: LogInStatus) {
         guard let view = view else { return }
-        if with == true {
+        switch with {
+        case .emptyLogin:
+            self.view?.makeAnimateTextField(with: .emptyLogin)
+            self.view?.stopAnimateLoginButton()
+        case .emptyPassword:
+            self.view?.makeAnimateTextField(with: .emptyPassword)
+            self.view?.stopAnimateLoginButton()
+        case .notValidEmail:
+            self.router?.showAllert(from: view, title: "Ошибка", 
+                                    message: """
+                                    Введен невалидный e-mail. Поробуйте снова
+                                    """)
+            self.view?.stopAnimateLoginButton()
+        case .wrongEnteredData:
+            self.router?.showAllert(from: view, title: "Ошибка",
+                                    message: """
+                                    Введен неверный логин или пароль. Попробуйте снова
+                                    """)
+            self.view?.stopAnimateLoginButton()
+        case .success:
             self.router?.goToMainScreen(from: view)
-        } else {
-            self.router?.showWrongPasswordAllert(from: view)
         }
     }
 }

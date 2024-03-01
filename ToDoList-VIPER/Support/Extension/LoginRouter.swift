@@ -34,21 +34,15 @@ final class LoginRouter: LoginRouterProtocol {
     func goToMainScreen(from view: LoginViewProtocol) {
         guard let view = view as? UIViewController else { return}
         let mainModule = HomeTabBarRouter.createHomeTabBar()
-//        view.navigationController?.pushViewController(mainModule, animated: true)
-//        mainModule.modalTransitionStyle = .crossDissolve
-//        mainModule.modalPresentationStyle = .fullScreen
-//        view.navigationController?.present(mainModule, animated: true)
         NewUserCheck.shared.setIsNotNewUser()
         view.navigationController?.pushViewController(mainModule, animated: true)
     }
     
-    func showWrongPasswordAllert(from view: LoginViewProtocol) {
+    func showAllert(from view: LoginViewProtocol, title: String, message: String) {
         guard let view = view as? UIViewController else { return }
-        let alertController = UIAlertController(title: "Ошибка",
-                                                message: "Введен неверный логин или пароль. Попробуйте снова",
-                                                preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Ок", style: .cancel))
-        view.present(alertController, animated: true)
+        let allertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        allertController.addAction(UIAlertAction(title: "Ок", style: .cancel))
+        view.present(allertController, animated: true)
     }
     
     func signInWithApple(with controller: LoginViewProtocol) {
@@ -62,6 +56,4 @@ final class LoginRouter: LoginRouterProtocol {
         allertController.addAction(UIAlertAction(title: "Понятно", style: .cancel))
         view.present(allertController, animated: true)
     }
-    
-    
 }

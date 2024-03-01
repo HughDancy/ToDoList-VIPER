@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class LoginController: SingInController, LoginViewProtocol {
+final class LoginController: SingInController {
     var presenter: LoginPresenterProtocol?
     
     //MARK: - OUTLETS
@@ -153,26 +153,16 @@ final class LoginController: SingInController, LoginViewProtocol {
     
     private func setupButtons() {
         loginButton.addTarget(self, action: #selector(loginApp), for: .touchDown)
+        registerButton.addTarget(self, action: #selector(registerUser), for: .touchDown)
+        googleLoginButton.addTarget(self, action: #selector(googleLogin), for: .touchDown)
+        appleLoginButton.addTarget(self, action: #selector(appleLogIn), for: .touchDown)
     }
     
     //MARK: - Buttons action
     @objc func loginApp()  {
         self.view.endEditing(true)
-        switch (loginField.text != nil) && (passwordField.text != nil) {
-          case (loginField.text == "") || (passwordField.text == ""):
-            if loginField.text == "" {
-                let animation = CABasicAnimation.createShakeAnimation(for: loginField, keyPath: "position")
-                loginField.layer.add(animation, forKey: "position")
-            } else {
-                let animation = CABasicAnimation.createShakeAnimation(for: passwordField, keyPath: "position")
-                passwordField.layer.add(animation, forKey: "position")
-            }
-        case loginField.text?.isValidEmail() == false:
-            print("Введен неверный email")
-        default:
-            self.loginButton.showLoading()
-            presenter?.chekTheLogin(login: loginField.text ?? "", password: passwordField.text ?? "")
-        }
+        self.loginButton.showLoading()
+        presenter?.chekTheLogin(login: loginField.text, password: passwordField.text)
     }
     
     @objc func registerUser() {
@@ -186,5 +176,21 @@ final class LoginController: SingInController, LoginViewProtocol {
     @objc func appleLogIn() {
         presenter?.appleSignIn()
         print("You login with Apple")
+    }
+}
+
+extension LoginController: LoginViewProtocol {
+    func makeAnimateTextField(with state: LogInStatus) {
+        if state == .emptyLogin {
+            let animation = CABasicAnimation.createShakeAnimation(for: loginField, keyPath: "position")
+            loginField.layer.add(animation, forKey: "position")
+        } else if state == .emptyPassword {
+            let animation = CABasicAnimation.createShakeAnimation(for: passwordField, keyPath: "position")
+            passwordField.layer.add(animation, forKey: "position")
+        }
+    }
+    
+    func stopAnimateLoginButton() {
+        self.loginButton.hideLoading()
     }
 }
