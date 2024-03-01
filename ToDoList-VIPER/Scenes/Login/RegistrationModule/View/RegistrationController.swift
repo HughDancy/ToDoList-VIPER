@@ -41,17 +41,18 @@ final class RegistrationController: UIViewController {
     private lazy var emailField = UITextField.createBasicTextField(textSize: 14, weight: .semibold, borderStyle: .none, returnKey: .continue, tag: 1)
     private lazy var passwordField = UITextField.createBasicTextField(textSize: 14, weight: .semibold, borderStyle: .none, returnKey: .done, tag: 2)
     
-    private lazy var registerButton: LoadingButton = {
-        let button = LoadingButton(type: .system)
-        button.originalButtonText = "Зарегистироваться"
-        button.tintColor = .systemBackground
-        button.backgroundColor = .systemCyan
-        button.hideLoading()
-        button.layer.cornerRadius = 10
-        button.clipsToBounds = true
-        button.addTarget(self, action: #selector(registerNewUser), for: .touchDown)
-        return button
-    }()
+    private lazy var registerButton = LoadingButton(originalText: "Зарегистрироваться", type: .system)
+//    private lazy var registerButton: LoadingButton = {
+//        let button = LoadingButton(type: .system)
+//        button.originalButtonText = "Зарегистироваться"
+//        button.tintColor = .systemBackground
+//        button.backgroundColor = .systemCyan
+//        button.hideLoading()
+//        button.layer.cornerRadius = 10
+//        button.clipsToBounds = true
+//        button.addTarget(self, action: #selector(registerNewUser), for: .touchDown)
+//        return button
+//    }()
     
     //MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {

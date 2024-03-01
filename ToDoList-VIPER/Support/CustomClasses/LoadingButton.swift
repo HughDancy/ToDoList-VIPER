@@ -13,6 +13,24 @@ class LoadingButton: UIButton {
     var originalButtonText: String?
     var activityIndicator: UIActivityIndicatorView?
     
+    init(originalText: String, type: UIButton.ButtonType) {
+        self.originalButtonText = originalText
+        super.init(frame: .zero)
+        self.setupLoginButton()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupLoginButton() {
+        self.tintColor = .systemBackground
+        self.backgroundColor = .systemCyan
+        self.layer.cornerRadius = 10
+        self.clipsToBounds = true
+        self.hideLoading()
+    }
+    
     func showLoading() {
         originalButtonText = self.titleLabel?.text
         self.setTitle("", for: .normal)

@@ -11,7 +11,7 @@ final class LoginRouter: LoginRouterProtocol {
     
     static func createLoginModule() -> UIViewController {
 //        let viewController = LoginController()
-        let viewController = SecondLoginController()
+        let viewController = LoginController()
 //        let navController = UINavigationController(rootViewController: viewController)
         let presenter: LoginPresenterProtocol & LoginInteractorOutputProtocol = LoginPresenter()
         let interactor: LoginInteractorInputProtocol = LoginInteractor()

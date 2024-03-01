@@ -33,11 +33,12 @@ class AddToDoController: UIViewController, AddToDoViewProtocol {
         return textField
     }()
     private lazy var datePicker = UIDatePicker.createToDoPicker()
-    private lazy var addButton: UIButton =  {
-        let button = UIButton.createToDoButton(title: "Добавить", backColor: .systemBlue, tintColor: .white)
-        button.addTarget(self, action: #selector(addNewTask), for: .touchDown)
-        return button
-    }()
+//    private lazy var addButton: UIButton =  {
+//        let button = UIButton.createToDoButton(title: "Добавить", backColor: .systemBlue, tintColor: .white)
+//        button.addTarget(self, action: #selector(addNewTask), for: .touchDown)
+//        return button
+//    }()
+    private lazy var addButton = BaseButton(imageName: nil, text: "Добавить", color: .systemCyan)
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
