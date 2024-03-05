@@ -32,7 +32,13 @@ class SignInTextField: UITextField {
         self.borderStyle = .none
         let image = UIImageView(image: UIImage(systemName: nameOfImage))
         image.contentMode = .scaleAspectFit
-        self.leftView = image
+        let stackContianer = UIStackView()
+        stackContianer.axis = .horizontal
+        stackContianer.spacing = 0
+        stackContianer.distribution = .fillEqually
+        stackContianer.addArrangedSubview(image)
+        stackContianer.addArrangedSubview(UIView(frame: CGRect(x: 0, y: 0, width: 1, height: 0)))
+        self.leftView = stackContianer
         self.leftViewMode = .unlessEditing
         self.tintColor = .systemGray4
     }
