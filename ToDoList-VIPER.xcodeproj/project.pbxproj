@@ -34,6 +34,7 @@
 		D86D452A2AFB9EBD00894774 /* ToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D45292AFB9EBD00894774 /* ToDoListViewController.swift */; };
 		D86D452C2AFCAAAF00894774 /* ToDoListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D452B2AFCAAAF00894774 /* ToDoListPresenter.swift */; };
 		D86D452E2AFCAD3B00894774 /* ToDoListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D452D2AFCAD3B00894774 /* ToDoListInteractor.swift */; };
+		D87474552B97176C00BF4866 /* CircleBaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87474542B97176C00BF4866 /* CircleBaseButton.swift */; };
 		D8900F112B5135F7008E0E34 /* AnimationLoadingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8900F102B5135F7008E0E34 /* AnimationLoadingController.swift */; };
 		D8900F152B5529C7008E0E34 /* AnimationLoadingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8900F142B5529C7008E0E34 /* AnimationLoadingRouter.swift */; };
 		D8900F172B55435A008E0E34 /* NewUserCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8900F162B55435A008E0E34 /* NewUserCheck.swift */; };
@@ -153,6 +154,7 @@
 		D86D45292AFB9EBD00894774 /* ToDoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewController.swift; sourceTree = "<group>"; };
 		D86D452B2AFCAAAF00894774 /* ToDoListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListPresenter.swift; sourceTree = "<group>"; };
 		D86D452D2AFCAD3B00894774 /* ToDoListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListInteractor.swift; sourceTree = "<group>"; };
+		D87474542B97176C00BF4866 /* CircleBaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleBaseButton.swift; sourceTree = "<group>"; };
 		D8900F102B5135F7008E0E34 /* AnimationLoadingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationLoadingController.swift; sourceTree = "<group>"; };
 		D8900F142B5529C7008E0E34 /* AnimationLoadingRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationLoadingRouter.swift; sourceTree = "<group>"; };
 		D8900F162B55435A008E0E34 /* NewUserCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserCheck.swift; sourceTree = "<group>"; };
@@ -876,6 +878,7 @@
 				D8C19ECF2B90B333004BCDDD /* SignInController.swift */,
 				D8C19ED32B90F3D4004BCDDD /* SignInTextField.swift */,
 				D8C19ED52B91C037004BCDDD /* BaseButton.swift */,
+				D87474542B97176C00BF4866 /* CircleBaseButton.swift */,
 			);
 			path = CustomClasses;
 			sourceTree = "<group>";
@@ -1089,6 +1092,7 @@
 				D80F38722AFCDF12004A408F /* ToDoCell.swift in Sources */,
 				D8E840662B6780A6005A0936 /* RegistrationPresenter.swift in Sources */,
 				D8E9F8A32B04D23900A3F3FC /* UILabel + EXT.swift in Sources */,
+				D87474552B97176C00BF4866 /* CircleBaseButton.swift in Sources */,
 				D86D452C2AFCAAAF00894774 /* ToDoListPresenter.swift in Sources */,
 				D8E9F8D02B18A56200A3F3FC /* ToDoObjectSorter.swift in Sources */,
 				D8E9F87E2B0353B500A3F3FC /* HomeTabBarRouterProtocol.swift in Sources */,

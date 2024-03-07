@@ -29,6 +29,9 @@ class LoadingButton: UIButton {
         self.layer.cornerRadius = 10
         self.clipsToBounds = true
         self.hideLoading()
+        self.snp.makeConstraints { make in
+            make.height.equalTo(UIScreen.main.bounds.size.width / 8)
+        }
     }
     
     func showLoading() {

@@ -18,8 +18,8 @@ final class LoginController: SingInController {
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
-
-    private lazy var loginField = SignInTextField(placeholder: "Логин", 
+    
+    private lazy var loginField = SignInTextField(placeholder: "Логин",
                                                   nameOfImage: "at",
                                                   tag: 0,
                                                   delegate: self,
@@ -27,7 +27,7 @@ final class LoginController: SingInController {
                                                   capitalizationType: .none,
                                                   returnKey: .next,
                                                   secure: false)
-
+    
     private lazy var passwordField = SignInTextField(placeholder: "Пароль",
                                                      nameOfImage: "lock",
                                                      tag: 1,
@@ -52,15 +52,24 @@ final class LoginController: SingInController {
     
     private lazy var orLabel: UILabel = {
         let label = UILabel()
-        label.text = "или"
+        label.text = "или войти с помощью"
         label.textColor = .systemGray2
         label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         return label
     }()
-
-    private lazy var googleLoginButton = BaseButton(imageName: "googleLogo", text: "Войти через Google", color: .systemGray3)
-    private lazy var appleLoginButton = BaseButton(imageName: "apple.logo", text: "Войти через Apple", color: .systemGray3)
-
+    
+    private lazy var googleLoginButton = CircleBaseButton(imageName: "googleLogo", color: .systemFill, cornerRadius: 30)
+    private lazy var appleLoginButton = CircleBaseButton(imageName: "apple.logo", color: .systemFill, cornerRadius: 30)
+    
+    private lazy var sigInButtonStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.alignment = .fill
+        stack.distribution = .fillEqually
+        stack.spacing = 15
+        return stack
+    }()
+    
     //MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -87,61 +96,66 @@ final class LoginController: SingInController {
         scrollView.addSubview(loginButton)
         scrollView.addSubview(registerButton)
         scrollView.addSubview(orLabel)
-        scrollView.addSubview(googleLoginButton)
-        scrollView.addSubview(appleLoginButton)
+        scrollView.addSubview(sigInButtonStack)
+        sigInButtonStack.addArrangedSubview(googleLoginButton)
+        sigInButtonStack.addArrangedSubview(appleLoginButton)
+//        scrollView.addSubview(googleLoginButton)
+//        scrollView.addSubview(appleLoginButton)
     }
     
     //MARK: - Setup Layout
     override func setupLayout() {
         super.setupLayout()
         logoImage.snp.makeConstraints { make in
-            make.top.equalTo(scrollView.snp.top).offset(50)
+//            make.top.equalTo(scrollView.snp.top).offset(50)
+//            make.top.equalTo(scrollView.snp.top).offset(UIScreen.main.bounds.height / 6).priority(1000)
+
+//            make.top.equalTo(scrollView.snp.top).offset(UIScreen.main.bounds.width / 2)
+//            make.top.equalTo(view.snp.top).offset((UIScreen.main.bounds.height / 3))
+            make.top.equalToSuperview().offset(scrollView.bounds.height - scrollView.bounds.width)
+            print(UIScreen.main.bounds.height)
+            print(UIScreen.main.bounds.width)
+            print(view.bounds.height)
+            print(view.bounds.width)
+            
+//            make.top.equalToSuperview().multipliedBy(0.1)
             make.centerX.equalTo(scrollView.snp.centerX)
-            make.height.equalTo(view.frame.size.height / 3)
-            make.width.equalTo(view.frame.size.width * 0.5)
+            make.height.equalTo(UIScreen.main.bounds.height / 4)
+            make.width.equalTo(UIScreen.main.bounds.height * 0.5)
         }
         
         loginField.snp.makeConstraints { make in
             make.top.equalTo(logoImage.snp.bottom).offset(10)
-            make.leading.trailing.equalTo(scrollView.safeAreaLayoutGuide).inset(30)
+            make.leading.trailing.equalTo(scrollView.safeAreaLayoutGuide).inset(40)
             make.height.equalTo(40)
         }
         
         passwordField.snp.makeConstraints { make in
             make.top.equalTo(loginField.snp.bottom).offset(15)
-            make.leading.trailing.equalTo(scrollView.safeAreaLayoutGuide).inset(30)
+            make.leading.trailing.equalTo(scrollView.safeAreaLayoutGuide).inset(40)
             make.height.equalTo(40)
         }
         
         loginButton.snp.makeConstraints { make in
             make.top.equalTo(passwordField.snp.bottom).offset(20)
             make.leading.trailing.equalTo(scrollView.safeAreaLayoutGuide).inset(40)
-            make.height.equalTo(UIScreen.main.bounds.size.width / 10)
-        }
-        
-        registerButton.snp.makeConstraints { make in
-            make.top.equalTo(loginButton.snp.bottom).offset(5)
-            make.leading.trailing.equalTo(scrollView.safeAreaLayoutGuide).inset(40)
-            make.height.equalTo(35)
+//            make.height.equalTo(UIScreen.main.bounds.size.width / 8)
         }
         
         orLabel.snp.makeConstraints { make in
-            make.top.equalTo(registerButton.snp.bottom).offset(5)
+            make.top.equalTo(loginButton.snp.bottom).offset(20)
             make.centerX.equalTo(scrollView.snp.centerX)
-        }
-
-        googleLoginButton.snp.makeConstraints { make in
-            make.top.equalTo(orLabel.snp.bottom).offset(10)
-            make.centerX.equalTo(scrollView.snp.centerX)
-            make.leading.trailing.equalTo(scrollView.safeAreaLayoutGuide).inset(40)
-            make.height.equalTo(UIScreen.main.bounds.size.width / 10)
         }
         
-        appleLoginButton.snp.makeConstraints { make in
-            make.top.equalTo(googleLoginButton.snp.bottom).offset(10)
+        sigInButtonStack.snp.makeConstraints { make in
+            make.top.equalTo(orLabel.snp.bottom).offset(15)
             make.centerX.equalTo(scrollView.safeAreaLayoutGuide.snp.centerX)
+        }
+        
+        registerButton.snp.makeConstraints { make in
+            make.top.equalTo(sigInButtonStack.snp.bottom).offset(5)
             make.leading.trailing.equalTo(scrollView.safeAreaLayoutGuide).inset(40)
-            make.height.equalTo(UIScreen.main.bounds.size.width / 10)
+            make.height.equalTo(35)
         }
     }
     
