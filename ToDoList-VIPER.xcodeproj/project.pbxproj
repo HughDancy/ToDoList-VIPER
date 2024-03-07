@@ -35,18 +35,18 @@
 		D86D452C2AFCAAAF00894774 /* ToDoListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D452B2AFCAAAF00894774 /* ToDoListPresenter.swift */; };
 		D86D452E2AFCAD3B00894774 /* ToDoListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D452D2AFCAD3B00894774 /* ToDoListInteractor.swift */; };
 		D87474552B97176C00BF4866 /* CircleBaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87474542B97176C00BF4866 /* CircleBaseButton.swift */; };
+		D87474592B99A28200BF4866 /* credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = D87474582B99A28200BF4866 /* credentials.plist */; };
+		D874745B2B99A2CE00BF4866 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D874745A2B99A2CE00BF4866 /* GoogleService-Info.plist */; };
 		D8900F112B5135F7008E0E34 /* AnimationLoadingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8900F102B5135F7008E0E34 /* AnimationLoadingController.swift */; };
 		D8900F152B5529C7008E0E34 /* AnimationLoadingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8900F142B5529C7008E0E34 /* AnimationLoadingRouter.swift */; };
 		D8900F172B55435A008E0E34 /* NewUserCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8900F162B55435A008E0E34 /* NewUserCheck.swift */; };
 		D8BF0D432B15ED2E00D1572E /* ToDoListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BF0D422B15ED2E00D1572E /* ToDoListController.swift */; };
 		D8C19EC62B8DC3FF004BCDDD /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = D8C19EC52B8DC3FF004BCDDD /* GoogleSignIn */; };
 		D8C19EC82B8DC3FF004BCDDD /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D8C19EC72B8DC3FF004BCDDD /* GoogleSignInSwift */; };
-		D8C19ECE2B8DDC55004BCDDD /* credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = D8C19ECD2B8DDC55004BCDDD /* credentials.plist */; };
 		D8C19ED02B90B333004BCDDD /* SignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C19ECF2B90B333004BCDDD /* SignInController.swift */; };
 		D8C19ED22B90B494004BCDDD /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C19ED12B90B494004BCDDD /* LoginController.swift */; };
 		D8C19ED42B90F3D4004BCDDD /* SignInTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C19ED32B90F3D4004BCDDD /* SignInTextField.swift */; };
 		D8C19ED62B91C037004BCDDD /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C19ED52B91C037004BCDDD /* BaseButton.swift */; };
-		D8CCF2C62B62719500C1E358 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D8CCF2C52B62719500C1E358 /* GoogleService-Info.plist */; };
 		D8CCF2C92B62725400C1E358 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D8CCF2C82B62725400C1E358 /* FirebaseAnalytics */; };
 		D8CCF2CB2B62725400C1E358 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = D8CCF2CA2B62725400C1E358 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		D8CCF2CD2B62725400C1E358 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D8CCF2CC2B62725400C1E358 /* FirebaseAuth */; };
@@ -155,16 +155,16 @@
 		D86D452B2AFCAAAF00894774 /* ToDoListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListPresenter.swift; sourceTree = "<group>"; };
 		D86D452D2AFCAD3B00894774 /* ToDoListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListInteractor.swift; sourceTree = "<group>"; };
 		D87474542B97176C00BF4866 /* CircleBaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleBaseButton.swift; sourceTree = "<group>"; };
+		D87474582B99A28200BF4866 /* credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = credentials.plist; sourceTree = "<group>"; };
+		D874745A2B99A2CE00BF4866 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D8900F102B5135F7008E0E34 /* AnimationLoadingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationLoadingController.swift; sourceTree = "<group>"; };
 		D8900F142B5529C7008E0E34 /* AnimationLoadingRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationLoadingRouter.swift; sourceTree = "<group>"; };
 		D8900F162B55435A008E0E34 /* NewUserCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserCheck.swift; sourceTree = "<group>"; };
 		D8BF0D422B15ED2E00D1572E /* ToDoListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListController.swift; sourceTree = "<group>"; };
-		D8C19ECD2B8DDC55004BCDDD /* credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = credentials.plist; path = ../../../../../../Downloads/credentials.plist; sourceTree = "<group>"; };
 		D8C19ECF2B90B333004BCDDD /* SignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInController.swift; sourceTree = "<group>"; };
 		D8C19ED12B90B494004BCDDD /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		D8C19ED32B90F3D4004BCDDD /* SignInTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInTextField.swift; sourceTree = "<group>"; };
 		D8C19ED52B91C037004BCDDD /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
-		D8CCF2C52B62719500C1E358 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D8CE4B6F2B87362500E473AC /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		D8CE4B712B8739D900E473AC /* RegistrationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationStatus.swift; sourceTree = "<group>"; };
 		D8E840532B63A8F0005A0936 /* String + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + EXT.swift"; sourceTree = "<group>"; };
@@ -429,8 +429,8 @@
 				D86D44ED2AFB933000894774 /* Assets.xcassets */,
 				D86D44EF2AFB933000894774 /* LaunchScreen.storyboard */,
 				D86D44F22AFB933000894774 /* Info.plist */,
-				D8CCF2C52B62719500C1E358 /* GoogleService-Info.plist */,
-				D8C19ECD2B8DDC55004BCDDD /* credentials.plist */,
+				D874745A2B99A2CE00BF4866 /* GoogleService-Info.plist */,
+				D87474582B99A28200BF4866 /* credentials.plist */,
 				D86D44EA2AFB932E00894774 /* ToDoList_VIPER.xcdatamodeld */,
 			);
 			path = Resources;
@@ -1007,9 +1007,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D86D44F12AFB933000894774 /* LaunchScreen.storyboard in Resources */,
-				D8C19ECE2B8DDC55004BCDDD /* credentials.plist in Resources */,
+				D87474592B99A28200BF4866 /* credentials.plist in Resources */,
+				D874745B2B99A2CE00BF4866 /* GoogleService-Info.plist in Resources */,
 				D86D44EE2AFB933000894774 /* Assets.xcassets in Resources */,
-				D8CCF2C62B62719500C1E358 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
