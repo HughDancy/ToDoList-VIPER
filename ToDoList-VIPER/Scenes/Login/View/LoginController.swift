@@ -58,8 +58,8 @@ final class LoginController: SingInController {
         return label
     }()
     
-    private lazy var googleLoginButton = CircleBaseButton(imageName: "googleLogo", color: .systemFill, cornerRadius: 30)
-    private lazy var appleLoginButton = CircleBaseButton(imageName: "apple.logo", color: .systemFill, cornerRadius: 30)
+    private lazy var googleLoginButton = CircleBaseButton(imageName: "googleLogo", typeOfImage: .customImage, color: .systemFill, cornerRadius: 30)
+    private lazy var appleLoginButton = CircleBaseButton(imageName: "apple.logo", typeOfImage: .systemImage, color: .systemFill, cornerRadius: 30)
     
     private lazy var sigInButtonStack: UIStackView = {
         let stack = UIStackView()
@@ -99,26 +99,13 @@ final class LoginController: SingInController {
         scrollView.addSubview(sigInButtonStack)
         sigInButtonStack.addArrangedSubview(googleLoginButton)
         sigInButtonStack.addArrangedSubview(appleLoginButton)
-//        scrollView.addSubview(googleLoginButton)
-//        scrollView.addSubview(appleLoginButton)
     }
     
     //MARK: - Setup Layout
     override func setupLayout() {
         super.setupLayout()
         logoImage.snp.makeConstraints { make in
-//            make.top.equalTo(scrollView.snp.top).offset(50)
-//            make.top.equalTo(scrollView.snp.top).offset(UIScreen.main.bounds.height / 6).priority(1000)
-
-//            make.top.equalTo(scrollView.snp.top).offset(UIScreen.main.bounds.width / 2)
-//            make.top.equalTo(view.snp.top).offset((UIScreen.main.bounds.height / 3))
-            make.top.equalToSuperview().offset(scrollView.bounds.height - scrollView.bounds.width)
-            print(UIScreen.main.bounds.height)
-            print(UIScreen.main.bounds.width)
-            print(view.bounds.height)
-            print(view.bounds.width)
-            
-//            make.top.equalToSuperview().multipliedBy(0.1)
+            make.top.equalTo(view.snp.top).offset((UIScreen.main.bounds.height * 0.6) - (UIScreen.main.bounds.width * 0.6))
             make.centerX.equalTo(scrollView.snp.centerX)
             make.height.equalTo(UIScreen.main.bounds.height / 4)
             make.width.equalTo(UIScreen.main.bounds.height * 0.5)
@@ -139,7 +126,6 @@ final class LoginController: SingInController {
         loginButton.snp.makeConstraints { make in
             make.top.equalTo(passwordField.snp.bottom).offset(20)
             make.leading.trailing.equalTo(scrollView.safeAreaLayoutGuide).inset(40)
-//            make.height.equalTo(UIScreen.main.bounds.size.width / 8)
         }
         
         orLabel.snp.makeConstraints { make in

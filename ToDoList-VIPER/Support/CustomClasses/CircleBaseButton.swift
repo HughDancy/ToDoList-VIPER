@@ -10,10 +10,12 @@ import SnapKit
 
 final class CircleBaseButton: UIButton {
     var imageName: String?
+    var typeOfImage: ImageTypeForButton?
     
-    init(imageName: String?, color: UIColor, cornerRadius: CGFloat) {
+    init(imageName: String?, typeOfImage: ImageTypeForButton, color: UIColor, cornerRadius: CGFloat) {
         super.init(frame: .zero)
         self.imageName = imageName
+        self.typeOfImage = typeOfImage
         self.backgroundColor = color
         self.layer.cornerRadius = cornerRadius
         self.setupButton()
@@ -33,22 +35,28 @@ final class CircleBaseButton: UIButton {
     }
     
     private func setupLefImageView() {
-        switch imageName {
-        case "googleLogo":
+        switch typeOfImage {
+        case .customImage:
             let imageView = UIImageView(image: UIImage(named: imageName ?? "exclamationmark.triangle"))
             self.addSubview(imageView)
             imageView.snp.makeConstraints { make in
                 make.centerY.centerX.equalTo(self.safeAreaLayoutGuide)
                 make.height.width.equalTo(20)
             }
-        default:
+        case .systemImage:
             let imageView = UIImageView(image: UIImage(systemName: imageName ?? "exclamationmark.triangle"))
             self.addSubview(imageView)
             imageView.snp.makeConstraints { make in
                 make.centerY.centerX.equalTo(self.safeAreaLayoutGuide)
             }
+        default:
+            break
         }
-    }
-    
+      }
+}
 
+
+enum ImageTypeForButton {
+    case systemImage
+    case customImage
 }
