@@ -38,7 +38,7 @@ class AddToDoController: UIViewController, AddToDoViewProtocol {
 //        button.addTarget(self, action: #selector(addNewTask), for: .touchDown)
 //        return button
 //    }()
-    private lazy var addButton = BaseButton(imageName: nil, text: "Добавить", color: .systemCyan)
+    private lazy var addButton = BaseButton(text: "Добавить", color: .systemCyan)
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
