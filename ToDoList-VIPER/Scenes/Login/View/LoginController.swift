@@ -23,7 +23,6 @@ final class LoginController: SingInController {
                                                   nameOfImage: "at",
                                                   tag: 0,
                                                   delegate: self,
-                                                  frame: .zero,
                                                   capitalizationType: .none,
                                                   returnKey: .next,
                                                   secure: false)
@@ -32,7 +31,6 @@ final class LoginController: SingInController {
                                                      nameOfImage: "lock",
                                                      tag: 1,
                                                      delegate: self,
-                                                     frame: .zero,
                                                      capitalizationType: .none,
                                                      returnKey: .done,
                                                      secure: true)
@@ -78,7 +76,6 @@ final class LoginController: SingInController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.layoutIfNeeded()
         setupButtons()
     }
     

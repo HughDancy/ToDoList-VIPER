@@ -38,6 +38,7 @@ class SingInController: UIViewController {
         scrollView.keyboardDismissMode = .interactive
         setupHierarchy()
         setupLayout()
+        view.layoutIfNeeded()
         
     }
     
