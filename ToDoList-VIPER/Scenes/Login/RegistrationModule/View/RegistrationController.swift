@@ -134,7 +134,7 @@ final class RegistrationController: SingInController {
         }
     }
 }
-
+    //MARK: - RegistrationViewProtocol Extension
 extension RegistrationController: RegistrationViewProtocol {
     func stopAnimateRegisterButton() {
         self.registerButton.hideLoading()
