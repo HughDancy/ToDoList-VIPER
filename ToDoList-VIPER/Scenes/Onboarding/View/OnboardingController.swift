@@ -18,15 +18,13 @@ class OnboardingController: UIPageViewController {
     //MARK: - Life cycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presenter?.viewWillAppear()
-        setupPages()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        //MARK: - REWRITE THIS
-//        UserDefaults.standard.setValue(OnboardingStates.welcome.rawValue, forKey: "onboardingState")
+        presenter?.viewWillAppear()
+        setupPages()
         self.dataSource = self
     }
     
@@ -34,26 +32,29 @@ class OnboardingController: UIPageViewController {
     private func setupPages() {
         for item in data {
             let vc = OnboardingPageController()
+            vc.state = item.state
             vc.setupElements(with: item)
             vc.nextScreenButton.addTarget(self, action: #selector(goToNextScreen), for: .touchDown)
             if vc.state == .option {
                 vc.photoAndLibraryButton.isHidden = false
                 vc.photoAndLibraryButton.addTarget(self, action: #selector(presentRequest), for: .touchDown)
+                vc.nextScreenButton.addTarget(self, action: #selector(goToLogin), for: .touchDown)
             } else {
                 vc.view.willRemoveSubview(vc.photoAndLibraryButton)
                 vc.photoAndLibraryButton.isHidden = true
             }
             pages.append(vc)
-            
         }
         
         if let firstPage = pages.first(where: { page in
-            page.state?.rawValue ?? OnboardingStates.welcome.rawValue == UserDefaults.standard.string(forKey: "onboardingState")
-        })  {
-            setViewControllers([firstPage], direction: .forward, animated: true, completion: nil)
-        }
+                  page.state?.rawValue ?? OnboardingStates.welcome.rawValue == UserDefaults.standard.string(forKey: "onboardingState")
+              })  {
+                  setViewControllers([firstPage], direction: .forward, animated: true, completion: nil)
+              }
+
     }
-    
+  
+    //MARK: - @OBJC METHODS
     @objc func goToNextScreen() {
         if currentPage + 1 < pages.count {
             self.setViewControllers([pages[currentPage + 1]], direction: .forward, animated: true)
@@ -63,6 +64,10 @@ class OnboardingController: UIPageViewController {
     
     @objc func presentRequest() {
         presenter?.presentRequestAcess()
+    }
+    
+    @objc func goToLogin() {
+        presenter?.goToLoginModule()
     }
 }
 
@@ -97,6 +102,4 @@ extension OnboardingController: UIPageViewControllerDelegate, UIPageViewControll
         }
         return nil
     }
-    
-    
 }

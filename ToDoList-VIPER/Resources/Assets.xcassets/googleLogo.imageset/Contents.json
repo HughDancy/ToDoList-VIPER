@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "pngtree-student-character-sitting-at-table-with-laptop-and-studying-at-home-png-image_4843347.png",
+      "filename" : "7612698.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -17,5 +17,8 @@
   "info" : {
     "author" : "xcode",
     "version" : 1
+  },
+  "properties" : {
+    "compression-type" : "automatic"
   }
 }

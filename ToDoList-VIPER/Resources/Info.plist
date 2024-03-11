@@ -2,10 +2,17 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSCameraUsageDescription</key>
-	<string>&quot;Разрешить доступ к камере, чтобы использовать сделанное фото в качестве аватара?&quot;</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>&quot;Разрешить доступ к медиа библиотеки, чтобы использовать сохраненные фото в качестве аватара?&quot;</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.100122040481-tsb14jr2najr7kkv74pf97k4grispi5p</string>
+			</array>
+		</dict>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -23,5 +30,7 @@
 			</array>
 		</dict>
 	</dict>
+	<key>CLIENT_ID</key>
+	<string>100122040481-tsb14jr2najr7kkv74pf97k4grispi5p.apps.googleusercontent.com</string>
 </dict>
 </plist>

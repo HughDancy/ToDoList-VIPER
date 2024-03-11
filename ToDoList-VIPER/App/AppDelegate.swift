@@ -7,6 +7,10 @@
 
 import UIKit
 import CoreData
+import FirebaseAuth
+import FirebaseCore
+import GoogleSignIn
+import GoogleSignInSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,13 +18,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        window = UIWindow(frame: UIScreen.main.bounds)
-//        let tabBar = HomeTabBarRouter.createHomeTabBar()
-        let loadingController = AnimationLoadingRouter.createLoadingModule()
-//        window?.rootViewController = tabBar
-        window?.rootViewController = loadingController
-        window?.makeKeyAndVisible()
+        FirebaseApp.configure()
+        guard let clientID = FirebaseApp.app()?.options.clientID else { return false }
+        let config = GIDConfiguration(clientID: clientID)
+        GIDSignIn.sharedInstance.configuration = config
+
         return true
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+      var handled: Bool
+
+      handled = GIDSignIn.sharedInstance.handle(url)
+      if handled {
+        return true
+      }
+
+      // Handle other custom URL types.
+
+      // If not handled by this app, return false.
+      return false
     }
 
     // MARK: UISceneSession Lifecycle

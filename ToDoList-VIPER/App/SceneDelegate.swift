@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import GoogleSignIn
+import GoogleSignInSwift
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -15,9 +17,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        let tabBar = HomeTabBarRouter.createHomeTabBar()
-        let loadingController = AnimationLoadingRouter.createLoadingModule()
-//        window?.rootViewController = tabBar
+        
+        GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
+            if error != nil || user == nil {
+              // Show the app's signed-out state.
+            } else {
+              // Show the app's signed-in state.
+            }
+          }
+        
+        let loadingController = AppConfigurator.configuator.configureApp()
         window?.rootViewController = loadingController
         window?.makeKeyAndVisible()
     }
