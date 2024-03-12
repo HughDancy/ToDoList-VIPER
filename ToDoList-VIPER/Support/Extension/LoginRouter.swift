@@ -34,8 +34,9 @@ final class LoginRouter: LoginRouterProtocol {
     func goToMainScreen(from view: LoginViewProtocol) {
         guard let view = view as? UIViewController else { return}
         let mainModule = HomeTabBarRouter.createHomeTabBar()
+        let mockMain = CustomHomeTabBarController()
         NewUserCheck.shared.setIsNotNewUser()
-        view.navigationController?.pushViewController(mainModule, animated: true)
+        view.navigationController?.pushViewController(mockMain, animated: true)
     }
     
     func showAllert(from view: LoginViewProtocol, title: String, message: String) {

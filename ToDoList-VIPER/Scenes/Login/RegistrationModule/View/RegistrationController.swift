@@ -109,7 +109,8 @@ final class RegistrationController: SingInController {
         }
         
         registerButton.snp.makeConstraints { make in
-            make.top.equalTo(passwordField.snp.bottom).offset(100)
+//            make.top.equalTo(passwordField.snp.bottom).offset(70)
+            make.bottom.equalTo(scrollView.safeAreaLayoutGuide.snp.bottom).inset(50)
             make.leading.trailing.equalTo(scrollView.safeAreaLayoutGuide).inset(35)
         }
     }
