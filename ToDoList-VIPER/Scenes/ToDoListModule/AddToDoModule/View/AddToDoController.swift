@@ -41,6 +41,7 @@ class AddToDoController: UIViewController, AddToDoViewProtocol {
         view.backgroundColor = .systemBackground
         setupHierarchy()
         setupLayout()
+        addButton.addTarget(self, action: #selector(addNewTask), for: .touchDown)
     }
     
     deinit {

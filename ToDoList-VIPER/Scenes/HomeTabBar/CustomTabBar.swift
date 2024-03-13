@@ -11,7 +11,7 @@ class CustomTabBar: UITabBar {
 
     private var shapeLayer: CALayer?
     
-    private func addShape() {
+     func addShape() {
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = createPath()
         shapeLayer.strokeColor = UIColor.clear.cgColor
@@ -57,8 +57,8 @@ class CustomTabBar: UITabBar {
                      
         
         //close the path
-        path.addLine(to: CGPoint(x: self.frame.width, y: self.frame.height))
-        path.addLine(to: CGPoint(x: 0, y: self.frame.height))
+        path.addLine(to: CGPoint(x: self.frame.width, y: self.frame.height + 50))
+        path.addLine(to: CGPoint(x: 0, y: self.frame.height + 50))
         path.close()
         return path.cgPath
     }
