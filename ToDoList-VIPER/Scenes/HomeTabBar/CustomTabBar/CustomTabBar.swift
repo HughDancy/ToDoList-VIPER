@@ -15,8 +15,8 @@ class CustomTabBar: UITabBar {
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = createPath()
         shapeLayer.strokeColor = UIColor.clear.cgColor
-        shapeLayer.fillColor = UIColor.darkGray.cgColor
-        shapeLayer.lineWidth = 1.0
+         shapeLayer.fillColor = UIColor.systemGray4.cgColor
+        shapeLayer.lineWidth = 3.0
         shapeLayer.shadowOffset = CGSize(width: 0, height: 0)
         shapeLayer.shadowRadius = 10
         shapeLayer.shadowColor = UIColor.black.cgColor
@@ -54,13 +54,10 @@ class CustomTabBar: UITabBar {
                                        controlPoint: CGPoint(x: centerWidth + 41, y: 5))
         path.addLine(to: CGPoint(x: self.frame.width, y: -20))
                      
-                     
-        
         //close the path
         path.addLine(to: CGPoint(x: self.frame.width, y: self.frame.height + 50))
         path.addLine(to: CGPoint(x: 0, y: self.frame.height + 50))
         path.close()
         return path.cgPath
     }
-
 }

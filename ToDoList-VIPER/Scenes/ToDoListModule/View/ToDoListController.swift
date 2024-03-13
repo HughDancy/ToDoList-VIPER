@@ -66,7 +66,8 @@ class ToDoListController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        title = "Запланировано"
+        self.navigationItem.title = "Запланированно"
+//        title = "Задачи"
         navigationController?.navigationBar.prefersLargeTitles = true
         setupHierarchy()
         setupLayout()

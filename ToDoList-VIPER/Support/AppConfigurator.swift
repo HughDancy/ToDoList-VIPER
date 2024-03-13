@@ -50,10 +50,10 @@ final class AppConfigurator {
     
     private func startMainModule() -> UIViewController {
         let mainModule = HomeTabBarRouter.createHomeTabBar()
-        let mainMockModule = CustomHomeTabBarController()
+//        let mainMockModule = CustomHomeTabBarController()
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate
-        sceneDelegate.window?.rootViewController = mainMockModule
-        return mainMockModule
+        sceneDelegate.window?.rootViewController = mainModule
+        return mainModule
         
     }
 }
