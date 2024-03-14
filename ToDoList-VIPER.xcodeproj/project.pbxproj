@@ -530,6 +530,53 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
+		D8B1E9AE2BA2F3D300D455AF /* MainScreen */ = {
+			isa = PBXGroup;
+			children = (
+				D8B1E9B32BA2F42400D455AF /* View */,
+				D8B1E9B22BA2F41D00D455AF /* Interactor */,
+				D8B1E9B12BA2F41600D455AF /* Presenter */,
+				D8B1E9B02BA2F3ED00D455AF /* Router */,
+				D8B1E9AF2BA2F3E600D455AF /* Protocols */,
+			);
+			path = MainScreen;
+			sourceTree = "<group>";
+		};
+		D8B1E9AF2BA2F3E600D455AF /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		D8B1E9B02BA2F3ED00D455AF /* Router */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		D8B1E9B12BA2F41600D455AF /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		D8B1E9B22BA2F41D00D455AF /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		D8B1E9B32BA2F42400D455AF /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		D8DD85D22BA1F763003E7F89 /* CustomTabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -650,6 +697,7 @@
 				D8900F0F2B513558008E0E34 /* Onboarding */,
 				D85C5DA92B614DC900F548AA /* Login */,
 				D8E9F87A2B03536800A3F3FC /* HomeTabBar */,
+				D8B1E9AE2BA2F3D300D455AF /* MainScreen */,
 				D86D45192AFB96F200894774 /* ToDoListModule */,
 				D8E9F8822B03709800A3F3FC /* ExecuteToDo */,
 				D8E9F8BF2B175A4600A3F3FC /* OverdueToDoModule */,
