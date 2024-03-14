@@ -41,6 +41,8 @@
 		D8900F112B5135F7008E0E34 /* AnimationLoadingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8900F102B5135F7008E0E34 /* AnimationLoadingController.swift */; };
 		D8900F152B5529C7008E0E34 /* AnimationLoadingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8900F142B5529C7008E0E34 /* AnimationLoadingRouter.swift */; };
 		D8900F172B55435A008E0E34 /* NewUserCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8900F162B55435A008E0E34 /* NewUserCheck.swift */; };
+		D8B1E9B62BA2F46C00D455AF /* MainScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9B52BA2F46C00D455AF /* MainScreenController.swift */; };
+		D8B1E9B92BA3026300D455AF /* MainToDoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9B82BA3026300D455AF /* MainToDoCell.swift */; };
 		D8BF0D432B15ED2E00D1572E /* ToDoListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BF0D422B15ED2E00D1572E /* ToDoListController.swift */; };
 		D8C19EC62B8DC3FF004BCDDD /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = D8C19EC52B8DC3FF004BCDDD /* GoogleSignIn */; };
 		D8C19EC82B8DC3FF004BCDDD /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D8C19EC72B8DC3FF004BCDDD /* GoogleSignInSwift */; };
@@ -163,6 +165,8 @@
 		D8900F102B5135F7008E0E34 /* AnimationLoadingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationLoadingController.swift; sourceTree = "<group>"; };
 		D8900F142B5529C7008E0E34 /* AnimationLoadingRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationLoadingRouter.swift; sourceTree = "<group>"; };
 		D8900F162B55435A008E0E34 /* NewUserCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserCheck.swift; sourceTree = "<group>"; };
+		D8B1E9B52BA2F46C00D455AF /* MainScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenController.swift; sourceTree = "<group>"; };
+		D8B1E9B82BA3026300D455AF /* MainToDoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainToDoCell.swift; sourceTree = "<group>"; };
 		D8BF0D422B15ED2E00D1572E /* ToDoListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListController.swift; sourceTree = "<group>"; };
 		D8C19ECF2B90B333004BCDDD /* SignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInController.swift; sourceTree = "<group>"; };
 		D8C19ED12B90B494004BCDDD /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
@@ -573,8 +577,18 @@
 		D8B1E9B32BA2F42400D455AF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D8B1E9B72BA3024000D455AF /* CustomCell */,
+				D8B1E9B52BA2F46C00D455AF /* MainScreenController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		D8B1E9B72BA3024000D455AF /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				D8B1E9B82BA3026300D455AF /* MainToDoCell.swift */,
+			);
+			path = CustomCell;
 			sourceTree = "<group>";
 		};
 		D8DD85D22BA1F763003E7F89 /* CustomTabBar */ = {
@@ -1100,6 +1114,7 @@
 				D86D452A2AFB9EBD00894774 /* ToDoListViewController.swift in Sources */,
 				D8E9F88B2B03768900A3F3FC /* ExecuteToDoInteractor.swift in Sources */,
 				D82B8B6E2B6B8CCB00A006F2 /* AppConfigurator.swift in Sources */,
+				D8B1E9B92BA3026300D455AF /* MainToDoCell.swift in Sources */,
 				D85C57E72B57CCA600023B04 /* OnboardingPresenter.swift in Sources */,
 				D8E840542B63A8F0005A0936 /* String + EXT.swift in Sources */,
 				D8E8405A2B63B148005A0936 /* LoginInteractor.swift in Sources */,
@@ -1116,6 +1131,7 @@
 				D8E9F89F2B04C06300A3F3FC /* AddToDoController.swift in Sources */,
 				D8E9F8B12B0B47FB00A3F3FC /* DateFormatter + EXT.swift in Sources */,
 				D86D44E22AFB932E00894774 /* AppDelegate.swift in Sources */,
+				D8B1E9B62BA2F46C00D455AF /* MainScreenController.swift in Sources */,
 				D8E9F8C62B175AA500A3F3FC /* OverdueProtocols.swift in Sources */,
 				D8E9F8BC2B109DB800A3F3FC /* ToDoStorage.swift in Sources */,
 				D8E8406C2B6789F8005A0936 /* RegistrationRouter.swift in Sources */,
