@@ -34,7 +34,7 @@ class ToDoListViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Запланировано"
+        title = "Задачи"
         navigationController?.navigationBar.prefersLargeTitles = true
         setupRightBarButton()
         setupView()

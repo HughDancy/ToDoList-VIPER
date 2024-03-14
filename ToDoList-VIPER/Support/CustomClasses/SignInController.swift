@@ -72,7 +72,6 @@ class SingInController: UIViewController {
     @objc func keyboardWillHide(_ notification: NSNotification) {
         scrollView.contentInset = .zero
     }
-    
 }
 
 //MARK: - TextField Delegate

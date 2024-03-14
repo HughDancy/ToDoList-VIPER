@@ -102,7 +102,7 @@ final class LoginController: SingInController {
     override func setupLayout() {
         super.setupLayout()
         logoImage.snp.makeConstraints { make in
-            make.top.equalTo(view.snp.top).offset((UIScreen.main.bounds.height * 0.6) - (UIScreen.main.bounds.width * 0.6))
+            make.top.equalTo(scrollView.snp.top).offset((UIScreen.main.bounds.height * 0.4) - (UIScreen.main.bounds.width * 0.4))
             make.centerX.equalTo(scrollView.snp.centerX)
             make.height.equalTo(UIScreen.main.bounds.height / 4)
             make.width.equalTo(UIScreen.main.bounds.height * 0.5)

@@ -9,43 +9,26 @@ import UIKit
 
 final class HomeTabBarRouter: HomeTabBarRouterProtocol {
     static func createHomeTabBar() -> UITabBarController {
-        let tabBar = UITabBarController()
+
+        let tabBar = CustomHomeTabBarController()
+        let taskScreen = ToDoListRouter.createToDoListModule()
+        taskScreen.hidesBottomBarWhenPushed = false
+        let taskScreenItem = UITabBarItem(title: "Задачи",
+                                          image: UIImage(systemName: "list.clipboard.fill"),
+                                          tag: 0)
+        taskScreen.tabBarItem = taskScreenItem
         
-        let planned = ToDoListRouter.createToDoListModule()
-        planned.hidesBottomBarWhenPushed = false
-        let plannedItem = UITabBarItem(title: "Запланировано",
-                                       image: UIImage(systemName: "square.3.layers.3d"),
-                                       selectedImage: UIImage(systemName: "square.3.layers.3d.top.filled"))
+        let optionsScreen = ViewController()
+        let optionsScreenItem = UITabBarItem(title: "Опции",
+                                             image: UIImage(systemName: "gearshape.fill"),
+                                             tag: 1)
+        optionsScreen.tabBarItem = optionsScreenItem
         
-        planned.tabBarItem = plannedItem
-        
-        let overdue = OverdueToDoRouter.createOverdueModule()
-        let overdueItem = UITabBarItem(title: "Просроченно",
-                                       image: UIImage(systemName: "square.stack.3d.up.slash"),
-                                       selectedImage: UIImage(systemName: "square.stack.3d.up.slash.fill"))
-        overdue.tabBarItem = overdueItem
-        
-        let executed = ExecuteToDoRouter.createToDoListModule()
-        let execudetItem = UITabBarItem(title: "Выполненно",
-                                        image: UIImage(systemName: "circle.badge.checkmark"),
-                                        selectedImage: UIImage(systemName: "circle.badge.checkmark.fill"))
-        executed.tabBarItem = execudetItem
-        
-        let configuarations = ViewController()
-        let configurationsItem = UITabBarItem(title: "Настройки",
-                                              image: UIImage(systemName: "gear.circle"),
-                                              selectedImage: UIImage(systemName: "gear.circle.fill"))
-        configuarations.tabBarItem = configurationsItem
-        
-        tabBar.viewControllers = [planned, overdue,  executed, configuarations]
-        tabBar.tabBar.tintColor = .systemBlue
-        
+        tabBar.viewControllers = [taskScreen, optionsScreen]
         
 //        let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
 //        appDelegate.window?.rootViewController = tabBar
       
         return tabBar
     }
-    
-    
 }
