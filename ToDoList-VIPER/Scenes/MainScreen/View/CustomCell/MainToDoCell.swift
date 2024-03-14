@@ -13,9 +13,13 @@ class MainToDoCell: UICollectionViewCell {
     //MARK: - Outlets
     private lazy var containerView: UIView = {
         let container = UIView()
-        container.backgroundColor = .systemGray4
+        container.backgroundColor = .systemGray5
         container.layer.cornerRadius = 15
         container.clipsToBounds = true
+        container.layer.shadowOffset = CGSize(width: 0, height: 0)
+        container.layer.shadowRadius = 10
+        container.layer.shadowColor = UIColor.black.cgColor
+        container.layer.shadowOpacity = 0.3
         return container
     }()
     
@@ -23,18 +27,24 @@ class MainToDoCell: UICollectionViewCell {
         let arrow = UIImageView()
         arrow.image = UIImage(systemName: "arrow.right.circle.fill")
         arrow.tintColor = .systemGreen
+        arrow.backgroundColor = .systemBackground
         return arrow
     }()
     
     private lazy var numbersLabel: UILabel = {
         let numbers = UILabel()
-        
+        numbers.font = UIFont.systemFont(ofSize: 30, weight: .bold)
+        numbers.textColor = .systemBackground
         return numbers
     }()
     
     private lazy var toDosLabel: UILabel = {
         let label = UILabel()
-        
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        label.textColor = .systemBackground
         return label
     }()
     
@@ -56,8 +66,8 @@ class MainToDoCell: UICollectionViewCell {
     
     //MARK: - Setup Hierarchy
     private func setupHierarchy() {
-        containerView.addSubview(containerView)
-        containerView.addSubview(arrowIcon)
+        contentView.addSubview(containerView)
+//        containerView.addSubview(arrowIcon)
         containerView.addSubview(numbersLabel)
         containerView.addSubview(toDosLabel)
     }
@@ -68,24 +78,25 @@ class MainToDoCell: UICollectionViewCell {
             make.top.leading.trailing.bottom.equalToSuperview().inset(10)
         }
         
-        arrowIcon.snp.makeConstraints { make in
-            make.top.trailing.equalToSuperview().inset(15)
-        }
+//        arrowIcon.snp.makeConstraints { make in
+//            make.top.trailing.equalToSuperview().inset(15)
+//        }
         
         numbersLabel.snp.makeConstraints { make in
-            make.top.equalTo(arrowIcon.snp.bottom).offset(15)
-            make.centerX.equalToSuperview()
+            make.centerX.centerY.equalToSuperview()
         }
         
         toDosLabel.snp.makeConstraints { make in
-            make.top.equalTo(numbersLabel.snp.bottom).offset(10)
+            make.top.equalTo(numbersLabel.snp.bottom).offset(5)
             make.centerX.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(10)
         }
     }
     
     //MARK: - Output setup outlets method
-    func setupElements(numbers: Int, dayLabel: String) {
+    func setupElements(numbers: Int, dayLabel: String, backgroundColor: UIColor) {
         numbersLabel.text = String(numbers)
         toDosLabel.text = dayLabel
+        containerView.backgroundColor = backgroundColor
     }
 }
