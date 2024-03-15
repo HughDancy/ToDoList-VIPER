@@ -44,6 +44,7 @@
 		D8B1E9B62BA2F46C00D455AF /* MainScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9B52BA2F46C00D455AF /* MainScreenController.swift */; };
 		D8B1E9B92BA3026300D455AF /* MainToDoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9B82BA3026300D455AF /* MainToDoCell.swift */; };
 		D8B1E9BB2BA40D4F00D455AF /* MainToDoContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9BA2BA40D4F00D455AF /* MainToDoContoller.swift */; };
+		D8B1E9BD2BA4178B00D455AF /* MainScreenProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9BC2BA4178B00D455AF /* MainScreenProtocols.swift */; };
 		D8BF0D432B15ED2E00D1572E /* ToDoListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BF0D422B15ED2E00D1572E /* ToDoListController.swift */; };
 		D8C19EC62B8DC3FF004BCDDD /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = D8C19EC52B8DC3FF004BCDDD /* GoogleSignIn */; };
 		D8C19EC82B8DC3FF004BCDDD /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D8C19EC72B8DC3FF004BCDDD /* GoogleSignInSwift */; };
@@ -169,6 +170,7 @@
 		D8B1E9B52BA2F46C00D455AF /* MainScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenController.swift; sourceTree = "<group>"; };
 		D8B1E9B82BA3026300D455AF /* MainToDoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainToDoCell.swift; sourceTree = "<group>"; };
 		D8B1E9BA2BA40D4F00D455AF /* MainToDoContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainToDoContoller.swift; sourceTree = "<group>"; };
+		D8B1E9BC2BA4178B00D455AF /* MainScreenProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenProtocols.swift; sourceTree = "<group>"; };
 		D8BF0D422B15ED2E00D1572E /* ToDoListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListController.swift; sourceTree = "<group>"; };
 		D8C19ECF2B90B333004BCDDD /* SignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInController.swift; sourceTree = "<group>"; };
 		D8C19ED12B90B494004BCDDD /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
@@ -539,11 +541,11 @@
 		D8B1E9AE2BA2F3D300D455AF /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
+				D8B1E9AF2BA2F3E600D455AF /* Protocols */,
 				D8B1E9B32BA2F42400D455AF /* View */,
 				D8B1E9B22BA2F41D00D455AF /* Interactor */,
 				D8B1E9B12BA2F41600D455AF /* Presenter */,
 				D8B1E9B02BA2F3ED00D455AF /* Router */,
-				D8B1E9AF2BA2F3E600D455AF /* Protocols */,
 			);
 			path = MainScreen;
 			sourceTree = "<group>";
@@ -551,6 +553,7 @@
 		D8B1E9AF2BA2F3E600D455AF /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				D8B1E9BC2BA4178B00D455AF /* MainScreenProtocols.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1123,6 +1126,7 @@
 				D8E8405A2B63B148005A0936 /* LoginInteractor.swift in Sources */,
 				D8CE4B702B87362500E473AC /* Reachability.swift in Sources */,
 				D86D44E62AFB932E00894774 /* ViewController.swift in Sources */,
+				D8B1E9BD2BA4178B00D455AF /* MainScreenProtocols.swift in Sources */,
 				D8E840642B677C31005A0936 /* RegistrationProtocols.swift in Sources */,
 				D8E9F8722B01FAFB00A3F3FC /* ToDoDetailController.swift in Sources */,
 				D8900F172B55435A008E0E34 /* NewUserCheck.swift in Sources */,
