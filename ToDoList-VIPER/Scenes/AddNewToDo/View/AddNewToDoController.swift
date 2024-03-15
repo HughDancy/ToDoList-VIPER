@@ -31,15 +31,14 @@ class AddNewToDoController: UIViewController {
     }()
     
     private lazy var descriptionField: UITextView = {
-       let textView = UITextView()
-//        textView.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
-//        textView.placeholderText = "Описание задачи"
+        let textView = UITextView()
+        
         textView.backgroundColor = .systemGray5
         textView.layer.cornerRadius = 10
         
         return textView
     }()
- 
+    
     private lazy var dateField = UIDatePicker.createToDoPicker()
     private lazy var addNewToDoButton = UIButton.createToDoButton(title: "Add new ToDo", backColor: .systemCyan, tintColor: .systemBackground)
     
@@ -50,6 +49,7 @@ class AddNewToDoController: UIViewController {
         view.backgroundColor = .systemBackground
         setupHierarchy()
         setupLayout()
+        setupTextView()
     }
     
     //MARK: - Setup Hierarchy
@@ -57,7 +57,7 @@ class AddNewToDoController: UIViewController {
         view.addSubview(titleOfScreen)
         view.addSubview(nameOfTaskField)
         view.addSubview(descriptionField)
-//        view.addSubview(dateField)
+        //        view.addSubview(dateField)
         view.addSubview(addNewToDoButton)
     }
     //MARK: - Setup Layout
@@ -79,10 +79,10 @@ class AddNewToDoController: UIViewController {
             make.height.equalTo(100)
         }
         
-//        dateField.snp.makeConstraints { make in
-//            make.top.equalTo(descriptionField.snp.bottom).offset(10)
-//            make.leading.trailing.equalToSuperview().inset(40)
-//        }
+        //        dateField.snp.makeConstraints { make in
+        //            make.top.equalTo(descriptionField.snp.bottom).offset(10)
+        //            make.leading.trailing.equalToSuperview().inset(40)
+        //        }
         
         addNewToDoButton.snp.makeConstraints { make in
             make.bottom.equalToSuperview().inset(50)
@@ -94,6 +94,16 @@ class AddNewToDoController: UIViewController {
         addNewToDoButton.layer.cornerRadius = 10
         
     }
+    
+    //MARK: - Setup TextView
+    private func setupTextView() {
+        descriptionField.text = "Описание задачи"
+        descriptionField.textColor = .lightGray
+        descriptionField.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        
+        descriptionField.delegate = self
+        descriptionField.returnKeyType = .done
+    }
     //MARK: - Button Action
     @objc func addNewToDo() {
         
@@ -102,6 +112,30 @@ class AddNewToDoController: UIViewController {
     @objc func removeTextInTextView() {
         self.descriptionField.text = ""
     }
+}
+
+//MARK: - UITextView Delegate
+extension AddNewToDoController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if descriptionField.text == "Описание задачи"  {
+            descriptionField.text = ""
+            textView.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+            textView.textColor = UIColor.label
+        }
+    }
     
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            descriptionField.becomeFirstResponder()
+        }
+        return true
+    }
     
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if descriptionField.text == "" {
+            descriptionField.text = "Описание задачи"
+            descriptionField.textColor = .lightGray
+            descriptionField.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        }
+    }
 }
