@@ -46,6 +46,6 @@ protocol MainScreenRouterProtocol: AnyObject {
     //PRESENTER -> ROUTER
     func goTodayToDos(from view: MainScreenViewProtocol)
     func goTomoorowToDos(from view: MainScreenViewProtocol)
-    func goTo(from view: MainScreenViewProtocol)
+    func goToOverdueToDos(from view: MainScreenViewProtocol)
     func goToDoneToDos(from view: MainScreenViewProtocol)
 }
