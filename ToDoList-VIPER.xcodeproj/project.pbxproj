@@ -605,6 +605,53 @@
 			path = CustomCell;
 			sourceTree = "<group>";
 		};
+		D8B1E9C42BA45F2C00D455AF /* AddNewToDo */ = {
+			isa = PBXGroup;
+			children = (
+				D8B1E9C92BA45F5B00D455AF /* View */,
+				D8B1E9C82BA45F5200D455AF /* Interactor */,
+				D8B1E9C72BA45F4B00D455AF /* Presenter */,
+				D8B1E9C62BA45F4400D455AF /* Router */,
+				D8B1E9C52BA45F3B00D455AF /* Protocols */,
+			);
+			path = AddNewToDo;
+			sourceTree = "<group>";
+		};
+		D8B1E9C52BA45F3B00D455AF /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		D8B1E9C62BA45F4400D455AF /* Router */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		D8B1E9C72BA45F4B00D455AF /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		D8B1E9C82BA45F5200D455AF /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		D8B1E9C92BA45F5B00D455AF /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		D8DD85D22BA1F763003E7F89 /* CustomTabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -726,6 +773,7 @@
 				D85C5DA92B614DC900F548AA /* Login */,
 				D8E9F87A2B03536800A3F3FC /* HomeTabBar */,
 				D8B1E9AE2BA2F3D300D455AF /* MainScreen */,
+				D8B1E9C42BA45F2C00D455AF /* AddNewToDo */,
 				D86D45192AFB96F200894774 /* ToDoListModule */,
 				D8E9F8822B03709800A3F3FC /* ExecuteToDo */,
 				D8E9F8BF2B175A4600A3F3FC /* OverdueToDoModule */,
