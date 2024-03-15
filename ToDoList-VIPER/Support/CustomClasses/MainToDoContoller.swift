@@ -40,7 +40,7 @@ class MainToDoContoller: UIViewController {
 //        view.backgroundColor = UIColor(named: "mainScreenColor")
         view.backgroundColor = .systemBackground
         view.layer.shadowOffset = CGSize(width: 0, height: 10)
-        view.layer.shadowRadius = 50
+        view.layer.shadowRadius = 70
         view.layer.shadowColor = UIColor.white.cgColor
         view.layer.shadowOpacity = 3.0
         view.layer.cornerRadius = 50
@@ -55,7 +55,6 @@ class MainToDoContoller: UIViewController {
         collectionView.backgroundColor = .systemBackground
 //        collectionView.backgroundColor = UIColor(named: "mainScreenColor")
         collectionView.isScrollEnabled = true
-//        collectionView.register(MainToDoCell.self, forCellWithReuseIdentifier: MainToDoCell.reuseIdentifier)
         collectionView.isScrollEnabled = false
         return collectionView
     }()
@@ -66,6 +65,7 @@ class MainToDoContoller: UIViewController {
         view.backgroundColor = .systemBackground
         setupHierarcy()
         setupLayout()
+        self.navigationItem.largeTitleDisplayMode = .never
     }
     
     //MARK: - Setup Hierarchy
@@ -87,7 +87,7 @@ class MainToDoContoller: UIViewController {
         }
         
         userAvatar.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(5)
             make.centerX.equalToSuperview()
             make.height.width.equalTo(60)
         }
@@ -99,7 +99,7 @@ class MainToDoContoller: UIViewController {
         
         containerView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(150)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(110)
         }
         
         toDosCollection.snp.makeConstraints { make in
