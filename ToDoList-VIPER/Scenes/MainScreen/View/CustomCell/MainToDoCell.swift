@@ -15,9 +15,8 @@ class MainToDoCell: UICollectionViewCell {
         let container = UIView()
         container.backgroundColor = .systemGray5
         container.layer.cornerRadius = 15
-        container.clipsToBounds = true
-        container.layer.shadowOffset = CGSize(width: 0, height: 0)
-        container.layer.shadowRadius = 10
+        container.layer.shadowOffset = CGSize(width: 0, height: 2)
+        container.layer.shadowRadius = 5
         container.layer.shadowColor = UIColor.black.cgColor
         container.layer.shadowOpacity = 0.3
         return container
@@ -67,7 +66,6 @@ class MainToDoCell: UICollectionViewCell {
     //MARK: - Setup Hierarchy
     private func setupHierarchy() {
         contentView.addSubview(containerView)
-//        containerView.addSubview(arrowIcon)
         containerView.addSubview(numbersLabel)
         containerView.addSubview(toDosLabel)
     }
@@ -75,19 +73,15 @@ class MainToDoCell: UICollectionViewCell {
     //MARK: - Setup Layout
     private func setupLayout() {
         containerView.snp.makeConstraints { make in
-            make.top.leading.trailing.bottom.equalToSuperview().inset(10)
+            make.top.leading.trailing.bottom.equalToSuperview().inset(5)
         }
-        
-//        arrowIcon.snp.makeConstraints { make in
-//            make.top.trailing.equalToSuperview().inset(15)
-//        }
         
         numbersLabel.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
         }
         
         toDosLabel.snp.makeConstraints { make in
-            make.top.equalTo(numbersLabel.snp.bottom).offset(5)
+            make.top.equalTo(numbersLabel.snp.bottom).offset(3)
             make.centerX.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(10)
         }

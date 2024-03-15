@@ -41,9 +41,13 @@ final class MainScreenController: UIViewController {
     
     private lazy var containerView: UIView = {
         let view = UIView()
+//        view.backgroundColor = UIColor(named: "mainScreenColor")
         view.backgroundColor = .systemBackground
+        view.layer.shadowOffset = CGSize(width: 0, height: 10)
+        view.layer.shadowRadius = 50
+        view.layer.shadowColor = UIColor.white.cgColor
+        view.layer.shadowOpacity = 3.0
         view.layer.cornerRadius = 50
-        view.clipsToBounds = true
         return view
     }()
     
@@ -55,6 +59,7 @@ final class MainScreenController: UIViewController {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.showsVerticalScrollIndicator = false
         collectionView.backgroundColor = .systemBackground
+//        collectionView.backgroundColor = UIColor(named: "mainScreenColor")
         collectionView.isScrollEnabled = true
         collectionView.register(MainToDoCell.self, forCellWithReuseIdentifier: MainToDoCell.reuseIdentifier)
         collectionView.isScrollEnabled = false
@@ -82,7 +87,7 @@ final class MainScreenController: UIViewController {
     //MARK: - Setup Layout
     private func setupLayout() {
         backgroundImage.snp.makeConstraints { make in
-            make.top.equalTo(view.snp.top).offset(-55)
+            make.top.equalTo(view.snp.top).offset(-65)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(350)
         }
@@ -100,18 +105,17 @@ final class MainScreenController: UIViewController {
         
         containerView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(130)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(150)
         }
         
         toDosCollection.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(70)
+            make.top.equalToSuperview().offset(60)
             make.leading.trailing.equalToSuperview()
             make.bottom.equalToSuperview().inset(70)
         }
     }
     
-    //MARK: -
-    
+    //MARK: - Layout for CollectionView
     func createLayout() -> UICollectionViewLayout {
                let layout = UICollectionViewCompositionalLayout {
                    (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
@@ -153,113 +157,9 @@ final class MainScreenController: UIViewController {
                    let section = NSCollectionLayoutSection(group: parrentGroup)
                    section.orthogonalScrollingBehavior = .continuous
                    return section
-                   
-                   
-//                   switch sectionIndex {
-//                   case 0 :
-//                       let topItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
-//                        widthDimension: .fractionalWidth(1.0),
-//                        heightDimension: .fractionalHeight(0.6)))
-//                       topItem.contentInsets = NSDirectionalEdgeInsets(top: 3, leading: 3, bottom: 3, trailing: 3)
-//                       let bottomItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
-//                        widthDimension: .fractionalWidth(1.0),
-//                        heightDimension: .fractionalHeight(1.0)))
-//                       let bottomNestedGroup = NSCollectionLayoutGroup.vertical(
-//                        layoutSize: NSCollectionLayoutSize(
-//                            widthDimension: .fractionalWidth(1.0),
-//                            heightDimension: .fractionalHeight(0.3)),
-//                        subitems: [bottomItem])
-//                       let itemsGroup = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(
-//                        widthDimension: .fractionalWidth(0.5),
-//                        heightDimension: .fractionalHeight(1.0)), subitems: [topItem, bottomNestedGroup])
-//                       let section = NSCollectionLayoutSection(group: itemsGroup)
-//                       section.orthogonalScrollingBehavior = .continuous
-//                       return section
-//                   case 1:
-//                       let topItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
-//                        widthDimension: .fractionalWidth(1.0),
-//                        heightDimension: .fractionalHeight(0.3)))
-//                       topItem.contentInsets = NSDirectionalEdgeInsets(top: 3, leading: 3, bottom: 3, trailing: 3)
-//                       let bottomItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
-//                        widthDimension: .fractionalWidth(1.0),
-//                        heightDimension: .fractionalHeight(1.0)))
-//                       let bottomNestedGroup = NSCollectionLayoutGroup.vertical(
-//                        layoutSize: NSCollectionLayoutSize(
-//                            widthDimension: .fractionalWidth(1.0),
-//                            heightDimension: .fractionalHeight(0.6)),
-//                        subitems: [bottomItem])
-//                       let itemsGroup = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(
-//                        widthDimension: .fractionalWidth(0.5),
-//                        heightDimension: .fractionalHeight(1.0)), subitems: [topItem, bottomNestedGroup])
-//                       let section = NSCollectionLayoutSection(group: itemsGroup)
-//                       section.orthogonalScrollingBehavior = .continuous
-//                       return section
-//                   default:
-//                       let topItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
-//                        widthDimension: .fractionalWidth(1.0),
-//                        heightDimension: .fractionalHeight(0.3)))
-//                       topItem.contentInsets = NSDirectionalEdgeInsets(top: 3, leading: 3, bottom: 3, trailing: 3)
-//                       let bottomItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
-//                        widthDimension: .fractionalWidth(1.0),
-//                        heightDimension: .fractionalHeight(1.0)))
-//                       let bottomNestedGroup = NSCollectionLayoutGroup.vertical(
-//                        layoutSize: NSCollectionLayoutSize(
-//                            widthDimension: .fractionalWidth(1.0),
-//                            heightDimension: .fractionalHeight(0.6)),
-//                        subitems: [bottomItem])
-//                       let rightItemsGroup = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(
-//                        widthDimension: .fractionalWidth(0.5),
-//                        heightDimension: .fractionalHeight(1.0)), subitems: [topItem, bottomNestedGroup])
-//                       
-//                       
-//                       
-//                       let section = NSCollectionLayoutSection(group: itemsGroup)
-//            
-//                       return section
-//                   }
-//                   
-                   
-//                   
-//                   let leadingItem = NSCollectionLayoutItem(
-//                       layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.7),
-//                                                          heightDimension: .fractionalHeight(1.0)))
-//                   leadingItem.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-//
-//                   let trailingItem = NSCollectionLayoutItem(
-//                       layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-//                                                          heightDimension: .fractionalHeight(0.3)))
-//                   trailingItem.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-//                   let trailingGroup = NSCollectionLayoutGroup.vertical(
-//                       layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.3),
-//                                                          heightDimension: .fractionalHeight(1.0)),
-//                       subitem: trailingItem, count: 2)
-//
-//                   let bottomNestedGroup = NSCollectionLayoutGroup.horizontal(
-//                       layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-//                                                          heightDimension: .fractionalHeight(0.6)),
-//                       subitems: [leadingItem, trailingGroup])
-//
-//                   let topItem = NSCollectionLayoutItem(
-//                       layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-//                                                      heightDimension: .fractionalHeight(0.3)))
-//                   topItem.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-//
-//                   let nestedGroup = NSCollectionLayoutGroup.horizontal(
-//                    layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
-//                                                          heightDimension: .fractionalHeight(0.5)),
-//                       subitems: [topItem, bottomNestedGroup])
-//                   
-//                   let secondNestedGroup = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(0.4)),
-//                                                                              subitems: [topItem, bottomNestedGroup])
-//                   let section = NSCollectionLayoutSection(group: secondNestedGroup)
-//                   section.orthogonalScrollingBehavior = .continuous
-//                   return section
-
                }
                return layout
            }
-    
-    
 }
 
 extension MainScreenController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -274,6 +174,5 @@ extension MainScreenController: UICollectionViewDelegate, UICollectionViewDataSo
       
         return cell ?? UICollectionViewCell()
     }
-    
     
 }
