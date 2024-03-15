@@ -9,8 +9,8 @@ import UIKit
 
 protocol MainScreenViewProtocol: AnyObject {
     var presenter: MainScreenPresenterProtocol? { get set }
-    func getUserData(_ : [String])
-    func getToDosCount(_ : [Int])
+    func getUserData(_ userInfo: [String])
+    func getToDosCount(_ toDosCount: [[String]])
 }
 
 protocol MainScreenPresenterProtocol: AnyObject {
@@ -37,7 +37,7 @@ protocol MainScreenInteractorInputProtocol: AnyObject {
 protocol MainScreenInteractorOutputProtocol: AnyObject {
     //INTERACTOR -> PRESENTER
     func didRetriveUserData(_ info: [String])
-    func didRetriveToDosCount(_ info: [Int])
+    func didRetriveToDosCount(_ info: [[String]])
 }
 
 protocol MainScreenRouterProtocol: AnyObject {

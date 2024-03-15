@@ -43,7 +43,7 @@ extension MainScreenPresenter: MainScreenInteractorOutputProtocol {
         view?.getUserData(info)
     }
     
-    func didRetriveToDosCount(_ info: [Int]) {
+    func didRetriveToDosCount(_ info: [[String]]) {
         view?.getToDosCount(info)
     }
 }
