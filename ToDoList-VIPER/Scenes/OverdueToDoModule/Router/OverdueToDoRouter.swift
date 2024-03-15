@@ -22,7 +22,7 @@ final class OverdueToDoRouter: OverdueRouterProtocol {
         presenter.router = router
         interactor.presenter = presenter
         
-        return navCon
+        return vc
     }
     
     func presentToDoDetailScreen(from view: OverdueViewProtocol, for item: ToDoObject) {

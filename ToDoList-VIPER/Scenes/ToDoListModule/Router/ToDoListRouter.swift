@@ -23,7 +23,7 @@ class ToDoListRouter: ToDoListRouterProtocol {
         presenter.router = router
         interactor.presenter = presenter
       
-        return navCon
+        return vc
     }
     
     func presentToDoDetailScreen(from view: ToDoListViewProtocol, for toDoItem: ToDoObject) {

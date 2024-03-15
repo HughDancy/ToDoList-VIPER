@@ -50,7 +50,8 @@ extension MainScreenController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainToDoCell.reuseIdentifier, for: indexPath) as? MainToDoCell
-        cell?.setupElements(numbers: Int(mockData[indexPath.row][0]) ?? 5, dayLabel: mockData[indexPath.row][1], backgroundColor: mockColors[indexPath.row])
+//        cell?.setupElements(numbers: Int(mockData[indexPath.row][0]) ?? 5, dayLabel: mockData[indexPath.row][1], backgroundColor: mockColors[indexPath.row])
+        cell?.setupElements(numbers: Int(toDosInfo[indexPath.row][0]) ?? 0, dayLabel: toDosInfo[indexPath.row][1], backgroundColor: mockColors[indexPath.row])
         return cell ?? UICollectionViewCell()
     }
     

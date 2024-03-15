@@ -11,7 +11,8 @@ final class HomeTabBarRouter: HomeTabBarRouterProtocol {
     static func createHomeTabBar() -> UITabBarController {
 
         let tabBar = CustomHomeTabBarController()
-        let taskScreen = MainScreenController()
+//        let taskScreen = MainScreenController()
+        let taskScreen = MainScreenRouter.createMainScreenModule()
         taskScreen.hidesBottomBarWhenPushed = false
         let taskScreenItem = UITabBarItem(title: "Задачи",
                                           image: UIImage(systemName: "list.clipboard.fill"),
