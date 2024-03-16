@@ -10,6 +10,7 @@ import UIKit
 class AddNewToDoController: UIViewController {
     
     //MARK: - OUTLETS
+    
     private lazy var titleOfScreen: UILabel = {
         let label = UILabel()
         label.text = "Добавить задачу"
@@ -27,6 +28,8 @@ class AddNewToDoController: UIViewController {
         textField.layer.cornerRadius = 10
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
         textField.leftViewMode = .always
+        textField.returnKeyType = .done
+        textField.delegate = self
         return textField
     }()
     
@@ -39,7 +42,31 @@ class AddNewToDoController: UIViewController {
         return textView
     }()
     
-    private lazy var dateField = UIDatePicker.createToDoPicker()
+    private lazy var dateStack: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.spacing = 10
+//        stackView.distribution = .fillProportionally
+        return stackView
+    }()
+    
+    private lazy var dateLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Дата"
+        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        label.textColor = .systemCyan
+        return label
+    }()
+    
+    private lazy var dateField: UIDatePicker = {
+        let picker = UIDatePicker()
+        picker.datePickerMode = .date
+        picker.preferredDatePickerStyle = .compact
+        picker.locale = .current
+        return picker
+    }()
+    
     private lazy var addNewToDoButton = UIButton.createToDoButton(title: "Add new ToDo", backColor: .systemCyan, tintColor: .systemBackground)
     
     
@@ -57,7 +84,9 @@ class AddNewToDoController: UIViewController {
         view.addSubview(titleOfScreen)
         view.addSubview(nameOfTaskField)
         view.addSubview(descriptionField)
-        //        view.addSubview(dateField)
+        view.addSubview(dateStack)
+        dateStack.addArrangedSubview(dateLabel)
+        dateStack.addArrangedSubview(dateField)
         view.addSubview(addNewToDoButton)
     }
     //MARK: - Setup Layout
@@ -74,15 +103,16 @@ class AddNewToDoController: UIViewController {
         }
         
         descriptionField.snp.makeConstraints { make in
-            make.top.equalTo(nameOfTaskField.snp.bottom).offset(10)
+            make.top.equalTo(nameOfTaskField.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(40)
             make.height.equalTo(100)
         }
         
-        //        dateField.snp.makeConstraints { make in
-        //            make.top.equalTo(descriptionField.snp.bottom).offset(10)
-        //            make.leading.trailing.equalToSuperview().inset(40)
-        //        }
+        dateStack.snp.makeConstraints { make in
+            make.top.equalTo(descriptionField.snp.bottom).offset(20)
+            make.leading.equalToSuperview().offset(50)
+            make.height.equalTo(50)
+        }
         
         addNewToDoButton.snp.makeConstraints { make in
             make.bottom.equalToSuperview().inset(50)
@@ -92,7 +122,6 @@ class AddNewToDoController: UIViewController {
         }
         
         addNewToDoButton.layer.cornerRadius = 10
-        
     }
     
     //MARK: - Setup TextView
@@ -104,7 +133,7 @@ class AddNewToDoController: UIViewController {
         descriptionField.delegate = self
         descriptionField.returnKeyType = .done
     }
-    //MARK: - Button Action
+    //MARK: - Buttons Action
     @objc func addNewToDo() {
         
     }
@@ -126,7 +155,7 @@ extension AddNewToDoController: UITextViewDelegate {
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
-            descriptionField.becomeFirstResponder()
+            descriptionField.resignFirstResponder()
         }
         return true
     }
@@ -137,5 +166,13 @@ extension AddNewToDoController: UITextViewDelegate {
             descriptionField.textColor = .lightGray
             descriptionField.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         }
+    }
+}
+
+//MARK: - TextField Delegate
+extension AddNewToDoController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        nameOfTaskField.resignFirstResponder()
+        return true
     }
 }
