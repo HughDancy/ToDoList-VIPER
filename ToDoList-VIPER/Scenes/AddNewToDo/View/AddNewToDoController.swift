@@ -8,6 +8,7 @@
 import UIKit
 
 class AddNewToDoController: UIViewController {
+    private var color: ColorsItemResult?
     
     //MARK: - OUTLETS
     
@@ -35,7 +36,6 @@ class AddNewToDoController: UIViewController {
     
     private lazy var descriptionField: UITextView = {
         let textView = UITextView()
-        
         textView.backgroundColor = .systemGray5
         textView.layer.cornerRadius = 10
         
@@ -95,6 +95,7 @@ class AddNewToDoController: UIViewController {
         setupHierarchy()
         setupLayout()
         setupTextView()
+        addNewToDoButton.addTarget(self, action: #selector(addNewToDo), for: .touchDown)
     }
     
     //MARK: - Setup Hierarchy
@@ -113,7 +114,6 @@ class AddNewToDoController: UIViewController {
     private func setupLayout() {
         titleOfScreen.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(70)
-            //            make.top.equalToSuperview().offset(50)
             make.centerX.equalToSuperview()
         }
         
@@ -190,7 +190,7 @@ class AddNewToDoController: UIViewController {
     }
     //MARK: - Buttons Action
     @objc func addNewToDo() {
-        
+        print(color)
     }
     
     @objc func removeTextInTextView() {
@@ -242,5 +242,22 @@ extension AddNewToDoController: UICollectionViewDelegate, UICollectionViewDataSo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ColorsCell.reuseIdentidier, for: indexPath) as? ColorsCell
         cell?.setupCell(with: ColorsItem.colorsStack[indexPath.row])
         return cell ?? UICollectionViewCell()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch ColorsItem.colorsStack[indexPath.row] {
+        case .systemRed:
+            self.color = ColorsItemResult.systemRed
+        case .systemBlue:
+            self.color = ColorsItemResult.systemBlue
+        case .systemOrange:
+            self.color = ColorsItemResult.systemOrange
+        case .systemYellow:
+            self.color = ColorsItemResult.systemYellow
+        case .systemMint:
+            self.color = ColorsItemResult.systemMint
+        default:
+            self.color = ColorsItemResult.systemOrange
+        }
     }
 }
