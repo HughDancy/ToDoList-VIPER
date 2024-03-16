@@ -51,6 +51,8 @@
 		D8B1E9CB2BA465A300D455AF /* AddNewToDoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9CA2BA465A300D455AF /* AddNewToDoController.swift */; };
 		D8B1E9CD2BA469AF00D455AF /* HomeTabBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9CC2BA469AE00D455AF /* HomeTabBarPresenter.swift */; };
 		D8B1E9D02BA46A0E00D455AF /* HomeTabBarProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9CF2BA46A0E00D455AF /* HomeTabBarProtocols.swift */; };
+		D8B1E9D52BA5708F00D455AF /* ColorsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9D42BA5708F00D455AF /* ColorsCell.swift */; };
+		D8B1E9D72BA574A700D455AF /* ColorsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9D62BA574A700D455AF /* ColorsItem.swift */; };
 		D8BF0D432B15ED2E00D1572E /* ToDoListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BF0D422B15ED2E00D1572E /* ToDoListController.swift */; };
 		D8C19EC62B8DC3FF004BCDDD /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = D8C19EC52B8DC3FF004BCDDD /* GoogleSignIn */; };
 		D8C19EC82B8DC3FF004BCDDD /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D8C19EC72B8DC3FF004BCDDD /* GoogleSignInSwift */; };
@@ -182,6 +184,8 @@
 		D8B1E9CA2BA465A300D455AF /* AddNewToDoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewToDoController.swift; sourceTree = "<group>"; };
 		D8B1E9CC2BA469AE00D455AF /* HomeTabBarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarPresenter.swift; sourceTree = "<group>"; };
 		D8B1E9CF2BA46A0E00D455AF /* HomeTabBarProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarProtocols.swift; sourceTree = "<group>"; };
+		D8B1E9D42BA5708F00D455AF /* ColorsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsCell.swift; sourceTree = "<group>"; };
+		D8B1E9D62BA574A700D455AF /* ColorsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsItem.swift; sourceTree = "<group>"; };
 		D8BF0D422B15ED2E00D1572E /* ToDoListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListController.swift; sourceTree = "<group>"; };
 		D8C19ECF2B90B333004BCDDD /* SignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInController.swift; sourceTree = "<group>"; };
 		D8C19ED12B90B494004BCDDD /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
@@ -479,6 +483,7 @@
 				D86D45232AFB986E00894774 /* ToDoStore.swift */,
 				D8E9F8BB2B109DB800A3F3FC /* ToDoStorage.swift */,
 				D85C583B2B5A771A00023B04 /* OnboardingItems.swift */,
+				D8B1E9D62BA574A700D455AF /* ColorsItem.swift */,
 			);
 			path = Entitys;
 			sourceTree = "<group>";
@@ -652,6 +657,7 @@
 		D8B1E9C92BA45F5B00D455AF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D8B1E9D32BA5706F00D455AF /* CustomCell */,
 				D8B1E9CA2BA465A300D455AF /* AddNewToDoController.swift */,
 			);
 			path = View;
@@ -663,6 +669,14 @@
 				D8B1E9CF2BA46A0E00D455AF /* HomeTabBarProtocols.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		D8B1E9D32BA5706F00D455AF /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				D8B1E9D42BA5708F00D455AF /* ColorsCell.swift */,
+			);
+			path = CustomCell;
 			sourceTree = "<group>";
 		};
 		D8DD85D22BA1F763003E7F89 /* CustomTabBar */ = {
@@ -1190,6 +1204,7 @@
 				D8F33E322B7E17F70008FE91 /* LoadingButton.swift in Sources */,
 				D86D452A2AFB9EBD00894774 /* ToDoListViewController.swift in Sources */,
 				D8E9F88B2B03768900A3F3FC /* ExecuteToDoInteractor.swift in Sources */,
+				D8B1E9D52BA5708F00D455AF /* ColorsCell.swift in Sources */,
 				D82B8B6E2B6B8CCB00A006F2 /* AppConfigurator.swift in Sources */,
 				D8B1E9B92BA3026300D455AF /* MainToDoCell.swift in Sources */,
 				D85C57E72B57CCA600023B04 /* OnboardingPresenter.swift in Sources */,
@@ -1256,6 +1271,7 @@
 				D8E9F8A32B04D23900A3F3FC /* UILabel + EXT.swift in Sources */,
 				D87474552B97176C00BF4866 /* CircleBaseButton.swift in Sources */,
 				D8B1E9BF2BA4212A00D455AF /* MainScreenPresenter.swift in Sources */,
+				D8B1E9D72BA574A700D455AF /* ColorsItem.swift in Sources */,
 				D86D452C2AFCAAAF00894774 /* ToDoListPresenter.swift in Sources */,
 				D8E9F8D02B18A56200A3F3FC /* ToDoObjectSorter.swift in Sources */,
 				D86D45262AFB9ADD00894774 /* ToDoListsProtocols.swift in Sources */,

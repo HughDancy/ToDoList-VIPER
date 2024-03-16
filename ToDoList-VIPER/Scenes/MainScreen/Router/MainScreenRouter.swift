@@ -16,6 +16,7 @@ final class MainScreenRouter: MainScreenRouterProtocol {
         let interactor: MainScreenInteractorInputProtocol = MainScreenInteractor()
         let router: MainScreenRouterProtocol = MainScreenRouter()
         let navVc = UINavigationController(rootViewController: viewController)
+        
         viewController.presenter = presenter
         presenter.view = viewController
         presenter.interactor = interactor

@@ -47,7 +47,7 @@ class AddNewToDoController: UIViewController {
         stackView.axis = .horizontal
         stackView.alignment = .center
         stackView.spacing = 10
-//        stackView.distribution = .fillProportionally
+        //        stackView.distribution = .fillProportionally
         return stackView
     }()
     
@@ -65,6 +65,24 @@ class AddNewToDoController: UIViewController {
         picker.preferredDatePickerStyle = .compact
         picker.locale = .current
         return picker
+    }()
+    
+    private lazy var colorLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Метка:"
+        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        label.textColor = .systemCyan
+        return label
+    }()
+    
+    private lazy var colorsCollectionView: UICollectionView = {
+        let layout = createLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(ColorsCell.self, forCellWithReuseIdentifier: ColorsCell.reuseIdentidier)
+        collectionView.backgroundColor = .systemBackground
+        return collectionView
     }()
     
     private lazy var addNewToDoButton = UIButton.createToDoButton(title: "Add new ToDo", backColor: .systemCyan, tintColor: .systemBackground)
@@ -87,25 +105,29 @@ class AddNewToDoController: UIViewController {
         view.addSubview(dateStack)
         dateStack.addArrangedSubview(dateLabel)
         dateStack.addArrangedSubview(dateField)
+        view.addSubview(colorLabel)
+        view.addSubview(colorsCollectionView)
         view.addSubview(addNewToDoButton)
     }
     //MARK: - Setup Layout
     private func setupLayout() {
         titleOfScreen.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(50)
+            make.top.equalToSuperview().offset(70)
+            //            make.top.equalToSuperview().offset(50)
             make.centerX.equalToSuperview()
         }
         
         nameOfTaskField.snp.makeConstraints { make in
             make.top.equalTo(titleOfScreen.snp.bottom).offset(50)
             make.leading.trailing.equalToSuperview().inset(40)
-            make.height.equalTo(50)
+            make.height.equalTo(60)
         }
         
         descriptionField.snp.makeConstraints { make in
             make.top.equalTo(nameOfTaskField.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(40)
-            make.height.equalTo(100)
+            //            make.height.equalTo(100)
+            make.height.equalTo(UIScreen.main.bounds.height / 5)
         }
         
         dateStack.snp.makeConstraints { make in
@@ -114,14 +136,47 @@ class AddNewToDoController: UIViewController {
             make.height.equalTo(50)
         }
         
+        colorLabel.snp.makeConstraints { make in
+            make.top.equalTo(dateStack.snp.bottom).offset(10)
+            make.leading.equalToSuperview().offset(50)
+        }
+        
+        colorsCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(colorLabel.snp.bottom).offset(15)
+            make.leading.trailing.equalToSuperview().inset(50)
+            make.height.equalTo(100)
+        }
+        
         addNewToDoButton.snp.makeConstraints { make in
             make.bottom.equalToSuperview().inset(50)
             make.leading.trailing.equalToSuperview().inset(50)
             make.height.equalTo(50)
-            
         }
         
         addNewToDoButton.layer.cornerRadius = 10
+    }
+    
+    //MARK: - Layout for CollectionView
+    private func createLayout() -> UICollectionViewLayout {
+        let spacing: CGFloat = 3.0
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(0.2),
+            heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = .init(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
+        
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalWidth(0.2))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
+        section.interGroupSpacing = spacing
+        
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        return layout
     }
     
     //MARK: - Setup TextView
@@ -174,5 +229,18 @@ extension AddNewToDoController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         nameOfTaskField.resignFirstResponder()
         return true
+    }
+}
+
+//MARK: - CollectionView Delegate
+extension AddNewToDoController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ColorsCell.reuseIdentidier, for: indexPath) as? ColorsCell
+        cell?.setupCell(with: ColorsItem.colorsStack[indexPath.row])
+        return cell ?? UICollectionViewCell()
     }
 }
