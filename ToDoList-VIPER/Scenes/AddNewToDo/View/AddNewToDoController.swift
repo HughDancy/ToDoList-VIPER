@@ -7,8 +7,9 @@
 
 import UIKit
 
-class AddNewToDoController: UIViewController {
+class AddNewToDoController: UIViewController, AddNewToDoViewProtocol {
     private var color: ColorsItemResult?
+    var presenter: AddNewToDoPresenterProtocol?
     
     //MARK: - OUTLETS
     

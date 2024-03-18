@@ -56,6 +56,7 @@
 		D8B1E9D92BA8376100D455AF /* AddNewToDosProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9D82BA8376100D455AF /* AddNewToDosProtocols.swift */; };
 		D8B1E9DB2BA8479E00D455AF /* AddNewToDoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9DA2BA8479E00D455AF /* AddNewToDoPresenter.swift */; };
 		D8B1E9DD2BA8486600D455AF /* AddNewToDoInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9DC2BA8486600D455AF /* AddNewToDoInteractor.swift */; };
+		D8B1E9DF2BA84CB100D455AF /* AddNewToDoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9DE2BA84CB100D455AF /* AddNewToDoRouter.swift */; };
 		D8BF0D432B15ED2E00D1572E /* ToDoListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BF0D422B15ED2E00D1572E /* ToDoListController.swift */; };
 		D8C19EC62B8DC3FF004BCDDD /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = D8C19EC52B8DC3FF004BCDDD /* GoogleSignIn */; };
 		D8C19EC82B8DC3FF004BCDDD /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D8C19EC72B8DC3FF004BCDDD /* GoogleSignInSwift */; };
@@ -192,6 +193,7 @@
 		D8B1E9D82BA8376100D455AF /* AddNewToDosProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewToDosProtocols.swift; sourceTree = "<group>"; };
 		D8B1E9DA2BA8479E00D455AF /* AddNewToDoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewToDoPresenter.swift; sourceTree = "<group>"; };
 		D8B1E9DC2BA8486600D455AF /* AddNewToDoInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewToDoInteractor.swift; sourceTree = "<group>"; };
+		D8B1E9DE2BA84CB100D455AF /* AddNewToDoRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewToDoRouter.swift; sourceTree = "<group>"; };
 		D8BF0D422B15ED2E00D1572E /* ToDoListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListController.swift; sourceTree = "<group>"; };
 		D8C19ECF2B90B333004BCDDD /* SignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInController.swift; sourceTree = "<group>"; };
 		D8C19ED12B90B494004BCDDD /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
@@ -643,6 +645,7 @@
 		D8B1E9C62BA45F4400D455AF /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				D8B1E9DE2BA84CB100D455AF /* AddNewToDoRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -1255,6 +1258,7 @@
 				D8DD85D12B9F4AD8003E7F89 /* CustomTabBar.swift in Sources */,
 				D8E840582B63B0AB005A0936 /* LoginPresenter.swift in Sources */,
 				D8B1E9C12BA4217F00D455AF /* MainScreenInteractor.swift in Sources */,
+				D8B1E9DF2BA84CB100D455AF /* AddNewToDoRouter.swift in Sources */,
 				D86D44EC2AFB932E00894774 /* ToDoList_VIPER.xcdatamodeld in Sources */,
 				D8E9F8A92B04D96600A3F3FC /* AddToDoRouter.swift in Sources */,
 				D8B1E9BB2BA40D4F00D455AF /* MainToDoContoller.swift in Sources */,
