@@ -47,7 +47,6 @@ class AddNewToDoController: UIViewController {
         stackView.axis = .horizontal
         stackView.alignment = .center
         stackView.spacing = 10
-        //        stackView.distribution = .fillProportionally
         return stackView
     }()
     
@@ -118,7 +117,7 @@ class AddNewToDoController: UIViewController {
         }
         
         nameOfTaskField.snp.makeConstraints { make in
-            make.top.equalTo(titleOfScreen.snp.bottom).offset(50)
+            make.top.equalTo(titleOfScreen.snp.bottom).offset((UIScreen.main.bounds.height / 10) - (UIScreen.main.bounds.width / 10))
             make.leading.trailing.equalToSuperview().inset(40)
             make.height.equalTo(60)
         }
@@ -126,7 +125,6 @@ class AddNewToDoController: UIViewController {
         descriptionField.snp.makeConstraints { make in
             make.top.equalTo(nameOfTaskField.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(40)
-            //            make.height.equalTo(100)
             make.height.equalTo(UIScreen.main.bounds.height / 5)
         }
         
@@ -142,13 +140,13 @@ class AddNewToDoController: UIViewController {
         }
         
         colorsCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(colorLabel.snp.bottom).offset(15)
+            make.top.equalTo(colorLabel.snp.bottom).offset(10)
             make.leading.trailing.equalToSuperview().inset(50)
             make.height.equalTo(100)
         }
         
         addNewToDoButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(50)
+            make.bottom.equalToSuperview().inset(40)
             make.leading.trailing.equalToSuperview().inset(50)
             make.height.equalTo(50)
         }
@@ -259,6 +257,5 @@ extension AddNewToDoController: UICollectionViewDelegate, UICollectionViewDataSo
         default:
             self.color = ColorsItemResult.systemOrange
         }
-//        collectionView.cellForItem(at: indexPath)?.alpha = 0.4
     }
 }
