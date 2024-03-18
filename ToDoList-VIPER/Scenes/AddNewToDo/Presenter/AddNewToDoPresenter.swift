@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class AddNewPresenter: AddNewToDoPresenterProtocol {
+final class AddNewToDoPresenter: AddNewToDoPresenterProtocol {
     weak var view:  AddNewToDoViewProtocol?
     var interactor: AddNewToDoInteractorProtocol?
     var router: AddNewToDoRouterProtocol?
@@ -16,8 +16,8 @@ final class AddNewPresenter: AddNewToDoPresenterProtocol {
         interactor?.addNewToDo(with: name, description: description, date: date, mark: mark)
     }
     
-    func goBackToMain(from view: AddNewToDoViewProtocol) {
-//        guard let parrentView = view else { return }
+    func goBackToMain() {
+        guard let view = view else { return }
         router?.dismiss(from: view)
     }
 }

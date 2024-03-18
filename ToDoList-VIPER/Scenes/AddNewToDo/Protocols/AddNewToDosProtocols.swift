@@ -19,7 +19,7 @@ protocol AddNewToDoPresenterProtocol: AnyObject {
     
     //VIEW -> PRESENTER
     func addNewToDo(with name: String, description: String, date: Date, mark: String)
-    func goBackToMain(from view: AddNewToDoViewProtocol)
+    func goBackToMain()
 }
 
 protocol AddNewToDoInteractorProtocol: AnyObject {

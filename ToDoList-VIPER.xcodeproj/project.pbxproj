@@ -54,7 +54,8 @@
 		D8B1E9D52BA5708F00D455AF /* ColorsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9D42BA5708F00D455AF /* ColorsCell.swift */; };
 		D8B1E9D72BA574A700D455AF /* ColorsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9D62BA574A700D455AF /* ColorsItem.swift */; };
 		D8B1E9D92BA8376100D455AF /* AddNewToDosProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9D82BA8376100D455AF /* AddNewToDosProtocols.swift */; };
-		D8B1E9DB2BA8479E00D455AF /* AddNewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9DA2BA8479E00D455AF /* AddNewPresenter.swift */; };
+		D8B1E9DB2BA8479E00D455AF /* AddNewToDoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9DA2BA8479E00D455AF /* AddNewToDoPresenter.swift */; };
+		D8B1E9DD2BA8486600D455AF /* AddNewToDoInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9DC2BA8486600D455AF /* AddNewToDoInteractor.swift */; };
 		D8BF0D432B15ED2E00D1572E /* ToDoListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BF0D422B15ED2E00D1572E /* ToDoListController.swift */; };
 		D8C19EC62B8DC3FF004BCDDD /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = D8C19EC52B8DC3FF004BCDDD /* GoogleSignIn */; };
 		D8C19EC82B8DC3FF004BCDDD /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D8C19EC72B8DC3FF004BCDDD /* GoogleSignInSwift */; };
@@ -189,7 +190,8 @@
 		D8B1E9D42BA5708F00D455AF /* ColorsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsCell.swift; sourceTree = "<group>"; };
 		D8B1E9D62BA574A700D455AF /* ColorsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsItem.swift; sourceTree = "<group>"; };
 		D8B1E9D82BA8376100D455AF /* AddNewToDosProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewToDosProtocols.swift; sourceTree = "<group>"; };
-		D8B1E9DA2BA8479E00D455AF /* AddNewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewPresenter.swift; sourceTree = "<group>"; };
+		D8B1E9DA2BA8479E00D455AF /* AddNewToDoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewToDoPresenter.swift; sourceTree = "<group>"; };
+		D8B1E9DC2BA8486600D455AF /* AddNewToDoInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewToDoInteractor.swift; sourceTree = "<group>"; };
 		D8BF0D422B15ED2E00D1572E /* ToDoListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListController.swift; sourceTree = "<group>"; };
 		D8C19ECF2B90B333004BCDDD /* SignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInController.swift; sourceTree = "<group>"; };
 		D8C19ED12B90B494004BCDDD /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
@@ -648,7 +650,7 @@
 		D8B1E9C72BA45F4B00D455AF /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				D8B1E9DA2BA8479E00D455AF /* AddNewPresenter.swift */,
+				D8B1E9DA2BA8479E00D455AF /* AddNewToDoPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -656,6 +658,7 @@
 		D8B1E9C82BA45F5200D455AF /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				D8B1E9DC2BA8486600D455AF /* AddNewToDoInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -1208,6 +1211,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8F33E322B7E17F70008FE91 /* LoadingButton.swift in Sources */,
+				D8B1E9DD2BA8486600D455AF /* AddNewToDoInteractor.swift in Sources */,
 				D86D452A2AFB9EBD00894774 /* ToDoListViewController.swift in Sources */,
 				D8E9F88B2B03768900A3F3FC /* ExecuteToDoInteractor.swift in Sources */,
 				D8B1E9D52BA5708F00D455AF /* ColorsCell.swift in Sources */,
@@ -1284,7 +1288,7 @@
 				D86D45262AFB9ADD00894774 /* ToDoListsProtocols.swift in Sources */,
 				D85C57EE2B57D16300023B04 /* OnboardingRouter.swift in Sources */,
 				D874745D2B99A95600BF4866 /* RegistrationController.swift in Sources */,
-				D8B1E9DB2BA8479E00D455AF /* AddNewPresenter.swift in Sources */,
+				D8B1E9DB2BA8479E00D455AF /* AddNewToDoPresenter.swift in Sources */,
 				D8E9F8912B037EEE00A3F3FC /* ExecuteToDoRouter.swift in Sources */,
 				D8E9F8A72B04D58900A3F3FC /* UIButton + EXT.swift in Sources */,
 				D8C19ED02B90B333004BCDDD /* SignInController.swift in Sources */,
