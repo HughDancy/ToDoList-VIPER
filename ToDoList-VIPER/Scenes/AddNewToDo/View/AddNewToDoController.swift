@@ -259,5 +259,6 @@ extension AddNewToDoController: UICollectionViewDelegate, UICollectionViewDataSo
         default:
             self.color = ColorsItemResult.systemOrange
         }
+//        collectionView.cellForItem(at: indexPath)?.alpha = 0.4
     }
 }
