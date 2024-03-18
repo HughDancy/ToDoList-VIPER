@@ -189,7 +189,7 @@ class AddNewToDoController: UIViewController, AddNewToDoViewProtocol {
     }
     //MARK: - Buttons Action
     @objc func addNewToDo() {
-        print(color)
+        presenter?.addNewToDo(with: nameOfTaskField.text ?? "Do it", description: descriptionField.text, date: dateField.date, mark: color?.rawValue ?? ColorsItemResult.systemRed.rawValue)
     }
     
     @objc func removeTextInTextView() {

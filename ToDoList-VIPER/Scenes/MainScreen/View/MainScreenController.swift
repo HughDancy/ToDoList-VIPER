@@ -26,6 +26,7 @@ final class MainScreenController: MainToDoContoller {
         super.viewWillAppear(animated)
         presenter?.viewWillAppear()
         self.setupElements(nameOfImage: userData[1], userName: userData[0])
+        toDosCollection.reloadData()
     }
     
     override func viewDidLoad() {
