@@ -53,6 +53,7 @@
 		D8B1E9D02BA46A0E00D455AF /* HomeTabBarProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9CF2BA46A0E00D455AF /* HomeTabBarProtocols.swift */; };
 		D8B1E9D52BA5708F00D455AF /* ColorsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9D42BA5708F00D455AF /* ColorsCell.swift */; };
 		D8B1E9D72BA574A700D455AF /* ColorsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9D62BA574A700D455AF /* ColorsItem.swift */; };
+		D8B1E9D92BA8376100D455AF /* AddNewToDosProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9D82BA8376100D455AF /* AddNewToDosProtocols.swift */; };
 		D8BF0D432B15ED2E00D1572E /* ToDoListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BF0D422B15ED2E00D1572E /* ToDoListController.swift */; };
 		D8C19EC62B8DC3FF004BCDDD /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = D8C19EC52B8DC3FF004BCDDD /* GoogleSignIn */; };
 		D8C19EC82B8DC3FF004BCDDD /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D8C19EC72B8DC3FF004BCDDD /* GoogleSignInSwift */; };
@@ -186,6 +187,7 @@
 		D8B1E9CF2BA46A0E00D455AF /* HomeTabBarProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarProtocols.swift; sourceTree = "<group>"; };
 		D8B1E9D42BA5708F00D455AF /* ColorsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsCell.swift; sourceTree = "<group>"; };
 		D8B1E9D62BA574A700D455AF /* ColorsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsItem.swift; sourceTree = "<group>"; };
+		D8B1E9D82BA8376100D455AF /* AddNewToDosProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewToDosProtocols.swift; sourceTree = "<group>"; };
 		D8BF0D422B15ED2E00D1572E /* ToDoListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListController.swift; sourceTree = "<group>"; };
 		D8C19ECF2B90B333004BCDDD /* SignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInController.swift; sourceTree = "<group>"; };
 		D8C19ED12B90B494004BCDDD /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
@@ -629,6 +631,7 @@
 		D8B1E9C52BA45F3B00D455AF /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				D8B1E9D82BA8376100D455AF /* AddNewToDosProtocols.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1255,6 +1258,7 @@
 				D86D452E2AFCAD3B00894774 /* ToDoListInteractor.swift in Sources */,
 				D8900F112B5135F7008E0E34 /* AnimationLoadingController.swift in Sources */,
 				D8BF0D432B15ED2E00D1572E /* ToDoListController.swift in Sources */,
+				D8B1E9D92BA8376100D455AF /* AddNewToDosProtocols.swift in Sources */,
 				D8E840682B678183005A0936 /* RegistrationInteractor.swift in Sources */,
 				D8C19ED22B90B494004BCDDD /* LoginController.swift in Sources */,
 				D8E9F88D2B0377AE00A3F3FC /* ExecuteToDoPresenter.swift in Sources */,

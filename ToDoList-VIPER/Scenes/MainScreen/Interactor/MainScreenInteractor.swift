@@ -12,7 +12,7 @@ final class MainScreenInteractor: MainScreenInteractorInputProtocol {
     private var storage = ToDoStorage.instance
     
     func retriveUserData() {
-        presenter?.didRetriveUserData(["Винеамин", "mockUserAvatar"])
+        presenter?.didRetriveUserData(["Женя", "mockUserAvatar"])
     }
     
     func getToDosCount() {
