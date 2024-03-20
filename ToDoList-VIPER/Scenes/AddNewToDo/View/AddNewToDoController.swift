@@ -82,6 +82,7 @@ class AddNewToDoController: UIViewController, AddNewToDoViewProtocol {
         collectionView.dataSource = self
         collectionView.register(ColorsCell.self, forCellWithReuseIdentifier: ColorsCell.reuseIdentidier)
         collectionView.backgroundColor = .systemBackground
+        collectionView.isScrollEnabled = false
         return collectionView
     }()
     
@@ -113,12 +114,12 @@ class AddNewToDoController: UIViewController, AddNewToDoViewProtocol {
     //MARK: - Setup Layout
     private func setupLayout() {
         titleOfScreen.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(70)
+            make.top.equalToSuperview().offset((UIScreen.main.bounds.height / 5) - (UIScreen.main.bounds.width / 5))
             make.centerX.equalToSuperview()
         }
         
         nameOfTaskField.snp.makeConstraints { make in
-            make.top.equalTo(titleOfScreen.snp.bottom).offset((UIScreen.main.bounds.height / 10) - (UIScreen.main.bounds.width / 10))
+            make.top.equalTo(titleOfScreen.snp.bottom).offset((UIScreen.main.bounds.height / 9) - (UIScreen.main.bounds.width / 9))
             make.leading.trailing.equalToSuperview().inset(40)
             make.height.equalTo(60)
         }
