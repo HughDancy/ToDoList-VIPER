@@ -32,12 +32,27 @@ class AddNewToDoController: UIViewController, AddNewToDoViewProtocol {
         textField.leftViewMode = .always
         textField.returnKeyType = .done
         textField.delegate = self
+        textField.layer.shadowOffset = CGSize(width: 0, height: 2)
+        textField.layer.shadowRadius = 5
+        textField.layer.shadowColor = UIColor.black.cgColor
+        textField.layer.shadowOpacity = 0.3
         return textField
     }()
     
     private lazy var descriptionField: UITextView = {
         let textView = UITextView()
         textView.backgroundColor = .systemGray5
+//        textView.layer.cornerRadius = 10
+//        textView.layer.shadowOffset = CGSize(width: 0, height: 10)
+//        textView.layer.shadowRadius = 30
+//        textView.layer.shadowColor = UIColor.black.cgColor
+//        textView.layer.shadowPath = UIBezierPath(rect: textView.bounds).cgPath
+//        textView.layer.shadowOpacity = 1.0
+        textView.layer.shadowColor = UIColor.black.cgColor
+        textView.layer.shadowOffset = CGSize(width:0,height: 2.0)
+        textView.layer.shadowRadius = 10.0
+        textView.layer.shadowOpacity = 0.4
+        textView.layer.masksToBounds = false
         textView.layer.cornerRadius = 10
         
         return textView
@@ -64,26 +79,31 @@ class AddNewToDoController: UIViewController, AddNewToDoViewProtocol {
         picker.datePickerMode = .date
         picker.preferredDatePickerStyle = .compact
         picker.locale = .current
+        picker.layer.shadowOffset = CGSize(width: 0, height: 2)
+        picker.layer.shadowRadius = 5
+        picker.layer.shadowColor = UIColor.black.cgColor
+        picker.layer.shadowOpacity = 0.3
         return picker
     }()
     
     private lazy var colorLabel: UILabel = {
         let label = UILabel()
-        label.text = "Метка:"
+        label.text = "Категория:"
         label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         label.textColor = .systemCyan
         return label
     }()
     
-    private lazy var colorsCollectionView: UICollectionView = {
-        let layout = createLayout()
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.register(ColorsCell.self, forCellWithReuseIdentifier: ColorsCell.reuseIdentidier)
-        collectionView.backgroundColor = .systemBackground
-        collectionView.isScrollEnabled = false
-        return collectionView
+    private lazy var cathegoryList: UITableView = {
+        let tableVIew = UITableView(frame: .zero, style: .plain)
+        tableVIew.backgroundColor = .systemBackground
+        tableVIew.delegate = self
+        tableVIew.dataSource = self
+        tableVIew.isScrollEnabled = false
+        tableVIew.showsVerticalScrollIndicator = false
+        tableVIew.separatorStyle = .none
+        tableVIew.register(CathegoryCell.self, forCellReuseIdentifier: CathegoryCell.reuseIdentifier)
+        return tableVIew
     }()
     
     private lazy var addNewToDoButton = UIButton.createToDoButton(title: "Add new ToDo", backColor: .systemCyan, tintColor: .systemBackground)
@@ -108,7 +128,7 @@ class AddNewToDoController: UIViewController, AddNewToDoViewProtocol {
         dateStack.addArrangedSubview(dateLabel)
         dateStack.addArrangedSubview(dateField)
         view.addSubview(colorLabel)
-        view.addSubview(colorsCollectionView)
+        view.addSubview(cathegoryList)
         view.addSubview(addNewToDoButton)
     }
     //MARK: - Setup Layout
@@ -141,42 +161,19 @@ class AddNewToDoController: UIViewController, AddNewToDoViewProtocol {
             make.leading.equalToSuperview().offset(50)
         }
         
-        colorsCollectionView.snp.makeConstraints { make in
+        cathegoryList.snp.makeConstraints { make in
             make.top.equalTo(colorLabel.snp.bottom).offset(10)
-            make.leading.trailing.equalToSuperview().inset(50)
-            make.height.equalTo(100)
+            make.leading.trailing.equalToSuperview().inset(35)
+            make.bottom.equalTo(addNewToDoButton.snp.top).inset(5)
         }
         
         addNewToDoButton.snp.makeConstraints { make in
             make.bottom.equalToSuperview().inset(40)
-            make.leading.trailing.equalToSuperview().inset(50)
+            make.leading.trailing.equalToSuperview().inset(40)
             make.height.equalTo(50)
         }
         
         addNewToDoButton.layer.cornerRadius = 10
-    }
-    
-    //MARK: - Layout for CollectionView
-    private func createLayout() -> UICollectionViewLayout {
-        let spacing: CGFloat = 3.0
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(0.2),
-            heightDimension: .fractionalHeight(1.0))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = .init(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
-        
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalWidth(0.2))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        
-        
-        let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
-        section.interGroupSpacing = spacing
-        
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        return layout
     }
     
     //MARK: - Setup TextView
@@ -188,9 +185,10 @@ class AddNewToDoController: UIViewController, AddNewToDoViewProtocol {
         descriptionField.delegate = self
         descriptionField.returnKeyType = .done
     }
+    
     //MARK: - Buttons Action
     @objc func addNewToDo() {
-        presenter?.addNewToDo(with: nameOfTaskField.text ?? "Do it", description: descriptionField.text, date: dateField.date, mark: color?.rawValue ?? ColorsItemResult.systemRed.rawValue)
+        presenter?.addNewToDo(with: nameOfTaskField.text ?? "Do it", description: descriptionField.text, date: dateField.date, mark: color?.rawValue ?? ColorsItemResult.systemMint.rawValue)
     }
     
     @objc func removeTextInTextView() {
@@ -233,31 +231,28 @@ extension AddNewToDoController: UITextFieldDelegate {
 }
 
 //MARK: - CollectionView Delegate
-extension AddNewToDoController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+extension AddNewToDoController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return ColorsItem.colorsStack.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ColorsCell.reuseIdentidier, for: indexPath) as? ColorsCell
-        cell?.setupCell(with: ColorsItem.colorsStack[indexPath.row])
-        return cell ?? UICollectionViewCell()
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CathegoryCell.reuseIdentifier, for: indexPath) as? CathegoryCell
+        let cathegoryName = ["Работа", "Личное", "Иное"]
+        cell?.setupCell(with: ColorsItem.colorsStack[indexPath.row], title: cathegoryName[indexPath.row])
+        return cell ?? UITableViewCell()
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch ColorsItem.colorsStack[indexPath.row] {
-        case .systemRed:
-            self.color = ColorsItemResult.systemRed
-        case .systemBlue:
-            self.color = ColorsItemResult.systemBlue
-        case .systemOrange:
-            self.color = ColorsItemResult.systemOrange
-        case .systemYellow:
-            self.color = ColorsItemResult.systemYellow
-        case .systemMint:
-            self.color = ColorsItemResult.systemMint
-        default:
-            self.color = ColorsItemResult.systemOrange
-        }
+                case .systemOrange:
+                    self.color = ColorsItemResult.systemOrange
+                case .systemYellow:
+                    self.color = ColorsItemResult.systemYellow
+                case .systemMint:
+                    self.color = ColorsItemResult.systemMint
+                default:
+                    self.color = ColorsItemResult.systemOrange
+                }
     }
 }
