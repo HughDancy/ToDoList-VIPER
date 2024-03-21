@@ -149,20 +149,20 @@ final class AddNewToDoView: UIView {
         
         titleOfScreen.snp.makeConstraints { make in
 //            make.top.equalToSuperview().offset((UIScreen.main.bounds.height / 5) - (UIScreen.main.bounds.width / 5))
-            make.top.equalTo(closeButton.snp.bottom).offset(20)
+            make.top.equalTo(closeButton.snp.bottom).offset(10)
             make.centerX.equalToSuperview()
         }
         
         nameOfTaskField.snp.makeConstraints { make in
             make.top.equalTo(titleOfScreen.snp.bottom).offset((UIScreen.main.bounds.height / 13) - (UIScreen.main.bounds.width / 13))
             make.leading.trailing.equalToSuperview().inset(40)
-            make.height.equalTo(60)
+            make.height.equalTo(50)
         }
         
         descriptionField.snp.makeConstraints { make in
             make.top.equalTo(nameOfTaskField.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(40)
-            make.height.equalTo(UIScreen.main.bounds.height / 6)
+            make.height.equalTo(UIScreen.main.bounds.height / 7)
         }
         
         dateStack.snp.makeConstraints { make in

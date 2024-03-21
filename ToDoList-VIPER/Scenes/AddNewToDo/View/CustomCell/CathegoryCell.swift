@@ -14,7 +14,7 @@ class CathegoryCell: UITableViewCell {
     private lazy var containerView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemGray6
-        view.layer.cornerRadius = 10
+        view.layer.cornerRadius = UIScreen.main.bounds.height > 700 ? 10 :  5
         view.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
         view.layer.shadowRadius = 3
         view.layer.shadowColor = UIColor.black.cgColor
@@ -31,7 +31,7 @@ class CathegoryCell: UITableViewCell {
     
     private lazy var circleView: UIView = {
         let view = UIView()
-        view.layer.cornerRadius = 15
+        view.layer.cornerRadius = UIScreen.main.bounds.height > 700 ? 20 :  15
         view.clipsToBounds = true
         return view
     }()
@@ -81,10 +81,10 @@ class CathegoryCell: UITableViewCell {
         }
         
         circleView.snp.makeConstraints { make in
-            make.top.equalTo(containerView.snp.top).offset(10)
+            make.top.equalTo(containerView.snp.top).offset(5)
             make.trailing.equalTo(containerView.snp.trailing).inset(10)
-            make.bottom.equalTo(containerView.snp.bottom).inset(10)
-            make.height.width.equalTo(30)
+            make.bottom.equalTo(containerView.snp.bottom).inset(5)
+            make.height.width.equalTo(UIScreen.main.bounds.height > 700 ? 40 :  30)
         }
     }
     
@@ -93,3 +93,4 @@ class CathegoryCell: UITableViewCell {
         self.cathegoryLabel.text = title
     }
 }
+
