@@ -18,6 +18,7 @@
 		D85C58392B5A595400023B04 /* OnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C58382B5A595400023B04 /* OnboardingController.swift */; };
 		D85C583C2B5A771A00023B04 /* OnboardingItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C583B2B5A771A00023B04 /* OnboardingItems.swift */; };
 		D85C5DB02B614E2F00F548AA /* LoginProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C5DAF2B614E2F00F548AA /* LoginProtocols.swift */; };
+		D864B5F62BAC0B7100650E8A /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B5F52BAC0B7100650E8A /* MainScreenView.swift */; };
 		D86D44E22AFB932E00894774 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D44E12AFB932E00894774 /* AppDelegate.swift */; };
 		D86D44E42AFB932E00894774 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D44E32AFB932E00894774 /* SceneDelegate.swift */; };
 		D86D44E62AFB932E00894774 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D44E52AFB932E00894774 /* ViewController.swift */; };
@@ -43,7 +44,6 @@
 		D8900F172B55435A008E0E34 /* NewUserCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8900F162B55435A008E0E34 /* NewUserCheck.swift */; };
 		D8B1E9B62BA2F46C00D455AF /* MainScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9B52BA2F46C00D455AF /* MainScreenController.swift */; };
 		D8B1E9B92BA3026300D455AF /* MainToDoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9B82BA3026300D455AF /* MainToDoCell.swift */; };
-		D8B1E9BB2BA40D4F00D455AF /* MainToDoContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9BA2BA40D4F00D455AF /* MainToDoContoller.swift */; };
 		D8B1E9BD2BA4178B00D455AF /* MainScreenProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9BC2BA4178B00D455AF /* MainScreenProtocols.swift */; };
 		D8B1E9BF2BA4212A00D455AF /* MainScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9BE2BA4212A00D455AF /* MainScreenPresenter.swift */; };
 		D8B1E9C12BA4217F00D455AF /* MainScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9C02BA4217F00D455AF /* MainScreenInteractor.swift */; };
@@ -153,6 +153,7 @@
 		D85C58382B5A595400023B04 /* OnboardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingController.swift; sourceTree = "<group>"; };
 		D85C583B2B5A771A00023B04 /* OnboardingItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingItems.swift; sourceTree = "<group>"; };
 		D85C5DAF2B614E2F00F548AA /* LoginProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProtocols.swift; sourceTree = "<group>"; };
+		D864B5F52BAC0B7100650E8A /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
 		D86D44DE2AFB932E00894774 /* ToDoList-VIPER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ToDoList-VIPER.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D86D44E12AFB932E00894774 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D86D44E32AFB932E00894774 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -181,7 +182,6 @@
 		D8900F162B55435A008E0E34 /* NewUserCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserCheck.swift; sourceTree = "<group>"; };
 		D8B1E9B52BA2F46C00D455AF /* MainScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenController.swift; sourceTree = "<group>"; };
 		D8B1E9B82BA3026300D455AF /* MainToDoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainToDoCell.swift; sourceTree = "<group>"; };
-		D8B1E9BA2BA40D4F00D455AF /* MainToDoContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainToDoContoller.swift; sourceTree = "<group>"; };
 		D8B1E9BC2BA4178B00D455AF /* MainScreenProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenProtocols.swift; sourceTree = "<group>"; };
 		D8B1E9BE2BA4212A00D455AF /* MainScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenPresenter.swift; sourceTree = "<group>"; };
 		D8B1E9C02BA4217F00D455AF /* MainScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenInteractor.swift; sourceTree = "<group>"; };
@@ -611,6 +611,7 @@
 			isa = PBXGroup;
 			children = (
 				D8B1E9B72BA3024000D455AF /* CustomCell */,
+				D864B5F52BAC0B7100650E8A /* MainScreenView.swift */,
 				D8B1E9B52BA2F46C00D455AF /* MainScreenController.swift */,
 			);
 			path = View;
@@ -1060,7 +1061,6 @@
 				D8C19ED32B90F3D4004BCDDD /* SignInTextField.swift */,
 				D8C19ED52B91C037004BCDDD /* BaseButton.swift */,
 				D87474542B97176C00BF4866 /* CircleBaseButton.swift */,
-				D8B1E9BA2BA40D4F00D455AF /* MainToDoContoller.swift */,
 			);
 			path = CustomClasses;
 			sourceTree = "<group>";
@@ -1237,6 +1237,7 @@
 				D85C57EC2B57D0AD00023B04 /* OnboardingInteractor.swift in Sources */,
 				D8B1E9E32BAB223700D455AF /* AddNewToDoView.swift in Sources */,
 				D8B1E9E12BAB10BA00D455AF /* CathegoryCell.swift in Sources */,
+				D864B5F62BAC0B7100650E8A /* MainScreenView.swift in Sources */,
 				D8E9F89D2B04BFAB00A3F3FC /* AddToDoPresenter.swift in Sources */,
 				D8E9F89F2B04C06300A3F3FC /* AddToDoController.swift in Sources */,
 				D8E9F8B12B0B47FB00A3F3FC /* DateFormatter + EXT.swift in Sources */,
@@ -1265,7 +1266,6 @@
 				D8B1E9DF2BA84CB100D455AF /* AddNewToDoRouter.swift in Sources */,
 				D86D44EC2AFB932E00894774 /* ToDoList_VIPER.xcdatamodeld in Sources */,
 				D8E9F8A92B04D96600A3F3FC /* AddToDoRouter.swift in Sources */,
-				D8B1E9BB2BA40D4F00D455AF /* MainToDoContoller.swift in Sources */,
 				D8E9F8742B02178E00A3F3FC /* ToDoDetailPresenter.swift in Sources */,
 				D8B1E9CD2BA469AF00D455AF /* HomeTabBarPresenter.swift in Sources */,
 				D8E9F8762B021B7800A3F3FC /* ToDoDetailInteractor.swift in Sources */,

@@ -8,37 +8,43 @@
 import UIKit
 import SnapKit
 
-final class MainScreenController: MainToDoContoller {
+final class MainScreenController: UIViewController {
     var presenter: MainScreenPresenterProtocol?
     
+    //MARK: - Outelts 
     let mockData = [["1", "Запланированно сегодня"], ["3", "просроченно"], ["10", "Запланированно на завтра"], ["50", "выполненно"]]
     let mockColors: [UIColor] = [.systemOrange, .systemRed, .systemTeal, .systemGreen]
     
     var userData: [String] = []
     var toDosInfo: [[String]] = [[]] {
         didSet {
-            self.toDosCollection.reloadData()
+            self.mainView?.toDosCollection.reloadData()
         }
+    }
+    
+    private var mainView: MainScreenView? {
+        guard isViewLoaded else { return nil }
+        return view as? MainScreenView
     }
     
    //MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter?.viewWillAppear()
-        self.setupElements(nameOfImage: userData[1], userName: userData[0])
-        toDosCollection.reloadData()
+        mainView?.setupElements(nameOfImage: userData[1], userName: userData[0])
+        mainView?.toDosCollection.reloadData()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view = MainScreenView()
         setupCollectionView()
     }
     
     //MARK: - Setup Collection View
     func setupCollectionView() {
-        self.toDosCollection.dataSource = self
-        self.toDosCollection.delegate = self
-        self.toDosCollection.register(MainToDoCell.self, forCellWithReuseIdentifier: MainToDoCell.reuseIdentifier)
+        mainView?.toDosCollection.dataSource = self
+        mainView?.toDosCollection.delegate = self
     }
  
 }
