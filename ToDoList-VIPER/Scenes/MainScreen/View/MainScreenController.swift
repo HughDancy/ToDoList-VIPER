@@ -25,11 +25,12 @@ final class MainScreenController: MainToDoContoller {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter?.viewWillAppear()
+        self.setupElements(nameOfImage: userData[1], userName: userData[0])
+        toDosCollection.reloadData()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setupElements(nameOfImage: "mockUserAvatar", userName: "Винеамин")
         setupCollectionView()
     }
     

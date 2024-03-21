@@ -12,7 +12,7 @@ final class MainScreenInteractor: MainScreenInteractorInputProtocol {
     private var storage = ToDoStorage.instance
     
     func retriveUserData() {
-        presenter?.didRetriveUserData(["Винеамин", "mockUserAvatar"])
+        presenter?.didRetriveUserData(["Женя", "mockUserAvatar"])
     }
     
     func getToDosCount() {
@@ -22,7 +22,8 @@ final class MainScreenInteractor: MainScreenInteractorInputProtocol {
     
         let todayToDosCount = upcomingToDos[0].count
         let tommorowToDosCount = upcomingToDos[1].count
-        let overdueToDosCount = ToDoObjectSorter.sortByStatus(object: allNotDoneToDos, and: .overdue).count
+        let overdueToDos = ToDoObjectSorter.sortByStatus(object: allNotDoneToDos, and: .overdue)
+        let overdueToDosCount = (overdueToDos[0].count) + (overdueToDos[1].count) + (overdueToDos[2].count)
         let doneToDosCount = allDoneToDos.count
         
         let toDosInfo = [
