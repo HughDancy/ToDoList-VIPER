@@ -11,13 +11,34 @@ final class AddNewToDoInteractor: AddNewToDoInteractorProtocol {
     weak var presenter: AddNewToDoPresenterProtocol?
     var storage = ToDoStorage.instance
     
-    func addNewToDo(with name: String, description: String, date: Date, mark: String) {
+    func addNewToDo(with name: String?, description: String?, date: Date?, mark: String) {
         let currentDay = Date.today
-        if date >= currentDay {
-            storage.createNewToDo(title: name, content: description, date: date, done: false)
+        if name != "" {
+            storage.createNewToDo(title: name ?? "Temp",
+                                  content: self.cehckDescription(description ?? "Описание задачи"),
+                                  date: date ?? currentDay,
+                                  done: self.checkDoneDate(date ?? currentDay))
+            presenter?.goBackToMain()
         } else {
-            storage.createNewToDo(title: name, content: description, date: date, done: true)
+            presenter?.showAlert()
         }
-        presenter?.goBackToMain()
+    }
+    
+    //MARK: - Support function
+    private func cehckDescription(_ description: String) -> String {
+        if description == "Описание задачи" {
+            return "Описание задачи не установлено"
+        } else {
+            return description
+        }
+    }
+    
+    private func checkDoneDate(_ date: Date) -> Bool {
+        let currentDate = Date.today
+        if date >= currentDate {
+            return false
+        } else {
+            return true
+        }
     }
 }

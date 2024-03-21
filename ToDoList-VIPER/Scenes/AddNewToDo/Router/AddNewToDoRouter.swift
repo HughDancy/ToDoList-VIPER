@@ -26,4 +26,11 @@ final class AddNewToDoRouter: AddNewToDoRouterProtocol {
         guard let parrentView = view as? UIViewController else { return }
         parrentView.dismiss(animated: true)
     }
+    
+    func showAlert(from view: any AddNewToDoViewProtocol) {
+        guard let parrentView = view as? UIViewController else { return }
+        let allertController = UIAlertController(title: "Ошибка", message: "Не заполненно наименование задачи", preferredStyle: .alert)
+        allertController.addAction(UIAlertAction(title: "Ок", style: .cancel))
+        parrentView.present(allertController, animated: true)
+    }
 }

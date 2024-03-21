@@ -34,10 +34,10 @@ class AddNewToDoController: UIViewController, AddNewToDoViewProtocol, UITableVie
     
     //MARK: - Buttons Action
     @objc func addNewToDo() {
-        presenter?.addNewToDo(with: addNewToDoView?.nameOfTaskField.text ?? "Do it",
-                              description: addNewToDoView?.descriptionField.text ?? "Dom",
-                              date: addNewToDoView?.dateField.date ?? Date(),
-                              mark: color?.rawValue ?? ColorsItemResult.systemMint.rawValue)
+        presenter?.addNewToDo(with: addNewToDoView?.nameOfTaskField.text,
+                              description: addNewToDoView?.descriptionField.text,
+                              date: addNewToDoView?.dateField.date,
+                              mark: color?.rawValue ?? ColorsItemResult.systemPurple.rawValue)
     }
     
     @objc func dismissToMain() {
@@ -68,8 +68,8 @@ extension AddNewToDoController: UITabBarDelegate, UITableViewDataSource {
             self.color = ColorsItemResult.systemOrange
         case .systemYellow:
             self.color = ColorsItemResult.systemGreen
-        case .systemGreen:
-            self.color = ColorsItemResult.systemMint
+        case .systemPurple:
+            self.color = ColorsItemResult.systemPurple
         default:
             self.color = ColorsItemResult.systemOrange
         }

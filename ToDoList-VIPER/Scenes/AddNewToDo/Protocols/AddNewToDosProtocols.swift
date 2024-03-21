@@ -18,15 +18,16 @@ protocol AddNewToDoPresenterProtocol: AnyObject {
     var router: AddNewToDoRouterProtocol? { get set }
     
     //VIEW -> PRESENTER
-    func addNewToDo(with name: String, description: String, date: Date, mark: String)
+    func addNewToDo(with name: String?, description: String?, date: Date?, mark: String)
     func goBackToMain()
+    func showAlert()
 }
 
 protocol AddNewToDoInteractorProtocol: AnyObject {
     var presenter: AddNewToDoPresenterProtocol? { get set }
     
     //PRESENTER -> INTERACTOR
-    func addNewToDo(with name: String, description: String, date: Date, mark: String)
+    func addNewToDo(with name: String?, description: String?, date: Date?, mark: String)
 }
 
 protocol AddNewToDoRouterProtocol: AnyObject {
@@ -34,4 +35,5 @@ protocol AddNewToDoRouterProtocol: AnyObject {
     
     //PRESENTER -> ROUTER
     func dismiss(from view: AddNewToDoViewProtocol)
+    func showAlert(from view: AddNewToDoViewProtocol)
 }

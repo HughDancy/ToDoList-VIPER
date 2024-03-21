@@ -14,7 +14,7 @@ class CathegoryCell: UITableViewCell {
     private lazy var containerView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemGray6
-        view.layer.cornerRadius = UIScreen.main.bounds.height > 700 ? 10 :  5
+        view.layer.cornerRadius = UIScreen.main.bounds.height > 700 ? 10 :  7
         view.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
         view.layer.shadowRadius = 3
         view.layer.shadowColor = UIColor.black.cgColor
