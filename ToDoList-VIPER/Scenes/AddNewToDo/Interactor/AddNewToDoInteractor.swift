@@ -17,7 +17,8 @@ final class AddNewToDoInteractor: AddNewToDoInteractorProtocol {
             storage.createNewToDo(title: name ?? "Temp",
                                   content: self.cehckDescription(description ?? "Описание задачи"),
                                   date: date ?? currentDay,
-                                  done: self.checkDoneDate(date ?? currentDay))
+                                  done: self.checkDoneDate(date ?? currentDay),
+                                  color: mark)
             presenter?.goBackToMain()
         } else {
             presenter?.showAlert()

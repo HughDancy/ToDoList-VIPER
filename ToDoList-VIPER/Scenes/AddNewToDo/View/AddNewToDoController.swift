@@ -66,7 +66,7 @@ extension AddNewToDoController: UITabBarDelegate, UITableViewDataSource {
         switch ColorsItem.colorsStack[indexPath.row] {
         case .systemOrange:
             self.color = ColorsItemResult.systemOrange
-        case .systemYellow:
+        case .systemGreen:
             self.color = ColorsItemResult.systemGreen
         case .systemPurple:
             self.color = ColorsItemResult.systemPurple
