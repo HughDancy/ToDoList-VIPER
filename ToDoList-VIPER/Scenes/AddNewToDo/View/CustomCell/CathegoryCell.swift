@@ -15,10 +15,10 @@ class CathegoryCell: UITableViewCell {
         let view = UIView()
         view.backgroundColor = .systemGray6
         view.layer.cornerRadius = 10
-        view.layer.shadowOffset = CGSize(width: 0, height: 2)
-        view.layer.shadowRadius = 5
+        view.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
+        view.layer.shadowRadius = 3
         view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOpacity = 0.3
+        view.layer.shadowOpacity = 0.2
         
         return view
     }()
@@ -50,7 +50,7 @@ class CathegoryCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         if self.isSelected {
-            containerView.layer.borderWidth = 3
+            containerView.layer.borderWidth = 2
             containerView.layer.borderColor = UIColor.systemBlue.cgColor
         } else {
             containerView.layer.borderWidth = 0
@@ -76,7 +76,6 @@ class CathegoryCell: UITableViewCell {
         }
         
         cathegoryLabel.snp.makeConstraints { make in
-//            make.top.equalTo(containerView.safeAreaLayoutGuide.snp.top).offset(10)
             make.centerY.equalTo(containerView.safeAreaLayoutGuide.snp.centerY)
             make.leading.equalTo(containerView.safeAreaLayoutGuide.snp.leading).offset(10)
         }
@@ -88,7 +87,7 @@ class CathegoryCell: UITableViewCell {
             make.height.width.equalTo(30)
         }
     }
-
+    
     func setupCell(with color: UIColor, title: String) {
         self.circleView.backgroundColor = color
         self.cathegoryLabel.text = title
