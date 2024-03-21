@@ -39,6 +39,7 @@ final class MainScreenController: UIViewController {
         super.viewDidLoad()
         view = MainScreenView()
         setupCollectionView()
+        self.navigationItem.largeTitleDisplayMode = .never
     }
     
     //MARK: - Setup Collection View
