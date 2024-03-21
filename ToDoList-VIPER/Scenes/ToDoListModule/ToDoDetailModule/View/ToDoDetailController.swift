@@ -16,7 +16,7 @@ class ToDoDetailController: UIViewController {
     private lazy var titleLabel: UITextView = {
         let textView = UITextView()
         textView.font = UIFont.systemFont(ofSize: 45, weight: .bold)
-        textView.textColor = .systemBlue
+//        textView.textColor = .systemBlue
         textView.isScrollEnabled = false
         textView.isUserInteractionEnabled = false
         return textView
@@ -194,6 +194,16 @@ class ToDoDetailController: UIViewController {
 extension ToDoDetailController: ToDoDetailViewProtocol {
     func showToDo(_ toDo: ToDoObject) {
         titleLabel.text = toDo.title
+        switch toDo.color {
+        case ColorsItemResult.systemOrange.rawValue:
+            titleLabel.textColor = ColorsItem.colorsStack[0]
+        case ColorsItemResult.systemGreen.rawValue:
+            titleLabel.textColor = ColorsItem.colorsStack[1]
+        case ColorsItemResult.systemPurple.rawValue:
+            titleLabel.textColor = ColorsItem.colorsStack[2]
+        default:
+            titleLabel.textColor = .systemCyan
+        }
         contentTextView.text = toDo.descriptionTitle
         datePicker.date = toDo.date ?? Date()
     }

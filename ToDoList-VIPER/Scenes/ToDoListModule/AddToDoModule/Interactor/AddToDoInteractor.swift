@@ -17,7 +17,7 @@ class AddToDoInteractor: AddToDoInteractorInputProtocol {
 //    }
     
     func saveToDo(title: String, content: String, date: Date, done: Bool) {
-        storage.createNewToDo(title: title, content: content, date: date, done: done)
+//        storage.createNewToDo(title: title, content: content, date: date, done: done)
         presenter?.goBack()
     }
 }

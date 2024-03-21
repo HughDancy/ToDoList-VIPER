@@ -8,9 +8,12 @@
 import Foundation
 import UIKit
 
-final class CustomHomeTabBarController: UITabBarController, UITabBarControllerDelegate {
+final class CustomHomeTabBarController: UITabBarController, UITabBarControllerDelegate, HomeTabBarViewProtocol {
+    var presenter: HomeTabBarPresenterProtocol?
+    
     private var customTabBar = CustomTabBar()
     
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
@@ -27,6 +30,7 @@ final class CustomHomeTabBarController: UITabBarController, UITabBarControllerDe
         self.tabBar.frame = tabBarFrame
     }
     
+    //MARK: - Setup Layout
     func setupLayoutCustomTabBar() {
         tabBar.addSubview(customTabBar)
         self.tabBar.addSubview(middleButton)
@@ -51,6 +55,7 @@ final class CustomHomeTabBarController: UITabBarController, UITabBarControllerDe
         self.tabBar.itemSpacing = self.view.bounds.width / 1.8
     }
     
+    //MARK: - Middle button
     lazy var middleButton: UIButton = {
         //        let middleButton = UIButton(frame: CGRect(x: (self.view.bounds.width / 2) - 25 , y: self.view.bounds.height * 0.87, width: 60, height: 60))
         let middleButton = UIButton()
@@ -74,11 +79,7 @@ final class CustomHomeTabBarController: UITabBarController, UITabBarControllerDe
     }()
     
     @objc func openAddNewToDo() {
-        let alertController = UIAlertController(title: "Hey", message: "Hey you press plus button", preferredStyle: .actionSheet)
-        alertController.addAction(UIAlertAction(title: "Done", style: .cancel))
-        self.present(alertController, animated: true)
-        self.selectedIndex = 2
-        print("Button is pushed")
+        presenter?.presentAddNewToDo()
     }
 }
 

@@ -21,6 +21,7 @@ extension ToDoObject {
     @NSManaged public var date: Date?
     @NSManaged public var dateTitle: String?
     @NSManaged public var doneStatus: Bool
+    @NSManaged public var color: String
 
 }
 

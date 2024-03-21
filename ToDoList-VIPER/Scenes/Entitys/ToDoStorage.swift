@@ -25,13 +25,13 @@ final class ToDoStorage {
     private lazy var viewContext: NSManagedObjectContext = persistentContainer.viewContext
     
     //MARK: - CoreData create new ToDoObject
-    func createNewToDo(title: String, content: String, date: Date, done: Bool) {
+    func createNewToDo(title: String, content: String, date: Date, done: Bool, color: String) {
         let newToDo = ToDoObject(context: viewContext)
         newToDo.title = title
         newToDo.descriptionTitle = content
         newToDo.date = date
         newToDo.dateTitle = DateFormatter.createMediumDate(from: date)
-        
+        newToDo.color = color
         do {
             try viewContext.save()
         }

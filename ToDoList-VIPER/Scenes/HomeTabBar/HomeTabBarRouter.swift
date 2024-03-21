@@ -8,10 +8,12 @@
 import UIKit
 
 final class HomeTabBarRouter: HomeTabBarRouterProtocol {
-    static func createHomeTabBar() -> UITabBarController {
-
+    static func createHomeTabBar() -> UIViewController {
         let tabBar = CustomHomeTabBarController()
-        let taskScreen = ToDoListRouter.createToDoListModule()
+        let presenter: HomeTabBarPresenterProtocol = HomeTabBarPresenter()
+        let router: HomeTabBarRouterProtocol = HomeTabBarRouter()
+        
+        let taskScreen = MainScreenRouter.createMainScreenModule()
         taskScreen.hidesBottomBarWhenPushed = false
         let taskScreenItem = UITabBarItem(title: "Задачи",
                                           image: UIImage(systemName: "list.clipboard.fill"),
@@ -25,10 +27,18 @@ final class HomeTabBarRouter: HomeTabBarRouterProtocol {
         optionsScreen.tabBarItem = optionsScreenItem
         
         tabBar.viewControllers = [taskScreen, optionsScreen]
+        tabBar.presenter = presenter
+        presenter.view = tabBar
+        presenter.router = router
         
-//        let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
-//        appDelegate.window?.rootViewController = tabBar
-      
         return tabBar
+    }
+    
+    func presentAddNewToDooScreen(from view: HomeTabBarViewProtocol) {
+        guard let parrentViewController = view as? UIViewController else { return }
+        let addNewToDoModule = AddNewToDoRouter.createAddNewToDoModule()
+        addNewToDoModule.modalPresentationStyle = .fullScreen
+        addNewToDoModule.modalTransitionStyle = .flipHorizontal
+        parrentViewController.present(addNewToDoModule, animated: true)
     }
 }
