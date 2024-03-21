@@ -12,7 +12,7 @@ final class MainScreenController: UIViewController {
     var presenter: MainScreenPresenterProtocol?
     
     //MARK: - Outelts 
-    let mockData = [["1", "Запланированно сегодня"], ["3", "просроченно"], ["10", "Запланированно на завтра"], ["50", "выполненно"]]
+    let mockData = [["1", "Cегодня"], ["3", "просроченно"], ["10", "Завтра"], ["50", "выполненно"]]
     let mockColors: [UIColor] = [.systemOrange, .systemRed, .systemTeal, .systemGreen]
     
     var userData: [String] = []

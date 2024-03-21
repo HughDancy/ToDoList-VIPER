@@ -27,9 +27,9 @@ final class MainScreenInteractor: MainScreenInteractorInputProtocol {
         let doneToDosCount = allDoneToDos.count
         
         let toDosInfo = [
-            [String(todayToDosCount), "Запланировано на сегодня"],
+            [String(todayToDosCount), "Сегодня"],
             [String(overdueToDosCount), "Просрочено"],
-            [String(tommorowToDosCount), "Запланировано на завтра"],
+            [String(tommorowToDosCount), "Завтра"],
             [String(doneToDosCount), "Завершено"]
         ]
         presenter?.didRetriveToDosCount(toDosInfo)

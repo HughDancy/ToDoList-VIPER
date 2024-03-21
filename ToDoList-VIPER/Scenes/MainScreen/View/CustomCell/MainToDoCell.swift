@@ -32,7 +32,7 @@ class MainToDoCell: UICollectionViewCell {
     
     private lazy var numbersLabel: UILabel = {
         let numbers = UILabel()
-        numbers.font = UIFont.systemFont(ofSize: 30, weight: .bold)
+        numbers.font = UIFont.systemFont(ofSize: UIScreen.main.bounds.height > 700 ? 60 : 30, weight: .bold)
         numbers.textColor = .systemBackground
         return numbers
     }()
@@ -42,7 +42,7 @@ class MainToDoCell: UICollectionViewCell {
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: UIScreen.main.bounds.height > 700 ? 20 : 17, weight: .semibold)
         label.textColor = .systemBackground
         return label
     }()
@@ -81,7 +81,8 @@ class MainToDoCell: UICollectionViewCell {
         }
         
         toDosLabel.snp.makeConstraints { make in
-            make.top.equalTo(numbersLabel.snp.bottom).offset(3)
+//            make.top.equalTo(numbersLabel.snp.bottom).offset(3)
+            make.top.equalTo(numbersLabel.snp.bottom)
             make.centerX.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(10)
         }
