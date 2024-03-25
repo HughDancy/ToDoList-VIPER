@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ToDoCell: UITableViewCell {
+class ToDosCell: UITableViewCell {
     
     weak var doneCheckDelegate: ToDoDoneProtocol?
     static let reuseIdentifier = "ToDoCell"

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D80F38722AFCDF12004A408F /* ToDoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F38712AFCDF12004A408F /* ToDoCell.swift */; };
+		D80F38722AFCDF12004A408F /* ToDosCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F38712AFCDF12004A408F /* ToDosCell.swift */; };
 		D82B8B6E2B6B8CCB00A006F2 /* AppConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82B8B6D2B6B8CCB00A006F2 /* AppConfigurator.swift */; };
 		D851385A2AFCC9C4004136D7 /* ToDoListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85138592AFCC9C4004136D7 /* ToDoListRouter.swift */; };
 		D85C57E52B57C71900023B04 /* OnboardingPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C57E42B57C71900023B04 /* OnboardingPageController.swift */; };
@@ -77,6 +77,8 @@
 		D8CE4B702B87362500E473AC /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CE4B6F2B87362500E473AC /* Reachability.swift */; };
 		D8CE4B722B8739D900E473AC /* RegistrationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CE4B712B8739D900E473AC /* RegistrationStatus.swift */; };
 		D8DC23CC2BAD7D9A00C3E220 /* CircularTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DC23CB2BAD7D9A00C3E220 /* CircularTransition.swift */; };
+		D8DC23D52BB1773400C3E220 /* ToDoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DC23D42BB1773400C3E220 /* ToDoCell.swift */; };
+		D8DC23D72BB17B8300C3E220 /* ToDoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DC23D62BB17B8300C3E220 /* ToDoController.swift */; };
 		D8DD85CF2B9F370C003E7F89 /* CustomHomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DD85CE2B9F370C003E7F89 /* CustomHomeTabBarController.swift */; };
 		D8DD85D12B9F4AD8003E7F89 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DD85D02B9F4AD8003E7F89 /* CustomTabBar.swift */; };
 		D8E840542B63A8F0005A0936 /* String + EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E840532B63A8F0005A0936 /* String + EXT.swift */; };
@@ -143,7 +145,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D80F38712AFCDF12004A408F /* ToDoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoCell.swift; sourceTree = "<group>"; };
+		D80F38712AFCDF12004A408F /* ToDosCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDosCell.swift; sourceTree = "<group>"; };
 		D82B8B6D2B6B8CCB00A006F2 /* AppConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigurator.swift; sourceTree = "<group>"; };
 		D85138592AFCC9C4004136D7 /* ToDoListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListRouter.swift; sourceTree = "<group>"; };
 		D85C57E42B57C71900023B04 /* OnboardingPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageController.swift; sourceTree = "<group>"; };
@@ -205,6 +207,8 @@
 		D8CE4B6F2B87362500E473AC /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		D8CE4B712B8739D900E473AC /* RegistrationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationStatus.swift; sourceTree = "<group>"; };
 		D8DC23CB2BAD7D9A00C3E220 /* CircularTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularTransition.swift; sourceTree = "<group>"; };
+		D8DC23D42BB1773400C3E220 /* ToDoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoCell.swift; sourceTree = "<group>"; };
+		D8DC23D62BB17B8300C3E220 /* ToDoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoController.swift; sourceTree = "<group>"; };
 		D8DD85CE2B9F370C003E7F89 /* CustomHomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHomeTabBarController.swift; sourceTree = "<group>"; };
 		D8DD85D02B9F4AD8003E7F89 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		D8E840532B63A8F0005A0936 /* String + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + EXT.swift"; sourceTree = "<group>"; };
@@ -293,7 +297,7 @@
 		D80F38702AFCDEFA004A408F /* CustomCell */ = {
 			isa = PBXGroup;
 			children = (
-				D80F38712AFCDF12004A408F /* ToDoCell.swift */,
+				D80F38712AFCDF12004A408F /* ToDosCell.swift */,
 			);
 			path = CustomCell;
 			sourceTree = "<group>";
@@ -740,8 +744,18 @@
 		D8DC23D22BB176DB00C3E220 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D8DC23D32BB1771700C3E220 /* ToDoCell */,
+				D8DC23D62BB17B8300C3E220 /* ToDoController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		D8DC23D32BB1771700C3E220 /* ToDoCell */ = {
+			isa = PBXGroup;
+			children = (
+				D8DC23D42BB1773400C3E220 /* ToDoCell.swift */,
+			);
+			path = ToDoCell;
 			sourceTree = "<group>";
 		};
 		D8DD85D22BA1F763003E7F89 /* CustomTabBar */ = {
@@ -1302,8 +1316,10 @@
 				D86D45242AFB986E00894774 /* ToDoStore.swift in Sources */,
 				D8B1E9D02BA46A0E00D455AF /* HomeTabBarProtocols.swift in Sources */,
 				D8E9F8782B021C3C00A3F3FC /* ToDoDetailRouter.swift in Sources */,
+				D8DC23D72BB17B8300C3E220 /* ToDoController.swift in Sources */,
 				D85C57EA2B57CD1E00023B04 /* OnboardingProtocols.swift in Sources */,
 				D8E9F8BA2B0CC0CB00A3F3FC /* ToDoObject+CoreDataProperties.swift in Sources */,
+				D8DC23D52BB1773400C3E220 /* ToDoCell.swift in Sources */,
 				D85C583C2B5A771A00023B04 /* OnboardingItems.swift in Sources */,
 				D8E9F8A52B04D32B00A3F3FC /* UITextField + EXT.swift in Sources */,
 				D8E9F8702B01F84F00A3F3FC /* ToDoDetailsProtocols.swift in Sources */,
@@ -1336,7 +1352,7 @@
 				D85C58392B5A595400023B04 /* OnboardingController.swift in Sources */,
 				D8C19ED42B90F3D4004BCDDD /* SignInTextField.swift in Sources */,
 				D8B1E9C32BA421A600D455AF /* MainScreenRouter.swift in Sources */,
-				D80F38722AFCDF12004A408F /* ToDoCell.swift in Sources */,
+				D80F38722AFCDF12004A408F /* ToDosCell.swift in Sources */,
 				D8E840662B6780A6005A0936 /* RegistrationPresenter.swift in Sources */,
 				D8DD85CF2B9F370C003E7F89 /* CustomHomeTabBarController.swift in Sources */,
 				D8E9F8A32B04D23900A3F3FC /* UILabel + EXT.swift in Sources */,

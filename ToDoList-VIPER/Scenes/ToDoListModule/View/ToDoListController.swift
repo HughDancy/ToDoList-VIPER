@@ -21,7 +21,7 @@ class ToDoListController: UIViewController {
     
     private lazy var tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .plain)
-        table.register(ToDoCell.self, forCellReuseIdentifier: ToDoCell.reuseIdentifier)
+        table.register(ToDosCell.self, forCellReuseIdentifier: ToDosCell.reuseIdentifier)
         table.showsVerticalScrollIndicator = false
         table.delegate = self
         table.dataSource = self
@@ -147,7 +147,7 @@ extension ToDoListController: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ToDoCell.reuseIdentifier, for: indexPath) as? ToDoCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: ToDosCell.reuseIdentifier, for: indexPath) as? ToDosCell
         cell?.setupElements(with: toDos[indexPath.section][indexPath.row])
         cell?.doneCheckDelegate = self
         cell?.numberOfRow = indexPath.row
