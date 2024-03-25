@@ -697,6 +697,53 @@
 			path = CustomCell;
 			sourceTree = "<group>";
 		};
+		D8DC23CD2BB1769D00C3E220 /* ToDos */ = {
+			isa = PBXGroup;
+			children = (
+				D8DC23D22BB176DB00C3E220 /* View */,
+				D8DC23D12BB176D500C3E220 /* Interactor */,
+				D8DC23D02BB176C400C3E220 /* Presenter */,
+				D8DC23CF2BB176BD00C3E220 /* Router */,
+				D8DC23CE2BB176B400C3E220 /* Protocols */,
+			);
+			path = ToDos;
+			sourceTree = "<group>";
+		};
+		D8DC23CE2BB176B400C3E220 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		D8DC23CF2BB176BD00C3E220 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		D8DC23D02BB176C400C3E220 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		D8DC23D12BB176D500C3E220 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		D8DC23D22BB176DB00C3E220 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		D8DD85D22BA1F763003E7F89 /* CustomTabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -813,6 +860,7 @@
 		D8E9F8792B03532000A3F3FC /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				D8DC23CD2BB1769D00C3E220 /* ToDos */,
 				D8900F0E2B51354B008E0E34 /* Loading */,
 				D8900F0F2B513558008E0E34 /* Onboarding */,
 				D85C5DA92B614DC900F548AA /* Login */,
