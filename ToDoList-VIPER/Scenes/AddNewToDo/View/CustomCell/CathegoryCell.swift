@@ -17,7 +17,7 @@ class CathegoryCell: UITableViewCell {
         view.layer.cornerRadius = UIScreen.main.bounds.height > 700 ? 10 :  7
         view.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
         view.layer.shadowRadius = 3
-        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowColor = UIColor.systemBackground.cgColor
         view.layer.shadowOpacity = 0.2
         
         return view

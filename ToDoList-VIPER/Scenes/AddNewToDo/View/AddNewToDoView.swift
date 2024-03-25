@@ -10,6 +10,11 @@ import UIKit
 final class AddNewToDoView: UIView {
     
     //MARK: - OUTLETS
+    lazy var boxView: UIView = {
+       let view = UIView(frame: CGRect(x: 20, y: 20, width: 50, height: 50))
+        view.backgroundColor = .systemPink
+        return view
+    }()
     lazy var closeButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .systemRed
@@ -24,7 +29,8 @@ final class AddNewToDoView: UIView {
         let label = UILabel()
         label.text = "Добавить задачу"
         label.font = UIFont.systemFont(ofSize: 35, weight: .bold)
-        label.textColor = .systemCyan
+//        label.textColor = .systemCyan
+        label.textColor = .systemPink
         return label
     }()
     
@@ -105,7 +111,7 @@ final class AddNewToDoView: UIView {
         return tableVIew
     }()
     
-    lazy var addNewToDoButton = UIButton.createToDoButton(title: "Add new ToDo", backColor: .systemCyan, tintColor: .systemBackground)
+    lazy var addNewToDoButton = UIButton.createToDoButton(title: "Add new ToDo", backColor: .systemRed, tintColor: .systemBackground)
     
     //MARK: - Init
     init() {
@@ -127,6 +133,7 @@ final class AddNewToDoView: UIView {
     
     //MARK: - Setup Hierarchy
     private func setupHierarchy() {
+        self.addSubview(boxView)
         self.addSubview(closeButton)
         self.addSubview(titleOfScreen)
         self.addSubview(nameOfTaskField)
@@ -141,6 +148,9 @@ final class AddNewToDoView: UIView {
     
     //MARK: - Setup Layout
     private func setupLayout() {
+//        boxView.snp.makeConstraints { make in
+//            <#code#>
+//        }
         closeButton.snp.makeConstraints { make in
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(10)
             make.leading.equalToSuperview().offset(15)
@@ -150,7 +160,7 @@ final class AddNewToDoView: UIView {
         titleOfScreen.snp.makeConstraints { make in
 //            make.top.equalToSuperview().offset((UIScreen.main.bounds.height / 5) - (UIScreen.main.bounds.width / 5))
             make.top.equalTo(closeButton.snp.bottom).offset(10)
-            make.centerX.equalToSuperview()
+//            make.centerX.equalToSuperview()
         }
         
         nameOfTaskField.snp.makeConstraints { make in
@@ -184,11 +194,13 @@ final class AddNewToDoView: UIView {
         
         addNewToDoButton.snp.makeConstraints { make in
             make.bottom.equalToSuperview().inset(40)
-            make.leading.trailing.equalToSuperview().inset(40)
-            make.height.equalTo(50)
+//            make.leading.trailing.equalToSuperview().inset(40)
+            make.centerX.equalToSuperview().inset(40)
+            make.height.width.equalTo(50)
         }
         
-        addNewToDoButton.layer.cornerRadius = 10
+        addNewToDoButton.layer.cornerRadius = 20
+        addNewToDoButton.clipsToBounds = true
     }
     
     //MARK: - Setup TextView

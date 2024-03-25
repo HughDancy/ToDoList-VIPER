@@ -37,8 +37,12 @@ final class HomeTabBarRouter: HomeTabBarRouterProtocol {
     func presentAddNewToDooScreen(from view: HomeTabBarViewProtocol) {
         guard let parrentViewController = view as? UIViewController else { return }
         let addNewToDoModule = AddNewToDoRouter.createAddNewToDoModule()
-        addNewToDoModule.modalPresentationStyle = .fullScreen
+//        let addNewToDoModule = AddToDoRouter.createAddToDoModule(with: ToDoListController())
+//        let toDoList = ToDoListRouter.createToDoListModule()
+        addNewToDoModule.modalPresentationStyle = .custom
         addNewToDoModule.modalTransitionStyle = .flipHorizontal
+//        toDoList.modalPresentationStyle = .custom
+        addNewToDoModule.transitioningDelegate = parrentViewController as? any UIViewControllerTransitioningDelegate
         parrentViewController.present(addNewToDoModule, animated: true)
     }
 }
