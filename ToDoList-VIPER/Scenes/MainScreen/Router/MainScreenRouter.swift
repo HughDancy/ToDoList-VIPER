@@ -35,7 +35,8 @@ final class MainScreenRouter: MainScreenRouterProtocol {
     func goTomoorowToDos(from view: any MainScreenViewProtocol) {
         guard let parrentView = view as? UIViewController else { return }
         let tommorowToDos = ToDoListRouter.createToDoListModule()
-        parrentView.navigationController?.pushViewController(tommorowToDos, animated: true)
+        let newToDos = ToDoController()
+        parrentView.navigationController?.pushViewController(newToDos, animated: true)
     }
     
     func goToOverdueToDos(from view: any MainScreenViewProtocol) {

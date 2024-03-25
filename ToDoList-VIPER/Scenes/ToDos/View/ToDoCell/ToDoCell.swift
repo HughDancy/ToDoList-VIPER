@@ -43,7 +43,8 @@ class ToDoCell: UITableViewCell {
     private lazy var icon: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = .systemBackground
+        imageView.backgroundColor = iconBox.backgroundColor
+        imageView.tintColor = .systemBackground
         return imageView
     }()
     
@@ -63,6 +64,9 @@ class ToDoCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        if self.isSelected {
+            checkboxImage.tintColor = .systemGreen
+        }
     }
     
     //MARK: - Setup Hierarchy
@@ -93,7 +97,9 @@ class ToDoCell: UITableViewCell {
         
         iconBox.snp.makeConstraints { make in
             make.top.trailing.bottom.equalToSuperview()
-            make.leading.equalTo(taskName.snp.trailing).offset(40)
+            make.width.equalTo(100)
+//            iconBox.layer.cornerRadius = 50
+//            iconBox.clipsToBounds = true
         }
         
         icon.snp.makeConstraints { make in
