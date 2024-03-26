@@ -32,6 +32,8 @@ class ToDoCell: UITableViewCell {
     private lazy var taskName: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         return label
     }()
     
@@ -88,7 +90,7 @@ class ToDoCell: UITableViewCell {
         }
         
         checkboxImage.snp.makeConstraints { make in
-            make.top.leading.equalToSuperview().offset(10)
+            make.top.leading.bottom.equalToSuperview().inset(10)
             make.height.width.equalTo(50)
         }
         
@@ -119,6 +121,7 @@ class ToDoCell: UITableViewCell {
         self.icon.image = UIImage(systemName: icon)
     }
 }
+
 //MARK: - Tap Gesture to Checkbox image Extension
 extension ToDoCell {
     private func addTapRecognizerToImage() {

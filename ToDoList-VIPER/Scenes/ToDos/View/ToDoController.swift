@@ -59,9 +59,9 @@ extension ToDoController: UITableViewDelegate, UITableViewDataSource {
         return cell ?? UITableViewCell()
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        120
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        120
+//    }
 }
 
 struct ToDoItems {
