@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D80F38722AFCDF12004A408F /* ToDosCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F38712AFCDF12004A408F /* ToDosCell.swift */; };
 		D82B8B6E2B6B8CCB00A006F2 /* AppConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82B8B6D2B6B8CCB00A006F2 /* AppConfigurator.swift */; };
+		D8473BE32BB2C5DF0063F87A /* CalendarCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8473BE22BB2C5DF0063F87A /* CalendarCollectionCell.swift */; };
 		D851385A2AFCC9C4004136D7 /* ToDoListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85138592AFCC9C4004136D7 /* ToDoListRouter.swift */; };
 		D85C57E52B57C71900023B04 /* OnboardingPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C57E42B57C71900023B04 /* OnboardingPageController.swift */; };
 		D85C57E72B57CCA600023B04 /* OnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C57E62B57CCA600023B04 /* OnboardingPresenter.swift */; };
@@ -147,6 +148,7 @@
 /* Begin PBXFileReference section */
 		D80F38712AFCDF12004A408F /* ToDosCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDosCell.swift; sourceTree = "<group>"; };
 		D82B8B6D2B6B8CCB00A006F2 /* AppConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigurator.swift; sourceTree = "<group>"; };
+		D8473BE22BB2C5DF0063F87A /* CalendarCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionCell.swift; sourceTree = "<group>"; };
 		D85138592AFCC9C4004136D7 /* ToDoListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListRouter.swift; sourceTree = "<group>"; };
 		D85C57E42B57C71900023B04 /* OnboardingPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageController.swift; sourceTree = "<group>"; };
 		D85C57E62B57CCA600023B04 /* OnboardingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPresenter.swift; sourceTree = "<group>"; };
@@ -300,6 +302,15 @@
 				D80F38712AFCDF12004A408F /* ToDosCell.swift */,
 			);
 			path = CustomCell;
+			sourceTree = "<group>";
+		};
+		D8473BE12BB2C5800063F87A /* CustomCells */ = {
+			isa = PBXGroup;
+			children = (
+				D8DC23D32BB1771700C3E220 /* ToDoCell */,
+				D8473BE22BB2C5DF0063F87A /* CalendarCollectionCell.swift */,
+			);
+			path = CustomCells;
 			sourceTree = "<group>";
 		};
 		D85C57E02B57AC1300023B04 /* View */ = {
@@ -744,7 +755,7 @@
 		D8DC23D22BB176DB00C3E220 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				D8DC23D32BB1771700C3E220 /* ToDoCell */,
+				D8473BE12BB2C5800063F87A /* CustomCells */,
 				D8DC23D62BB17B8300C3E220 /* ToDoController.swift */,
 			);
 			path = View;
@@ -1302,6 +1313,7 @@
 				D85C57EC2B57D0AD00023B04 /* OnboardingInteractor.swift in Sources */,
 				D8B1E9E32BAB223700D455AF /* AddNewToDoView.swift in Sources */,
 				D8B1E9E12BAB10BA00D455AF /* CathegoryCell.swift in Sources */,
+				D8473BE32BB2C5DF0063F87A /* CalendarCollectionCell.swift in Sources */,
 				D864B5F62BAC0B7100650E8A /* MainScreenView.swift in Sources */,
 				D8E9F89D2B04BFAB00A3F3FC /* AddToDoPresenter.swift in Sources */,
 				D8DC23CC2BAD7D9A00C3E220 /* CircularTransition.swift in Sources */,

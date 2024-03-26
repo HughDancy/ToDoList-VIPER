@@ -73,6 +73,12 @@ class ToDoCell: UITableViewCell {
         }
     }
     
+    override func prepareForReuse() {
+        checkboxImage.isHighlighted = false
+        checkboxImage.tintColor = .black
+        taskName.text = "Temp"
+    }
+    
     //MARK: - Setup Hierarchy
     private func setupHierachy() {
         iconBox.addSubview(icon)
