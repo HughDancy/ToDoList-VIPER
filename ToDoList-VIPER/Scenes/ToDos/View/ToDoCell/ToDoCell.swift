@@ -129,5 +129,14 @@ extension ToDoCell {
         checkboxImage.tintColor = .systemGreen
         checkboxImage.isHighlighted = true
         checkboxImage.isUserInteractionEnabled = false
+        
+        let attributedText : NSMutableAttributedString =  NSMutableAttributedString(string: taskName.text ?? "Temp")
+        attributedText.addAttributes([
+                        NSAttributedString.Key.strikethroughStyle: NSUnderlineStyle.single.rawValue,
+                        NSAttributedString.Key.strikethroughColor: UIColor.systemGreen,
+                        NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15.0, weight: .semibold)
+                        ], range: NSMakeRange(0, attributedText.length))
+        taskName.attributedText = attributedText
+        
     }
 }
