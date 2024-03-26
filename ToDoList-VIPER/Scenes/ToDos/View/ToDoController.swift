@@ -18,6 +18,7 @@ final class ToDoController: UIViewController {
         tableView.register(ToDoCell.self, forCellReuseIdentifier: ToDosCell.reuseIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorStyle = .none
         return tableView
         
     }()

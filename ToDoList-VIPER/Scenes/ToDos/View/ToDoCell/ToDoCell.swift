@@ -16,15 +16,16 @@ class ToDoCell: UITableViewCell {
         let view = UIView()
         view.backgroundColor = .systemGray6
         view.layer.cornerRadius = 10
+        view.clipsToBounds = true
         return view
     }()
     
-    private lazy var checkboxImage: UIImageView = {
+    var checkboxImage: UIImageView = {
         let image = UIImage(systemName: "square")
         let highlaghtedImage = UIImage(systemName: "checkmark.square")
         let imageView = UIImageView(image: image, highlightedImage: highlaghtedImage)
         imageView.tintColor = imageView.isHighlighted ? .systemGreen : .label
-        
+        imageView.isUserInteractionEnabled = true
         return imageView
     }()
     
@@ -36,7 +37,6 @@ class ToDoCell: UITableViewCell {
     
     private lazy var iconBox: UIView = {
         let view = UIView()
-        
         return view
     }()
     
@@ -60,22 +60,25 @@ class ToDoCell: UITableViewCell {
     private func commonInit() {
         setupHierachy()
         setupLayout()
+        addTapRecognizerToImage()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        self.selectionStyle = .none
         if self.isSelected {
-            checkboxImage.tintColor = .systemGreen
+           
         }
     }
     
     //MARK: - Setup Hierarchy
     private func setupHierachy() {
+        iconBox.addSubview(icon)
         contentView.addSubview(container)
         container.addSubview(checkboxImage)
         container.addSubview(taskName)
         container.addSubview(iconBox)
-        iconBox.addSubview(icon)
+//        iconBox.addSubview(icon)
     }
     
     //MARK: - Setup Layout
@@ -96,22 +99,35 @@ class ToDoCell: UITableViewCell {
         }
         
         iconBox.snp.makeConstraints { make in
-            make.top.trailing.bottom.equalToSuperview()
+            make.top.equalTo(container.safeAreaLayoutGuide.snp.top).offset(-5)
+            make.trailing.bottom.equalTo(container).offset(5)
             make.width.equalTo(100)
 //            iconBox.layer.cornerRadius = 50
 //            iconBox.clipsToBounds = true
         }
         
         icon.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
+            make.centerX.centerY.equalTo(iconBox)
             make.height.width.equalTo(50)
         }
     }
-    
+
     //MARK: - Setup cell
     func setupCell(with title: String, boxColor: UIColor, icon: String) {
         self.taskName.text = title
         self.iconBox.backgroundColor = boxColor
         self.icon.image = UIImage(systemName: icon)
+    }
+}
+//MARK: - Tap Gesture to Checkbox image Extension
+extension ToDoCell {
+    private func addTapRecognizerToImage() {
+        self.checkboxImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapToImage)))
+    }
+
+    @objc private func tapToImage(_ sender: UIGestureRecognizer) {
+        checkboxImage.tintColor = .systemGreen
+        checkboxImage.isHighlighted = true
+        checkboxImage.isUserInteractionEnabled = false
     }
 }
