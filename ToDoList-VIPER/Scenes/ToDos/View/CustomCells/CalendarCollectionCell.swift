@@ -15,6 +15,7 @@ final class CalendarCollectionCell: UICollectionViewCell {
     private lazy var containerView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 10
+        view.backgroundColor = .systemGray6
         return view
     }()
     
@@ -26,10 +27,18 @@ final class CalendarCollectionCell: UICollectionViewCell {
     }()
     
     private lazy var dayNumberLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 15.0, weight: .semibold)
         label.textColor = self.isSelected ? .white  : .black
         return label
+    }()
+    
+    private lazy var circlesStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.alignment = .center
+        
+        return stack
     }()
     
     //MARK: - Init
@@ -59,18 +68,19 @@ final class CalendarCollectionCell: UICollectionViewCell {
             }
         }
     }
-
+    
     //MARK: - Setup Hierarchy
     private func setupHierarchy() {
         contentView.addSubview(containerView)
         containerView.addSubview(dayOfWeekLabel)
         containerView.addSubview(dayNumberLabel)
+        containerView.addSubview(circlesStack)
     }
     
     //MARK: - SetupLayout
     private func setupLayout() {
         containerView.snp.makeConstraints { make in
-            make.top.leading.trailing.bottom.equalToSuperview().inset(5)
+            make.top.leading.trailing.bottom.equalTo(contentView.safeAreaLayoutGuide).inset(5)
         }
         
         dayOfWeekLabel.snp.makeConstraints { make in
@@ -79,14 +89,21 @@ final class CalendarCollectionCell: UICollectionViewCell {
         }
         
         dayNumberLabel.snp.makeConstraints { make in
-            make.top.equalTo(dayOfWeekLabel.snp.bottom).offset(5)
+            make.top.equalTo(dayOfWeekLabel.snp.bottom).offset(3)
+            make.centerX.equalTo(containerView.snp.centerX)
+//            make.bottom.equalTo(containerView.snp.bottom).inset(10)
+        }
+        
+        circlesStack.snp.makeConstraints { make in
+            make.top.equalTo(dayNumberLabel.snp.bottom).offset(3)
             make.centerX.equalTo(containerView.snp.centerX)
         }
     }
     
-    func setupCell(dayOfWeek: String, numberOfDay: String) {
-        dayOfWeekLabel.text = dayOfWeek
-        dayNumberLabel.text = numberOfDay
+    func setupCell(_ dateItem: DateItem) {
+        dayOfWeekLabel.text = dateItem.dayOfWeek
+        dayNumberLabel.text = dateItem.numberOfDay
+        
     }
     
     override func prepareForReuse() {

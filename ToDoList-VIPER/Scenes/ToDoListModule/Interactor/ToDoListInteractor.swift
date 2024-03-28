@@ -14,7 +14,7 @@ class ToDoListInteractor: ToDoListInteractorInputProtocol {
     
     
     func retriveToDos() {
-        let allToDos = storage.fetchUsers().filter { $0.doneStatus == false }
+        let allToDos = storage.fetchToDos().filter { $0.doneStatus == false }
         let outputToDos = ToDoObjectSorter.sortByStatus(object: allToDos, and: .upcoming)
         presenter?.didRetriveToDos(outputToDos)
     }
