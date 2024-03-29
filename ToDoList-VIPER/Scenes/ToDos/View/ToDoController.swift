@@ -9,13 +9,14 @@ import UIKit
 import SnapKit
 
 final class ToDoController: UIViewController {
-    
+    private let calendarModel = CalendarModel()
+    private var centerDate = Date()
     
     //MARK: - Outlets
     private lazy var calendarView: HorizontalCalendarView = {
         let calendar = HorizontalCalendarView()
-        calendar.calendar.delegate = self
-        calendar.calendar.dataSource = self
+//        calendar.calendar.delegate = self
+//        calendar.calendar.dataSource = self
 //        calendar.calendarView.register(CalendarCollectionCell.self, forCellWithReuseIdentifier: CalendarCollectionCell.reuseIdentifier)
         return calendar
     }()
@@ -33,12 +34,17 @@ final class ToDoController: UIViewController {
     //MARK: - Lifecycle
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        let calendarModel = CalendarModel()
+        let daysArray = calendarModel.getWeekForCalendar(date: Date.today)
+        calendarView.calendar.setDaysArray(days: daysArray)
+        print(calendarView.calendar.totalSquares)
         calendarView.calendar.scrollToItem(at: [0, 10], at: .centeredHorizontally, animated: false)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        updateData(day: 0, index: 10)
         setupHierarchy()
         setupLayot()
         calendarView.calendar.calendarDelegate = self
@@ -55,7 +61,7 @@ final class ToDoController: UIViewController {
     private func setupLayot() {
         calendarView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(5)
-            make.leading.trailing.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(8)
             make.height.equalTo(100)
         }
         
@@ -67,10 +73,13 @@ final class ToDoController: UIViewController {
     
     //MARK: - Update func
     private func updateData(day offset: Int, index: Int, scrollToItem: Bool = true) {
-        let calendarModel = CalendarModel()
-        let date = Date()
-        let centerDay = date.getDayOffset(with: offset)
-        let daysArray = calendarModel.getWeekForCalendar(date: centerDay)
+//        let calendarModel = CalendarModel()
+//        let date = Date()
+//        let centerDay = date.getDayOffset(with: offset)
+//
+        centerDate = centerDate.getDayOffset(with: offset)
+        var daysArray = calendarModel.getWeekForCalendar(date: centerDate)
+//        let daysArray = calendarModel.getWeekForCalendar(date: centerDay)
         guard daysArray.count > index else { return }
         
         calendarView.calendar.setDaysArray(days: daysArray)
@@ -99,49 +108,50 @@ extension ToDoController: UITableViewDelegate, UITableViewDataSource {
 }
 
 //MARK: - CollectionView Delegate Extension
-extension ToDoController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
+//extension ToDoController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+//    func numberOfSections(in collectionView: UICollectionView) -> Int {
+//        return 1
+//    }
+//    
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        let calendarModel = CalendarModel()
+//        let date = Date()
+//        let centerDay = date.getDayOffset(with: 20)
+//        let daysArray = calendarModel.getWeekForCalendar(date: Date.today)
+//        return daysArray.count
+//        return 50
+//    }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let calendarModel = CalendarModel()
-        let date = Date()
-//        let centerDay = date.getDayOffset(with: 1)
-        let daysArray = calendarModel.getWeekForCalendar(date: Date.today)
-        return daysArray.count
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        let width = calendarView.calendar.frame.width / 7.7
+//        let height = calendarView.calendar.frame.height
+//        return CGSize(width: width, height: height)
+//    }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = calendarView.calendar.frame.width / 7.7
-        let height = calendarView.calendar.frame.height
-        return CGSize(width: width, height: height)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarCollectionCell.reuseIdentifier, for: indexPath) as! CalendarCollectionCell
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarCollectionCell.reuseIdentifier, for: indexPath) as! CalendarCollectionCell
         
 //        cell.setupCell(dayOfWeek: calendarView.dayName, numberOfDay: calendarView.sevenDates[indexPath.row])
-        let calendarModel = CalendarModel()
-        let date = Date()
-        let centerDay = date.getDayOffset(with: 3)
-        let daysArray = calendarModel.getWeekForCalendar(date: centerDay)
-        cell.setupCell(daysArray[indexPath.row])
-        calendarView.setupMonthLabel(with: daysArray[indexPath.row].monthName.changeWordEnding().capitalized)
-        
-        if indexPath.row == calendarView.calendar.selectedUserCell {
-            collectionView
-                .selectItem(at: [0, calendarView.calendar.selectedUserCell], animated: false, scrollPosition: [])
-        }
+//        let calendarModel = CalendarModel()
+//        let date = Date()
+//        let centerDay = date.getDayOffset(with: 3)
+//        let daysArray = calendarModel.getWeekForCalendar(date: centerDay)
+//        cell.setupCell(daysArray[indexPath.row])
+//        calendarView.setupMonthLabel(with: daysArray[indexPath.row].monthName.changeWordEnding().capitalized)
+//        
+//        if indexPath.row == calendarView.calendar.selectedUserCell {
+//            collectionView
+//                .selectItem(at: [0, calendarView.calendar.selectedUserCell], animated: false, scrollPosition: [])
+//        }
 //        if daysArray[indexPath.row].dateString == DateFormatter.createMediumDate(from: Date.today) {
 //            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
 //        }
-      
-        return cell /*?? UICollectionViewCell()*/
-    }
+//      
+//        return cell /*?? UICollectionViewCell()*/
+//    }
+//    
     
-    
-}
+//}
 
 //MARK: - Calendar Support methods extension
 extension ToDoController: CalendarCollectionViewDelegate {
@@ -150,11 +160,13 @@ extension ToDoController: CalendarCollectionViewDelegate {
     }
     
     func scrollRight() {
-        updateData(day: -7, index: 13)
+        updateData(day: 7, index: 13)
     }
     
    
 }
+
+extension ToDoController: UIScrollViewDelegate { }
 
 struct ToDoItems {
     var title: String
