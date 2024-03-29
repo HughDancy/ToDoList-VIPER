@@ -49,6 +49,7 @@
 		D8900F152B5529C7008E0E34 /* AnimationLoadingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8900F142B5529C7008E0E34 /* AnimationLoadingRouter.swift */; };
 		D8900F172B55435A008E0E34 /* NewUserCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8900F162B55435A008E0E34 /* NewUserCheck.swift */; };
 		D8A54EBE2BB6D2E000D9B15F /* ToDosModuleProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A54EBD2BB6D2E000D9B15F /* ToDosModuleProtocols.swift */; };
+		D8A54EC02BB6D61000D9B15F /* ToDosPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A54EBF2BB6D61000D9B15F /* ToDosPresenter.swift */; };
 		D8B1E9B62BA2F46C00D455AF /* MainScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9B52BA2F46C00D455AF /* MainScreenController.swift */; };
 		D8B1E9B92BA3026300D455AF /* MainToDoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9B82BA3026300D455AF /* MainToDoCell.swift */; };
 		D8B1E9BD2BA4178B00D455AF /* MainScreenProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9BC2BA4178B00D455AF /* MainScreenProtocols.swift */; };
@@ -197,6 +198,7 @@
 		D8900F142B5529C7008E0E34 /* AnimationLoadingRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationLoadingRouter.swift; sourceTree = "<group>"; };
 		D8900F162B55435A008E0E34 /* NewUserCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserCheck.swift; sourceTree = "<group>"; };
 		D8A54EBD2BB6D2E000D9B15F /* ToDosModuleProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDosModuleProtocols.swift; sourceTree = "<group>"; };
+		D8A54EBF2BB6D61000D9B15F /* ToDosPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDosPresenter.swift; sourceTree = "<group>"; };
 		D8B1E9B52BA2F46C00D455AF /* MainScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenController.swift; sourceTree = "<group>"; };
 		D8B1E9B82BA3026300D455AF /* MainToDoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainToDoCell.swift; sourceTree = "<group>"; };
 		D8B1E9BC2BA4178B00D455AF /* MainScreenProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenProtocols.swift; sourceTree = "<group>"; };
@@ -756,6 +758,7 @@
 		D8DC23D02BB176C400C3E220 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				D8A54EBF2BB6D61000D9B15F /* ToDosPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -1384,6 +1387,7 @@
 				D8E9F8892B0370FE00A3F3FC /* ExecuteProtocols.swift in Sources */,
 				D8E9F8BE2B17427F00A3F3FC /* Date + EXT.swift in Sources */,
 				D8C19ED62B91C037004BCDDD /* BaseButton.swift in Sources */,
+				D8A54EC02BB6D61000D9B15F /* ToDosPresenter.swift in Sources */,
 				D85C58392B5A595400023B04 /* OnboardingController.swift in Sources */,
 				D8C19ED42B90F3D4004BCDDD /* SignInTextField.swift in Sources */,
 				D8B1E9C32BA421A600D455AF /* MainScreenRouter.swift in Sources */,

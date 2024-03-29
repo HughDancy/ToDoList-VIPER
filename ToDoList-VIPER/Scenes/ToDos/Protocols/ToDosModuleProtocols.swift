@@ -11,13 +11,14 @@ protocol ToDosViewProtocol: AnyObject {
     var presenter: ToDoListPresenterProtocol? { get set }
     
     func fetchToDos(date: Date)
-    func showToDos(_ toDos: [[ToDoObject]])
+    func showToDos(_ toDos: [ToDoObject])
 }
 
 protocol ToDosPresenterProtocol: AnyObject {
     var view: ToDosViewProtocol? { get set }
     var interactor: ToDosInteractorInputProtocol? { get set }
-    var router: ToDosRouterProtocol? { get set}
+    var router: ToDosRouterProtocol? { get set }
+    var date: ToDoListStatus? { get set }
     
     //VIEW -> PRESENTER
     func viewWillAppear()
@@ -31,6 +32,7 @@ protocol ToDosInteractorInputProtocol: AnyObject {
     var presenter: AddToDoInteractorOutputProtocol? { get set }
     
     //PRESENTER -> INTERACTOR
+    func fetchFirstTasks(_ status: ToDoListStatus)
     func fetchTask(date: Date)
     func doneTask(_ task: ToDoObject)
     func deleteTask(_ task: ToDoObject)
