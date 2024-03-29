@@ -14,6 +14,7 @@
 		D8473BE72BB57CEC0063F87A /* CalendarCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8473BE62BB57CEC0063F87A /* CalendarCollection.swift */; };
 		D8473BE92BB581A00063F87A /* DateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8473BE82BB581A00063F87A /* DateItem.swift */; };
 		D8473BEB2BB5A6250063F87A /* CalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8473BEA2BB5A6250063F87A /* CalendarModel.swift */; };
+		D8473BED2BB6BE860063F87A /* UIStackView + EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8473BEC2BB6BE860063F87A /* UIStackView + EXT.swift */; };
 		D851385A2AFCC9C4004136D7 /* ToDoListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85138592AFCC9C4004136D7 /* ToDoListRouter.swift */; };
 		D85C57E52B57C71900023B04 /* OnboardingPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C57E42B57C71900023B04 /* OnboardingPageController.swift */; };
 		D85C57E72B57CCA600023B04 /* OnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C57E62B57CCA600023B04 /* OnboardingPresenter.swift */; };
@@ -157,6 +158,7 @@
 		D8473BE62BB57CEC0063F87A /* CalendarCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollection.swift; sourceTree = "<group>"; };
 		D8473BE82BB581A00063F87A /* DateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateItem.swift; sourceTree = "<group>"; };
 		D8473BEA2BB5A6250063F87A /* CalendarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarModel.swift; sourceTree = "<group>"; };
+		D8473BEC2BB6BE860063F87A /* UIStackView + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView + EXT.swift"; sourceTree = "<group>"; };
 		D85138592AFCC9C4004136D7 /* ToDoListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListRouter.swift; sourceTree = "<group>"; };
 		D85C57E42B57C71900023B04 /* OnboardingPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageController.swift; sourceTree = "<group>"; };
 		D85C57E62B57CCA600023B04 /* OnboardingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPresenter.swift; sourceTree = "<group>"; };
@@ -1049,6 +1051,7 @@
 				D8E9F8BD2B17427F00A3F3FC /* Date + EXT.swift */,
 				D8E840532B63A8F0005A0936 /* String + EXT.swift */,
 				D8E840552B63AA69005A0936 /* CABasicAnimation + EXT.swift */,
+				D8473BEC2BB6BE860063F87A /* UIStackView + EXT.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1311,6 +1314,7 @@
 				D82B8B6E2B6B8CCB00A006F2 /* AppConfigurator.swift in Sources */,
 				D8B1E9B92BA3026300D455AF /* MainToDoCell.swift in Sources */,
 				D85C57E72B57CCA600023B04 /* OnboardingPresenter.swift in Sources */,
+				D8473BED2BB6BE860063F87A /* UIStackView + EXT.swift in Sources */,
 				D8E840542B63A8F0005A0936 /* String + EXT.swift in Sources */,
 				D8E8405A2B63B148005A0936 /* LoginInteractor.swift in Sources */,
 				D8CE4B702B87362500E473AC /* Reachability.swift in Sources */,

@@ -60,7 +60,11 @@ extension Date {
         return DateItem(dayOfWeek: dayOfWeek,
                         numberOfDay: numberOfDay,
                         monthName: getMonthName(date: date),
-                        dateString: dateFormattedMMyyyy())
+                        dateString: dateFormattedMMyyyy(),
+                        isWorkTask: true,
+                        isPersonalTask: true,
+                        isOtherTask: true
+                               )
     }
     
     //MARK: Get dateFormatedMMyyyy

@@ -10,6 +10,7 @@ import SnapKit
 
 final class CalendarCollectionCell: UICollectionViewCell {
     static let reuseIdentifier = "CalndarCollectionCell"
+    var dateString = ""
     
     //MARK: - Outlets
     private lazy var containerView: UIView = {
@@ -36,7 +37,10 @@ final class CalendarCollectionCell: UICollectionViewCell {
     private lazy var circlesStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
-        stack.alignment = .center
+        stack.spacing = 5
+        stack.alignment = .firstBaseline
+        stack.contentMode = .scaleAspectFit
+        stack.distribution = .fillEqually
         
         return stack
     }()
@@ -49,7 +53,7 @@ final class CalendarCollectionCell: UICollectionViewCell {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
     }
     
     private func commonInit() {
@@ -74,13 +78,14 @@ final class CalendarCollectionCell: UICollectionViewCell {
         contentView.addSubview(containerView)
         containerView.addSubview(dayOfWeekLabel)
         containerView.addSubview(dayNumberLabel)
-        containerView.addSubview(circlesStack)
+        contentView.addSubview(circlesStack)
     }
     
     //MARK: - SetupLayout
     private func setupLayout() {
         containerView.snp.makeConstraints { make in
-            make.top.leading.trailing.bottom.equalTo(contentView.safeAreaLayoutGuide).inset(5)
+            make.top.leading.trailing.equalTo(contentView.safeAreaLayoutGuide).inset(5)
+            make.bottom.equalTo(contentView.safeAreaLayoutGuide.snp.bottom).inset(10)
         }
         
         dayOfWeekLabel.snp.makeConstraints { make in
@@ -91,23 +96,39 @@ final class CalendarCollectionCell: UICollectionViewCell {
         dayNumberLabel.snp.makeConstraints { make in
             make.top.equalTo(dayOfWeekLabel.snp.bottom).offset(3)
             make.centerX.equalTo(containerView.snp.centerX)
-//            make.bottom.equalTo(containerView.snp.bottom).inset(10)
         }
         
         circlesStack.snp.makeConstraints { make in
-            make.top.equalTo(dayNumberLabel.snp.bottom).offset(3)
+            make.top.equalTo(containerView.snp.bottom).offset(1)
             make.centerX.equalTo(containerView.snp.centerX)
+            make.height.equalTo(20)
         }
     }
     
     func setupCell(_ dateItem: DateItem) {
         dayOfWeekLabel.text = dateItem.dayOfWeek
         dayNumberLabel.text = dateItem.numberOfDay
-        
+        getMarkingCell(with: dateItem.isWorkTask ?? false , color: .systemOrange)
+        getMarkingCell(with: dateItem.isPersonalTask ?? false, color: .systemGreen)
+        getMarkingCell(with: dateItem.isOtherTask ?? false, color: .systemPurple)
+    }
+    
+    private func getMarkingCell(with bool: Bool, color: UIColor) {
+        if bool {
+            let view = UIView()
+            view.backgroundColor = color
+            view.layer.cornerRadius = 5
+            view.clipsToBounds = true
+            self.circlesStack.addArrangedSubview(view)
+            view.snp.makeConstraints { make in
+                make.height.width.equalTo(10)
+            }
+        }
     }
     
     override func prepareForReuse() {
         dayOfWeekLabel.text = nil
         dayNumberLabel.text = nil
+        circlesStack.removeAllArrangedSubViews()
     }
 }

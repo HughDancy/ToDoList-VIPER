@@ -92,17 +92,17 @@ extension CalendarCollectionView: UICollectionViewDelegate, UICollectionViewData
         totalSquares.count
     }
     
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        selectedUserCell = indexPath.row
-//        selectedDate = totalSquares[indexPath.item].dateString
-//    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedUserCell = indexPath.row
+        selectedDate = totalSquares[indexPath.item].dateString
+    }
     
 }
 
 extension CalendarCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = frame.width / 7.7
-        let height = frame.height
+        let height = frame.height - 23.0
         return CGSize(width: width, height: height)
     }
 }
