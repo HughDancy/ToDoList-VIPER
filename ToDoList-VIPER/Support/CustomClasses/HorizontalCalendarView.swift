@@ -18,7 +18,7 @@ final class HorizontalCalendarView: UIView {
     
     private lazy var monthLabel: UILabel = {
        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 25, weight: .semibold)
         label.textColor = .systemCyan
         label.textAlignment = .left
         return label
@@ -49,11 +49,11 @@ final class HorizontalCalendarView: UIView {
     private func setupLayout() {
         monthLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(5)
-            make.leading.equalToSuperview().offset(5)
+            make.leading.equalToSuperview().offset(15)
         }
         
         calendar.snp.makeConstraints { make in
-            make.top.equalTo(monthLabel.snp.bottom).offset(10)
+            make.top.equalTo(monthLabel.snp.bottom).offset(5)
             make.leading.trailing.equalToSuperview().inset(8)
             make.height.equalTo(90)
         }

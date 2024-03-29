@@ -74,6 +74,18 @@ final class ToDoController: UIViewController {
         let daysArray = calendarModel.getWeekForCalendar(date: centerDate)
         guard daysArray.count > index else { return }
         
+//        let items = ToDoStorage.instance.fetchToDos()
+//        for item in items {
+//            switch item.color {
+//            case .systemRed:
+//                
+//            case .systemOrange:
+//                
+//            case .systemPurple:
+//                
+//            }
+//        }
+        
         calendarView.calendar.setDaysArray(days: daysArray)
         calendarView.calendar.reloadData()
         calendarView.setupMonthLabel(with: daysArray[index].monthName.changeWordEnding().capitalized)
