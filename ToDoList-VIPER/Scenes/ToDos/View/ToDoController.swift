@@ -88,14 +88,18 @@ final class ToDoController: UIViewController {
 //MARK: - TableView Extension
 extension ToDoController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return MockToDoItem.items.count
+        let toDos = ToDoStorage.instance.fetchToDos()
+        return toDos.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ToDoCell.reuseIdentifier, for: indexPath) as? ToDoCell
-        cell?.setupCell(with: MockToDoItem.items[indexPath.row].title,
-                        boxColor: MockToDoItem.items[indexPath.row].color,
-                        icon: MockToDoItem.items[indexPath.row].nameOfImage)
+        let toDos = ToDoStorage.instance.fetchToDos()
+//        cell?.setupCell(with: MockToDoItem.items[indexPath.row].title,
+//                        boxColor: MockToDoItem.items[indexPath.row].color,
+//                        icon: MockToDoItem.items[indexPath.row].nameOfImage)
+        cell?.setupCell(with: toDos[indexPath.row].title ?? "",
+                        boxColor: UIColor.convertStringToColor(toDos[indexPath.row].color))
         return cell ?? UITableViewCell()
     }
 }

@@ -121,10 +121,19 @@ class ToDoCell: UITableViewCell {
     }
 
     //MARK: - Setup cell
-    func setupCell(with title: String, boxColor: UIColor, icon: String) {
+    func setupCell(with title: String, boxColor: UIColor) {
         self.taskName.text = title
         self.iconBox.backgroundColor = boxColor
-        self.icon.image = UIImage(systemName: icon)
+        switch boxColor {
+        case .systemOrange:
+            self.icon.image = UIImage(systemName: "bag")
+        case .systemGreen:
+            self.icon.image = UIImage(systemName: "person")
+        case .systemPurple:
+            self.icon.image = UIImage(systemName: "folder")
+        default:
+            self.icon.image = UIImage(systemName: "lightbulb")
+        }
     }
 }
 

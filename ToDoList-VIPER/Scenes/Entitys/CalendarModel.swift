@@ -21,14 +21,8 @@ class CalendarModel {
         let daysArray = getDaysArray(date: date)
         var dateModelsArray = daysArray.map { $0.convertDateModel(for: $0) }
         let tasks = ToDoStorage.instance.fetchToDos()
-//        dateModelsArray.forEach { dateItem in
-//            if tasks.contains(where: { task in
-//                dateItem.dateString == DateFormatter.createMediumDate(from: task.date ?? Date.today)
-//            }) {
-//                print("Hoola")
-//            }
-//        }
-      let tempDateModelsArray = dateModelsArray
+        
+        let tempDateModelsArray = dateModelsArray
         for task in tasks {
             for (index, date) in tempDateModelsArray.enumerated() {
                 if date.dateString == task.dateTitle ?? "" {
