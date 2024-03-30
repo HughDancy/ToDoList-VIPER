@@ -39,19 +39,13 @@ final class ToDoController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter?.viewWillAppear()
-        self.getCurrentDay()
-        calendarView.calendar.reloadData()
-        let calendarModel = CalendarModel()
-        let daysArray = calendarModel.getWeekForCalendar(date: centerDate)
-        calendarView.calendar.setDaysArray(days: daysArray)
-       
-        calendarView.calendar.selectedDate = DateFormatter.createMediumDate(from: centerDate)
-      
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         DispatchQueue.main.async {
+            self.getCurrentDay()
+            self.calendarView.calendar.reloadData()
+            let calendarModel = CalendarModel()
+            let daysArray = calendarModel.getWeekForCalendar(date: self.centerDate)
+            self.calendarView.calendar.setDaysArray(days: daysArray)
+            self.calendarView.calendar.selectedDate = DateFormatter.createMediumDate(from: self.centerDate)
             self.calendarView.calendar.scrollToItem(at: [0, 10], at: .centeredHorizontally, animated: false)
         }
     }
