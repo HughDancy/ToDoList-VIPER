@@ -58,6 +58,8 @@ final class ToDoController: UIViewController {
         setupLayot()
         calendarView.calendar.calendarDelegate = self
         setupNotificationObserver()
+        self.navigationItem.largeTitleDisplayMode = .never
+        self.navigationController?.navigationBar.prefersLargeTitles = false 
     }
     
     //MARK: - Setup Hierarchy

@@ -22,7 +22,8 @@ final class CustomHomeTabBarController: UITabBarController, UITabBarControllerDe
         setupLayoutCustomTabBar()
         self.selectedIndex = 1
         setupPositionTabBarItem()
-       
+        self.navigationItem.largeTitleDisplayMode = .never
+        navigationItem.setHidesBackButton(true, animated: false)
     }
     
     override func viewDidLayoutSubviews() {
