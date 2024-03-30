@@ -88,7 +88,7 @@ final class AddNewToDoController: UIViewController, AddNewToDoViewProtocol, UITa
         let picker = UIDatePicker()
         picker.datePickerMode = .date
         picker.preferredDatePickerStyle = .compact
-        picker.locale = .current
+        picker.locale = Locale(identifier: "ru_RU")
         picker.layer.shadowOffset = CGSize(width: 0, height: 2)
         picker.layer.shadowRadius = 5
         picker.layer.shadowColor = UIColor.systemBackground.cgColor
