@@ -10,11 +10,12 @@ import UIKit
 protocol CalendarCollectionViewDelegate: AnyObject {
     func scrollLeft()
     func scrollRight()
+    func updateTasks(with data: String)
 }
 
 class CalendarCollectionView: UICollectionView {
     
-    var selectedDate: String = DateFormatter.createMediumDate(from: Date.tomorrow)
+    var selectedDate: String = DateFormatter.getStringFromDate(from: Date.tomorrow)
     private let layoutCollection = UICollectionViewFlowLayout()
     var selectedUserCell = 10
     
@@ -95,6 +96,7 @@ extension CalendarCollectionView: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedUserCell = indexPath.row
         selectedDate = totalSquares[indexPath.item].dateString
+        calendarDelegate?.updateTasks(with: totalSquares[indexPath.row].dateString)
     }
     
 }

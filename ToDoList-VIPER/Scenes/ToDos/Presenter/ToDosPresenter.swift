@@ -22,6 +22,11 @@ final class ToDosPresenter: ToDosPresenterProtocol {
         interactor?.fetchTask(date: date)
     }
     
+    func updateToDosForDay(_ date: String) {
+        let dayDate = DateFormatter.getDateFromString(date)
+        interactor?.fetchTask(date: dayDate)
+    }
+    
     func doneToDo(_ task: ToDoObject) {
         interactor?.doneTask(task)
     }

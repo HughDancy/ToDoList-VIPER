@@ -15,11 +15,11 @@ final class ToDosInteractor: ToDosInteractorInputProtocol {
     func fetchFirstTasks(_ status: ToDoListStatus) {
         switch status {
         case .today:
-            let todayTasks = tasks.filter { ($0.dateTitle) == DateFormatter.createMediumDate(from: Date.today) }
+            let todayTasks = tasks.filter { ($0.dateTitle) == DateFormatter.getStringFromDate(from: Date.today) }
             presenter?.getTask(todayTasks)
             print("Today tasks")
         case .tommorow:
-            let tomroowTasks = tasks.filter { ($0.dateTitle) == DateFormatter.createMediumDate(from: Date.tomorrow) }
+            let tomroowTasks = tasks.filter { ($0.dateTitle) == DateFormatter.getStringFromDate(from: Date.tomorrow) }
             presenter?.getTask(tomroowTasks)
             print("Tommorow tasks")
         case .overdue:
@@ -34,7 +34,7 @@ final class ToDosInteractor: ToDosInteractorInputProtocol {
     }
     
     func fetchTask(date: Date) {
-        let outputTasks = tasks.filter { $0.dateTitle == DateFormatter.createMediumDate(from: date) }
+        let outputTasks = tasks.filter { $0.dateTitle == DateFormatter.getStringFromDate(from: date) }
         presenter?.getTask(outputTasks)
     }
     

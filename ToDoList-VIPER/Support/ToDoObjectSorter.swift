@@ -27,8 +27,8 @@ final class ToDoObjectSorter {
         var outputMatrix = [[ToDoObject]]()
         switch toDoType {
         case .upcoming:
-            let todoay = DateFormatter.createMediumDate(from: Date.today)
-            let tommorow = DateFormatter.createMediumDate(from: Date.tomorrow)
+            let todoay = DateFormatter.getStringFromDate(from: Date.today)
+            let tommorow = DateFormatter.getStringFromDate(from: Date.tomorrow)
        
             let toDayToDos = object.filter { $0.dateTitle == todoay }
             let tommorowToDos = object.filter { $0.dateTitle == tommorow }
@@ -42,11 +42,11 @@ final class ToDoObjectSorter {
             let now = Calendar.current.dateComponents(in: .current, from: Date())
             let yesterday = DateComponents(year: now.year, month: now.month, day: now.day! - 1)
             let dayBeforeYesterday = DateComponents(year: now.year, month: now.month, day: now.day! - 2)
-            let todayTitle = DateFormatter.createMediumDate(from: Date.today)
+            let todayTitle = DateFormatter.getStringFromDate(from: Date.today)
             let dateYesterday = Calendar.current.date(from: yesterday)!
             let dateDayBedoreYesterday = Calendar.current.date(from: dayBeforeYesterday)!
-            let yesterdayTitle = DateFormatter.createMediumDate(from: dateYesterday)
-            let dayBeforeYesterdayTitle = DateFormatter.createMediumDate(from: dateDayBedoreYesterday)
+            let yesterdayTitle = DateFormatter.getStringFromDate(from: dateYesterday)
+            let dayBeforeYesterdayTitle = DateFormatter.getStringFromDate(from: dateDayBedoreYesterday)
             
             let yesterdayToDos = object.filter({ $0.dateTitle == yesterdayTitle })
                                          .sorted { $0.date?.compare($1.date ?? Date()) == .orderedAscending }
@@ -61,10 +61,10 @@ final class ToDoObjectSorter {
             return outputMatrix
         case .completed:
             let now = Calendar.current.dateComponents(in: .current, from: Date())
-            let today = DateFormatter.createMediumDate(from: Date.today)
+            let today = DateFormatter.getStringFromDate(from: Date.today)
             let yesterday = DateComponents(year: now.year, month: now.month, day: now.day! - 1)
             let dateYesterday = Calendar.current.date(from: yesterday)!
-            let yesterdayTitile = DateFormatter.createMediumDate(from: dateYesterday)
+            let yesterdayTitile = DateFormatter.getStringFromDate(from: dateYesterday)
       
             
             let todayDoneToDos = object.filter({ $0.dateTitle == today })

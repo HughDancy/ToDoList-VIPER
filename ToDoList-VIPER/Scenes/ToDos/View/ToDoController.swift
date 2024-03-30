@@ -45,7 +45,7 @@ final class ToDoController: UIViewController {
             let calendarModel = CalendarModel()
             let daysArray = calendarModel.getWeekForCalendar(date: self.centerDate)
             self.calendarView.calendar.setDaysArray(days: daysArray)
-            self.calendarView.calendar.selectedDate = DateFormatter.createMediumDate(from: self.centerDate)
+            self.calendarView.calendar.selectedDate = DateFormatter.getStringFromDate(from: self.centerDate)
             self.calendarView.calendar.scrollToItem(at: [0, 10], at: .centeredHorizontally, animated: false)
         }
     }
@@ -137,6 +137,11 @@ extension ToDoController: CalendarCollectionViewDelegate {
     
     func scrollRight() {
         updateData(day: 7, index: 13)
+    }
+    
+    func updateTasks(with data: String) {
+        presenter?.updateToDosForDay(data)
+        toDoTable.reloadData()
     }
 }
 
