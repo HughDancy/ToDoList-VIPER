@@ -14,7 +14,7 @@ protocol CalendarCollectionViewDelegate: AnyObject {
 
 class CalendarCollectionView: UICollectionView {
     
-    var selectedDate: String = DateFormatter.createMediumDate(from: Date.today)
+    var selectedDate: String = DateFormatter.createMediumDate(from: Date.tomorrow)
     private let layoutCollection = UICollectionViewFlowLayout()
     var selectedUserCell = 10
     

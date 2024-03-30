@@ -13,8 +13,12 @@ final class ToDoController: UIViewController {
     private let calendarModel = CalendarModel()
     private var centerDate = Date()
     
-    private var toDoTasks: [ToDoObject] = []
-    
+    private var toDoTasks: [ToDoObject] = [] {
+        didSet {
+            toDoTable.reloadData()
+        }
+    }
+        
     //MARK: - Outlets
     private lazy var calendarView: HorizontalCalendarView = {
         let calendar = HorizontalCalendarView()
@@ -32,14 +36,24 @@ final class ToDoController: UIViewController {
     }()
     
     //MARK: - Lifecycle
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter?.viewWillAppear()
+        self.getCurrentDay()
         calendarView.calendar.reloadData()
         let calendarModel = CalendarModel()
-        let daysArray = calendarModel.getWeekForCalendar(date: Date.today)
+        let daysArray = calendarModel.getWeekForCalendar(date: centerDate)
         calendarView.calendar.setDaysArray(days: daysArray)
-        print(calendarView.calendar.totalSquares)
-        calendarView.calendar.scrollToItem(at: [0, 10], at: .centeredHorizontally, animated: false)
+       
+        calendarView.calendar.selectedDate = DateFormatter.createMediumDate(from: centerDate)
+      
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        DispatchQueue.main.async {
+            self.calendarView.calendar.scrollToItem(at: [0, 10], at: .centeredHorizontally, animated: false)
+        }
     }
     
     override func viewDidLoad() {
@@ -49,7 +63,6 @@ final class ToDoController: UIViewController {
         setupHierarchy()
         setupLayot()
         calendarView.calendar.calendarDelegate = self
-        
     }
     
     //MARK: - Setup Hierarchy
@@ -86,13 +99,25 @@ final class ToDoController: UIViewController {
         calendarView.calendar.scrollToItem(at: [0, 10], at: .centeredHorizontally, animated: false)
         print("Update calendar func is working")
     }
+    
+    //MARK: - Date configure with module
+    private func getCurrentDay() {
+        switch presenter?.date {
+        case .today:
+            self.centerDate = Date.today
+        case .tommorow:
+            self.centerDate = Date.tomorrow
+        default:
+            self.centerDate = Date.tomorrow
+        }
+    }
 }
 
 //MARK: - TableView Extension
 extension ToDoController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let toDos = ToDoStorage.instance.fetchToDos()
-        return toDos.count
+//        let toDos = ToDoStorage.instance.fetchToDos()
+        return toDoTasks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -101,8 +126,10 @@ extension ToDoController: UITableViewDelegate, UITableViewDataSource {
 //        cell?.setupCell(with: MockToDoItem.items[indexPath.row].title,
 //                        boxColor: MockToDoItem.items[indexPath.row].color,
 //                        icon: MockToDoItem.items[indexPath.row].nameOfImage)
-        cell?.setupCell(with: toDos[indexPath.row].title ?? "",
-                        boxColor: UIColor.convertStringToColor(toDos[indexPath.row].color))
+//        cell?.setupCell(with: toDos[indexPath.row].title ?? "",
+//                        boxColor: UIColor.convertStringToColor(toDos[indexPath.row].color))
+        cell?.setupCell(with: toDoTasks[indexPath.row].title ?? "",
+                        boxColor: UIColor.convertStringToColor(toDoTasks[indexPath.row].color))
         return cell ?? UITableViewCell()
     }
 }
