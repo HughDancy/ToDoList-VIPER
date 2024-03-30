@@ -9,8 +9,11 @@ import UIKit
 import SnapKit
 
 final class ToDoController: UIViewController {
+    var presenter: ToDosPresenterProtocol?
     private let calendarModel = CalendarModel()
     private var centerDate = Date()
+    
+    private var toDoTasks: [ToDoObject] = []
     
     //MARK: - Outlets
     private lazy var calendarView: HorizontalCalendarView = {
@@ -113,6 +116,17 @@ extension ToDoController: CalendarCollectionViewDelegate {
     
     func scrollRight() {
         updateData(day: 7, index: 13)
+    }
+}
+
+//MARK: - ToDosViewProtocol extension
+extension ToDoController: ToDosViewProtocol {
+    func fetchToDos(date: Date) {
+        presenter?.fetchToDos(date: date)
+    }
+    
+    func showToDos(_ toDos: [ToDoObject]) {
+        self.toDoTasks = toDos
     }
 }
 

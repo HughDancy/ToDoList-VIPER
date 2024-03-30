@@ -31,7 +31,8 @@ final class ToDosPresenter: ToDosPresenterProtocol {
     }
     
     func goToTask(_ task: ToDoObject) {
-        router?.goToTask(task)
+        guard let view = view else { return }
+        router?.goToTask(task, from: view)
     }
 }
 

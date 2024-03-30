@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ToDosViewProtocol: AnyObject {
-    var presenter: ToDoListPresenterProtocol? { get set }
+    var presenter: ToDosPresenterProtocol? { get set }
     
     func fetchToDos(date: Date)
     func showToDos(_ toDos: [ToDoObject])
@@ -47,7 +47,7 @@ protocol ToDosRouterProtocol: AnyObject {
     static func createToDosModule(with status: ToDoListStatus) -> UIViewController
     
     //PRESENTER -> ROUTER
-    func goToTask(_ task: ToDoObject)
+    func goToTask(_ task: ToDoObject, from view: ToDosViewProtocol)
 }
 
 enum ToDoListStatus {
