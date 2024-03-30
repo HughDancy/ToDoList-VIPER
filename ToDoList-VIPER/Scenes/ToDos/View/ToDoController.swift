@@ -57,6 +57,7 @@ final class ToDoController: UIViewController {
         setupHierarchy()
         setupLayot()
         calendarView.calendar.calendarDelegate = self
+        setupNotificationObserver()
     }
     
     //MARK: - Setup Hierarchy
@@ -104,6 +105,25 @@ final class ToDoController: UIViewController {
         default:
             self.centerDate = Date.tomorrow
         }
+    }
+    
+    //MARK: - Make notification observer
+    private func setupNotificationObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTables), name: Notification.Name(rawValue: "UpdateTables"), object: nil)
+    }
+    
+    @objc func updateTables(notification: Notification) {
+        DispatchQueue.main.async {
+            self.presenter?.viewWillAppear()
+//            self.view.backgroundColor = .systemMint
+            self.toDoTable.reloadData()
+            let calendarModel = CalendarModel()
+            let daysArray = calendarModel.getWeekForCalendar(date: self.centerDate)
+            self.calendarView.calendar.setDaysArray(days: daysArray)
+            self.calendarView.calendar.reloadData()
+//            print(toDoTasks.count)
+        }
+        
     }
 }
 
