@@ -31,6 +31,7 @@ final class ToDoController: UIViewController {
     //MARK: - Lifecycle
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        calendarView.calendar.reloadData()
         let calendarModel = CalendarModel()
         let daysArray = calendarModel.getWeekForCalendar(date: Date.today)
         calendarView.calendar.setDaysArray(days: daysArray)

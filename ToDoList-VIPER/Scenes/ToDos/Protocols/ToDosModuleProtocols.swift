@@ -29,7 +29,7 @@ protocol ToDosPresenterProtocol: AnyObject {
 }
 
 protocol ToDosInteractorInputProtocol: AnyObject {
-    var presenter: AddToDoInteractorOutputProtocol? { get set }
+    var presenter: ToDosInteractorOutputProtocol? { get set }
     
     //PRESENTER -> INTERACTOR
     func fetchFirstTasks(_ status: ToDoListStatus)
