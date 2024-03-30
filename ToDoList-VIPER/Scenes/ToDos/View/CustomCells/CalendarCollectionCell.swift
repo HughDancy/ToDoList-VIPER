@@ -38,7 +38,7 @@ final class CalendarCollectionCell: UICollectionViewCell {
         let stack = UIStackView()
         stack.axis = .horizontal
         stack.spacing = 5
-        stack.alignment = .firstBaseline
+//        stack.alignment = .firstBaseline
         stack.contentMode = .scaleAspectFit
         stack.distribution = .fillEqually
         
@@ -99,9 +99,9 @@ final class CalendarCollectionCell: UICollectionViewCell {
         }
         
         circlesStack.snp.makeConstraints { make in
-            make.top.equalTo(containerView.snp.bottom).offset(1)
+            make.top.equalTo(containerView.snp.bottom).offset(5)
             make.centerX.equalTo(containerView.snp.centerX)
-            make.height.equalTo(20)
+//            make.height.equalTo(20)
         }
     }
     
