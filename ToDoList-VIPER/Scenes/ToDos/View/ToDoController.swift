@@ -44,7 +44,6 @@ final class ToDoController: UIViewController {
         presenter?.viewWillAppear()
         DispatchQueue.main.async {
             self.getCurrentDay()
-            self.calendarView.calendar.reloadData()
             let calendarModel = CalendarModel()
             let daysArray = calendarModel.getWeekForCalendar(date: self.centerDate)
             self.calendarView.calendar.setDaysArray(days: daysArray)
@@ -99,7 +98,7 @@ final class ToDoController: UIViewController {
         calendarView.calendar.scrollToItem(at: [0, 10], at: .centeredHorizontally, animated: false)
     }
     
-    //MARK: - Current date configure with module
+    //MARK: - Current date configure for start module
     private func getCurrentDay() {
         switch presenter?.date {
         case .today:
@@ -130,8 +129,9 @@ final class ToDoController: UIViewController {
     
     @objc func makeItDone(notification: Notification) {
         guard let doneInfo = notification.userInfo else { return }
-        let value = doneInfo["doneStatus"]
-        self.presenter?.doneToDo(toDoTasks[value as! Int])
+        guard let item = doneInfo["doneItem"] as? ToDoObject else { return }
+        self.presenter?.doneToDo(item)
+        
         
     }
     
@@ -148,11 +148,8 @@ extension ToDoController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ToDoCell.reuseIdentifier, for: indexPath) as? ToDoCell
-//        let toDos = ToDoStorage.instance.fetchToDos()
-        cell?.setupCell(with: toDoTasks[indexPath.row].title ?? "",
-                        boxColor: UIColor.convertStringToColor(toDoTasks[indexPath.row].color),
-                        doneStatus: toDoTasks[indexPath.row].doneStatus,
-                        index: indexPath.row)
+        cell?.setupCell(with: toDoTasks[indexPath.row])
+        tableView.reloadRows(at: [indexPath], with: .none)
         return cell ?? UITableViewCell()
     }
     
@@ -166,6 +163,12 @@ extension ToDoController: UITableViewDelegate, UITableViewDataSource {
         
         action.backgroundColor = .systemBackground
         return UISwipeActionsConfiguration(actions: [action])
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = toDoTasks[indexPath.row]
+        print(item)
+        
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

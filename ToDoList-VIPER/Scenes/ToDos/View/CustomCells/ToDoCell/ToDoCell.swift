@@ -12,7 +12,7 @@ class ToDoCell: UITableViewCell {
     
     //MARK: - Class custom properties
     static let reuseIdentifier = "ToDoCell"
-    var isDone: Bool = false
+    var toDoItem: ToDoObject = ToDoObject()
     var index: Int = 0
     
     //MARK: - Outlets
@@ -80,7 +80,10 @@ class ToDoCell: UITableViewCell {
     override func prepareForReuse() {
         checkboxImage.isHighlighted = false
         checkboxImage.tintColor = .black
-        taskName.text = "Temp"
+        taskName.text = nil
+        let attributedText : NSMutableAttributedString =  NSMutableAttributedString()
+
+        taskName.attributedText = attributedText
     }
     
     //MARK: - Setup Hierarchy
@@ -108,6 +111,7 @@ class ToDoCell: UITableViewCell {
             make.centerX.equalTo(container.safeAreaLayoutGuide.snp.centerX)
             make.top.equalToSuperview().offset(20)
             make.leading.equalTo(checkboxImage.snp.trailing).offset(20)
+            make.trailing.equalTo(iconBox.snp.leading).inset(20)
         }
         
         iconBox.snp.makeConstraints { make in
@@ -123,11 +127,11 @@ class ToDoCell: UITableViewCell {
     }
 
     //MARK: - Setup cell
-    func setupCell(with title: String, boxColor: UIColor, doneStatus: Bool, index: Int) {
-        self.taskName.text = title
-        self.iconBox.backgroundColor = boxColor
-        self.index = index
-        switch boxColor {
+    func setupCell(with item: ToDoObject) {
+        self.taskName.text = item.title
+        self.iconBox.backgroundColor = UIColor.convertStringToColor(item.color)
+        self.toDoItem = item
+        switch UIColor.convertStringToColor(item.color) {
         case .systemOrange:
             self.icon.image = UIImage(systemName: "bag")
         case .systemGreen:
@@ -138,9 +142,16 @@ class ToDoCell: UITableViewCell {
             self.icon.image = UIImage(systemName: "lightbulb")
         }
         
-//        if doneStatus == true  {
-//            self.makeItDone()
-//        }
+        if item.doneStatus == true {
+            self.makeItDone()
+        } else {
+            checkboxImage.isHighlighted = false
+            checkboxImage.tintColor = .black
+            self.taskName.text = item.title
+            taskName.strikeThrough(false)
+            self.checkboxImage.isUserInteractionEnabled = true
+        }
+
     }
 }
 
@@ -151,10 +162,14 @@ extension ToDoCell {
     }
 
     @objc private func tapToImage(_ sender: UIGestureRecognizer) {
-        self.isDone = true
+        if self.toDoItem.doneStatus == false {
+            self.makeItDone()
+            let userInfo: [String: ToDoObject] = ["doneItem" : self.toDoItem]
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "DoneTask"), object: nil, userInfo: userInfo)
+        }
 //        let doneTaskInfo: [String : Int] = ["doneStatus" : self.index]
 //        NotificationCenter.default.post(name: Notification.Name("DoneTask"), object: nil, userInfo: doneTaskInfo)
-        self.makeItDone()
+        
     }
     
     func makeItDone() {
@@ -164,8 +179,8 @@ extension ToDoCell {
         
         let attributedText : NSMutableAttributedString =  NSMutableAttributedString(string: taskName.text ?? "Temp")
         attributedText.addAttributes([
-                        NSAttributedString.Key.strikethroughStyle: NSUnderlineStyle.single.rawValue,
-                        NSAttributedString.Key.strikethroughColor: UIColor.systemGreen,
+            NSAttributedString.Key.strikethroughStyle: NSUnderlineStyle.thick.rawValue,
+                        NSAttributedString.Key.strikethroughColor: UIColor.label,
                         NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15.0, weight: .semibold)
                         ], range: NSMakeRange(0, attributedText.length))
         taskName.attributedText = attributedText
