@@ -211,12 +211,12 @@ final class AddNewToDoController: UIViewController, AddNewToDoViewProtocol, UITa
     
     //MARK: - Buttons Action
     @objc func addNewToDo() {
-        self.makeNotification()
+//        self.makeNotification()
         presenter?.addNewToDo(with: nameOfTaskField.text,
                               description: descriptionField.text,
                               date: dateField.date,
                               mark: color?.rawValue ?? ColorsItemResult.systemPurple.rawValue)
-//        self.makeNotification()
+        self.makeNotification()
     }
     
     @objc func dismissToMain() {

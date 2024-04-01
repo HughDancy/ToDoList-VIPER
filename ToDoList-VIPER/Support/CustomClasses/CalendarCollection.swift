@@ -96,6 +96,7 @@ extension CalendarCollectionView: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedUserCell = indexPath.row
         selectedDate = totalSquares[indexPath.item].dateString
+        print("Heya")
         calendarDelegate?.updateTasks(with: totalSquares[indexPath.row].dateString)
     }
     

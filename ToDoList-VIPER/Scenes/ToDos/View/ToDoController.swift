@@ -14,6 +14,7 @@ final class ToDoController: UIViewController {
     var presenter: ToDosPresenterProtocol?
     private let calendarModel = CalendarModel()
     private var centerDate = Date()
+    private var selectedDate = String()
     
     private var toDoTasks: [ToDoObject] = [] {
         didSet {
@@ -118,7 +119,7 @@ final class ToDoController: UIViewController {
     
     @objc func updateTables(notification: Notification) {
         DispatchQueue.main.async {
-            self.presenter?.viewWillAppear()
+            self.presenter?.updateToDosForDay(self.selectedDate)
             self.toDoTable.reloadData()
             let calendarModel = CalendarModel()
             let daysArray = calendarModel.getWeekForCalendar(date: self.centerDate)
@@ -192,6 +193,7 @@ extension ToDoController: CalendarCollectionViewDelegate {
     
     func updateTasks(with data: String) {
         presenter?.updateToDosForDay(data)
+        self.selectedDate = data
         toDoTable.reloadData()
     }
 }
