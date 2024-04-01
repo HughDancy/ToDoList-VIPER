@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 
 final class ToDoController: UIViewController {
+
+    //MARK: - Properties
     var presenter: ToDosPresenterProtocol?
     private let calendarModel = CalendarModel()
     private var centerDate = Date()
@@ -94,10 +96,9 @@ final class ToDoController: UIViewController {
         
         guard scrollToItem else { return }
         calendarView.calendar.scrollToItem(at: [0, 10], at: .centeredHorizontally, animated: false)
-        print("Update calendar func is working")
     }
     
-    //MARK: - Date configure with module
+    //MARK: - Current date configure with module
     private func getCurrentDay() {
         switch presenter?.date {
         case .today:
@@ -109,44 +110,72 @@ final class ToDoController: UIViewController {
         }
     }
     
-    //MARK: - Make notification observer
+    //MARK: - Make notification observers
     private func setupNotificationObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateTables), name: Notification.Name(rawValue: "UpdateTables"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(makeItDone), name: Notification.Name(rawValue: "DoneTask") , object: nil)
     }
     
     @objc func updateTables(notification: Notification) {
         DispatchQueue.main.async {
             self.presenter?.viewWillAppear()
-//            self.view.backgroundColor = .systemMint
             self.toDoTable.reloadData()
             let calendarModel = CalendarModel()
             let daysArray = calendarModel.getWeekForCalendar(date: self.centerDate)
             self.calendarView.calendar.setDaysArray(days: daysArray)
             self.calendarView.calendar.reloadData()
-//            print(toDoTasks.count)
         }
+    }
+    
+    @objc func makeItDone(notification: Notification) {
+        guard let doneInfo = notification.userInfo else { return }
+        let value = doneInfo["doneStatus"]
+        self.presenter?.doneToDo(toDoTasks[value as! Int])
         
+    }
+    
+    func makeNotification() {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "UpdateTables"), object: nil)
     }
 }
 
 //MARK: - TableView Extension
 extension ToDoController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        let toDos = ToDoStorage.instance.fetchToDos()
         return toDoTasks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ToDoCell.reuseIdentifier, for: indexPath) as? ToDoCell
-        let toDos = ToDoStorage.instance.fetchToDos()
-//        cell?.setupCell(with: MockToDoItem.items[indexPath.row].title,
-//                        boxColor: MockToDoItem.items[indexPath.row].color,
-//                        icon: MockToDoItem.items[indexPath.row].nameOfImage)
-//        cell?.setupCell(with: toDos[indexPath.row].title ?? "",
-//                        boxColor: UIColor.convertStringToColor(toDos[indexPath.row].color))
+//        let toDos = ToDoStorage.instance.fetchToDos()
         cell?.setupCell(with: toDoTasks[indexPath.row].title ?? "",
-                        boxColor: UIColor.convertStringToColor(toDoTasks[indexPath.row].color))
+                        boxColor: UIColor.convertStringToColor(toDoTasks[indexPath.row].color),
+                        doneStatus: toDoTasks[indexPath.row].doneStatus,
+                        index: indexPath.row)
         return cell ?? UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let action = UIContextualAction(style: .destructive, title: "") { _, _, _ in
+            tableView.dataSource?.tableView?(tableView, commit: .delete, forRowAt: indexPath)
+        }
+        action.image = UIGraphicsImageRenderer(size: CGSize(width: 50, height: 74)).image { _ in
+            UIImage(named: "delete")?.draw(in: CGRect(x: 0, y: 0, width: 50, height: 74))
+        }
+        
+        action.backgroundColor = .systemBackground
+        return UISwipeActionsConfiguration(actions: [action])
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            tableView.beginUpdates()
+            presenter?.deleteToDo(toDoTasks[indexPath.row])
+            toDoTasks.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .left)
+            self.makeNotification()
+            tableView.endUpdates()
+        }
     }
 }
 
@@ -177,31 +206,6 @@ extension ToDoController: ToDosViewProtocol {
         self.toDoTasks = toDos
     }
 }
-
-struct MockToDoItem {
-    var title: String
-    var color: UIColor
-    var nameOfImage: String
-}
-
-extension MockToDoItem {
-    static let items = [
-        MockToDoItem(title: "working on code",
-                  color: .systemOrange,
-                  nameOfImage: "bag"),
-        MockToDoItem(title: "good sleep",
-                  color: .systemGreen,
-                  nameOfImage: "person"),
-        MockToDoItem(title: "buy Nintendo",
-                  color: .systemPurple,
-                  nameOfImage: "folder"),
-        MockToDoItem(title: "working on code twice",
-                  color: .systemOrange,
-                  nameOfImage: "bag")
-    ]
-}
-
-
 
 //extension ToDoController {
 //    func preformGesture() {

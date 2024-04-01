@@ -9,7 +9,11 @@ import UIKit
 import SnapKit
 
 class ToDoCell: UITableViewCell {
+    
+    //MARK: - Class custom properties
     static let reuseIdentifier = "ToDoCell"
+    var isDone: Bool = false
+    var index: Int = 0
     
     //MARK: - Outlets
     private lazy var container: UIView = {
@@ -110,8 +114,6 @@ class ToDoCell: UITableViewCell {
             make.top.equalTo(container.safeAreaLayoutGuide.snp.top).offset(-5)
             make.trailing.bottom.equalTo(container).offset(5)
             make.width.equalTo(100)
-//            iconBox.layer.cornerRadius = 50
-//            iconBox.clipsToBounds = true
         }
         
         icon.snp.makeConstraints { make in
@@ -121,9 +123,10 @@ class ToDoCell: UITableViewCell {
     }
 
     //MARK: - Setup cell
-    func setupCell(with title: String, boxColor: UIColor) {
+    func setupCell(with title: String, boxColor: UIColor, doneStatus: Bool, index: Int) {
         self.taskName.text = title
         self.iconBox.backgroundColor = boxColor
+        self.index = index
         switch boxColor {
         case .systemOrange:
             self.icon.image = UIImage(systemName: "bag")
@@ -134,6 +137,10 @@ class ToDoCell: UITableViewCell {
         default:
             self.icon.image = UIImage(systemName: "lightbulb")
         }
+        
+//        if doneStatus == true  {
+//            self.makeItDone()
+//        }
     }
 }
 
@@ -144,6 +151,13 @@ extension ToDoCell {
     }
 
     @objc private func tapToImage(_ sender: UIGestureRecognizer) {
+        self.isDone = true
+//        let doneTaskInfo: [String : Int] = ["doneStatus" : self.index]
+//        NotificationCenter.default.post(name: Notification.Name("DoneTask"), object: nil, userInfo: doneTaskInfo)
+        self.makeItDone()
+    }
+    
+    func makeItDone() {
         checkboxImage.tintColor = .systemGreen
         checkboxImage.isHighlighted = true
         checkboxImage.isUserInteractionEnabled = false
@@ -155,6 +169,5 @@ extension ToDoCell {
                         NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15.0, weight: .semibold)
                         ], range: NSMakeRange(0, attributedText.length))
         taskName.attributedText = attributedText
-        
     }
 }
