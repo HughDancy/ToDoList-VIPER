@@ -45,6 +45,13 @@ extension Date {
         let month = formatter.string(from: date)
         return month
     }
+
+    //MARK: - Get year name
+    func getYear(date: Date) -> Int {
+        let calendar = Calendar.current
+        let currentYear = calendar.component(.year, from: date)
+        return currentYear
+    }
     
     //MARK: - Get day offset
     public func getDayOffset(with offset: Int) -> Date {

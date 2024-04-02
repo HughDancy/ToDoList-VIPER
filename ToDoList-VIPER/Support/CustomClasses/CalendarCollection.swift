@@ -79,9 +79,6 @@ extension CalendarCollectionView: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarCollectionCell.reuseIdentifier, for: indexPath) as? CalendarCollectionCell else { return UICollectionViewCell() }
-//        
-//        let date = totalSquares[indexPath.item]
-//        cell.setupCell(date)
         cell.setupCell(totalSquares[indexPath.row])
         if indexPath.row == selectedUserCell {
             selectItem(at: [0, selectedUserCell], animated: false, scrollPosition: [])
@@ -96,10 +93,8 @@ extension CalendarCollectionView: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedUserCell = indexPath.row
         selectedDate = totalSquares[indexPath.item].dateString
-        print("Heya")
         calendarDelegate?.updateTasks(with: totalSquares[indexPath.row].dateString)
     }
-    
 }
 
 extension CalendarCollectionView: UICollectionViewDelegateFlowLayout {

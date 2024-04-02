@@ -13,7 +13,6 @@ class ToDoCell: UITableViewCell {
     //MARK: - Class custom properties
     static let reuseIdentifier = "ToDoCell"
     var toDoItem: ToDoObject = ToDoObject()
-    var index: Int = 0
     
     //MARK: - Outlets
     private lazy var container: UIView = {
@@ -63,6 +62,7 @@ class ToDoCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     private func commonInit() {
         setupHierachy()
         setupLayout()
@@ -72,28 +72,21 @@ class ToDoCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         self.selectionStyle = .none
-        if self.isSelected {
-           
-        }
     }
     
     override func prepareForReuse() {
         checkboxImage.isHighlighted = false
         checkboxImage.tintColor = .black
         taskName.text = nil
-        let attributedText : NSMutableAttributedString =  NSMutableAttributedString()
-
-        taskName.attributedText = attributedText
     }
     
     //MARK: - Setup Hierarchy
     private func setupHierachy() {
-        iconBox.addSubview(icon)
         contentView.addSubview(container)
         container.addSubview(checkboxImage)
         container.addSubview(taskName)
         container.addSubview(iconBox)
-//        iconBox.addSubview(icon)
+        iconBox.addSubview(icon)
     }
     
     //MARK: - Setup Layout
@@ -151,7 +144,6 @@ class ToDoCell: UITableViewCell {
             taskName.strikeThrough(false)
             self.checkboxImage.isUserInteractionEnabled = true
         }
-
     }
 }
 
@@ -167,9 +159,6 @@ extension ToDoCell {
             let userInfo: [String: ToDoObject] = ["doneItem" : self.toDoItem]
             NotificationCenter.default.post(name: Notification.Name(rawValue: "DoneTask"), object: nil, userInfo: userInfo)
         }
-//        let doneTaskInfo: [String : Int] = ["doneStatus" : self.index]
-//        NotificationCenter.default.post(name: Notification.Name("DoneTask"), object: nil, userInfo: doneTaskInfo)
-        
     }
     
     func makeItDone() {

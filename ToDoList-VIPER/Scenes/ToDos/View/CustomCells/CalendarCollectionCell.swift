@@ -38,7 +38,6 @@ final class CalendarCollectionCell: UICollectionViewCell {
         let stack = UIStackView()
         stack.axis = .horizontal
         stack.spacing = 5
-//        stack.alignment = .firstBaseline
         stack.contentMode = .scaleAspectFit
         stack.distribution = .fillEqually
         

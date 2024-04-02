@@ -40,8 +40,6 @@ class CalendarModel {
                 }
             }
         }
-        
         return dateModelsArray
     }
-    
 }

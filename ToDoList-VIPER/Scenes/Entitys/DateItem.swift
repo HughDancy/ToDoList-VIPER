@@ -16,20 +16,4 @@ struct DateItem {
     var isPersonalTask: Bool?
     var isOtherTask: Bool?
     
-//    mutating func changeStatus(with status: DateStatus) {
-//        switch status {
-//        case .isWork:
-//            isWorkTask = true
-//        case .isPersonal:
-//            isPersonalTask = true
-//        case .isOther:
-//            isOtherTask = true
-//        }
-//    }
 }
-
-//enum DateStatus {
-//    case isWork
-//    case isPersonal
-//    case isOther
-//}

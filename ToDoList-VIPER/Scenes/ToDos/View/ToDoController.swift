@@ -60,6 +60,7 @@ final class ToDoController: UIViewController {
         setupLayot()
         calendarView.calendar.calendarDelegate = self
         setupNotificationObserver()
+        self.navigationController?.navigationBar.topItem?.title = "Назад"
         self.navigationItem.largeTitleDisplayMode = .never
         self.navigationController?.navigationBar.prefersLargeTitles = false 
     }
@@ -84,7 +85,7 @@ final class ToDoController: UIViewController {
         }
     }
     
-    //MARK: - Update func
+    //MARK: - Update calendar func
     private func updateData(day offset: Int, index: Int, scrollToItem: Bool = true) {
         centerDate = centerDate.getDayOffset(with: offset)
         let daysArray = calendarModel.getWeekForCalendar(date: centerDate)
@@ -110,7 +111,7 @@ final class ToDoController: UIViewController {
         }
     }
     
-    //MARK: - Make notification observers
+    //MARK: - Make notification observers for update collection
     private func setupNotificationObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateTables), name: Notification.Name(rawValue: "UpdateTables"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(makeItDone), name: Notification.Name(rawValue: "DoneTask") , object: nil)
@@ -131,8 +132,6 @@ final class ToDoController: UIViewController {
         guard let doneInfo = notification.userInfo else { return }
         guard let item = doneInfo["doneItem"] as? ToDoObject else { return }
         self.presenter?.doneToDo(item)
-        
-        
     }
     
     func makeNotification() {
@@ -212,53 +211,4 @@ extension ToDoController: ToDosViewProtocol {
     }
 }
 
-//extension ToDoController {
-//    func preformGesture() {
-//        let leftGesture = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipes(sender:)))
-//        let rightGesture = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipes(sender:)))
-//        
-//        leftGesture.direction = .left
-//        rightGesture.direction = .right
-//        
-//        self.calendarView.calendarView.addGestureRecognizer(leftGesture)
-//        self.calendarView.calendarView.addGestureRecognizer(rightGesture)
-//    }
-//    
-//    func swipeTransitionToLeftSide(_ leftSide: Bool) -> CATransition {
-//        let transition = CATransition()
-//        transition.startProgress = 0.0
-//        transition.endProgress = 1.0
-//        transition.type = CATransitionType.push
-//        transition.subtype = leftSide ? CATransitionSubtype.fromRight : CATransitionSubtype.fromLeft
-//        transition.duration = 0.3
-//        return transition
-//    }
-//    
-//    @objc func handleSwipes(sender: UISwipeGestureRecognizer) {
-//        if (sender.direction == .left) {
-//            calendarView.getNextSevenDays { [weak self] (response) in
-//                if response == "succes" {
-//                    DispatchQueue.main.async  {
-//                        self?.calendarView.calendarView.layer.add(self!.swipeTransitionToLeftSide(true), forKey: nil)
-//                        self?.calendarView.calendarView.collectionViewLayout.invalidateLayout()
-//                        self?.calendarView.calendarView.layoutSubviews()
-//                        self?.calendarView.calendarView.reloadData()
-//                        //TODO - Make a month name change
-//                    }
-//                }
-//            }
-//        }
-//        
-//        if (sender.direction == .right) {
-//            self.calendarView.getPreviousSevenDays { [weak self] (response) in
-//                if response == "succes" {
-//                    self?.calendarView.calendarView.layer.add(self!.swipeTransitionToLeftSide(false), forKey: nil)
-//                    self?.calendarView.calendarView.collectionViewLayout.invalidateLayout()
-//                    self?.calendarView.calendarView.layoutSubviews()
-//                    self?.calendarView.calendarView.reloadData()
-//                    //TODO - Make a month name change
-//                }
-//            }
-//        }
-//    }
-//}
+
