@@ -602,6 +602,53 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
+		D8AB921C2BBBF83100826A4E /* ToDosDetail */ = {
+			isa = PBXGroup;
+			children = (
+				D8AB92212BBBF85B00826A4E /* Protocols */,
+				D8AB92202BBBF85500826A4E /* View */,
+				D8AB921F2BBBF84E00826A4E /* Interactor */,
+				D8AB921E2BBBF84500826A4E /* Presenter */,
+				D8AB921D2BBBF83C00826A4E /* Router */,
+			);
+			path = ToDosDetail;
+			sourceTree = "<group>";
+		};
+		D8AB921D2BBBF83C00826A4E /* Router */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		D8AB921E2BBBF84500826A4E /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		D8AB921F2BBBF84E00826A4E /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		D8AB92202BBBF85500826A4E /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D8AB92212BBBF85B00826A4E /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		D8B1E9AE2BA2F3D300D455AF /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -911,6 +958,7 @@
 		D8E9F8792B03532000A3F3FC /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				D8AB921C2BBBF83100826A4E /* ToDosDetail */,
 				D8DC23CD2BB1769D00C3E220 /* ToDos */,
 				D8900F0E2B51354B008E0E34 /* Loading */,
 				D8900F0F2B513558008E0E34 /* Onboarding */,
