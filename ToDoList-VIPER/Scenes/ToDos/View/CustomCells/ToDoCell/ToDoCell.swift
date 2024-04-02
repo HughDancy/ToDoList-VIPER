@@ -126,11 +126,11 @@ class ToDoCell: UITableViewCell {
         self.toDoItem = item
         switch UIColor.convertStringToColor(item.color) {
         case .systemOrange:
-            self.icon.image = UIImage(systemName: "bag")
+            self.icon.image = UIImage(systemName: "briefcase")
         case .systemGreen:
             self.icon.image = UIImage(systemName: "person")
         case .systemPurple:
-            self.icon.image = UIImage(systemName: "folder")
+            self.icon.image = UIImage(systemName: "books.vertical.circle")
         default:
             self.icon.image = UIImage(systemName: "lightbulb")
         }
