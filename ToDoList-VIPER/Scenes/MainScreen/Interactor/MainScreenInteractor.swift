@@ -16,8 +16,8 @@ final class MainScreenInteractor: MainScreenInteractorInputProtocol {
     }
     
     func getToDosCount() {
-        let allNotDoneToDos = storage.fetchUsers().filter { $0.doneStatus == false }
-        let allDoneToDos = storage.fetchUsers().filter { $0.doneStatus == true}
+        let allNotDoneToDos = storage.fetchToDos().filter { $0.doneStatus == false }
+        let allDoneToDos = storage.fetchToDos().filter { $0.doneStatus == true}
         let upcomingToDos = ToDoObjectSorter.sortByStatus(object: allNotDoneToDos, and: .upcoming)
     
         let todayToDosCount = upcomingToDos[0].count

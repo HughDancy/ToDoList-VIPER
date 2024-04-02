@@ -54,7 +54,7 @@ class ToDoListViewController: UITableViewController {
     
     //MARK: - Setup Elements
     private func setupView() {
-        self.tableView.register(ToDoCell.self, forCellReuseIdentifier: ToDoCell.reuseIdentifier)
+        self.tableView.register(ToDosCell.self, forCellReuseIdentifier: ToDosCell.reuseIdentifier)
         self.tableView.showsVerticalScrollIndicator = false
     }
     
@@ -72,7 +72,7 @@ class ToDoListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ToDoCell.reuseIdentifier, for: indexPath) as? ToDoCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: ToDosCell.reuseIdentifier, for: indexPath) as? ToDosCell
         cell?.setupElements(with: toDos[indexPath.section][indexPath.row])
         cell?.doneCheckDelegate = self
         cell?.numberOfRow = indexPath.row

@@ -30,7 +30,7 @@ final class ToDoStorage {
         newToDo.title = title
         newToDo.descriptionTitle = content
         newToDo.date = date
-        newToDo.dateTitle = DateFormatter.createMediumDate(from: date)
+        newToDo.dateTitle = DateFormatter.getStringFromDate(from: date)
         newToDo.color = color
         do {
             try viewContext.save()
@@ -57,7 +57,7 @@ final class ToDoStorage {
         item.title = newTitle
         item.descriptionTitle = newDescription
         item.date = newDate
-        item.dateTitle = DateFormatter.createMediumDate(from: newDate)
+        item.dateTitle = DateFormatter.getStringFromDate(from: newDate)
         
         do {
             try viewContext.save()
@@ -79,7 +79,7 @@ final class ToDoStorage {
     }
     
     //MARK: - CoreData fetch
-    func fetchUsers() -> [ToDoObject] {
+    func fetchToDos() -> [ToDoObject] {
         let fetchRequest: NSFetchRequest<ToDoObject> = ToDoObject.fetchRequest()
         let objects = try! viewContext.fetch(fetchRequest)
         return objects

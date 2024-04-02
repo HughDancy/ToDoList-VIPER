@@ -28,25 +28,25 @@ final class MainScreenRouter: MainScreenRouterProtocol {
     
     func goTodayToDos(from view: any MainScreenViewProtocol) {
         guard let parrentView = view as? UIViewController else { return }
-        let toDayToDos = ToDoListRouter.createToDoListModule()
+        let toDayToDos = ToDosRouter.createToDosModule(with: .today)
         parrentView.navigationController?.pushViewController(toDayToDos, animated: true)
     }
     
     func goTomoorowToDos(from view: any MainScreenViewProtocol) {
         guard let parrentView = view as? UIViewController else { return }
-        let tommorowToDos = ToDoListRouter.createToDoListModule()
+        let tommorowToDos = ToDosRouter.createToDosModule(with: .tommorow)
         parrentView.navigationController?.pushViewController(tommorowToDos, animated: true)
     }
     
     func goToOverdueToDos(from view: any MainScreenViewProtocol) {
         guard let parrentView = view as? UIViewController else { return }
-        let overdueToDos = OverdueToDoRouter.createOverdueModule()
+        let overdueToDos = ToDosRouter.createToDosModule(with: .overdue)
         parrentView.navigationController?.pushViewController(overdueToDos, animated: true)
     }
     
     func goToDoneToDos(from view: any MainScreenViewProtocol) {
         guard let parrentView = view as? UIViewController else { return }
-        let doneToDos = ExecuteToDoRouter.createToDoListModule()
+        let doneToDos = ToDosRouter.createToDosModule(with: .done)
         parrentView.navigationController?.pushViewController(doneToDos, animated: true)
     }
     

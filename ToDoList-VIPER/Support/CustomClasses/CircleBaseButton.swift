@@ -55,7 +55,6 @@ final class CircleBaseButton: UIButton {
       }
 }
 
-
 enum ImageTypeForButton {
     case systemImage
     case customImage

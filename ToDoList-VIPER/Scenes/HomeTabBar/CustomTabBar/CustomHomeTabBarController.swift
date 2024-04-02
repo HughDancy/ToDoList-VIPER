@@ -13,6 +13,8 @@ final class CustomHomeTabBarController: UITabBarController, UITabBarControllerDe
     
     private var customTabBar = CustomTabBar()
     
+    private var transition = CircularTransition()
+    
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +22,8 @@ final class CustomHomeTabBarController: UITabBarController, UITabBarControllerDe
         setupLayoutCustomTabBar()
         self.selectedIndex = 1
         setupPositionTabBarItem()
+        self.navigationItem.largeTitleDisplayMode = .never
+        navigationItem.setHidesBackButton(true, animated: false)
     }
     
     override func viewDidLayoutSubviews() {
@@ -28,6 +32,7 @@ final class CustomHomeTabBarController: UITabBarController, UITabBarControllerDe
         tabBarFrame.size.height = tabBarFrame.height + 40
         tabBarFrame.origin.y = UIScreen.main.bounds.height - 107
         self.tabBar.frame = tabBarFrame
+        print("ViewDidLoad method centr button - \(middleButton.center)")
     }
     
     //MARK: - Setup Layout
@@ -83,4 +88,22 @@ final class CustomHomeTabBarController: UITabBarController, UITabBarControllerDe
     }
 }
 
+extension CustomHomeTabBarController: UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> (any UIViewControllerAnimatedTransitioning)? {
+        transition.transitionMode = .present
+//        transition.startingPoint = middleButt
+//        transition.startingPoint = tabBar.center
+        transition.startingPoint = CGPoint(x: (tabBar.center.x + 5.0), y: (tabBar.center.y - 15.0))
+        print(middleButton.center)
+        transition.circleColor = middleButton.backgroundColor ?? UIColor.systemCyan
+        return transition
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> (any UIViewControllerAnimatedTransitioning)? {
+        transition.transitionMode = .dismiss
+        transition.startingPoint = CGPoint(x: (tabBar.center.x + 5.0), y: (tabBar.center.y - 15.0))
+        transition.circleColor = middleButton.backgroundColor ?? UIColor.systemCyan
+        return transition
+    }
+}
 

@@ -21,7 +21,7 @@ class OverdueToDoController: UIViewController {
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
-        tableView.register(ToDoCell.self, forCellReuseIdentifier: ToDoCell.reuseIdentifier)
+        tableView.register(ToDosCell.self, forCellReuseIdentifier: ToDosCell.reuseIdentifier)
         tableView.showsVerticalScrollIndicator = false
         tableView.delegate = self
         tableView.dataSource = self
@@ -122,7 +122,7 @@ extension OverdueToDoController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ToDoCell.reuseIdentifier, for: indexPath) as? ToDoCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: ToDosCell.reuseIdentifier, for: indexPath) as? ToDosCell
         cell?.setupElements(with: toDos[indexPath.section][indexPath.row])
         cell?.overdueToDo()
         cell?.numberOfSection = indexPath.section

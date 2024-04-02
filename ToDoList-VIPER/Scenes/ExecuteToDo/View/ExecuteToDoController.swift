@@ -32,7 +32,7 @@ class ExecuteToDoController: UITableViewController {
         view.backgroundColor = .systemBackground
         title = "Завершено"
         navigationController?.navigationBar.prefersLargeTitles = true
-        self.tableView.register(ToDoCell.self, forCellReuseIdentifier: ToDoCell.reuseIdentifier)
+        self.tableView.register(ToDosCell.self, forCellReuseIdentifier: ToDosCell.reuseIdentifier)
         self.tableView.showsVerticalScrollIndicator = false
     }
 
@@ -58,7 +58,7 @@ class ExecuteToDoController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ToDoCell.reuseIdentifier, for: indexPath) as? ToDoCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: ToDosCell.reuseIdentifier, for: indexPath) as? ToDosCell
         cell?.setupElements(with: executeToDos[indexPath.section][indexPath.row])
         cell?.executeToDo()
         return cell ?? UITableViewCell()
