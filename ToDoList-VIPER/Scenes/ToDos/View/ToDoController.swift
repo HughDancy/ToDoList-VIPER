@@ -19,6 +19,11 @@ final class ToDoController: UIViewController {
     private var toDoTasks: [ToDoObject] = [] {
         didSet {
             toDoTable.reloadData()
+            if toDoTasks.count == 0 {
+                noTasksStack.arrangedSubviews.forEach { $0.isHidden = false }
+            } else {
+                noTasksStack.arrangedSubviews.forEach { $0.isHidden = true }
+            }
         }
     }
         
@@ -36,6 +41,35 @@ final class ToDoController: UIViewController {
         tableView.dataSource = self
         tableView.separatorStyle = .none
         return tableView
+    }()
+    
+    private lazy var taskImage: UIImageView = {
+       let imageView = UIImageView()
+        imageView.image = UIImage(named: "noTasks")
+        imageView.contentMode = .scaleAspectFit
+        imageView.isHidden = true
+        return imageView
+    }()
+    
+    private lazy var tasksLabel: UILabel = {
+        let label = UILabel()
+        label.text = "    Задачи отсутствуют"
+        label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
+        label.textColor = .systemCyan
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.textAlignment = .center
+        label.isHidden = true
+        return label
+    }()
+    
+    private lazy var noTasksStack: UIStackView =  {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 3
+        stack.alignment = .center
+        stack.contentMode = .scaleAspectFit
+        return stack
     }()
     
     //MARK: - Lifecycle
@@ -60,6 +94,7 @@ final class ToDoController: UIViewController {
         setupLayot()
         calendarView.calendar.calendarDelegate = self
         setupNotificationObserver()
+        setupNoTaskStack()
         self.navigationController?.navigationBar.topItem?.title = "Назад"
         self.navigationItem.largeTitleDisplayMode = .never
         self.navigationController?.navigationBar.prefersLargeTitles = false 
@@ -69,6 +104,9 @@ final class ToDoController: UIViewController {
     private func setupHierarchy() {
         view.addSubview(calendarView)
         view.addSubview(toDoTable)
+        view.addSubview(noTasksStack)
+        noTasksStack.addArrangedSubview(taskImage)
+        noTasksStack.addArrangedSubview(tasksLabel)
     }
     
     //MARK: - Setup Layout
@@ -82,6 +120,17 @@ final class ToDoController: UIViewController {
         toDoTable.snp.makeConstraints { make in
             make.top.equalTo(calendarView.snp.bottom).offset(15)
             make.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        noTasksStack.snp.makeConstraints { make in
+            make.top.equalTo(calendarView.snp.bottom).offset(10)
+            make.centerY.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(40)
+
+        }
+        
+        tasksLabel.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().inset(5)
         }
     }
     
@@ -137,6 +186,30 @@ final class ToDoController: UIViewController {
     func makeNotification() {
         NotificationCenter.default.post(name: Notification.Name(rawValue: "UpdateTables"), object: nil)
     }
+    
+    //MARK: - Get label for module
+    private func getTaskLabel() -> String {
+        switch presenter?.date {
+        case .today, .tommorow:
+            return "Задачи отсутствуют"
+        case .overdue:
+            return "На эту дату просроченные задачи отсутствуют"
+        case .done:
+            return "На эту дату отсутствуют выполненные задачи"
+        default:
+            return ""
+        }
+    }
+    
+    //MARK: - No tasks setup method
+    private func setupNoTaskStack() {
+        if toDoTasks.count == 0 {
+            noTasksStack.arrangedSubviews.forEach { $0.isHidden = false}
+            noTasksStack.isHidden = false
+        } else {
+            noTasksStack.arrangedSubviews.forEach { $0.isHidden = true }
+        }
+    }
 }
 
 //MARK: - TableView Extension
@@ -177,6 +250,7 @@ extension ToDoController: UITableViewDelegate, UITableViewDataSource {
             toDoTasks.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .left)
             self.makeNotification()
+            self.setupNoTaskStack()
             tableView.endUpdates()
         }
     }

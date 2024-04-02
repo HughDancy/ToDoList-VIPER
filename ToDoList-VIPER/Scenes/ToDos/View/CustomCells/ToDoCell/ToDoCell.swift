@@ -36,7 +36,7 @@ class ToDoCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
+        label.lineBreakMode = .byClipping
         return label
     }()
     
@@ -104,7 +104,8 @@ class ToDoCell: UITableViewCell {
             make.centerX.equalTo(container.safeAreaLayoutGuide.snp.centerX)
             make.top.equalToSuperview().offset(20)
             make.leading.equalTo(checkboxImage.snp.trailing).offset(20)
-            make.trailing.equalTo(iconBox.snp.leading).inset(20)
+//            make.trailing.equalTo(iconBox.snp.leading).offset(-5)
+            make.bottom.equalTo(container.snp.bottom).inset(10)
         }
         
         iconBox.snp.makeConstraints { make in
