@@ -221,7 +221,6 @@ extension ToDoController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ToDoCell.reuseIdentifier, for: indexPath) as? ToDoCell
         cell?.setupCell(with: toDoTasks[indexPath.row])
-        tableView.reloadRows(at: [indexPath], with: .none)
         return cell ?? UITableViewCell()
     }
     
@@ -255,7 +254,6 @@ extension ToDoController: UITableViewDelegate, UITableViewDataSource {
         }
     }
 }
-
 
 //MARK: - Calendar Support methods extension
 extension ToDoController: CalendarCollectionViewDelegate {
