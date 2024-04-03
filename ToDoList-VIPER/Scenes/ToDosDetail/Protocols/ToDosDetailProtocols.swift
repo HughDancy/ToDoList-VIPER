@@ -37,11 +37,13 @@ protocol ToDosDetailInteractorOutputProtocol: AnyObject {
     //INTERACTOR -> PRESTNER
     func didDeleteToDo()
     func didEditToDo(_ toDo: ToDoObject)
+    func showAllert()
 }
 
 protocol ToDosDetailRouterProtocol: AnyObject {
     static func createModule(with toDo: ToDoObject) -> UIViewController
     
     //PRESENTER -> ROUTER
+    func showAllert(with view: ToDosDetailViewProtocol)
     func goBackToTasks(with view: ToDosDetailViewProtocol)
 }

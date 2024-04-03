@@ -27,6 +27,11 @@ final class ToDosDetailPresenter: ToDosDetailPresenterProtocol {
 }
 
 extension ToDosDetailPresenter: ToDosDetailInteractorOutputProtocol {
+    func showAllert() {
+        guard let view = view else { return }
+        router?.showAllert(with: view)
+    }
+    
     func didDeleteToDo() {
         guard let view = view else { return }
         router?.goBackToTasks(with: view)
