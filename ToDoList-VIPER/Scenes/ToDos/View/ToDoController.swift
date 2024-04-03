@@ -20,9 +20,9 @@ final class ToDoController: UIViewController {
         didSet {
             toDoTable.reloadData()
             if toDoTasks.count == 0 {
-                noTasksStack.arrangedSubviews.forEach { $0.isHidden = false }
+                noTaskView.isHidden = false
             } else {
-                noTasksStack.arrangedSubviews.forEach { $0.isHidden = true }
+                noTaskView.isHidden = true
             }
         }
     }
@@ -47,7 +47,6 @@ final class ToDoController: UIViewController {
        let imageView = UIImageView()
         imageView.image = UIImage(named: "noTasks")
         imageView.contentMode = .scaleAspectFit
-        imageView.isHidden = true
         return imageView
     }()
     
@@ -59,31 +58,21 @@ final class ToDoController: UIViewController {
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         label.textAlignment = .center
-        label.isHidden = true
         return label
     }()
     
-    private lazy var noTasksStack: UIStackView =  {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.spacing = 3
-        stack.alignment = .center
-        stack.contentMode = .scaleAspectFit
-        return stack
+    private lazy var noTaskView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        
+        return view
     }()
     
     //MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter?.viewWillAppear()
-        DispatchQueue.main.async {
-            self.getCurrentDay()
-            let calendarModel = CalendarModel()
-            let daysArray = calendarModel.getWeekForCalendar(date: self.centerDate)
-            self.calendarView.calendar.setDaysArray(days: daysArray)
-            self.calendarView.calendar.selectedDate = DateFormatter.getStringFromDate(from: self.centerDate)
-            self.calendarView.calendar.scrollToItem(at: [0, 10], at: .centeredHorizontally, animated: false)
-        }
+        setupCalendarColletcion()
     }
     
     override func viewDidLoad() {
@@ -104,13 +93,32 @@ final class ToDoController: UIViewController {
     private func setupHierarchy() {
         view.addSubview(calendarView)
         view.addSubview(toDoTable)
-        view.addSubview(noTasksStack)
-        noTasksStack.addArrangedSubview(taskImage)
-        noTasksStack.addArrangedSubview(tasksLabel)
+        view.addSubview(noTaskView)
+        noTaskView.addSubview(taskImage)
+        noTaskView.addSubview(tasksLabel)
     }
     
     //MARK: - Setup Layout
     private func setupLayot() {
+        noTaskView.snp.makeConstraints { make in
+            make.centerX.centerY.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(300)
+            make.width.equalTo(270)
+        }
+        
+        taskImage.snp.makeConstraints { make in
+            make.top.leading.trailing.equalTo(noTaskView).inset(10)
+        }
+        
+        tasksLabel.snp.makeConstraints { make in
+            make.top.equalTo(taskImage.snp.bottom).offset(10)
+            make.centerX.equalTo(noTaskView.snp.centerX)
+        }
+        
+        tasksLabel.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().inset(5)
+        }
+        
         calendarView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(5)
             make.leading.trailing.equalToSuperview().inset(8)
@@ -121,16 +129,17 @@ final class ToDoController: UIViewController {
             make.top.equalTo(calendarView.snp.bottom).offset(15)
             make.leading.trailing.bottom.equalToSuperview()
         }
-        
-        noTasksStack.snp.makeConstraints { make in
-            make.top.equalTo(calendarView.snp.bottom).offset(10)
-            make.centerY.equalToSuperview()
-            make.leading.trailing.equalToSuperview().inset(40)
-
-        }
-        
-        tasksLabel.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(5)
+    }
+    
+    //MARK: - Setup outlets
+    private func setupCalendarColletcion() {
+        DispatchQueue.main.async {
+            self.getCurrentDay()
+            let calendarModel = CalendarModel()
+            let daysArray = calendarModel.getWeekForCalendar(date: self.centerDate)
+            self.calendarView.calendar.setDaysArray(days: daysArray)
+            self.calendarView.calendar.selectedDate = DateFormatter.getStringFromDate(from: self.centerDate)
+            self.calendarView.calendar.scrollToItem(at: [0, 10], at: .centeredHorizontally, animated: false)
         }
     }
     
@@ -204,10 +213,9 @@ final class ToDoController: UIViewController {
     //MARK: - No tasks setup method
     private func setupNoTaskStack() {
         if toDoTasks.count == 0 {
-            noTasksStack.arrangedSubviews.forEach { $0.isHidden = false}
-            noTasksStack.isHidden = false
+            noTaskView.isHidden = false
         } else {
-            noTasksStack.arrangedSubviews.forEach { $0.isHidden = true }
+            noTaskView.isHidden = true
         }
     }
 }
@@ -224,6 +232,11 @@ extension ToDoController: UITableViewDelegate, UITableViewDataSource {
         return cell ?? UITableViewCell()
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let toDo = toDoTasks[indexPath.row]
+        presenter?.goToTask(toDo)
+    }
+    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .destructive, title: "") { _, _, _ in
             tableView.dataSource?.tableView?(tableView, commit: .delete, forRowAt: indexPath)
@@ -235,12 +248,7 @@ extension ToDoController: UITableViewDelegate, UITableViewDataSource {
         action.backgroundColor = .systemBackground
         return UISwipeActionsConfiguration(actions: [action])
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let item = toDoTasks[indexPath.row]
-        print(item)
-        
-    }
+
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {

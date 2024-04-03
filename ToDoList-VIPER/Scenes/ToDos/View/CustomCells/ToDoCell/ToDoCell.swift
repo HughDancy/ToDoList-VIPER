@@ -72,6 +72,7 @@ class ToDoCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         self.selectionStyle = .none
+        self.isUserInteractionEnabled = true
     }
     
     override func prepareForReuse() {
@@ -104,7 +105,7 @@ class ToDoCell: UITableViewCell {
             make.centerX.equalTo(container.safeAreaLayoutGuide.snp.centerX)
             make.top.equalToSuperview().offset(20)
             make.leading.equalTo(checkboxImage.snp.trailing).offset(20)
-//            make.trailing.equalTo(iconBox.snp.leading).offset(-5)
+            make.trailing.equalTo(iconBox.snp.leading).offset(-5)
             make.bottom.equalTo(container.snp.bottom).inset(10)
         }
         

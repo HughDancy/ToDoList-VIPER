@@ -8,6 +8,7 @@
 import UIKit
 
 class SingleToDoController: UIViewController {
+    var color: ColorsItemResult?
     
     //MARK: - Base Outelts
     lazy var descriptionText: UITextView = {
@@ -66,6 +67,10 @@ class SingleToDoController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "coralColor")
+        setupHierarchy()
+        setupLayout()
+        setupOutlets()
+        setupTextView()
     }
     
     //MARK: - Setup Hierarchy
