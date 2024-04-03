@@ -27,6 +27,7 @@ final class ToDosDetailInteractor: ToDosDetailInteractorInputProtocol {
     func deleteTask(_ toDo: ToDoObject) {
         guard let task = toDoItem else { return }
         storage.deleteToDoObject(item: task)
+        presenter?.didDeleteToDo()
     }
     
 }

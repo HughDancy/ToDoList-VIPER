@@ -120,9 +120,9 @@ final class ToDosDetailController: SingleToDoController {
     //MARK: - Setup Outlets
     override func setupOutlets() {
         cathegoryTableView.delegate = self
-        self.taskName.text = item?.title
-        self.descriptionText.text = item?.descriptionTitle
-        self.datePicker.date = item?.date ?? Date.today
+//        self.taskName.text = item?.title
+//        self.descriptionText.text = item?.descriptionTitle
+//        self.datePicker.date = item?.date ?? Date.today
     }
     
     //MARK: - Setup TextView
@@ -159,11 +159,13 @@ final class ToDosDetailController: SingleToDoController {
     @objc private func saveEditToDo() {
         self.isEditButtonIsTapped["isTapped"] = false
         NotificationCenter.default.post(name: Notification.Name(rawValue: "TapEditButton"), object: nil, userInfo: self.isEditButtonIsTapped)
+        presenter?.editToDo(title: taskName.text, descriprion: descriptionText.text, date: datePicker.date, color: "systemOrange")
         print("Saving what been edited")
     }
     
     @objc func deleteToDo() {
-        
+        guard let task = item else { return }
+        presenter?.deleteToDo(task)
     }
 }
 
