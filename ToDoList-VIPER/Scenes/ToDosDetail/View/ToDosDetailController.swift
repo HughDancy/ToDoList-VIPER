@@ -10,6 +10,7 @@ import UIKit
 final class ToDosDetailController: SingleToDoController {
     var item: ToDoObject?
     var isEditButtonIsTapped: [String : Bool] = ["isTapped" : false]
+    var presenter: ToDosDetailPresenterProtocol?
     
     //MARK: - Controller custom outlets
     private lazy var taskName: UITextView = {
@@ -48,6 +49,8 @@ final class ToDosDetailController: SingleToDoController {
     
     //MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter?.viewWillAppear()
         tabBarController?.tabBar.isHidden = true
         self.navigationController?.addCustomBackButton()
         NotificationCenter.default.addObserver(self, selector: #selector(changeEditButtonState), name: Notification.Name(rawValue: "TapEditButton"), object: nil)
@@ -161,6 +164,16 @@ final class ToDosDetailController: SingleToDoController {
     
     @objc func deleteToDo() {
         
+    }
+}
+
+    //MARK: - ToDosDetailViewProtocol
+extension ToDosDetailController: ToDosDetailViewProtocol {
+    func showToDoItem(_ toDo: ToDoObject) {
+        self.item = toDo
+        taskName.text = toDo.title
+        descriptionText.text = toDo.descriptionTitle
+        datePicker.date = toDo.date ?? Date.today
     }
 }
 
