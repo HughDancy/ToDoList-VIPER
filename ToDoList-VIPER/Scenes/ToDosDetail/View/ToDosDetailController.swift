@@ -43,6 +43,7 @@ final class ToDosDetailController: SingleToDoController {
     //MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = true
+        self.navigationController?.addCustomBackButton()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

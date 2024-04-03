@@ -71,6 +71,7 @@ final class ToDoController: UIViewController {
     //MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.addCustomBackButton()
         presenter?.viewWillAppear()
         setupCalendarColletcion()
     }
@@ -78,15 +79,34 @@ final class ToDoController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        setupOtlets()
+        setupNavigationBar()
+    }
+    
+    //MARK: - Setup outlets
+    private func setupCalendarColletcion() {
+        DispatchQueue.main.async {
+            self.getCurrentDay()
+            let calendarModel = CalendarModel()
+            let daysArray = calendarModel.getWeekForCalendar(date: self.centerDate)
+            self.calendarView.calendar.setDaysArray(days: daysArray)
+            self.calendarView.calendar.selectedDate = DateFormatter.getStringFromDate(from: self.centerDate)
+            self.calendarView.calendar.scrollToItem(at: [0, 10], at: .centeredHorizontally, animated: false)
+        }
+    }
+    
+    private func setupNavigationBar() {
+        self.navigationItem.largeTitleDisplayMode = .never
+        self.navigationController?.navigationBar.prefersLargeTitles = false
+    }
+    
+    private func setupOtlets() {
         updateData(day: 0, index: 10)
         setupHierarchy()
         setupLayot()
         calendarView.calendar.calendarDelegate = self
         setupNotificationObserver()
         setupNoTaskStack()
-        self.navigationController?.navigationBar.topItem?.title = "Назад"
-        self.navigationItem.largeTitleDisplayMode = .never
-        self.navigationController?.navigationBar.prefersLargeTitles = false 
     }
     
     //MARK: - Setup Hierarchy
@@ -131,18 +151,6 @@ final class ToDoController: UIViewController {
         }
     }
     
-    //MARK: - Setup outlets
-    private func setupCalendarColletcion() {
-        DispatchQueue.main.async {
-            self.getCurrentDay()
-            let calendarModel = CalendarModel()
-            let daysArray = calendarModel.getWeekForCalendar(date: self.centerDate)
-            self.calendarView.calendar.setDaysArray(days: daysArray)
-            self.calendarView.calendar.selectedDate = DateFormatter.getStringFromDate(from: self.centerDate)
-            self.calendarView.calendar.scrollToItem(at: [0, 10], at: .centeredHorizontally, animated: false)
-        }
-    }
-    
     //MARK: - Update calendar func
     private func updateData(day offset: Int, index: Int, scrollToItem: Bool = true) {
         centerDate = centerDate.getDayOffset(with: offset)
@@ -183,6 +191,7 @@ final class ToDoController: UIViewController {
             let daysArray = calendarModel.getWeekForCalendar(date: self.centerDate)
             self.calendarView.calendar.setDaysArray(days: daysArray)
             self.calendarView.calendar.reloadData()
+            self.tabBarController?.tabBar.isHidden = false
         }
     }
     
