@@ -26,8 +26,6 @@ final class ToDosDetailController: SingleToDoController {
     private lazy var editButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "square.and.pencil"), for: .normal)
-//        let saveEditImage = UIImage(systemName: "checkmark.circle")
-//        button.setImage(UIImage(systemName: "checkmark.circle"), for: .selected)
         button.backgroundColor = .systemOrange
         button.tintColor = .systemBackground
         button.layer.cornerRadius = 30
@@ -147,7 +145,6 @@ final class ToDosDetailController: SingleToDoController {
             editButton.backgroundColor = .systemOrange
             editButton.addTarget(self, action: #selector(editToDo), for: .touchDown)
         }
-            
     }
     
     @objc func editToDo() {
@@ -173,9 +170,22 @@ final class ToDosDetailController: SingleToDoController {
 extension ToDosDetailController: ToDosDetailViewProtocol {
     func showToDoItem(_ toDo: ToDoObject) {
         self.item = toDo
-        taskName.text = toDo.title
-        descriptionText.text = toDo.descriptionTitle
-        datePicker.date = toDo.date ?? Date.today
+        DispatchQueue.main.async {
+            self.taskName.text = toDo.title
+            self.descriptionText.text = toDo.descriptionTitle
+            self.datePicker.date = toDo.date ?? Date.today
+        }
+        
+        switch item?.color {
+        case "systemOrange":
+            cathegoryTableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .none)
+        case "systemGreen":
+            cathegoryTableView.selectRow(at: IndexPath(row: 1, section: 0), animated: false, scrollPosition: .none)
+        case "systemPurple":
+            cathegoryTableView.selectRow(at: IndexPath(row: 2, section: 0), animated: false, scrollPosition: .none)
+        default:
+            break
+        }
     }
 }
 
