@@ -149,7 +149,7 @@ final class ToDosDetailController: SingleToDoController {
         self.isEditButtonIsTapped["isTapped"] = true
         NotificationCenter.default.post(name: Notification.Name(rawValue: "TapEditButton"), object: nil, userInfo: self.isEditButtonIsTapped)
         setupUserInteracton(with: isEditButtonIsTapped["isTapped"] ?? true)
-        print("Edit is starting")
+        taskName.isUserInteractionEnabled = true
     }
     
     @objc private func saveEditToDo() {
@@ -157,7 +157,7 @@ final class ToDosDetailController: SingleToDoController {
         NotificationCenter.default.post(name: Notification.Name(rawValue: "TapEditButton"), object: nil, userInfo: self.isEditButtonIsTapped)
         presenter?.editToDo(title: taskName.text, descriprion: descriptionText.text, date: datePicker.date, color: "systemOrange")
         setupUserInteracton(with: isEditButtonIsTapped["isTapped"] ?? false)
-        print("Saving what been edited")
+        taskName.isUserInteractionEnabled = true
     }
     
     @objc func deleteToDo() {
