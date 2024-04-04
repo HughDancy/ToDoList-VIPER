@@ -27,9 +27,9 @@ final class ToDosDetailPresenter: ToDosDetailPresenterProtocol {
 }
 
 extension ToDosDetailPresenter: ToDosDetailInteractorOutputProtocol {
-    func showAllert() {
+    func showAllert(with status: ToDoDetailStatus) {
         guard let view = view else { return }
-        router?.showAllert(with: view)
+        router?.showAllert(with: view, status: status)
     }
     
     func didDeleteToDo() {

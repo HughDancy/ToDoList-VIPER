@@ -19,15 +19,16 @@ final class ToDosDetailInteractor: ToDosDetailInteractorInputProtocol {
                                    newTitle: title ?? "Temp",
                                    newDescription: descriprion ?? "Temp",
                                    newDate: date ?? Date.today)
+            presenter?.showAllert(with: .allSave)
         } else {
-            presenter?.showAllert()
+            presenter?.showAllert(with: .error)
         }
     }
     
     func deleteTask(_ toDo: ToDoObject) {
         guard let task = toDoItem else { return }
         storage.deleteToDoObject(item: task)
-        presenter?.didDeleteToDo()
+        presenter?.showAllert(with: .delete)
     }
     
 }

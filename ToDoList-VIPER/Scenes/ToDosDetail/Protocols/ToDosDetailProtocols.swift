@@ -37,13 +37,20 @@ protocol ToDosDetailInteractorOutputProtocol: AnyObject {
     //INTERACTOR -> PRESTNER
     func didDeleteToDo()
     func didEditToDo(_ toDo: ToDoObject)
-    func showAllert()
+    func showAllert(with status: ToDoDetailStatus)
 }
 
 protocol ToDosDetailRouterProtocol: AnyObject {
+    var presenter: ToDosDetailInteractorOutputProtocol? { get set }
     static func createModule(with toDo: ToDoObject) -> UIViewController
     
     //PRESENTER -> ROUTER
-    func showAllert(with view: ToDosDetailViewProtocol)
+    func showAllert(with view: ToDosDetailViewProtocol, status: ToDoDetailStatus)
     func goBackToTasks(with view: ToDosDetailViewProtocol)
+}
+
+enum ToDoDetailStatus {
+    case allSave
+    case error
+    case delete
 }
