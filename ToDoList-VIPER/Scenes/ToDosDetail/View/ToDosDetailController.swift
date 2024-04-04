@@ -118,9 +118,7 @@ final class ToDosDetailController: SingleToDoController {
     //MARK: - Setup Outlets
     override func setupOutlets() {
         cathegoryTableView.delegate = self
-//        self.taskName.text = item?.title
-//        self.descriptionText.text = item?.descriptionTitle
-//        self.datePicker.date = item?.date ?? Date.today
+        setupUserInteracton(with: isEditButtonIsTapped["isTapped"] ?? false)
     }
     
     //MARK: - Setup TextView
@@ -150,6 +148,7 @@ final class ToDosDetailController: SingleToDoController {
     @objc func editToDo() {
         self.isEditButtonIsTapped["isTapped"] = true
         NotificationCenter.default.post(name: Notification.Name(rawValue: "TapEditButton"), object: nil, userInfo: self.isEditButtonIsTapped)
+        setupUserInteracton(with: isEditButtonIsTapped["isTapped"] ?? true)
         print("Edit is starting")
     }
     
@@ -157,6 +156,7 @@ final class ToDosDetailController: SingleToDoController {
         self.isEditButtonIsTapped["isTapped"] = false
         NotificationCenter.default.post(name: Notification.Name(rawValue: "TapEditButton"), object: nil, userInfo: self.isEditButtonIsTapped)
         presenter?.editToDo(title: taskName.text, descriprion: descriptionText.text, date: datePicker.date, color: "systemOrange")
+        setupUserInteracton(with: isEditButtonIsTapped["isTapped"] ?? false)
         print("Saving what been edited")
     }
     
@@ -175,7 +175,6 @@ extension ToDosDetailController: ToDosDetailViewProtocol {
             self.descriptionText.text = toDo.descriptionTitle
             self.datePicker.date = toDo.date ?? Date.today
         }
-        
         switch item?.color {
         case "systemOrange":
             cathegoryTableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .none)
@@ -186,6 +185,7 @@ extension ToDosDetailController: ToDosDetailViewProtocol {
         default:
             break
         }
+        
     }
 }
 

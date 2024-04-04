@@ -84,6 +84,13 @@ class SingleToDoController: UIViewController {
     
     //MARK: - Setup TextView
     func setupTextView() { }
+
+    //MARK: - Setup elements user interaction
+    func setupUserInteracton(with bool: Bool) {
+        descriptionText.isUserInteractionEnabled = bool
+        datePicker.isUserInteractionEnabled = bool
+        cathegoryTableView.isUserInteractionEnabled = bool
+    }
 }
 
 //MARK: - TableView Data source extension
