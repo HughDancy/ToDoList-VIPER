@@ -16,6 +16,7 @@ class SingleToDoController: UIViewController {
         textView.backgroundColor = .systemGray6
         textView.layer.cornerRadius = 10
         textView.clipsToBounds = true
+        textView.textColor = .label
         return textView
     }()
     

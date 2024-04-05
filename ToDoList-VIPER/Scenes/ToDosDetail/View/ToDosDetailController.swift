@@ -124,10 +124,10 @@ final class ToDosDetailController: SingleToDoController {
     //MARK: - Setup TextView
     override func setupTextView() {
         descriptionText.text = item?.descriptionTitle
-        descriptionText.textColor = .lightGray
+        descriptionText.textColor = .label
         descriptionText.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
-        descriptionText.delegate = self
         descriptionText.returnKeyType = .done
+        descriptionText.text = item?.descriptionTitle ?? "Описание задачи не установлено"
     }
     
     //MARK: - Button's Actions
@@ -155,7 +155,7 @@ final class ToDosDetailController: SingleToDoController {
     @objc private func saveEditToDo() {
         self.isEditButtonIsTapped["isTapped"] = false
         NotificationCenter.default.post(name: Notification.Name(rawValue: "TapEditButton"), object: nil, userInfo: self.isEditButtonIsTapped)
-        presenter?.editToDo(title: taskName.text, descriprion: descriptionText.text, date: datePicker.date, color: "systemOrange")
+        presenter?.editToDo(title: taskName.text, descriprion: descriptionText.text, date: datePicker.date, color: self.color?.rawValue ?? "systemOrange")
         setupUserInteracton(with: isEditButtonIsTapped["isTapped"] ?? false)
         taskName.isUserInteractionEnabled = true
     }
@@ -206,28 +206,28 @@ extension ToDosDetailController: UITableViewDelegate {
 }
 
    //MARK: - TextView Delegate Extension
-extension ToDosDetailController: UITextViewDelegate {
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if descriptionText.text == item?.descriptionTitle  {
-            descriptionText.text = ""
-            textView.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
-            textView.textColor = UIColor.label
-        }
-    }
-    
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if text == "\n" {
-            descriptionText.resignFirstResponder()
-        }
-        return true
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if descriptionText.text == "" {
-            descriptionText.text = item?.descriptionTitle
-            descriptionText.textColor = .lightGray
-            descriptionText.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
-        }
-    }
-}
+//extension ToDosDetailController: UITextViewDelegate {
+//    func textViewDidBeginEditing(_ textView: UITextView) {
+//        if descriptionText.text == item?.descriptionTitle  {
+//            descriptionText.text = ""
+//            textView.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+//            textView.textColor = .label
+//        }
+//    }
+//    
+//    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+//        if text == "\n" {
+//            descriptionText.resignFirstResponder()
+//        }
+//        return true
+//    }
+//    
+//    func textViewDidEndEditing(_ textView: UITextView) {
+//        if descriptionText.text == "" {
+//            descriptionText.text = item?.descriptionTitle
+//            descriptionText.textColor = .label
+//            descriptionText.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+//        }
+//    }
+//}
 

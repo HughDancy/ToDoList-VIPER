@@ -18,7 +18,8 @@ final class ToDosDetailInteractor: ToDosDetailInteractorInputProtocol {
             storage.editToDoObject(item: task,
                                    newTitle: title ?? "Temp",
                                    newDescription: descriprion ?? "Temp",
-                                   newDate: date ?? Date.today)
+                                   newDate: date ?? Date.today,
+                                   color: color)
             presenter?.showAllert(with: .allSave)
         } else {
             presenter?.showAllert(with: .error)
