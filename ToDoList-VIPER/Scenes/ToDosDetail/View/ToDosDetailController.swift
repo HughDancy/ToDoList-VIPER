@@ -29,7 +29,7 @@ final class ToDosDetailController: SingleToDoController {
         button.setImage(UIImage(systemName: "square.and.pencil"), for: .normal)
         button.backgroundColor = .systemOrange
         button.tintColor = .systemBackground
-        button.layer.cornerRadius = 30
+        button.layer.cornerRadius = 35
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(editToDo), for: .touchDown)
         return button
@@ -40,7 +40,7 @@ final class ToDosDetailController: SingleToDoController {
         button.setImage(UIImage(systemName: "trash"), for: .normal)
         button.backgroundColor = .systemRed
         button.tintColor = .systemBackground
-        button.layer.cornerRadius = 30
+        button.layer.cornerRadius = 35
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(deleteToDo), for: .touchDown)
         return button
@@ -106,13 +106,13 @@ final class ToDosDetailController: SingleToDoController {
         editButton.snp.makeConstraints { make in
             make.bottom.equalToSuperview().inset(40)
             make.leading.equalToSuperview().offset(30)
-            make.width.height.equalTo(60)
+            make.width.height.equalTo(70)
         }
         
         deleteButton.snp.makeConstraints { make in
             make.bottom.equalToSuperview().inset(40)
             make.trailing.equalToSuperview().inset(30)
-            make.width.height.equalTo(60)
+            make.width.height.equalTo(70)
         }
     }
     
