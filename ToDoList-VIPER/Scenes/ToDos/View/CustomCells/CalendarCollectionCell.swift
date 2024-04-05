@@ -66,8 +66,13 @@ final class CalendarCollectionCell: UICollectionViewCell {
                 containerView.backgroundColor = .systemIndigo
                 dayNumberLabel.textColor = .white
             } else {
-                containerView.backgroundColor = .systemGray6
-                dayNumberLabel.textColor = .label
+                if dayOfWeekLabel.text == "Сб" || dayOfWeekLabel.text == "Вс" {
+                    containerView.backgroundColor = UIColor(named: "hollydayColor")
+                    dayNumberLabel.textColor = .label
+                } else {
+                    containerView.backgroundColor = .systemGray6
+                    dayNumberLabel.textColor = .label
+                }
             }
         }
     }
@@ -108,7 +113,7 @@ final class CalendarCollectionCell: UICollectionViewCell {
         dayOfWeekLabel.text = dateItem.dayOfWeek
         dayNumberLabel.text = dateItem.numberOfDay
         if self.dayOfWeekLabel.text == "Сб" || self.dayOfWeekLabel.text == "Вс" {
-            self.containerView.backgroundColor = .systemPink
+            self.containerView.backgroundColor = UIColor(named: "hollydayColor")
         } else {
             self.containerView.backgroundColor = .systemGray6
         }
