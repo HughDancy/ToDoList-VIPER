@@ -48,21 +48,21 @@ final class AddNewToDoController: UIViewController, AddNewToDoViewProtocol, UITa
         textField.leftViewMode = .always
         textField.returnKeyType = .done
         textField.delegate = self
-        textField.layer.shadowOffset = CGSize(width: 0, height: 2)
-        textField.layer.shadowRadius = 3
-        textField.layer.shadowColor = UIColor.systemBackground.cgColor
-        textField.layer.shadowOpacity = 0.3
+//        textField.layer.shadowOffset = CGSize(width: 0, height: 2)
+//        textField.layer.shadowRadius = 3
+//        textField.layer.shadowColor = UIColor.systemBackground.cgColor
+//        textField.layer.shadowOpacity = 0.3
         return textField
     }()
     
     private lazy var descriptionField: UITextView = {
         let textView = UITextView()
         textView.backgroundColor = .systemGray6
-        textView.layer.shadowColor = UIColor.systemBackground.cgColor
-        textView.layer.shadowOffset = CGSize(width:0,height: 2.0)
-        textView.layer.shadowRadius = 3.0
-        textView.layer.shadowOpacity = 0.3
-        textView.layer.masksToBounds = false
+//        textView.layer.shadowColor = UIColor.systemBackground.cgColor
+//        textView.layer.shadowOffset = CGSize(width:0,height: 2.0)
+//        textView.layer.shadowRadius = 3.0
+//        textView.layer.shadowOpacity = 0.3
+//        textView.layer.masksToBounds = false
         textView.layer.cornerRadius = 10
         
         return textView
@@ -89,11 +89,11 @@ final class AddNewToDoController: UIViewController, AddNewToDoViewProtocol, UITa
         picker.datePickerMode = .date
         picker.preferredDatePickerStyle = .compact
         picker.locale = Locale(identifier: "ru_RU")
-        picker.layer.shadowOffset = CGSize(width: 0, height: 2)
-        picker.layer.shadowRadius = 5
-        picker.layer.shadowColor = UIColor.systemBackground.cgColor
-        picker.layer.shadowOpacity = 0.3
-        picker.backgroundColor = .systemCyan
+//        picker.layer.shadowOffset = CGSize(width: 0, height: 2)
+//        picker.layer.shadowRadius = 5
+//        picker.layer.shadowColor = UIColor.systemBackground.cgColor
+//        picker.layer.shadowOpacity = 0.3
+        picker.backgroundColor = UIColor(named: "coralColor")
         return picker
     }()
     
@@ -107,7 +107,7 @@ final class AddNewToDoController: UIViewController, AddNewToDoViewProtocol, UITa
     
     lazy var cathegoryList: UITableView = {
         let tableVIew = UITableView(frame: .zero, style: .plain)
-        tableVIew.backgroundColor = .systemCyan
+        tableVIew.backgroundColor = UIColor(named: "coralColor")
         tableVIew.isScrollEnabled = false
         tableVIew.showsVerticalScrollIndicator = false
         tableVIew.separatorStyle = .none
@@ -126,7 +126,7 @@ final class AddNewToDoController: UIViewController, AddNewToDoViewProtocol, UITa
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemCyan
+        view.backgroundColor = UIColor(named: "coralColor")
         setupHierarchy()
         setupLaout()
         setupTextView()
@@ -191,7 +191,6 @@ final class AddNewToDoController: UIViewController, AddNewToDoViewProtocol, UITa
         addNewToDoButton.snp.makeConstraints { make in
             make.bottom.equalToSuperview().inset(40)
             make.leading.trailing.equalToSuperview().inset(40)
-//            make.centerX.equalToSuperview().inset(40)
             make.height.equalTo(50)
         }
         
@@ -238,7 +237,7 @@ extension AddNewToDoController: UITabBarDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CathegoryCell.reuseIdentifier, for: indexPath) as? CathegoryCell
         let cathegoryName = ["Работа", "Личное", "Иное"]
-        cell?.backgroundColor = .systemCyan
+        cell?.backgroundColor = UIColor(named: "coralColor")
         cell?.setupCell(with: ColorsItem.colorsStack[indexPath.row], title: cathegoryName[indexPath.row])
         return cell ?? UITableViewCell()
     }

@@ -33,7 +33,7 @@ class CustomTabBar: UITabBar {
     override func draw(_ rect: CGRect) {
         self.addShape()
         self.unselectedItemTintColor = UIColor.white
-        self.tintColor = .systemCyan
+        self.tintColor = UIColor(named: "PeachColor")
     }
     
     private func createPath() -> CGPath {

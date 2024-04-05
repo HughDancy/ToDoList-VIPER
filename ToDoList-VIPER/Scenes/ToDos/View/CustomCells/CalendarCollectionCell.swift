@@ -20,7 +20,7 @@ final class CalendarCollectionCell: UICollectionViewCell {
         return view
     }()
     
-    private lazy var dayOfWeekLabel: UILabel = {
+    lazy var dayOfWeekLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 15.0, weight: .semibold)
         label.textColor = .label
@@ -66,8 +66,13 @@ final class CalendarCollectionCell: UICollectionViewCell {
                 containerView.backgroundColor = .systemIndigo
                 dayNumberLabel.textColor = .white
             } else {
-                containerView.backgroundColor = .systemGray6
-                dayNumberLabel.textColor = .label
+                if dayOfWeekLabel.text == "Сб" || dayOfWeekLabel.text == "Вс" {
+                    containerView.backgroundColor = UIColor(named: "hollydayColor")
+                    dayNumberLabel.textColor = .label
+                } else {
+                    containerView.backgroundColor = .systemGray6
+                    dayNumberLabel.textColor = .label
+                }
             }
         }
     }
@@ -107,6 +112,11 @@ final class CalendarCollectionCell: UICollectionViewCell {
     func setupCell(_ dateItem: DateItem) {
         dayOfWeekLabel.text = dateItem.dayOfWeek
         dayNumberLabel.text = dateItem.numberOfDay
+        if self.dayOfWeekLabel.text == "Сб" || self.dayOfWeekLabel.text == "Вс" {
+            self.containerView.backgroundColor = UIColor(named: "hollydayColor")
+        } else {
+            self.containerView.backgroundColor = .systemGray6
+        }
         getMarkingCell(with: dateItem.isWorkTask ?? false , color: .systemOrange)
         getMarkingCell(with: dateItem.isPersonalTask ?? false, color: .systemGreen)
         getMarkingCell(with: dateItem.isOtherTask ?? false, color: .systemPurple)

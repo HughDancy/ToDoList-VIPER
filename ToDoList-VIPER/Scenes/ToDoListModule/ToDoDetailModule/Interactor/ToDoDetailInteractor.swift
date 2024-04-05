@@ -20,7 +20,7 @@ class ToDoDetailInteractor: TodoDetailInteractorInputProtocol {
     
     func editToDo(title: String, content: String, date: Date) {
         guard let toDoItem = toDoItem else { return }
-        storage.editToDoObject(item: toDoItem, newTitle: title, newDescription: content, newDate: date)
+        storage.editToDoObject(item: toDoItem, newTitle: title, newDescription: content, newDate: date, color: "systemOrange")
         presenter?.didEditToDo(toDoItem)
     }
     

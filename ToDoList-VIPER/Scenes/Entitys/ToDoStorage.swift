@@ -53,11 +53,12 @@ final class ToDoStorage {
     }
     
     //MARK: - CoreData edit ToDoObject
-    func editToDoObject(item: ToDoObject, newTitle: String, newDescription: String, newDate: Date) {
+    func editToDoObject(item: ToDoObject, newTitle: String, newDescription: String, newDate: Date, color: String) {
         item.title = newTitle
         item.descriptionTitle = newDescription
         item.date = newDate
         item.dateTitle = DateFormatter.getStringFromDate(from: newDate)
+        item.color = color
         
         do {
             try viewContext.save()

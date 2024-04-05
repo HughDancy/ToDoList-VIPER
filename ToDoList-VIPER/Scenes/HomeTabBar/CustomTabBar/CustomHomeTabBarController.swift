@@ -32,7 +32,6 @@ final class CustomHomeTabBarController: UITabBarController, UITabBarControllerDe
         tabBarFrame.size.height = tabBarFrame.height + 40
         tabBarFrame.origin.y = UIScreen.main.bounds.height - 107
         self.tabBar.frame = tabBarFrame
-        print("ViewDidLoad method centr button - \(middleButton.center)")
     }
     
     //MARK: - Setup Layout
@@ -66,7 +65,7 @@ final class CustomHomeTabBarController: UITabBarController, UITabBarControllerDe
         let middleButton = UIButton()
         middleButton.layer.cornerRadius = 30
         middleButton.clipsToBounds = true
-        middleButton.backgroundColor = .systemCyan
+        middleButton.backgroundColor = UIColor(named: "coralColor")
         middleButton.tintColor = .systemBackground
         let buttonImage = UIImageView(image: UIImage(systemName: "plus"))
         middleButton.addSubview(buttonImage)
@@ -91,8 +90,6 @@ final class CustomHomeTabBarController: UITabBarController, UITabBarControllerDe
 extension CustomHomeTabBarController: UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> (any UIViewControllerAnimatedTransitioning)? {
         transition.transitionMode = .present
-//        transition.startingPoint = middleButt
-//        transition.startingPoint = tabBar.center
         transition.startingPoint = CGPoint(x: (tabBar.center.x + 5.0), y: (tabBar.center.y - 15.0))
         print(middleButton.center)
         transition.circleColor = middleButton.backgroundColor ?? UIColor.systemCyan
