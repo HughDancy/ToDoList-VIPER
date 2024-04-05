@@ -30,7 +30,8 @@ final class CalendarCollectionCell: UICollectionViewCell {
     private lazy var dayNumberLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 15.0, weight: .semibold)
-        label.textColor = self.isSelected ? .white  : .black
+//        label.textColor = self.isSelected ? .white  : .black
+        label.textColor = .label
         return label
     }()
     
@@ -48,7 +49,7 @@ final class CalendarCollectionCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
-        contentView.backgroundColor = .systemBackground
+        contentView.backgroundColor = UIColor(named: "tasksBackground")
     }
     
     required init?(coder: NSCoder) {
@@ -105,7 +106,6 @@ final class CalendarCollectionCell: UICollectionViewCell {
         circlesStack.snp.makeConstraints { make in
             make.top.equalTo(containerView.snp.bottom).offset(5)
             make.centerX.equalTo(containerView.snp.centerX)
-//            make.height.equalTo(20)
         }
     }
     

@@ -35,7 +35,7 @@ final class ToDoController: UIViewController {
     
     private lazy var toDoTable: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
-        tableView.backgroundColor = .systemBackground
+        tableView.backgroundColor = UIColor(named: "tasksBackground")
         tableView.register(ToDoCell.self, forCellReuseIdentifier: ToDosCell.reuseIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
@@ -78,7 +78,7 @@ final class ToDoController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(named: "tasksBackground")
         setupOtlets()
         setupNavigationBar()
     }

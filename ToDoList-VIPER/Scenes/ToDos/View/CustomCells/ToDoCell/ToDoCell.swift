@@ -67,6 +67,7 @@ class ToDoCell: UITableViewCell {
         setupHierachy()
         setupLayout()
         addTapRecognizerToImage()
+        self.backgroundColor = UIColor(named: "tasksBackground")
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
