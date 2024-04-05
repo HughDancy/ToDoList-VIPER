@@ -15,7 +15,8 @@ final class ToDosDetailController: SingleToDoController {
     //MARK: - Controller custom outlets
     private lazy var taskName: UITextView = {
         let textView = UITextView()
-        textView.font = UIFont.systemFont(ofSize: 45, weight: .bold)
+        textView.font = UIFont.systemFont(ofSize: 40, weight: .bold)
+        textView.adjustsFontForContentSizeCategory = true
         textView.textColor = .systemBackground
         textView.backgroundColor = UIColor(named: "coralColor")
         textView.isScrollEnabled = false
@@ -185,7 +186,6 @@ extension ToDosDetailController: ToDosDetailViewProtocol {
         default:
             break
         }
-        
     }
 }
 
@@ -204,30 +204,4 @@ extension ToDosDetailController: UITableViewDelegate {
         }
     }
 }
-
-   //MARK: - TextView Delegate Extension
-//extension ToDosDetailController: UITextViewDelegate {
-//    func textViewDidBeginEditing(_ textView: UITextView) {
-//        if descriptionText.text == item?.descriptionTitle  {
-//            descriptionText.text = ""
-//            textView.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
-//            textView.textColor = .label
-//        }
-//    }
-//    
-//    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-//        if text == "\n" {
-//            descriptionText.resignFirstResponder()
-//        }
-//        return true
-//    }
-//    
-//    func textViewDidEndEditing(_ textView: UITextView) {
-//        if descriptionText.text == "" {
-//            descriptionText.text = item?.descriptionTitle
-//            descriptionText.textColor = .label
-//            descriptionText.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
-//        }
-//    }
-//}
 
