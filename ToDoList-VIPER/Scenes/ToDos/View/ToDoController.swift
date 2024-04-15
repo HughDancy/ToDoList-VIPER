@@ -54,7 +54,7 @@ final class ToDoController: UIViewController {
         let label = UILabel()
         label.text = "    Задачи отсутствуют"
         label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
-        label.textColor = .systemCyan
+        label.textColor = .white
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         label.textAlignment = .center

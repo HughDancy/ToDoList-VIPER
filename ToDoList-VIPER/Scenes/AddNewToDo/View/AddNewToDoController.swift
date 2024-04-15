@@ -118,7 +118,7 @@ final class AddNewToDoController: UIViewController, AddNewToDoViewProtocol, UITa
     }()
     
     private lazy var addNewToDoButton: BaseButton = {
-        let button = BaseButton(text: "Добавить задачу", color: .systemGreen)
+        let button = BaseButton(text: "Добавить задачу", color: UIColor(named: "customBlue") ?? .systemOrange)
         button.addTarget(self, action: #selector(addNewToDo), for: .touchDown)
         return button
     }()
@@ -210,7 +210,6 @@ final class AddNewToDoController: UIViewController, AddNewToDoViewProtocol, UITa
     
     //MARK: - Buttons Action
     @objc func addNewToDo() {
-//        self.makeNotification()
         presenter?.addNewToDo(with: nameOfTaskField.text,
                               description: descriptionField.text,
                               date: dateField.date,

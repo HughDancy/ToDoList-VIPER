@@ -9,7 +9,7 @@ import UIKit
 
 final class ToDosDetailController: SingleToDoController {
     var item: ToDoObject?
-    var isEditButtonIsTapped: [String : Bool] = ["isTapped" : false]
+    private var isEditButtonIsTapped: [String : Bool] = ["isTapped" : false]
     var presenter: ToDosDetailPresenterProtocol?
     
     //MARK: - Controller custom outlets
@@ -27,7 +27,7 @@ final class ToDosDetailController: SingleToDoController {
     private lazy var editButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "square.and.pencil"), for: .normal)
-        button.backgroundColor = .systemOrange
+        button.backgroundColor = UIColor(named: "customBlue")
         button.tintColor = .systemBackground
         button.layer.cornerRadius = 35
         button.clipsToBounds = true
@@ -196,7 +196,7 @@ extension ToDosDetailController: UITableViewDelegate {
         case .systemOrange:
             self.color = ColorsItemResult.systemOrange
         case .systemGreen:
-            self.color = ColorsItemResult.systemGreen
+            self.color = ColorsItemResult.taskGreen
         case .systemPurple:
             self.color = ColorsItemResult.systemPurple
         default:

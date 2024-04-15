@@ -13,9 +13,11 @@ extension UIColor {
         case "systemOrange":
             return .systemOrange
         case "systemGreen":
-            return .systemGreen
+            return UIColor(named: "taskGreen") ?? .systemGreen
         case "systemPurple":
             return .systemPurple
+        case "taskGreen":
+            return UIColor(named: "taskGreen") ?? .systemGreen
         default:
             return .systemMint
         }
@@ -29,6 +31,8 @@ extension UIColor {
             return "systemGreen"
         case .systemPurple:
             return "systemPurple"
+        case UIColor(named: "taskGreen"):
+            return "taskGreen"
         default:
             return "systemBlue"
         }

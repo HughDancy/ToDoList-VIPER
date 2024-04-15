@@ -27,7 +27,6 @@ class ToDoCell: UITableViewCell {
         let image = UIImage(systemName: "square")
         let highlaghtedImage = UIImage(systemName: "checkmark.square")
         let imageView = UIImageView(image: image, highlightedImage: highlaghtedImage)
-        imageView.tintColor = imageView.isHighlighted ? .systemGreen : .label
         imageView.isUserInteractionEnabled = true
         return imageView
     }()
@@ -104,7 +103,7 @@ class ToDoCell: UITableViewCell {
         
         taskName.snp.makeConstraints { make in
             make.centerX.equalTo(container.safeAreaLayoutGuide.snp.centerX)
-            make.top.equalToSuperview().offset(20)
+            make.top.equalToSuperview().offset(10)
             make.leading.equalTo(checkboxImage.snp.trailing).offset(20)
             make.trailing.equalTo(iconBox.snp.leading).offset(-5)
             make.bottom.equalTo(container.snp.bottom).inset(10)
@@ -135,14 +134,14 @@ class ToDoCell: UITableViewCell {
         case .systemPurple:
             self.icon.image = UIImage(systemName: "books.vertical.circle")
         default:
-            self.icon.image = UIImage(systemName: "lightbulb")
+            self.icon.image = UIImage(systemName: "person")
         }
         
         if item.doneStatus == true {
             self.makeItDone()
         } else {
             checkboxImage.isHighlighted = false
-            checkboxImage.tintColor = .black
+            checkboxImage.tintColor = .label
             self.taskName.text = item.title
             taskName.strikeThrough(false)
             self.checkboxImage.isUserInteractionEnabled = true

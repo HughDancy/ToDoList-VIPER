@@ -18,7 +18,7 @@ final class HorizontalCalendarView: UIView {
     private lazy var monthLabel: UILabel = {
        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 25, weight: .semibold)
-        label.textColor = .systemCyan
+        label.textColor = .white
         label.textAlignment = .left
         return label
     }()

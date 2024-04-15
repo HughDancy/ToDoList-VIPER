@@ -118,7 +118,7 @@ final class CalendarCollectionCell: UICollectionViewCell {
             self.containerView.backgroundColor = .systemGray6
         }
         getMarkingCell(with: dateItem.isWorkTask ?? false , color: .systemOrange)
-        getMarkingCell(with: dateItem.isPersonalTask ?? false, color: .systemGreen)
+        getMarkingCell(with: dateItem.isPersonalTask ?? false, color: UIColor(named: "taskGreen") ?? .systemGreen)
         getMarkingCell(with: dateItem.isOtherTask ?? false, color: .systemPurple)
     }
     

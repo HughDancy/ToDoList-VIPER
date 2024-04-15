@@ -111,7 +111,7 @@ final class AddNewToDoView: UIView {
         return tableVIew
     }()
     
-    lazy var addNewToDoButton = UIButton.createToDoButton(title: "Add new ToDo", backColor: .systemRed, tintColor: .systemBackground)
+    lazy var addNewToDoButton = UIButton.createToDoButton(title: "Add new ToDo", backColor: UIColor(named: "customOrange") ?? .systemOrange, tintColor: .systemBackground)
     
     //MARK: - Init
     init() {
