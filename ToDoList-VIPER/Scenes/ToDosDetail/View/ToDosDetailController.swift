@@ -179,7 +179,7 @@ extension ToDosDetailController: ToDosDetailViewProtocol {
         switch item?.color {
         case "systemOrange":
             cathegoryTableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .none)
-        case "systemGreen":
+        case "taskGreen":
             cathegoryTableView.selectRow(at: IndexPath(row: 1, section: 0), animated: false, scrollPosition: .none)
         case "systemPurple":
             cathegoryTableView.selectRow(at: IndexPath(row: 2, section: 0), animated: false, scrollPosition: .none)
@@ -195,7 +195,7 @@ extension ToDosDetailController: UITableViewDelegate {
         switch ColorsItem.colorsStack[indexPath.row] {
         case .systemOrange:
             self.color = ColorsItemResult.systemOrange
-        case .systemGreen:
+        case UIColor(named: "taskGreen"):
             self.color = ColorsItemResult.taskGreen
         case .systemPurple:
             self.color = ColorsItemResult.systemPurple

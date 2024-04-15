@@ -12,12 +12,10 @@ extension UIColor {
         switch string {
         case "systemOrange":
             return .systemOrange
-        case "systemGreen":
+        case "taskGreen":
             return UIColor(named: "taskGreen") ?? .systemGreen
         case "systemPurple":
             return .systemPurple
-        case "taskGreen":
-            return UIColor(named: "taskGreen") ?? .systemGreen
         default:
             return .systemMint
         }
@@ -27,12 +25,10 @@ extension UIColor {
         switch color {
         case .systemOrange:
             return "systemOrange"
-        case .systemGreen:
-            return "systemGreen"
-        case .systemPurple:
-            return "systemPurple"
         case UIColor(named: "taskGreen"):
             return "taskGreen"
+        case .systemPurple:
+            return "systemPurple"
         default:
             return "systemBlue"
         }

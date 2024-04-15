@@ -250,11 +250,11 @@ extension ToDoController: UITableViewDelegate, UITableViewDataSource {
         let action = UIContextualAction(style: .destructive, title: "") { _, _, _ in
             tableView.dataSource?.tableView?(tableView, commit: .delete, forRowAt: indexPath)
         }
-        action.image = UIGraphicsImageRenderer(size: CGSize(width: 50, height: 74)).image { _ in
+        action.image = UIGraphicsImageRenderer(size: CGSize(width: 50, height: 74)).image { some in
             UIImage(named: "delete")?.draw(in: CGRect(x: 0, y: 0, width: 50, height: 74))
         }
         
-        action.backgroundColor = .systemBackground
+        action.backgroundColor = UIColor(named: "tasksBackground")
         return UISwipeActionsConfiguration(actions: [action])
     }
 

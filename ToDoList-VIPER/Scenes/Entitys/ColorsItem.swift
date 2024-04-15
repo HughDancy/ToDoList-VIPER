@@ -14,7 +14,6 @@ struct ColorsItem {
 
 enum ColorsItemResult: String {
     case systemOrange
-    case systemGreen
     case taskGreen
     case systemPurple
 }

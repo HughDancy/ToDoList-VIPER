@@ -30,7 +30,7 @@ class CalendarModel {
                         dateModelsArray[index].isWorkTask = true
                     }
                     
-                    if task.color == "systemGreen" {
+                    if task.color == "taskGreen" {
                         dateModelsArray[index].isPersonalTask = true
                     }
                     

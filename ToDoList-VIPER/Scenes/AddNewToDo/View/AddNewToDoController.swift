@@ -32,7 +32,6 @@ final class AddNewToDoController: UIViewController, AddNewToDoViewProtocol, UITa
         let label = UILabel()
         label.text = "Добавить задачу"
         label.font = UIFont.systemFont(ofSize: 35, weight: .bold)
-//        label.textColor = .systemCyan
         label.textColor = .systemBackground
         return label
     }()
@@ -245,8 +244,8 @@ extension AddNewToDoController: UITabBarDelegate, UITableViewDataSource {
         switch ColorsItem.colorsStack[indexPath.row] {
         case .systemOrange:
             self.color = ColorsItemResult.systemOrange
-        case .systemGreen:
-            self.color = ColorsItemResult.systemGreen
+        case UIColor(named: "taskGreen"):
+            self.color = ColorsItemResult.taskGreen
         case .systemPurple:
             self.color = ColorsItemResult.systemPurple
         default:
