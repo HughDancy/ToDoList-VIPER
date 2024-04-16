@@ -65,12 +65,16 @@ extension MainScreenController: UICollectionViewDelegate, UICollectionViewDataSo
         switch indexPath.row {
         case 0:
             self.presenter?.goToTodayToDos()
+            print("cell 0")
         case 1:
             self.presenter?.goToOverdueToDos()
+            print("cell 1")
         case 2:
             self.presenter?.goToTommorowToDos()
+            print("cell 2")
         case 3:
             self.presenter?.goToDoneToDos()
+            print("cell 3")
         default:
             print("No cell action")
         }

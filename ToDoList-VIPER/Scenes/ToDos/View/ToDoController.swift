@@ -52,7 +52,7 @@ final class ToDoController: UIViewController {
     
     private lazy var tasksLabel: UILabel = {
         let label = UILabel()
-        label.text = "    Задачи отсутствуют"
+        label.text = self.getTaskLabel()
         label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
         label.textColor = .white
         label.numberOfLines = 0
@@ -73,6 +73,7 @@ final class ToDoController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.addCustomBackButton()
         presenter?.viewWillAppear()
+        print(toDoTasks)
         setupCalendarColletcion()
     }
     
@@ -132,7 +133,7 @@ final class ToDoController: UIViewController {
         
         tasksLabel.snp.makeConstraints { make in
             make.top.equalTo(taskImage.snp.bottom).offset(10)
-            make.centerX.equalTo(noTaskView.snp.centerX)
+            make.leading.trailing.equalToSuperview().inset(1)
         }
         
         tasksLabel.snp.makeConstraints { make in
@@ -168,10 +169,12 @@ final class ToDoController: UIViewController {
     //MARK: - Current date configure for start module
     private func getCurrentDay() {
         switch presenter?.date {
-        case .today:
+        case .today, .done:
             self.centerDate = Date.today
         case .tommorow:
             self.centerDate = Date.tomorrow
+        case .overdue:
+            self.centerDate = Date.yesterday
         default:
             self.centerDate = Date.tomorrow
         }
@@ -211,9 +214,9 @@ final class ToDoController: UIViewController {
         case .today, .tommorow:
             return "Задачи отсутствуют"
         case .overdue:
-            return "На эту дату просроченные задачи отсутствуют"
+            return "Просроченные задачи отсутствуют"
         case .done:
-            return "На эту дату отсутствуют выполненные задачи"
+            return "Выполненные задачи отсутствуют"
         default:
             return ""
         }

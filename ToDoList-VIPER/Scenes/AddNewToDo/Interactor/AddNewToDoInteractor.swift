@@ -13,11 +13,12 @@ final class AddNewToDoInteractor: AddNewToDoInteractorProtocol {
     
     func addNewToDo(with name: String?, description: String?, date: Date?, mark: String) {
         let currentDay = Date.today
+        let doneStatus: Bool = (date ?? Date.today) >= currentDay ? false : true
         if name != "" {
             storage.createNewToDo(title: name ?? "Temp",
                                   content: self.cehckDescription(description ?? "Описание задачи"),
                                   date: date ?? currentDay,
-                                  done: self.checkDoneDate(date ?? currentDay),
+                                  done: doneStatus,
                                   color: mark)
             presenter?.goBackToMain()
         } else {

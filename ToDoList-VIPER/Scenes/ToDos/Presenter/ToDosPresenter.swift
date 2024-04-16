@@ -19,12 +19,14 @@ final class ToDosPresenter: ToDosPresenterProtocol {
     }
     
     func fetchToDos(date: Date) {
-        interactor?.fetchTask(date: date)
+        guard let status = self.date else { return }
+        interactor?.fetchTask(date: date, status: status)
     }
     
     func updateToDosForDay(_ date: String) {
+        guard let status = self.date else { return }
         let dayDate = DateFormatter.getDateFromString(date)
-        interactor?.fetchTask(date: dayDate)
+        interactor?.fetchTask(date: dayDate, status: status)
     }
     
     func doneToDo(_ task: ToDoObject) {

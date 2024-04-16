@@ -86,6 +86,38 @@ final class ToDoStorage {
         return objects
     }
     
+    func fetchConcreteToDos(with date: Date) -> [ToDoObject] {
+        let fetchRequest: NSFetchRequest<ToDoObject> = ToDoObject.fetchRequest()
+        let predicate = NSPredicate(format: "%K == %@",
+                                    #keyPath(ToDoObject.dateTitle), DateFormatter.getStringFromDate(from: date))
+        fetchRequest.predicate = predicate
+        let objects = try! viewContext.fetch(fetchRequest)
+        return objects
+    }
+    
+    func fetchDoneToDos(with date: Date) -> [ToDoObject] {
+        let fetchRequest: NSFetchRequest<ToDoObject> = ToDoObject.fetchRequest()
+//        let donePredicate = NSPredicate(format: "doneStatus == YES")
+        let donePredicate = NSPredicate(format: "%K == %@", "doneStatus", NSNumber(value: true))
+        let datePredicate = NSPredicate(format: "%K == %@", #keyPath(ToDoObject.dateTitle), DateFormatter.getStringFromDate(from: date))
+        let subPredicates = [donePredicate, datePredicate]
+        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: subPredicates)
+        let objects = try! viewContext.fetch(fetchRequest)
+        return objects
+    }
+    
+    func fetchOverdueToDos(with date: Date) -> [ToDoObject] {
+        let fetchRequest: NSFetchRequest<ToDoObject> = ToDoObject.fetchRequest()
+        let donePredicate = NSPredicate(format: "doneStatus == nil")
+        let datePredicate = NSPredicate(format: "%K == %@", #keyPath(ToDoObject.dateTitle), DateFormatter.getStringFromDate(from: date))
+        let secondDatePredicate = NSPredicate(format: "%K < %@", #keyPath(ToDoObject.date), Date.today as NSDate)
+        let subPredicates = [donePredicate, datePredicate, secondDatePredicate]
+        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: subPredicates)
+        let objects = try! viewContext.fetch(fetchRequest)
+        print(objects)
+        return objects
+    }
+    
     //MARK: - CoreData Saving support
     func saveContext () {
         let context = persistentContainer.viewContext
@@ -98,5 +130,4 @@ final class ToDoStorage {
             }
         }
     }
-    
 }

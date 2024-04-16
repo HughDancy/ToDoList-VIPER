@@ -34,7 +34,7 @@ protocol ToDosInteractorInputProtocol: AnyObject {
     
     //PRESENTER -> INTERACTOR
     func fetchFirstTasks(_ status: ToDoListStatus)
-    func fetchTask(date: Date)
+    func fetchTask(date: Date, status: ToDoListStatus)
     func doneTask(_ task: ToDoObject)
     func deleteTask(_ task: ToDoObject)
 }
