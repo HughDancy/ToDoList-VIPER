@@ -110,7 +110,7 @@ final class ToDoStorage {
         let fetchRequest: NSFetchRequest<ToDoObject> = ToDoObject.fetchRequest()
         let donePredicate = NSPredicate(format: "doneStatus == nil")
         let datePredicate = NSPredicate(format: "%K == %@", #keyPath(ToDoObject.dateTitle), DateFormatter.getStringFromDate(from: date))
-        let secondDatePredicate = NSPredicate(format: "%K < %@", #keyPath(ToDoObject.date), Date.today as NSDate)
+        let secondDatePredicate = NSPredicate(format: "%K <= %@", #keyPath(ToDoObject.date), Date.yesterday as NSDate)
         let subPredicates = [donePredicate, datePredicate, secondDatePredicate]
         fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: subPredicates)
         let objects = try! viewContext.fetch(fetchRequest)
