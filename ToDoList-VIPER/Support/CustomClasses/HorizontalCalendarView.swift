@@ -53,7 +53,7 @@ final class HorizontalCalendarView: UIView {
         
         calendar.snp.makeConstraints { make in
             make.top.equalTo(monthLabel.snp.bottom).offset(5)
-            make.leading.trailing.equalToSuperview().inset(8)
+            make.leading.trailing.equalToSuperview()
             make.height.equalTo(90)
         }
     }

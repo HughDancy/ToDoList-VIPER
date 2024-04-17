@@ -120,22 +120,22 @@ class ToDoCell: UITableViewCell {
             make.height.width.equalTo(50)
         }
     }
-
-    //MARK: - Setup cell
-    func setupCell(with item: ToDoObject) {
+    
+    //MARK: - Setup cell methods
+    func setupCell(with item: ToDoObject, status: ToDoListStatus) {
+        switch status {
+        case .today, .tommorow, .done:
+            self.setupStandartCell(with: item)
+        case .overdue:
+            self.setupOverdueCell(with: item)
+        }
+    }
+    
+    private func setupStandartCell(with item: ToDoObject) {
         self.taskName.text = item.title
         self.iconBox.backgroundColor = UIColor.convertStringToColor(item.color)
         self.toDoItem = item
-        switch UIColor.convertStringToColor(item.color) {
-        case .systemOrange:
-            self.icon.image = UIImage(systemName: "briefcase")
-        case .systemGreen:
-            self.icon.image = UIImage(systemName: "person")
-        case .systemPurple:
-            self.icon.image = UIImage(systemName: "books.vertical.circle")
-        default:
-            self.icon.image = UIImage(systemName: "person")
-        }
+        self.setupIconImage(with: UIColor.convertStringToColor(item.color))
         
         if item.doneStatus == true {
             self.makeItDone()
@@ -147,14 +147,42 @@ class ToDoCell: UITableViewCell {
             self.checkboxImage.isUserInteractionEnabled = true
         }
     }
+    
+    private func setupOverdueCell(with item: ToDoObject) {
+        self.taskName.text = item.title
+        self.iconBox.backgroundColor = UIColor.convertStringToColor(item.color)
+        self.toDoItem = item
+        self.setupIconImage(with: UIColor.convertStringToColor(item.color))
+        checkboxImage.isHighlighted = false
+        checkboxImage.image = UIImage(systemName: "xmark.square")
+        checkboxImage.tintColor = .systemRed
+        self.taskName.text = item.title
+        taskName.strikeThrough(false)
+        self.checkboxImage.isUserInteractionEnabled = true
+        
+    }
+    
+    private func setupIconImage(with color: UIColor) {
+        switch color {
+        case .systemOrange:
+            icon.image = UIImage(systemName: "briefcase")
+        case UIColor(named: "taskGreen"):
+            icon.image = UIImage(systemName: "person")
+        case .systemPurple:
+            icon.image = UIImage(systemName: "books.vertical.circle")
+        default:
+            icon.image = UIImage(systemName: "person")
+        }
+    }
 }
+
 
 //MARK: - Tap Gesture to Checkbox image Extension
 extension ToDoCell {
     private func addTapRecognizerToImage() {
         self.checkboxImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapToImage)))
     }
-
+    
     @objc private func tapToImage(_ sender: UIGestureRecognizer) {
         if self.toDoItem.doneStatus == false {
             self.makeItDone()
@@ -171,9 +199,9 @@ extension ToDoCell {
         let attributedText : NSMutableAttributedString =  NSMutableAttributedString(string: taskName.text ?? "Temp")
         attributedText.addAttributes([
             NSAttributedString.Key.strikethroughStyle: NSUnderlineStyle.thick.rawValue,
-                        NSAttributedString.Key.strikethroughColor: UIColor.label,
-                        NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15.0, weight: .semibold)
-                        ], range: NSMakeRange(0, attributedText.length))
+            NSAttributedString.Key.strikethroughColor: UIColor.label,
+            NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15.0, weight: .semibold)
+        ], range: NSMakeRange(0, attributedText.length))
         taskName.attributedText = attributedText
     }
 }

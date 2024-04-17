@@ -40,6 +40,7 @@ final class ToDoController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
     
@@ -145,7 +146,7 @@ final class ToDoController: UIViewController {
         
         calendarView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(5)
-            make.leading.trailing.equalToSuperview().inset(8)
+            make.leading.trailing.equalToSuperview()
             make.height.equalTo(130)
         }
         
@@ -243,7 +244,8 @@ extension ToDoController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ToDoCell.reuseIdentifier, for: indexPath) as? ToDoCell
-        cell?.setupCell(with: toDoTasks[indexPath.row])
+        cell?.setupCell(with: toDoTasks[indexPath.row], status: self.presenter?.date ?? ToDoListStatus.tommorow
+        )
         return cell ?? UITableViewCell()
     }
     
