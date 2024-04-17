@@ -73,7 +73,6 @@ final class ToDoController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.addCustomBackButton()
         presenter?.viewWillAppear()
-        print(toDoTasks)
         setupCalendarColletcion()
     }
     
@@ -82,6 +81,10 @@ final class ToDoController: UIViewController {
         view.backgroundColor = UIColor(named: "tasksBackground")
         setupOtlets()
         setupNavigationBar()
+    }
+    
+    deinit {
+        print("ToDoController is ☠️")
     }
     
     //MARK: - Setup outlets
@@ -286,8 +289,8 @@ extension ToDoController: CalendarCollectionViewDelegate {
     }
     
     func updateTasks(with data: String) {
-        presenter?.updateToDosForDay(data)
         self.selectedDate = data
+        presenter?.updateToDosForDay(data)
         toDoTable.reloadData()
     }
 }

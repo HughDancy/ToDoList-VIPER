@@ -91,7 +91,9 @@ final class ToDoStorage {
         let predicate = NSPredicate(format: "%K == %@",
                                     #keyPath(ToDoObject.dateTitle), DateFormatter.getStringFromDate(from: date))
         fetchRequest.predicate = predicate
+        fetchRequest.fetchBatchSize = 7
         let objects = try! viewContext.fetch(fetchRequest)
+        print(objects)
         return objects
     }
     
@@ -102,6 +104,7 @@ final class ToDoStorage {
         let datePredicate = NSPredicate(format: "%K == %@", #keyPath(ToDoObject.dateTitle), DateFormatter.getStringFromDate(from: date))
         let subPredicates = [donePredicate, datePredicate]
         fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: subPredicates)
+        fetchRequest.fetchBatchSize = 7
         let objects = try! viewContext.fetch(fetchRequest)
         return objects
     }
@@ -111,8 +114,9 @@ final class ToDoStorage {
         let donePredicate = NSPredicate(format: "doneStatus == nil")
         let datePredicate = NSPredicate(format: "%K == %@", #keyPath(ToDoObject.dateTitle), DateFormatter.getStringFromDate(from: date))
         let secondDatePredicate = NSPredicate(format: "%K <= %@", #keyPath(ToDoObject.date), Date.yesterday as NSDate)
-        let subPredicates = [donePredicate, datePredicate, secondDatePredicate]
+        let subPredicates = [donePredicate, secondDatePredicate, datePredicate]
         fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: subPredicates)
+        fetchRequest.fetchBatchSize = 7
         let objects = try! viewContext.fetch(fetchRequest)
         print(objects)
         return objects

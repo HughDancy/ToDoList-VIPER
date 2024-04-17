@@ -11,7 +11,7 @@ extension Date {
    static var tomorrow:  Date { return Date().dayAfter }
    static var today: Date { return Date() }
     static var yesterday: Date {
-        let yersterday =  Calendar.current.date(byAdding: .day, value: -1, to: today)!
+        let yersterday =  Calendar.current.date(byAdding: .day, value: -1, to: Date())!
         return yersterday
     }
    var dayAfter: Date {

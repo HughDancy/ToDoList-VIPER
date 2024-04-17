@@ -32,7 +32,8 @@ final class MainScreenController: UIViewController {
         super.viewWillAppear(animated)
         presenter?.viewWillAppear()
         mainView?.setupElements(nameOfImage: userData[1], userName: userData[0])
-        mainView?.toDosCollection.reloadData()
+        subcribeToNotification()
+//        mainView?.toDosCollection.reloadData()
     }
     
     override func viewDidLoad() {
@@ -47,6 +48,14 @@ final class MainScreenController: UIViewController {
         mainView?.toDosCollection.delegate = self
     }
  
+    //MARK: - Notification
+    func subcribeToNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(mustUpdateData), name: Notification.Name("UpdateMainScreenData"), object: nil)
+    }
+    
+    @objc func mustUpdateData() {
+        self.presenter?.viewWillAppear()
+    }
 }
     //MARK: - CollectionView Delegate
 extension MainScreenController: UICollectionViewDelegate, UICollectionViewDataSource {

@@ -223,6 +223,7 @@ final class AddNewToDoController: UIViewController, AddNewToDoViewProtocol, UITa
     //MARK: - Notification
     func makeNotification() {
         NotificationCenter.default.post(name: Notification.Name(rawValue: "UpdateTables"), object: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "UpdateMainScreenData"), object: nil)
     }
 }
 
