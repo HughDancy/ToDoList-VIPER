@@ -20,10 +20,10 @@ final class MainScreenInteractor: MainScreenInteractorInputProtocol {
         let allDoneToDos = storage.fetchToDos().filter { $0.doneStatus == true}
         let upcomingToDos = ToDoObjectSorter.sortByStatus(object: allNotDoneToDos, and: .upcoming)
     
-        let todayToDosCount = upcomingToDos[0].count
-        let tommorowToDosCount = upcomingToDos[1].count
-        let overdueToDos = ToDoObjectSorter.sortByStatus(object: allNotDoneToDos, and: .overdue)
-        let overdueToDosCount = (overdueToDos[0].count) + (overdueToDos[1].count) + (overdueToDos[2].count)
+        let todayToDosCount = storage.fetchToDosCount(with: .today)
+        let tommorowToDosCount = storage.fetchToDosCount(with: .tommorow)
+//        let overdueToDos = storage.fetchOverdueToDos(with: .yesterday)
+        let overdueToDosCount = storage.fetchToDosCount(with: .overdue)
         let doneToDosCount = allDoneToDos.count
         
         let toDosInfo = [

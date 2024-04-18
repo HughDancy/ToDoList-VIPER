@@ -132,7 +132,6 @@ class ToDoCell: UITableViewCell {
     }
     
     private func setupStandartCell(with item: ToDoObject) {
-        self.taskName.text = item.title
         self.iconBox.backgroundColor = UIColor.convertStringToColor(item.color)
         self.toDoItem = item
         self.setupIconImage(with: UIColor.convertStringToColor(item.color))

@@ -30,6 +30,7 @@ final class MainScreenController: UIViewController {
    //MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setupNavigationBar()
         presenter?.viewWillAppear()
         mainView?.setupElements(nameOfImage: userData[1], userName: userData[0])
         subcribeToNotification()
@@ -42,10 +43,15 @@ final class MainScreenController: UIViewController {
         setupCollectionView()
     }
     
-    //MARK: - Setup Collection View
+    //MARK: - Setup Outlets
     func setupCollectionView() {
         mainView?.toDosCollection.dataSource = self
         mainView?.toDosCollection.delegate = self
+    }
+    
+    private func setupNavigationBar() {
+        self.navigationItem.largeTitleDisplayMode = .never
+        self.navigationController?.navigationBar.prefersLargeTitles = false
     }
  
     //MARK: - Notification
