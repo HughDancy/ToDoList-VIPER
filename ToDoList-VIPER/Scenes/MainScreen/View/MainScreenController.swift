@@ -11,8 +11,7 @@ import SnapKit
 final class MainScreenController: UIViewController {
     var presenter: MainScreenPresenterProtocol?
     
-    //MARK: - Outelts 
-    let mockData = [["1", "Cегодня"], ["3", "просроченно"], ["10", "Завтра"], ["50", "выполненно"]]
+    //MARK: - Outelts
     let mockColors: [UIColor] = [.systemOrange, .systemRed, .systemTeal, .systemGreen]
     
     var userData: [String] = []
@@ -34,7 +33,6 @@ final class MainScreenController: UIViewController {
         presenter?.viewWillAppear()
         mainView?.setupElements(nameOfImage: userData[1], userName: userData[0])
         subcribeToNotification()
-//        mainView?.toDosCollection.reloadData()
     }
     
     override func viewDidLoad() {
@@ -65,9 +63,8 @@ final class MainScreenController: UIViewController {
 }
     //MARK: - CollectionView Delegate
 extension MainScreenController: UICollectionViewDelegate, UICollectionViewDataSource {
-
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return mockData.count
+        return toDosInfo.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

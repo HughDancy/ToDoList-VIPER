@@ -30,7 +30,6 @@ final class CalendarCollectionCell: UICollectionViewCell {
     private lazy var dayNumberLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 15.0, weight: .semibold)
-//        label.textColor = self.isSelected ? .white  : .black
         label.textColor = .label
         return label
     }()

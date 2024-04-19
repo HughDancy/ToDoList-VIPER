@@ -36,7 +36,7 @@ final class ToDoController: UIViewController {
     private lazy var toDoTable: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.backgroundColor = UIColor(named: "tasksBackground")
-        tableView.register(ToDoCell.self, forCellReuseIdentifier: ToDosCell.reuseIdentifier)
+        tableView.register(ToDoCell.self, forCellReuseIdentifier: ToDoCell.reuseIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none

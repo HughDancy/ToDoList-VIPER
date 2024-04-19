@@ -148,9 +148,6 @@ final class AddNewToDoView: UIView {
     
     //MARK: - Setup Layout
     private func setupLayout() {
-//        boxView.snp.makeConstraints { make in
-//            <#code#>
-//        }
         closeButton.snp.makeConstraints { make in
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(10)
             make.leading.equalToSuperview().offset(15)

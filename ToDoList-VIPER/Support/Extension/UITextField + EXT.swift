@@ -48,7 +48,7 @@ extension UITextField {
 
 extension UITextField {
     func addBottomLine(width: CGFloat, color: UIColor) {
-        var border = CALayer()
+        let border = CALayer()
         border.backgroundColor = color.cgColor
         border.frame = CGRect(x: 0, y: self.frame.height - 3, width: self.frame.width, height: width)
         self.layer.addSublayer(border)

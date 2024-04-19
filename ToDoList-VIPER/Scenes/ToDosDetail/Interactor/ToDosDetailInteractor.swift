@@ -31,5 +31,4 @@ final class ToDosDetailInteractor: ToDosDetailInteractorInputProtocol {
         storage.deleteToDoObject(item: task)
         presenter?.showAllert(with: .delete)
     }
-    
 }

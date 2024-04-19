@@ -77,6 +77,7 @@ class ToDoCell: UITableViewCell {
     
     override func prepareForReuse() {
         checkboxImage.isHighlighted = false
+        checkboxImage.image = UIImage(systemName: "square")
         checkboxImage.tintColor = .black
         taskName.text = nil
     }
@@ -132,19 +133,23 @@ class ToDoCell: UITableViewCell {
     }
     
     private func setupStandartCell(with item: ToDoObject) {
-        self.taskName.text = item.title
-        self.iconBox.backgroundColor = UIColor.convertStringToColor(item.color)
-        self.toDoItem = item
-        self.setupIconImage(with: UIColor.convertStringToColor(item.color))
-        
-        if item.doneStatus == true {
-            self.makeItDone()
+        if item.isOverdue {
+            self.setupOverdueCell(with: item)
         } else {
-            checkboxImage.isHighlighted = false
-            checkboxImage.tintColor = .label
             self.taskName.text = item.title
-            taskName.strikeThrough(false)
-            self.checkboxImage.isUserInteractionEnabled = true
+            self.iconBox.backgroundColor = UIColor.convertStringToColor(item.color)
+            self.toDoItem = item
+            self.setupIconImage(with: UIColor.convertStringToColor(item.color))
+            
+            if item.doneStatus == true {
+                self.makeItDone()
+            } else {
+                checkboxImage.isHighlighted = false
+                checkboxImage.tintColor = .label
+                self.taskName.text = item.title
+                taskName.strikeThrough(false)
+                self.checkboxImage.isUserInteractionEnabled = true
+            }
         }
     }
     

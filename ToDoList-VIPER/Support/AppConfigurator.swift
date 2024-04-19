@@ -13,15 +13,11 @@ final class AppConfigurator {
     func configureApp() -> UIViewController {
         let isNewUser = NewUserCheck.shared.isNewUser()
         
-//        print("you is new user? - \(isNewUser)")
-        
         switch isNewUser {
         case true:
             return AnimationLoadingRouter.createLoadingModule(startOnboardingModule())
         case false:
             return AnimationLoadingRouter.createLoadingModule(startMainModule())
-           
-            
         }
     }
     
@@ -55,6 +51,5 @@ final class AppConfigurator {
         sceneDelegate.window?.rootViewController = mainModule
         ToDoStorage.instance.checkOverdueToDos()
         return mainModule
-        
     }
 }

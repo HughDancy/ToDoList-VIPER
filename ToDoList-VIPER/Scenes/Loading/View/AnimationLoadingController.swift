@@ -90,7 +90,6 @@ final class AnimationLoadingController: UIViewController, AnimationLoadingContro
             make.centerX.equalTo(view.safeAreaLayoutGuide.snp.centerX)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(20)
         }
-
     }
     
     //MARK: - Animate Method
@@ -105,7 +104,6 @@ final class AnimationLoadingController: UIViewController, AnimationLoadingContro
                 width: size,
                 height: size
             )
-    
         }
         
         UIView.animate(withDuration: 1.5, animations: {
