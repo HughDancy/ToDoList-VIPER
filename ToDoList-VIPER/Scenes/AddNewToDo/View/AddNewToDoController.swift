@@ -7,14 +7,8 @@
 
 import UIKit
 
-final class AddNewToDoController: UIViewController, AddNewToDoViewProtocol, UITableViewDelegate {
-    private var color: ColorsItemResult?
+final class AddNewToDoController: SingleToDoController, AddNewToDoViewProtocol {
     var presenter: AddNewToDoPresenterProtocol?
-    
-    private var addNewToDoView: AddNewToDoView? {
-        guard isViewLoaded else { return nil }
-        return view as? AddNewToDoView
-    }
     
     //MARK: - OUTLETS
     private lazy var closeButton: UIButton = {
@@ -47,76 +41,7 @@ final class AddNewToDoController: UIViewController, AddNewToDoViewProtocol, UITa
         textField.leftViewMode = .always
         textField.returnKeyType = .done
         textField.delegate = self
-//        textField.layer.shadowOffset = CGSize(width: 0, height: 2)
-//        textField.layer.shadowRadius = 3
-//        textField.layer.shadowColor = UIColor.systemBackground.cgColor
-//        textField.layer.shadowOpacity = 0.3
         return textField
-    }()
-    
-    private lazy var descriptionField: UITextView = {
-        let textView = UITextView()
-        textView.backgroundColor = .systemGray6
-//        textView.layer.shadowColor = UIColor.systemBackground.cgColor
-//        textView.layer.shadowOffset = CGSize(width:0,height: 2.0)
-//        textView.layer.shadowRadius = 3.0
-//        textView.layer.shadowOpacity = 0.3
-//        textView.layer.masksToBounds = false
-        textView.layer.cornerRadius = 10
-        
-        return textView
-    }()
-    
-    private lazy var dateStack: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.alignment = .center
-        stackView.spacing = 10
-        return stackView
-    }()
-    
-    private lazy var dateLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Дата"
-        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-        label.textColor = .systemBackground
-        return label
-    }()
-    
-     private lazy var dateField: UIDatePicker = {
-        let picker = UIDatePicker()
-        picker.datePickerMode = .date
-        picker.preferredDatePickerStyle = .compact
-        picker.locale = Locale(identifier: "ru_RU")
-         var calendar = Calendar.current
-         calendar.timeZone = NSTimeZone.local
-         picker.calendar = calendar
-//        picker.layer.shadowOffset = CGSize(width: 0, height: 2)
-//        picker.layer.shadowRadius = 5
-//        picker.layer.shadowColor = UIColor.systemBackground.cgColor
-//        picker.layer.shadowOpacity = 0.3
-        picker.backgroundColor = UIColor(named: "coralColor")
-        return picker
-    }()
-    
-    private lazy var colorLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Категория:"
-        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-        label.textColor = .systemBackground
-        return label
-    }()
-    
-    lazy var cathegoryList: UITableView = {
-        let tableVIew = UITableView(frame: .zero, style: .plain)
-        tableVIew.backgroundColor = UIColor(named: "coralColor")
-        tableVIew.isScrollEnabled = false
-        tableVIew.showsVerticalScrollIndicator = false
-        tableVIew.separatorStyle = .none
-        tableVIew.delegate = self
-        tableVIew.dataSource = self
-        tableVIew.register(CathegoryCell.self, forCellReuseIdentifier: CathegoryCell.reuseIdentifier)
-        return tableVIew
     }()
     
     private lazy var addNewToDoButton: BaseButton = {
@@ -126,30 +51,26 @@ final class AddNewToDoController: UIViewController, AddNewToDoViewProtocol, UITa
     }()
     
     //MARK: - Lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "coralColor")
-        setupHierarchy()
-        setupLaout()
-        setupTextView()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        cathegoryTableView.delegate = self
     }
     
-    //MARK: - Setup Hierarchy
-    private func setupHierarchy() {
+    //MARK: - Setup Hierarchy and Layout
+    override func setupHierarchy() {
         view.addSubview(closeButton)
         view.addSubview(titleOfScreen)
         view.addSubview(nameOfTaskField)
-        view.addSubview(descriptionField)
+        view.addSubview(descriptionText)
         view.addSubview(dateStack)
         dateStack.addArrangedSubview(dateLabel)
-        dateStack.addArrangedSubview(dateField)
-        view.addSubview(colorLabel)
-        view.addSubview(cathegoryList)
+        dateStack.addArrangedSubview(datePicker)
+        view.addSubview(cathegoryLabel)
+        view.addSubview(cathegoryTableView)
         view.addSubview(addNewToDoButton)
     }
     
-    //MARK: - Setup Layout
-    private func setupLaout() {
+    override func setupLayout() {
         closeButton.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
             make.leading.equalToSuperview().offset(15)
@@ -163,31 +84,30 @@ final class AddNewToDoController: UIViewController, AddNewToDoViewProtocol, UITa
         
         nameOfTaskField.snp.makeConstraints { make in
             make.top.equalTo(titleOfScreen.snp.bottom).offset((UIScreen.main.bounds.height / 13) - (UIScreen.main.bounds.width / 13))
-            make.leading.trailing.equalToSuperview().inset(40)
+            make.leading.trailing.equalToSuperview().inset(30)
             make.height.equalTo(50)
         }
         
-        descriptionField.snp.makeConstraints { make in
+        descriptionText.snp.makeConstraints { make in
             make.top.equalTo(nameOfTaskField.snp.bottom).offset(20)
-            make.leading.trailing.equalToSuperview().inset(40)
+            make.leading.trailing.equalToSuperview().inset(30)
             make.height.equalTo(UIScreen.main.bounds.height / 7)
         }
         
         dateStack.snp.makeConstraints { make in
-            make.top.equalTo(descriptionField.snp.bottom).offset(20)
-            make.leading.equalToSuperview().offset(50)
-            make.height.equalTo(50)
+            make.top.equalTo(descriptionText.snp.bottom).offset(20)
+            make.leading.equalToSuperview().inset(30)
         }
         
-        colorLabel.snp.makeConstraints { make in
+        cathegoryLabel.snp.makeConstraints { make in
             make.top.equalTo(dateStack.snp.bottom).offset(10)
-            make.leading.equalToSuperview().offset(50)
+            make.leading.equalToSuperview().inset(30)
         }
         
-        cathegoryList.snp.makeConstraints { make in
-            make.top.equalTo(colorLabel.snp.bottom).offset(10)
-            make.leading.trailing.equalToSuperview().inset(35)
-            make.bottom.equalTo(addNewToDoButton.snp.top).inset(5)
+        cathegoryTableView.snp.makeConstraints { make in
+            make.top.equalTo(cathegoryLabel.snp.bottom).offset(10)
+            make.leading.trailing.equalToSuperview().inset(30)
+            make.bottom.equalTo(addNewToDoButton.snp.top).inset(10)
         }
         
         addNewToDoButton.snp.makeConstraints { make in
@@ -197,24 +117,23 @@ final class AddNewToDoController: UIViewController, AddNewToDoViewProtocol, UITa
         }
         
         addNewToDoButton.layer.cornerRadius = 20
-        dateField.layer.cornerRadius = 10
     }
     
     //MARK: - Setup View Outelets
-    private func setupTextView() {
-        descriptionField.text = "Описание задачи"
-        descriptionField.textColor = .lightGray
-        descriptionField.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+    override func setupTextView() {
+        descriptionText.text = "Описание задачи"
+        descriptionText.textColor = .lightGray
+        descriptionText.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         
-        descriptionField.delegate = self
-        descriptionField.returnKeyType = .done
+        descriptionText.delegate = self
+        descriptionText.returnKeyType = .done
     }
     
     //MARK: - Buttons Action
     @objc func addNewToDo() {
         presenter?.addNewToDo(with: nameOfTaskField.text,
-                              description: descriptionField.text,
-                              date: dateField.date,
+                              description: descriptionText.text,
+                              date: datePicker.date,
                               mark: color?.rawValue ?? ColorsItemResult.systemPurple.rawValue)
         self.makeNotification()
     }
@@ -230,20 +149,7 @@ final class AddNewToDoController: UIViewController, AddNewToDoViewProtocol, UITa
     }
 }
 
-//MARK: - TableViewDelegate Extension
-extension AddNewToDoController: UITabBarDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ColorsItem.colorsStack.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CathegoryCell.reuseIdentifier, for: indexPath) as? CathegoryCell
-        let cathegoryName = ["Работа", "Личное", "Иное"]
-        cell?.backgroundColor = UIColor(named: "coralColor")
-        cell?.setupCell(with: ColorsItem.colorsStack[indexPath.row], title: cathegoryName[indexPath.row])
-        return cell ?? UITableViewCell()
-    }
-    
+extension AddNewToDoController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch ColorsItem.colorsStack[indexPath.row] {
         case .systemOrange:
@@ -258,7 +164,7 @@ extension AddNewToDoController: UITabBarDelegate, UITableViewDataSource {
     }
 }
 
-//MARK: - TextField Delegate
+    //MARK: - TextField Delegate
 extension AddNewToDoController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         nameOfTaskField.resignFirstResponder()
@@ -266,11 +172,11 @@ extension AddNewToDoController: UITextFieldDelegate {
     }
 }
 
-//MARK: - UITextView Delegate
+    //MARK: - UITextView Delegate
 extension AddNewToDoController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if descriptionField.text == "Описание задачи"  {
-            descriptionField.text = ""
+        if descriptionText.text == "Описание задачи"  {
+            descriptionText.text = ""
             textView.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
             textView.textColor = UIColor.label
         }
@@ -278,16 +184,16 @@ extension AddNewToDoController: UITextViewDelegate {
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
-            descriptionField.resignFirstResponder()
+            descriptionText.resignFirstResponder()
         }
         return true
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        if descriptionField.text == "" {
-            descriptionField.text = "Описание задачи"
-            descriptionField.textColor = .lightGray
-            descriptionField.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        if descriptionText.text == "" {
+            descriptionText.text = "Описание задачи"
+            descriptionText.textColor = .lightGray
+            descriptionText.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         }
     }
 }
