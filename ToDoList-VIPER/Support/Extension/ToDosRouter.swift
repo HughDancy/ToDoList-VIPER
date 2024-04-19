@@ -30,7 +30,6 @@ final class ToDosRouter: ToDosRouterProtocol {
         let toDoDetailModule = ToDosDetailRouter.createModule(with: task)
         let detailModule = ToDosDetailController()
         detailModule.item = task
-        print(task)
         parrentView.navigationController?.pushViewController(toDoDetailModule, animated: true)
     }
 }

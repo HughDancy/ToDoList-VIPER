@@ -91,7 +91,6 @@ extension CustomHomeTabBarController: UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> (any UIViewControllerAnimatedTransitioning)? {
         transition.transitionMode = .present
         transition.startingPoint = CGPoint(x: (tabBar.center.x + 5.0), y: (tabBar.center.y - 15.0))
-        print(middleButton.center)
         transition.circleColor = middleButton.backgroundColor ?? UIColor.systemCyan
         return transition
     }

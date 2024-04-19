@@ -185,8 +185,6 @@ class ToDoDetailController: UIViewController {
         contentTextView.isEditable = false
         datePicker.isUserInteractionEnabled = false
         presenter?.editToDo(title: titleLabel.text ?? "", content: contentTextView.text ?? "", date: datePicker.date)
-        print(datePicker.date)
-        
     }
 }
 

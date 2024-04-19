@@ -12,7 +12,7 @@ class ToDoCell: UITableViewCell {
     
     //MARK: - Class custom properties
     static let reuseIdentifier = "ToDoCell"
-    var toDoItem: ToDoObject = ToDoObject()
+    var toDoItem: ToDoObject?
     
     //MARK: - Outlets
     private lazy var container: UIView = {
@@ -184,10 +184,10 @@ extension ToDoCell {
     }
     
     @objc private func tapToImage(_ sender: UIGestureRecognizer) {
-        if self.toDoItem.doneStatus == false {
+        if self.toDoItem?.doneStatus == false {
             self.makeItDone()
-            let userInfo: [String: ToDoObject] = ["doneItem" : self.toDoItem]
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "DoneTask"), object: nil, userInfo: userInfo)
+            let userInfo: [String: ToDoObject?] = ["doneItem" : self.toDoItem]
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "DoneTask"), object: nil, userInfo: userInfo as [AnyHashable : Any])
         }
     }
     

@@ -244,8 +244,7 @@ extension ToDoController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ToDoCell.reuseIdentifier, for: indexPath) as? ToDoCell
-        cell?.setupCell(with: toDoTasks[indexPath.row], status: self.presenter?.date ?? ToDoListStatus.tommorow
-        )
+        cell?.setupCell(with: toDoTasks[indexPath.row], status: self.presenter?.date ?? ToDoListStatus.tommorow)
         return cell ?? UITableViewCell()
     }
     

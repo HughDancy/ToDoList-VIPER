@@ -93,7 +93,6 @@ final class ToDoStorage {
         fetchRequest.predicate = predicate
         fetchRequest.fetchBatchSize = 7
         let objects = try! viewContext.fetch(fetchRequest)
-        print(objects)
         return objects
     }
     
@@ -111,19 +110,11 @@ final class ToDoStorage {
     
     func fetchOverdueToDos(with date: Date) -> [ToDoObject] {
         let fetchRequest: NSFetchRequest<ToDoObject> = ToDoObject.fetchRequest()
-//        let subPredicates = self.createPredicates(with: .overdue, date: .yesterday)
-        let calendar = Calendar.current
-        // get the start of the day of the selected date
-        // get the start of the day after the selected date
-        let endDate = calendar.date(byAdding: .day, value: -1, to: Date())!
-        let donePredicate = NSPredicate(format: "doneStatus == NO")
-        let datePredicate = NSPredicate(format: "%K == %@", #keyPath(ToDoObject.dateTitle), DateFormatter.getStringFromDate(from: date))
-        let secondDatePredicate = NSPredicate(format: "%K <= %@", #keyPath(ToDoObject.date), endDate as NSDate)
-        let subPredicates = [donePredicate, secondDatePredicate, datePredicate]
+        let subPredicates = self.createPredicates(with: .overdue, date: date)
         fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: subPredicates)
         fetchRequest.fetchBatchSize = 7
         let objects = try! viewContext.fetch(fetchRequest)
-        print(objects)
+//      ауес
         return objects
     }
     //MARK: - TO-DO: Check this method and rewrite 
@@ -147,10 +138,7 @@ final class ToDoStorage {
             return objectsCount ?? 0
         case .overdue:
             let predicate = self.createPredicates(with: .overdue, date: .yesterday)
-            let calendar = Calendar.current
-            let endDate = calendar.date(byAdding: .day, value: -1, to: Date())!
-            let yesterdayPredicate = NSPredicate(format: "date < %@ OR date = %@", endDate as NSDate)
-            fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate[0], yesterdayPredicate])
+            fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate[0], predicate[1]])
             let objects = try! viewContext.fetch(fetchRequest)
             let objectsCount = objects.first?.intValue
             return objectsCount ?? 0
@@ -176,28 +164,25 @@ final class ToDoStorage {
             return [donePredicate, datePredicate]
         case .overdue:
             let donePredicate = NSPredicate(format: "doneStatus == NO")
-            ///
-            // get the current calendar
-            let calendar = Calendar.current
-            // get the start of the day of the selected date
-            let startDate = calendar.startOfDay(for: date)
-            // get the start of the day after the selected date
-            let endDate = calendar.date(byAdding: .day, value: -1, to: startDate)!
-            // create a predicate to filter between start date and end date
-            let predicate = NSPredicate(format: "date == %@ AND date <= %@", startDate as NSDate, endDate as NSDate)
-//            let yesterdayPredicate = NSPredicate(format: "date < %@ OR date = %@", endDate as NSDate)
-   
-            
-            
-            ///
-         
-            let dayString = DateFormatter.getStringFromDate(from: date)
-//            print(Date.yesterday)
-//            let dateN = date as NSDate
-//            print(dateN)
-//            let secondDatePredicate = NSPredicate(format: "%K < %@", #keyPath(ToDoObject.date), Date.today as NSDate)
-            return [donePredicate, predicate]
+            let overduePredicate = NSPredicate(format: "isOverdue == TRUE")
+            let datePredicate = NSPredicate(format: "dateTitle == %@", DateFormatter.getStringFromDate(from: date))
+//            print(date)
+//            print(DateFormatter.getStringFromDate(from: date))
+            return [donePredicate, overduePredicate, datePredicate]
         }
+    }
+    
+    func checkOverdueToDos() {
+        let fetchRequest: NSFetchRequest<ToDoObject> = ToDoObject.fetchRequest()
+        let calendar = NSCalendar.current
+        let todayDate = calendar.startOfDay(for: Date())
+        let predicateDate = NSPredicate(format: "date < %@", todayDate as NSDate)
+        let donePredicate = NSPredicate(format: "doneStatus != YES")
+        let overduePredicate = NSPredicate(format: "isOverdue != YES")
+        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateDate, donePredicate, overduePredicate])
+        let objects = try! viewContext.fetch(fetchRequest)
+        objects.forEach { $0.isOverdue = true }
+        self.saveContext()
     }
     
     //MARK: - CoreData Saving support

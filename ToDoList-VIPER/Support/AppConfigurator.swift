@@ -53,6 +53,7 @@ final class AppConfigurator {
 //        let mainMockModule = CustomHomeTabBarController()
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate
         sceneDelegate.window?.rootViewController = mainModule
+        ToDoStorage.instance.checkOverdueToDos()
         return mainModule
         
     }

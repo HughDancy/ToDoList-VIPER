@@ -22,7 +22,7 @@ var window: UIWindow?
         guard let clientID = FirebaseApp.app()?.options.clientID else { return false }
         let config = GIDConfiguration(clientID: clientID)
         GIDSignIn.sharedInstance.configuration = config
-
+        
         return true
     }
     
