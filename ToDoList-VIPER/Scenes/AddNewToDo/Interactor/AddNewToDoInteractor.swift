@@ -12,13 +12,16 @@ final class AddNewToDoInteractor: AddNewToDoInteractorProtocol {
     var storage = ToDoStorage.instance
     
     func addNewToDo(with name: String?, description: String?, date: Date?, mark: String) {
-        let currentDay = Date.today
-        let doneStatus: Bool = (date ?? Date.today) >= currentDay ? false : true
+        let choosenDate = Calendar.current.startOfDay(for: date ?? Date.today)
+        let compareDate = Calendar.current.startOfDay(for: Date.today)
+        let overdueStatus: Bool = choosenDate >= compareDate ? false : true
+        
+       
         if name != "" {
             storage.createNewToDo(title: name ?? "Temp",
                                   content: self.cehckDescription(description ?? "Описание задачи"),
-                                  date: date ?? currentDay,
-                                  done: doneStatus,
+                                  date: date ?? Date.today,
+                                  isOverdue: overdueStatus,
                                   color: mark)
             presenter?.goBackToMain()
         } else {
