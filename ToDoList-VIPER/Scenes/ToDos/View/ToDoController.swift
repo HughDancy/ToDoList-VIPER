@@ -18,7 +18,6 @@ final class ToDoController: UIViewController {
     
     private var toDoTasks: [ToDoObject] = [] {
         didSet {
-            toDoTable.reloadData()
             if toDoTasks.count == 0 {
                 noTaskView.isHidden = false
             } else {
@@ -73,12 +72,12 @@ final class ToDoController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.addCustomBackButton()
-        presenter?.viewWillAppear()
         setupCalendarColletcion()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter?.viewWillAppear()
         view.backgroundColor = UIColor(named: "tasksBackground")
         setupOtlets()
         setupNavigationBar()
@@ -268,13 +267,13 @@ extension ToDoController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            let itemToDelete = toDoTasks[indexPath.row]
+            presenter?.deleteToDo(itemToDelete)
             tableView.beginUpdates()
-            presenter?.deleteToDo(toDoTasks[indexPath.row])
             toDoTasks.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .left)
-            self.makeNotification()
-            self.setupNoTaskStack()
+            tableView.deleteRows(at: [indexPath], with: .right)
             tableView.endUpdates()
+            self.setupNoTaskStack()
         }
     }
 }
