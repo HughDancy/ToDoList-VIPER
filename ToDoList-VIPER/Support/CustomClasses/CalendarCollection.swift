@@ -82,6 +82,7 @@ extension CalendarCollectionView: UICollectionViewDelegate, UICollectionViewData
         cell.setupCell(totalSquares[indexPath.row])
         if indexPath.row == selectedUserCell {
             selectItem(at: [0, selectedUserCell], animated: false, scrollPosition: [])
+            cell.isSelected = true
         }
         return cell
     }
@@ -100,7 +101,7 @@ extension CalendarCollectionView: UICollectionViewDelegate, UICollectionViewData
 extension CalendarCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = frame.width / 7.7
-        let height = frame.height - 23.0
+        let height = frame.height - 25.0 //early - 23.0
         return CGSize(width: width, height: height)
     }
 }

@@ -65,7 +65,9 @@ final class CalendarCollectionCell: UICollectionViewCell {
             if self.isSelected {
                 containerView.backgroundColor = .systemIndigo
                 dayNumberLabel.textColor = .white
+                self.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
             } else {
+                self.transform = CGAffineTransform.identity
                 if dayOfWeekLabel.text == "Сб" || dayOfWeekLabel.text == "Вс" {
                     containerView.backgroundColor = UIColor(named: "hollydayColor")
                     dayNumberLabel.textColor = .label
