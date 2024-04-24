@@ -193,12 +193,16 @@ final class ToDoController: UIViewController {
         DispatchQueue.main.async {
             self.presenter?.updateToDosForDay(self.selectedDate)
             self.toDoTable.reloadData()
-            let calendarModel = CalendarModel()
-            let daysArray = calendarModel.getWeekForCalendar(date: self.centerDate)
-            self.calendarView.calendar.setDaysArray(days: daysArray)
-            self.calendarView.calendar.reloadData()
+            self.updateCalendar()
             self.tabBarController?.tabBar.isHidden = false
         }
+    }
+    
+    private func updateCalendar() {
+        let calendarModel = CalendarModel()
+        let daysArray = calendarModel.getWeekForCalendar(date: self.centerDate)
+        self.calendarView.calendar.setDaysArray(days: daysArray)
+        self.calendarView.calendar.reloadData()
     }
     
     @objc func makeItDone(notification: Notification) {
@@ -273,6 +277,7 @@ extension ToDoController: UITableViewDelegate, UITableViewDataSource {
             toDoTasks.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .right)
             tableView.endUpdates()
+            self.updateCalendar()
             self.setupNoTaskStack()
         }
     }
