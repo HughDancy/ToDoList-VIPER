@@ -21,8 +21,8 @@ final class CustomAlertController: UIViewController {
 
     }
     
-    func present(title: String, message: String, handler: @escaping (Bool) -> Void) {
-        let alertView = CustomAlertView(title: title, message: message, image: UIImage(systemName: "person")!, closure: handler)
+    func present(type: CustomAlertType, title: String, message: String, imageName: String, handler: @escaping (Bool) -> Void) {
+        let alertView = CustomAlertView(type: type, title: title, message: message, image: UIImage(named: imageName)!, closure: handler)
         alertView.delegate = self
         view.addSubview(alertView)
         alertView.snp.makeConstraints { make in

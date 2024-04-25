@@ -131,18 +131,11 @@ final class AddNewToDoController: SingleToDoController, AddNewToDoViewProtocol {
     
     //MARK: - Buttons Action
     @objc func addNewToDo() {
-//        presenter?.addNewToDo(with: nameOfTaskField.text,
-//                              description: descriptionText.text,
-//                              date: datePicker.date,
-//                              mark: color?.rawValue ?? ColorsItemResult.systemPurple.rawValue)
-//        self.makeNotification()
-        let alertController = CustomAlertController()
-        alertController.modalPresentationStyle = .overCurrentContext
-        alertController.modalTransitionStyle = .crossDissolve
-        self.present(alertController, animated: true)
-        alertController.present(title: "Heya", message: "Bagin") { nameBool in
-            print("Ok button is tapped ")
-        }
+        presenter?.addNewToDo(with: nameOfTaskField.text,
+                              description: descriptionText.text,
+                              date: datePicker.date,
+                              mark: color?.rawValue ?? ColorsItemResult.systemPurple.rawValue)
+        self.makeNotification()
     }
     
     @objc func dismissToMain() {
