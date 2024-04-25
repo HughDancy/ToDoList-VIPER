@@ -45,6 +45,7 @@ final class CustomAlertView: UIView {
         button.layer.shadowOffset = CGSize(width: 1, height: 1)
         button.layer.shadowRadius = 1
         button.layer.cornerRadius = 10
+        button.addTarget(self, action: #selector(okTapped), for: .touchDown)
         return button
     }()
     
@@ -57,11 +58,12 @@ final class CustomAlertView: UIView {
         button.layer.shadowOffset = CGSize(width: 1, height: 1)
         button.layer.shadowRadius = 1
         button.layer.cornerRadius = 10
+        button.addTarget(self, action: #selector(noTapped), for: .touchDown)
         return button
     }()
     
     //MARK: - Init
-    init(type: CustomAlertType, title: String, message: String, image: UIImage, closure: @escaping (Bool) -> Void) {
+    init(type: CustomAlertType, title: String, message: String, image: UIImage, colorOne: UIColor, colorTwo: UIColor?, buttonTitleOne: String, buttonTitleTwo: String?, closure: @escaping (Bool) -> Void) {
         self.closure = closure
         self.type = type
         super.init(frame: .zero)
@@ -70,6 +72,8 @@ final class CustomAlertView: UIView {
         titleLabel.text = title
         messageLabel.text = message
         iconImage.image = image
+        setupOkButton(with: buttonTitleOne, color: colorOne)
+        setupNoButton(with: buttonTitleTwo, color: colorTwo)
         layer.cornerRadius = 10
         setupLayout()
     }
@@ -108,17 +112,18 @@ final class CustomAlertView: UIView {
         switch type {
         case .oneButton:
             okButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
-            okButton.setTitle("Ok", for: .normal)
-            okButton.addTarget(self, action: #selector(okTapped), for: .touchDown)
+//            okButton.setTitle("Ok", for: .normal)
+//            okButton.addTarget(self, action: #selector(okTapped), for: .touchDown)
             parrentStackView.addArrangedSubview(okButton)
             self.addSubview(parrentStackView)
         case .twoButtons:
             okButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
-            okButton.setTitle("Ok", for: .normal)
-            okButton.addTarget(self, action: #selector(okTapped), for: .touchDown)
+//            okButton.setTitle("Ok", for: .normal)
+           
+            
             noButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
-            noButton.setTitle("What", for: .normal)
-            noButton.addTarget(self, action: #selector(noTapped), for: .touchDown)
+//            noButton.setTitle("What", for: .normal)
+          
             let buttonsStack = UIStackView()
             buttonsStack.axis = .horizontal
             buttonsStack.distribution = .equalCentering
@@ -138,14 +143,27 @@ final class CustomAlertView: UIView {
         
     }
     
+    //MARK: - Button's setup
+    private func setupOkButton(with title: String, color: UIColor) {
+        okButton.setTitle(title, for: .normal)
+        okButton.backgroundColor = color
+        okButton.tintColor = .systemBackground
+    }
+    
+    private func setupNoButton(with title: String?, color: UIColor?) {
+        noButton.setTitle(title, for: .normal)
+        noButton.backgroundColor = color
+        noButton.tintColor = .systemBackground
+    }
+    
     //MARK: - Button's methods
     @objc func okTapped() {
         delegate?.dismissMe()
-        closure(true)
+        closure(false)
     }
     
     @objc func noTapped() {
         delegate?.dismissMe()
-        closure(false)
+        closure(true)
     }
 }

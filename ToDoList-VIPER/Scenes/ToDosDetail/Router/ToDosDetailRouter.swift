@@ -27,34 +27,61 @@ final class ToDosDetailRouter: ToDosDetailRouterProtocol {
         return viewController as! UIViewController
     }
     
-    func showAllert(with view: any ToDosDetailViewProtocol, status: ToDoDetailStatus) {
+    func showAllert(with view: any ToDosDetailViewProtocol, status: ToDoDetailStatus, toDo: ToDoObject?) {
         
         guard let currentView = view as? UIViewController else { return }
         
         switch status {
         case .allSave:
-            let allertController = UIAlertController(title: nil,
-                                                     message: "Изменения успешно сохранены!",
-                                                     preferredStyle: .alert)
-            allertController.addAction(UIAlertAction(title: "Ок", style: .cancel, handler: { _ in
-                self.presenter?.didDeleteToDo()
-            }))
+            let allertController = CustomAlertController()
+            allertController.modalPresentationStyle = .overCurrentContext
+            allertController.modalTransitionStyle = .crossDissolve
             currentView.present(allertController, animated: true)
-        case .delete:
-            let allertController = UIAlertController(title: nil, message: "Вы действительно хотите удалить эту задачу?", preferredStyle: .alert)
-            let deleteAction = UIAlertAction(title: "Да", style: .destructive) { _ in
+            allertController.present(type: .oneButton,
+                                     title: "Сохранено",
+                                     message: "Изменения успешно сохранены",
+                                     imageName: "saveDone",
+                                     colorOne: .systemCyan,
+                                     colorTwo: nil,
+                                     buttonText: "Ок",
+                                     buttonTextTwo: nil) { _ in
                 self.presenter?.didDeleteToDo()
             }
-            let cancelAction = UIAlertAction(title: "Нет", style: .cancel)
-            allertController.addAction(cancelAction)
-            allertController.addAction(deleteAction)
+        case .delete:
+            let allertController = CustomAlertController()
+            allertController.modalPresentationStyle = .overCurrentContext
+            allertController.modalTransitionStyle = .crossDissolve
             currentView.present(allertController, animated: true)
+            allertController.present(
+                type: .twoButtons,
+                title: "Удалить",
+                message: "Вы действительно хотите удалить эту задачу?",
+                imageName: "deleteToDo",
+                colorOne: .systemCyan,
+                colorTwo: .systemRed,
+                buttonText: "Отмена",
+                buttonTextTwo: "Да") { state in
+                    if state == true {
+                        guard let toDoItem = toDo else { return }
+                        self.presenter?.deleteToDo(toDoItem)
+                    }
+                }
         case .error:
-            let allertController = UIAlertController(title: "Ошибка",
-                                                     message: "Произошла неизвестная ошибка. Попробуйте снова",
-                                                     preferredStyle: .alert)
-            allertController.addAction(UIAlertAction(title: "Ок", style: .cancel))
+            let allertController = CustomAlertController()
+            allertController.modalPresentationStyle = .overCurrentContext
+            allertController.modalTransitionStyle = .crossDissolve
             currentView.present(allertController, animated: true)
+            allertController.present(
+                type: .oneButton,
+                title: "Ошибка",
+                message: "Произошла неизвестная ошибка. Попробуйте снова",
+                imageName: "error",
+                colorOne: .systemCyan,
+                colorTwo: nil,
+                buttonText: "Ок",
+                buttonTextTwo: nil,
+                handler: {_ in }
+            )
         }
     }
     

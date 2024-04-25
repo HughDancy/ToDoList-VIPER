@@ -21,7 +21,7 @@ protocol ToDosDetailPresenterProtocol: AnyObject {
     //VIEW -> PRESENTER
     func viewWillAppear()
     func editToDo(title: String?, descriprion: String?, date: Date?, color: String)
-    func deleteToDo(_ toDo: ToDoObject)
+    func whantDeleteToDo(_ toDo: ToDoObject)
 }
 
 protocol ToDosDetailInteractorInputProtocol: AnyObject {
@@ -35,6 +35,7 @@ protocol ToDosDetailInteractorInputProtocol: AnyObject {
 
 protocol ToDosDetailInteractorOutputProtocol: AnyObject {
     //INTERACTOR -> PRESTNER
+    func deleteToDo(_ toDo: ToDoObject)
     func didDeleteToDo()
     func didEditToDo(_ toDo: ToDoObject)
     func showAllert(with status: ToDoDetailStatus)
@@ -45,7 +46,7 @@ protocol ToDosDetailRouterProtocol: AnyObject {
     static func createModule(with toDo: ToDoObject) -> UIViewController
     
     //PRESENTER -> ROUTER
-    func showAllert(with view: ToDosDetailViewProtocol, status: ToDoDetailStatus)
+    func showAllert(with view: ToDosDetailViewProtocol, status: ToDoDetailStatus, toDo: ToDoObject?)
     func goBackToTasks(with view: ToDosDetailViewProtocol)
 }
 

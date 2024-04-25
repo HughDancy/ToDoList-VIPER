@@ -36,7 +36,15 @@ final class AddNewToDoRouter: AddNewToDoRouterProtocol {
         alertController.modalTransitionStyle = .crossDissolve
 //        self.present(alertController, animated: true)
         parrentView.present(alertController, animated: true)
-        alertController.present(type: .oneButton, title: "Ошибка",
-                                message: "Не заполненно наименование задачи", imageName: "error") { _ in }
+        alertController.present(
+            type: .oneButton,
+            title: "Ошибка",
+            message: "Не заполненно наименование задачи",
+            imageName: "error",
+            colorOne: .systemCyan,
+            colorTwo: nil,
+            buttonText: "Ок",
+            buttonTextTwo: nil
+        ) { _ in }
     }
 }

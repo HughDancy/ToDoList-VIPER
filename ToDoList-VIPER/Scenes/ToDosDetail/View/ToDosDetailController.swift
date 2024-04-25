@@ -163,7 +163,7 @@ final class ToDosDetailController: SingleToDoController {
     
     @objc func deleteToDo() {
         guard let task = item else { return }
-        presenter?.deleteToDo(task)
+        presenter?.whantDeleteToDo(task)
     }
 }
 
