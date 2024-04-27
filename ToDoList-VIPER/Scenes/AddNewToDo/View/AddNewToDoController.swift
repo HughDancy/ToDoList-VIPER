@@ -11,35 +11,27 @@ final class AddNewToDoController: SingleToDoController, AddNewToDoViewProtocol {
     var presenter: AddNewToDoPresenterProtocol?
     
     //MARK: - OUTLETS
-    private lazy var closeButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.backgroundColor = .systemRed
-        button.tintColor = .systemBackground
+    private lazy var closeButton: BaseButton = {
+        let button = BaseButton(text: "", color: .systemRed)
+        button.makeButtonCircle(with: 15)
         button.setImage(UIImage(systemName: "xmark"), for: .normal)
-        button.layer.cornerRadius = 15
-        button.clipsToBounds = true
         button.addTarget(self, action: #selector(dismissToMain), for: .touchDown)
         return button
     }()
-    
+
     private lazy var titleOfScreen: UILabel = {
-        let label = UILabel()
-        label.text = "Добавить задачу"
-        label.font = UIFont.systemFont(ofSize: 35, weight: .bold)
-        label.textColor = .systemBackground
+        let label = UILabel.createSimpleLabel(text: "Добавить задачу", size: 35, width: .bold, color: .systemBackground)
         return label
     }()
     
     private lazy var nameOfTaskField: UITextField = {
-        let textField = UITextField()
-        textField.borderStyle = .none
-        textField.backgroundColor = .systemGray6
-        textField.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
-        textField.placeholder = "Наименование задачи"
-        textField.layer.cornerRadius = 10
-        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
-        textField.leftViewMode = .always
-        textField.returnKeyType = .done
+        let textField = UITextField.createToDoTextField(
+            text: "Наименование задачи",
+            textSize: 15,
+            weight: .semibold,
+            color: .systemGray6,
+            returnKey: .done
+        )
         textField.delegate = self
         return textField
     }()

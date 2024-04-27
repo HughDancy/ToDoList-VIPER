@@ -31,19 +31,19 @@ final class CustomAlertView: UIView {
         return stack
     }()
     
-    lazy var iconImage: UIImageView = {
+    private lazy var iconImage: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
-    lazy var titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         return label
     }()
     
-    lazy var messageLabel: UILabel = {
+    private lazy var messageLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 13, weight: .medium)
         label.numberOfLines = 0
@@ -52,29 +52,17 @@ final class CustomAlertView: UIView {
         return label
     }()
     
-    lazy var okButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.backgroundColor = .systemCyan
-        button.tintColor = .systemBackground
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOpacity = 1
-        button.layer.shadowOffset = CGSize(width: 1, height: 1)
-        button.layer.shadowRadius = 1
-        button.layer.cornerRadius = 10
-        button.addTarget(self, action: #selector(okTapped), for: .touchDown)
+    private lazy var firstButton: BaseButton =  {
+        let button = BaseButton(text: "", color: .systemCyan)
+        button.setupShadows(with: .black)
+        button.addTarget(self, action: #selector(firstButtonTapped), for: .touchDown)
         return button
     }()
-    
-    lazy var noButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.backgroundColor = .systemOrange
-        button.tintColor = .systemBackground
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOpacity = 1
-        button.layer.shadowOffset = CGSize(width: 1, height: 1)
-        button.layer.shadowRadius = 1
-        button.layer.cornerRadius = 10
-        button.addTarget(self, action: #selector(noTapped), for: .touchDown)
+
+    private lazy var secondButton: BaseButton = {
+        let button = BaseButton(text: "", color: .systemOrange)
+        button.setupShadows(with: .black)
+        button.addTarget(self, action: #selector(secondButtonTapped), for: .touchDown)
         return button
     }()
     
@@ -97,6 +85,7 @@ final class CustomAlertView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     //MARK: - Setup stackViews and his layout
     private func setupAlertView() {
         setupElements()
@@ -116,19 +105,19 @@ final class CustomAlertView: UIView {
         
         switch type {
         case .oneButton:
-            okButton.widthAnchor.constraint(equalToConstant: AlertSizes.buttonWidth.rawValue).isActive = true
-            parrentStack.addArrangedSubview(okButton)
+            firstButton.widthAnchor.constraint(equalToConstant: AlertSizes.buttonWidth.rawValue).isActive = true
+            parrentStack.addArrangedSubview(firstButton)
             self.addSubview(parrentStack)
         case .twoButtons:
-            okButton.widthAnchor.constraint(equalToConstant: AlertSizes.buttonWidth.rawValue).isActive = true
-            noButton.widthAnchor.constraint(equalToConstant: AlertSizes.buttonWidth.rawValue).isActive = true
+            firstButton.widthAnchor.constraint(equalToConstant: AlertSizes.buttonWidth.rawValue).isActive = true
+            secondButton.widthAnchor.constraint(equalToConstant: AlertSizes.buttonWidth.rawValue).isActive = true
             let buttonsStack = UIStackView()
             buttonsStack.axis = .horizontal
             buttonsStack.distribution = .equalCentering
             buttonsStack.alignment = .fill
             buttonsStack.spacing = AlertSizes.outerSpacing.rawValue
-            buttonsStack.addArrangedSubview(okButton)
-            buttonsStack.addArrangedSubview(noButton)
+            buttonsStack.addArrangedSubview(firstButton)
+            buttonsStack.addArrangedSubview(secondButton)
             parrentStack.addArrangedSubview(buttonsStack)
             self.addSubview(parrentStack)
         }
@@ -143,24 +132,24 @@ final class CustomAlertView: UIView {
     
     //MARK: - Button's setup
     private func setupOkButton(with title: String, color: UIColor) {
-        okButton.setTitle(title, for: .normal)
-        okButton.backgroundColor = color
-        okButton.tintColor = .systemBackground
+        firstButton.setTitle(title, for: .normal)
+        firstButton.backgroundColor = color
+        firstButton.tintColor = .systemBackground
     }
     
     private func setupNoButton(with title: String?, color: UIColor?) {
-        noButton.setTitle(title, for: .normal)
-        noButton.backgroundColor = color
-        noButton.tintColor = .systemBackground
+        secondButton.setTitle(title, for: .normal)
+        secondButton.backgroundColor = color
+        secondButton.tintColor = .systemBackground
     }
     
     //MARK: - Button's methods
-    @objc func okTapped() {
+    @objc func firstButtonTapped() {
         delegate?.dismissMe()
         closure(false)
     }
     
-    @objc func noTapped() {
+    @objc func secondButtonTapped() {
         delegate?.dismissMe()
         closure(true)
     }

@@ -70,7 +70,6 @@
 		D8B1E9DF2BA84CB100D455AF /* AddNewToDoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9DE2BA84CB100D455AF /* AddNewToDoRouter.swift */; };
 		D8B1E9E12BAB10BA00D455AF /* CathegoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9E02BAB10BA00D455AF /* CathegoryCell.swift */; };
 		D8B1E9E32BAB223700D455AF /* AddNewToDoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9E22BAB223700D455AF /* AddNewToDoView.swift */; };
-		D8BDEAB52BD9456100C3BE55 /* CustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BDEAB42BD9456100C3BE55 /* CustomAlertViewController.swift */; };
 		D8BDEAB82BDA16A000C3BE55 /* CustomAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BDEAB72BDA16A000C3BE55 /* CustomAlertController.swift */; };
 		D8BDEABA2BDA178200C3BE55 /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BDEAB92BDA178200C3BE55 /* CustomAlertView.swift */; };
 		D8C19EC62B8DC3FF004BCDDD /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = D8C19EC52B8DC3FF004BCDDD /* GoogleSignIn */; };
@@ -205,7 +204,6 @@
 		D8B1E9DE2BA84CB100D455AF /* AddNewToDoRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewToDoRouter.swift; sourceTree = "<group>"; };
 		D8B1E9E02BAB10BA00D455AF /* CathegoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CathegoryCell.swift; sourceTree = "<group>"; };
 		D8B1E9E22BAB223700D455AF /* AddNewToDoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewToDoView.swift; sourceTree = "<group>"; };
-		D8BDEAB42BD9456100C3BE55 /* CustomAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertViewController.swift; sourceTree = "<group>"; };
 		D8BDEAB72BDA16A000C3BE55 /* CustomAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertController.swift; sourceTree = "<group>"; };
 		D8BDEAB92BDA178200C3BE55 /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		D8C19ECF2B90B333004BCDDD /* SignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInController.swift; sourceTree = "<group>"; };
@@ -923,7 +921,6 @@
 				D8473BE42BB415BB0063F87A /* HorizontalCalendarView.swift */,
 				D8473BE62BB57CEC0063F87A /* CalendarCollection.swift */,
 				D8AB92242BBC063400826A4E /* SingleToDoController.swift */,
-				D8BDEAB42BD9456100C3BE55 /* CustomAlertViewController.swift */,
 			);
 			path = CustomClasses;
 			sourceTree = "<group>";
@@ -1113,7 +1110,6 @@
 				D8E9F8BC2B109DB800A3F3FC /* ToDoStorage.swift in Sources */,
 				D8E8406C2B6789F8005A0936 /* RegistrationRouter.swift in Sources */,
 				D8F11C5E2B5660C900D2282D /* AnimationLoadingInteractor.swift in Sources */,
-				D8BDEAB52BD9456100C3BE55 /* CustomAlertViewController.swift in Sources */,
 				D8AB92232BBBF8A200826A4E /* ToDosDetailController.swift in Sources */,
 				D86D45242AFB986E00894774 /* ToDoStore.swift in Sources */,
 				D8B1E9D02BA46A0E00D455AF /* HomeTabBarProtocols.swift in Sources */,

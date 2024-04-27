@@ -29,10 +29,7 @@ class SingleToDoController: UIViewController {
     }()
     
     lazy var dateLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Дата"
-        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-        label.textColor = .systemBackground
+        let label = UILabel.createSimpleLabel(text: "Дата", size: 20, width: .semibold, color: .systemBackground)
         return label
     }()
     
@@ -46,10 +43,7 @@ class SingleToDoController: UIViewController {
     }()
     
     lazy var cathegoryLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Категория:"
-        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-        label.textColor = .systemBackground
+        let label = UILabel.createSimpleLabel(text: "Категория:", size: 20, width: .semibold, color: .systemBackground)
         return label
     }()
     
