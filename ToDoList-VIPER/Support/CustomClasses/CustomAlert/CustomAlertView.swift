@@ -6,11 +6,6 @@
 //
 
 import UIKit
-enum CustomAlertType {
-    case oneButton
-    case twoButtons
-}
-
 
 final class CustomAlertView: UIView {
     weak var delegate: AlertControllerDelegate?
@@ -18,6 +13,24 @@ final class CustomAlertView: UIView {
     private var type: CustomAlertType
     
     //MARK: - Outlets
+    private lazy var parrentStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.distribution = .equalSpacing
+        stack.alignment = .center
+        stack.spacing = AlertSizes.innerSpacing.rawValue * 2
+        return stack
+    }()
+    
+    private lazy var titleStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.distribution = .equalCentering
+        stack.alignment = .fill
+        stack.spacing = AlertSizes.innerSpacing.rawValue
+        return stack
+    }()
+    
     lazy var iconImage: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -33,6 +46,9 @@ final class CustomAlertView: UIView {
     lazy var messageLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 13, weight: .medium)
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.textAlignment = .center
         return label
     }()
     
@@ -75,72 +91,54 @@ final class CustomAlertView: UIView {
         setupOkButton(with: buttonTitleOne, color: colorOne)
         setupNoButton(with: buttonTitleTwo, color: colorTwo)
         layer.cornerRadius = 10
-        setupLayout()
+        setupAlertView()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    //MARK: - Other methods
+    //MARK: - Setup stackViews and his layout
+    private func setupAlertView() {
+        setupElements()
+        setupLayout()
+    }
     
-    private func setupLayout() {
-        let innerSpacing: CGFloat = 8
-        let outerSpacing: CGFloat = 40
-        
-        let parrentStackView = UIStackView()
-        parrentStackView.axis = .vertical
-        parrentStackView.distribution = .equalSpacing
-        parrentStackView.alignment = .center
-        parrentStackView.spacing = innerSpacing * 2
-        
-        let titleStakView = UIStackView()
-        titleStakView.axis = .vertical
-        titleStakView.distribution = .equalCentering
-        titleStakView.alignment = .fill
-        titleStakView.spacing = innerSpacing
-        
+    private func setupElements() {
         let sepparatorLine = UIView()
         sepparatorLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
         sepparatorLine.backgroundColor = .label
         
-        parrentStackView.addArrangedSubview(iconImage)
-        titleStakView.addArrangedSubview(titleLabel)
-        titleStakView.addArrangedSubview(sepparatorLine)
-        parrentStackView.addArrangedSubview(titleStakView)
-        parrentStackView.addArrangedSubview(messageLabel)
+        parrentStack.addArrangedSubview(iconImage)
+        titleStack.addArrangedSubview(titleLabel)
+        titleStack.addArrangedSubview(sepparatorLine)
+        parrentStack.addArrangedSubview(titleStack)
+        parrentStack.addArrangedSubview(messageLabel)
         
         switch type {
         case .oneButton:
-            okButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
-//            okButton.setTitle("Ok", for: .normal)
-//            okButton.addTarget(self, action: #selector(okTapped), for: .touchDown)
-            parrentStackView.addArrangedSubview(okButton)
-            self.addSubview(parrentStackView)
+            okButton.widthAnchor.constraint(equalToConstant: AlertSizes.buttonWidth.rawValue).isActive = true
+            parrentStack.addArrangedSubview(okButton)
+            self.addSubview(parrentStack)
         case .twoButtons:
-            okButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
-//            okButton.setTitle("Ok", for: .normal)
-           
-            
-            noButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
-//            noButton.setTitle("What", for: .normal)
-          
+            okButton.widthAnchor.constraint(equalToConstant: AlertSizes.buttonWidth.rawValue).isActive = true
+            noButton.widthAnchor.constraint(equalToConstant: AlertSizes.buttonWidth.rawValue).isActive = true
             let buttonsStack = UIStackView()
             buttonsStack.axis = .horizontal
             buttonsStack.distribution = .equalCentering
             buttonsStack.alignment = .fill
-            buttonsStack.spacing = outerSpacing
+            buttonsStack.spacing = AlertSizes.outerSpacing.rawValue
             buttonsStack.addArrangedSubview(okButton)
             buttonsStack.addArrangedSubview(noButton)
-            parrentStackView.addArrangedSubview(buttonsStack)
-            self.addSubview(parrentStackView)
+            parrentStack.addArrangedSubview(buttonsStack)
+            self.addSubview(parrentStack)
         }
-       
-        
-        parrentStackView.snp.makeConstraints { make in
-            make.top.bottom.equalTo(self.safeAreaLayoutGuide).inset(16)
-            make.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(outerSpacing)
+    }
+    
+    private func setupLayout() {
+        parrentStack.snp.makeConstraints { make in
+            make.top.bottom.equalTo(self.safeAreaLayoutGuide).inset(AlertSizes.buttonTopAnchor.rawValue)
+            make.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(AlertSizes.outerSpacing.rawValue)
         }
-        
     }
     
     //MARK: - Button's setup
@@ -166,4 +164,17 @@ final class CustomAlertView: UIView {
         delegate?.dismissMe()
         closure(true)
     }
+}
+
+    //MARK: - Support Enum's
+enum CustomAlertType {
+    case oneButton
+    case twoButtons
+}
+
+fileprivate enum AlertSizes: CGFloat {
+    case innerSpacing = 8
+    case outerSpacing = 40
+    case buttonWidth = 100
+    case buttonTopAnchor = 16
 }
