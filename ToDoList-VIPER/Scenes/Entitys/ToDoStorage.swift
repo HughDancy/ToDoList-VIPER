@@ -168,8 +168,6 @@ final class ToDoStorage {
             let donePredicate = NSPredicate(format: "doneStatus == NO")
             let overduePredicate = NSPredicate(format: "isOverdue == TRUE")
             let datePredicate = NSPredicate(format: "dateTitle == %@", DateFormatter.getStringFromDate(from: date))
-//            print(date)
-//            print(DateFormatter.getStringFromDate(from: date))
             return [donePredicate, overduePredicate, datePredicate]
         }
     }

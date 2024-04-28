@@ -47,16 +47,7 @@ class SingleToDoController: UIViewController {
         return label
     }()
     
-    lazy var cathegoryTableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .plain)
-        tableView.backgroundColor = UIColor(named: "coralColor")
-        tableView.isScrollEnabled = false
-        tableView.showsVerticalScrollIndicator = false
-        tableView.separatorStyle = .none
-        tableView.dataSource = self
-        tableView.register(CathegoryCell.self, forCellReuseIdentifier: CathegoryCell.reuseIdentifier)
-        return tableView
-    }()
+    lazy var cathegoryTableView = CathegoryTableView(frame: .zero, style: .plain, color: UIColor(named: "coralColor") ?? .systemBackground)
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -88,18 +79,4 @@ class SingleToDoController: UIViewController {
     }
 }
 
-//MARK: - TableView Data source extension
-extension SingleToDoController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ColorsItem.colorsStack.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CathegoryCell.reuseIdentifier, for: indexPath) as? CathegoryCell
-        let cathegoryName = ["Работа", "Личное", "Иное"]
-        cell?.backgroundColor = UIColor(named: "coralColor")
-        cell?.setupCell(with: ColorsItem.colorsStack[indexPath.row], title: cathegoryName[indexPath.row])
-        return cell ?? UITableViewCell()
-    }
-}
 

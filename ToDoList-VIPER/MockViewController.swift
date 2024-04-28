@@ -8,23 +8,28 @@
 import UIKit
 
 class MockViewController: UIViewController {
-
+    
+    private lazy var mockImage: UIImageView = {
+        let imageView = UIImageView()
+        let image = UIImage(systemName: "wrench.and.screwdriver.fill")
+        imageView.image = image
+        imageView.backgroundColor = .systemPink
+        imageView.tintColor = .systemBackground
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemPink
-
-        // Do any additional setup after loading the view.
+        setupMockImage()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func setupMockImage() {
+        view.addSubview(mockImage)
+        mockImage.snp.makeConstraints { make in
+            make.centerX.centerY.equalTo(view.safeAreaLayoutGuide)
+            make.height.width.equalTo(100)
+        }
     }
-    */
-
 }
