@@ -11,18 +11,19 @@ final class AddNewToDoInteractor: AddNewToDoInteractorProtocol {
     weak var presenter: AddNewToDoPresenterProtocol?
     var storage = ToDoStorage.instance
     
-    func addNewToDo(with name: String?, description: String?, date: Date?, colorCathegory: UIColor) {
+    func addNewToDo(with name: String?, description: String?, date: Date?, colorCategory: UIColor, iconName: String) {
         let choosenDate = Calendar.current.startOfDay(for: date ?? Date.today)
         let compareDate = Calendar.current.startOfDay(for: Date.today)
         let overdueStatus: Bool = choosenDate >= compareDate ? false : true
         
-       
+        
         if name != "" {
             storage.createNewToDo(title: name ?? "Temp",
                                   content: self.cehckDescription(description ?? "Описание задачи"),
                                   date: date ?? Date.today,
                                   isOverdue: overdueStatus,
-                                  color: colorCathegory)
+                                  color: colorCategory,
+                                  iconName: iconName)
             presenter?.goBackToMain()
         } else {
             presenter?.showAlert()

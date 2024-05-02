@@ -26,7 +26,7 @@ final class ToDoStorage {
     private lazy var viewContext: NSManagedObjectContext = persistentContainer.viewContext
     
     //MARK: - CoreData create new ToDoObject
-    func createNewToDo(title: String, content: String, date: Date, isOverdue: Bool, color: UIColor) {
+    func createNewToDo(title: String, content: String, date: Date, isOverdue: Bool, color: UIColor, iconName: String) {
         let newToDo = ToDoObject(context: viewContext)
         newToDo.title = title
         newToDo.descriptionTitle = content
@@ -35,6 +35,7 @@ final class ToDoStorage {
         newToDo.color = color
         newToDo.isOverdue = isOverdue
         newToDo.doneStatus = false
+        newToDo.iconName = iconName
         do {
             try viewContext.save()
         }
@@ -56,12 +57,13 @@ final class ToDoStorage {
     }
     
     //MARK: - CoreData edit ToDoObject
-    func editToDoObject(item: ToDoObject, newTitle: String, newDescription: String, newDate: Date, color: UIColor) {
+    func editToDoObject(item: ToDoObject, newTitle: String, newDescription: String, newDate: Date, color: UIColor, iconName: String) {
         item.title = newTitle
         item.descriptionTitle = newDescription
         item.date = newDate
         item.dateTitle = DateFormatter.getStringFromDate(from: newDate)
         item.color = color
+        item.iconName = iconName
         
         do {
             try viewContext.save()

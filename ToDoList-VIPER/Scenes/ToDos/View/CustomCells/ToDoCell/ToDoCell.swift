@@ -139,7 +139,7 @@ class ToDoCell: UITableViewCell {
             self.taskName.text = item.title
             self.iconBox.backgroundColor = item.color
             self.toDoItem = item
-            self.setupIconImage(with: item.color ?? .systemPurple)
+            self.icon.image = UIImage(systemName: item.iconName ?? "moon.fill")
             
             if item.doneStatus == true {
                 self.makeItDone()
@@ -157,7 +157,7 @@ class ToDoCell: UITableViewCell {
         self.taskName.text = item.title
         self.iconBox.backgroundColor = item.color
         self.toDoItem = item
-        self.setupIconImage(with: item.color ?? .systemPurple)
+        self.icon.image = UIImage(systemName: item.iconName ?? "moon.fill")
         checkboxImage.isHighlighted = false
         checkboxImage.image = UIImage(systemName: "xmark.square")
         checkboxImage.tintColor = .systemRed
@@ -165,19 +165,6 @@ class ToDoCell: UITableViewCell {
         taskName.strikeThrough(false)
         self.checkboxImage.isUserInteractionEnabled = true
         
-    }
-    
-    private func setupIconImage(with color: UIColor) {
-        switch color {
-        case .systemOrange:
-            icon.image = UIImage(systemName: "briefcase")
-        case UIColor(named: "taskGreen"):
-            icon.image = UIImage(systemName: "person")
-        case .systemPurple:
-            icon.image = UIImage(systemName: "books.vertical.circle")
-        default:
-            icon.image = UIImage(systemName: "person")
-        }
     }
 }
 

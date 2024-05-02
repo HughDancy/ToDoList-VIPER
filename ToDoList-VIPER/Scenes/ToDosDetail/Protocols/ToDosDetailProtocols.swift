@@ -20,7 +20,7 @@ protocol ToDosDetailPresenterProtocol: AnyObject {
     
     //VIEW -> PRESENTER
     func viewWillAppear()
-    func editToDo(title: String?, descriprion: String?, date: Date?, color: UIColor)
+    func editToDo(title: String?, descriprion: String?, date: Date?, color: UIColor, iconName: String)
     func whantDeleteToDo(_ toDo: ToDoObject)
 }
 
@@ -29,7 +29,7 @@ protocol ToDosDetailInteractorInputProtocol: AnyObject {
     var toDoItem: ToDoObject? { get set }
     
     //PRESENTER -> INTERACTOR
-    func editTask(title: String?, descriprion: String?, date: Date?, color: UIColor)
+    func editTask(title: String?, descriprion: String?, date: Date?, color: UIColor, iconName: String)
     func deleteTask(_ toDo: ToDoObject)
 }
 

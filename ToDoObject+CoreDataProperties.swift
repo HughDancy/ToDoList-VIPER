@@ -23,7 +23,7 @@ extension ToDoObject {
     @NSManaged public var doneStatus: Bool
     @NSManaged public var isOverdue: Bool
     @NSManaged public var color: UIColor?
-
+    @NSManaged public var iconName: String?
 }
 
 extension ToDoObject : Identifiable {

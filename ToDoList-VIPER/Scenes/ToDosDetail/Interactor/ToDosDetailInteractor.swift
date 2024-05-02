@@ -12,14 +12,15 @@ final class ToDosDetailInteractor: ToDosDetailInteractorInputProtocol {
     var toDoItem: ToDoObject?
     var storage = ToDoStorage.instance
     
-    func editTask(title: String?, descriprion: String?, date: Date?, color: UIColor) {
+    func editTask(title: String?, descriprion: String?, date: Date?, color: UIColor, iconName: String) {
         guard let task = toDoItem else { return }
         if title != nil && descriprion != nil && date != nil {
             storage.editToDoObject(item: task,
                                    newTitle: title ?? "Temp",
                                    newDescription: descriprion ?? "Temp",
                                    newDate: date ?? Date.today,
-                                   color: color)
+                                   color: color,
+                                   iconName: iconName)
             presenter?.showAllert(with: .allSave)
         } else {
             presenter?.showAllert(with: .error)

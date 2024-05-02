@@ -7,7 +7,12 @@
 
 import UIKit
 
-class CathegoryTableView: UITableView {
+class CategoryTableView: UITableView {
+    
+    lazy var categories: [TaskCategory] = {
+        let categories = TaskCategoryManager.manager.fetchCategories()
+        return categories
+    }()
     
     init(frame: CGRect, style: UITableView.Style, color: UIColor) {
         super.init(frame: frame, style: style)
@@ -24,22 +29,22 @@ class CathegoryTableView: UITableView {
         isScrollEnabled = false
         showsVerticalScrollIndicator = false
         separatorStyle = .none
-        register(CathegoryCell.self, forCellReuseIdentifier: CathegoryCell.reuseIdentifier)
+        register(CategoryCell.self, forCellReuseIdentifier: CategoryCell.reuseIdentifier)
     }
 }
 
-extension CathegoryTableView: UITableViewDataSource {
+extension CategoryTableView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ColorsItem.colorsStack.count
+        return categories.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CathegoryCell.reuseIdentifier, for: indexPath) as? CathegoryCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CategoryCell.reuseIdentifier, for: indexPath) as? CategoryCell else {
             return UITableViewCell()
         }
-        let cathegoryName = ["Работа", "Личное", "Иное"]
+        let category = categories[indexPath.row]
         cell.backgroundColor = UIColor(named: "coralColor")
-        cell.setupCell(with: ColorsItem.colorsStack[indexPath.row], title: cathegoryName[indexPath.row])
+        cell.setupCell(with: category.color, title: category.title)
         return cell
     }
 }

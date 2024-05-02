@@ -45,7 +45,7 @@ final class AddNewToDoController: SingleToDoController, AddNewToDoViewProtocol {
     //MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        cathegoryTableView.delegate = self
+        categoryTableView.delegate = self
     }
     
     //MARK: - Setup Hierarchy and Layout
@@ -57,8 +57,8 @@ final class AddNewToDoController: SingleToDoController, AddNewToDoViewProtocol {
         view.addSubview(dateStack)
         dateStack.addArrangedSubview(dateLabel)
         dateStack.addArrangedSubview(datePicker)
-        view.addSubview(cathegoryLabel)
-        view.addSubview(cathegoryTableView)
+        view.addSubview(categoryLabel)
+        view.addSubview(categoryTableView)
         view.addSubview(addNewToDoButton)
     }
     
@@ -91,13 +91,13 @@ final class AddNewToDoController: SingleToDoController, AddNewToDoViewProtocol {
             make.leading.equalToSuperview().inset(30)
         }
         
-        cathegoryLabel.snp.makeConstraints { make in
+        categoryLabel.snp.makeConstraints { make in
             make.top.equalTo(dateStack.snp.bottom).offset(10)
             make.leading.equalToSuperview().inset(30)
         }
         
-        cathegoryTableView.snp.makeConstraints { make in
-            make.top.equalTo(cathegoryLabel.snp.bottom).offset(10)
+        categoryTableView.snp.makeConstraints { make in
+            make.top.equalTo(categoryLabel.snp.bottom).offset(10)
             make.leading.trailing.equalToSuperview().inset(30)
             make.bottom.equalTo(addNewToDoButton.snp.top).inset(10)
         }
@@ -126,7 +126,8 @@ final class AddNewToDoController: SingleToDoController, AddNewToDoViewProtocol {
         presenter?.addNewToDo(with: nameOfTaskField.text,
                               description: descriptionText.text,
                               date: datePicker.date,
-                              colorCathegory: color ?? .systemPurple)
+                              colorCategory: color ?? .systemPurple,
+                              iconName: self.iconName ?? "moon.fill")
         self.makeNotification()
     }
     
@@ -143,15 +144,21 @@ final class AddNewToDoController: SingleToDoController, AddNewToDoViewProtocol {
 
 extension AddNewToDoController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch ColorsItem.colorsStack[indexPath.row] {
+        let categories = TaskCategoryManager.manager.fetchCategories()
+        let category = categories[indexPath.row]
+        switch category.color {
         case .systemOrange:
-            self.color = .systemOrange
+            self.setupColorAndIcon(color: category.color, icon: category.iconName)
+//            self.color = .systemOrange
         case UIColor(named: "taskGreen"):
-            self.color = .taskGreen
+            self.setupColorAndIcon(color: category.color, icon: category.iconName)
+//            self.color = .taskGreen
         case .systemPurple:
-            self.color = .systemPurple
+            self.setupColorAndIcon(color: category.color, icon: category.iconName)
+//            self.color = .systemPurple
         default:
-            self.color = .systemOrange
+//            self.color = .systemOrange
+            self.setupColorAndIcon(color: .systemOrange, icon: "moon.fill")
         }
     }
 }

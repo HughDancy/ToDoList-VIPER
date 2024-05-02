@@ -9,6 +9,7 @@ import UIKit
 
 class SingleToDoController: UIViewController {
     var color: UIColor?
+    var iconName: String?
     
     //MARK: - Base Outelts
     lazy var descriptionText: UITextView = {
@@ -42,12 +43,12 @@ class SingleToDoController: UIViewController {
         return picker
     }()
     
-    lazy var cathegoryLabel: UILabel = {
+    lazy var categoryLabel: UILabel = {
         let label = UILabel.createSimpleLabel(text: "Категория:", size: 20, width: .semibold, color: .systemBackground)
         return label
     }()
     
-    lazy var cathegoryTableView = CathegoryTableView(frame: .zero, style: .plain, color: UIColor(named: "coralColor") ?? .systemBackground)
+    lazy var categoryTableView = CategoryTableView(frame: .zero, style: .plain, color: UIColor(named: "coralColor") ?? .systemBackground)
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -70,12 +71,18 @@ class SingleToDoController: UIViewController {
     
     //MARK: - Setup TextView
     func setupTextView() { }
+    
+    //MARK: - Setup color and iconName
+    func setupColorAndIcon(color: UIColor, icon: String) {
+        self.color = color
+        self.iconName = icon
+    }
 
     //MARK: - Setup elements user interaction
     func setupUserInteracton(with bool: Bool) {
         descriptionText.isUserInteractionEnabled = bool
         datePicker.isUserInteractionEnabled = bool
-        cathegoryTableView.isUserInteractionEnabled = bool
+        categoryTableView.isUserInteractionEnabled = bool
     }
 }
 

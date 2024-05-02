@@ -67,8 +67,8 @@ final class ToDosDetailController: SingleToDoController {
         view.addSubview(dateStack)
         dateStack.addArrangedSubview(dateLabel)
         dateStack.addArrangedSubview(datePicker)
-        view.addSubview(cathegoryLabel)
-        view.addSubview(cathegoryTableView)
+        view.addSubview(categoryLabel)
+        view.addSubview(categoryTableView)
         view.addSubview(editButton)
         view.addSubview(deleteButton)
     }
@@ -92,13 +92,13 @@ final class ToDosDetailController: SingleToDoController {
             make.leading.equalToSuperview().inset(30)
         }
         
-        cathegoryLabel.snp.makeConstraints { make in
+        categoryLabel.snp.makeConstraints { make in
             make.top.equalTo(dateStack.snp.bottom).offset(10)
             make.leading.equalToSuperview().inset(30)
         }
         
-        cathegoryTableView.snp.makeConstraints { make in
-            make.top.equalTo(cathegoryLabel.snp.bottom).offset(10)
+        categoryTableView.snp.makeConstraints { make in
+            make.top.equalTo(categoryLabel.snp.bottom).offset(10)
             make.leading.trailing.equalToSuperview().inset(30)
             make.bottom.equalTo(editButton.snp.top).inset(10)
         }
@@ -118,7 +118,7 @@ final class ToDosDetailController: SingleToDoController {
     
     //MARK: - Setup Outlets
     override func setupOutlets() {
-        cathegoryTableView.delegate = self
+        categoryTableView.delegate = self
         setupUserInteracton(with: isEditButtonIsTapped["isTapped"] ?? false)
     }
     
@@ -156,7 +156,7 @@ final class ToDosDetailController: SingleToDoController {
     @objc private func saveEditToDo() {
         self.isEditButtonIsTapped["isTapped"] = false
         NotificationCenter.default.post(name: Notification.Name(rawValue: "TapEditButton"), object: nil, userInfo: self.isEditButtonIsTapped)
-        presenter?.editToDo(title: taskName.text, descriprion: descriptionText.text, date: datePicker.date, color: self.color ?? .systemPurple)
+        presenter?.editToDo(title: taskName.text, descriprion: descriptionText.text, date: datePicker.date, color: self.color ?? .systemPurple, iconName: self.iconName ?? "moon.fil")
         setupUserInteracton(with: isEditButtonIsTapped["isTapped"] ?? false)
         taskName.isUserInteractionEnabled = true
     }
@@ -178,11 +178,11 @@ extension ToDosDetailController: ToDosDetailViewProtocol {
         }
         switch item?.color {
         case .systemOrange:
-            cathegoryTableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .none)
+            categoryTableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .none)
         case .taskGreen:
-            cathegoryTableView.selectRow(at: IndexPath(row: 1, section: 0), animated: false, scrollPosition: .none)
+            categoryTableView.selectRow(at: IndexPath(row: 1, section: 0), animated: false, scrollPosition: .none)
         case .systemPurple:
-            cathegoryTableView.selectRow(at: IndexPath(row: 2, section: 0), animated: false, scrollPosition: .none)
+            categoryTableView.selectRow(at: IndexPath(row: 2, section: 0), animated: false, scrollPosition: .none)
         default:
             break
         }
@@ -192,13 +192,17 @@ extension ToDosDetailController: ToDosDetailViewProtocol {
     //MARK: - TableView Delegate extension
 extension ToDosDetailController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch ColorsItem.colorsStack[indexPath.row] {
+        let categories = TaskCategoryManager.manager.fetchCategories()
+        let category = categories[indexPath.row]
+        switch category.color {
         case .systemOrange:
-            self.color = .systemOrange
+            self.setupColorAndIcon(color: category.color, icon: category.iconName)
+//            self.color = .systemOrange
         case UIColor(named: "taskGreen"):
-            self.color = .taskGreen
+            self.setupColorAndIcon(color: category.color, icon: category.iconName)
+//            self.color = .taskGreen
         case .systemPurple:
-            self.color = .systemPurple
+            self.setupColorAndIcon(color: category.color, icon: category.iconName)
         default:
             self.color = .systemOrange
         }

@@ -8,7 +8,7 @@
 import UIKit
 
 class CategoryCell: UITableViewCell {
-    static let reuseIdentifier = "CategoryCell"
+    static let reuseIdentifier = "CathegoryCell"
     
     //MARK: - OUTELTS
     private lazy var containerView: UIView = {
@@ -23,7 +23,7 @@ class CategoryCell: UITableViewCell {
         return view
     }()
     
-    private lazy var categoryLabel = UILabel.createSimpleLabel(text: "", size: 15, width: .semibold, color: .label)
+    private lazy var cathegoryLabel = UILabel.createSimpleLabel(text: "", size: 15, width: .semibold, color: .label)
     
     private lazy var circleView: UIView = {
         let view = UIView()
@@ -61,7 +61,7 @@ class CategoryCell: UITableViewCell {
     //MARK: - Setup Hierarchy
     private func setupHierarcy() {
         contentView.addSubview(containerView)
-        containerView.addSubview(categoryLabel)
+        containerView.addSubview(cathegoryLabel)
         containerView.addSubview(circleView)
     }
     
@@ -71,7 +71,7 @@ class CategoryCell: UITableViewCell {
             make.top.leading.trailing.bottom.equalToSuperview().inset(5)
         }
         
-        categoryLabel.snp.makeConstraints { make in
+        cathegoryLabel.snp.makeConstraints { make in
             make.centerY.equalTo(containerView.safeAreaLayoutGuide.snp.centerY)
             make.leading.equalTo(containerView.safeAreaLayoutGuide.snp.leading).offset(10)
         }
@@ -86,7 +86,7 @@ class CategoryCell: UITableViewCell {
     
     func setupCell(with color: UIColor, title: String) {
         self.circleView.backgroundColor = color
-        self.categoryLabel.text = title
+        self.cathegoryLabel.text = title
     }
 }
 
