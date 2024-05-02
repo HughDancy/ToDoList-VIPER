@@ -65,6 +65,7 @@
 		D8B1E9DF2BA84CB100D455AF /* AddNewToDoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9DE2BA84CB100D455AF /* AddNewToDoRouter.swift */; };
 		D8B1E9E12BAB10BA00D455AF /* CathegoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B1E9E02BAB10BA00D455AF /* CathegoryCell.swift */; };
 		D8B85D6A2BE3891B0015F2B2 /* TaskCategoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B85D692BE3891B0015F2B2 /* TaskCategoryManager.swift */; };
+		D8B85D6C2BE398740015F2B2 /* MainScreenCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B85D6B2BE398740015F2B2 /* MainScreenCollectionView.swift */; };
 		D8BDEAB82BDA16A000C3BE55 /* CustomAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BDEAB72BDA16A000C3BE55 /* CustomAlertController.swift */; };
 		D8BDEABA2BDA178200C3BE55 /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BDEAB92BDA178200C3BE55 /* CustomAlertView.swift */; };
 		D8BDEABC2BDC9C8E00C3BE55 /* CategoryTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BDEABB2BDC9C8E00C3BE55 /* CategoryTableView.swift */; };
@@ -196,6 +197,7 @@
 		D8B1E9DE2BA84CB100D455AF /* AddNewToDoRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewToDoRouter.swift; sourceTree = "<group>"; };
 		D8B1E9E02BAB10BA00D455AF /* CathegoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CathegoryCell.swift; sourceTree = "<group>"; };
 		D8B85D692BE3891B0015F2B2 /* TaskCategoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCategoryManager.swift; sourceTree = "<group>"; };
+		D8B85D6B2BE398740015F2B2 /* MainScreenCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenCollectionView.swift; sourceTree = "<group>"; };
 		D8BDEAB72BDA16A000C3BE55 /* CustomAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertController.swift; sourceTree = "<group>"; };
 		D8BDEAB92BDA178200C3BE55 /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		D8BDEABB2BDC9C8E00C3BE55 /* CategoryTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableView.swift; sourceTree = "<group>"; };
@@ -912,6 +914,7 @@
 				D8473BE62BB57CEC0063F87A /* CalendarCollection.swift */,
 				D8AB92242BBC063400826A4E /* SingleToDoController.swift */,
 				D8BDEABB2BDC9C8E00C3BE55 /* CategoryTableView.swift */,
+				D8B85D6B2BE398740015F2B2 /* MainScreenCollectionView.swift */,
 			);
 			path = CustomClasses;
 			sourceTree = "<group>";
@@ -1088,6 +1091,7 @@
 				D8F11C622B5669AC00D2282D /* MockViewController.swift in Sources */,
 				D85C57EC2B57D0AD00023B04 /* OnboardingInteractor.swift in Sources */,
 				D8B1E9E12BAB10BA00D455AF /* CathegoryCell.swift in Sources */,
+				D8B85D6C2BE398740015F2B2 /* MainScreenCollectionView.swift in Sources */,
 				D8473BE32BB2C5DF0063F87A /* CalendarCollectionCell.swift in Sources */,
 				D864B5F62BAC0B7100650E8A /* MainScreenView.swift in Sources */,
 				D8473BE72BB57CEC0063F87A /* CalendarCollection.swift in Sources */,
