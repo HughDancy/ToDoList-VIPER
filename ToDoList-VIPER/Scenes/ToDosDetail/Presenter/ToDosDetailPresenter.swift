@@ -17,7 +17,7 @@ final class ToDosDetailPresenter: ToDosDetailPresenterProtocol {
         view?.showToDoItem(task)
     }
     
-    func editToDo(title: String?, descriprion: String?, date: Date?, color: String) {
+    func editToDo(title: String?, descriprion: String?, date: Date?, color: UIColor) {
         interactor?.editTask(title: title, descriprion: descriprion, date: date , color: color)
     }
     

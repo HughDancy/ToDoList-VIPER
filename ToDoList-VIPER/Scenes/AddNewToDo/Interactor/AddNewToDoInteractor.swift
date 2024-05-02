@@ -5,13 +5,13 @@
 //  Created by Борис Киселев on 18.03.2024.
 //
 
-import Foundation
+import UIKit.UIColor
 
 final class AddNewToDoInteractor: AddNewToDoInteractorProtocol {
     weak var presenter: AddNewToDoPresenterProtocol?
     var storage = ToDoStorage.instance
     
-    func addNewToDo(with name: String?, description: String?, date: Date?, mark: String) {
+    func addNewToDo(with name: String?, description: String?, date: Date?, colorCathegory: UIColor) {
         let choosenDate = Calendar.current.startOfDay(for: date ?? Date.today)
         let compareDate = Calendar.current.startOfDay(for: Date.today)
         let overdueStatus: Bool = choosenDate >= compareDate ? false : true
@@ -22,7 +22,7 @@ final class AddNewToDoInteractor: AddNewToDoInteractorProtocol {
                                   content: self.cehckDescription(description ?? "Описание задачи"),
                                   date: date ?? Date.today,
                                   isOverdue: overdueStatus,
-                                  color: mark)
+                                  color: colorCathegory)
             presenter?.goBackToMain()
         } else {
             presenter?.showAlert()

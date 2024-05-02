@@ -156,7 +156,7 @@ final class ToDosDetailController: SingleToDoController {
     @objc private func saveEditToDo() {
         self.isEditButtonIsTapped["isTapped"] = false
         NotificationCenter.default.post(name: Notification.Name(rawValue: "TapEditButton"), object: nil, userInfo: self.isEditButtonIsTapped)
-        presenter?.editToDo(title: taskName.text, descriprion: descriptionText.text, date: datePicker.date, color: self.color?.rawValue ?? "systemOrange")
+        presenter?.editToDo(title: taskName.text, descriprion: descriptionText.text, date: datePicker.date, color: self.color ?? .systemPurple)
         setupUserInteracton(with: isEditButtonIsTapped["isTapped"] ?? false)
         taskName.isUserInteractionEnabled = true
     }
@@ -177,11 +177,11 @@ extension ToDosDetailController: ToDosDetailViewProtocol {
             self.datePicker.date = toDo.date ?? Date.today
         }
         switch item?.color {
-        case "systemOrange":
+        case .systemOrange:
             cathegoryTableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .none)
-        case "taskGreen":
+        case .taskGreen:
             cathegoryTableView.selectRow(at: IndexPath(row: 1, section: 0), animated: false, scrollPosition: .none)
-        case "systemPurple":
+        case .systemPurple:
             cathegoryTableView.selectRow(at: IndexPath(row: 2, section: 0), animated: false, scrollPosition: .none)
         default:
             break
@@ -194,13 +194,13 @@ extension ToDosDetailController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch ColorsItem.colorsStack[indexPath.row] {
         case .systemOrange:
-            self.color = ColorsItemResult.systemOrange
+            self.color = .systemOrange
         case UIColor(named: "taskGreen"):
-            self.color = ColorsItemResult.taskGreen
+            self.color = .taskGreen
         case .systemPurple:
-            self.color = ColorsItemResult.systemPurple
+            self.color = .systemPurple
         default:
-            self.color = ColorsItemResult.systemOrange
+            self.color = .systemOrange
         }
     }
 }

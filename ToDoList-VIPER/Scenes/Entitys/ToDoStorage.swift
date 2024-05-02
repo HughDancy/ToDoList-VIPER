@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import UIKit.UIColor
 
 final class ToDoStorage {
     static let instance = ToDoStorage()
@@ -25,7 +26,7 @@ final class ToDoStorage {
     private lazy var viewContext: NSManagedObjectContext = persistentContainer.viewContext
     
     //MARK: - CoreData create new ToDoObject
-    func createNewToDo(title: String, content: String, date: Date, isOverdue: Bool, color: String) {
+    func createNewToDo(title: String, content: String, date: Date, isOverdue: Bool, color: UIColor) {
         let newToDo = ToDoObject(context: viewContext)
         newToDo.title = title
         newToDo.descriptionTitle = content
@@ -55,7 +56,7 @@ final class ToDoStorage {
     }
     
     //MARK: - CoreData edit ToDoObject
-    func editToDoObject(item: ToDoObject, newTitle: String, newDescription: String, newDate: Date, color: String) {
+    func editToDoObject(item: ToDoObject, newTitle: String, newDescription: String, newDate: Date, color: UIColor) {
         item.title = newTitle
         item.descriptionTitle = newDescription
         item.date = newDate

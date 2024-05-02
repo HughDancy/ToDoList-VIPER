@@ -8,7 +8,7 @@
 
 import Foundation
 import CoreData
-
+import UIKit.UIColor
 
 extension ToDoObject {
 
@@ -22,7 +22,7 @@ extension ToDoObject {
     @NSManaged public var dateTitle: String?
     @NSManaged public var doneStatus: Bool
     @NSManaged public var isOverdue: Bool
-    @NSManaged public var color: String
+    @NSManaged public var color: UIColor?
 
 }
 

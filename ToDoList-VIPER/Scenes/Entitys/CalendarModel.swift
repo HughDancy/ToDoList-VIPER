@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit.UIColor
 
 class CalendarModel {
     func getDaysArray(date: Date) -> [Date] {
@@ -26,15 +27,15 @@ class CalendarModel {
         for task in tasks {
             for (index, date) in tempDateModelsArray.enumerated() {
                 if date.dateString == task.dateTitle ?? "" {
-                    if task.color == "systemOrange" {
+                    if task.color == .systemOrange {
                         dateModelsArray[index].isWorkTask = true
                     }
                     
-                    if task.color == "taskGreen" {
+                    if task.color == .taskGreen {
                         dateModelsArray[index].isPersonalTask = true
                     }
                     
-                    if task.color == "systemPurple" {
+                    if task.color == .systemPurple {
                         dateModelsArray[index].isOtherTask = true
                     }
                 }

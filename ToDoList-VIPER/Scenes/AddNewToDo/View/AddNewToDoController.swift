@@ -126,7 +126,7 @@ final class AddNewToDoController: SingleToDoController, AddNewToDoViewProtocol {
         presenter?.addNewToDo(with: nameOfTaskField.text,
                               description: descriptionText.text,
                               date: datePicker.date,
-                              mark: color?.rawValue ?? ColorsItemResult.systemPurple.rawValue)
+                              colorCathegory: color ?? .systemPurple)
         self.makeNotification()
     }
     
@@ -145,13 +145,13 @@ extension AddNewToDoController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch ColorsItem.colorsStack[indexPath.row] {
         case .systemOrange:
-            self.color = ColorsItemResult.systemOrange
+            self.color = .systemOrange
         case UIColor(named: "taskGreen"):
-            self.color = ColorsItemResult.taskGreen
+            self.color = .taskGreen
         case .systemPurple:
-            self.color = ColorsItemResult.systemPurple
+            self.color = .systemPurple
         default:
-            self.color = ColorsItemResult.systemOrange
+            self.color = .systemOrange
         }
     }
 }

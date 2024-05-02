@@ -137,9 +137,9 @@ class ToDoCell: UITableViewCell {
             self.setupOverdueCell(with: item)
         } else {
             self.taskName.text = item.title
-            self.iconBox.backgroundColor = UIColor.convertStringToColor(item.color)
+            self.iconBox.backgroundColor = item.color
             self.toDoItem = item
-            self.setupIconImage(with: UIColor.convertStringToColor(item.color))
+            self.setupIconImage(with: item.color ?? .systemPurple)
             
             if item.doneStatus == true {
                 self.makeItDone()
@@ -155,9 +155,9 @@ class ToDoCell: UITableViewCell {
     
     private func setupOverdueCell(with item: ToDoObject) {
         self.taskName.text = item.title
-        self.iconBox.backgroundColor = UIColor.convertStringToColor(item.color)
+        self.iconBox.backgroundColor = item.color
         self.toDoItem = item
-        self.setupIconImage(with: UIColor.convertStringToColor(item.color))
+        self.setupIconImage(with: item.color ?? .systemPurple)
         checkboxImage.isHighlighted = false
         checkboxImage.image = UIImage(systemName: "xmark.square")
         checkboxImage.tintColor = .systemRed

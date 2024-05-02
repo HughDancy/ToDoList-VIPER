@@ -12,8 +12,8 @@ final class AddNewToDoPresenter: AddNewToDoPresenterProtocol {
     var interactor: AddNewToDoInteractorProtocol?
     var router: AddNewToDoRouterProtocol?
     
-    func addNewToDo(with name: String?, description: String?, date: Date?, mark: String) {
-        interactor?.addNewToDo(with: name, description: description, date: date, mark: mark)
+    func addNewToDo(with name: String?, description: String?, date: Date?, colorCathegory: UIColor) {
+        interactor?.addNewToDo(with: name, description: description, date: date, colorCathegory: colorCathegory)
     }
     
     func goBackToMain() {

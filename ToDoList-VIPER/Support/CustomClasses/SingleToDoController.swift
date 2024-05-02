@@ -8,7 +8,7 @@
 import UIKit
 
 class SingleToDoController: UIViewController {
-    var color: ColorsItemResult?
+    var color: UIColor?
     
     //MARK: - Base Outelts
     lazy var descriptionText: UITextView = {
