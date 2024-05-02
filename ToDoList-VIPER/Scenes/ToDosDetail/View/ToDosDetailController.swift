@@ -194,18 +194,7 @@ extension ToDosDetailController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let categories = TaskCategoryManager.manager.fetchCategories()
         let category = categories[indexPath.row]
-        switch category.color {
-        case .systemOrange:
-            self.setupColorAndIcon(color: category.color, icon: category.iconName)
-//            self.color = .systemOrange
-        case UIColor(named: "taskGreen"):
-            self.setupColorAndIcon(color: category.color, icon: category.iconName)
-//            self.color = .taskGreen
-        case .systemPurple:
-            self.setupColorAndIcon(color: category.color, icon: category.iconName)
-        default:
-            self.color = .systemOrange
-        }
+        self.setupColorAndIcon(color: category.color, icon: category.iconName)
     }
 }
 

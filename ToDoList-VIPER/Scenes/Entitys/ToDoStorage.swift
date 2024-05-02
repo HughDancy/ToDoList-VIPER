@@ -162,11 +162,12 @@ final class ToDoStorage {
         case .today, .tommorow:
             let predicate = NSPredicate(format: "%K == %@",
                                         #keyPath(ToDoObject.dateTitle), DateFormatter.getStringFromDate(from: date))
-            return [predicate]
+            let donePredicate = NSPredicate(format: "%K == %@", "doneStatus", NSNumber(value: false))
+            return [predicate, donePredicate]
         case .done:
             let donePredicate = NSPredicate(format: "%K == %@", "doneStatus", NSNumber(value: true))
-            let datePredicate = NSPredicate(format: "%K == %@", #keyPath(ToDoObject.dateTitle), DateFormatter.getStringFromDate(from: date))
-            return [donePredicate, datePredicate]
+//            let datePredicate = NSPredicate(format: "%K == %@", #keyPath(ToDoObject.dateTitle), DateFormatter.getStringFromDate(from: date))
+            return [donePredicate]
         case .overdue:
             let donePredicate = NSPredicate(format: "doneStatus == NO")
             let overduePredicate = NSPredicate(format: "isOverdue == TRUE")

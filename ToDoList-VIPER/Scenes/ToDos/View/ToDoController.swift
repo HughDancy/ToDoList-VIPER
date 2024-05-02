@@ -73,6 +73,8 @@ final class ToDoController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.addCustomBackButton()
         setupCalendarColletcion()
+        print("Selected date is - \(selectedDate)")
+        print("Center date is - \(self.centerDate)")
     }
     
     override func viewDidLoad() {

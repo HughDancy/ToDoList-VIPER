@@ -21,15 +21,7 @@ class MainToDoCell: UICollectionViewCell {
         container.layer.shadowOpacity = 0.3
         return container
     }()
-    
-    private lazy var arrowIcon: UIImageView = {
-        let arrow = UIImageView()
-        arrow.image = UIImage(systemName: "arrow.right.circle.fill")
-        arrow.tintColor = .systemGreen
-        arrow.backgroundColor = .systemBackground
-        return arrow
-    }()
-    
+
     private lazy var numbersLabel: UILabel = {
         let numbers = UILabel()
         numbers.font = UIFont.systemFont(ofSize: UIScreen.main.bounds.height > 700 ? 60 : 30, weight: .bold)
@@ -81,7 +73,6 @@ class MainToDoCell: UICollectionViewCell {
         }
         
         toDosLabel.snp.makeConstraints { make in
-//            make.top.equalTo(numbersLabel.snp.bottom).offset(3)
             make.top.equalTo(numbersLabel.snp.bottom)
             make.centerX.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(10)
