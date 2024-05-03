@@ -10,7 +10,10 @@ import Foundation
 extension Date {
    static var tomorrow:  Date { return Date().dayAfter }
     
-   static var today: Date { return Date() }
+   static var today: Date { 
+       let calendar = Calendar.current
+       let date = calendar.startOfDay(for: Date())
+       return date }
     
     static var yesterday: Date {
         let yersterday =  Calendar.current.date(byAdding: .day, value: -1, to: Date())!
@@ -70,7 +73,9 @@ extension Date {
     func convertDateModel(for date: Date) -> DateItem {
         let dayOfWeek = getWeekDay(date: date)
         let numberOfDay = getNumberDayOfWeek(date: date)
-        return DateItem(dayOfWeek: dayOfWeek,
+        let date = Calendar.current.startOfDay(for: date)
+        return DateItem(date: date,
+                        dayOfWeek: dayOfWeek,
                         numberOfDay: numberOfDay,
                         monthName: getMonthName(date: date),
                         dateString: dateFormattedMMyyyy())

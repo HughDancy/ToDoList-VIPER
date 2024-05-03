@@ -23,7 +23,7 @@ protocol ToDosPresenterProtocol: AnyObject {
     //VIEW -> PRESENTER
     func viewWillAppear()
     func fetchToDos(date: Date)
-    func updateToDosForDay(_ date: String)
+    func updateToDosForDay(_ date: Date)
     func doneToDo(_ task: ToDoObject)
     func deleteToDo(_ task: ToDoObject)
     func goToTask(_ task: ToDoObject)

@@ -8,6 +8,7 @@
 import Foundation
 
 struct DateItem {
+    let date: Date
     let dayOfWeek: String
     let numberOfDay: String
     let monthName: String

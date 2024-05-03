@@ -14,7 +14,7 @@ final class ToDoController: UIViewController {
     var presenter: ToDosPresenterProtocol?
     private let calendarModel = CalendarModel()
     private var centerDate = Date()
-    private var selectedDate = String()
+    private var selectedDate = Date()
     
     private var toDoTasks: [ToDoObject] = [] {
         didSet {
@@ -79,6 +79,15 @@ final class ToDoController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupView()
+    }
+    
+    deinit {
+        print("ToDoController is ☠️")
+    }
+    
+    //MARK:  - Setup View
+    private func setupView() {
         presenter?.viewWillAppear()
         self.getCurrentDay()
         view.backgroundColor = UIColor(named: "tasksBackground")
@@ -86,18 +95,13 @@ final class ToDoController: UIViewController {
         setupNavigationBar()
     }
     
-    deinit {
-        print("ToDoController is ☠️")
-    }
-    
     //MARK: - Setup outlets
     private func setupCalendarColletcion() {
         DispatchQueue.main.async {
-           
             let calendarModel = CalendarModel()
             let daysArray = calendarModel.getWeekForCalendar(date: self.centerDate)
             self.calendarView.calendar.setDaysArray(days: daysArray)
-            self.calendarView.calendar.selectedDate = DateFormatter.getStringFromDate(from: self.centerDate)
+           
             self.calendarView.calendar.scrollToItem(at: [0, 10], at: .centeredHorizontally, animated: false)
         }
     }
@@ -176,20 +180,22 @@ final class ToDoController: UIViewController {
     private func getCurrentDay() {
         switch presenter?.date {
         case .today, .done:
-            self.centerDate = Date.today
-            self.selectedDate = DateFormatter.getStringFromDate(from: centerDate)
+            setupCalendarDefault(date: Date.today)
         case .tommorow:
-            self.centerDate = Date.tomorrow
-            self.selectedDate = DateFormatter.getStringFromDate(from: centerDate)
+            setupCalendarDefault(date: Date.tomorrow)
         case .overdue:
-            self.centerDate = Date.yesterday
-            self.selectedDate = DateFormatter.getStringFromDate(from: centerDate)
+            setupCalendarDefault(date: Date.yesterday)
         default:
             self.centerDate = Date.tomorrow
         }
     }
     
-    //MARK: - Make notification observers for update collection
+    private func setupCalendarDefault(date: Date) {
+        self.centerDate = date
+        self.selectedDate = centerDate
+    }
+    
+    //MARK: - Make notification observers for update tableView and CalendarCollection
     private func setupNotificationObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateTables), name: Notification.Name(rawValue: "UpdateTables"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(makeItDone), name: Notification.Name(rawValue: "DoneTask") , object: nil)
@@ -212,14 +218,11 @@ final class ToDoController: UIViewController {
         self.calendarView.calendar.reloadData()
     }
     
+    
     @objc func makeItDone(notification: Notification) {
         guard let doneInfo = notification.userInfo else { return }
         guard let item = doneInfo["doneItem"] as? ToDoObject else { return }
         self.presenter?.doneToDo(item)
-    }
-    
-    func makeNotification() {
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "UpdateTables"), object: nil)
     }
     
     //MARK: - Get label for module
@@ -247,17 +250,21 @@ final class ToDoController: UIViewController {
 }
 
 //MARK: - TableView Extension
-extension ToDoController: UITableViewDelegate, UITableViewDataSource {
+extension ToDoController:  UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return toDoTasks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ToDoCell.reuseIdentifier, for: indexPath) as? ToDoCell
-        cell?.setupCell(with: toDoTasks[indexPath.row], status: self.presenter?.date ?? ToDoListStatus.tommorow)
-        return cell ?? UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ToDoCell.reuseIdentifier, for: indexPath) as? ToDoCell else  {
+            return UITableViewCell()
+        }
+        cell.setupCell(with: toDoTasks[indexPath.row], status: self.presenter?.date ?? ToDoListStatus.tommorow)
+        return cell
     }
-    
+}
+
+extension ToDoController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let toDo = toDoTasks[indexPath.row]
         presenter?.goToTask(toDo)
@@ -300,7 +307,7 @@ extension ToDoController: CalendarCollectionViewDelegate {
         updateData(day: 7, index: 13)
     }
     
-    func updateTasks(with data: String) {
+    func updateTasks(with data: Date) {
         self.selectedDate = data
         presenter?.updateToDosForDay(data)
         toDoTable.reloadData()

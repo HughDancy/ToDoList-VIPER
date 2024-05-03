@@ -123,9 +123,10 @@ final class AddNewToDoController: SingleToDoController, AddNewToDoViewProtocol {
     
     //MARK: - Buttons Action
     @objc func addNewToDo() {
+        let selectedDate = Calendar.current.startOfDay(for: datePicker.date)
         presenter?.addNewToDo(with: nameOfTaskField.text,
                               description: descriptionText.text,
-                              date: datePicker.date,
+                              date: selectedDate,
                               colorCategory: color ?? .systemPurple,
                               iconName: self.iconName ?? "moon.fill")
         self.makeNotification()

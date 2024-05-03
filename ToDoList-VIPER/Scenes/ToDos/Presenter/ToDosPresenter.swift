@@ -23,10 +23,10 @@ final class ToDosPresenter: ToDosPresenterProtocol {
         interactor?.fetchTask(date: date, status: status)
     }
     
-    func updateToDosForDay(_ date: String) {
+    func updateToDosForDay(_ date: Date) {
         guard let status = self.date else { return }
-        let dayDate = DateFormatter.getDateFromString(date)
-        interactor?.fetchTask(date: dayDate, status: status)
+//        let dayDate = DateFormatter.getDateFromString(date)
+        interactor?.fetchTask(date: date, status: status)
     }
     
     func doneToDo(_ task: ToDoObject) {

@@ -10,16 +10,20 @@ import UIKit
 protocol CalendarCollectionViewDelegate: AnyObject {
     func scrollLeft()
     func scrollRight()
-    func updateTasks(with data: String)
+    func updateTasks(with data: Date)
 }
 
 class CalendarCollectionView: UICollectionView {
-    
-    var selectedDate: String = DateFormatter.getStringFromDate(from: Date.tomorrow)
+    //MARK: - Properties
     private let layoutCollection = UICollectionViewFlowLayout()
     var selectedUserCell = 10
     
-    private var centerDate = Date()
+    private var centerDate: Date {
+        let calendar = Calendar.current
+        let date = calendar.startOfDay(for: Date())
+        return date
+    }
+    
     weak var calendarDelegate: CalendarCollectionViewDelegate?
     var totalSquares = [DateItem]()
     
@@ -72,7 +76,7 @@ class CalendarCollectionView: UICollectionView {
     }
 }
    
-extension CalendarCollectionView: UICollectionViewDelegate, UICollectionViewDataSource {
+extension CalendarCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         totalSquares.count
     }
@@ -92,17 +96,19 @@ extension CalendarCollectionView: UICollectionViewDelegate, UICollectionViewData
         totalSquares.count
     }
     
+}
+
+extension CalendarCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedUserCell = indexPath.row
-        selectedDate = totalSquares[indexPath.item].dateString
-        calendarDelegate?.updateTasks(with: totalSquares[indexPath.row].dateString)
+        calendarDelegate?.updateTasks(with: totalSquares[indexPath.row].date)
     }
 }
 
 extension CalendarCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = frame.width / 7.7
-        let height = frame.height - 25.0 //early - 23.0
+        let height = frame.height - 25.0 //early was - 23.0
         return CGSize(width: width, height: height)
     }
 }
