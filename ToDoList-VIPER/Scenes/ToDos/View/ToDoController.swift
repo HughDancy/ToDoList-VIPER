@@ -80,6 +80,7 @@ final class ToDoController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.viewWillAppear()
+        self.getCurrentDay()
         view.backgroundColor = UIColor(named: "tasksBackground")
         setupOtlets()
         setupNavigationBar()
@@ -92,7 +93,7 @@ final class ToDoController: UIViewController {
     //MARK: - Setup outlets
     private func setupCalendarColletcion() {
         DispatchQueue.main.async {
-            self.getCurrentDay()
+           
             let calendarModel = CalendarModel()
             let daysArray = calendarModel.getWeekForCalendar(date: self.centerDate)
             self.calendarView.calendar.setDaysArray(days: daysArray)
@@ -176,10 +177,13 @@ final class ToDoController: UIViewController {
         switch presenter?.date {
         case .today, .done:
             self.centerDate = Date.today
+            self.selectedDate = DateFormatter.getStringFromDate(from: centerDate)
         case .tommorow:
             self.centerDate = Date.tomorrow
+            self.selectedDate = DateFormatter.getStringFromDate(from: centerDate)
         case .overdue:
             self.centerDate = Date.yesterday
+            self.selectedDate = DateFormatter.getStringFromDate(from: centerDate)
         default:
             self.centerDate = Date.tomorrow
         }
@@ -202,7 +206,8 @@ final class ToDoController: UIViewController {
     
     private func updateCalendar() {
         let calendarModel = CalendarModel()
-        let daysArray = calendarModel.getWeekForCalendar(date: self.centerDate)
+        let daysArray = calendarModel.getWeekForCalendar(date: centerDate)
+        print("In update calendar date is - \(selectedDate)")
         self.calendarView.calendar.setDaysArray(days: daysArray)
         self.calendarView.calendar.reloadData()
     }

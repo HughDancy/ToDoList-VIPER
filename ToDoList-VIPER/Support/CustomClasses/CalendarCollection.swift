@@ -83,6 +83,7 @@ extension CalendarCollectionView: UICollectionViewDelegate, UICollectionViewData
         if indexPath.row == selectedUserCell {
             selectItem(at: [0, selectedUserCell], animated: false, scrollPosition: [])
             cell.isSelected = true
+            print("Selected index is - \(selectedUserCell). Total indexes - \(totalSquares.count)")
         }
         return cell
     }
