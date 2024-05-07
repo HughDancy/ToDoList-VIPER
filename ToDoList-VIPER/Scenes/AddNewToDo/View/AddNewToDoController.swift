@@ -138,8 +138,8 @@ final class AddNewToDoController: SingleToDoController, AddNewToDoViewProtocol {
     
     //MARK: - Notification
     func makeNotification() {
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "UpdateTables"), object: nil)
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "UpdateMainScreenData"), object: nil)
+        NotificationCenter.default.post(name: NotificationNames.updateTables.name, object: nil)
+        NotificationCenter.default.post(name: NotificationNames.updateMainScreen.name, object: nil)
     }
 }
 

@@ -179,7 +179,7 @@ extension ToDoCell {
         if self.toDoItem?.doneStatus == false {
             self.makeItDone()
             let userInfo: [String: ToDoObject?] = ["doneItem" : self.toDoItem]
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "DoneTask"), object: nil, userInfo: userInfo as [AnyHashable : Any])
+            NotificationCenter.default.post(name: NotificationNames.doneToDo.name, object: nil, userInfo: userInfo as [AnyHashable : Any])
         }
     }
     

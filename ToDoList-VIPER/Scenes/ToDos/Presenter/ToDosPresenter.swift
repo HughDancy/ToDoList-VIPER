@@ -25,7 +25,6 @@ final class ToDosPresenter: ToDosPresenterProtocol {
     
     func updateToDosForDay(_ date: Date) {
         guard let status = self.date else { return }
-//        let dayDate = DateFormatter.getDateFromString(date)
         interactor?.fetchTask(date: date, status: status)
     }
     

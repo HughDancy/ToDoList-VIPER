@@ -33,6 +33,7 @@
 		D86D45062AFB933000894774 /* ToDoList_VIPERUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D45052AFB933000894774 /* ToDoList_VIPERUITests.swift */; };
 		D86D45082AFB933000894774 /* ToDoList_VIPERUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D45072AFB933000894774 /* ToDoList_VIPERUITestsLaunchTests.swift */; };
 		D86D45162AFB947B00894774 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D86D45152AFB947B00894774 /* SnapKit */; };
+		D87087D42BEA35BB00EEDDD7 /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87087D32BEA35BB00EEDDD7 /* NotificationNames.swift */; };
 		D87474552B97176C00BF4866 /* CircleBaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87474542B97176C00BF4866 /* CircleBaseButton.swift */; };
 		D87474592B99A28200BF4866 /* credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = D87474582B99A28200BF4866 /* credentials.plist */; };
 		D874745B2B99A2CE00BF4866 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D874745A2B99A2CE00BF4866 /* GoogleService-Info.plist */; };
@@ -165,6 +166,7 @@
 		D86D45012AFB933000894774 /* ToDoList-VIPERUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ToDoList-VIPERUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D86D45052AFB933000894774 /* ToDoList_VIPERUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoList_VIPERUITests.swift; sourceTree = "<group>"; };
 		D86D45072AFB933000894774 /* ToDoList_VIPERUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoList_VIPERUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D87087D32BEA35BB00EEDDD7 /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
 		D87474542B97176C00BF4866 /* CircleBaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleBaseButton.swift; sourceTree = "<group>"; };
 		D87474582B99A28200BF4866 /* credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = credentials.plist; sourceTree = "<group>"; };
 		D874745A2B99A2CE00BF4866 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -469,6 +471,7 @@
 				D8473BEA2BB5A6250063F87A /* CalendarModel.swift */,
 				D8BDEABF2BE3658200C3BE55 /* ColorTransformer.swift */,
 				D8B85D692BE3891B0015F2B2 /* TaskCategoryManager.swift */,
+				D87087D32BEA35BB00EEDDD7 /* NotificationNames.swift */,
 			);
 			path = Entitys;
 			sourceTree = "<group>";
@@ -1151,6 +1154,7 @@
 				D85C57EE2B57D16300023B04 /* OnboardingRouter.swift in Sources */,
 				D874745D2B99A95600BF4866 /* RegistrationController.swift in Sources */,
 				D8B1E9DB2BA8479E00D455AF /* AddNewToDoPresenter.swift in Sources */,
+				D87087D42BEA35BB00EEDDD7 /* NotificationNames.swift in Sources */,
 				D8E9F8A72B04D58900A3F3FC /* UIButton + EXT.swift in Sources */,
 				D8C19ED02B90B333004BCDDD /* SignInController.swift in Sources */,
 				D85C5DB02B614E2F00F548AA /* LoginProtocols.swift in Sources */,

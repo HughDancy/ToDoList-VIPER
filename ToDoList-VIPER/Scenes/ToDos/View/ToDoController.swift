@@ -73,7 +73,7 @@ final class ToDoController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.addCustomBackButton()
         setupCalendarColletcion()
-        print("Selected date is - \(selectedDate)")
+//        print("Selected date is - \(selectedDate)")
         print("Center date is - \(self.centerDate)")
     }
     
@@ -192,18 +192,18 @@ final class ToDoController: UIViewController {
     
     private func setupCalendarDefault(date: Date) {
         self.centerDate = date
-        self.selectedDate = centerDate
+//        self.selectedDate = centerDate
     }
     
     //MARK: - Make notification observers for update tableView and CalendarCollection
     private func setupNotificationObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(updateTables), name: Notification.Name(rawValue: "UpdateTables"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(makeItDone), name: Notification.Name(rawValue: "DoneTask") , object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTables), name: NotificationNames.updateTables.name, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(makeItDone), name: NotificationNames.doneToDo.name , object: nil)
     }
     
     @objc func updateTables(notification: Notification) {
         DispatchQueue.main.async {
-            self.presenter?.updateToDosForDay(self.selectedDate)
+            self.presenter?.updateToDosForDay(self.centerDate)
             self.toDoTable.reloadData()
             self.updateCalendar()
             self.tabBarController?.tabBar.isHidden = false
@@ -308,7 +308,7 @@ extension ToDoController: CalendarCollectionViewDelegate {
     }
     
     func updateTasks(with data: Date) {
-        self.selectedDate = data
+        self.centerDate = data
         presenter?.updateToDosForDay(data)
         toDoTable.reloadData()
     }

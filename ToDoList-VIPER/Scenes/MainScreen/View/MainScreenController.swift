@@ -54,7 +54,7 @@ final class MainScreenController: UIViewController {
  
     //MARK: - Notification
     func subcribeToNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(mustUpdateData), name: Notification.Name("UpdateMainScreenData"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(mustUpdateData), name: NotificationNames.updateMainScreen.name, object: nil)
     }
     
     @objc func mustUpdateData() {

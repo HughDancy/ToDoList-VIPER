@@ -52,14 +52,18 @@ final class ToDosDetailController: SingleToDoController {
         presenter?.viewWillAppear()
         tabBarController?.tabBar.isHidden = true
         self.navigationController?.addCustomBackButton()
-        NotificationCenter.default.addObserver(self, selector: #selector(changeEditButtonState), name: Notification.Name(rawValue: "TapEditButton"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(changeEditButtonState), name: NotificationNames.tapEditButton.name, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "UpdateTables"), object: nil)
+        NotificationCenter.default.post(name: NotificationNames.updateTables.name, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NotificationNames.tapEditButton.name, object: nil)
     }
     
+    deinit {
+        print("ToDosDetailController is ☠️")
+    }
     //MARK: - Setup Hierarchy
     override func setupHierarchy() {
         view.addSubview(taskName)
@@ -148,14 +152,14 @@ final class ToDosDetailController: SingleToDoController {
     
     @objc func editToDo() {
         self.isEditButtonIsTapped["isTapped"] = true
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "TapEditButton"), object: nil, userInfo: self.isEditButtonIsTapped)
+        NotificationCenter.default.post(name: NotificationNames.tapEditButton.name, object: nil, userInfo: self.isEditButtonIsTapped)
         setupUserInteracton(with: isEditButtonIsTapped["isTapped"] ?? true)
         taskName.isUserInteractionEnabled = true
     }
     
     @objc private func saveEditToDo() {
         self.isEditButtonIsTapped["isTapped"] = false
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "TapEditButton"), object: nil, userInfo: self.isEditButtonIsTapped)
+        NotificationCenter.default.post(name: NotificationNames.tapEditButton.name, object: nil, userInfo: self.isEditButtonIsTapped)
         presenter?.editToDo(title: taskName.text, descriprion: descriptionText.text, date: datePicker.date, color: self.color ?? .systemPurple, iconName: self.iconName ?? "moon.fil")
         setupUserInteracton(with: isEditButtonIsTapped["isTapped"] ?? false)
         taskName.isUserInteractionEnabled = true
