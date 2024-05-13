@@ -123,7 +123,6 @@ final class ToDosDetailController: SingleToDoController {
     //MARK: - Setup Outlets
     override func setupOutlets() {
         categoryTableView.delegate = self
-        self.color = item?.color
         setupUserInteracton(with: isEditButtonIsTapped["isTapped"] ?? false)
     }
     
@@ -184,10 +183,13 @@ extension ToDosDetailController: ToDosDetailViewProtocol {
         switch item?.color {
         case .systemOrange:
             categoryTableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .none)
+            self.color = .systemOrange
         case .taskGreen:
             categoryTableView.selectRow(at: IndexPath(row: 1, section: 0), animated: false, scrollPosition: .none)
+            self.color = .taskGreen
         case .systemPurple:
             categoryTableView.selectRow(at: IndexPath(row: 2, section: 0), animated: false, scrollPosition: .none)
+            self.color = .systemPurple
         default:
             break
         }

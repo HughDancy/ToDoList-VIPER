@@ -13,7 +13,6 @@ final class ToDoController: UIViewController {
     //MARK: - Properties
     var presenter: ToDosPresenterProtocol?
     private let calendarModel = CalendarModel()
-    private var centerDate = Date()
     private var selectedDate = Date()
     
     private var toDoTasks: [ToDoObject] = [] {
@@ -304,7 +303,6 @@ extension ToDoController: CalendarCollectionViewDelegate {
     }
     
     func updateTasks(with data: Date) {
-        self.centerDate = data
         self.selectedDate = data
         presenter?.updateToDosForDay(data)
         toDoTable.reloadData()
