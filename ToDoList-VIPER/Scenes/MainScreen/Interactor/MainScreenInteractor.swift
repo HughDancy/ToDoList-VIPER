@@ -9,7 +9,7 @@ import Foundation
 
 final class MainScreenInteractor: MainScreenInteractorInputProtocol {
     var presenter: MainScreenInteractorOutputProtocol?
-    private var storage = ToDoStorage.instance
+    private var storage = TaskStorageManager.instance
     
     func retriveUserData() {
         presenter?.didRetriveUserData(["Женя", "mockUserAvatar"])

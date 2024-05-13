@@ -9,8 +9,8 @@ import Foundation
 import CoreData
 import UIKit.UIColor
 
-final class ToDoStorage {
-    static let instance = ToDoStorage()
+final class TaskStorageManager {
+    static let instance = TaskStorageManager()
     
     //MARK: - Context
     private lazy var persistentContainer: NSPersistentContainer = {

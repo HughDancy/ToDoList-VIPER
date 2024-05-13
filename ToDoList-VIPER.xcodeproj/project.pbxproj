@@ -110,7 +110,7 @@
 		D8E9F8B12B0B47FB00A3F3FC /* DateFormatter + EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8B02B0B47FB00A3F3FC /* DateFormatter + EXT.swift */; };
 		D8E9F8B92B0CC0CB00A3F3FC /* ToDoObject+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8B72B0CC0CB00A3F3FC /* ToDoObject+CoreDataClass.swift */; };
 		D8E9F8BA2B0CC0CB00A3F3FC /* ToDoObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8B82B0CC0CB00A3F3FC /* ToDoObject+CoreDataProperties.swift */; };
-		D8E9F8BC2B109DB800A3F3FC /* ToDoStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8BB2B109DB800A3F3FC /* ToDoStorage.swift */; };
+		D8E9F8BC2B109DB800A3F3FC /* TaskStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8BB2B109DB800A3F3FC /* TaskStorageManager.swift */; };
 		D8E9F8BE2B17427F00A3F3FC /* Date + EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8BD2B17427F00A3F3FC /* Date + EXT.swift */; };
 		D8E9F8D02B18A56200A3F3FC /* ToDoObjectSorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8CF2B18A56200A3F3FC /* ToDoObjectSorter.swift */; };
 		D8F11C5E2B5660C900D2282D /* AnimationLoadingInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F11C5D2B5660C900D2282D /* AnimationLoadingInteractor.swift */; };
@@ -232,7 +232,7 @@
 		D8E9F8B02B0B47FB00A3F3FC /* DateFormatter + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter + EXT.swift"; sourceTree = "<group>"; };
 		D8E9F8B72B0CC0CB00A3F3FC /* ToDoObject+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToDoObject+CoreDataClass.swift"; sourceTree = "<group>"; };
 		D8E9F8B82B0CC0CB00A3F3FC /* ToDoObject+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToDoObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		D8E9F8BB2B109DB800A3F3FC /* ToDoStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoStorage.swift; sourceTree = "<group>"; };
+		D8E9F8BB2B109DB800A3F3FC /* TaskStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStorageManager.swift; sourceTree = "<group>"; };
 		D8E9F8BD2B17427F00A3F3FC /* Date + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + EXT.swift"; sourceTree = "<group>"; };
 		D8E9F8CF2B18A56200A3F3FC /* ToDoObjectSorter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoObjectSorter.swift; sourceTree = "<group>"; };
 		D8F11C5D2B5660C900D2282D /* AnimationLoadingInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationLoadingInteractor.swift; sourceTree = "<group>"; };
@@ -465,7 +465,7 @@
 		D86D451B2AFB970400894774 /* Entitys */ = {
 			isa = PBXGroup;
 			children = (
-				D8E9F8BB2B109DB800A3F3FC /* ToDoStorage.swift */,
+				D8E9F8BB2B109DB800A3F3FC /* TaskStorageManager.swift */,
 				D85C583B2B5A771A00023B04 /* OnboardingItems.swift */,
 				D8473BE82BB581A00063F87A /* DateItem.swift */,
 				D8473BEA2BB5A6250063F87A /* CalendarModel.swift */,
@@ -1104,7 +1104,7 @@
 				D8AB92272BBD46AD00826A4E /* UINavigationController + EXT.swift in Sources */,
 				D86D44E22AFB932E00894774 /* AppDelegate.swift in Sources */,
 				D8B1E9B62BA2F46C00D455AF /* MainScreenController.swift in Sources */,
-				D8E9F8BC2B109DB800A3F3FC /* ToDoStorage.swift in Sources */,
+				D8E9F8BC2B109DB800A3F3FC /* TaskStorageManager.swift in Sources */,
 				D8E8406C2B6789F8005A0936 /* RegistrationRouter.swift in Sources */,
 				D8F11C5E2B5660C900D2282D /* AnimationLoadingInteractor.swift in Sources */,
 				D8AB92232BBBF8A200826A4E /* ToDosDetailController.swift in Sources */,

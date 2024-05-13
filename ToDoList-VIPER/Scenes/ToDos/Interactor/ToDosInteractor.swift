@@ -9,7 +9,7 @@ import UIKit
 
 final class ToDosInteractor: ToDosInteractorInputProtocol {
    weak var presenter: ToDosInteractorOutputProtocol?
-    let storage = ToDoStorage.instance
+    let storage = TaskStorageManager.instance
     
     func fetchFirstTasks(_ status: ToDoListStatus) {
         self.fetchSortedToDos(with: status, and: nil)

@@ -9,7 +9,7 @@ import UIKit.UIColor
 
 final class AddNewToDoInteractor: AddNewToDoInteractorProtocol {
     weak var presenter: AddNewToDoPresenterProtocol?
-    var storage = ToDoStorage.instance
+    var storage = TaskStorageManager.instance
     
     func addNewToDo(with name: String?, description: String?, date: Date?, colorCategory: UIColor, iconName: String) {
         let choosenDate = Calendar.current.startOfDay(for: date ?? Date.today)

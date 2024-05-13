@@ -18,11 +18,7 @@ class CalendarCollectionView: UICollectionView {
     private let layoutCollection = UICollectionViewFlowLayout()
     var selectedUserCell = 10
     
-    private var centerDate: Date {
-        let calendar = Calendar.current
-        let date = calendar.startOfDay(for: Date())
-        return date
-    }
+     var centerDate = Date()
     
     weak var calendarDelegate: CalendarCollectionViewDelegate?
     var totalSquares = [DateItem]()
@@ -101,6 +97,7 @@ extension CalendarCollectionView: UICollectionViewDataSource {
 extension CalendarCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedUserCell = indexPath.row
+        centerDate = totalSquares[indexPath.row].date
         calendarDelegate?.updateTasks(with: totalSquares[indexPath.row].date)
     }
 }

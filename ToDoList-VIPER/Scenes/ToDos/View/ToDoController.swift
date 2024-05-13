@@ -64,7 +64,6 @@ final class ToDoController: UIViewController {
     private lazy var noTaskView: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
-        
         return view
     }()
     
@@ -72,9 +71,8 @@ final class ToDoController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.addCustomBackButton()
-        setupCalendarColletcion()
-//        print("Selected date is - \(selectedDate)")
         print("Center date is - \(self.centerDate)")
+        print("Selected date if - \(self.selectedDate)")
     }
     
     override func viewDidLoad() {
@@ -90,6 +88,7 @@ final class ToDoController: UIViewController {
     private func setupView() {
         presenter?.viewWillAppear()
         self.getCurrentDay()
+        setupCalendarColletcion()
         view.backgroundColor = UIColor(named: "tasksBackground")
         setupOtlets()
         setupNavigationBar()
@@ -101,7 +100,6 @@ final class ToDoController: UIViewController {
             let calendarModel = CalendarModel()
             let daysArray = calendarModel.getWeekForCalendar(date: self.centerDate)
             self.calendarView.calendar.setDaysArray(days: daysArray)
-           
             self.calendarView.calendar.scrollToItem(at: [0, 10], at: .centeredHorizontally, animated: false)
         }
     }
@@ -192,37 +190,7 @@ final class ToDoController: UIViewController {
     
     private func setupCalendarDefault(date: Date) {
         self.centerDate = date
-//        self.selectedDate = centerDate
-    }
-    
-    //MARK: - Make notification observers for update tableView and CalendarCollection
-    private func setupNotificationObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(updateTables), name: NotificationNames.updateTables.name, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(makeItDone), name: NotificationNames.doneToDo.name , object: nil)
-    }
-    
-    @objc func updateTables(notification: Notification) {
-        DispatchQueue.main.async {
-            self.presenter?.updateToDosForDay(self.centerDate)
-            self.toDoTable.reloadData()
-            self.updateCalendar()
-            self.tabBarController?.tabBar.isHidden = false
-        }
-    }
-    
-    private func updateCalendar() {
-        let calendarModel = CalendarModel()
-        let daysArray = calendarModel.getWeekForCalendar(date: centerDate)
-        print("In update calendar date is - \(selectedDate)")
-        self.calendarView.calendar.setDaysArray(days: daysArray)
-        self.calendarView.calendar.reloadData()
-    }
-    
-    
-    @objc func makeItDone(notification: Notification) {
-        guard let doneInfo = notification.userInfo else { return }
-        guard let item = doneInfo["doneItem"] as? ToDoObject else { return }
-        self.presenter?.doneToDo(item)
+        self.selectedDate = centerDate
     }
     
     //MARK: - Get label for module
@@ -297,6 +265,40 @@ extension ToDoController: UITableViewDelegate {
     }
 }
 
+    //MARK: - Make notification observers for update tableView and CalendarCollection Extension
+extension ToDoController {
+    private func setupNotificationObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTables), name: NotificationNames.updateTables.name, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(makeItDone), name: NotificationNames.doneToDo.name , object: nil)
+    }
+    
+    @objc func updateTables(notification: Notification) {
+        DispatchQueue.main.async {
+            self.presenter?.updateToDosForDay(self.centerDate)
+            self.toDoTable.reloadData()
+            self.setupCalendarColletcion()
+            self.calendarView.calendar.reloadData()
+            self.tabBarController?.tabBar.isHidden = false
+        }
+    }
+    
+    private func updateCalendar() {
+        let calendarModel = CalendarModel()
+        let daysArray = calendarModel.getWeekForCalendar(date: selectedDate)
+        print("In update calendar date is - \(selectedDate)")
+        self.calendarView.calendar.setDaysArray(days: daysArray)
+        self.calendarView.calendar.reloadData()
+        self.calendarView.calendar.scrollToItem(at: [0, 10], at: .centeredHorizontally, animated: false)
+    }
+    
+    
+    @objc func makeItDone(notification: Notification) {
+        guard let doneInfo = notification.userInfo else { return }
+        guard let item = doneInfo["doneItem"] as? ToDoObject else { return }
+        self.presenter?.doneToDo(item)
+    }
+}
+
 //MARK: - Calendar Support methods extension
 extension ToDoController: CalendarCollectionViewDelegate {
     func scrollLeft() {
@@ -309,6 +311,7 @@ extension ToDoController: CalendarCollectionViewDelegate {
     
     func updateTasks(with data: Date) {
         self.centerDate = data
+        self.selectedDate = data
         presenter?.updateToDosForDay(data)
         toDoTable.reloadData()
     }
