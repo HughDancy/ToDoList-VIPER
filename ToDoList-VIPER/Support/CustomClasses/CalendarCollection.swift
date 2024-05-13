@@ -58,6 +58,7 @@ class CalendarCollectionView: UICollectionView {
     
     func setDaysArray(days: [DateItem]) {
         self.totalSquares = days
+        self.reloadData()
     }
     
     //MARK: - ScrollViewDidScroll method
@@ -80,10 +81,9 @@ extension CalendarCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarCollectionCell.reuseIdentifier, for: indexPath) as? CalendarCollectionCell else { return UICollectionViewCell() }
         cell.setupCell(totalSquares[indexPath.row])
-        if indexPath.row == selectedUserCell {
-            selectItem(at: [0, selectedUserCell], animated: false, scrollPosition: [])
+        if cell.dateString == DateFormatter.getStringFromDate(from: centerDate)  {
+            selectItem(at: [0, indexPath.row], animated: false, scrollPosition: [])
             cell.isSelected = true
-            print("Selected index is - \(selectedUserCell). Total indexes - \(totalSquares.count)")
         }
         return cell
     }

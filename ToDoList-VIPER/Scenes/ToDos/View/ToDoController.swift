@@ -71,8 +71,6 @@ final class ToDoController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.addCustomBackButton()
-        print("Center date is - \(self.centerDate)")
-        print("Selected date if - \(self.selectedDate)")
     }
     
     override func viewDidLoad() {
@@ -98,7 +96,7 @@ final class ToDoController: UIViewController {
     private func setupCalendarColletcion() {
         DispatchQueue.main.async {
             let calendarModel = CalendarModel()
-            let daysArray = calendarModel.getWeekForCalendar(date: self.centerDate)
+            let daysArray = calendarModel.getWeekForCalendar(date: self.selectedDate)
             self.calendarView.calendar.setDaysArray(days: daysArray)
             self.calendarView.calendar.scrollToItem(at: [0, 10], at: .centeredHorizontally, animated: false)
         }
@@ -162,7 +160,7 @@ final class ToDoController: UIViewController {
     
     //MARK: - Update calendar func
     private func updateData(day offset: Int, index: Int, scrollToItem: Bool = true) {
-        centerDate = centerDate.getDayOffset(with: offset)
+        let centerDate = selectedDate.getDayOffset(with: offset)
         let daysArray = calendarModel.getWeekForCalendar(date: centerDate)
         guard daysArray.count > index else { return }
         
@@ -184,13 +182,13 @@ final class ToDoController: UIViewController {
         case .overdue:
             setupCalendarDefault(date: Date.yesterday)
         default:
-            self.centerDate = Date.tomorrow
+            self.selectedDate = Date.tomorrow
         }
     }
     
     private func setupCalendarDefault(date: Date) {
-        self.centerDate = date
-        self.selectedDate = centerDate
+        self.selectedDate = date
+        self.calendarView.calendar.centerDate = date
     }
     
     //MARK: - Get label for module
@@ -274,10 +272,9 @@ extension ToDoController {
     
     @objc func updateTables(notification: Notification) {
         DispatchQueue.main.async {
-            self.presenter?.updateToDosForDay(self.centerDate)
+            self.presenter?.updateToDosForDay(self.selectedDate)
             self.toDoTable.reloadData()
-            self.setupCalendarColletcion()
-            self.calendarView.calendar.reloadData()
+            self.updateCalendar()
             self.tabBarController?.tabBar.isHidden = false
         }
     }
@@ -285,10 +282,7 @@ extension ToDoController {
     private func updateCalendar() {
         let calendarModel = CalendarModel()
         let daysArray = calendarModel.getWeekForCalendar(date: selectedDate)
-        print("In update calendar date is - \(selectedDate)")
         self.calendarView.calendar.setDaysArray(days: daysArray)
-        self.calendarView.calendar.reloadData()
-        self.calendarView.calendar.scrollToItem(at: [0, 10], at: .centeredHorizontally, animated: false)
     }
     
     

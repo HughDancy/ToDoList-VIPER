@@ -11,7 +11,8 @@ extension Date {
    static var tomorrow:  Date { return Date().dayAfter }
     
    static var today: Date { 
-       let calendar = Calendar.current
+       var calendar = Calendar.current
+       calendar.timeZone = .current
        let date = calendar.startOfDay(for: Date())
        return date }
     
@@ -28,6 +29,7 @@ extension Date {
     //MARK: - Standart DateFormatter
     private func getFormatter() -> DateFormatter {
         let formatter = DateFormatter()
+        formatter.timeZone = .current
         formatter.locale = Locale(identifier: "ru_RU")
         return formatter
     }
@@ -42,7 +44,8 @@ extension Date {
     
     //MARK: - Get fay of week
     private func getNumberDayOfWeek(date: Date) -> String {
-        let calendar = Calendar.current
+        var calendar = Calendar.current
+        calendar.timeZone = .current
         let dayOfWeek = "\(calendar.component(.day, from: date))"
         return dayOfWeek
     }
@@ -57,14 +60,16 @@ extension Date {
 
     //MARK: - Get year name
     func getYear(date: Date) -> Int {
-        let calendar = Calendar.current
+        var calendar = Calendar.current
+        calendar.timeZone = .current
         let currentYear = calendar.component(.year, from: date)
         return currentYear
     }
     
     //MARK: - Get day offset
     public func getDayOffset(with offset: Int) -> Date {
-        let calendar = Calendar.current
+        var calendar = Calendar.current
+        calendar.timeZone = .current
         let date = calendar.date(byAdding: .day, value: offset, to: self) ?? Date()
         return date
     }
@@ -73,7 +78,6 @@ extension Date {
     func convertDateModel(for date: Date) -> DateItem {
         let dayOfWeek = getWeekDay(date: date)
         let numberOfDay = getNumberDayOfWeek(date: date)
-        let date = Calendar.current.startOfDay(for: date)
         return DateItem(date: date,
                         dayOfWeek: dayOfWeek,
                         numberOfDay: numberOfDay,

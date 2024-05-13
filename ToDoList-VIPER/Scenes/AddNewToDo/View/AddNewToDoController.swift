@@ -123,7 +123,9 @@ final class AddNewToDoController: SingleToDoController, AddNewToDoViewProtocol {
     
     //MARK: - Buttons Action
     @objc func addNewToDo() {
-        let selectedDate = Calendar.current.startOfDay(for: datePicker.date)
+        let selectedDate = datePicker.date
+//        Calendar.current.startOfDay(for: datePicker.date)
+        print("Date picker selected date is - \(selectedDate)")
         presenter?.addNewToDo(with: nameOfTaskField.text,
                               description: descriptionText.text,
                               date: selectedDate,

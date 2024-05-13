@@ -123,6 +123,7 @@ final class ToDosDetailController: SingleToDoController {
     //MARK: - Setup Outlets
     override func setupOutlets() {
         categoryTableView.delegate = self
+        self.color = item?.color
         setupUserInteracton(with: isEditButtonIsTapped["isTapped"] ?? false)
     }
     

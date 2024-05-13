@@ -113,6 +113,7 @@ final class CalendarCollectionCell: UICollectionViewCell {
     func setupCell(_ dateItem: DateItem) {
         dayOfWeekLabel.text = dateItem.dayOfWeek
         dayNumberLabel.text = dateItem.numberOfDay
+        self.dateString = dateItem.dateString
         if self.dayOfWeekLabel.text == "Сб" || self.dayOfWeekLabel.text == "Вс" {
             self.containerView.backgroundColor = UIColor(named: "hollydayColor")
         } else {
@@ -140,5 +141,6 @@ final class CalendarCollectionCell: UICollectionViewCell {
         dayOfWeekLabel.text = nil
         dayNumberLabel.text = nil
         circlesStack.removeAllArrangedSubViews()
+        self.isSelected = false
     }
 }
