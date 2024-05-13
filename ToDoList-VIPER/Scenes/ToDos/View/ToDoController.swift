@@ -49,16 +49,7 @@ final class ToDoController: UIViewController {
         return imageView
     }()
     
-    private lazy var tasksLabel: UILabel = {
-        let label = UILabel()
-        label.text = self.getTaskLabel()
-        label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
-        label.textColor = .white
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        label.textAlignment = .center
-        return label
-    }()
+    private lazy var tasksLabel = NoTaskLabel(status: presenter?.date ?? .today, size: 25, weight: .bold, color: .white)
     
     private lazy var noTaskView: UIView = {
         let view = UIView()
@@ -189,21 +180,7 @@ final class ToDoController: UIViewController {
         self.selectedDate = date
         self.calendarView.calendar.centerDate = date
     }
-    
-    //MARK: - Get label for module
-    private func getTaskLabel() -> String {
-        switch presenter?.date {
-        case .today, .tommorow:
-            return "Задачи отсутствуют"
-        case .overdue:
-            return "Просроченные задачи отсутствуют"
-        case .done:
-            return "Выполненные задачи отсутствуют"
-        default:
-            return ""
-        }
-    }
-    
+
     //MARK: - No tasks setup method
     private func setupNoTaskStack() {
         if toDoTasks.count == 0 {
