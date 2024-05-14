@@ -136,38 +136,35 @@ class ToDoCell: UITableViewCell {
         if item.isOverdue {
             self.setupOverdueCell(with: item)
         } else {
-            self.taskName.text = item.title
-            self.iconBox.backgroundColor = item.color
-            self.toDoItem = item
-            self.icon.image = UIImage(systemName: item.iconName ?? "moon.fill")
+            self.basicSetupCell(with: item)
             
             if item.doneStatus == true {
                 self.makeItDone()
             } else {
                 checkboxImage.isHighlighted = false
                 checkboxImage.tintColor = .label
-                self.taskName.text = item.title
                 taskName.strikeThrough(false)
                 self.checkboxImage.isUserInteractionEnabled = true
             }
         }
     }
     
-    private func setupOverdueCell(with item: ToDoObject) {
+    private func basicSetupCell(with item: ToDoObject) {
         self.taskName.text = item.title
         self.iconBox.backgroundColor = item.color
         self.toDoItem = item
         self.icon.image = UIImage(systemName: item.iconName ?? "moon.fill")
+    }
+    
+    private func setupOverdueCell(with item: ToDoObject) {
+        self.basicSetupCell(with: item)
         checkboxImage.isHighlighted = false
         checkboxImage.image = UIImage(systemName: "xmark.square")
         checkboxImage.tintColor = .systemRed
-        self.taskName.text = item.title
         taskName.strikeThrough(false)
         self.checkboxImage.isUserInteractionEnabled = true
-        
     }
 }
-
 
 //MARK: - Tap Gesture to Checkbox image Extension
 extension ToDoCell {
@@ -187,13 +184,6 @@ extension ToDoCell {
         checkboxImage.tintColor = .systemGreen
         checkboxImage.isHighlighted = true
         checkboxImage.isUserInteractionEnabled = false
-        
-        let attributedText : NSMutableAttributedString =  NSMutableAttributedString(string: taskName.text ?? "Temp")
-        attributedText.addAttributes([
-            NSAttributedString.Key.strikethroughStyle: NSUnderlineStyle.thick.rawValue,
-            NSAttributedString.Key.strikethroughColor: UIColor.label,
-            NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15.0, weight: .semibold)
-        ], range: NSMakeRange(0, attributedText.length))
-        taskName.attributedText = attributedText
+        taskName.strikeThrough(true)
     }
 }

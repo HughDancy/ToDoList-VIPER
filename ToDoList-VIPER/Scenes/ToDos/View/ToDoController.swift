@@ -83,6 +83,15 @@ final class ToDoController: UIViewController {
     }
     
     //MARK: - Setup outlets
+    private func setupOtlets() {
+        updateData(day: 0, index: 10)
+        setupHierarchy()
+        setupLayot()
+        calendarView.calendar.calendarDelegate = self
+        setupNotificationObserver()
+        setupNoTaskStack()
+    }
+    
     private func setupCalendarColletcion() {
         DispatchQueue.main.async {
             let calendarModel = CalendarModel()
@@ -95,15 +104,6 @@ final class ToDoController: UIViewController {
     private func setupNavigationBar() {
         self.navigationItem.largeTitleDisplayMode = .never
         self.navigationController?.navigationBar.prefersLargeTitles = false
-    }
-    
-    private func setupOtlets() {
-        updateData(day: 0, index: 10)
-        setupHierarchy()
-        setupLayot()
-        calendarView.calendar.calendarDelegate = self
-        setupNotificationObserver()
-        setupNoTaskStack()
     }
     
     //MARK: - Setup Hierarchy
@@ -146,20 +146,6 @@ final class ToDoController: UIViewController {
             make.top.equalTo(calendarView.snp.bottom).offset(15)
             make.leading.trailing.bottom.equalToSuperview()
         }
-    }
-    
-    //MARK: - Update calendar func
-    private func updateData(day offset: Int, index: Int, scrollToItem: Bool = true) {
-        let centerDate = selectedDate.getDayOffset(with: offset)
-        let daysArray = calendarModel.getWeekForCalendar(date: centerDate)
-        guard daysArray.count > index else { return }
-        
-        calendarView.calendar.setDaysArray(days: daysArray)
-        calendarView.calendar.reloadData()
-        calendarView.setupMonthLabel(with: daysArray[index].monthName.changeWordEnding().capitalized)
-        
-        guard scrollToItem else { return }
-        calendarView.calendar.scrollToItem(at: [0, 10], at: .centeredHorizontally, animated: false)
     }
     
     //MARK: - Current date configure for start module
@@ -277,6 +263,19 @@ extension ToDoController: CalendarCollectionViewDelegate {
     
     func scrollRight() {
         updateData(day: 7, index: 13)
+    }
+
+    private func updateData(day offset: Int, index: Int, scrollToItem: Bool = true) {
+        let centerDate = selectedDate.getDayOffset(with: offset)
+        let daysArray = calendarModel.getWeekForCalendar(date: centerDate)
+        guard daysArray.count > index else { return }
+        
+        calendarView.calendar.setDaysArray(days: daysArray)
+        calendarView.calendar.reloadData()
+        calendarView.setupMonthLabel(with: daysArray[index].monthName.changeWordEnding().capitalized)
+        
+        guard scrollToItem else { return }
+        calendarView.calendar.scrollToItem(at: [0, 10], at: .centeredHorizontally, animated: false)
     }
     
     func updateTasks(with data: Date) {
