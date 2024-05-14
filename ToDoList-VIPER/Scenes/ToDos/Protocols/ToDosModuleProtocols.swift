@@ -18,10 +18,10 @@ protocol ToDosPresenterProtocol: AnyObject {
     var view: ToDosViewProtocol? { get set }
     var interactor: ToDosInteractorInputProtocol? { get set }
     var router: ToDosRouterProtocol? { get set }
-    var date: ToDoListStatus? { get set }
+    var status: ToDoListStatus? { get set }
     
     //VIEW -> PRESENTER
-    func viewWillAppear()
+    func getToDos()
     func fetchToDos(date: Date)
     func updateToDosForDay(_ date: Date)
     func doneToDo(_ task: ToDoObject)

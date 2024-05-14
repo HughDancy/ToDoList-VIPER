@@ -20,27 +20,15 @@ final class CalendarCollectionCell: UICollectionViewCell {
         return view
     }()
     
-    lazy var dayOfWeekLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15.0, weight: .semibold)
-        label.textColor = .label
-        return label
-    }()
-    
-    private lazy var dayNumberLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15.0, weight: .semibold)
-        label.textColor = .label
-        return label
-    }()
-    
+    private lazy var dayOfWeekLabel = UILabel.createSimpleLabel(text: "", size: 15.0, width: .semibold, color: .label)
+    private lazy var dayNumberLabel = UILabel.createSimpleLabel(text: "", size: 15.0, width: .semibold, color: .label)
+
     private lazy var circlesStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
         stack.spacing = 5
         stack.contentMode = .scaleAspectFit
         stack.distribution = .fillEqually
-        
         return stack
     }()
     

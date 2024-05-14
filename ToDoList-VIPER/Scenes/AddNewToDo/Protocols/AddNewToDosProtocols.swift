@@ -9,7 +9,6 @@ import UIKit
 
 protocol AddNewToDoViewProtocol: AnyObject {
     var presenter: AddNewToDoPresenterProtocol? { get set }
-
 }
 
 protocol AddNewToDoPresenterProtocol: AnyObject {

@@ -49,7 +49,7 @@ final class ToDoController: UIViewController {
         return imageView
     }()
     
-    private lazy var tasksLabel = NoTaskLabel(status: presenter?.date ?? .today, size: 25, weight: .bold, color: .white)
+    private lazy var tasksLabel = NoTaskLabel(status: presenter?.status ?? .today, size: 25, weight: .bold, color: .white)
     
     private lazy var noTaskView: UIView = {
         let view = UIView()
@@ -74,8 +74,8 @@ final class ToDoController: UIViewController {
     
     //MARK:  - Setup View
     private func setupView() {
-        presenter?.viewWillAppear()
-        self.getCurrentDay()
+        presenter?.getToDos()
+        self.getCurrentDate()
         setupCalendarColletcion()
         view.backgroundColor = UIColor(named: "tasksBackground")
         setupOtlets()
@@ -149,20 +149,20 @@ final class ToDoController: UIViewController {
     }
     
     //MARK: - Current date configure for start module
-    private func getCurrentDay() {
-        switch presenter?.date {
+    private func getCurrentDate() {
+        switch presenter?.status {
         case .today, .done:
-            setupCalendarDefault(date: Date.today)
+            defaultCalendarSetup(date: Date.today)
         case .tommorow:
-            setupCalendarDefault(date: Date.tomorrow)
+            defaultCalendarSetup(date: Date.tomorrow)
         case .overdue:
-            setupCalendarDefault(date: Date.yesterday)
+            defaultCalendarSetup(date: Date.yesterday)
         default:
             self.selectedDate = Date.tomorrow
         }
     }
     
-    private func setupCalendarDefault(date: Date) {
+    private func defaultCalendarSetup(date: Date) {
         self.selectedDate = date
         self.calendarView.calendar.centerDate = date
     }
@@ -187,7 +187,7 @@ extension ToDoController:  UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ToDoCell.reuseIdentifier, for: indexPath) as? ToDoCell else  {
             return UITableViewCell()
         }
-        cell.setupCell(with: toDoTasks[indexPath.row], status: self.presenter?.date ?? ToDoListStatus.tommorow)
+        cell.setupCell(with: toDoTasks[indexPath.row], status: self.presenter?.status ?? ToDoListStatus.tommorow)
         return cell
     }
 }

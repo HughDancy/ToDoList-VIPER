@@ -19,7 +19,7 @@ protocol ToDosDetailPresenterProtocol: AnyObject {
     var router: ToDosDetailRouterProtocol? { get set }
     
     //VIEW -> PRESENTER
-    func viewWillAppear()
+    func getToDo()
     func editToDo(title: String?, descriprion: String?, date: Date?, color: UIColor, iconName: String)
     func whantDeleteToDo(_ toDo: ToDoObject)
 }

@@ -19,7 +19,7 @@ protocol MainScreenPresenterProtocol: AnyObject {
     var router: MainScreenRouterProtocol? { get set }
     
     //VIEW -> PRESETNER
-    func viewWillAppear()
+    func getToDosCount()
     func goToTodayToDos()
     func goToTommorowToDos()
     func goToDoneToDos()

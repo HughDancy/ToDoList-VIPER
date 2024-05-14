@@ -39,7 +39,7 @@ final class MainScreenView: UIView {
         return view
     }()
     
-    lazy var toDosCollection = MainScreenCollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+    lazy var toDosCollection = MainScreenCollectionView()
     
     //MARK: - Init
     init() {
@@ -67,6 +67,7 @@ final class MainScreenView: UIView {
         self.addSubview(containerView)
         containerView.addSubview(toDosCollection)
     }
+    
     //MARK: - Setup Layout
     private func setupLayout() {
         backgroundImage.snp.makeConstraints { make in

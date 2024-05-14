@@ -49,7 +49,7 @@ final class ToDosDetailController: SingleToDoController {
     //MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presenter?.viewWillAppear()
+        presenter?.getToDo()
         tabBarController?.tabBar.isHidden = true
         self.navigationController?.addCustomBackButton()
         NotificationCenter.default.addObserver(self, selector: #selector(changeEditButtonState), name: NotificationNames.tapEditButton.name, object: nil)

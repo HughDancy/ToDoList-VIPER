@@ -15,7 +15,7 @@ final class ToDosRouter: ToDosRouterProtocol {
         let interactor: ToDosInteractorInputProtocol = ToDosInteractor()
         let router: ToDosRouterProtocol = ToDosRouter()
         
-        presenter.date = status
+        presenter.status = status
         view.presenter = presenter
         presenter.view = view
         presenter.interactor = interactor

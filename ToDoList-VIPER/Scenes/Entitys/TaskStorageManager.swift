@@ -85,8 +85,21 @@ final class TaskStorageManager {
     }
     
     //MARK: - CoreData fetch ToDosObject methods
-    func fetchToDos() -> [ToDoObject] {
+    func fetchAllToDos() -> [ToDoObject] {
         let fetchRequest: NSFetchRequest<ToDoObject> = ToDoObject.fetchRequest()
+        let objects = try! viewContext.fetch(fetchRequest)
+        return objects
+    }
+    
+    func fetchDateRangeToDos(date: [Date]) -> [ToDoObject] {
+        let fetchRequest: NSFetchRequest<ToDoObject> = ToDoObject.fetchRequest()
+        let fromDate = date.first ?? Date.today
+        let toDate = date.last ?? Date.tomorrow
+        let calendar = NSCalendar.current
+        let startDate = calendar.startOfDay(for: fromDate)
+        let endDate = calendar.startOfDay(for: toDate)
+        let predicateDate = NSPredicate(format: "date >= %@ && date <= %@", startDate as NSDate, endDate as NSDate)
+        fetchRequest.predicate = predicateDate
         let objects = try! viewContext.fetch(fetchRequest)
         return objects
     }
@@ -119,7 +132,6 @@ final class TaskStorageManager {
         fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: subPredicates)
         fetchRequest.fetchBatchSize = 7
         let objects = try! viewContext.fetch(fetchRequest)
-//      ауес
         return objects
     }
     //MARK: - TO-DO: Check this method and rewrite 
@@ -155,7 +167,7 @@ final class TaskStorageManager {
             return objectsCount ?? 0
         }
     }
-    //MARK: - TO-DO: Check tommorow and rewrite this method
+
     //MARK: - Create predicates for cathegories
     private func createPredicates(with status: ToDoListStatus, date: Date) -> [NSPredicate] {
         switch status {

@@ -11,20 +11,20 @@ final class ToDosPresenter: ToDosPresenterProtocol {
     weak var view:  ToDosViewProtocol?
     var interactor: ToDosInteractorInputProtocol?
     var router: ToDosRouterProtocol?
-    var date: ToDoListStatus?
+    var status: ToDoListStatus?
     
-    func viewWillAppear() {
-        guard let statusDate = date else { return }
+    func getToDos() {
+        guard let statusDate = status else { return }
         interactor?.fetchFirstTasks(statusDate)
     }
     
     func fetchToDos(date: Date) {
-        guard let status = self.date else { return }
+        guard let status = self.status else { return }
         interactor?.fetchTask(date: date, status: status)
     }
     
     func updateToDosForDay(_ date: Date) {
-        guard let status = self.date else { return }
+        guard let status = self.status else { return }
         interactor?.fetchTask(date: date, status: status)
     }
     

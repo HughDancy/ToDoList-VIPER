@@ -12,7 +12,7 @@ final class MainScreenPresenter: MainScreenPresenterProtocol {
     var interactor: MainScreenInteractorInputProtocol?
     var router: MainScreenRouterProtocol?
     
-    func viewWillAppear() {
+    func getToDosCount() {
         interactor?.getToDosCount()
         interactor?.retriveUserData()
     }

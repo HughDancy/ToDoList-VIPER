@@ -12,7 +12,7 @@ final class ToDosDetailPresenter: ToDosDetailPresenterProtocol {
     var interactor: ToDosDetailInteractorInputProtocol?
     var router: ToDosDetailRouterProtocol?
     
-    func viewWillAppear() {
+    func getToDo() {
         guard let task = interactor?.toDoItem else { return }
         view?.showToDoItem(task)
     }

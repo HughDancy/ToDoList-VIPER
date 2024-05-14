@@ -21,7 +21,7 @@ class CalendarModel {
     func getWeekForCalendar(date: Date) -> [DateItem] {
         let daysArray = getDaysArray(date: date)
         var dateModelsArray = daysArray.map { $0.convertDateModel(for: $0) }
-        let tasks = TaskStorageManager.instance.fetchToDos()
+        let tasks = TaskStorageManager.instance.fetchDateRangeToDos(date: daysArray)
         
         let tempDateModelsArray = dateModelsArray
         for task in tasks {

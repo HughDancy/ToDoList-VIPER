@@ -30,7 +30,7 @@ final class MainScreenController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigationBar()
-        presenter?.viewWillAppear()
+        presenter?.getToDosCount()
         mainView?.setupElements(nameOfImage: userData[1], userName: userData[0])
         subcribeToNotification()
     }
@@ -58,7 +58,7 @@ final class MainScreenController: UIViewController {
     }
     
     @objc func mustUpdateData() {
-        self.presenter?.viewWillAppear()
+        self.presenter?.getToDosCount()
     }
 }
     //MARK: - CollectionView Delegate
@@ -68,9 +68,11 @@ extension MainScreenController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainToDoCell.reuseIdentifier, for: indexPath) as? MainToDoCell
-        cell?.setupElements(numbers: Int(toDosInfo[indexPath.row][0]) ?? 0, dayLabel: toDosInfo[indexPath.row][1], backgroundColor: mockColors[indexPath.row])
-        return cell ?? UICollectionViewCell()
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainToDoCell.reuseIdentifier, for: indexPath) as? MainToDoCell else {
+            return UICollectionViewCell()
+        }
+        cell.setupElements(numbers: Int(toDosInfo[indexPath.row][0]) ?? 0, dayLabel: toDosInfo[indexPath.row][1], backgroundColor: mockColors[indexPath.row])
+        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
