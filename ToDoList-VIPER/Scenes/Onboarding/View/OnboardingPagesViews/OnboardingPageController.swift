@@ -31,7 +31,7 @@ class OnboardingPageController: UIViewController {
         let label = UILabel()
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         return label
     }()
     
@@ -49,10 +49,20 @@ class OnboardingPageController: UIViewController {
         let button = UIButton(type: .system)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .systemCyan
-        button.layer.cornerRadius = 10
-        button.clipsToBounds = true
+        button.layer.cornerRadius = 13
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+//        button.clipsToBounds = true
         
         return button
+    }()
+    
+    lazy var stack: UIStackView = {
+       let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 3
+        stack.setCustomSpacing(3.0, after: photoAndLibraryButton)
+        stack.distribution = .equalSpacing
+        return stack
     }()
     
     //MARK: - Lifecycle
@@ -70,45 +80,72 @@ class OnboardingPageController: UIViewController {
     
     //MARK: - Setup Outlets
     private func setupHierarchy() {
-        view.addSubview(picture)
-        view.addSubview(welcomeLabel)
-        view.addSubview(descriptionLabel)
-        view.addSubview(photoAndLibraryButton)
-        view.addSubview(photoAndLibraryButton)
-        view.addSubview(nextScreenButton)
+        view.addSubview(stack)
+        stack.addArrangedSubview(picture)
+        stack.addArrangedSubview(welcomeLabel)
+//        stack.addArrangedSubview(descriptionLabel)
+        stack.addArrangedSubview(photoAndLibraryButton)
+        stack.addArrangedSubview(photoAndLibraryButton)
+        stack.addArrangedSubview(nextScreenButton)
+//        stack.addArrangedSubview(picture)
+//        view.addSubview(picture)
+//        view.addSubview(welcomeLabel)
+//        view.addSubview(descriptionLabel)
+//        view.addSubview(photoAndLibraryButton)
+//        view.addSubview(photoAndLibraryButton)
+//        view.addSubview(nextScreenButton)
     }
     
     private func setupLayout() {
-        
-        picture.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(40)
-            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
-            make.height.equalTo(300)
+        stack.snp.makeConstraints { make in
+            make.top.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide).inset(10)
         }
         
         welcomeLabel.snp.makeConstraints { make in
-            make.top.equalTo(picture.snp.bottom).offset(30)
-            make.centerX.equalTo(view.safeAreaLayoutGuide.snp.centerX)
-            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(10)
-//            make.height.equalTo(40)
+            make.height.equalTo(60)
         }
         
-        descriptionLabel.snp.makeConstraints { make in
-            make.top.equalTo(welcomeLabel.snp.bottom).offset(10)
-            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
+        picture.snp.makeConstraints { make in
+            make.height.equalTo(530)
+        }
+        
+        
+        nextScreenButton.snp.makeConstraints { make in
+            make.height.equalTo(55)
         }
         
         photoAndLibraryButton.snp.makeConstraints { make in
-            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(40)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(80)
-            make.height.equalTo(40)
+            make.height.equalTo(55)
         }
-        
-        nextScreenButton.snp.makeConstraints { make in
-            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(40)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(30)
-            make.height.equalTo(40)
-        }
+//        picture.snp.makeConstraints { make in
+//            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
+//            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(65)
+//            make.height.equalTo(500)
+//        }
+//        
+//        welcomeLabel.snp.makeConstraints { make in
+//            make.top.equalTo(picture.snp.bottom).offset(30)
+//            make.centerX.equalTo(view.safeAreaLayoutGuide.snp.centerX)
+//            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(1)
+////            make.height.equalTo(40)
+//        }
+//        
+//        descriptionLabel.snp.makeConstraints { make in
+//            make.top.equalTo(welcomeLabel.snp.bottom).offset(10)
+//            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
+//        }
+//        
+//        photoAndLibraryButton.snp.makeConstraints { make in
+//            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(40)
+//            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(80)
+//            make.height.equalTo(40)
+//        }
+//        
+//        nextScreenButton.snp.makeConstraints { make in
+//            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(40)
+//            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(30)
+//            make.height.equalTo(40)
+//        }
     }
     
     func setupElements(with data: OnboardingItems) {
