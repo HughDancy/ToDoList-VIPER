@@ -25,12 +25,12 @@ extension OnboardingItems {
         OnboardingItems(title: "Удобное приложение для Ваших задач!",
                         description: "ToDo List позволяет привести Ваши задачи в порядок, отсортировать их по дате и установленному Вами приоритету",
                         buttonText: "Далее", 
-                        imageName: "onboardingMock",
+                        imageName: "onboarding_1",
                         state: .aboutApp),
         OnboardingItems(title: "Добавить новую задачу просто!", 
                         description: "Просто нажмите на иконку плюса и заполните необходимые поля",
                         buttonText: "Далее",
-                        imageName: "onboardingMock",
+                        imageName: "onboarding_2",
                         state: .addToDo),
         OnboardingItems(title: "Редактикруйте уже созданные задачи!",
                         description: """
@@ -38,14 +38,14 @@ extension OnboardingItems {
                                       Если задача уже не актуальна - просто удалите ее!
                                       """,
                         buttonText: "Далее",
-                        imageName: "onboardingMock",
+                        imageName: "onboarding_3",
                         state: .featureToDo),
         OnboardingItems(title: "Завершить задачу в один клик!",
                         description: """
-                        Завершить задачу очень просто - просто нажми на кружок в левой части и она перейдет в раздел "Выполнено".
+                        Завершить задачу очень просто - просто нажми на квадрат в левой части и она перейдет в раздел "Выполнено".
                         """,
                         buttonText: "Далее",
-                        imageName: "onboardingMock",
+                        imageName: "onboarding_4",
                         state: .doneAndOvedueToDo),
         OnboardingItems(title: "Настройте приложение!",
                         description: """
