@@ -253,6 +253,10 @@ extension ToDoController {
         guard let doneInfo = notification.userInfo else { return }
         guard let item = doneInfo["doneItem"] as? ToDoObject else { return }
         self.presenter?.doneToDo(item)
+        guard let index = toDoTasks.firstIndex(of: item) else { return }
+        let doneItem = toDoTasks.remove(at: index)
+        toDoTasks.append(doneItem)
+        toDoTable.reloadData()
     }
 }
 

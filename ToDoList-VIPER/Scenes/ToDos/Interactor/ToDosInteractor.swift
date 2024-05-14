@@ -24,19 +24,23 @@ final class ToDosInteractor: ToDosInteractorInputProtocol {
         switch status {
         case .today:
         guard let date = date else {
-            let todayTasks = storage.fetchConcreteToDos(with: Date.today)
+            var todayTasks = storage.fetchConcreteToDos(with: Date.today)
+            todayTasks = self.sortByDone(items: todayTasks)
             self.presenter?.getTask(todayTasks)
             return
         }
-            let todayTasks = storage.fetchConcreteToDos(with: date)
+            var todayTasks = storage.fetchConcreteToDos(with: date)
+            todayTasks = self.sortByDone(items: todayTasks)
             presenter?.getTask(todayTasks)
         case .tommorow:
             guard let date = date else {
-                let tommorowTasks = storage.fetchConcreteToDos(with: Date.tomorrow)
+                var tommorowTasks = storage.fetchConcreteToDos(with: Date.tomorrow)
+                tommorowTasks = self.sortByDone(items: tommorowTasks)
                 self.presenter?.getTask(tommorowTasks)
                 return
             }
-            let tommorowTasks = storage.fetchConcreteToDos(with: date)
+            var tommorowTasks = storage.fetchConcreteToDos(with: date)
+            tommorowTasks = self.sortByDone(items: tommorowTasks)
             presenter?.getTask(tommorowTasks)
         case .overdue:
             //MARK: - Change methods
@@ -45,7 +49,7 @@ final class ToDosInteractor: ToDosInteractorInputProtocol {
                 self.presenter?.getTask(overdueTasks)
                 return
             }
-                let overdueTasks = storage.fetchOverdueToDos(with: date)
+                var overdueTasks = storage.fetchOverdueToDos(with: date)
                 presenter?.getTask(overdueTasks)
         case .done:
             guard let date = date else {
@@ -64,5 +68,14 @@ final class ToDosInteractor: ToDosInteractorInputProtocol {
     
     func deleteTask(_ task: ToDoObject) {
         storage.deleteToDoObject(item: task)
+    }
+}
+
+extension ToDosInteractor {
+    private func sortByDone(items: [ToDoObject]) -> [ToDoObject] {
+        let doneItems = items.filter { $0.doneStatus == true }
+        let notDoneItems  = items.filter { $0.doneStatus != true }
+        let result = notDoneItems + doneItems
+        return result
     }
 }
