@@ -245,6 +245,7 @@ extension ToDoController {
         let calendarModel = CalendarModel()
         let daysArray = calendarModel.getWeekForCalendar(date: selectedDate)
         self.calendarView.calendar.setDaysArray(days: daysArray)
+        self.calendarView.calendar.scrollToItem(at: [0, 10], at: .centeredHorizontally, animated: false)
     }
     
     
@@ -258,16 +259,21 @@ extension ToDoController {
 //MARK: - Calendar Support methods extension
 extension ToDoController: CalendarCollectionViewDelegate {
     func scrollLeft() {
-        updateData(day: -7, index: 7)
+        DispatchQueue.main.async {
+            self.updateData(day: -7, index: 7)
+        }
     }
     
     func scrollRight() {
-        updateData(day: 7, index: 13)
+        DispatchQueue.main.async {
+            self.updateData(day: 7, index: 13)
+        }
     }
 
     private func updateData(day offset: Int, index: Int, scrollToItem: Bool = true) {
-        let centerDate = selectedDate.getDayOffset(with: offset)
-        let daysArray = calendarModel.getWeekForCalendar(date: centerDate)
+        selectedDate = selectedDate.getDayOffset(with: offset)
+        calendarView.calendar.centerDate = self.selectedDate
+        let daysArray = calendarModel.getWeekForCalendar(date: selectedDate)
         guard daysArray.count > index else { return }
         
         calendarView.calendar.setDaysArray(days: daysArray)
