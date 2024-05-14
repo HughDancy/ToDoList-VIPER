@@ -21,6 +21,7 @@ extension DateFormatter {
         let formatter = DateFormatter()
         formatter.timeStyle = .none
         formatter.dateStyle = .medium
+        formatter.timeZone = .current
         formatter.locale = Locale(identifier: "ru_RU")
         let dayDate = formatter.date(from: date) ?? Date.today
         return dayDate

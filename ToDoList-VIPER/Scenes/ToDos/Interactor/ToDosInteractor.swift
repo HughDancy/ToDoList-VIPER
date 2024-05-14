@@ -9,36 +9,57 @@ import UIKit
 
 final class ToDosInteractor: ToDosInteractorInputProtocol {
    weak var presenter: ToDosInteractorOutputProtocol?
-    let storage = ToDoStorage.instance
+    let storage = TaskStorageManager.instance
     
     func fetchFirstTasks(_ status: ToDoListStatus) {
-        switch status {
-        case .today:
-            let tasks = storage.fetchToDos()
-            let todayTasks = tasks.filter { ($0.dateTitle) == DateFormatter.getStringFromDate(from: Date.today) }
-            presenter?.getTask(todayTasks)
-            print("Today tasks")
-        case .tommorow:
-            let tasks = storage.fetchToDos()
-            let tomroowTasks = tasks.filter { ($0.dateTitle) == DateFormatter.getStringFromDate(from: Date.tomorrow) }
-            presenter?.getTask(tomroowTasks)
-            print("Tommorow tasks")
-        case .overdue:
-//            let overdueTask = tasks.filter { ($0.dateTitle) == DateFormatter.createMediumDate(from: Date.tomorrow) }
-//            presenter?.getTask(tomroowTasks)
-            print("OverdueTasks")
-        case .done:
-            let tasks = storage.fetchToDos()
-            let doneTasks = tasks.filter { $0.doneStatus == true }
-            presenter?.getTask(doneTasks)
-            print("Done tasks")
-        }
+        self.fetchSortedToDos(with: status, and: nil)
+    }
+
+    func fetchTask(date: Date, status: ToDoListStatus) {
+        self.fetchSortedToDos(with: status, and: date)
     }
     
-    func fetchTask(date: Date) {
-        let tasks = storage.fetchToDos()
-        let outputTasks = tasks.filter { $0.dateTitle == DateFormatter.getStringFromDate(from: date) }
-        presenter?.getTask(outputTasks)
+    //MAYBE REFACTOR
+    func fetchSortedToDos(with status: ToDoListStatus, and date: Date?) {
+        switch status {
+        case .today:
+        guard let date = date else {
+            var todayTasks = storage.fetchConcreteToDos(with: Date.today)
+            todayTasks = self.sortByDone(items: todayTasks)
+            self.presenter?.getTask(todayTasks)
+            return
+        }
+            var todayTasks = storage.fetchConcreteToDos(with: date)
+            todayTasks = self.sortByDone(items: todayTasks)
+            presenter?.getTask(todayTasks)
+        case .tommorow:
+            guard let date = date else {
+                var tommorowTasks = storage.fetchConcreteToDos(with: Date.tomorrow)
+                tommorowTasks = self.sortByDone(items: tommorowTasks)
+                self.presenter?.getTask(tommorowTasks)
+                return
+            }
+            var tommorowTasks = storage.fetchConcreteToDos(with: date)
+            tommorowTasks = self.sortByDone(items: tommorowTasks)
+            presenter?.getTask(tommorowTasks)
+        case .overdue:
+            //MARK: - Change methods
+            guard let date = date else {
+                let overdueTasks = storage.fetchOverdueToDos(with: Date.yesterday)
+                self.presenter?.getTask(overdueTasks)
+                return
+            }
+                var overdueTasks = storage.fetchOverdueToDos(with: date)
+                presenter?.getTask(overdueTasks)
+        case .done:
+            guard let date = date else {
+                let doneTasks = storage.fetchDoneToDos(with: Date.today)
+                self.presenter?.getTask(doneTasks)
+                return
+            }
+            let doneTasks = storage.fetchDoneToDos(with: date)
+            presenter?.getTask(doneTasks)
+        }
     }
     
     func doneTask(_ task: ToDoObject) {
@@ -48,6 +69,13 @@ final class ToDosInteractor: ToDosInteractorInputProtocol {
     func deleteTask(_ task: ToDoObject) {
         storage.deleteToDoObject(item: task)
     }
-    
-    
+}
+
+extension ToDosInteractor {
+    private func sortByDone(items: [ToDoObject]) -> [ToDoObject] {
+        let doneItems = items.filter { $0.doneStatus == true }
+        let notDoneItems  = items.filter { $0.doneStatus != true }
+        let result = notDoneItems + doneItems
+        return result
+    }
 }

@@ -12,7 +12,7 @@ class ToDoCell: UITableViewCell {
     
     //MARK: - Class custom properties
     static let reuseIdentifier = "ToDoCell"
-    var toDoItem: ToDoObject = ToDoObject()
+    var toDoItem: ToDoObject?
     
     //MARK: - Outlets
     private lazy var container: UIView = {
@@ -27,14 +27,12 @@ class ToDoCell: UITableViewCell {
         let image = UIImage(systemName: "square")
         let highlaghtedImage = UIImage(systemName: "checkmark.square")
         let imageView = UIImageView(image: image, highlightedImage: highlaghtedImage)
-        imageView.tintColor = imageView.isHighlighted ? .systemGreen : .label
         imageView.isUserInteractionEnabled = true
         return imageView
     }()
     
     private lazy var taskName: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        let label = UILabel.createSimpleLabel(text: "", size: 15, width: .semibold, color: .label)
         label.numberOfLines = 0
         label.lineBreakMode = .byClipping
         return label
@@ -67,6 +65,7 @@ class ToDoCell: UITableViewCell {
         setupHierachy()
         setupLayout()
         addTapRecognizerToImage()
+        self.backgroundColor = UIColor(named: "tasksBackground")
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -77,6 +76,7 @@ class ToDoCell: UITableViewCell {
     
     override func prepareForReuse() {
         checkboxImage.isHighlighted = false
+        checkboxImage.image = UIImage(systemName: "square")
         checkboxImage.tintColor = .black
         taskName.text = nil
     }
@@ -103,7 +103,7 @@ class ToDoCell: UITableViewCell {
         
         taskName.snp.makeConstraints { make in
             make.centerX.equalTo(container.safeAreaLayoutGuide.snp.centerX)
-            make.top.equalToSuperview().offset(20)
+            make.top.equalToSuperview().offset(10)
             make.leading.equalTo(checkboxImage.snp.trailing).offset(20)
             make.trailing.equalTo(iconBox.snp.leading).offset(-5)
             make.bottom.equalTo(container.snp.bottom).inset(10)
@@ -120,32 +120,48 @@ class ToDoCell: UITableViewCell {
             make.height.width.equalTo(50)
         }
     }
-
-    //MARK: - Setup cell
-    func setupCell(with item: ToDoObject) {
-        self.taskName.text = item.title
-        self.iconBox.backgroundColor = UIColor.convertStringToColor(item.color)
-        self.toDoItem = item
-        switch UIColor.convertStringToColor(item.color) {
-        case .systemOrange:
-            self.icon.image = UIImage(systemName: "briefcase")
-        case .systemGreen:
-            self.icon.image = UIImage(systemName: "person")
-        case .systemPurple:
-            self.icon.image = UIImage(systemName: "books.vertical.circle")
-        default:
-            self.icon.image = UIImage(systemName: "lightbulb")
+    
+    //MARK: - Setup cell methods
+    func setupCell(with item: ToDoObject, status: ToDoListStatus) {
+        switch status {
+        case .today, .tommorow, .done:
+            self.setupStandartCell(with: item)
+        case .overdue:
+            self.setupOverdueCell(with: item)
         }
-        
-        if item.doneStatus == true {
-            self.makeItDone()
+    }
+    
+    private func setupStandartCell(with item: ToDoObject) {
+        if item.isOverdue {
+            self.setupOverdueCell(with: item)
         } else {
-            checkboxImage.isHighlighted = false
-            checkboxImage.tintColor = .black
-            self.taskName.text = item.title
-            taskName.strikeThrough(false)
-            self.checkboxImage.isUserInteractionEnabled = true
+            self.basicSetupCell(with: item)
+            
+            if item.doneStatus == true {
+                self.makeItDone()
+            } else {
+                checkboxImage.isHighlighted = false
+                checkboxImage.tintColor = .label
+                taskName.strikeThrough(false)
+                self.checkboxImage.isUserInteractionEnabled = true
+            }
         }
+    }
+    
+    private func basicSetupCell(with item: ToDoObject) {
+        self.taskName.text = item.title
+        self.iconBox.backgroundColor = item.color
+        self.toDoItem = item
+        self.icon.image = UIImage(systemName: item.iconName ?? "moon.fill")
+    }
+    
+    private func setupOverdueCell(with item: ToDoObject) {
+        self.basicSetupCell(with: item)
+        checkboxImage.isHighlighted = false
+        checkboxImage.image = UIImage(systemName: "xmark.square")
+        checkboxImage.tintColor = .systemRed
+        taskName.strikeThrough(false)
+        self.checkboxImage.isUserInteractionEnabled = true
     }
 }
 
@@ -154,12 +170,12 @@ extension ToDoCell {
     private func addTapRecognizerToImage() {
         self.checkboxImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapToImage)))
     }
-
+    
     @objc private func tapToImage(_ sender: UIGestureRecognizer) {
-        if self.toDoItem.doneStatus == false {
+        if self.toDoItem?.doneStatus == false {
             self.makeItDone()
-            let userInfo: [String: ToDoObject] = ["doneItem" : self.toDoItem]
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "DoneTask"), object: nil, userInfo: userInfo)
+            let userInfo: [String: ToDoObject?] = ["doneItem" : self.toDoItem]
+            NotificationCenter.default.post(name: NotificationNames.doneToDo.name, object: nil, userInfo: userInfo as [AnyHashable : Any])
         }
     }
     
@@ -167,13 +183,6 @@ extension ToDoCell {
         checkboxImage.tintColor = .systemGreen
         checkboxImage.isHighlighted = true
         checkboxImage.isUserInteractionEnabled = false
-        
-        let attributedText : NSMutableAttributedString =  NSMutableAttributedString(string: taskName.text ?? "Temp")
-        attributedText.addAttributes([
-            NSAttributedString.Key.strikethroughStyle: NSUnderlineStyle.thick.rawValue,
-                        NSAttributedString.Key.strikethroughColor: UIColor.label,
-                        NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15.0, weight: .semibold)
-                        ], range: NSMakeRange(0, attributedText.length))
-        taskName.attributedText = attributedText
+        taskName.strikeThrough(true)
     }
 }

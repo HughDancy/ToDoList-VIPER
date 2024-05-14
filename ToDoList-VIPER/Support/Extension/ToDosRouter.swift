@@ -15,7 +15,7 @@ final class ToDosRouter: ToDosRouterProtocol {
         let interactor: ToDosInteractorInputProtocol = ToDosInteractor()
         let router: ToDosRouterProtocol = ToDosRouter()
         
-        presenter.date = status
+        presenter.status = status
         view.presenter = presenter
         presenter.view = view
         presenter.interactor = interactor
@@ -30,7 +30,6 @@ final class ToDosRouter: ToDosRouterProtocol {
         let toDoDetailModule = ToDosDetailRouter.createModule(with: task)
         let detailModule = ToDosDetailController()
         detailModule.item = task
-        print(task)
         parrentView.navigationController?.pushViewController(toDoDetailModule, animated: true)
     }
 }

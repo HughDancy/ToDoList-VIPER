@@ -20,27 +20,15 @@ final class CalendarCollectionCell: UICollectionViewCell {
         return view
     }()
     
-    lazy var dayOfWeekLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15.0, weight: .semibold)
-        label.textColor = .label
-        return label
-    }()
-    
-    private lazy var dayNumberLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15.0, weight: .semibold)
-        label.textColor = self.isSelected ? .white  : .black
-        return label
-    }()
-    
+    private lazy var dayOfWeekLabel = UILabel.createSimpleLabel(text: "", size: 15.0, width: .semibold, color: .label)
+    private lazy var dayNumberLabel = UILabel.createSimpleLabel(text: "", size: 15.0, width: .semibold, color: .label)
+
     private lazy var circlesStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
         stack.spacing = 5
         stack.contentMode = .scaleAspectFit
         stack.distribution = .fillEqually
-        
         return stack
     }()
     
@@ -48,7 +36,7 @@ final class CalendarCollectionCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
-        contentView.backgroundColor = .systemBackground
+        contentView.backgroundColor = UIColor(named: "tasksBackground")
     }
     
     required init?(coder: NSCoder) {
@@ -65,7 +53,9 @@ final class CalendarCollectionCell: UICollectionViewCell {
             if self.isSelected {
                 containerView.backgroundColor = .systemIndigo
                 dayNumberLabel.textColor = .white
+                self.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
             } else {
+                self.transform = CGAffineTransform.identity
                 if dayOfWeekLabel.text == "Сб" || dayOfWeekLabel.text == "Вс" {
                     containerView.backgroundColor = UIColor(named: "hollydayColor")
                     dayNumberLabel.textColor = .label
@@ -105,20 +95,20 @@ final class CalendarCollectionCell: UICollectionViewCell {
         circlesStack.snp.makeConstraints { make in
             make.top.equalTo(containerView.snp.bottom).offset(5)
             make.centerX.equalTo(containerView.snp.centerX)
-//            make.height.equalTo(20)
         }
     }
     
     func setupCell(_ dateItem: DateItem) {
         dayOfWeekLabel.text = dateItem.dayOfWeek
         dayNumberLabel.text = dateItem.numberOfDay
+        self.dateString = dateItem.dateString
         if self.dayOfWeekLabel.text == "Сб" || self.dayOfWeekLabel.text == "Вс" {
             self.containerView.backgroundColor = UIColor(named: "hollydayColor")
         } else {
             self.containerView.backgroundColor = .systemGray6
         }
         getMarkingCell(with: dateItem.isWorkTask ?? false , color: .systemOrange)
-        getMarkingCell(with: dateItem.isPersonalTask ?? false, color: .systemGreen)
+        getMarkingCell(with: dateItem.isPersonalTask ?? false, color: UIColor(named: "taskGreen") ?? .systemGreen)
         getMarkingCell(with: dateItem.isOtherTask ?? false, color: .systemPurple)
     }
     
@@ -139,5 +129,6 @@ final class CalendarCollectionCell: UICollectionViewCell {
         dayOfWeekLabel.text = nil
         dayNumberLabel.text = nil
         circlesStack.removeAllArrangedSubViews()
+        self.isSelected = false
     }
 }

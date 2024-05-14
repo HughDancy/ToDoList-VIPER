@@ -8,12 +8,11 @@
 import UIKit
 
 extension UILabel {
-    static func createToDoLabel(fontSize: CGFloat, weight: UIFont.Weight, title: String) -> UILabel {
+    static func createSimpleLabel(text: String, size: CGFloat, width: UIFont.Weight, color: UIColor) -> UILabel {
         let label = UILabel()
-        label.text = title
-        label.font = UIFont.systemFont(ofSize: fontSize, weight: weight)
-        label.textColor = .systemBlue
-        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: size, weight: width)
+        label.text = text
+        label.textColor = color
         return label
     }
 }
@@ -26,7 +25,11 @@ extension UILabel {
         
         if isStrikeThrough {
             let attributeString =  NSMutableAttributedString(string: text)
-            attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(0,attributeString.length))
+            attributeString.addAttributes([
+                NSAttributedString.Key.strikethroughStyle: NSUnderlineStyle.thick.rawValue,
+                NSAttributedString.Key.strikethroughColor: UIColor.label,
+                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15.0, weight: .semibold)
+            ], range: NSMakeRange(0, attributeString.length))
             self.attributedText = attributeString
         } else {
             let attributeString =  NSMutableAttributedString(string: text)

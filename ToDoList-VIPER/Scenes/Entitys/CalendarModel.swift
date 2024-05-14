@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit.UIColor
 
 class CalendarModel {
     func getDaysArray(date: Date) -> [Date] {
@@ -20,21 +21,21 @@ class CalendarModel {
     func getWeekForCalendar(date: Date) -> [DateItem] {
         let daysArray = getDaysArray(date: date)
         var dateModelsArray = daysArray.map { $0.convertDateModel(for: $0) }
-        let tasks = ToDoStorage.instance.fetchToDos()
+        let tasks = TaskStorageManager.instance.fetchDateRangeToDos(date: daysArray)
         
         let tempDateModelsArray = dateModelsArray
         for task in tasks {
             for (index, date) in tempDateModelsArray.enumerated() {
                 if date.dateString == task.dateTitle ?? "" {
-                    if task.color == "systemOrange" {
+                    if task.color == .systemOrange {
                         dateModelsArray[index].isWorkTask = true
                     }
                     
-                    if task.color == "systemGreen" {
+                    if task.color == .taskGreen {
                         dateModelsArray[index].isPersonalTask = true
                     }
                     
-                    if task.color == "systemPurple" {
+                    if task.color == .systemPurple {
                         dateModelsArray[index].isOtherTask = true
                     }
                 }

@@ -13,15 +13,11 @@ final class AppConfigurator {
     func configureApp() -> UIViewController {
         let isNewUser = NewUserCheck.shared.isNewUser()
         
-//        print("you is new user? - \(isNewUser)")
-        
         switch isNewUser {
         case true:
             return AnimationLoadingRouter.createLoadingModule(startOnboardingModule())
         case false:
             return AnimationLoadingRouter.createLoadingModule(startMainModule())
-           
-            
         }
     }
     
@@ -53,7 +49,7 @@ final class AppConfigurator {
 //        let mainMockModule = CustomHomeTabBarController()
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate
         sceneDelegate.window?.rootViewController = mainModule
+        TaskStorageManager.instance.checkOverdueToDos()
         return mainModule
-        
     }
 }

@@ -9,11 +9,11 @@ import UIKit
 
 struct ColorsItem {
     var color: UIColor
-    static let colorsStack: [UIColor] = [.systemOrange, .systemGreen, .systemPurple]
+    static let colorsStack: [UIColor] = [.systemOrange, UIColor(named: "taskGreen") ?? .systemGreen, .systemPurple]
 }
 
 enum ColorsItemResult: String {
     case systemOrange
-    case systemGreen
+    case taskGreen
     case systemPurple
 }

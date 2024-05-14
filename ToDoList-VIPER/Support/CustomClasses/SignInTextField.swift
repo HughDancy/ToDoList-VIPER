@@ -16,7 +16,6 @@ class SignInTextField: UITextField {
         self.placeholder = placeholder
         self.tag = tag
         self.delegate = delegate
-//        self.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         self.autocapitalizationType = capitalizationType
         self.returnKeyType = returnKey
         self.isSecureTextEntry = secure

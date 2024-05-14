@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22757" systemVersion="23E214" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22757" systemVersion="23E224" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="ToDoObject" representedClassName="ToDoObject" syncable="YES">
-        <attribute name="color" optional="YES" attributeType="String"/>
+        <attribute name="color" optional="YES" attributeType="Transformable" valueTransformerName="ColorTransformer" customClassName="UIColor"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dateTitle" optional="YES" attributeType="String"/>
         <attribute name="descriptionTitle" optional="YES" attributeType="String"/>
-        <attribute name="doneStatus" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="doneStatus" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="iconName" optional="YES" attributeType="String"/>
+        <attribute name="isOverdue" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
     </entity>
 </model>

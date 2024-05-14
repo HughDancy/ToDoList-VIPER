@@ -185,8 +185,6 @@ class ToDoDetailController: UIViewController {
         contentTextView.isEditable = false
         datePicker.isUserInteractionEnabled = false
         presenter?.editToDo(title: titleLabel.text ?? "", content: contentTextView.text ?? "", date: datePicker.date)
-        print(datePicker.date)
-        
     }
 }
 
@@ -197,8 +195,8 @@ extension ToDoDetailController: ToDoDetailViewProtocol {
         switch toDo.color {
         case ColorsItemResult.systemOrange.rawValue:
             titleLabel.textColor = ColorsItem.colorsStack[0]
-        case ColorsItemResult.systemGreen.rawValue:
-            titleLabel.textColor = ColorsItem.colorsStack[1]
+//        case ColorsItemResult.systemGreen.rawValue:
+//            titleLabel.textColor = ColorsItem.colorsStack[1]
         case ColorsItemResult.systemPurple.rawValue:
             titleLabel.textColor = ColorsItem.colorsStack[2]
         default:

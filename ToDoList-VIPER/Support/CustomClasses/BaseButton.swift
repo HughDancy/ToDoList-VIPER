@@ -23,6 +23,18 @@ class BaseButton: UIButton {
     private func setupButton() {
         self.tintColor = .systemBackground
         self.layer.cornerRadius = 10
+    }
+    
+    func setupShadows(with color: UIColor) {
+        self.layer.shadowColor = color.cgColor
+        self.layer.shadowOpacity = 1
+        self.layer.shadowOffset = CGSize(width: 1, height: 1)
+        self.layer.shadowRadius = 1
+        self.layer.cornerRadius = 10
+    }
+    
+    func makeButtonCircle(with radius: CGFloat) {
+        self.layer.cornerRadius = radius
         self.clipsToBounds = true
     }
 }

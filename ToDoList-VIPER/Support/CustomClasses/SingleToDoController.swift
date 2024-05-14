@@ -8,7 +8,8 @@
 import UIKit
 
 class SingleToDoController: UIViewController {
-    var color: ColorsItemResult?
+    var color: UIColor?
+    var iconName: String?
     
     //MARK: - Base Outelts
     lazy var descriptionText: UITextView = {
@@ -29,10 +30,7 @@ class SingleToDoController: UIViewController {
     }()
     
     lazy var dateLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Дата"
-        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-        label.textColor = .systemBackground
+        let label = UILabel.createSimpleLabel(text: "Дата", size: 20, width: .semibold, color: .systemBackground)
         return label
     }()
     
@@ -45,24 +43,12 @@ class SingleToDoController: UIViewController {
         return picker
     }()
     
-    lazy var cathegoryLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Категория:"
-        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-        label.textColor = .systemBackground
+    lazy var categoryLabel: UILabel = {
+        let label = UILabel.createSimpleLabel(text: "Категория:", size: 20, width: .semibold, color: .systemBackground)
         return label
     }()
     
-    lazy var cathegoryTableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .plain)
-        tableView.backgroundColor = UIColor(named: "coralColor")
-        tableView.isScrollEnabled = false
-        tableView.showsVerticalScrollIndicator = false
-        tableView.separatorStyle = .none
-        tableView.dataSource = self
-        tableView.register(CathegoryCell.self, forCellReuseIdentifier: CathegoryCell.reuseIdentifier)
-        return tableView
-    }()
+    lazy var categoryTableView = CategoryTableView(frame: .zero, style: .plain, color: UIColor(named: "coralColor") ?? .systemBackground)
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -85,27 +71,19 @@ class SingleToDoController: UIViewController {
     
     //MARK: - Setup TextView
     func setupTextView() { }
+    
+    //MARK: - Setup color and iconName
+    func setupColorAndIcon(color: UIColor, icon: String) {
+        self.color = color
+        self.iconName = icon
+    }
 
     //MARK: - Setup elements user interaction
     func setupUserInteracton(with bool: Bool) {
         descriptionText.isUserInteractionEnabled = bool
         datePicker.isUserInteractionEnabled = bool
-        cathegoryTableView.isUserInteractionEnabled = bool
+        categoryTableView.isUserInteractionEnabled = bool
     }
 }
 
-//MARK: - TableView Data source extension
-extension SingleToDoController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ColorsItem.colorsStack.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CathegoryCell.reuseIdentifier, for: indexPath) as? CathegoryCell
-        let cathegoryName = ["Работа", "Личное", "Иное"]
-        cell?.backgroundColor = UIColor(named: "coralColor")
-        cell?.setupCell(with: ColorsItem.colorsStack[indexPath.row], title: cathegoryName[indexPath.row])
-        return cell ?? UITableViewCell()
-    }
-}
 

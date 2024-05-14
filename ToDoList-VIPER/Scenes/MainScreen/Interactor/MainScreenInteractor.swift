@@ -9,22 +9,17 @@ import Foundation
 
 final class MainScreenInteractor: MainScreenInteractorInputProtocol {
     var presenter: MainScreenInteractorOutputProtocol?
-    private var storage = ToDoStorage.instance
+    private var storage = TaskStorageManager.instance
     
     func retriveUserData() {
         presenter?.didRetriveUserData(["Женя", "mockUserAvatar"])
     }
     
     func getToDosCount() {
-        let allNotDoneToDos = storage.fetchToDos().filter { $0.doneStatus == false }
-        let allDoneToDos = storage.fetchToDos().filter { $0.doneStatus == true}
-        let upcomingToDos = ToDoObjectSorter.sortByStatus(object: allNotDoneToDos, and: .upcoming)
-    
-        let todayToDosCount = upcomingToDos[0].count
-        let tommorowToDosCount = upcomingToDos[1].count
-        let overdueToDos = ToDoObjectSorter.sortByStatus(object: allNotDoneToDos, and: .overdue)
-        let overdueToDosCount = (overdueToDos[0].count) + (overdueToDos[1].count) + (overdueToDos[2].count)
-        let doneToDosCount = allDoneToDos.count
+        let todayToDosCount = storage.fetchToDosCount(with: .today)
+        let tommorowToDosCount = storage.fetchToDosCount(with: .tommorow)
+        let overdueToDosCount = storage.fetchToDosCount(with: .overdue)
+        let doneToDosCount = storage.fetchToDosCount(with: .done)
         
         let toDosInfo = [
             [String(todayToDosCount), "Сегодня"],

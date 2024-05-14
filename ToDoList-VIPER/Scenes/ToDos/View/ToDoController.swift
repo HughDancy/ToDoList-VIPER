@@ -13,12 +13,10 @@ final class ToDoController: UIViewController {
     //MARK: - Properties
     var presenter: ToDosPresenterProtocol?
     private let calendarModel = CalendarModel()
-    private var centerDate = Date()
-    private var selectedDate = String()
+    private var selectedDate = Date()
     
     private var toDoTasks: [ToDoObject] = [] {
         didSet {
-            toDoTable.reloadData()
             if toDoTasks.count == 0 {
                 noTaskView.isHidden = false
             } else {
@@ -35,11 +33,12 @@ final class ToDoController: UIViewController {
     
     private lazy var toDoTable: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
-        tableView.backgroundColor = .systemBackground
-        tableView.register(ToDoCell.self, forCellReuseIdentifier: ToDosCell.reuseIdentifier)
+        tableView.backgroundColor = UIColor(named: "tasksBackground")
+        tableView.register(ToDoCell.self, forCellReuseIdentifier: ToDoCell.reuseIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
     
@@ -50,21 +49,11 @@ final class ToDoController: UIViewController {
         return imageView
     }()
     
-    private lazy var tasksLabel: UILabel = {
-        let label = UILabel()
-        label.text = "    Задачи отсутствуют"
-        label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
-        label.textColor = .systemCyan
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        label.textAlignment = .center
-        return label
-    }()
+    private lazy var tasksLabel = NoTaskLabel(status: presenter?.status ?? .today, size: 25, weight: .bold, color: .white)
     
     private lazy var noTaskView: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
-        
         return view
     }()
     
@@ -72,34 +61,28 @@ final class ToDoController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.addCustomBackButton()
-        presenter?.viewWillAppear()
-        setupCalendarColletcion()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        setupView()
+    }
+    
+    deinit {
+        print("ToDoController is ☠️")
+    }
+    
+    //MARK:  - Setup View
+    private func setupView() {
+        presenter?.getToDos()
+        self.getCurrentDate()
+        setupCalendarColletcion()
+        view.backgroundColor = UIColor(named: "tasksBackground")
         setupOtlets()
         setupNavigationBar()
     }
     
     //MARK: - Setup outlets
-    private func setupCalendarColletcion() {
-        DispatchQueue.main.async {
-            self.getCurrentDay()
-            let calendarModel = CalendarModel()
-            let daysArray = calendarModel.getWeekForCalendar(date: self.centerDate)
-            self.calendarView.calendar.setDaysArray(days: daysArray)
-            self.calendarView.calendar.selectedDate = DateFormatter.getStringFromDate(from: self.centerDate)
-            self.calendarView.calendar.scrollToItem(at: [0, 10], at: .centeredHorizontally, animated: false)
-        }
-    }
-    
-    private func setupNavigationBar() {
-        self.navigationItem.largeTitleDisplayMode = .never
-        self.navigationController?.navigationBar.prefersLargeTitles = false
-    }
-    
     private func setupOtlets() {
         updateData(day: 0, index: 10)
         setupHierarchy()
@@ -107,6 +90,20 @@ final class ToDoController: UIViewController {
         calendarView.calendar.calendarDelegate = self
         setupNotificationObserver()
         setupNoTaskStack()
+    }
+    
+    private func setupCalendarColletcion() {
+        DispatchQueue.main.async {
+            let calendarModel = CalendarModel()
+            let daysArray = calendarModel.getWeekForCalendar(date: self.selectedDate)
+            self.calendarView.calendar.setDaysArray(days: daysArray)
+            self.calendarView.calendar.scrollToItem(at: [0, 10], at: .centeredHorizontally, animated: false)
+        }
+    }
+    
+    private func setupNavigationBar() {
+        self.navigationItem.largeTitleDisplayMode = .never
+        self.navigationController?.navigationBar.prefersLargeTitles = false
     }
     
     //MARK: - Setup Hierarchy
@@ -132,7 +129,7 @@ final class ToDoController: UIViewController {
         
         tasksLabel.snp.makeConstraints { make in
             make.top.equalTo(taskImage.snp.bottom).offset(10)
-            make.centerX.equalTo(noTaskView.snp.centerX)
+            make.leading.trailing.equalToSuperview().inset(1)
         }
         
         tasksLabel.snp.makeConstraints { make in
@@ -141,7 +138,7 @@ final class ToDoController: UIViewController {
         
         calendarView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(5)
-            make.leading.trailing.equalToSuperview().inset(8)
+            make.leading.trailing.equalToSuperview()
             make.height.equalTo(130)
         }
         
@@ -151,74 +148,25 @@ final class ToDoController: UIViewController {
         }
     }
     
-    //MARK: - Update calendar func
-    private func updateData(day offset: Int, index: Int, scrollToItem: Bool = true) {
-        centerDate = centerDate.getDayOffset(with: offset)
-        let daysArray = calendarModel.getWeekForCalendar(date: centerDate)
-        guard daysArray.count > index else { return }
-        
-        calendarView.calendar.setDaysArray(days: daysArray)
-        calendarView.calendar.reloadData()
-        calendarView.setupMonthLabel(with: daysArray[index].monthName.changeWordEnding().capitalized)
-        
-        guard scrollToItem else { return }
-        calendarView.calendar.scrollToItem(at: [0, 10], at: .centeredHorizontally, animated: false)
-    }
-    
     //MARK: - Current date configure for start module
-    private func getCurrentDay() {
-        switch presenter?.date {
-        case .today:
-            self.centerDate = Date.today
+    private func getCurrentDate() {
+        switch presenter?.status {
+        case .today, .done:
+            defaultCalendarSetup(date: Date.today)
         case .tommorow:
-            self.centerDate = Date.tomorrow
-        default:
-            self.centerDate = Date.tomorrow
-        }
-    }
-    
-    //MARK: - Make notification observers for update collection
-    private func setupNotificationObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(updateTables), name: Notification.Name(rawValue: "UpdateTables"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(makeItDone), name: Notification.Name(rawValue: "DoneTask") , object: nil)
-    }
-    
-    @objc func updateTables(notification: Notification) {
-        DispatchQueue.main.async {
-            self.presenter?.updateToDosForDay(self.selectedDate)
-            self.toDoTable.reloadData()
-            let calendarModel = CalendarModel()
-            let daysArray = calendarModel.getWeekForCalendar(date: self.centerDate)
-            self.calendarView.calendar.setDaysArray(days: daysArray)
-            self.calendarView.calendar.reloadData()
-            self.tabBarController?.tabBar.isHidden = false
-        }
-    }
-    
-    @objc func makeItDone(notification: Notification) {
-        guard let doneInfo = notification.userInfo else { return }
-        guard let item = doneInfo["doneItem"] as? ToDoObject else { return }
-        self.presenter?.doneToDo(item)
-    }
-    
-    func makeNotification() {
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "UpdateTables"), object: nil)
-    }
-    
-    //MARK: - Get label for module
-    private func getTaskLabel() -> String {
-        switch presenter?.date {
-        case .today, .tommorow:
-            return "Задачи отсутствуют"
+            defaultCalendarSetup(date: Date.tomorrow)
         case .overdue:
-            return "На эту дату просроченные задачи отсутствуют"
-        case .done:
-            return "На эту дату отсутствуют выполненные задачи"
+            defaultCalendarSetup(date: Date.yesterday)
         default:
-            return ""
+            self.selectedDate = Date.tomorrow
         }
     }
     
+    private func defaultCalendarSetup(date: Date) {
+        self.selectedDate = date
+        self.calendarView.calendar.centerDate = date
+    }
+
     //MARK: - No tasks setup method
     private func setupNoTaskStack() {
         if toDoTasks.count == 0 {
@@ -230,17 +178,21 @@ final class ToDoController: UIViewController {
 }
 
 //MARK: - TableView Extension
-extension ToDoController: UITableViewDelegate, UITableViewDataSource {
+extension ToDoController:  UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return toDoTasks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ToDoCell.reuseIdentifier, for: indexPath) as? ToDoCell
-        cell?.setupCell(with: toDoTasks[indexPath.row])
-        return cell ?? UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ToDoCell.reuseIdentifier, for: indexPath) as? ToDoCell else  {
+            return UITableViewCell()
+        }
+        cell.setupCell(with: toDoTasks[indexPath.row], status: self.presenter?.status ?? ToDoListStatus.tommorow)
+        return cell
     }
-    
+}
+
+extension ToDoController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let toDo = toDoTasks[indexPath.row]
         presenter?.goToTask(toDo)
@@ -250,41 +202,95 @@ extension ToDoController: UITableViewDelegate, UITableViewDataSource {
         let action = UIContextualAction(style: .destructive, title: "") { _, _, _ in
             tableView.dataSource?.tableView?(tableView, commit: .delete, forRowAt: indexPath)
         }
-        action.image = UIGraphicsImageRenderer(size: CGSize(width: 50, height: 74)).image { _ in
+        action.image = UIGraphicsImageRenderer(size: CGSize(width: 50, height: 74)).image { some in
             UIImage(named: "delete")?.draw(in: CGRect(x: 0, y: 0, width: 50, height: 74))
         }
         
-        action.backgroundColor = .systemBackground
+        action.backgroundColor = UIColor(named: "tasksBackground")
         return UISwipeActionsConfiguration(actions: [action])
     }
 
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            let itemToDelete = toDoTasks[indexPath.row]
+            presenter?.deleteToDo(itemToDelete)
             tableView.beginUpdates()
-            presenter?.deleteToDo(toDoTasks[indexPath.row])
             toDoTasks.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .left)
-            self.makeNotification()
-            self.setupNoTaskStack()
+            tableView.deleteRows(at: [indexPath], with: .right)
             tableView.endUpdates()
+            self.updateCalendar()
+            self.setupNoTaskStack()
         }
+    }
+}
+
+    //MARK: - Make notification observers for update tableView and CalendarCollection Extension
+extension ToDoController {
+    private func setupNotificationObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTables), name: NotificationNames.updateTables.name, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(makeItDone), name: NotificationNames.doneToDo.name , object: nil)
+    }
+    
+    @objc func updateTables(notification: Notification) {
+        DispatchQueue.main.async {
+            self.presenter?.updateToDosForDay(self.selectedDate)
+            self.toDoTable.reloadData()
+            self.updateCalendar()
+            self.tabBarController?.tabBar.isHidden = false
+        }
+    }
+    
+    private func updateCalendar() {
+        let calendarModel = CalendarModel()
+        let daysArray = calendarModel.getWeekForCalendar(date: selectedDate)
+        self.calendarView.calendar.setDaysArray(days: daysArray)
+        self.calendarView.calendar.scrollToItem(at: [0, 10], at: .centeredHorizontally, animated: false)
+    }
+    
+    
+    @objc func makeItDone(notification: Notification) {
+        guard let doneInfo = notification.userInfo else { return }
+        guard let item = doneInfo["doneItem"] as? ToDoObject else { return }
+        self.presenter?.doneToDo(item)
+        guard let index = toDoTasks.firstIndex(of: item) else { return }
+        let doneItem = toDoTasks.remove(at: index)
+        toDoTasks.append(doneItem)
+        toDoTable.reloadData()
     }
 }
 
 //MARK: - Calendar Support methods extension
 extension ToDoController: CalendarCollectionViewDelegate {
     func scrollLeft() {
-        updateData(day: -7, index: 7)
+        DispatchQueue.main.async {
+            self.updateData(day: -7, index: 7)
+        }
     }
     
     func scrollRight() {
-        updateData(day: 7, index: 13)
+        DispatchQueue.main.async {
+            self.updateData(day: 7, index: 13)
+        }
+    }
+
+    private func updateData(day offset: Int, index: Int, scrollToItem: Bool = true) {
+        selectedDate = selectedDate.getDayOffset(with: offset)
+        calendarView.calendar.centerDate = self.selectedDate
+        let daysArray = calendarModel.getWeekForCalendar(date: selectedDate)
+        guard daysArray.count > index else { return }
+        
+        calendarView.calendar.setDaysArray(days: daysArray)
+        calendarView.calendar.reloadData()
+        calendarView.setupMonthLabel(with: daysArray[index].monthName.changeWordEnding().capitalized)
+        
+        guard scrollToItem else { return }
+        calendarView.calendar.scrollToItem(at: [0, 10], at: .centeredHorizontally, animated: false)
     }
     
-    func updateTasks(with data: String) {
-        presenter?.updateToDosForDay(data)
+    func updateTasks(with data: Date) {
         self.selectedDate = data
+        presenter?.updateToDosForDay(data)
         toDoTable.reloadData()
     }
 }

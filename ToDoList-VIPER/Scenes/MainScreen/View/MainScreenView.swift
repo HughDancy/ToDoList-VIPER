@@ -26,18 +26,10 @@ final class MainScreenView: UIView {
         return userAvatar
     }()
     
-    private lazy var userName: UILabel = {
-       let userName = UILabel()
-        userName.font = UIFont.systemFont(ofSize: 25, weight: .semibold)
-        userName.textColor = .white
-        userName.text = "Привет, Дональд!"
-        userName.numberOfLines = 0
-        return userName
-    }()
+    private lazy var userName = UILabel.createSimpleLabel(text: "", size: 25, width: .semibold, color: .white)
     
     private lazy var containerView: UIView = {
         let view = UIView()
-//        view.backgroundColor = UIColor(named: "mainScreenColor")
         view.backgroundColor = .systemBackground
         view.layer.shadowOffset = CGSize(width: 0, height: 10)
         view.layer.shadowRadius = 70
@@ -47,17 +39,7 @@ final class MainScreenView: UIView {
         return view
     }()
     
-     lazy var toDosCollection: UICollectionView = {
-        let layout = createCollectionViewLayout()
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(MainToDoCell.self, forCellWithReuseIdentifier: MainToDoCell.reuseIdentifier)
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.showsVerticalScrollIndicator = false
-        collectionView.backgroundColor = .systemBackground
-        collectionView.isScrollEnabled = true
-        collectionView.isScrollEnabled = false
-        return collectionView
-    }()
+    lazy var toDosCollection = MainScreenCollectionView()
     
     //MARK: - Init
     init() {
@@ -85,6 +67,7 @@ final class MainScreenView: UIView {
         self.addSubview(containerView)
         containerView.addSubview(toDosCollection)
     }
+    
     //MARK: - Setup Layout
     private func setupLayout() {
         backgroundImage.snp.makeConstraints { make in
@@ -115,53 +98,7 @@ final class MainScreenView: UIView {
             make.bottom.equalToSuperview().inset(70)
         }
     }
-    
-    //MARK: - Create CollectionView Layout
-    private func createCollectionViewLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewCompositionalLayout {
-            (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
-            let topItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
-             widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.6)))
-            topItem.contentInsets = NSDirectionalEdgeInsets(top: 1, leading: 1, bottom: 1, trailing: 1)
-            let bottomNestedItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
-             widthDimension: .fractionalWidth(1.0),
-             heightDimension: .fractionalHeight(1.0)))
-            let nestedBottomGroup = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(
-             widthDimension: .fractionalWidth(1.0),
-             heightDimension: .fractionalHeight(0.3)),
-             subitems: [bottomNestedItem])
-            let rigthNestedGroup = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(
-             widthDimension: .fractionalWidth(0.5),
-             heightDimension: .fractionalHeight(1.0)),
-             subitems: [topItem, nestedBottomGroup])
-            
-            let leftTopItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
-             widthDimension: .fractionalWidth(1.0),
-             heightDimension: .fractionalHeight(0.3)))
-            let bottonLeftNestedItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
-             widthDimension: .fractionalWidth(1.0),
-             heightDimension: .fractionalHeight(1.0)))
-            let leftNestedBottomGroup = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(
-             widthDimension: .fractionalWidth(1.0),
-             heightDimension: .fractionalHeight(0.6)),
-             subitems: [bottonLeftNestedItem])
-            let leftNestedGroup = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(
-             widthDimension: .fractionalWidth(0.5),
-             heightDimension: .fractionalHeight(1.0)),
-             subitems: [leftTopItem, leftNestedBottomGroup])
-            
-            let parrentGroup = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(
-             widthDimension: .fractionalWidth(1.0),
-             heightDimension: .fractionalHeight(1.0)),
-             subitems: [rigthNestedGroup, leftNestedGroup])
-            
-            let section = NSCollectionLayoutSection(group: parrentGroup)
-            section.orthogonalScrollingBehavior = .continuous
-            return section
-        }
-        return layout
-    }
-    
+        
     //MARK: - Setup elements
     func setupElements(nameOfImage: String, userName: String) {
         self.userAvatar.image = UIImage(named: nameOfImage)

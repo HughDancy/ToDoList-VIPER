@@ -9,7 +9,6 @@ import UIKit
 
 final class MainScreenRouter: MainScreenRouterProtocol {
  
-    
     static func createMainScreenModule() -> UIViewController {
         let viewController = MainScreenController()
         let presenter: MainScreenPresenterProtocol & MainScreenInteractorOutputProtocol = MainScreenPresenter()
@@ -49,6 +48,4 @@ final class MainScreenRouter: MainScreenRouterProtocol {
         let doneToDos = ToDosRouter.createToDosModule(with: .done)
         parrentView.navigationController?.pushViewController(doneToDos, animated: true)
     }
-    
-    
 }

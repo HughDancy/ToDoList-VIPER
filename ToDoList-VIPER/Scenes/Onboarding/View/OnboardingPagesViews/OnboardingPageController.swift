@@ -16,10 +16,6 @@ class OnboardingPageController: UIViewController {
         let picture = UIImageView()
         picture.contentMode = .scaleAspectFit
         picture.backgroundColor = .clear
-//        picture.layer.shadowOffset = CGSizeMake(5, 5)
-//        picture.layer.shadowOpacity = 0.7
-//        picture.layer.shadowRadius = 5
-//        picture.layer.shadowColor = UIColor.systemGray5.cgColor
         return picture
     }()
     

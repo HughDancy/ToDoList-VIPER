@@ -10,16 +10,16 @@ import UIKit
 protocol CalendarCollectionViewDelegate: AnyObject {
     func scrollLeft()
     func scrollRight()
-    func updateTasks(with data: String)
+    func updateTasks(with data: Date)
 }
 
 class CalendarCollectionView: UICollectionView {
-    
-    var selectedDate: String = DateFormatter.getStringFromDate(from: Date.tomorrow)
+    //MARK: - Properties
     private let layoutCollection = UICollectionViewFlowLayout()
     var selectedUserCell = 10
     
-    private var centerDate = Date()
+     var centerDate = Date()
+    
     weak var calendarDelegate: CalendarCollectionViewDelegate?
     var totalSquares = [DateItem]()
     
@@ -58,6 +58,7 @@ class CalendarCollectionView: UICollectionView {
     
     func setDaysArray(days: [DateItem]) {
         self.totalSquares = days
+        self.reloadData()
     }
     
     //MARK: - ScrollViewDidScroll method
@@ -72,7 +73,7 @@ class CalendarCollectionView: UICollectionView {
     }
 }
    
-extension CalendarCollectionView: UICollectionViewDelegate, UICollectionViewDataSource {
+extension CalendarCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         totalSquares.count
     }
@@ -80,8 +81,9 @@ extension CalendarCollectionView: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarCollectionCell.reuseIdentifier, for: indexPath) as? CalendarCollectionCell else { return UICollectionViewCell() }
         cell.setupCell(totalSquares[indexPath.row])
-        if indexPath.row == selectedUserCell {
-            selectItem(at: [0, selectedUserCell], animated: false, scrollPosition: [])
+        if cell.dateString == DateFormatter.getStringFromDate(from: centerDate)  {
+            selectItem(at: [0, indexPath.row], animated: false, scrollPosition: [])
+            cell.isSelected = true
         }
         return cell
     }
@@ -90,17 +92,20 @@ extension CalendarCollectionView: UICollectionViewDelegate, UICollectionViewData
         totalSquares.count
     }
     
+}
+
+extension CalendarCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedUserCell = indexPath.row
-        selectedDate = totalSquares[indexPath.item].dateString
-        calendarDelegate?.updateTasks(with: totalSquares[indexPath.row].dateString)
+        centerDate = totalSquares[indexPath.row].date
+        calendarDelegate?.updateTasks(with: totalSquares[indexPath.row].date)
     }
 }
 
 extension CalendarCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = frame.width / 7.7
-        let height = frame.height - 23.0
+        let height = frame.height - 25.0 //early was - 23.0
         return CGSize(width: width, height: height)
     }
 }

@@ -12,24 +12,29 @@ final class ToDosDetailPresenter: ToDosDetailPresenterProtocol {
     var interactor: ToDosDetailInteractorInputProtocol?
     var router: ToDosDetailRouterProtocol?
     
-    func viewWillAppear() {
+    func getToDo() {
         guard let task = interactor?.toDoItem else { return }
         view?.showToDoItem(task)
     }
     
-    func editToDo(title: String?, descriprion: String?, date: Date?, color: String) {
-        interactor?.editTask(title: title, descriprion: descriprion, date: date , color: color)
+    func editToDo(title: String?, descriprion: String?, date: Date?, color: UIColor, iconName: String) {
+        interactor?.editTask(title: title, descriprion: descriprion, date: date , color: color, iconName: iconName)
     }
     
-    func deleteToDo(_ toDo: ToDoObject) {
-        interactor?.deleteTask(toDo)
+    func whantDeleteToDo(_ toDo: ToDoObject) {
+        guard let view = view else { return }
+        router?.showAllert(with: view, status: .delete, toDo: toDo)
     }
 }
 
 extension ToDosDetailPresenter: ToDosDetailInteractorOutputProtocol {
     func showAllert(with status: ToDoDetailStatus) {
         guard let view = view else { return }
-        router?.showAllert(with: view, status: status)
+        router?.showAllert(with: view, status: status, toDo: nil)
+    }
+    
+    func deleteToDo(_ toDo: ToDoObject) {
+        interactor?.deleteTask(toDo)
     }
     
     func didDeleteToDo() {

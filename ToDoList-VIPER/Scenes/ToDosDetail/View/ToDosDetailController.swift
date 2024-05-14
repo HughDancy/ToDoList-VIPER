@@ -9,7 +9,7 @@ import UIKit
 
 final class ToDosDetailController: SingleToDoController {
     var item: ToDoObject?
-    var isEditButtonIsTapped: [String : Bool] = ["isTapped" : false]
+    private var isEditButtonIsTapped: [String : Bool] = ["isTapped" : false]
     var presenter: ToDosDetailPresenterProtocol?
     
     //MARK: - Controller custom outlets
@@ -27,7 +27,7 @@ final class ToDosDetailController: SingleToDoController {
     private lazy var editButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "square.and.pencil"), for: .normal)
-        button.backgroundColor = .systemOrange
+        button.backgroundColor = UIColor(named: "customBlue")
         button.tintColor = .systemBackground
         button.layer.cornerRadius = 35
         button.clipsToBounds = true
@@ -49,17 +49,21 @@ final class ToDosDetailController: SingleToDoController {
     //MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presenter?.viewWillAppear()
+        presenter?.getToDo()
         tabBarController?.tabBar.isHidden = true
         self.navigationController?.addCustomBackButton()
-        NotificationCenter.default.addObserver(self, selector: #selector(changeEditButtonState), name: Notification.Name(rawValue: "TapEditButton"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(changeEditButtonState), name: NotificationNames.tapEditButton.name, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "UpdateTables"), object: nil)
+        NotificationCenter.default.post(name: NotificationNames.updateTables.name, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NotificationNames.tapEditButton.name, object: nil)
     }
     
+    deinit {
+        print("ToDosDetailController is ☠️")
+    }
     //MARK: - Setup Hierarchy
     override func setupHierarchy() {
         view.addSubview(taskName)
@@ -67,8 +71,8 @@ final class ToDosDetailController: SingleToDoController {
         view.addSubview(dateStack)
         dateStack.addArrangedSubview(dateLabel)
         dateStack.addArrangedSubview(datePicker)
-        view.addSubview(cathegoryLabel)
-        view.addSubview(cathegoryTableView)
+        view.addSubview(categoryLabel)
+        view.addSubview(categoryTableView)
         view.addSubview(editButton)
         view.addSubview(deleteButton)
     }
@@ -92,13 +96,13 @@ final class ToDosDetailController: SingleToDoController {
             make.leading.equalToSuperview().inset(30)
         }
         
-        cathegoryLabel.snp.makeConstraints { make in
+        categoryLabel.snp.makeConstraints { make in
             make.top.equalTo(dateStack.snp.bottom).offset(10)
             make.leading.equalToSuperview().inset(30)
         }
         
-        cathegoryTableView.snp.makeConstraints { make in
-            make.top.equalTo(cathegoryLabel.snp.bottom).offset(10)
+        categoryTableView.snp.makeConstraints { make in
+            make.top.equalTo(categoryLabel.snp.bottom).offset(10)
             make.leading.trailing.equalToSuperview().inset(30)
             make.bottom.equalTo(editButton.snp.top).inset(10)
         }
@@ -118,7 +122,7 @@ final class ToDosDetailController: SingleToDoController {
     
     //MARK: - Setup Outlets
     override func setupOutlets() {
-        cathegoryTableView.delegate = self
+        categoryTableView.delegate = self
         setupUserInteracton(with: isEditButtonIsTapped["isTapped"] ?? false)
     }
     
@@ -148,22 +152,22 @@ final class ToDosDetailController: SingleToDoController {
     
     @objc func editToDo() {
         self.isEditButtonIsTapped["isTapped"] = true
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "TapEditButton"), object: nil, userInfo: self.isEditButtonIsTapped)
+        NotificationCenter.default.post(name: NotificationNames.tapEditButton.name, object: nil, userInfo: self.isEditButtonIsTapped)
         setupUserInteracton(with: isEditButtonIsTapped["isTapped"] ?? true)
         taskName.isUserInteractionEnabled = true
     }
     
     @objc private func saveEditToDo() {
         self.isEditButtonIsTapped["isTapped"] = false
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "TapEditButton"), object: nil, userInfo: self.isEditButtonIsTapped)
-        presenter?.editToDo(title: taskName.text, descriprion: descriptionText.text, date: datePicker.date, color: self.color?.rawValue ?? "systemOrange")
+        NotificationCenter.default.post(name: NotificationNames.tapEditButton.name, object: nil, userInfo: self.isEditButtonIsTapped)
+        presenter?.editToDo(title: taskName.text, descriprion: descriptionText.text, date: datePicker.date, color: self.color ?? .systemPurple, iconName: self.iconName ?? "moon.fil")
         setupUserInteracton(with: isEditButtonIsTapped["isTapped"] ?? false)
         taskName.isUserInteractionEnabled = true
     }
     
     @objc func deleteToDo() {
         guard let task = item else { return }
-        presenter?.deleteToDo(task)
+        presenter?.whantDeleteToDo(task)
     }
 }
 
@@ -177,12 +181,15 @@ extension ToDosDetailController: ToDosDetailViewProtocol {
             self.datePicker.date = toDo.date ?? Date.today
         }
         switch item?.color {
-        case "systemOrange":
-            cathegoryTableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .none)
-        case "systemGreen":
-            cathegoryTableView.selectRow(at: IndexPath(row: 1, section: 0), animated: false, scrollPosition: .none)
-        case "systemPurple":
-            cathegoryTableView.selectRow(at: IndexPath(row: 2, section: 0), animated: false, scrollPosition: .none)
+        case .systemOrange:
+            categoryTableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .none)
+            self.color = .systemOrange
+        case .taskGreen:
+            categoryTableView.selectRow(at: IndexPath(row: 1, section: 0), animated: false, scrollPosition: .none)
+            self.color = .taskGreen
+        case .systemPurple:
+            categoryTableView.selectRow(at: IndexPath(row: 2, section: 0), animated: false, scrollPosition: .none)
+            self.color = .systemPurple
         default:
             break
         }
@@ -192,16 +199,9 @@ extension ToDosDetailController: ToDosDetailViewProtocol {
     //MARK: - TableView Delegate extension
 extension ToDosDetailController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch ColorsItem.colorsStack[indexPath.row] {
-        case .systemOrange:
-            self.color = ColorsItemResult.systemOrange
-        case .systemGreen:
-            self.color = ColorsItemResult.systemGreen
-        case .systemPurple:
-            self.color = ColorsItemResult.systemPurple
-        default:
-            self.color = ColorsItemResult.systemOrange
-        }
+        let categories = TaskCategoryManager.manager.fetchCategories()
+        let category = categories[indexPath.row]
+        self.setupColorAndIcon(color: category.color, icon: category.iconName)
     }
 }
 

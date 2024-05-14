@@ -33,7 +33,7 @@ final class RegistrationInteractor: RegistrationInteractorInputProtocol {
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
             if error != nil {
                 self.presenter?.getRegistrationResult(result: .error)
-                print(error?.localizedDescription)
+                print(error?.localizedDescription as Any)
             } else {
                 self.db.collection("users").addDocument(data: [
                     "email" : email,

@@ -13,6 +13,9 @@ extension UIDatePicker {
         picker.datePickerMode = .date
         picker.preferredDatePickerStyle = .inline
         picker.locale = .current
+        var calendar = Calendar.current
+        calendar.timeZone = NSTimeZone.local
+        picker.calendar = calendar
         return picker
     }
 }
