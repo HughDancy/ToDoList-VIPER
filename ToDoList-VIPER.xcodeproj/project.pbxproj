@@ -16,6 +16,7 @@
 		D8473BED2BB6BE860063F87A /* UIStackView + EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8473BEC2BB6BE860063F87A /* UIStackView + EXT.swift */; };
 		D8473BF12BB7E73C0063F87A /* ToDosRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8473BF02BB7E73C0063F87A /* ToDosRouter.swift */; };
 		D84CADF92BF25E1F009C666D /* NoTaskLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CADF82BF25E1F009C666D /* NoTaskLabel.swift */; };
+		D85A925A2BF4B57700194796 /* UIImage + EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85A92592BF4B57700194796 /* UIImage + EXT.swift */; };
 		D85C57E52B57C71900023B04 /* OnboardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C57E42B57C71900023B04 /* OnboardingPage.swift */; };
 		D85C57E72B57CCA600023B04 /* OnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C57E62B57CCA600023B04 /* OnboardingPresenter.swift */; };
 		D85C57EA2B57CD1E00023B04 /* OnboardingProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C57E92B57CD1E00023B04 /* OnboardingProtocols.swift */; };
@@ -147,6 +148,7 @@
 		D8473BEC2BB6BE860063F87A /* UIStackView + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView + EXT.swift"; sourceTree = "<group>"; };
 		D8473BF02BB7E73C0063F87A /* ToDosRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ToDosRouter.swift; path = "ToDoList-VIPER/Support/Extension/ToDosRouter.swift"; sourceTree = SOURCE_ROOT; };
 		D84CADF82BF25E1F009C666D /* NoTaskLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoTaskLabel.swift; sourceTree = "<group>"; };
+		D85A92592BF4B57700194796 /* UIImage + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + EXT.swift"; sourceTree = "<group>"; };
 		D85C57E42B57C71900023B04 /* OnboardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPage.swift; sourceTree = "<group>"; };
 		D85C57E62B57CCA600023B04 /* OnboardingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPresenter.swift; sourceTree = "<group>"; };
 		D85C57E92B57CD1E00023B04 /* OnboardingProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingProtocols.swift; sourceTree = "<group>"; };
@@ -868,6 +870,7 @@
 				D8E840552B63AA69005A0936 /* CABasicAnimation + EXT.swift */,
 				D8473BEC2BB6BE860063F87A /* UIStackView + EXT.swift */,
 				D8AB92262BBD46AD00826A4E /* UINavigationController + EXT.swift */,
+				D85A92592BF4B57700194796 /* UIImage + EXT.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1136,6 +1139,7 @@
 				D8E9F87C2B03537A00A3F3FC /* HomeTabBarRouter.swift in Sources */,
 				D8900F112B5135F7008E0E34 /* AnimationLoadingController.swift in Sources */,
 				D8B1E9D92BA8376100D455AF /* AddNewToDosProtocols.swift in Sources */,
+				D85A925A2BF4B57700194796 /* UIImage + EXT.swift in Sources */,
 				D8BDEABC2BDC9C8E00C3BE55 /* CategoryTableView.swift in Sources */,
 				D8E840682B678183005A0936 /* RegistrationInteractor.swift in Sources */,
 				D8C19ED22B90B494004BCDDD /* LoginController.swift in Sources */,
