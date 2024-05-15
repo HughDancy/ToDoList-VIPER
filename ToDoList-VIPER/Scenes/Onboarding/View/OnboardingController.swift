@@ -36,13 +36,9 @@ class OnboardingController: UIPageViewController {
             vc.setupElements(with: item)
             vc.nextScreenButton.addTarget(self, action: #selector(goToNextScreen), for: .touchDown)
             if vc.state == .option {
-                vc.photoAndLibraryButton.isHidden = false
-                vc.photoAndLibraryButton.addTarget(self, action: #selector(presentRequest), for: .touchDown)
                 vc.nextScreenButton.addTarget(self, action: #selector(goToLogin), for: .touchDown)
-            } else {
-                vc.view.willRemoveSubview(vc.photoAndLibraryButton)
-                vc.photoAndLibraryButton.isHidden = true
-            }
+           } 
+
             pages.append(vc)
         }
         
@@ -61,11 +57,7 @@ class OnboardingController: UIPageViewController {
             currentPage = currentPage + 1
         }
     }
-    
-    @objc func presentRequest() {
-        presenter?.presentRequestAcess()
-    }
-    
+
     @objc func goToLogin() {
         presenter?.goToLoginModule()
     }
