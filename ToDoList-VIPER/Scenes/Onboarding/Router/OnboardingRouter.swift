@@ -11,7 +11,7 @@ final class OnboardingRouter: OnboardingRouterProtocol {
    weak var presenter: OnboardingPresenterProtocol?
     
     static func createOnboardingModule() -> UIViewController {
-        let view = OnboardingController(transitionStyle: .scroll, navigationOrientation: .horizontal)
+        let view = OnboardingPagesController(transitionStyle: .scroll, navigationOrientation: .horizontal)
         let presenter: OnboardingPresenterProtocol & OnboardingInteractorOutputProtocol = OnboardingPresenter()
         let interactor: OnboardingInteractorInputProtocol = OnboardingInteractor()
         let router = OnboardingRouter()

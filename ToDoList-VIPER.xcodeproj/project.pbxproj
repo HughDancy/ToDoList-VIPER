@@ -16,12 +16,12 @@
 		D8473BED2BB6BE860063F87A /* UIStackView + EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8473BEC2BB6BE860063F87A /* UIStackView + EXT.swift */; };
 		D8473BF12BB7E73C0063F87A /* ToDosRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8473BF02BB7E73C0063F87A /* ToDosRouter.swift */; };
 		D84CADF92BF25E1F009C666D /* NoTaskLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CADF82BF25E1F009C666D /* NoTaskLabel.swift */; };
-		D85C57E52B57C71900023B04 /* OnboardingPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C57E42B57C71900023B04 /* OnboardingPageController.swift */; };
+		D85C57E52B57C71900023B04 /* OnboardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C57E42B57C71900023B04 /* OnboardingPage.swift */; };
 		D85C57E72B57CCA600023B04 /* OnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C57E62B57CCA600023B04 /* OnboardingPresenter.swift */; };
 		D85C57EA2B57CD1E00023B04 /* OnboardingProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C57E92B57CD1E00023B04 /* OnboardingProtocols.swift */; };
 		D85C57EC2B57D0AD00023B04 /* OnboardingInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C57EB2B57D0AD00023B04 /* OnboardingInteractor.swift */; };
 		D85C57EE2B57D16300023B04 /* OnboardingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C57ED2B57D16300023B04 /* OnboardingRouter.swift */; };
-		D85C58392B5A595400023B04 /* OnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C58382B5A595400023B04 /* OnboardingController.swift */; };
+		D85C58392B5A595400023B04 /* OnboardingPagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C58382B5A595400023B04 /* OnboardingPagesController.swift */; };
 		D85C583C2B5A771A00023B04 /* OnboardingItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C583B2B5A771A00023B04 /* OnboardingItems.swift */; };
 		D85C5DB02B614E2F00F548AA /* LoginProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C5DAF2B614E2F00F548AA /* LoginProtocols.swift */; };
 		D864B5F62BAC0B7100650E8A /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B5F52BAC0B7100650E8A /* MainScreenView.swift */; };
@@ -147,12 +147,12 @@
 		D8473BEC2BB6BE860063F87A /* UIStackView + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView + EXT.swift"; sourceTree = "<group>"; };
 		D8473BF02BB7E73C0063F87A /* ToDosRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ToDosRouter.swift; path = "ToDoList-VIPER/Support/Extension/ToDosRouter.swift"; sourceTree = SOURCE_ROOT; };
 		D84CADF82BF25E1F009C666D /* NoTaskLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoTaskLabel.swift; sourceTree = "<group>"; };
-		D85C57E42B57C71900023B04 /* OnboardingPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageController.swift; sourceTree = "<group>"; };
+		D85C57E42B57C71900023B04 /* OnboardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPage.swift; sourceTree = "<group>"; };
 		D85C57E62B57CCA600023B04 /* OnboardingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPresenter.swift; sourceTree = "<group>"; };
 		D85C57E92B57CD1E00023B04 /* OnboardingProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingProtocols.swift; sourceTree = "<group>"; };
 		D85C57EB2B57D0AD00023B04 /* OnboardingInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingInteractor.swift; sourceTree = "<group>"; };
 		D85C57ED2B57D16300023B04 /* OnboardingRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRouter.swift; sourceTree = "<group>"; };
-		D85C58382B5A595400023B04 /* OnboardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingController.swift; sourceTree = "<group>"; };
+		D85C58382B5A595400023B04 /* OnboardingPagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPagesController.swift; sourceTree = "<group>"; };
 		D85C583B2B5A771A00023B04 /* OnboardingItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingItems.swift; sourceTree = "<group>"; };
 		D85C5DAF2B614E2F00F548AA /* LoginProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProtocols.swift; sourceTree = "<group>"; };
 		D864B5F52BAC0B7100650E8A /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
@@ -293,7 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				D85C583A2B5A595900023B04 /* OnboardingPagesViews */,
-				D85C58382B5A595400023B04 /* OnboardingController.swift */,
+				D85C58382B5A595400023B04 /* OnboardingPagesController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -333,7 +333,7 @@
 		D85C583A2B5A595900023B04 /* OnboardingPagesViews */ = {
 			isa = PBXGroup;
 			children = (
-				D85C57E42B57C71900023B04 /* OnboardingPageController.swift */,
+				D85C57E42B57C71900023B04 /* OnboardingPage.swift */,
 			);
 			path = OnboardingPagesViews;
 			sourceTree = "<group>";
@@ -1122,7 +1122,7 @@
 				D85C583C2B5A771A00023B04 /* OnboardingItems.swift in Sources */,
 				D8E9F8A52B04D32B00A3F3FC /* UITextField + EXT.swift in Sources */,
 				D8473BE52BB415BB0063F87A /* HorizontalCalendarView.swift in Sources */,
-				D85C57E52B57C71900023B04 /* OnboardingPageController.swift in Sources */,
+				D85C57E52B57C71900023B04 /* OnboardingPage.swift in Sources */,
 				D8AB92292BBD593700826A4E /* ToDosDetailProtocols.swift in Sources */,
 				D8E9F8B92B0CC0CB00A3F3FC /* ToDoObject+CoreDataClass.swift in Sources */,
 				D8DD85D12B9F4AD8003E7F89 /* CustomTabBar.swift in Sources */,
@@ -1144,7 +1144,7 @@
 				D8BDEABA2BDA178200C3BE55 /* CustomAlertView.swift in Sources */,
 				D8C19ED62B91C037004BCDDD /* BaseButton.swift in Sources */,
 				D8A54EC02BB6D61000D9B15F /* ToDosPresenter.swift in Sources */,
-				D85C58392B5A595400023B04 /* OnboardingController.swift in Sources */,
+				D85C58392B5A595400023B04 /* OnboardingPagesController.swift in Sources */,
 				D8C19ED42B90F3D4004BCDDD /* SignInTextField.swift in Sources */,
 				D8AB92252BBC063400826A4E /* SingleToDoController.swift in Sources */,
 				D8B1E9C32BA421A600D455AF /* MainScreenRouter.swift in Sources */,

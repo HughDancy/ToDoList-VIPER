@@ -7,12 +7,12 @@
 
 import UIKit
 
-class OnboardingController: UIPageViewController {
+class OnboardingPagesController: UIPageViewController {
  
     //MARK: - Elements
     var presenter: OnboardingPresenterProtocol?
     private var data = [OnboardingItems]()
-    private var pages = [OnboardingPageController]()
+    private var pages = [OnboardingPage]()
     private var currentPage = 0
     
     //MARK: - Life cycle
@@ -31,7 +31,7 @@ class OnboardingController: UIPageViewController {
     //MARK: - Setup onboarding pages
     private func setupPages() {
         for item in data {
-            let vc = OnboardingPageController()
+            let vc = OnboardingPage()
             vc.state = item.state
             vc.setupElements(with: item)
             vc.nextScreenButton.addTarget(self, action: #selector(goToNextScreen), for: .touchDown)
@@ -64,16 +64,16 @@ class OnboardingController: UIPageViewController {
 }
 
 //MARK: - OnboardingViewProtocol Extension
-extension OnboardingController: OnboardingViewProtocol {
+extension OnboardingPagesController: OnboardingViewProtocol {
     func getOnboardingData(_ data: [OnboardingItems]) {
         self.data = data
     }
 }
 
    //MARK: - Page Controller delegate and data source Extension
-extension OnboardingController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
+extension OnboardingPagesController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        if let index = pages.firstIndex(of: viewController as! OnboardingPageController) {
+        if let index = pages.firstIndex(of: viewController as! OnboardingPage) {
             if index > 0 {
                 self.currentPage = index - 1
                 return pages[index - 1]
@@ -85,7 +85,7 @@ extension OnboardingController: UIPageViewControllerDelegate, UIPageViewControll
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        if let index = pages.firstIndex(of: viewController as! OnboardingPageController) {
+        if let index = pages.firstIndex(of: viewController as! OnboardingPage) {
             if index < pages.count - 1 {
                 return pages[index + 1]
             } else {

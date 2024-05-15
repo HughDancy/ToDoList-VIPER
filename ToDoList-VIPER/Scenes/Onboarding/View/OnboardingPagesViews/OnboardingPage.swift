@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OnboardingPageController: UIViewController {
+class OnboardingPage: UIViewController {
     
     var state: OnboardingStates?
     
