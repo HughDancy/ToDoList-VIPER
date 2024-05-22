@@ -83,6 +83,19 @@ class OnboardingPage: UIViewController {
         welcomeLabel.text = data.title
         nextScreenButton.setTitle(data.buttonText, for: .normal)
         picture.image = UIImage(named: data.imageName)
+        switch self.state {
+        case .welcome, .aboutApp, .featureToDo, .doneAndOvedueToDo, .option:
+            picture.image = UIImage(named: data.imageName)
+        case .addToDo:
+            let gif = UIImage.gifImageWithName(data.imageName)
+            //            gif?.withRoundedCorners(radius: 10)
+            picture.image = gif
+            picture.image?.withRoundedCorners(radius: 50)
+        case .none:
+            picture.image = UIImage(named: data.imageName)
+        default:
+            break
+        }
         self.state = data.state
     }
 }

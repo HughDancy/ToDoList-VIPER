@@ -150,14 +150,16 @@ extension UIImage {
         }
         
         let duration: Int = {
-            var sum = 0
-            
+            var sum:Double = 0
+
             for val: Int in delays {
-                sum += val
+                let newVal =    Double(val) - (Double(val)/1.5)//Modified calculation to speed up the animtion in gif
+                //sum += val :default calculation
+                sum += newVal
             }
-            
-            return sum
-        }()
+
+            return Int(sum)
+            }()
         
         let gcd = gcdForArray(delays)
         var frames = [UIImage]()
@@ -179,3 +181,23 @@ extension UIImage {
         return animation
     }
 }
+
+extension UIImage {
+    // image with rounded corners
+    public func withRoundedCorners(radius: CGFloat? = nil) -> UIImage? {
+        let maxRadius = min(size.width, size.height) / 2
+        let cornerRadius: CGFloat
+        if let radius = radius, radius > 0 && radius <= maxRadius {
+            cornerRadius = radius
+        } else {
+            cornerRadius = maxRadius
+        }
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        let rect = CGRect(origin: .zero, size: size)
+        UIBezierPath(roundedRect: rect, cornerRadius: cornerRadius).addClip()
+        draw(in: rect)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
+}   

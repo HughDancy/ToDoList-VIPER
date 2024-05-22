@@ -30,7 +30,7 @@ extension OnboardingItems {
         OnboardingItems(title: "Добавить новую задачу просто!", 
                         description: "Просто нажмите на иконку плюса и заполните необходимые поля",
                         buttonText: "Далее",
-                        imageName: "onboarding_2",
+                        imageName: "fig",
                         state: .addToDo),
         OnboardingItems(title: "Редактикруйте уже созданные задачи!",
                         description: """

@@ -25,6 +25,8 @@ class OnboardingPagesController: UIPageViewController {
         view.backgroundColor = .systemBackground
         presenter?.viewWillAppear()
         setupPages()
+        setupFirstPage()
+        print(currentPage)
         self.dataSource = self
     }
     
@@ -42,10 +44,15 @@ class OnboardingPagesController: UIPageViewController {
             pages.append(vc)
         }
         
+      
+    }
+    
+    private func setupFirstPage() {
         if let firstPage = pages.first(where: { page in
                   page.state?.rawValue ?? OnboardingStates.welcome.rawValue == UserDefaults.standard.string(forKey: "onboardingState")
               })  {
                   setViewControllers([firstPage], direction: .forward, animated: true, completion: nil)
+            self.currentPage = pages.firstIndex(of: firstPage) ?? 0
               }
 
     }
@@ -53,8 +60,8 @@ class OnboardingPagesController: UIPageViewController {
     //MARK: - @OBJC METHODS
     @objc func goToNextScreen() {
         if currentPage + 1 < pages.count {
-            self.setViewControllers([pages[currentPage + 1]], direction: .forward, animated: true)
-            currentPage = currentPage + 1
+                self.setViewControllers([self.pages[self.currentPage + 1]], direction: .forward, animated: true)
+                self.currentPage = self.currentPage + 1
         }
     }
 

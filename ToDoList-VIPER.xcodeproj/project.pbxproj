@@ -17,6 +17,14 @@
 		D8473BF12BB7E73C0063F87A /* ToDosRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8473BF02BB7E73C0063F87A /* ToDosRouter.swift */; };
 		D84CADF92BF25E1F009C666D /* NoTaskLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CADF82BF25E1F009C666D /* NoTaskLabel.swift */; };
 		D85A925A2BF4B57700194796 /* UIImage + EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85A92592BF4B57700194796 /* UIImage + EXT.swift */; };
+		D85A925D2BF4BAAD00194796 /* ONB_3_fps.gif in Resources */ = {isa = PBXBuildFile; fileRef = D85A925C2BF4BAAD00194796 /* ONB_3_fps.gif */; };
+		D85A925F2BF4BE4500194796 /* onb_3.gif in Resources */ = {isa = PBXBuildFile; fileRef = D85A925E2BF4BE4500194796 /* onb_3.gif */; };
+		D85A92612BF4CF9800194796 /* bo.gif in Resources */ = {isa = PBXBuildFile; fileRef = D85A92602BF4CF9800194796 /* bo.gif */; };
+		D85A92632BF747E800194796 /* ssss.gif in Resources */ = {isa = PBXBuildFile; fileRef = D85A92622BF747E800194796 /* ssss.gif */; };
+		D85A92652BFB45DB00194796 /* 20May.gif in Resources */ = {isa = PBXBuildFile; fileRef = D85A92642BFB45DB00194796 /* 20May.gif */; };
+		D85A92672BFB63D200194796 /* shg.gif in Resources */ = {isa = PBXBuildFile; fileRef = D85A92662BFB63D200194796 /* shg.gif */; };
+		D85A92692BFC93BB00194796 /* jojo.gif in Resources */ = {isa = PBXBuildFile; fileRef = D85A92682BFC93BB00194796 /* jojo.gif */; };
+		D85A926B2BFC947800194796 /* fig.gif in Resources */ = {isa = PBXBuildFile; fileRef = D85A926A2BFC947800194796 /* fig.gif */; };
 		D85C57E52B57C71900023B04 /* OnboardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C57E42B57C71900023B04 /* OnboardingPage.swift */; };
 		D85C57E72B57CCA600023B04 /* OnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C57E62B57CCA600023B04 /* OnboardingPresenter.swift */; };
 		D85C57EA2B57CD1E00023B04 /* OnboardingProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C57E92B57CD1E00023B04 /* OnboardingProtocols.swift */; };
@@ -149,6 +157,14 @@
 		D8473BF02BB7E73C0063F87A /* ToDosRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ToDosRouter.swift; path = "ToDoList-VIPER/Support/Extension/ToDosRouter.swift"; sourceTree = SOURCE_ROOT; };
 		D84CADF82BF25E1F009C666D /* NoTaskLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoTaskLabel.swift; sourceTree = "<group>"; };
 		D85A92592BF4B57700194796 /* UIImage + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + EXT.swift"; sourceTree = "<group>"; };
+		D85A925C2BF4BAAD00194796 /* ONB_3_fps.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = ONB_3_fps.gif; path = ../../../../../../../Downloads/ONB_3_fps.gif; sourceTree = "<group>"; };
+		D85A925E2BF4BE4500194796 /* onb_3.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = onb_3.gif; path = ../../../../../../onb_3.gif; sourceTree = "<group>"; };
+		D85A92602BF4CF9800194796 /* bo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = bo.gif; path = ../../../../../../../Pictures/Monosnap/bo.gif; sourceTree = "<group>"; };
+		D85A92622BF747E800194796 /* ssss.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = ssss.gif; path = ../../../../../../../Pictures/Monosnap/ssss.gif; sourceTree = "<group>"; };
+		D85A92642BFB45DB00194796 /* 20May.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = 20May.gif; path = ../../../../../../../Pictures/Monosnap/20May.gif; sourceTree = "<group>"; };
+		D85A92662BFB63D200194796 /* shg.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = shg.gif; path = ../../../../../../../Pictures/Monosnap/shg.gif; sourceTree = "<group>"; };
+		D85A92682BFC93BB00194796 /* jojo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = jojo.gif; path = ../../../../../../jojo.gif; sourceTree = "<group>"; };
+		D85A926A2BFC947800194796 /* fig.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = fig.gif; path = ../../../../../../fig.gif; sourceTree = "<group>"; };
 		D85C57E42B57C71900023B04 /* OnboardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPage.swift; sourceTree = "<group>"; };
 		D85C57E62B57CCA600023B04 /* OnboardingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPresenter.swift; sourceTree = "<group>"; };
 		D85C57E92B57CD1E00023B04 /* OnboardingProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingProtocols.swift; sourceTree = "<group>"; };
@@ -289,6 +305,21 @@
 				D8473BE22BB2C5DF0063F87A /* CalendarCollectionCell.swift */,
 			);
 			path = CustomCells;
+			sourceTree = "<group>";
+		};
+		D85A925B2BF4BA9600194796 /* OnboardingGif's */ = {
+			isa = PBXGroup;
+			children = (
+				D85A926A2BFC947800194796 /* fig.gif */,
+				D85A92682BFC93BB00194796 /* jojo.gif */,
+				D85A92662BFB63D200194796 /* shg.gif */,
+				D85A92642BFB45DB00194796 /* 20May.gif */,
+				D85A92622BF747E800194796 /* ssss.gif */,
+				D85A92602BF4CF9800194796 /* bo.gif */,
+				D85A925E2BF4BE4500194796 /* onb_3.gif */,
+				D85A925C2BF4BAAD00194796 /* ONB_3_fps.gif */,
+			);
+			path = "OnboardingGif's";
 			sourceTree = "<group>";
 		};
 		D85C57E02B57AC1300023B04 /* View */ = {
@@ -456,6 +487,7 @@
 		D86D45182AFB967D00894774 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D85A925B2BF4BA9600194796 /* OnboardingGif's */,
 				D86D44ED2AFB933000894774 /* Assets.xcassets */,
 				D86D44EF2AFB933000894774 /* LaunchScreen.storyboard */,
 				D86D44F22AFB933000894774 /* Info.plist */,
@@ -1051,9 +1083,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D85A92632BF747E800194796 /* ssss.gif in Resources */,
 				D86D44F12AFB933000894774 /* LaunchScreen.storyboard in Resources */,
 				D87474592B99A28200BF4866 /* credentials.plist in Resources */,
 				D874745B2B99A2CE00BF4866 /* GoogleService-Info.plist in Resources */,
+				D85A92692BFC93BB00194796 /* jojo.gif in Resources */,
+				D85A92652BFB45DB00194796 /* 20May.gif in Resources */,
+				D85A92612BF4CF9800194796 /* bo.gif in Resources */,
+				D85A925D2BF4BAAD00194796 /* ONB_3_fps.gif in Resources */,
+				D85A92672BFB63D200194796 /* shg.gif in Resources */,
+				D85A926B2BFC947800194796 /* fig.gif in Resources */,
+				D85A925F2BF4BE4500194796 /* onb_3.gif in Resources */,
 				D86D44EE2AFB933000894774 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
