@@ -9,50 +9,36 @@ import UIKit
 
 struct OnboardingItems {
     var title: String
-    var description: String
-    var buttonText: String
+    var buttonText: String?
     var imageName: String
     var state: OnboardingStates
 }
 
 extension OnboardingItems {
     static let pagesData = [
-        OnboardingItems(title: "Добро пожаловать ToDo List!",
-                        description: "Для продолжения нажмите кнопку или свайпните вправо",
-                        buttonText: "Начать",
-                        imageName: "welcomeImage",
+        OnboardingItems(title: "",
+                        buttonText: nil,
+                        imageName: "onboarding_1",
                         state: .welcome),
-        OnboardingItems(title: "Удобное приложение для Ваших задач!",
-                        description: "ToDo List позволяет привести Ваши задачи в порядок, отсортировать их по дате и установленному Вами приоритету",
-                        buttonText: "Далее", 
-                        imageName: "onboardingMock",
+        OnboardingItems(title: "Удобное приложение для Ваших задач",
+                        buttonText: nil,
+                        imageName: "onboarding_2",
                         state: .aboutApp),
-        OnboardingItems(title: "Добавить новую задачу просто!", 
-                        description: "Просто нажмите на иконку плюса и заполните необходимые поля",
-                        buttonText: "Далее",
-                        imageName: "onboardingMock",
+        OnboardingItems(title: "Добавить новую задачу просто",
+                        buttonText: nil,
+                        imageName: "onboarding_3",
                         state: .addToDo),
-        OnboardingItems(title: "Редактикруйте уже созданные задачи!",
-                        description: """
-                                      Изменяйте наименование задачи, ее описание, приоритет или дату.
-                                      Если задача уже не актуальна - просто удалите ее!
-                                      """,
-                        buttonText: "Далее",
-                        imageName: "onboardingMock",
+        OnboardingItems(title: "Редактикруй уже созданные задачи",
+                        buttonText: nil,
+                        imageName: "onboarding_4",
                         state: .featureToDo),
-        OnboardingItems(title: "Завершить задачу в один клик!",
-                        description: """
-                        Завершить задачу очень просто - просто нажми на кружок в левой части и она перейдет в раздел "Выполнено".
-                        """,
-                        buttonText: "Далее",
-                        imageName: "onboardingMock",
+        OnboardingItems(title: "Заверши задачу в один клик",
+                        buttonText: nil,
+                        imageName: "onboarding_5",
                         state: .doneAndOvedueToDo),
-        OnboardingItems(title: "Настройте приложение!",
-                        description: """
-                        Измените аватар, смените ник, включите темную или светлую тему в разделе "Настройки"
-                        """,
+        OnboardingItems(title: "Начнем?",
                         buttonText: "Начать",
-                        imageName: "onboardingMock",
+                        imageName: "onboarding_6",
                         state: .option),
     
     ]
