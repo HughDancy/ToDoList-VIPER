@@ -37,6 +37,15 @@ final class LoginController: SingInController {
     
     private lazy var loginButton = LoadingButton(originalText: "Войти", type: .custom)
     
+    private lazy var forgottPasswordButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Забыли пароль?", for: .normal)
+        button.backgroundColor = .systemBackground
+        button.tintColor = .systemCyan
+        button.addTarget(self, action: #selector(goToForgottenPassword), for: .touchDown)
+        return button
+    }()
+    
     private lazy var registerButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Зарегестрироваться", for: .normal)
@@ -92,6 +101,7 @@ final class LoginController: SingInController {
         scrollView.addSubview(passwordField)
         scrollView.addSubview(loginButton)
         scrollView.addSubview(registerButton)
+        scrollView.addSubview(forgottPasswordButton)
         scrollView.addSubview(orLabel)
         scrollView.addSubview(sigInButtonStack)
         sigInButtonStack.addArrangedSubview(googleLoginButton)
@@ -102,7 +112,7 @@ final class LoginController: SingInController {
     override func setupLayout() {
         super.setupLayout()
         logoImage.snp.makeConstraints { make in
-            make.top.equalTo(scrollView.snp.top).offset((UIScreen.main.bounds.height * 0.4) - (UIScreen.main.bounds.width * 0.4))
+            make.top.equalTo(scrollView.snp.top).offset((UIScreen.main.bounds.height * 0.33) - (UIScreen.main.bounds.width * 0.4))
             make.centerX.equalTo(scrollView.snp.centerX)
             make.height.equalTo(UIScreen.main.bounds.height / 4)
             make.width.equalTo(UIScreen.main.bounds.height * 0.5)
@@ -125,20 +135,25 @@ final class LoginController: SingInController {
             make.leading.trailing.equalTo(scrollView.safeAreaLayoutGuide).inset(40)
         }
         
+        registerButton.snp.makeConstraints { make in
+            make.top.equalTo(loginButton.snp.bottom).offset(7)
+            make.leading.trailing.equalTo(scrollView.safeAreaLayoutGuide).inset(40)
+            make.height.equalTo(35)
+        }
+        
+        forgottPasswordButton.snp.makeConstraints { make in
+            make.top.equalTo(registerButton.snp.bottom).offset(7)
+            make.centerX.equalTo(scrollView.snp.centerX)
+        }
+        
         orLabel.snp.makeConstraints { make in
-            make.top.equalTo(loginButton.snp.bottom).offset(20)
+            make.top.equalTo(forgottPasswordButton.snp.bottom).offset(15)
             make.centerX.equalTo(scrollView.snp.centerX)
         }
         
         sigInButtonStack.snp.makeConstraints { make in
             make.top.equalTo(orLabel.snp.bottom).offset(15)
             make.centerX.equalTo(scrollView.safeAreaLayoutGuide.snp.centerX)
-        }
-        
-        registerButton.snp.makeConstraints { make in
-            make.top.equalTo(sigInButtonStack.snp.bottom).offset(5)
-            make.leading.trailing.equalTo(scrollView.safeAreaLayoutGuide).inset(40)
-            make.height.equalTo(35)
         }
     }
     
@@ -160,6 +175,10 @@ final class LoginController: SingInController {
         self.view.endEditing(true)
         self.loginButton.showLoading()
         presenter?.chekTheLogin(login: loginField.text, password: passwordField.text)
+    }
+    
+    @objc func goToForgottenPassword() {
+        print("Reloading pass")
     }
     
     @objc func registerUser() {
