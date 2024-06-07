@@ -178,7 +178,7 @@ final class LoginController: SingInController {
     }
     
     @objc func goToForgottenPassword() {
-        print("Reloading pass")
+        presenter?.goToForgottPassword()
     }
     
     @objc func registerUser() {

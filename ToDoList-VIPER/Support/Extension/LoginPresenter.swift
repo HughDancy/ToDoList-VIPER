@@ -8,12 +8,18 @@
 import Foundation
 
 final class LoginPresenter: LoginPresenterProtocol {
+
     weak var view: LoginViewProtocol?
     var interactor: LoginInteractorInputProtocol?
     var router: LoginRouterProtocol?
     
     func chekTheLogin(login: String?, password: String?) {
         interactor?.checkAutorizationData(login: login, password: password)
+    }
+    
+    func goToForgottPassword() {
+        guard let view = view else { return }
+        router?.goToForgottPasswordModule(from: view)
     }
     
     func goToRegistration() {

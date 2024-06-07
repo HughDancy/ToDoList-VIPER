@@ -94,6 +94,7 @@
 		D8DC23D72BB17B8300C3E220 /* ToDoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DC23D62BB17B8300C3E220 /* ToDoController.swift */; };
 		D8DD85CF2B9F370C003E7F89 /* CustomHomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DD85CE2B9F370C003E7F89 /* CustomHomeTabBarController.swift */; };
 		D8DD85D12B9F4AD8003E7F89 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DD85D02B9F4AD8003E7F89 /* CustomTabBar.swift */; };
+		D8E00C6D2C131425005AEA4D /* ForgottPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E00C6C2C131425005AEA4D /* ForgottPasswordController.swift */; };
 		D8E840542B63A8F0005A0936 /* String + EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E840532B63A8F0005A0936 /* String + EXT.swift */; };
 		D8E840562B63AA69005A0936 /* CABasicAnimation + EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E840552B63AA69005A0936 /* CABasicAnimation + EXT.swift */; };
 		D8E840582B63B0AB005A0936 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E840572B63B0AB005A0936 /* LoginPresenter.swift */; };
@@ -217,6 +218,7 @@
 		D8DC23D62BB17B8300C3E220 /* ToDoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoController.swift; sourceTree = "<group>"; };
 		D8DD85CE2B9F370C003E7F89 /* CustomHomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHomeTabBarController.swift; sourceTree = "<group>"; };
 		D8DD85D02B9F4AD8003E7F89 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		D8E00C6C2C131425005AEA4D /* ForgottPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgottPasswordController.swift; sourceTree = "<group>"; };
 		D8E840532B63A8F0005A0936 /* String + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + EXT.swift"; sourceTree = "<group>"; };
 		D8E840552B63AA69005A0936 /* CABasicAnimation + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CABasicAnimation + EXT.swift"; sourceTree = "<group>"; };
 		D8E840572B63B0AB005A0936 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginPresenter.swift; path = "ToDoList-VIPER/Support/Extension/LoginPresenter.swift"; sourceTree = SOURCE_ROOT; };
@@ -800,6 +802,7 @@
 		D8E00C6A2C130434005AEA4D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D8E00C6C2C131425005AEA4D /* ForgottPasswordController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1212,6 +1215,7 @@
 				D85C5DB02B614E2F00F548AA /* LoginProtocols.swift in Sources */,
 				D8F11C602B5660DA00D2282D /* AnimationLoadingPresenter.swift in Sources */,
 				D8B1E9CB2BA465A300D455AF /* AddNewToDoController.swift in Sources */,
+				D8E00C6D2C131425005AEA4D /* ForgottPasswordController.swift in Sources */,
 				D8E9F8AF2B0B40FE00A3F3FC /* UIDatePicker + EXT.swift in Sources */,
 				D86D44E42AFB932E00894774 /* SceneDelegate.swift in Sources */,
 				D8E8405C2B63B2D1005A0936 /* LoginRouter.swift in Sources */,
