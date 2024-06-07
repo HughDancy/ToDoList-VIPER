@@ -27,7 +27,7 @@ final class LoginRouter: LoginRouterProtocol {
     
     func goToForgottPasswordModule(from view: any LoginViewProtocol) {
         guard let view = view as? UIViewController else { return }
-        let forgottPasswordModule = ForgottPasswordController()
+        let forgottPasswordModule = ForgettPasswordRouter.createForgettPasswordModule()
         view.navigationController?.pushViewController(forgottPasswordModule, animated: true)
     }
     

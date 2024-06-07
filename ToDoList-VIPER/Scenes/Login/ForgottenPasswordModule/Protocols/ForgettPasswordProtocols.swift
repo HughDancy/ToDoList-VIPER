@@ -32,9 +32,13 @@ protocol ForgettPasswordInreractorOutputProtocol: AnyObject {
     func returnWelldone()
     func returnFailure()
     func returnNetworkError()
+    //ROUTER -> PRESENTER
+    func dismissToLogin()
 }
 
 protocol ForgettPasswordRouterProtocol: AnyObject {
+    var presenter: ForgettPasswordInreractorOutputProtocol? { get set }
+    
     static func createForgettPasswordModule() -> UIViewController
     
     func dismissToLoginScreen(from view: ForgetPasswordViewProtocol)
