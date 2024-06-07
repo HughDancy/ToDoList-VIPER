@@ -36,15 +36,12 @@ class OnboardingPagesController: UIPageViewController {
             let vc = OnboardingPage()
             vc.state = item.state
             vc.setupElements(with: item)
-            vc.nextScreenButton.addTarget(self, action: #selector(goToNextScreen), for: .touchDown)
+            vc.nextScreenButton.addTarget(self, action: #selector(goToLogin), for: .touchDown)
             if vc.state == .option {
-                vc.nextScreenButton.addTarget(self, action: #selector(goToLogin), for: .touchDown)
-           } 
-
+                vc.nextScreenButton.isHidden = false
+            }
             pages.append(vc)
         }
-        
-      
     }
     
     private func setupFirstPage() {

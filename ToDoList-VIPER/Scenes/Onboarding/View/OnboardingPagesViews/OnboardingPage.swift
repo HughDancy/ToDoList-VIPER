@@ -14,32 +14,26 @@ class OnboardingPage: UIViewController {
     //MARK: - Outlets
     private lazy var picture: UIImageView = {
         let picture = UIImageView()
-        picture.contentMode = .scaleAspectFit
+        picture.contentMode = .scaleAspectFill
         picture.backgroundColor = .clear
         return picture
     }()
     
-    private lazy var welcomeLabel: UILabel = {
-        let label = UILabel()
+    private lazy var descriptionTitle: UILabel = {
+        let label = UILabel.createSimpleLabel(text: "", 
+                                              size: OnboardingSizes.textSize.getTextSize(),
+                                              width: .bold,
+                                              color: .label)
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
         return label
     }()
-
+    
     lazy var nextScreenButton: BaseButton = {
         let button = BaseButton(text: "", color: .systemCyan)
         button.setupShadows(with: .label)
+        button.isHidden = true
         return button
-    }()
-
-    lazy var stack: UIStackView = {
-       let stack = UIStackView()
-        stack.axis = .vertical
-        stack.spacing = 5
-        stack.alignment = .center
-        stack.distribution = .equalSpacing
-        return stack
     }()
     
     //MARK: - Lifecycle
@@ -57,45 +51,54 @@ class OnboardingPage: UIViewController {
     
     //MARK: - Setup Outlets
     private func setupHierarchy() {
-        view.addSubview(stack)
-        stack.addArrangedSubview(picture)
-        stack.addArrangedSubview(welcomeLabel)
-        stack.addArrangedSubview(nextScreenButton)
+        view.addSubview(picture)
+        view.sendSubviewToBack(picture)
+        view.addSubview(descriptionTitle)
+        view.addSubview(nextScreenButton)
     }
     
     private func setupLayout() {
-        stack.snp.makeConstraints { make in
-            make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(10)
-            make.bottom.equalTo(view.safeAreaLayoutGuide)
+        picture.snp.makeConstraints { make in
+            make.centerX.centerY.equalTo(view)
+            make.top.bottom.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
         }
         
-        welcomeLabel.snp.makeConstraints { make in
-            make.height.equalTo(70)
+        descriptionTitle.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().inset(OnboardingSizes.labelBottomOffset.getOffsetSize())
+            make.centerX.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(10)
         }
-  
+
         nextScreenButton.snp.makeConstraints { make in
-            make.height.equalTo(40)
-            make.leading.trailing.equalToSuperview().inset(40)
+            make.top.equalTo(descriptionTitle.snp.bottom).offset(10)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(40)
+            make.height.equalTo(OnboardingSizes.buttonSize.getButtonSize())
         }
     }
     
     func setupElements(with data: OnboardingItems) {
-        welcomeLabel.text = data.title
+        self.descriptionTitle.text = data.title
+        self.picture.image = UIImage(named: data.imageName)
         nextScreenButton.setTitle(data.buttonText, for: .normal)
-        picture.image = UIImage(named: data.imageName)
-        switch self.state {
-        case .welcome, .aboutApp, .featureToDo, .doneAndOvedueToDo, .option:
-            picture.image = UIImage(named: data.imageName)
-        case .addToDo:
-            let gif = UIImage.gifImageWithName(data.imageName)
-            //            gif?.withRoundedCorners(radius: 10)
-            picture.image = gif
-            picture.image?.withRoundedCorners(radius: 50)
-        case .none:
-            picture.image = UIImage(named: data.imageName)
-        default:
-            break
-        }
-        self.state = data.state
+    }
+}
+
+enum OnboardingSizes: CGFloat {
+    case textSize = 28
+    case labelBottomOffset = 110
+    case buttonSize = 45
+    
+    func getTextSize() -> CGFloat {
+        UIScreen.main.bounds.height > 700 ? rawValue : rawValue - 8.0
+    }
+    
+    func getOffsetSize() -> CGFloat {
+        UIScreen.main.bounds.height > 700 ? rawValue : rawValue - 55.0
+    }
+    
+    func getButtonSize() -> CGFloat {
+        UIScreen.main.bounds.height > 700 ? rawValue : rawValue - 10.0
     }
 }
