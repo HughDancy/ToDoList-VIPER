@@ -8,7 +8,6 @@
 import UIKit
 
 final class ForgettPasswordRouter: ForgettPasswordRouterProtocol {
-    weak var presenter: ForgettPasswordInreractorOutputProtocol?
     
     static func createForgettPasswordModule() -> UIViewController {
         let view = ForgottPasswordController()
@@ -21,7 +20,6 @@ final class ForgettPasswordRouter: ForgettPasswordRouterProtocol {
         presenter.interactor = interactor
         presenter.router = router
         interactor.presenter = presenter
-        router.presenter = presenter
         
         return view
     }
@@ -46,7 +44,7 @@ final class ForgettPasswordRouter: ForgettPasswordRouterProtocol {
             colorTwo: nil,
             buttonText: "Ок",
             buttonTextTwo: nil) { _ in
-                self.presenter?.dismissToLogin()
+                self.dismissToLoginScreen(from: view)
             }
     }
     
@@ -64,9 +62,7 @@ final class ForgettPasswordRouter: ForgettPasswordRouterProtocol {
             colorOne: .systemCyan,
             colorTwo: nil,
             buttonText: "Ок",
-            buttonTextTwo: nil) { _ in
-                self.presenter?.dismissToLogin()
-            }
+            buttonTextTwo: nil) { _ in }
     }
     
     func showNetworkErrorAlert(from view: ForgetPasswordViewProtocol) {
@@ -83,8 +79,6 @@ final class ForgettPasswordRouter: ForgettPasswordRouterProtocol {
             colorOne: .systemCyan,
             colorTwo: nil,
             buttonText: "Ок",
-            buttonTextTwo: nil) { _ in
-                self.presenter?.dismissToLogin()
-            }
+            buttonTextTwo: nil) { _ in }
     }
 }

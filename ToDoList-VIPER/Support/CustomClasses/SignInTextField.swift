@@ -19,6 +19,7 @@ class SignInTextField: UITextField {
         self.autocapitalizationType = capitalizationType
         self.returnKeyType = returnKey
         self.isSecureTextEntry = secure
+        self.autocorrectionType = .no
         self.setupTextField()
     }
     

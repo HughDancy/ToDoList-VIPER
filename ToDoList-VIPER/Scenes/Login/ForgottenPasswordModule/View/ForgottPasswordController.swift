@@ -37,6 +37,7 @@ final class ForgottPasswordController: UIViewController, ForgetPasswordViewProto
                                                         color: .systemGray5,
                                                         returnKey: .done)
         textField.autocapitalizationType = .none
+        textField.autocorrectionType = .no
         return textField
     }()
     
@@ -53,6 +54,10 @@ final class ForgottPasswordController: UIViewController, ForgetPasswordViewProto
         view.backgroundColor = .systemBackground
         setupHierarchy()
         setupLayout()
+    }
+    
+    deinit {
+        print("ForgettPasswordController is ☠️")
     }
     
     //MARK: - Setup Outlets
