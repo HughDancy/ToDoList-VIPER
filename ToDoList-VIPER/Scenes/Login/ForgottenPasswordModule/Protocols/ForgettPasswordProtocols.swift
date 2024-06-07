@@ -8,10 +8,10 @@
 import UIKit
 
 protocol ForgetPasswordViewProtocol: AnyObject {
-    var presenter: ForgottPasswordPresenterProtocol? { get set }
+    var presenter: ForgettPasswordPresenterProtocol? { get set }
 }
 
-protocol ForgottPasswordPresenterProtocol: AnyObject {
+protocol ForgettPasswordPresenterProtocol: AnyObject {
     var view: ForgetPasswordViewProtocol? { get set }
     var interactor: ForgettPasswordInreractorInputProtocol? { get set }
     var router: ForgettPasswordRouterProtocol? { get set }

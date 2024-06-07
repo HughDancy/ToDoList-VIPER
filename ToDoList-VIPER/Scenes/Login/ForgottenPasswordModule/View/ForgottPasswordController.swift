@@ -7,7 +7,9 @@
 
 import UIKit
 
-class ForgottPasswordController: UIViewController {
+final class ForgottPasswordController: UIViewController, ForgetPasswordViewProtocol {
+    
+    var presenter: ForgettPasswordPresenterProtocol?
     
     //MARK: - Outlets
     private lazy var resetPasswordImage: UIImageView = {
@@ -28,7 +30,7 @@ class ForgottPasswordController: UIViewController {
         return label
     }()
     
-    private lazy var forgotPasswordTextField: UITextField = {
+    private lazy var emailTextField: UITextField = {
         let textField = UITextField.createToDoTextField(text: "",
                                                         textSize: 20,
                                                         weight: .semibold,
@@ -41,6 +43,7 @@ class ForgottPasswordController: UIViewController {
     private lazy var acceptButton: BaseButton = {
         let button = BaseButton(text: "Сбросить пароль", color: .systemCyan)
         button.setupShadows(with: .label)
+        button.addTarget(self, action: #selector(getResetPassword), for: .touchDown)
         return button
     }()
     
@@ -56,7 +59,7 @@ class ForgottPasswordController: UIViewController {
     private func setupHierarchy() {
         view.addSubview(resetPasswordImage)
         view.addSubview(forgottLabel)
-        view.addSubview(forgotPasswordTextField)
+        view.addSubview(emailTextField)
         view.addSubview(acceptButton)
     }
     
@@ -73,19 +76,23 @@ class ForgottPasswordController: UIViewController {
             make.leading.trailing.equalToSuperview().inset(20)
         }
         
-        forgotPasswordTextField.snp.makeConstraints { make in
+        emailTextField.snp.makeConstraints { make in
             make.top.equalTo(forgottLabel.snp.bottom).offset(15)
             make.leading.trailing.equalToSuperview().inset(30)
             make.height.equalTo(40)
         }
         
         acceptButton.snp.makeConstraints { make in
-            make.top.equalTo(forgotPasswordTextField.snp.bottom).offset(20)
+            make.top.equalTo(emailTextField.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(40)
             make.height.equalTo(40)
         }
     }
     
+    //MARK: - Button Action
+    @objc func getResetPassword() {
+        presenter?.resetPassword(with: emailTextField.text ?? "")
+    }
 }
 
 enum ResetPassSizes: CGFloat {
