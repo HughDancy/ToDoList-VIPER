@@ -29,17 +29,18 @@ protocol ForgettPasswordInreractorInputProtocol: AnyObject {
 
 protocol ForgettPasswordInreractorOutputProtocol: AnyObject {
     //INTERACTOR -> PRESENTER
-    func returnWelldone()
-    func returnFailure()
-    func returnNetworkError()
+    func returnResult(with status: ResetStatus)
 }
 
 protocol ForgettPasswordRouterProtocol: AnyObject {
     static func createForgettPasswordModule() -> UIViewController
     
     func dismissToLoginScreen(from view: ForgetPasswordViewProtocol)
-    func showWelldoneAlert(from view: ForgetPasswordViewProtocol)
-    func showFailureAlert(from view: ForgetPasswordViewProtocol)
-    func showNetworkErrorAlert(from view: ForgetPasswordViewProtocol)
+    func showAlert(from view: ForgetPasswordViewProtocol, status: ResetStatus)
 }
 
+enum ResetStatus {
+    case wellDone
+    case failure
+    case networkError
+}

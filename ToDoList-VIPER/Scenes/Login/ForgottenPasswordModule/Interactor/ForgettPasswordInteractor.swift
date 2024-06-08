@@ -13,19 +13,19 @@ final class ForgettPasswordInteractor: ForgettPasswordInreractorInputProtocol {
     
     func resetPassword(with email: String) {
         if  email == "" || email.isValidEmail() == false {
-            presenter?.returnFailure()
+            presenter?.returnResult(with: .failure)
         }
         
         if Reachability.isConnectedToNetwork() {
             Auth.auth().sendPasswordReset(withEmail: email, completion: { (error) in
                 if error == nil  {
-                    self.presenter?.returnWelldone()
+                    self.presenter?.returnResult(with: .wellDone)
                 } else {
-                    self.presenter?.returnFailure()
+                    self.presenter?.returnResult(with: .failure)
                 }
             })
         } else {
-            presenter?.returnNetworkError()
+            presenter?.returnResult(with: .networkError)
         }
     }
 }

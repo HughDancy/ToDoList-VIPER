@@ -28,14 +28,13 @@ final class ToDosDetailRouter: ToDosDetailRouterProtocol {
     }
     
     func showAllert(with view: any ToDosDetailViewProtocol, status: ToDoDetailStatus, toDo: ToDoObject?) {
-        
         guard let currentView = view as? UIViewController else { return }
+        let allertController = CustomAlertController()
+        allertController.modalPresentationStyle = .overCurrentContext
+        allertController.modalTransitionStyle = .crossDissolve
         
         switch status {
         case .allSave:
-            let allertController = CustomAlertController()
-            allertController.modalPresentationStyle = .overCurrentContext
-            allertController.modalTransitionStyle = .crossDissolve
             currentView.present(allertController, animated: true)
             allertController.present(type: .oneButton,
                                      title: "Сохранено",
@@ -48,9 +47,6 @@ final class ToDosDetailRouter: ToDosDetailRouterProtocol {
                 self.presenter?.didDeleteToDo()
             }
         case .delete:
-            let allertController = CustomAlertController()
-            allertController.modalPresentationStyle = .overCurrentContext
-            allertController.modalTransitionStyle = .crossDissolve
             currentView.present(allertController, animated: true)
             allertController.present(
                 type: .twoButtons,
@@ -67,9 +63,6 @@ final class ToDosDetailRouter: ToDosDetailRouterProtocol {
                     }
                 }
         case .error:
-            let allertController = CustomAlertController()
-            allertController.modalPresentationStyle = .overCurrentContext
-            allertController.modalTransitionStyle = .crossDissolve
             currentView.present(allertController, animated: true)
             allertController.present(
                 type: .oneButton,

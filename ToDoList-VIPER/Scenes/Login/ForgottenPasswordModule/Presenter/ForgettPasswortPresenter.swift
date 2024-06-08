@@ -18,18 +18,8 @@ final class ForgettPasswortPresenter: ForgettPasswordPresenterProtocol {
 }
 
 extension ForgettPasswortPresenter: ForgettPasswordInreractorOutputProtocol {
-    func returnWelldone() {
+    func returnResult(with status: ResetStatus) {
         guard let view = view else { return }
-        router?.showWelldoneAlert(from: view)
-    }
-    
-    func returnFailure() {
-        guard let view = view else { return }
-        router?.showFailureAlert(from: view)
-    }
-    
-    func returnNetworkError() {
-        guard let view = view else { return }
-        router?.showNetworkErrorAlert(from: view)
+        router?.showAlert(from: view, status: status)
     }
 }
