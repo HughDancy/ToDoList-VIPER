@@ -9,6 +9,7 @@ import UIKit
 
 final class AppConfigurator {
     static let configuator = AppConfigurator()
+    let authManager = AuthKeychainManager()
     
     func configureApp() -> UIViewController {
         let isNewUser = NewUserCheck.shared.isNewUser()

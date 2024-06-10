@@ -12,7 +12,7 @@ import GoogleSignInSwift
 
 final class LoginInteractor: LoginInteractorInputProtocol {
     var presenter: LoginInteractorOutputProtocol?
-    
+    var keyChainedManager = AuthKeychainManager()
     
     func checkAutorizationData(login: String?, password: String?) {
         switch (login != nil) && (password != nil) {
@@ -31,6 +31,7 @@ final class LoginInteractor: LoginInteractorInputProtocol {
                 if error != nil {
                     self.presenter?.getVerificationResult(with: .wrongEnteredData)
                 } else {
+                    self.keyChainedManager.persist(id: dataResult?.user.uid ?? UUID().uuidString)
                     self.presenter?.getVerificationResult(with: .success)
                 }
             }
