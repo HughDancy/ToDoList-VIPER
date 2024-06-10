@@ -14,10 +14,9 @@ final class RegistrationController: SingInController {
     //MARK: - OUTLETS
     private lazy var image: UIImageView = {
         let imageView = UIImageView()
-        let picture = UIImage(named: "registerImage")
-        imageView.image = picture
-        imageView.backgroundColor = .clear
-        imageView.contentMode = .scaleAspectFill
+        imageView.image = UIImage(named: MockUsersAvatrs.collection.randomElement()?.imageName ?? "mockUser_1")
+        imageView.layer.cornerRadius = RegistrationSizes.imageSize.getImageSize() / 2
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -80,8 +79,7 @@ final class RegistrationController: SingInController {
         image.snp.makeConstraints { make in
             make.top.equalTo(scrollView.snp.top).offset(20)
             make.centerX.equalTo(scrollView.safeAreaLayoutGuide.snp.centerX)
-            make.height.equalTo(view.frame.size.height / 3)
-            make.width.equalTo(view.frame.size.width * 0.5)
+            make.height.width.equalTo(RegistrationSizes.imageSize.getImageSize())
         }
         
         createNewUserLabel.snp.makeConstraints { make in
@@ -109,7 +107,6 @@ final class RegistrationController: SingInController {
         }
         
         registerButton.snp.makeConstraints { make in
-//            make.top.equalTo(passwordField.snp.bottom).offset(70)
             make.bottom.equalTo(scrollView.safeAreaLayoutGuide.snp.bottom).inset(50)
             make.leading.trailing.equalTo(scrollView.safeAreaLayoutGuide).inset(35)
         }
@@ -139,5 +136,14 @@ final class RegistrationController: SingInController {
 extension RegistrationController: RegistrationViewProtocol {
     func stopAnimateRegisterButton() {
         self.registerButton.hideLoading()
+    }
+}
+
+
+enum RegistrationSizes: CGFloat {
+    case imageSize = 300
+    
+    func getImageSize() -> CGFloat {
+        UIScreen.main.bounds.height > 700 ? 300 : 200
     }
 }
