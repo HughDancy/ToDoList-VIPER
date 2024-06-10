@@ -8,6 +8,8 @@
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
+import AVFoundation
+import Photos
 
 final class RegistrationInteractor: RegistrationInteractorInputProtocol {
     var presenter: RegistrationInteractorOutputProtocol?
@@ -47,6 +49,46 @@ final class RegistrationInteractor: RegistrationInteractorInputProtocol {
                     } else {
                         self.presenter?.getRegistrationResult(result: .complete)
                     }
+                }
+            }
+        }
+    }
+    
+    func checkPermission(with status: PermissionStatus) {
+        switch status {
+        case .camera:
+            let cameraStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
+            switch cameraStatus {
+            case .authorized:
+                return
+            case .denied:
+                presenter?.goToOptions(with: "камере")
+            case .notDetermined:
+                AVCaptureDevice.requestAccess(for: AVMediaType.video) { (authorized) in
+                    if (!authorized) {
+                        abort()
+                    }
+                }
+            case .restricted:
+                abort()
+            @unknown default:
+                fatalError()
+            }
+        case .gallery:
+            PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
+                switch status {
+                case .authorized:
+                    print("Authorized")
+                case .denied:
+                    self.presenter?.goToOptions(with: "медиа библиотеке")
+                case .limited:
+                    print("Limited")
+                case .notDetermined:
+                    print("not determintd")
+                case .restricted:
+                    print("restricted")
+                @unknown default:
+                    fatalError()
                 }
             }
         }

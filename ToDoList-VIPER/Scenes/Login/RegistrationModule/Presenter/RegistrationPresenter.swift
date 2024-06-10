@@ -10,7 +10,7 @@ import Foundation
 final class RegistrationPresenter: RegistrationPresenterPtorocol {
     weak var view: RegistrationViewProtocol?
     var interactor: RegistrationInteractorInputProtocol?
-    var rotuter: RegistrationRouterProtocol?
+    var router: RegistrationRouterProtocol?
     
     func registerNewUser(with name: String, email: String, password: String) {
         interactor?.registerNewUser(name: name, email: email, password: password)
@@ -18,7 +18,16 @@ final class RegistrationPresenter: RegistrationPresenterPtorocol {
     
     func showAllert(status: RegistrationStatus) {
         guard let view = view else { return }
-        rotuter?.showAlert(with: status, and: view)
+        router?.showAlert(with: status, and: view)
+    }
+    
+    func chooseImageSource() {
+        guard let view = view else { return }
+        router?.showImageSourceAlert(from: view)
+    }
+    
+    func checkPermission(with status: PermissionStatus) {
+        interactor?.checkPermission(with: status)
     }
 }
 
@@ -27,19 +36,24 @@ extension RegistrationPresenter: RegistrationInteractorOutputProtocol {
         guard let view = self.view else { return }
         switch result {
         case .complete:
-            self.rotuter?.showAlert(with: .complete, and: view)
+            self.router?.showAlert(with: .complete, and: view)
         case .emptyFields:
-            self.rotuter?.showAlert(with: .emptyFields, and: view)
+            self.router?.showAlert(with: .emptyFields, and: view)
             self.view?.stopAnimateRegisterButton()
         case .notValidEmail:
-            self.rotuter?.showAlert(with: .notValidEmail, and: view)
+            self.router?.showAlert(with: .notValidEmail, and: view)
             self.view?.stopAnimateRegisterButton()
         case .connectionLost:
-            self.rotuter?.showAlert(with: .connectionLost, and: view)
+            self.router?.showAlert(with: .connectionLost, and: view)
             self.view?.stopAnimateRegisterButton()
         case .error:
-            self.rotuter?.showAlert(with: .error, and: view)
+            self.router?.showAlert(with: .error, and: view)
             self.view?.stopAnimateRegisterButton()
         }
+    }
+    
+    func goToOptions(with label: String) {
+        guard let view = view else { return }
+        router?.goToOption(from: view, with: label)
     }
 }

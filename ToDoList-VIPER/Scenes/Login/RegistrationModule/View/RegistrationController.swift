@@ -17,6 +17,7 @@ final class RegistrationController: SingInController {
         imageView.image = UIImage(named: MockUsersAvatrs.collection.randomElement()?.imageName ?? "mockUser_1")
         imageView.layer.cornerRadius = RegistrationSizes.imageSize.getImageSize() / 2
         imageView.clipsToBounds = true
+        imageView.isUserInteractionEnabled = true
         return imageView
     }()
     
@@ -120,7 +121,9 @@ final class RegistrationController: SingInController {
     
     private func setupButton() {
         registerButton.addTarget(self, action: #selector(registerNewUser), for: .touchDown)
+        self.image.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(chooseSource)))
     }
+    
     //MARK: - Button's Action
     @objc func registerNewUser() {
         if (nameField.text != nil) && (emailField.text != nil) && (passwordField.text != nil) {
@@ -130,6 +133,12 @@ final class RegistrationController: SingInController {
             self.registerButton.showLoading()
             presenter?.registerNewUser(with: name, email: email, password: password)
         }
+    }
+    
+    @objc func chooseSource(_ sender: UITapGestureRecognizer) {
+        print("Mock avatar has been tapped")
+        self.image.image = UIImage(named: "mockUser_4")
+        presenter?.chooseImageSource()
     }
 }
     //MARK: - RegistrationViewProtocol Extension
