@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 final class AppConfigurator {
     static let configuator = AppConfigurator()
@@ -46,11 +47,26 @@ final class AppConfigurator {
     }
     
     private func startMainModule() -> UIViewController {
-        let mainModule = HomeTabBarRouter.createHomeTabBar()
-//        let mainMockModule = CustomHomeTabBarController()
-        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate
-        sceneDelegate.window?.rootViewController = mainModule
-        TaskStorageManager.instance.checkOverdueToDos()
-        return mainModule
+        let currentUser = Auth.auth().currentUser?.uid
+        print(currentUser)
+//        guard let keychainId = try? authManager.fetchId() else {
+//            let loginModule = LoginRouter.createLoginModule()
+//            print("Something went wrong")
+//            return loginModule
+//        }
+        let currentId = authManager.id
+        print(currentId)
+        if currentUser == currentId {
+            let mainModule = HomeTabBarRouter.createHomeTabBar()
+    //        let mainMockModule = CustomHomeTabBarController()
+            let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate
+            sceneDelegate.window?.rootViewController = mainModule
+            TaskStorageManager.instance.checkOverdueToDos()
+            return mainModule
+        } else {
+            let loginModule = LoginRouter.createLoginModule()
+            return loginModule
+        }
+       
     }
 }
