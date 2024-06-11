@@ -25,8 +25,8 @@ final class FirebaseStorageManager {
                 print("Meta data not found or somehow another error")
                 return
             }
-            
-            let size = metadata.size
+//            
+//            let size = metadata.size
             
             
         }

@@ -7,12 +7,15 @@
 
 import Foundation
 import FirebaseAuth
+import FirebaseFirestore
 import GoogleSignIn
 import GoogleSignInSwift
 
 final class LoginInteractor: LoginInteractorInputProtocol {
     var presenter: LoginInteractorOutputProtocol?
-    var keyChainedManager = AuthKeychainManager()
+    private var keyChainedManager = AuthKeychainManager()
+    private let db = Firestore.firestore()
+    private let firebaseStorage = FirebaseStorageManager.shared
     
     func checkAutorizationData(login: String?, password: String?) {
         switch (login != nil) && (password != nil) {
@@ -46,7 +49,39 @@ final class LoginInteractor: LoginInteractorInputProtocol {
                 self.presenter?.getVerificationResult(with: .wrongEnteredData)
                 return
             }
-            self.presenter?.getVerificationResult(with: .success)
+            
+            let uuid = signInResult?.user.userID ?? UUID().uuidString
+            print(uuid)
+            let docRef = self.db.collection("users").whereField("uid", isEqualTo: uuid)
+            
+            docRef.getDocuments { snapshot, error in
+                if error != nil {
+                    print(error?.localizedDescription)
+        
+                } else {
+                    if let doc = snapshot?.documents, !doc.isEmpty {
+                        self.presenter?.getVerificationResult(with: .success)
+                        print("Seems all is alright")
+                    } else {
+                        self.db.collection("users").addDocument(data: [
+                            "email" : signInResult?.user.profile?.email ?? "",
+                            "name" : signInResult?.user.profile?.name ?? "",
+                            "password" : "",
+                            "uid": uuid
+                        ], completion: { error in
+                            if error != nil {
+                                self.presenter?.getVerificationResult(with: .wrongEnteredData)
+                            } else {
+                                DispatchQueue.main.async {
+                                    let image = UIImage(named: "mockUser_3")!
+                                    self.firebaseStorage.saveImage(image: image, name: uuid)
+                                }
+                                self.keyChainedManager.persist(id: uuid)
+                                self.presenter?.getVerificationResult(with: .success)
+                            }})
+                    }
+                }
+            }
         }
     }
     
