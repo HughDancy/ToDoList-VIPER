@@ -106,7 +106,7 @@ final class RegistrationRouter: RegistrationRouterProtocol {
         guard let registrationView = view as? UIViewController else { return }
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = registrationView as? any UIImagePickerControllerDelegate & UINavigationControllerDelegate
-        imagePicker.allowsEditing = false
+        imagePicker.allowsEditing = true
         switch status {
         case .camera:
             imagePicker.sourceType = .camera;
