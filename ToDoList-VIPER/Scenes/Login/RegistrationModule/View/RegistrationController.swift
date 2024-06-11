@@ -136,8 +136,6 @@ final class RegistrationController: SingInController {
     }
     
     @objc func chooseSource(_ sender: UITapGestureRecognizer) {
-        print("Mock avatar has been tapped")
-        self.image.image = UIImage(named: "mockUser_4")
         presenter?.chooseImageSource()
     }
 }
@@ -146,6 +144,10 @@ extension RegistrationController: RegistrationViewProtocol {
     func stopAnimateRegisterButton() {
         self.registerButton.hideLoading()
     }
+}
+
+extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
 }
 
 

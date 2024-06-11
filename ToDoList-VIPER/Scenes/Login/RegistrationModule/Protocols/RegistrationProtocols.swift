@@ -37,14 +37,17 @@ protocol RegistrationInteractorOutputProtocol: AnyObject {
     //INTERACTOR -> PRESENTER
     func getRegistrationResult(result: RegistrationStatus)
     func goToOptions(with label: String)
+    func goToImagePicker(with status: PermissionStatus)
 }
 
 protocol RegistrationRouterProtocol: AnyObject {
     var presenter: RegistrationPresenterPtorocol? { get set }
+    
     static func createRegistrationModule() -> UIViewController
     func showAlert(with result: RegistrationStatus, and view: RegistrationViewProtocol)
     func showImageSourceAlert(from view: RegistrationViewProtocol)
     func goToOption(from view: RegistrationViewProtocol, with label: String)
+    func goToImagePicker(from view: RegistrationViewProtocol, status: PermissionStatus)
 }
 
 enum PermissionStatus {

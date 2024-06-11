@@ -40,7 +40,7 @@ final class RegistrationRouter: RegistrationRouterProtocol {
             alertController.addAction(UIAlertAction(title: "Ок", style: .cancel))
             view.present(alertController, animated: true)
         case .notValidEmail:
-            alertController.title = "Введен невалидный email. Пожалуйста, попробуйте снова"
+            alertController.title = "Введен неверный адрес электронной почты. Пожалуйста, попробуйте снова"
             alertController.addAction(UIAlertAction(title: "Ок", style: .cancel))
             view.present(alertController, animated: true)
         case .emptyFields:
@@ -61,21 +61,31 @@ final class RegistrationRouter: RegistrationRouterProtocol {
                                                  preferredStyle: .alert)
         allertController.addAction(UIAlertAction(title: "Камера",
                                                  style: .default,
-                                                 handler: {_ in 
-                                                       self.presenter?.checkPermission(with: .camera)
-                                                       print("User choose camera")
-                                                           }))
+                                                 handler: {_ in
+            if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                self.goToImagePicker(from: view, status: .camera)
+            } else {
+                self.presenter?.checkPermission(with: .camera)
+                print("User choose camera")
+            }
+           
+        }))
         allertController.addAction(UIAlertAction(title: "Галлерея",
                                                  style: .default,
-                                                 handler: {_ in 
-                                                       self.presenter?.checkPermission(with: .gallery)
-                                                       print("User choose gallery")
-                                                           }))
+                                                 handler: {_ in
+            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+                self.goToImagePicker(from: view, status: .gallery)
+            } else  {
+                self.presenter?.checkPermission(with: .gallery)
+                print("User choose gallery")
+            }
+           
+        }))
         allertController.addAction(UIAlertAction(title: "Позже",
                                                  style: .cancel,
-                                                 handler: {_ in 
-                                                       print("User choose cancel")
-                                                           }))
+                                                 handler: {_ in
+            print("User choose cancel")
+        }))
         registrationView.present(allertController, animated: true)
     }
     
@@ -90,5 +100,22 @@ final class RegistrationRouter: RegistrationRouterProtocol {
         }))
         alert.addAction(UIAlertAction(title: "Отмена", style: .cancel))
         registrationView.present(alert, animated: true)
+    }
+    
+    func goToImagePicker(from view: any RegistrationViewProtocol, status: PermissionStatus) {
+        guard let registrationView = view as? UIViewController else { return }
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = registrationView as? any UIImagePickerControllerDelegate & UINavigationControllerDelegate
+        imagePicker.allowsEditing = false
+        switch status {
+        case .camera:
+            imagePicker.sourceType = .camera;
+            registrationView.present(imagePicker, animated: true, completion: nil)
+        case .gallery:
+            DispatchQueue.main.async {
+                imagePicker.sourceType = .photoLibrary;
+                registrationView.present(imagePicker, animated: true, completion: nil)
+            }
+        }
     }
 }

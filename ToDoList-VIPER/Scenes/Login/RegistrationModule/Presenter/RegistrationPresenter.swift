@@ -34,26 +34,17 @@ final class RegistrationPresenter: RegistrationPresenterPtorocol {
 extension RegistrationPresenter: RegistrationInteractorOutputProtocol {
     func getRegistrationResult(result: RegistrationStatus)  {
         guard let view = self.view else { return }
-        switch result {
-        case .complete:
-            self.router?.showAlert(with: .complete, and: view)
-        case .emptyFields:
-            self.router?.showAlert(with: .emptyFields, and: view)
-            self.view?.stopAnimateRegisterButton()
-        case .notValidEmail:
-            self.router?.showAlert(with: .notValidEmail, and: view)
-            self.view?.stopAnimateRegisterButton()
-        case .connectionLost:
-            self.router?.showAlert(with: .connectionLost, and: view)
-            self.view?.stopAnimateRegisterButton()
-        case .error:
-            self.router?.showAlert(with: .error, and: view)
-            self.view?.stopAnimateRegisterButton()
-        }
+        self.router?.showAlert(with: result, and: view)
+        self.view?.stopAnimateRegisterButton()
     }
     
     func goToOptions(with label: String) {
         guard let view = view else { return }
         router?.goToOption(from: view, with: label)
+    }
+    
+    func goToImagePicker(with status: PermissionStatus) {
+        guard let view = view else { return }
+        router?.goToImagePicker(from: view, status: status)
     }
 }

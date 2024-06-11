@@ -60,6 +60,7 @@ final class RegistrationInteractor: RegistrationInteractorInputProtocol {
             let cameraStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
             switch cameraStatus {
             case .authorized:
+                presenter?.goToImagePicker(with: .camera)
                 return
             case .denied:
                 presenter?.goToOptions(with: "камере")
@@ -78,6 +79,7 @@ final class RegistrationInteractor: RegistrationInteractorInputProtocol {
             PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
                 switch status {
                 case .authorized:
+                    self.presenter?.goToImagePicker(with: .gallery)
                     print("Authorized")
                 case .denied:
                     self.presenter?.goToOptions(with: "медиа библиотеке")
