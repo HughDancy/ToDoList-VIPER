@@ -10,6 +10,7 @@
 		D82B8B6E2B6B8CCB00A006F2 /* AppConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82B8B6D2B6B8CCB00A006F2 /* AppConfigurator.swift */; };
 		D846B8622C14606A00AA8775 /* AuthKeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D846B8612C14606A00AA8775 /* AuthKeychainManager.swift */; };
 		D846B8652C14609C00AA8775 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D846B8642C14609C00AA8775 /* Security.framework */; };
+		D846B8692C18518F00AA8775 /* FirebaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D846B8682C18518F00AA8775 /* FirebaseStorageManager.swift */; };
 		D8473BE32BB2C5DF0063F87A /* CalendarCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8473BE22BB2C5DF0063F87A /* CalendarCollectionCell.swift */; };
 		D8473BE52BB415BB0063F87A /* HorizontalCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8473BE42BB415BB0063F87A /* HorizontalCalendarView.swift */; };
 		D8473BE72BB57CEC0063F87A /* CalendarCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8473BE62BB57CEC0063F87A /* CalendarCollection.swift */; };
@@ -149,6 +150,7 @@
 		D82B8B6D2B6B8CCB00A006F2 /* AppConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigurator.swift; sourceTree = "<group>"; };
 		D846B8612C14606A00AA8775 /* AuthKeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthKeychainManager.swift; sourceTree = "<group>"; };
 		D846B8642C14609C00AA8775 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		D846B8682C18518F00AA8775 /* FirebaseStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageManager.swift; sourceTree = "<group>"; };
 		D8473BE22BB2C5DF0063F87A /* CalendarCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionCell.swift; sourceTree = "<group>"; };
 		D8473BE42BB415BB0063F87A /* HorizontalCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCalendarView.swift; sourceTree = "<group>"; };
 		D8473BE62BB57CEC0063F87A /* CalendarCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollection.swift; sourceTree = "<group>"; };
@@ -1002,6 +1004,7 @@
 				D8B85D6B2BE398740015F2B2 /* MainScreenCollectionView.swift */,
 				D84CADF82BF25E1F009C666D /* NoTaskLabel.swift */,
 				D846B8612C14606A00AA8775 /* AuthKeychainManager.swift */,
+				D846B8682C18518F00AA8775 /* FirebaseStorageManager.swift */,
 			);
 			path = CustomClasses;
 			sourceTree = "<group>";
@@ -1229,6 +1232,7 @@
 				D8C19ED62B91C037004BCDDD /* BaseButton.swift in Sources */,
 				D8A54EC02BB6D61000D9B15F /* ToDosPresenter.swift in Sources */,
 				D8E00C772C16DC66005AEA4D /* MockUsersAvatrs.swift in Sources */,
+				D846B8692C18518F00AA8775 /* FirebaseStorageManager.swift in Sources */,
 				D85C58392B5A595400023B04 /* OnboardingPagesController.swift in Sources */,
 				D8C19ED42B90F3D4004BCDDD /* SignInTextField.swift in Sources */,
 				D8AB92252BBC063400826A4E /* SingleToDoController.swift in Sources */,

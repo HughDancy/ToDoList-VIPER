@@ -13,7 +13,9 @@ import Photos
 
 final class RegistrationInteractor: RegistrationInteractorInputProtocol {
     var presenter: RegistrationInteractorOutputProtocol?
-    let db = Firestore.firestore()
+    private let db = Firestore.firestore()
+    private var storageManager = FirebaseStorageManager.shared
+    var avatarTemp = UIImage()
     
     func registerNewUser(name: String, email: String, password: String) {
         if Reachability.isConnectedToNetwork() {
@@ -37,6 +39,7 @@ final class RegistrationInteractor: RegistrationInteractorInputProtocol {
                 self.presenter?.getRegistrationResult(result: .error)
                 print(error?.localizedDescription as Any)
             } else {
+                self.storageManager.saveImage(image: self.avatarTemp, name: result!.user.uid)
                 self.db.collection("users").addDocument(data: [
                     "email" : email,
                     "name" : name,
@@ -94,5 +97,9 @@ final class RegistrationInteractor: RegistrationInteractorInputProtocol {
                 }
             }
         }
+    }
+    
+    func setTempAvatar(_ image: UIImage) {
+        self.avatarTemp = image
     }
 }

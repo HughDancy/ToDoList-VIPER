@@ -157,6 +157,7 @@ extension RegistrationController: UIImagePickerControllerDelegate, UINavigationC
 
         // print out the image size as a test
         self.image.image = image
+        presenter?.setImage(image)
     }
 }
 

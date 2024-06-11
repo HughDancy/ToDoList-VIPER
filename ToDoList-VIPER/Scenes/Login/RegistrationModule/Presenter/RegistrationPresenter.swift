@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 final class RegistrationPresenter: RegistrationPresenterPtorocol {
     weak var view: RegistrationViewProtocol?
@@ -28,6 +29,10 @@ final class RegistrationPresenter: RegistrationPresenterPtorocol {
     
     func checkPermission(with status: PermissionStatus) {
         interactor?.checkPermission(with: status)
+    }
+    
+    func setImage(_ image: UIImage) {
+        interactor?.setTempAvatar(image)
     }
 }
 

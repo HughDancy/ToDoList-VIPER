@@ -20,6 +20,7 @@ protocol RegistrationPresenterPtorocol: AnyObject {
     //VIEW -> PRESENTER
     func registerNewUser(with name: String, email: String, password: String)
     func chooseImageSource()
+    func setImage(_ image: UIImage)
     
     //ROUTER -> PRESENTER
     func checkPermission(with status: PermissionStatus)
@@ -31,6 +32,7 @@ protocol RegistrationInteractorInputProtocol: AnyObject {
     //PRESENTER -> INTERACTOR
     func registerNewUser(name: String, email: String, password: String)
     func checkPermission(with status: PermissionStatus)
+    func setTempAvatar(_ image: UIImage)
 }
 
 protocol RegistrationInteractorOutputProtocol: AnyObject {
