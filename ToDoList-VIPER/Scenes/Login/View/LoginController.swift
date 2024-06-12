@@ -193,6 +193,15 @@ final class LoginController: SingInController {
         presenter?.appleSignIn()
         print("You login with Apple")
     }
+    
+    //MARK: - Notification
+    private func subscribeToNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(startAnimateLoginButton), name: NotificationNames.googleSignIn.name, object: nil)
+    }
+    
+    @objc func startAnimateLoginButton() {
+        self.loginButton.showLoading()
+    }
 }
 
 extension LoginController: LoginViewProtocol {

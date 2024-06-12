@@ -66,6 +66,8 @@ extension LoginPresenter: LoginInteractorOutputProtocol {
             self.view?.stopAnimateLoginButton()
         case .success:
             self.router?.goToMainScreen(from: view)
+        case .googleSignInSucces:
+            self.router?.goToMainScreen(from: view)
         }
     }
 }

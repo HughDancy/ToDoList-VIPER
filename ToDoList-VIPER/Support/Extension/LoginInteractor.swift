@@ -60,7 +60,8 @@ final class LoginInteractor: LoginInteractorInputProtocol {
         
                 } else {
                     if let doc = snapshot?.documents, !doc.isEmpty {
-                        self.presenter?.getVerificationResult(with: .success)
+                        NotificationCenter.default.post(name: NotificationNames.googleSignIn.name, object: nil)
+                        self.presenter?.getVerificationResult(with: .googleSignInSucces)
                         print("Seems all is alright")
                     } else {
                         self.db.collection("users").addDocument(data: [
@@ -77,7 +78,8 @@ final class LoginInteractor: LoginInteractorInputProtocol {
                                     self.firebaseStorage.saveImage(image: image, name: uuid)
                                 }
                                 self.keyChainedManager.persist(id: uuid)
-                                self.presenter?.getVerificationResult(with: .success)
+                                NotificationCenter.default.post(name: NotificationNames.googleSignIn.name, object: nil)
+                                self.presenter?.getVerificationResult(with: .googleSignInSucces)
                             }})
                     }
                 }

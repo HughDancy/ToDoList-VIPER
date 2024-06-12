@@ -12,6 +12,7 @@ public enum NotificationNames: String {
     case updateMainScreen = "UpdateMainScreenData" 
     case doneToDo = "DoneTask"
     case tapEditButton = "TapEditButton"
+    case googleSignIn = "GoogleSignIn"
     
     var name: Notification.Name {
         Notification.Name(rawValue: rawValue)

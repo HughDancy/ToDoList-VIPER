@@ -55,6 +55,7 @@ protocol LoginRouterProtocol: AnyObject {
 
 enum LogInStatus {
     case success
+    case googleSignInSucces
     case notValidEmail
     case emptyLogin
     case emptyPassword
