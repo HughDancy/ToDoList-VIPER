@@ -104,7 +104,13 @@ final class MainScreenView: UIView {
     func setupElements(userName: String, userAvatar: URL?) {
         self.userAvatar.kf.setImage(
             with: userAvatar,
-            placeholder: UIImage(named: "mockUser_3"))
+            placeholder: UIImage(named: "mockUser_3"),
+            options: [
+                 .loadDiskFileSynchronously,
+                 .cacheOriginalImage,
+                 .transition(.fade(0.25)),
+             ])
+        print(userAvatar)
         self.userName.text = "Привет, \(userName)!"
     }
 }

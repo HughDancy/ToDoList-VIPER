@@ -39,7 +39,6 @@ final class RegistrationInteractor: RegistrationInteractorInputProtocol {
                 self.presenter?.getRegistrationResult(result: .error)
                 print(error?.localizedDescription as Any)
             } else {
-//                let uid = UUID().uuidString
                 let uid = result!.user.uid
                 self.storageManager.saveImage(image: self.avatarTemp, name: uid)
                 print("Login give me that result - result!.user.uid")
@@ -69,13 +68,6 @@ final class RegistrationInteractor: RegistrationInteractorInputProtocol {
                         self.presenter?.getRegistrationResult(result: .complete)
                     }
                 }
-//                self.db.collection("users").addDocument(data: [
-//                    "email" : email,
-//                    "name" : name,
-//                    "displayName": name,
-//                    "password" : password,
-//                    "uid": result!.user.uid
-//                ]) 
             }
         }
     }

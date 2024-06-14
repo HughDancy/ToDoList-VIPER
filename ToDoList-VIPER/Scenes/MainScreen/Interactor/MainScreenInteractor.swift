@@ -14,7 +14,8 @@ final class MainScreenInteractor: MainScreenInteractorInputProtocol {
     private var firebaseStorage = FirebaseStorageManager.shared
     
     func retriveUserData() {
-        let imageUrl = firebaseStorage.loadAvatar()
+        let storage = firebaseStorage.loadAvatar()
+        let imageUrl = UserDefaults.standard.value(forKey: "UserAvatar") as? URL
         guard let name = UserDefaults.standard.string(forKey: NotificationNames.userName.rawValue) else {
             presenter?.didRetriveUserData(( "User", imageUrl))
             return
