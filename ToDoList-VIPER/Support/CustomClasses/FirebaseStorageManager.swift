@@ -15,7 +15,9 @@ final class FirebaseStorageManager {
     private let storage = Storage.storage().reference()
     private var authManager = AuthKeychainManager()
     
-    private init() { }
+    init() {
+        self.loadAvatar()
+    }
     
     func saveImage(image: UIImage, name: String) {
         guard let data = image.jpegData(compressionQuality: 8.0) else { return }
@@ -28,23 +30,17 @@ final class FirebaseStorageManager {
         }
     }
     
-    func loadAvatar() -> URL? {
-        guard let userId = authManager.id else {
-            return nil }
-        print(userId)
-        
-        var imageUrl: URL? = URL(string: "")
+    func loadAvatar() {
+        guard let userId = authManager.id else { return  }
         let avatarRef = storage.child(userId)
         
         avatarRef.downloadURL { url, error in
             if error != nil {
                 print("When download avatar url something went wrong")
             } else {
-                imageUrl = url
-                print("LoadAvatar method avatar id is - \(imageUrl)")
+                print("LoadAvatar method avatar id is - \(url)")
                 UserDefaults.standard.set(url, forKey: "UserAvatar")
             }
         }
-       return imageUrl
     }
 }

@@ -17,7 +17,7 @@ final class MainScreenView: UIView {
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
-
+    
     private lazy var userAvatar: UIImageView = {
         let userAvatar = UIImageView()
         userAvatar.image = UIImage(named: "mockUserAvatar")
@@ -58,7 +58,7 @@ final class MainScreenView: UIView {
         setupLayout()
         self.backgroundColor = .systemBackground
     }
-
+    
     //MARK: - Setup Hierarchy
     private func setupHierarchy() {
         self.addSubview(backgroundImage)
@@ -99,18 +99,15 @@ final class MainScreenView: UIView {
             make.bottom.equalToSuperview().inset(70)
         }
     }
-        
+    
     //MARK: - Setup elements
     func setupElements(userName: String, userAvatar: URL?) {
         self.userAvatar.kf.setImage(
             with: userAvatar,
             placeholder: UIImage(named: "mockUser_3"),
             options: [
-                 .loadDiskFileSynchronously,
-                 .cacheOriginalImage,
-                 .transition(.fade(0.25)),
-             ])
-        print(userAvatar)
+                .cacheOriginalImage
+            ])
         self.userName.text = "Привет, \(userName)!"
     }
 }

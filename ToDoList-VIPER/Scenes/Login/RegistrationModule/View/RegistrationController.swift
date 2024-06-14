@@ -183,7 +183,6 @@ extension RegistrationController: UIImagePickerControllerDelegate, UINavigationC
     }
 }
 
-
 enum RegistrationSizes: CGFloat {
     case imageSize = 300
     case avatarFontSize = 20

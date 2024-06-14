@@ -11,11 +11,11 @@ import FirebaseFirestore
 final class MainScreenInteractor: MainScreenInteractorInputProtocol {
     var presenter: MainScreenInteractorOutputProtocol?
     private var storage = TaskStorageManager.instance
-    private var firebaseStorage = FirebaseStorageManager.shared
+    private var firebaseStorage = FirebaseStorageManager()
     
     func retriveUserData() {
-        let storage = firebaseStorage.loadAvatar()
-        let imageUrl = UserDefaults.standard.value(forKey: "UserAvatar") as? URL
+        let imageUrl = UserDefaults.standard.url(forKey: "UserAvatar")
+        print("Main Screen Interactor image url us - \(imageUrl)")
         guard let name = UserDefaults.standard.string(forKey: NotificationNames.userName.rawValue) else {
             presenter?.didRetriveUserData(( "User", imageUrl))
             return
