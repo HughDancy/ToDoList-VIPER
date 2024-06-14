@@ -14,7 +14,7 @@ final class MainScreenController: UIViewController {
     //MARK: - Outelts
     let mockColors: [UIColor] = [.systemOrange, .systemRed, .systemTeal, .systemGreen]
     
-    var userData: [String] = []
+    var userData: (name: String, avatarUrl: URL?) = ("", nil)
     var toDosInfo: [[String]] = [[]] {
         didSet {
             self.mainView?.toDosCollection.reloadData()
@@ -30,13 +30,13 @@ final class MainScreenController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigationBar()
-        presenter?.getToDosCount()
-        mainView?.setupElements(nameOfImage: userData[1], userName: userData[0])
+        self.mainView?.setupElements(userName: userData.name, userAvatar: userData.avatarUrl)
         subcribeToNotification()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter?.getToDosCount()
         view = MainScreenView()
         setupCollectionView()
     }
@@ -93,7 +93,7 @@ extension MainScreenController: UICollectionViewDelegate, UICollectionViewDataSo
 
   //MARK: - MainScreenViewPtorocol Extension
 extension MainScreenController: MainScreenViewProtocol {
-    func getUserData(_ userInfo: [String]) {
+    func getUserData(_ userInfo: (name: String, avatarUrl: URL?)) {
         self.userData = userInfo
     }
     

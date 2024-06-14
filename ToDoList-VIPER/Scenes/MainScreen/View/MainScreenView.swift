@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class MainScreenView: UIView {
     
@@ -100,8 +101,10 @@ final class MainScreenView: UIView {
     }
         
     //MARK: - Setup elements
-    func setupElements(nameOfImage: String, userName: String) {
-        self.userAvatar.image = UIImage(named: nameOfImage)
+    func setupElements(userName: String, userAvatar: URL?) {
+        self.userAvatar.kf.setImage(
+            with: userAvatar,
+            placeholder: UIImage(named: "mockUser_3"))
         self.userName.text = "Привет, \(userName)!"
     }
 }

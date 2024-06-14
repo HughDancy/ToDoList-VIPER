@@ -41,8 +41,9 @@ class LoadingButton: UIButton {
         if (activityIndicator == nil) {
             activityIndicator = createActivityIndicator()
         }
-        
-        showSpinning()
+        DispatchQueue.main.async {
+            self.showSpinning()
+        }
     }
     
     func hideLoading() {

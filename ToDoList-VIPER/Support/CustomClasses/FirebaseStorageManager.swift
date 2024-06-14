@@ -8,12 +8,14 @@
 import Foundation
 import UIKit
 import FirebaseStorage
+import Kingfisher
 
 final class FirebaseStorageManager {
     static let shared = FirebaseStorageManager()
-    private init() { }
-    
     private let storage = Storage.storage().reference()
+    private var authManager = AuthKeychainManager()
+    
+    private init() { }
     
     func saveImage(image: UIImage, name: String) {
         guard let data = image.jpegData(compressionQuality: 8.0) else { return }
@@ -26,16 +28,20 @@ final class FirebaseStorageManager {
         }
     }
     
-    func loadAvatar(name: String) -> UIImage? {
-        var image: UIImage? = UIImage()
-        let avatarRef = storage.child(name)
-        avatarRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+    func loadAvatar() -> URL? {
+        guard let userId = authManager.id else {
+            return nil}
+        
+        var imageUrl: URL? = URL(string: "")
+        let avatarRef = storage.child(userId)
+        
+        avatarRef.downloadURL { url, error in
             if let error = error {
-                print("Something went wrong when avatar has been load")
+                print("When download avatar url something went wrong")
             } else {
-                image = UIImage(data: data ?? Data())
+                imageUrl = url
             }
         }
-        return image
+       return imageUrl
     }
 }

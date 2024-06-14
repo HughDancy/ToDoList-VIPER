@@ -39,20 +39,43 @@ final class RegistrationInteractor: RegistrationInteractorInputProtocol {
                 self.presenter?.getRegistrationResult(result: .error)
                 print(error?.localizedDescription as Any)
             } else {
-                self.storageManager.saveImage(image: self.avatarTemp, name: result!.user.uid)
-                self.db.collection("users").addDocument(data: [
+//                let uid = UUID().uuidString
+                let uid = result!.user.uid
+                self.storageManager.saveImage(image: self.avatarTemp, name: uid)
+                print("Login give me that result - result!.user.uid")
+                self.db.collection("users").document(uid).setData([
                     "email" : email,
                     "name" : name,
                     "password" : password,
-                    "uid": result!.user.uid
-                ]) { error in
+                    "uid": uid
+                ])    { error in
                     if error != nil {
                         print("Error save new user in data base ")
                         self.presenter?.getRegistrationResult(result: .error)
                     } else {
+                        let user = Auth.auth().currentUser
+                           if let user = user {
+                               let changeRequest = user.createProfileChangeRequest()
+
+                              changeRequest.displayName = name
+                               changeRequest.commitChanges { error in
+                                if let error = error {
+                                  // An error happened.
+                                } else {
+                                  // Profile updated.
+                                }
+                              }
+                            }
                         self.presenter?.getRegistrationResult(result: .complete)
                     }
                 }
+//                self.db.collection("users").addDocument(data: [
+//                    "email" : email,
+//                    "name" : name,
+//                    "displayName": name,
+//                    "password" : password,
+//                    "uid": result!.user.uid
+//                ]) 
             }
         }
     }

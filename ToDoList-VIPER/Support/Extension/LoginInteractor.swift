@@ -34,7 +34,10 @@ final class LoginInteractor: LoginInteractorInputProtocol {
                 if error != nil {
                     self.presenter?.getVerificationResult(with: .wrongEnteredData)
                 } else {
-                    self.keyChainedManager.persist(id: dataResult?.user.uid ?? UUID().uuidString)
+                    let uid = dataResult?.user.uid ?? UUID().uuidString
+                    let name = Auth.auth().currentUser?.displayName
+                    UserDefaults.standard.set(name, forKey: NotificationNames.userName.rawValue)
+                    self.keyChainedManager.persist(id: uid)
                     self.presenter?.getVerificationResult(with: .success)
                 }
             }
@@ -51,19 +54,21 @@ final class LoginInteractor: LoginInteractorInputProtocol {
             }
             
             let uuid = signInResult?.user.userID ?? UUID().uuidString
-            print(uuid)
+            var userName = signInResult?.user.profile?.name
             let docRef = self.db.collection("users").whereField("uid", isEqualTo: uuid)
             
             docRef.getDocuments { snapshot, error in
                 if error != nil {
-                    print(error?.localizedDescription)
+                    print(error?.localizedDescription as Any)
         
                 } else {
                     if let doc = snapshot?.documents, !doc.isEmpty {
                         NotificationCenter.default.post(name: NotificationNames.googleSignIn.name, object: nil)
+                        self.setUserName(userName)
                         self.presenter?.getVerificationResult(with: .googleSignInSucces)
                         print("Seems all is alright")
                     } else {
+                        userName = signInResult?.user.profile?.name
                         self.db.collection("users").addDocument(data: [
                             "email" : signInResult?.user.profile?.email ?? "",
                             "name" : signInResult?.user.profile?.name ?? "",
@@ -79,6 +84,7 @@ final class LoginInteractor: LoginInteractorInputProtocol {
                                 }
                                 self.keyChainedManager.persist(id: uuid)
                                 NotificationCenter.default.post(name: NotificationNames.googleSignIn.name, object: nil)
+                                self.setUserName(userName)
                                 self.presenter?.getVerificationResult(with: .googleSignInSucces)
                             }})
                     }
@@ -89,5 +95,13 @@ final class LoginInteractor: LoginInteractorInputProtocol {
     
     func changeOnboardingState() {
         NewUserCheck.shared.setIsLoginScrren()
+    }
+    
+    private func setUserName(_ name: String?) {
+        guard let userName = name else {
+            UserDefaults.standard.setValue("Test", forKeyPath: "UserName")
+            return
+        }
+        UserDefaults.standard.setValue(userName, forKeyPath: "UserName")
     }
 }

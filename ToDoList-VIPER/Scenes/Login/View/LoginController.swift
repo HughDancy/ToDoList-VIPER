@@ -86,6 +86,7 @@ final class LoginController: SingInController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupButtons()
+        subscribeToNotification()
     }
     
     override func viewDidLayoutSubviews() {
