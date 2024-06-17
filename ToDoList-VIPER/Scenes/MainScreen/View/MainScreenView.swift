@@ -21,8 +21,8 @@ final class MainScreenView: UIView {
     private lazy var userAvatar: UIImageView = {
         let userAvatar = UIImageView()
         userAvatar.image = UIImage(named: "mockUserAvatar")
-        userAvatar.contentMode = .scaleAspectFit
-        userAvatar.layer.cornerRadius = 30
+        userAvatar.contentMode = .scaleAspectFill
+        userAvatar.layer.cornerRadius = MainScreenSizes.avatar.size / 2
         userAvatar.clipsToBounds = true
         return userAvatar
     }()
@@ -74,13 +74,13 @@ final class MainScreenView: UIView {
         backgroundImage.snp.makeConstraints { make in
             make.top.equalTo(self.snp.top).offset(-65)
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(350)
+            make.height.equalTo(MainScreenSizes.backgroundImage.size)
         }
         
         userAvatar.snp.makeConstraints { make in
-            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(5)
+            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(7)
             make.centerX.equalToSuperview()
-            make.height.width.equalTo(60)
+            make.height.width.equalTo(MainScreenSizes.avatar.size)
         }
         
         userName.snp.makeConstraints { make in
@@ -90,11 +90,11 @@ final class MainScreenView: UIView {
         
         containerView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(110)
+            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(130)
         }
         
         toDosCollection.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(60)
+            make.top.equalToSuperview().offset(40)
             make.leading.trailing.equalToSuperview()
             make.bottom.equalToSuperview().inset(70)
         }
@@ -109,5 +109,20 @@ final class MainScreenView: UIView {
                 .cacheOriginalImage
             ])
         self.userName.text = "Привет, \(userName)!"
+    }
+}
+
+enum MainScreenSizes: CGFloat {
+    case avatar = 80
+    case backgroundImage = 350
+    
+    var size: CGFloat {
+        switch self {
+        case .avatar:
+            let size: CGFloat = UIScreen.main.bounds.height > 700 ? 80 : 70
+            return size
+        case .backgroundImage:
+            return rawValue
+        }
     }
 }

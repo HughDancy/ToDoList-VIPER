@@ -50,6 +50,7 @@ final class MainScreenController: UIViewController {
     private func setupNavigationBar() {
         self.navigationItem.largeTitleDisplayMode = .never
         self.navigationController?.navigationBar.prefersLargeTitles = false
+        self.navigationController?.navigationBar.isHidden = true
     }
  
     //MARK: - Notification
