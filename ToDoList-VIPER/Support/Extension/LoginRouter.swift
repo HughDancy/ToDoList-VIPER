@@ -8,7 +8,7 @@
 import UIKit
 
 final class LoginRouter: LoginRouterProtocol {
-    
+  
     static func createLoginModule() -> UIViewController {
 //        let viewController = LoginController()
         let viewController = LoginController()
@@ -24,6 +24,13 @@ final class LoginRouter: LoginRouterProtocol {
         viewController.navigationItem.hidesBackButton = true
         return viewController
     }
+    
+    func goToForgottPasswordModule(from view: any LoginViewProtocol) {
+        guard let view = view as? UIViewController else { return }
+        let forgottPasswordModule = ForgettPasswordRouter.createForgettPasswordModule()
+        view.navigationController?.pushViewController(forgottPasswordModule, animated: true)
+    }
+    
     
     func goToRegistration(from view: LoginViewProtocol) {
         guard let view = view as? UIViewController else { return }

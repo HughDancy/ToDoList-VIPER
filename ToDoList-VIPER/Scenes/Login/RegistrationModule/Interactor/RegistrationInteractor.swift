@@ -8,10 +8,14 @@
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
+import AVFoundation
+import Photos
 
 final class RegistrationInteractor: RegistrationInteractorInputProtocol {
     var presenter: RegistrationInteractorOutputProtocol?
-    let db = Firestore.firestore()
+    private let db = Firestore.firestore()
+    private var storageManager = FirebaseStorageManager.shared
+    var avatarTemp = UIImage()
     
     func registerNewUser(name: String, email: String, password: String) {
         if Reachability.isConnectedToNetwork() {
@@ -35,20 +39,82 @@ final class RegistrationInteractor: RegistrationInteractorInputProtocol {
                 self.presenter?.getRegistrationResult(result: .error)
                 print(error?.localizedDescription as Any)
             } else {
-                self.db.collection("users").addDocument(data: [
+                let uid = result!.user.uid
+                self.storageManager.saveImage(image: self.avatarTemp, name: uid)
+                print("Login give me that result - result!.user.uid")
+                self.db.collection("users").document(uid).setData([
                     "email" : email,
                     "name" : name,
                     "password" : password,
-                    "uid": result!.user.uid
-                ]) { error in
+                    "uid": uid
+                ])    { error in
                     if error != nil {
                         print("Error save new user in data base ")
                         self.presenter?.getRegistrationResult(result: .error)
                     } else {
+                        let user = Auth.auth().currentUser
+                           if let user = user {
+                               let changeRequest = user.createProfileChangeRequest()
+
+                              changeRequest.displayName = name
+                               changeRequest.commitChanges { error in
+                                if let error = error {
+                                  // An error happened.
+                                } else {
+                                  // Profile updated.
+                                }
+                              }
+                            }
                         self.presenter?.getRegistrationResult(result: .complete)
                     }
                 }
             }
         }
+    }
+    
+    func checkPermission(with status: PermissionStatus) {
+        switch status {
+        case .camera:
+            let cameraStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
+            switch cameraStatus {
+            case .authorized:
+                presenter?.goToImagePicker(with: .camera)
+                return
+            case .denied:
+                presenter?.goToOptions(with: "камере")
+            case .notDetermined:
+                AVCaptureDevice.requestAccess(for: AVMediaType.video) { (authorized) in
+                    if (!authorized) {
+                        abort()
+                    }
+                }
+            case .restricted:
+                abort()
+            @unknown default:
+                fatalError()
+            }
+        case .gallery:
+            PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
+                switch status {
+                case .authorized:
+                    self.presenter?.goToImagePicker(with: .gallery)
+                    print("Authorized")
+                case .denied:
+                    self.presenter?.goToOptions(with: "медиа библиотеке")
+                case .limited:
+                    print("Limited")
+                case .notDetermined:
+                    print("not determintd")
+                case .restricted:
+                    print("restricted")
+                @unknown default:
+                    fatalError()
+                }
+            }
+        }
+    }
+    
+    func setTempAvatar(_ image: UIImage) {
+        self.avatarTemp = image
     }
 }

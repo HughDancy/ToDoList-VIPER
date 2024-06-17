@@ -6,13 +6,21 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
 final class MainScreenInteractor: MainScreenInteractorInputProtocol {
     var presenter: MainScreenInteractorOutputProtocol?
     private var storage = TaskStorageManager.instance
+    private var firebaseStorage = FirebaseStorageManager()
     
     func retriveUserData() {
-        presenter?.didRetriveUserData(["Женя", "mockUserAvatar"])
+        let imageUrl = UserDefaults.standard.url(forKey: "UserAvatar")
+        print("Main Screen Interactor image url us - \(imageUrl)")
+        guard let name = UserDefaults.standard.string(forKey: NotificationNames.userName.rawValue) else {
+            presenter?.didRetriveUserData(( "User", imageUrl))
+            return
+        }
+            presenter?.didRetriveUserData((name, imageUrl))
     }
     
     func getToDosCount() {

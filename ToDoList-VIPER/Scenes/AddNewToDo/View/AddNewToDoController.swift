@@ -137,7 +137,7 @@ final class AddNewToDoController: SingleToDoController, AddNewToDoViewProtocol {
     @objc func dismissToMain() {
         presenter?.goBackToMain()
     }
-    
+
     //MARK: - Notification
     func makeNotification() {
         NotificationCenter.default.post(name: NotificationNames.updateTables.name, object: nil)

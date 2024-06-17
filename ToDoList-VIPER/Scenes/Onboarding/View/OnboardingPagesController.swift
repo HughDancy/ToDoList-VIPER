@@ -55,13 +55,6 @@ class OnboardingPagesController: UIPageViewController {
     }
   
     //MARK: - @OBJC METHODS
-    @objc func goToNextScreen() {
-        if currentPage + 1 < pages.count {
-                self.setViewControllers([self.pages[self.currentPage + 1]], direction: .forward, animated: true)
-                self.currentPage = self.currentPage + 1
-        }
-    }
-
     @objc func goToLogin() {
         presenter?.goToLoginModule()
     }

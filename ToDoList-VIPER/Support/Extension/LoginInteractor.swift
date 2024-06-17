@@ -7,12 +7,15 @@
 
 import Foundation
 import FirebaseAuth
+import FirebaseFirestore
 import GoogleSignIn
 import GoogleSignInSwift
 
 final class LoginInteractor: LoginInteractorInputProtocol {
     var presenter: LoginInteractorOutputProtocol?
-    
+    private var keyChainedManager = AuthKeychainManager()
+    private let db = Firestore.firestore()
+    private let firebaseStorage = FirebaseStorageManager.shared
     
     func checkAutorizationData(login: String?, password: String?) {
         switch (login != nil) && (password != nil) {
@@ -31,6 +34,10 @@ final class LoginInteractor: LoginInteractorInputProtocol {
                 if error != nil {
                     self.presenter?.getVerificationResult(with: .wrongEnteredData)
                 } else {
+                    let uid = dataResult?.user.uid ?? UUID().uuidString
+                    let name = Auth.auth().currentUser?.displayName
+                    UserDefaults.standard.set(name, forKey: NotificationNames.userName.rawValue)
+                    self.keyChainedManager.persist(id: uid)
                     self.presenter?.getVerificationResult(with: .success)
                 }
             }
@@ -45,11 +52,56 @@ final class LoginInteractor: LoginInteractorInputProtocol {
                 self.presenter?.getVerificationResult(with: .wrongEnteredData)
                 return
             }
-            self.presenter?.getVerificationResult(with: .success)
+            
+            let uuid = signInResult?.user.userID ?? UUID().uuidString
+            var userName = signInResult?.user.profile?.name
+            let docRef = self.db.collection("users").whereField("uid", isEqualTo: uuid)
+            
+            docRef.getDocuments { snapshot, error in
+                if error != nil {
+                    print(error?.localizedDescription as Any)
+        
+                } else {
+                    if let doc = snapshot?.documents, !doc.isEmpty {
+                        NotificationCenter.default.post(name: NotificationNames.googleSignIn.name, object: nil)
+                        self.setUserName(userName)
+                        self.presenter?.getVerificationResult(with: .googleSignInSucces)
+                        print("Seems all is alright")
+                    } else {
+                        userName = signInResult?.user.profile?.name
+                        self.db.collection("users").addDocument(data: [
+                            "email" : signInResult?.user.profile?.email ?? "",
+                            "name" : signInResult?.user.profile?.name ?? "",
+                            "password" : "",
+                            "uid": uuid
+                        ], completion: { error in
+                            if error != nil {
+                                self.presenter?.getVerificationResult(with: .wrongEnteredData)
+                            } else {
+                                DispatchQueue.main.async {
+                                    let image = UIImage(named: "mockUser_3")!
+                                    self.firebaseStorage.saveImage(image: image, name: uuid)
+                                }
+                                self.keyChainedManager.persist(id: uuid)
+                                NotificationCenter.default.post(name: NotificationNames.googleSignIn.name, object: nil)
+                                self.setUserName(userName)
+                                self.presenter?.getVerificationResult(with: .googleSignInSucces)
+                            }})
+                    }
+                }
+            }
         }
     }
     
     func changeOnboardingState() {
         NewUserCheck.shared.setIsLoginScrren()
+    }
+    
+    private func setUserName(_ name: String?) {
+        guard let userName = name else {
+            UserDefaults.standard.setValue("Test", forKeyPath: "UserName")
+            return
+        }
+        UserDefaults.standard.setValue(userName, forKeyPath: "UserName")
     }
 }

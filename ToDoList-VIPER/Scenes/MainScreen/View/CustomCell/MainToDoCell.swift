@@ -24,7 +24,7 @@ class MainToDoCell: UICollectionViewCell {
 
     private lazy var numbersLabel: UILabel = {
         let numbers = UILabel()
-        numbers.font = UIFont.systemFont(ofSize: UIScreen.main.bounds.height > 700 ? 60 : 30, weight: .bold)
+        numbers.font = UIFont.systemFont(ofSize: UIScreen.main.bounds.height > 700 ? 60 : 40, weight: .bold)
         numbers.textColor = .systemBackground
         return numbers
     }()

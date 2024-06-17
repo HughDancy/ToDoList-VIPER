@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		D82B8B6E2B6B8CCB00A006F2 /* AppConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82B8B6D2B6B8CCB00A006F2 /* AppConfigurator.swift */; };
+		D846B8622C14606A00AA8775 /* AuthKeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D846B8612C14606A00AA8775 /* AuthKeychainManager.swift */; };
+		D846B8652C14609C00AA8775 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D846B8642C14609C00AA8775 /* Security.framework */; };
+		D846B8692C18518F00AA8775 /* FirebaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D846B8682C18518F00AA8775 /* FirebaseStorageManager.swift */; };
 		D8473BE32BB2C5DF0063F87A /* CalendarCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8473BE22BB2C5DF0063F87A /* CalendarCollectionCell.swift */; };
 		D8473BE52BB415BB0063F87A /* HorizontalCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8473BE42BB415BB0063F87A /* HorizontalCalendarView.swift */; };
 		D8473BE72BB57CEC0063F87A /* CalendarCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8473BE62BB57CEC0063F87A /* CalendarCollection.swift */; };
@@ -89,11 +92,18 @@
 		D8CCF2D92B62725400C1E358 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = D8CCF2D82B62725400C1E358 /* FirebaseStorage */; };
 		D8CE4B702B87362500E473AC /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CE4B6F2B87362500E473AC /* Reachability.swift */; };
 		D8CE4B722B8739D900E473AC /* RegistrationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CE4B712B8739D900E473AC /* RegistrationStatus.swift */; };
+		D8CED86A2C19EBFC00A98181 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D8CED8692C19EBFC00A98181 /* Kingfisher */; };
 		D8DC23CC2BAD7D9A00C3E220 /* CircularTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DC23CB2BAD7D9A00C3E220 /* CircularTransition.swift */; };
 		D8DC23D52BB1773400C3E220 /* ToDoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DC23D42BB1773400C3E220 /* ToDoCell.swift */; };
 		D8DC23D72BB17B8300C3E220 /* ToDoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DC23D62BB17B8300C3E220 /* ToDoController.swift */; };
 		D8DD85CF2B9F370C003E7F89 /* CustomHomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DD85CE2B9F370C003E7F89 /* CustomHomeTabBarController.swift */; };
 		D8DD85D12B9F4AD8003E7F89 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DD85D02B9F4AD8003E7F89 /* CustomTabBar.swift */; };
+		D8E00C6D2C131425005AEA4D /* ForgottPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E00C6C2C131425005AEA4D /* ForgottPasswordController.swift */; };
+		D8E00C6F2C133B96005AEA4D /* ForgettPasswordProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E00C6E2C133B96005AEA4D /* ForgettPasswordProtocols.swift */; };
+		D8E00C712C1345D5005AEA4D /* ForgettPasswortPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E00C702C1345D5005AEA4D /* ForgettPasswortPresenter.swift */; };
+		D8E00C732C1346DF005AEA4D /* ForgettPasswordInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E00C722C1346DF005AEA4D /* ForgettPasswordInteractor.swift */; };
+		D8E00C752C1348FF005AEA4D /* ForgettPasswordRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E00C742C1348FF005AEA4D /* ForgettPasswordRouter.swift */; };
+		D8E00C772C16DC66005AEA4D /* MockUsersAvatrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E00C762C16DC66005AEA4D /* MockUsersAvatrs.swift */; };
 		D8E840542B63A8F0005A0936 /* String + EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E840532B63A8F0005A0936 /* String + EXT.swift */; };
 		D8E840562B63AA69005A0936 /* CABasicAnimation + EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E840552B63AA69005A0936 /* CABasicAnimation + EXT.swift */; };
 		D8E840582B63B0AB005A0936 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E840572B63B0AB005A0936 /* LoginPresenter.swift */; };
@@ -139,6 +149,9 @@
 
 /* Begin PBXFileReference section */
 		D82B8B6D2B6B8CCB00A006F2 /* AppConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigurator.swift; sourceTree = "<group>"; };
+		D846B8612C14606A00AA8775 /* AuthKeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthKeychainManager.swift; sourceTree = "<group>"; };
+		D846B8642C14609C00AA8775 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		D846B8682C18518F00AA8775 /* FirebaseStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageManager.swift; sourceTree = "<group>"; };
 		D8473BE22BB2C5DF0063F87A /* CalendarCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionCell.swift; sourceTree = "<group>"; };
 		D8473BE42BB415BB0063F87A /* HorizontalCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCalendarView.swift; sourceTree = "<group>"; };
 		D8473BE62BB57CEC0063F87A /* CalendarCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollection.swift; sourceTree = "<group>"; };
@@ -217,6 +230,12 @@
 		D8DC23D62BB17B8300C3E220 /* ToDoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoController.swift; sourceTree = "<group>"; };
 		D8DD85CE2B9F370C003E7F89 /* CustomHomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHomeTabBarController.swift; sourceTree = "<group>"; };
 		D8DD85D02B9F4AD8003E7F89 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		D8E00C6C2C131425005AEA4D /* ForgottPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgottPasswordController.swift; sourceTree = "<group>"; };
+		D8E00C6E2C133B96005AEA4D /* ForgettPasswordProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgettPasswordProtocols.swift; sourceTree = "<group>"; };
+		D8E00C702C1345D5005AEA4D /* ForgettPasswortPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgettPasswortPresenter.swift; sourceTree = "<group>"; };
+		D8E00C722C1346DF005AEA4D /* ForgettPasswordInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgettPasswordInteractor.swift; sourceTree = "<group>"; };
+		D8E00C742C1348FF005AEA4D /* ForgettPasswordRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgettPasswordRouter.swift; sourceTree = "<group>"; };
+		D8E00C762C16DC66005AEA4D /* MockUsersAvatrs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUsersAvatrs.swift; sourceTree = "<group>"; };
 		D8E840532B63A8F0005A0936 /* String + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + EXT.swift"; sourceTree = "<group>"; };
 		D8E840552B63AA69005A0936 /* CABasicAnimation + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CABasicAnimation + EXT.swift"; sourceTree = "<group>"; };
 		D8E840572B63B0AB005A0936 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginPresenter.swift; path = "ToDoList-VIPER/Support/Extension/LoginPresenter.swift"; sourceTree = SOURCE_ROOT; };
@@ -248,7 +267,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D846B8652C14609C00AA8775 /* Security.framework in Frameworks */,
 				D8CCF2D12B62725400C1E358 /* FirebaseDatabaseSwift in Frameworks */,
+				D8CED86A2C19EBFC00A98181 /* Kingfisher in Frameworks */,
 				D8CCF2CF2B62725400C1E358 /* FirebaseDatabase in Frameworks */,
 				D8C19EC62B8DC3FF004BCDDD /* GoogleSignIn in Frameworks */,
 				D8C19EC82B8DC3FF004BCDDD /* GoogleSignInSwift in Frameworks */,
@@ -280,6 +301,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D846B8632C14609C00AA8775 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D846B8642C14609C00AA8775 /* Security.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D8473BE12BB2C5800063F87A /* CustomCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -341,6 +370,7 @@
 		D85C5DA92B614DC900F548AA /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				D8E00C662C1303F4005AEA4D /* ForgottenPasswordModule */,
 				D8E8405D2B677BCF005A0936 /* RegistrationModule */,
 				D85C5DAE2B614E0F00F548AA /* Protocols */,
 				D85C5DAD2B614E0700F548AA /* View */,
@@ -400,6 +430,7 @@
 				D86D44FA2AFB933000894774 /* ToDoList-VIPERTests */,
 				D86D45042AFB933000894774 /* ToDoList-VIPERUITests */,
 				D86D44DF2AFB932E00894774 /* Products */,
+				D846B8632C14609C00AA8775 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -474,6 +505,7 @@
 				D8BDEABF2BE3658200C3BE55 /* ColorTransformer.swift */,
 				D8B85D692BE3891B0015F2B2 /* TaskCategoryManager.swift */,
 				D87087D32BEA35BB00EEDDD7 /* NotificationNames.swift */,
+				D8E00C762C16DC66005AEA4D /* MockUsersAvatrs.swift */,
 			);
 			path = Entitys;
 			sourceTree = "<group>";
@@ -763,6 +795,58 @@
 			path = CustomTabBar;
 			sourceTree = "<group>";
 		};
+		D8E00C662C1303F4005AEA4D /* ForgottenPasswordModule */ = {
+			isa = PBXGroup;
+			children = (
+				D8E00C6B2C13043C005AEA4D /* Protocols */,
+				D8E00C6A2C130434005AEA4D /* View */,
+				D8E00C692C13042A005AEA4D /* Interactor */,
+				D8E00C682C130423005AEA4D /* Presenter */,
+				D8E00C672C13041C005AEA4D /* Router */,
+			);
+			path = ForgottenPasswordModule;
+			sourceTree = "<group>";
+		};
+		D8E00C672C13041C005AEA4D /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				D8E00C742C1348FF005AEA4D /* ForgettPasswordRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		D8E00C682C130423005AEA4D /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				D8E00C702C1345D5005AEA4D /* ForgettPasswortPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		D8E00C692C13042A005AEA4D /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				D8E00C722C1346DF005AEA4D /* ForgettPasswordInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		D8E00C6A2C130434005AEA4D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D8E00C6C2C131425005AEA4D /* ForgottPasswordController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D8E00C6B2C13043C005AEA4D /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				D8E00C6E2C133B96005AEA4D /* ForgettPasswordProtocols.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		D8E8405D2B677BCF005A0936 /* RegistrationModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -921,6 +1005,8 @@
 				D8BDEABB2BDC9C8E00C3BE55 /* CategoryTableView.swift */,
 				D8B85D6B2BE398740015F2B2 /* MainScreenCollectionView.swift */,
 				D84CADF82BF25E1F009C666D /* NoTaskLabel.swift */,
+				D846B8612C14606A00AA8775 /* AuthKeychainManager.swift */,
+				D846B8682C18518F00AA8775 /* FirebaseStorageManager.swift */,
 			);
 			path = CustomClasses;
 			sourceTree = "<group>";
@@ -954,6 +1040,7 @@
 				D8CCF2D82B62725400C1E358 /* FirebaseStorage */,
 				D8C19EC52B8DC3FF004BCDDD /* GoogleSignIn */,
 				D8C19EC72B8DC3FF004BCDDD /* GoogleSignInSwift */,
+				D8CED8692C19EBFC00A98181 /* Kingfisher */,
 			);
 			productName = "ToDoList-VIPER";
 			productReference = D86D44DE2AFB932E00894774 /* ToDoList-VIPER.app */;
@@ -1031,6 +1118,7 @@
 				D86D45142AFB947B00894774 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				D8CCF2C72B62725400C1E358 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				D8C19EC42B8DC3FF004BCDDD /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				D8CED8682C19EBFC00A98181 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = D86D44DF2AFB932E00894774 /* Products */;
 			projectDirPath = "";
@@ -1111,6 +1199,7 @@
 				D8E8406C2B6789F8005A0936 /* RegistrationRouter.swift in Sources */,
 				D8F11C5E2B5660C900D2282D /* AnimationLoadingInteractor.swift in Sources */,
 				D8AB92232BBBF8A200826A4E /* ToDosDetailController.swift in Sources */,
+				D8E00C732C1346DF005AEA4D /* ForgettPasswordInteractor.swift in Sources */,
 				D8B1E9D02BA46A0E00D455AF /* HomeTabBarProtocols.swift in Sources */,
 				D8AB922B2BBD5C6800826A4E /* ToDosDetailPresenter.swift in Sources */,
 				D8DC23D72BB17B8300C3E220 /* ToDoController.swift in Sources */,
@@ -1132,6 +1221,8 @@
 				D8B1E9DF2BA84CB100D455AF /* AddNewToDoRouter.swift in Sources */,
 				D86D44EC2AFB932E00894774 /* ToDoList_VIPER.xcdatamodeld in Sources */,
 				D8B1E9CD2BA469AF00D455AF /* HomeTabBarPresenter.swift in Sources */,
+				D8E00C6F2C133B96005AEA4D /* ForgettPasswordProtocols.swift in Sources */,
+				D8E00C752C1348FF005AEA4D /* ForgettPasswordRouter.swift in Sources */,
 				D84CADF92BF25E1F009C666D /* NoTaskLabel.swift in Sources */,
 				D8E9F87C2B03537A00A3F3FC /* HomeTabBarRouter.swift in Sources */,
 				D8900F112B5135F7008E0E34 /* AnimationLoadingController.swift in Sources */,
@@ -1144,6 +1235,8 @@
 				D8BDEABA2BDA178200C3BE55 /* CustomAlertView.swift in Sources */,
 				D8C19ED62B91C037004BCDDD /* BaseButton.swift in Sources */,
 				D8A54EC02BB6D61000D9B15F /* ToDosPresenter.swift in Sources */,
+				D8E00C772C16DC66005AEA4D /* MockUsersAvatrs.swift in Sources */,
+				D846B8692C18518F00AA8775 /* FirebaseStorageManager.swift in Sources */,
 				D85C58392B5A595400023B04 /* OnboardingPagesController.swift in Sources */,
 				D8C19ED42B90F3D4004BCDDD /* SignInTextField.swift in Sources */,
 				D8AB92252BBC063400826A4E /* SingleToDoController.swift in Sources */,
@@ -1152,6 +1245,7 @@
 				D8E840662B6780A6005A0936 /* RegistrationPresenter.swift in Sources */,
 				D8DD85CF2B9F370C003E7F89 /* CustomHomeTabBarController.swift in Sources */,
 				D8E9F8A32B04D23900A3F3FC /* UILabel + EXT.swift in Sources */,
+				D846B8622C14606A00AA8775 /* AuthKeychainManager.swift in Sources */,
 				D87474552B97176C00BF4866 /* CircleBaseButton.swift in Sources */,
 				D8B1E9BF2BA4212A00D455AF /* MainScreenPresenter.swift in Sources */,
 				D8E9F8D02B18A56200A3F3FC /* ToDoObjectSorter.swift in Sources */,
@@ -1161,9 +1255,11 @@
 				D87087D42BEA35BB00EEDDD7 /* NotificationNames.swift in Sources */,
 				D8E9F8A72B04D58900A3F3FC /* UIButton + EXT.swift in Sources */,
 				D8C19ED02B90B333004BCDDD /* SignInController.swift in Sources */,
+				D8E00C712C1345D5005AEA4D /* ForgettPasswortPresenter.swift in Sources */,
 				D85C5DB02B614E2F00F548AA /* LoginProtocols.swift in Sources */,
 				D8F11C602B5660DA00D2282D /* AnimationLoadingPresenter.swift in Sources */,
 				D8B1E9CB2BA465A300D455AF /* AddNewToDoController.swift in Sources */,
+				D8E00C6D2C131425005AEA4D /* ForgottPasswordController.swift in Sources */,
 				D8E9F8AF2B0B40FE00A3F3FC /* UIDatePicker + EXT.swift in Sources */,
 				D86D44E42AFB932E00894774 /* SceneDelegate.swift in Sources */,
 				D8E8405C2B63B2D1005A0936 /* LoginRouter.swift in Sources */,
@@ -1534,6 +1630,14 @@
 				minimumVersion = 10.20.0;
 			};
 		};
+		D8CED8682C19EBFC00A98181 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.12.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1596,6 +1700,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D8CCF2C72B62725400C1E358 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		D8CED8692C19EBFC00A98181 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8CED8682C19EBFC00A98181 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 

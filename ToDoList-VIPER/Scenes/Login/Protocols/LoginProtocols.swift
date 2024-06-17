@@ -22,6 +22,7 @@ protocol LoginPresenterProtocol: AnyObject {
     
     //VIEW -> PRESENTER
     func chekTheLogin(login: String?, password: String?)
+    func goToForgottPassword()
     func goToRegistration()
     func googleSingIn()
     func appleSignIn()
@@ -44,6 +45,7 @@ protocol LoginInteractorOutputProtocol: AnyObject {
 
 protocol LoginRouterProtocol: AnyObject {
     static func createLoginModule() -> UIViewController
+    func goToForgottPasswordModule(from view: LoginViewProtocol)
     func goToRegistration(from view: LoginViewProtocol)
     func goToMainScreen(from view: LoginViewProtocol)
     func showAllert(from view: LoginViewProtocol, title: String, message: String)
@@ -53,6 +55,7 @@ protocol LoginRouterProtocol: AnyObject {
 
 enum LogInStatus {
     case success
+    case googleSignInSucces
     case notValidEmail
     case emptyLogin
     case emptyPassword
