@@ -6,36 +6,31 @@
 //
 
 import UIKit.UIColor
-import FirebaseAuth
-import FirebaseFirestore
 
 final class AddNewToDoInteractor: AddNewToDoInteractorProtocol {
     weak var presenter: AddNewToDoPresenterProtocol?
-    var storage = TaskStorageManager.instance
-    let db = Firestore.firestore()
+    
+    //MARK: - Property's
+    private var localStorage = TaskStorageManager.instance
+    private var networkStorage = FirebaseStorageManager.shared
+    private var categoryManger = TaskCategoryManager()
     
     func addNewToDo(with name: String?, description: String?, date: Date?, colorCategory: UIColor, iconName: String) {
         let choosenDate = Calendar.current.startOfDay(for: date ?? Date.today)
         let compareDate = Calendar.current.startOfDay(for: Date.today)
         let overdueStatus: Bool = choosenDate >= compareDate ? false : true
+        let category = categoryManger.getCategoryName(from: colorCategory)
         
         
         if name != "" {
-            storage.createNewToDo(title: name ?? "Temp",
+            localStorage.createNewToDo(title: name ?? "Temp",
                                   content: self.cehckDescription(description ?? "Описание задачи"),
                                   date: date ?? Date.today,
                                   isOverdue: overdueStatus,
                                   color: colorCategory,
                                   iconName: iconName)
-            let uid = Auth.auth().currentUser?.uid ?? UUID().uuidString
-            db.collection("toDos").document(uid).collection("tasks").addDocument(data: [
-                "category" : "work",
-                "date": DateFormatter.getStringFromDate(from: date ?? Date.today),
-                "description" : description ?? "Описание задачи отсутствует",
-                "name" : name ?? "Temp",
-                "userId" : uid
-                
-            ])
+            let newToDo = ToDoTask(title: name ?? "Temp", descriptionTitle: description ?? "Temp", date: date ?? Date.today, category: category)
+            networkStorage.uploadTaskToServer(with: newToDo)
             presenter?.goBackToMain()
         } else {
             presenter?.showAlert()

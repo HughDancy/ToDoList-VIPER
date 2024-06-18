@@ -27,3 +27,18 @@ final class TaskCategoryManager {
         return categoryStack
     }
 }
+
+extension TaskCategoryManager {
+    func getCategoryName(from color: UIColor) -> String {
+        switch color {
+        case .systemOrange:
+            return "Работа"
+        case .taskGreen:
+            return "Личное"
+        case .systemPurple:
+            return "Иное"
+        default:
+            return "work"
+        }
+    }
+}

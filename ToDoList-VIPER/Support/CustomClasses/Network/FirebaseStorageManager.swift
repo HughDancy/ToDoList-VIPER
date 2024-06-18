@@ -6,18 +6,20 @@
 //
 
 import Foundation
-import UIKit
+import UIKit.UIImage
 import FirebaseStorage
+import FirebaseAuth
+import FirebaseFirestore
 import Kingfisher
 
 final class FirebaseStorageManager {
     static let shared = FirebaseStorageManager()
+    
     private let storage = Storage.storage().reference()
+    private let db = Firestore.firestore()
     private var authManager = AuthKeychainManager()
     
-    init() {
-        self.loadAvatar()
-    }
+    init() { }
     
     func saveImage(image: UIImage, name: String) {
         guard let data = image.jpegData(compressionQuality: 8.0) else { return }
@@ -41,6 +43,18 @@ final class FirebaseStorageManager {
                 print("LoadAvatar method avatar id is - \(url)")
                 UserDefaults.standard.set(url, forKey: "UserAvatar")
             }
+        }
+    }
+}
+
+extension FirebaseStorageManager {
+    func uploadTaskToServer(with task: ToDoTask) {
+        let uid = Auth.auth().currentUser?.uid ?? UUID().uuidString
+        do {
+            try db.collection("toDos").document(uid).collection("tasks").addDocument(from: task)
+        }
+        catch {
+            print(error)
         }
     }
 }

@@ -11,7 +11,6 @@ import FirebaseFirestore
 final class MainScreenInteractor: MainScreenInteractorInputProtocol {
     var presenter: MainScreenInteractorOutputProtocol?
     private var storage = TaskStorageManager.instance
-    private var firebaseStorage = FirebaseStorageManager()
     
     func retriveUserData() {
         let imageUrl = UserDefaults.standard.url(forKey: "UserAvatar")
