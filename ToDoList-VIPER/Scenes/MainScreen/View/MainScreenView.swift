@@ -72,31 +72,31 @@ final class MainScreenView: UIView {
     //MARK: - Setup Layout
     private func setupLayout() {
         backgroundImage.snp.makeConstraints { make in
-            make.top.equalTo(self.snp.top).offset(-65)
+            make.top.equalTo(self.snp.top).offset(MainScreenSizes.backgrounImageOffset.size)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(MainScreenSizes.backgroundImage.size)
         }
         
         userAvatar.snp.makeConstraints { make in
-            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(7)
+            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(MainScreenSizes.userAvatarTopOffset.size)
             make.centerX.equalToSuperview()
             make.height.width.equalTo(MainScreenSizes.avatar.size)
         }
         
         userName.snp.makeConstraints { make in
-            make.top.equalTo(userAvatar.snp.bottom).offset(5)
+            make.top.equalTo(userAvatar.snp.bottom).offset(MainScreenSizes.userNameTopOffset.size)
             make.centerX.equalToSuperview()
         }
         
         containerView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(130)
+            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(MainScreenSizes.containerTopOffset.size)
         }
         
         toDosCollection.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(40)
+            make.top.equalToSuperview().offset(MainScreenSizes.toDoTopOffset.size)
             make.leading.trailing.equalToSuperview()
-            make.bottom.equalToSuperview().inset(70)
+            make.bottom.equalToSuperview().inset(MainScreenSizes.toDoBottomOffset.size)
         }
     }
     
@@ -115,6 +115,12 @@ final class MainScreenView: UIView {
 enum MainScreenSizes: CGFloat {
     case avatar = 80
     case backgroundImage = 350
+    case backgrounImageOffset = -65
+    case userAvatarTopOffset = 7
+    case userNameTopOffset = 5
+    case containerTopOffset = 130
+    case toDoTopOffset = 40
+    case toDoBottomOffset = 70
     
     var size: CGFloat {
         switch self {
@@ -122,6 +128,18 @@ enum MainScreenSizes: CGFloat {
             let size: CGFloat = UIScreen.main.bounds.height > 700 ? 80 : 70
             return size
         case .backgroundImage:
+            return rawValue
+        case .backgrounImageOffset:
+            return rawValue
+        case .userAvatarTopOffset:
+            return rawValue
+        case .userNameTopOffset:
+            return rawValue
+        case .containerTopOffset:
+            return rawValue
+        case .toDoTopOffset:
+            return rawValue
+        case .toDoBottomOffset:
             return rawValue
         }
     }

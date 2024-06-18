@@ -6,10 +6,13 @@
 //
 
 import UIKit.UIColor
+import FirebaseAuth
+import FirebaseFirestore
 
 final class AddNewToDoInteractor: AddNewToDoInteractorProtocol {
     weak var presenter: AddNewToDoPresenterProtocol?
     var storage = TaskStorageManager.instance
+    let db = Firestore.firestore()
     
     func addNewToDo(with name: String?, description: String?, date: Date?, colorCategory: UIColor, iconName: String) {
         let choosenDate = Calendar.current.startOfDay(for: date ?? Date.today)
@@ -24,6 +27,15 @@ final class AddNewToDoInteractor: AddNewToDoInteractorProtocol {
                                   isOverdue: overdueStatus,
                                   color: colorCategory,
                                   iconName: iconName)
+            let uid = Auth.auth().currentUser?.uid ?? UUID().uuidString
+            db.collection("toDos").document(uid).collection("tasks").addDocument(data: [
+                "category" : "work",
+                "date": DateFormatter.getStringFromDate(from: date ?? Date.today),
+                "description" : description ?? "Описание задачи отсутствует",
+                "name" : name ?? "Temp",
+                "userId" : uid
+                
+            ])
             presenter?.goBackToMain()
         } else {
             presenter?.showAlert()
