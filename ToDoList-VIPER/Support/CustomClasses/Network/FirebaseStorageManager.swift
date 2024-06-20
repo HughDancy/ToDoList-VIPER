@@ -15,12 +15,14 @@ import Kingfisher
 final class FirebaseStorageManager {
     static let shared = FirebaseStorageManager()
     
+    //MARK: - Property's
     private let storage = Storage.storage().reference()
     private let db = Firestore.firestore()
     private var authManager = AuthKeychainManager()
     
     init() { }
     
+    //MARK: - Upload and load avatar to/from server
     func saveImage(image: UIImage, name: String) {
         guard let data = image.jpegData(compressionQuality: 8.0) else { return }
         let avatarRef = storage.child(name)
@@ -46,7 +48,7 @@ final class FirebaseStorageManager {
         }
     }
 }
-
+      //MARK: - Upload task to server
 extension FirebaseStorageManager {
     func uploadTaskToServer(with task: ToDoTask) {
         let uid = Auth.auth().currentUser?.uid ?? UUID().uuidString
@@ -56,5 +58,13 @@ extension FirebaseStorageManager {
         catch {
             print(error)
         }
+    }
+}
+
+    //MARK: - Download tasks
+extension FirebaseStorageManager {
+    func loadTasks(with uid: String) -> [ToDoTask] {
+        
+        return [ToDoTask(title: "", descriptionTitle: "", date: Date.today, category: "")]
     }
 }

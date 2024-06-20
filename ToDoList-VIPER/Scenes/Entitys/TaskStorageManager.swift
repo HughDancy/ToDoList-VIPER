@@ -20,6 +20,9 @@ final class TaskStorageManager {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
+        container.viewContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
+        container.viewContext.shouldDeleteInaccessibleFaults = true
+        container.viewContext.automaticallyMergesChangesFromParent = false
         return container
     }()
     
@@ -40,10 +43,10 @@ final class TaskStorageManager {
             try viewContext.save()
         }
         catch {
-            
+            print(error)
         }
     }
-    
+ 
     //MARK: - CoreData delete ToDoObject
     func deleteToDoObject(item: ToDoObject) {
         viewContext.delete(item)
@@ -52,7 +55,7 @@ final class TaskStorageManager {
             try viewContext.save()
         }
         catch {
-            
+            print(error)
         }
     }
     
@@ -69,7 +72,7 @@ final class TaskStorageManager {
             try viewContext.save()
         }
         catch {
-            
+            print(error)
         }
     }
     
@@ -80,7 +83,7 @@ final class TaskStorageManager {
             try viewContext.save()
         }
         catch {
-            
+            print(error)
         }
     }
     
@@ -111,6 +114,7 @@ final class TaskStorageManager {
         fetchRequest.predicate = predicate
         fetchRequest.fetchBatchSize = 7
         let objects = try! viewContext.fetch(fetchRequest)
+        print("Private context - \(objects)")
         return objects
     }
     
