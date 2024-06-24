@@ -63,8 +63,26 @@ extension FirebaseStorageManager {
 
     //MARK: - Download tasks
 extension FirebaseStorageManager {
-    func loadTasks(with uid: String) -> [ToDoTask] {
-        
-        return [ToDoTask(title: "", descriptionTitle: "", date: Date.today, category: "")]
+    func loadTaskFromFirestore() async  {
+        let uid = Auth.auth().currentUser?.uid ?? UUID().uuidString
+        do {
+            let querySnapshot = try await db.collection("toDos").document(uid).collection("tasks").getDocuments()
+            querySnapshot.documents.forEach { document in
+                let task = document.data()
+                let category = Category.work
+                let status = ProgressStatus.inProgress
+                let timestamp = task["date"] as! Timestamp
+                let date = timestamp.dateValue()
+                let savingTask = ToDoTask(title: task["title"] as? String ?? "Temp",
+                                          descriptionTitle: task["description"] as? String ?? "Description",
+                                          date: date,
+                                          category: task["work"] as? Category ?? category,
+                                          status: task["status"] as? ProgressStatus ?? status)
+                print("Loading task is - \(task)")
+                TaskStorageManager.instance.saveItemsOnBackground(savingTask)
+            }
+        } catch {
+            print("Some error when download task from server on private context: \(error)")
+        }
     }
 }

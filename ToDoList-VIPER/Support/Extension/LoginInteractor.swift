@@ -13,10 +13,13 @@ import GoogleSignInSwift
 
 final class LoginInteractor: LoginInteractorInputProtocol {
     var presenter: LoginInteractorOutputProtocol?
+    //MARK: - Properties
     private var keyChainedManager = AuthKeychainManager()
     private let db = Firestore.firestore()
     private let firebaseStorage = FirebaseStorageManager.shared
+    private let taskManager = FirebaseStorageManager()
     
+    //MARK: - Login
     func checkAutorizationData(login: String?, password: String?) {
         switch (login != nil) && (password != nil) {
         case (login == "") || (password == ""):
@@ -38,12 +41,16 @@ final class LoginInteractor: LoginInteractorInputProtocol {
                     let name = Auth.auth().currentUser?.displayName
                     UserDefaults.standard.set(name, forKey: NotificationNames.userName.rawValue)
                     self.keyChainedManager.persist(id: uid)
+                    Task {
+                        await self.taskManager.loadTaskFromFirestore()
+                    }
                     self.presenter?.getVerificationResult(with: .success)
                 }
             }
         }
     }
     
+    //MARK: - Google SignIn
     func googleLogIn(with: LoginViewProtocol) {
         guard let viewController = with as? UIViewController else { return }
         GIDSignIn.sharedInstance.signIn(withPresenting: viewController) { signInResult, error in
@@ -85,6 +92,9 @@ final class LoginInteractor: LoginInteractorInputProtocol {
                                 self.keyChainedManager.persist(id: uuid)
                                 NotificationCenter.default.post(name: NotificationNames.googleSignIn.name, object: nil)
                                 self.setUserName(userName)
+                                Task {
+                                    await self.taskManager.loadTaskFromFirestore()
+                                }
                                 self.presenter?.getVerificationResult(with: .googleSignInSucces)
                             }})
                     }
@@ -97,6 +107,7 @@ final class LoginInteractor: LoginInteractorInputProtocol {
         NewUserCheck.shared.setIsLoginScrren()
     }
     
+    //MARK: - Get user name
     private func setUserName(_ name: String?) {
         guard let userName = name else {
             UserDefaults.standard.setValue("Test", forKeyPath: "UserName")
@@ -105,3 +116,4 @@ final class LoginInteractor: LoginInteractorInputProtocol {
         UserDefaults.standard.setValue(userName, forKeyPath: "UserName")
     }
 }
+

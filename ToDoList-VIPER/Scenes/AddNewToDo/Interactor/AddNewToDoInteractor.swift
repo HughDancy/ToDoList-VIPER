@@ -19,7 +19,8 @@ final class AddNewToDoInteractor: AddNewToDoInteractorProtocol {
         let choosenDate = Calendar.current.startOfDay(for: date ?? Date.today)
         let compareDate = Calendar.current.startOfDay(for: Date.today)
         let overdueStatus: Bool = choosenDate >= compareDate ? false : true
-        let category = categoryManger.getCategoryName(from: colorCategory)
+        let status = overdueStatus ? ProgressStatus.fail : ProgressStatus.inProgress
+        let category = categoryManger.getCategory(from: colorCategory)
         
         
         if name != "" {
@@ -29,7 +30,8 @@ final class AddNewToDoInteractor: AddNewToDoInteractorProtocol {
                                   isOverdue: overdueStatus,
                                   color: colorCategory,
                                   iconName: iconName)
-            let newToDo = ToDoTask(title: name ?? "Temp", descriptionTitle: description ?? "Temp", date: date ?? Date.today, category: category)
+            let newToDo = ToDoTask(title: name ?? "Temp", descriptionTitle: description ?? "Temp", date: date ?? Date.today, category: category, status: status)
+//            let newToDo = ToDoTask(title: name ?? "Temp", descriptionTitle: description ?? "Temp", date: date ?? Date.today, category: category)
             networkStorage.uploadTaskToServer(with: newToDo)
             presenter?.goBackToMain()
         } else {

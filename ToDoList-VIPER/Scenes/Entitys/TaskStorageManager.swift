@@ -22,10 +22,12 @@ final class TaskStorageManager {
         })
         container.viewContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
         container.viewContext.shouldDeleteInaccessibleFaults = true
-        container.viewContext.automaticallyMergesChangesFromParent = false
+        container.viewContext.automaticallyMergesChangesFromParent = true
         return container
     }()
     
+  
+    private lazy var privateContext: NSManagedObjectContext = persistentContainer.newBackgroundContext()
     private lazy var viewContext: NSManagedObjectContext = persistentContainer.viewContext
     
     //MARK: - CoreData create new ToDoObject
@@ -46,7 +48,7 @@ final class TaskStorageManager {
             print(error)
         }
     }
- 
+    
     //MARK: - CoreData delete ToDoObject
     func deleteToDoObject(item: ToDoObject) {
         viewContext.delete(item)
@@ -120,7 +122,7 @@ final class TaskStorageManager {
     
     func fetchDoneToDos(with date: Date) -> [ToDoObject] {
         let fetchRequest: NSFetchRequest<ToDoObject> = ToDoObject.fetchRequest()
-//        let donePredicate = NSPredicate(format: "doneStatus == YES")
+        //        let donePredicate = NSPredicate(format: "doneStatus == YES")
         let donePredicate = NSPredicate(format: "%K == %@", "doneStatus", NSNumber(value: true))
         let datePredicate = NSPredicate(format: "%K == %@", #keyPath(ToDoObject.dateTitle), DateFormatter.getStringFromDate(from: date))
         let subPredicates = [donePredicate, datePredicate]
@@ -138,13 +140,13 @@ final class TaskStorageManager {
         let objects = try! viewContext.fetch(fetchRequest)
         return objects
     }
-    //MARK: - TO-DO: Check this method and rewrite 
+    //MARK: - TO-DO: Check this method and rewrite
     //MARK: - Fetch count ToDosObjects Method
     func fetchToDosCount(with status: ToDoListStatus) -> Int {
         let fetchRequest = NSFetchRequest<NSNumber>(entityName: "ToDoObject")
         fetchRequest.resultType = .countResultType
         
-        switch status {
+      switch status {
         case .today:
             let predicate = self.createPredicates(with: .today, date: Date.today)
             fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicate)
@@ -168,10 +170,13 @@ final class TaskStorageManager {
             fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicate)
             let objects = try! viewContext.fetch(fetchRequest)
             let objectsCount = objects.first?.intValue
+            print(objectsCount)
+            let selfAllTask = self.fetchAllToDos()
+            print(selfAllTask)
             return objectsCount ?? 0
         }
     }
-
+    
     //MARK: - Create predicates for cathegories
     private func createPredicates(with status: ToDoListStatus, date: Date) -> [NSPredicate] {
         switch status {
@@ -182,7 +187,7 @@ final class TaskStorageManager {
             return [predicate, donePredicate]
         case .done:
             let donePredicate = NSPredicate(format: "%K == %@", "doneStatus", NSNumber(value: true))
-//            let datePredicate = NSPredicate(format: "%K == %@", #keyPath(ToDoObject.dateTitle), DateFormatter.getStringFromDate(from: date))
+            //            let datePredicate = NSPredicate(format: "%K == %@", #keyPath(ToDoObject.dateTitle), DateFormatter.getStringFromDate(from: date))
             return [donePredicate]
         case .overdue:
             let donePredicate = NSPredicate(format: "doneStatus == NO")
@@ -216,6 +221,47 @@ final class TaskStorageManager {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+    
+    func saveItemsOnBackground(_ item: ToDoTask) {
+        let status = item.status != ProgressStatus.done && item.status != ProgressStatus.fail
+        let categoryData = TaskCategoryManager.manager.getCategoryData(from: item.category)
+        
+        let object = ToDoObject(context: privateContext)
+        object.title = item.title
+        object.descriptionTitle = item.descriptionTitle
+        object.date = item.date
+        object.dateTitle = DateFormatter.getStringFromDate(from: item.date)
+        object.color = categoryData.1
+        object.isOverdue = status
+        object.doneStatus = status
+        object.iconName = categoryData.0
+        
+        privateContext.performAndWait {
+            if privateContext.hasChanges {
+                do {
+                    try privateContext.save()
+                    print("It's all alright in private context saving")
+                } catch {
+                    privateContext.rollback()
+                    print("Not all good in private context")
+                }
+            }
+            privateContext.reset()
+        }
+//        privateContext.perform {
+//            if self.privateContext.hasChanges {
+//                do {
+//                    try self.privateContext.save()
+//                    print("It's all right on saving private context")
+//                    print("PARRENT FOR PRIVATE CONTEXT IS - \(self.viewContext.parent)")
+//                } catch {
+//                    self.privateContext.rollback()
+//                    print("Not all good in private context")
+//                }
+//            }
+//        }
+  
     }
 }
 

@@ -29,16 +29,31 @@ final class TaskCategoryManager {
 }
 
 extension TaskCategoryManager {
-    func getCategoryName(from color: UIColor) -> String {
+    func getCategory(from color: UIColor) -> Category {
         switch color {
         case .systemOrange:
-            return "Работа"
+            return Category.work
         case .taskGreen:
-            return "Личное"
+            return Category.personal
         case .systemPurple:
-            return "Иное"
+            return Category.other
         default:
-            return "work"
+            return Category.other
         }
     }
 }
+
+extension TaskCategoryManager {
+    func getCategoryData(from category: Category) -> (String, UIColor) {
+        switch category {
+        case .work:
+            return ("briefcase", .systemOrange)
+        case .personal:
+            return ("person", .taskGreen)
+        case .other:
+            return ("books.vertical.circle", .systemPurple)
+        }
+    }
+}
+
+
