@@ -65,6 +65,7 @@ final class ToDoController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(toDoTasks)
         setupView()
     }
     

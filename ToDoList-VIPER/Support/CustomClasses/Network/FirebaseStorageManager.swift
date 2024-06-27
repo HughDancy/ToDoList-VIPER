@@ -20,7 +20,9 @@ final class FirebaseStorageManager {
     private let db = Firestore.firestore()
     private var authManager = AuthKeychainManager()
     
-    init() { }
+    init() {
+        self.loadAvatar()
+    }
     
     //MARK: - Upload and load avatar to/from server
     func saveImage(image: UIImage, name: String) {
@@ -62,24 +64,37 @@ extension FirebaseStorageManager {
 }
 
     //MARK: - Download tasks
-extension FirebaseStorageManager {
+extension FirebaseStorageManager {    
     func loadTaskFromFirestore() async  {
         let uid = Auth.auth().currentUser?.uid ?? UUID().uuidString
         do {
             let querySnapshot = try await db.collection("toDos").document(uid).collection("tasks").getDocuments()
             querySnapshot.documents.forEach { document in
                 let task = document.data()
-                let category = Category.work
-                let status = ProgressStatus.inProgress
+                let categoryFromServer = Category(rawValue: task["category"] as? String ?? "work")
+                print(categoryFromServer)
+                let category = TaskCategoryManager.manager.getCategoryData(from: categoryFromServer ?? Category.work)
+                let statusFromServer = task["status"] as? ProgressStatus ?? ProgressStatus.inProgress
+                let status = statusFromServer != ProgressStatus.done && statusFromServer != ProgressStatus.fail
                 let timestamp = task["date"] as! Timestamp
                 let date = timestamp.dateValue()
-                let savingTask = ToDoTask(title: task["title"] as? String ?? "Temp",
-                                          descriptionTitle: task["description"] as? String ?? "Description",
-                                          date: date,
-                                          category: task["work"] as? Category ?? category,
-                                          status: task["status"] as? ProgressStatus ?? status)
-                print("Loading task is - \(task)")
-                TaskStorageManager.instance.saveItemsOnBackground(savingTask)
+            
+
+//                let savingTask = ToDoTask(title: task["title"] as? String ?? "Temp",
+//                                          descriptionTitle: task["description"] as? String ?? "Description",
+//                                          date: date,
+//                                          category: task["work"] as? Category ?? category,
+//                                          status: task["status"] as? ProgressStatus ?? status)
+//                print("Loading task is - \(task)")
+      
+                 TaskStorageManager.instance.createNewToDo(title: task["title"] as? String ?? "Temp",
+                                                           content: task["description"] as? String ?? "Description",
+                                                           date: date,
+                                                           isOverdue: status ,
+                                                           color: category.1,
+                                                           iconName: category.0)
+
+               
             }
         } catch {
             print("Some error when download task from server on private context: \(error)")

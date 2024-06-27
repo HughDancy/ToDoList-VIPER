@@ -37,13 +37,15 @@ final class LoginInteractor: LoginInteractorInputProtocol {
                 if error != nil {
                     self.presenter?.getVerificationResult(with: .wrongEnteredData)
                 } else {
-                    let uid = dataResult?.user.uid ?? UUID().uuidString
-                    let name = Auth.auth().currentUser?.displayName
-                    UserDefaults.standard.set(name, forKey: NotificationNames.userName.rawValue)
-                    self.keyChainedManager.persist(id: uid)
                     Task {
                         await self.taskManager.loadTaskFromFirestore()
                     }
+                    let uid = dataResult?.user.uid ?? UUID().uuidString
+                    let name = Auth.auth().currentUser?.displayName
+                    UserDefaults.standard.set(name, forKey: NotificationNames.userName.rawValue)
+                   
+                    self.keyChainedManager.persist(id: uid)
+                   
                     self.presenter?.getVerificationResult(with: .success)
                 }
             }
@@ -92,6 +94,7 @@ final class LoginInteractor: LoginInteractorInputProtocol {
                                 self.keyChainedManager.persist(id: uuid)
                                 NotificationCenter.default.post(name: NotificationNames.googleSignIn.name, object: nil)
                                 self.setUserName(userName)
+                                self.firebaseStorage.loadAvatar()
                                 Task {
                                     await self.taskManager.loadTaskFromFirestore()
                                 }

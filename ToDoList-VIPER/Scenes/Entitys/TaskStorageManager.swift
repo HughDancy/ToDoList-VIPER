@@ -12,7 +12,7 @@ import UIKit.UIColor
 final class TaskStorageManager {
     static let instance = TaskStorageManager()
     
-    //MARK: - Context
+    //MARK: - PersistentContainer and Context
     private lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "ToDoList_VIPER")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
@@ -20,15 +20,22 @@ final class TaskStorageManager {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
-        container.viewContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
-        container.viewContext.shouldDeleteInaccessibleFaults = true
-        container.viewContext.automaticallyMergesChangesFromParent = true
         return container
     }()
     
-  
-    private lazy var privateContext: NSManagedObjectContext = persistentContainer.newBackgroundContext()
-    private lazy var viewContext: NSManagedObjectContext = persistentContainer.viewContext
+    private lazy var privateContext: NSManagedObjectContext =  {
+        let privateContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        privateContext.persistentStoreCoordinator = self.persistentContainer.persistentStoreCoordinator
+        return privateContext
+    }()
+    
+    private lazy var viewContext: NSManagedObjectContext = {
+        let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        context.parent = privateContext
+        context.automaticallyMergesChangesFromParent = true
+        context.shouldDeleteInaccessibleFaults = true
+        return context
+    }()
     
     //MARK: - CoreData create new ToDoObject
     func createNewToDo(title: String, content: String, date: Date, isOverdue: Bool, color: UIColor, iconName: String) {
@@ -41,12 +48,8 @@ final class TaskStorageManager {
         newToDo.isOverdue = isOverdue
         newToDo.doneStatus = false
         newToDo.iconName = iconName
-        do {
-            try viewContext.save()
-        }
-        catch {
-            print(error)
-        }
+        self.saveChanges()
+        
     }
     
     //MARK: - CoreData delete ToDoObject
@@ -90,7 +93,15 @@ final class TaskStorageManager {
     }
     
     //MARK: - CoreData fetch ToDosObject methods
-    func fetchAllToDos() -> [ToDoObject] {
+    func fetchAllToDosCount() -> Int {
+        let fetchRequest = NSFetchRequest<NSNumber>(entityName: "ToDoObject")
+        fetchRequest.resultType = .countResultType
+        let objects = try! viewContext.fetch(fetchRequest)
+        let objectsCount = objects.first?.intValue
+        return objectsCount ?? 0
+    }
+    
+    func fetchAllPrivateToDos() -> [ToDoObject] {
         let fetchRequest: NSFetchRequest<ToDoObject> = ToDoObject.fetchRequest()
         let objects = try! viewContext.fetch(fetchRequest)
         return objects
@@ -142,11 +153,11 @@ final class TaskStorageManager {
     }
     //MARK: - TO-DO: Check this method and rewrite
     //MARK: - Fetch count ToDosObjects Method
-    func fetchToDosCount(with status: ToDoListStatus) -> Int {
+    func fetchToDosCount(with status: ToDoListStatus)  -> Int {
         let fetchRequest = NSFetchRequest<NSNumber>(entityName: "ToDoObject")
         fetchRequest.resultType = .countResultType
         
-      switch status {
+        switch status {
         case .today:
             let predicate = self.createPredicates(with: .today, date: Date.today)
             fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicate)
@@ -170,9 +181,6 @@ final class TaskStorageManager {
             fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicate)
             let objects = try! viewContext.fetch(fetchRequest)
             let objectsCount = objects.first?.intValue
-            print(objectsCount)
-            let selfAllTask = self.fetchAllToDos()
-            print(selfAllTask)
             return objectsCount ?? 0
         }
     }
@@ -223,45 +231,28 @@ final class TaskStorageManager {
         }
     }
     
-    func saveItemsOnBackground(_ item: ToDoTask) {
-        let status = item.status != ProgressStatus.done && item.status != ProgressStatus.fail
-        let categoryData = TaskCategoryManager.manager.getCategoryData(from: item.category)
-        
-        let object = ToDoObject(context: privateContext)
-        object.title = item.title
-        object.descriptionTitle = item.descriptionTitle
-        object.date = item.date
-        object.dateTitle = DateFormatter.getStringFromDate(from: item.date)
-        object.color = categoryData.1
-        object.isOverdue = status
-        object.doneStatus = status
-        object.iconName = categoryData.0
-        
-        privateContext.performAndWait {
-            if privateContext.hasChanges {
-                do {
-                    try privateContext.save()
-                    print("It's all alright in private context saving")
-                } catch {
-                    privateContext.rollback()
-                    print("Not all good in private context")
+    func saveChanges() {
+        viewContext.performAndWait {
+            do {
+                if self.viewContext.hasChanges {
+                    try self.viewContext.save()
                 }
+            } catch {
+                print("Unable to Save Changes of Main Managed Object Context")
+                print("\(error), \(error.localizedDescription)")
             }
-            privateContext.reset()
         }
-//        privateContext.perform {
-//            if self.privateContext.hasChanges {
-//                do {
-//                    try self.privateContext.save()
-//                    print("It's all right on saving private context")
-//                    print("PARRENT FOR PRIVATE CONTEXT IS - \(self.viewContext.parent)")
-//                } catch {
-//                    self.privateContext.rollback()
-//                    print("Not all good in private context")
-//                }
-//            }
-//        }
-  
+        
+        privateContext.perform {
+            do {
+                if self.privateContext.hasChanges {
+                    try self.privateContext.save()
+                }
+            } catch {
+                print("Unable to Save Changes of Private Managed Object Context")
+                print("\(error), \(error.localizedDescription)")
+            }
+        }
     }
 }
 

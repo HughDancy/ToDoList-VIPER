@@ -49,7 +49,7 @@ final class ToDosInteractor: ToDosInteractorInputProtocol {
                 self.presenter?.getTask(overdueTasks)
                 return
             }
-                var overdueTasks = storage.fetchOverdueToDos(with: date)
+            let overdueTasks = storage.fetchOverdueToDos(with: date)
                 presenter?.getTask(overdueTasks)
         case .done:
             guard let date = date else {
