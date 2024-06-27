@@ -72,25 +72,16 @@ extension FirebaseStorageManager {
             querySnapshot.documents.forEach { document in
                 let task = document.data()
                 let categoryFromServer = Category(rawValue: task["category"] as? String ?? "work")
-                print(categoryFromServer)
                 let category = TaskCategoryManager.manager.getCategoryData(from: categoryFromServer ?? Category.work)
                 let statusFromServer = task["status"] as? ProgressStatus ?? ProgressStatus.inProgress
-                let status = statusFromServer != ProgressStatus.done && statusFromServer != ProgressStatus.fail
                 let timestamp = task["date"] as! Timestamp
                 let date = timestamp.dateValue()
+                let status = ProgressStatus.convertStatusFromServer(serverStatus: statusFromServer, date: date)
             
-
-//                let savingTask = ToDoTask(title: task["title"] as? String ?? "Temp",
-//                                          descriptionTitle: task["description"] as? String ?? "Description",
-//                                          date: date,
-//                                          category: task["work"] as? Category ?? category,
-//                                          status: task["status"] as? ProgressStatus ?? status)
-//                print("Loading task is - \(task)")
-      
                  TaskStorageManager.instance.createNewToDo(title: task["title"] as? String ?? "Temp",
                                                            content: task["description"] as? String ?? "Description",
                                                            date: date,
-                                                           isOverdue: status ,
+                                                           isOverdue: status,
                                                            color: category.1,
                                                            iconName: category.0)
 

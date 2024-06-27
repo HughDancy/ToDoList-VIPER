@@ -32,6 +32,12 @@ enum ProgressStatus: String, Codable {
     var value: String {
         return rawValue
     }
+    
+    static func convertStatusFromServer(serverStatus: ProgressStatus, date: Date) -> Bool {
+        let statusFromServer = serverStatus != ProgressStatus.done && serverStatus != ProgressStatus.inProgress
+        let dateStatus = date >= Date.today
+        return statusFromServer == dateStatus
+    }
 }
 
 enum Category: String, Codable {
