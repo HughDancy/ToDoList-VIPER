@@ -92,3 +92,39 @@ extension FirebaseStorageManager {
         }
     }
 }
+
+     //MARK: - Save editing task
+extension FirebaseStorageManager {
+    func uploadChanges(task: ToDoTask) {
+        let uid = Auth.auth().currentUser?.uid ?? UUID().uuidString
+        
+            db.collection("toDos").document(uid).collection("tasks").whereField("title", isEqualTo: task.title).getDocuments { result, error in
+                if error == nil {
+                    guard let documents = result?.documents.first else { return }
+                    let serverDate = documents["date"] as? Timestamp
+                    let date = serverDate?.dateValue()
+                    
+                    if documents["title"] as? String != task.title {
+                        documents.reference.updateData(["title" : task.title])
+                    }
+                    
+                    if documents["description"] as? String != task.descriptionTitle {
+                        documents.reference.updateData(["description" : task.descriptionTitle])
+                    }
+                    
+                    if date != task.date {
+                        documents.reference.updateData(["date" : task.date])
+                    }
+                    
+                    if documents["status"] as? String != task.status.value {
+                        documents.reference.updateData(["status" : task.status])
+                    }
+                    
+                    if documents["category"] as? String != task.category.value {
+                        documents.reference.updateData(["category" : task.category.value])
+                    }
+                }
+            }
+        } 
+    }
+

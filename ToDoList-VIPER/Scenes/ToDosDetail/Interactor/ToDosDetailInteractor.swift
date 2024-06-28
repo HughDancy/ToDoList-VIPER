@@ -10,17 +10,24 @@ import UIKit
 final class ToDosDetailInteractor: ToDosDetailInteractorInputProtocol {
     weak var presenter: ToDosDetailInteractorOutputProtocol?
     var toDoItem: ToDoObject?
-    var storage = TaskStorageManager.instance
+    var localStorage = TaskStorageManager.instance
+    var firebaseStorage = FirebaseStorageManager()
+    
     
     func editTask(title: String?, descriprion: String?, date: Date?, color: UIColor, iconName: String) {
         guard let task = toDoItem else { return }
+        let defaultData = self.getDefaultData()
         if title != nil && descriprion != nil && date != nil {
-            storage.editToDoObject(item: task,
-                                   newTitle: title ?? "Temp",
-                                   newDescription: descriprion ?? "Temp",
-                                   newDate: date ?? Date.today,
+            localStorage.editToDoObject(item: task,
+                                   newTitle: title ?? defaultData.title,
+                                   newDescription: descriprion ?? defaultData.description,
+                                   newDate: date ?? defaultData.date,
                                    color: color,
                                    iconName: iconName)
+            let category = TaskCategoryManager.manager.getCategory(from: color)
+            let status = ProgressStatus.convertStatusForServer(task: task)
+            let task = ToDoTask(title: title ?? defaultData.title, descriptionTitle: descriprion ?? defaultData.description, date: date ?? defaultData.date, category: category, status: status)
+            firebaseStorage.uploadChanges(task: task)
             presenter?.showAllert(with: .allSave)
         } else {
             presenter?.showAllert(with: .error)
@@ -29,8 +36,16 @@ final class ToDosDetailInteractor: ToDosDetailInteractorInputProtocol {
     
     func deleteTask(_ toDo: ToDoObject) {
         guard let task = toDoItem else { return }
-        storage.deleteToDoObject(item: task)
+        localStorage.deleteToDoObject(item: task)
         presenter?.didDeleteToDo()
         
+    }
+}
+
+
+fileprivate extension ToDosDetailInteractor {
+    func getDefaultData() -> (title: String, description: String, date: Date) {
+        let temponaryData: (title: String, description: String, date: Date) = (title: toDoItem?.title ?? "", description: toDoItem?.description ?? "", date: toDoItem?.date ?? Date.today)
+        return temponaryData
     }
 }
