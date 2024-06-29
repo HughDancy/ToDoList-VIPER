@@ -50,7 +50,7 @@ final class FirebaseStorageManager {
         }
     }
 }
-      //MARK: - Upload task to server
+//MARK: - Upload task to server
 extension FirebaseStorageManager {
     func uploadTaskToServer(with task: ToDoTask) {
         let uid = Auth.auth().currentUser?.uid ?? UUID().uuidString
@@ -63,8 +63,8 @@ extension FirebaseStorageManager {
     }
 }
 
-    //MARK: - Download tasks
-extension FirebaseStorageManager {    
+//MARK: - Download tasks
+extension FirebaseStorageManager {
     func loadTaskFromFirestore() async  {
         let uid = Auth.auth().currentUser?.uid ?? UUID().uuidString
         do {
@@ -77,15 +77,15 @@ extension FirebaseStorageManager {
                 let timestamp = task["date"] as! Timestamp
                 let date = timestamp.dateValue()
                 let status = ProgressStatus.convertStatusFromServer(serverStatus: statusFromServer, date: date)
-            
-                 TaskStorageManager.instance.createNewToDo(title: task["title"] as? String ?? "Temp",
-                                                           content: task["description"] as? String ?? "Description",
-                                                           date: date,
-                                                           isOverdue: status,
-                                                           color: category.1,
-                                                           iconName: category.0)
-
-               
+                
+                TaskStorageManager.instance.createNewToDo(title: task["title"] as? String ?? "Temp",
+                                                          content: task["description"] as? String ?? "Description",
+                                                          date: date,
+                                                          isOverdue: status,
+                                                          color: category.1,
+                                                          iconName: category.0)
+                
+                
             }
         } catch {
             print("Some error when download task from server on private context: \(error)")
@@ -93,38 +93,57 @@ extension FirebaseStorageManager {
     }
 }
 
-     //MARK: - Save editing task
+//MARK: - Save editing task
 extension FirebaseStorageManager {
     func uploadChanges(task: ToDoTask) {
         let uid = Auth.auth().currentUser?.uid ?? UUID().uuidString
         
-            db.collection("toDos").document(uid).collection("tasks").whereField("title", isEqualTo: task.title).getDocuments { result, error in
-                if error == nil {
-                    guard let documents = result?.documents.first else { return }
-                    let serverDate = documents["date"] as? Timestamp
-                    let date = serverDate?.dateValue()
-                    
-                    if documents["title"] as? String != task.title {
-                        documents.reference.updateData(["title" : task.title])
-                    }
-                    
-                    if documents["description"] as? String != task.descriptionTitle {
-                        documents.reference.updateData(["description" : task.descriptionTitle])
-                    }
-                    
-                    if date != task.date {
-                        documents.reference.updateData(["date" : task.date])
-                    }
-                    
-                    if documents["status"] as? String != task.status.value {
-                        documents.reference.updateData(["status" : task.status.value])
-                    }
-                    
-                    if documents["category"] as? String != task.category.value {
-                        documents.reference.updateData(["category" : task.category.value])
-                    }
+        db.collection("toDos").document(uid).collection("tasks").whereField("title", isEqualTo: task.title).getDocuments { result, error in
+            if error == nil {
+                guard let documents = result?.documents.first else { return }
+                let serverDate = documents["date"] as? Timestamp
+                let date = serverDate?.dateValue()
+                
+                if documents["title"] as? String != task.title {
+                    documents.reference.updateData(["title" : task.title])
+                }
+                
+                if documents["description"] as? String != task.descriptionTitle {
+                    documents.reference.updateData(["description" : task.descriptionTitle])
+                }
+                
+                if date != task.date {
+                    documents.reference.updateData(["date" : task.date])
+                }
+                
+                if documents["status"] as? String != task.status.value {
+                    documents.reference.updateData(["status" : task.status.value])
+                }
+                
+                if documents["category"] as? String != task.category.value {
+                    documents.reference.updateData(["category" : task.category.value])
                 }
             }
-        } 
+        }
     }
+}
+
+
+//MARK: - Delete function
+extension FirebaseStorageManager {
+    func deleteTaskFromServer(_ task: ToDoTask) {
+        let uid = Auth.auth().currentUser?.uid ?? UUID().uuidString
+        
+        let collectionReference = db.collection("toDos").document(uid).collection("tasks")
+        let query : Query = collectionReference.whereField("title", isEqualTo: task.title)
+        query.getDocuments(completion: { (snapshot, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                for document in snapshot!.documents {
+                    self.db.collection("toDos").document(uid).collection("tasks").document("\(document.documentID)").delete()
+                }
+            }})
+    }
+}
 

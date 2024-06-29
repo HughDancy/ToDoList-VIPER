@@ -25,11 +25,6 @@ final class ToDosDetailInteractor: ToDosDetailInteractorInputProtocol {
                                    newDate: date ?? defaultData.date,
                                    color: color,
                                    iconName: iconName)
-            print(title)
-            print(descriprion)
-            print(date)
-            print(color)
-            print(iconName)
             let category = TaskCategoryManager.manager.getCategory(from: color)
             let status = ProgressStatus.convertStatusForServer(task: task)
             let task = ToDoTask(title: title ?? defaultData.title, descriptionTitle: descriprion ?? defaultData.description, date: date ?? defaultData.date, category: category, status: status)
@@ -42,6 +37,8 @@ final class ToDosDetailInteractor: ToDosDetailInteractorInputProtocol {
     
     func deleteTask(_ toDo: ToDoObject) {
         guard let task = toDoItem else { return }
+        let deletedTask = ToDoTask.convertToToDoTask(task: task)
+        firebaseStorage.deleteTaskFromServer(deletedTask)
         localStorage.deleteToDoObject(item: task)
         presenter?.didDeleteToDo()
         

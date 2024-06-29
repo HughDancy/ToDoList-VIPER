@@ -10,6 +10,7 @@ import UIKit
 final class ToDosInteractor: ToDosInteractorInputProtocol {
    weak var presenter: ToDosInteractorOutputProtocol?
     let storage = TaskStorageManager.instance
+    let firebaseStorage = FirebaseStorageManager()
     
     func fetchFirstTasks(_ status: ToDoListStatus) {
         self.fetchSortedToDos(with: status, and: nil)
@@ -67,7 +68,11 @@ final class ToDosInteractor: ToDosInteractorInputProtocol {
     }
     
     func deleteTask(_ task: ToDoObject) {
+        let deletedTask = ToDoTask.convertToToDoTask(task: task)
+        print("Converted task is -  \(deletedTask)")
+        firebaseStorage.deleteTaskFromServer(deletedTask)
         storage.deleteToDoObject(item: task)
+       
     }
 }
 
