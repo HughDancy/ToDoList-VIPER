@@ -117,7 +117,7 @@ extension FirebaseStorageManager {
                     }
                     
                     if documents["status"] as? String != task.status.value {
-                        documents.reference.updateData(["status" : task.status])
+                        documents.reference.updateData(["status" : task.status.value])
                     }
                     
                     if documents["category"] as? String != task.category.value {

@@ -55,41 +55,41 @@ final class TaskStorageManager {
     //MARK: - CoreData delete ToDoObject
     func deleteToDoObject(item: ToDoObject) {
         viewContext.delete(item)
-        
-        do {
-            try viewContext.save()
-        }
-        catch {
-            print(error)
-        }
+        self.saveChanges()
     }
     
     //MARK: - CoreData edit ToDoObject
     func editToDoObject(item: ToDoObject, newTitle: String, newDescription: String, newDate: Date, color: UIColor, iconName: String) {
-        item.title = newTitle
-        item.descriptionTitle = newDescription
-        item.date = newDate
-        item.dateTitle = DateFormatter.getStringFromDate(from: newDate)
-        item.color = color
-        item.iconName = iconName
+        if item.title != newTitle {
+            item.title = newTitle
+        }
         
-        do {
-            try viewContext.save()
+        if item.descriptionTitle != newDescription {
+            item.descriptionTitle = newDescription
         }
-        catch {
-            print(error)
+        
+        if item.date != newDate {
+            item.date = newDate
+            item.dateTitle = DateFormatter.getStringFromDate(from: newDate)
         }
+        
+//        item.date = newDate
+//        item.dateTitle = DateFormatter.getStringFromDate(from: newDate)
+        if item.color != color {
+            item.color = color
+            item.iconName = iconName
+        }
+//        item.color = color
+//        item.iconName = iconName
+        self.saveChanges()
+    
     }
     
     //MARK: - CoreData Done ToDoObject
     func doneToDo(item: ToDoObject) {
         item.doneStatus = true
-        do {
-            try viewContext.save()
-        }
-        catch {
-            print(error)
-        }
+        self.saveChanges()
+        
     }
     
     //MARK: - CoreData fetch ToDosObject methods

@@ -52,6 +52,7 @@ final class ToDosDetailController: SingleToDoController {
         presenter?.getToDo()
         tabBarController?.tabBar.isHidden = true
         self.navigationController?.addCustomBackButton()
+        self.color = item?.color
         NotificationCenter.default.addObserver(self, selector: #selector(changeEditButtonState), name: NotificationNames.tapEditButton.name, object: nil)
     }
     
