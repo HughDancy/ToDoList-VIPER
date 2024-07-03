@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class OptionsViewController: UIViewController {
     //MARK: - Properties
@@ -18,7 +19,11 @@ class OptionsViewController: UIViewController {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = OptionsScreenSizes.avatarCornerRadius.value
         imageView.clipsToBounds = true
-        imageView.image = UIImage(named: "mockUser_1")
+        imageView.kf.setImage(with: userData.1,
+                              placeholder: UIImage(named: "mockUser_3"),
+                              options: [
+                                .cacheOriginalImage
+                              ])
         return imageView
     }()
     
@@ -50,10 +55,10 @@ class OptionsViewController: UIViewController {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter?.getData()
         view.backgroundColor = .systemBackground
         setupHierarchy()
         setupLayout()
-        presenter?.getData()
     }
     
     //MARK: - Setup outlets
@@ -110,28 +115,31 @@ extension OptionsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: OptionsCell.reuseIdentifier, for: indexPath) as? OptionsCell else { return UITableViewCell() }
         let data = ["Сменить тему", "Обратная связь", "Выход"]
-        cell.setupCell(title: data[indexPath.row], index: indexPath.row)
+        cell.setupCell(title: optionsData[indexPath.row], index: indexPath.row)
         return cell
     }
 }
 
-   //MARK: - TableView Delegate Extension
+//MARK: - TableView Delegate Extension
 extension OptionsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
             presenter?.changeTheme()
+            print(0)
         case 1:
             presenter?.getFeedback()
+            print(1)
         case 2:
             presenter?.logOut()
+            print(2)
         default:
             break
         }
     }
 }
 
-   //MARK: - OptionsScreen Sizes
+//MARK: - OptionsScreen Sizes
 fileprivate enum OptionsScreenSizes: CGFloat {
     case avatarSize = 200
     case avatarCornerRadius = 100

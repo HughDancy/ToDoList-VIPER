@@ -20,7 +20,7 @@ final class HomeTabBarRouter: HomeTabBarRouterProtocol {
                                           tag: 0)
         taskScreen.tabBarItem = taskScreenItem
         
-        let optionsScreen = OptionsViewController()
+        let optionsScreen = OptionsRouter.createOptionsModule()
         let optionsScreenItem = UITabBarItem(title: "Опции",
                                              image: UIImage(systemName: "gearshape.fill"),
                                              tag: 1)

@@ -31,6 +31,7 @@ protocol OptionsInputInteractorProtocol: AnyObject {
     func fetchOptionsData()
     func fetchUserData()
     func changeTheme()
+    func loggedOut()
 }
 
 
@@ -40,7 +41,7 @@ protocol OptionsOutputInteractorProtocol: AnyObject {
 }
 
 protocol OptionsRouterProtocol: AnyObject {
-    func createOptionsModule() -> UIViewController
+    static func createOptionsModule() -> UIViewController
     func goToUserOptions(from view: OptionsViewProtocol)
     func logOut(from view: OptionsViewProtocol)
 }

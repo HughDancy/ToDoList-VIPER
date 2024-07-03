@@ -24,11 +24,13 @@ final class OptionsPresenter: OptionsPresenterProtocol {
     
     func logOut() {
         guard let view = view else { return }
+        interactor?.loggedOut()
         router?.logOut(from: view)
     }
     
     func getFeedback() {
-        
+        guard let view = view else { return }
+        router?.goToUserOptions(from: view)
     }
     
     func changeTheme() {

@@ -111,6 +111,7 @@
 		D8E72F0E2C3555BE007FF819 /* CustomSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E72F0D2C3555BE007FF819 /* CustomSwitcher.swift */; };
 		D8E72F102C355BF3007FF819 /* OptionsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E72F0F2C355BF3007FF819 /* OptionsPresenter.swift */; };
 		D8E72F122C355D4F007FF819 /* OptionsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E72F112C355D4F007FF819 /* OptionsInteractor.swift */; };
+		D8E72F142C3562C5007FF819 /* OptionsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E72F132C3562C5007FF819 /* OptionsRouter.swift */; };
 		D8E840542B63A8F0005A0936 /* String + EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E840532B63A8F0005A0936 /* String + EXT.swift */; };
 		D8E840562B63AA69005A0936 /* CABasicAnimation + EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E840552B63AA69005A0936 /* CABasicAnimation + EXT.swift */; };
 		D8E840582B63B0AB005A0936 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E840572B63B0AB005A0936 /* LoginPresenter.swift */; };
@@ -250,6 +251,7 @@
 		D8E72F0D2C3555BE007FF819 /* CustomSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSwitcher.swift; sourceTree = "<group>"; };
 		D8E72F0F2C355BF3007FF819 /* OptionsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsPresenter.swift; sourceTree = "<group>"; };
 		D8E72F112C355D4F007FF819 /* OptionsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsInteractor.swift; sourceTree = "<group>"; };
+		D8E72F132C3562C5007FF819 /* OptionsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsRouter.swift; sourceTree = "<group>"; };
 		D8E840532B63A8F0005A0936 /* String + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + EXT.swift"; sourceTree = "<group>"; };
 		D8E840552B63AA69005A0936 /* CABasicAnimation + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CABasicAnimation + EXT.swift"; sourceTree = "<group>"; };
 		D8E840572B63B0AB005A0936 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginPresenter.swift; path = "ToDoList-VIPER/Support/Extension/LoginPresenter.swift"; sourceTree = SOURCE_ROOT; };
@@ -908,6 +910,7 @@
 		D8E72EFF2C3543BA007FF819 /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				D8E72F132C3562C5007FF819 /* OptionsRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -1332,6 +1335,7 @@
 				D8C19ED62B91C037004BCDDD /* BaseButton.swift in Sources */,
 				D8E72F0E2C3555BE007FF819 /* CustomSwitcher.swift in Sources */,
 				D8A54EC02BB6D61000D9B15F /* ToDosPresenter.swift in Sources */,
+				D8E72F142C3562C5007FF819 /* OptionsRouter.swift in Sources */,
 				D8E72F0A2C354658007FF819 /* OptionsCell.swift in Sources */,
 				D8E00C772C16DC66005AEA4D /* MockUsersAvatrs.swift in Sources */,
 				D846B8692C18518F00AA8775 /* FirebaseStorageManager.swift in Sources */,
