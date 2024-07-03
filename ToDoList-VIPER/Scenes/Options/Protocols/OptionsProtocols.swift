@@ -15,7 +15,7 @@ protocol OptionsViewProtocol: AnyObject {
 }
 
 protocol OptionsPresenterProtocol: AnyObject {
-    var view: OptionsPresenterProtocol? { get set }
+    var view: OptionsViewProtocol? { get set }
     var interactor: OptionsInputInteractorProtocol? { get set }
     var router: OptionsRouterProtocol? { get set }
     
@@ -30,6 +30,7 @@ protocol OptionsInputInteractorProtocol: AnyObject {
     var presenter: OptionsOutputInteractorProtocol? { get set }
     func fetchOptionsData()
     func getUserData()
+    func getOptionsData()
     func changeTheme()
 }
 
