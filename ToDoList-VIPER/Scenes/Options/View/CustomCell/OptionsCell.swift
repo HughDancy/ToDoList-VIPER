@@ -53,6 +53,10 @@ class OptionsCell: UITableViewCell {
         self.selectionStyle = .none
     }
     
+    override func prepareForReuse() {
+        self.optionTitle.text = nil
+    }
+    
     //MARK: - Setup Hierarchy
     private func setupHierarchy() {
         contentView.addSubview(containerView)

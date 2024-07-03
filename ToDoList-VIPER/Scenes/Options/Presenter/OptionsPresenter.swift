@@ -13,8 +13,8 @@ final class OptionsPresenter: OptionsPresenterProtocol {
     var router: OptionsRouterProtocol?
     
     func getData() {
-        interactor?.getUserData()
-        interactor?.getOptionsData()
+        interactor?.fetchUserData()
+        interactor?.fetchOptionsData()
     }
     
     func goToUserOptions() {

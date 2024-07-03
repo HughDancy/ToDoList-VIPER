@@ -48,13 +48,12 @@ class OptionsViewController: UIViewController {
     }()
     
     //MARK: - Lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         setupHierarchy()
         setupLayout()
-        
+        presenter?.getData()
     }
     
     //MARK: - Setup outlets

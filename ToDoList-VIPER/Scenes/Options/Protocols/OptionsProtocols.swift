@@ -29,8 +29,7 @@ protocol OptionsPresenterProtocol: AnyObject {
 protocol OptionsInputInteractorProtocol: AnyObject {
     var presenter: OptionsOutputInteractorProtocol? { get set }
     func fetchOptionsData()
-    func getUserData()
-    func getOptionsData()
+    func fetchUserData()
     func changeTheme()
 }
 
