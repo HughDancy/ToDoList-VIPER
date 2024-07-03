@@ -108,6 +108,7 @@
 		D8E72F052C354435007FF819 /* OptionsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E72F042C354435007FF819 /* OptionsProtocols.swift */; };
 		D8E72F072C354457007FF819 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E72F062C354457007FF819 /* OptionsViewController.swift */; };
 		D8E72F0A2C354658007FF819 /* OptionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E72F092C354658007FF819 /* OptionsCell.swift */; };
+		D8E72F0E2C3555BE007FF819 /* CustomSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E72F0D2C3555BE007FF819 /* CustomSwitcher.swift */; };
 		D8E840542B63A8F0005A0936 /* String + EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E840532B63A8F0005A0936 /* String + EXT.swift */; };
 		D8E840562B63AA69005A0936 /* CABasicAnimation + EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E840552B63AA69005A0936 /* CABasicAnimation + EXT.swift */; };
 		D8E840582B63B0AB005A0936 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E840572B63B0AB005A0936 /* LoginPresenter.swift */; };
@@ -244,6 +245,7 @@
 		D8E72F042C354435007FF819 /* OptionsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsProtocols.swift; sourceTree = "<group>"; };
 		D8E72F062C354457007FF819 /* OptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
 		D8E72F092C354658007FF819 /* OptionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsCell.swift; sourceTree = "<group>"; };
+		D8E72F0D2C3555BE007FF819 /* CustomSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSwitcher.swift; sourceTree = "<group>"; };
 		D8E840532B63A8F0005A0936 /* String + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + EXT.swift"; sourceTree = "<group>"; };
 		D8E840552B63AA69005A0936 /* CABasicAnimation + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CABasicAnimation + EXT.swift"; sourceTree = "<group>"; };
 		D8E840572B63B0AB005A0936 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginPresenter.swift; path = "ToDoList-VIPER/Support/Extension/LoginPresenter.swift"; sourceTree = SOURCE_ROOT; };
@@ -872,6 +874,7 @@
 				D8BDEABB2BDC9C8E00C3BE55 /* CategoryTableView.swift */,
 				D8B85D6B2BE398740015F2B2 /* MainScreenCollectionView.swift */,
 				D84CADF82BF25E1F009C666D /* NoTaskLabel.swift */,
+				D8E72F0D2C3555BE007FF819 /* CustomSwitcher.swift */,
 			);
 			path = InterfaceElements;
 			sourceTree = "<group>";
@@ -1319,6 +1322,7 @@
 				D8E9F8BE2B17427F00A3F3FC /* Date + EXT.swift in Sources */,
 				D8BDEABA2BDA178200C3BE55 /* CustomAlertView.swift in Sources */,
 				D8C19ED62B91C037004BCDDD /* BaseButton.swift in Sources */,
+				D8E72F0E2C3555BE007FF819 /* CustomSwitcher.swift in Sources */,
 				D8A54EC02BB6D61000D9B15F /* ToDosPresenter.swift in Sources */,
 				D8E72F0A2C354658007FF819 /* OptionsCell.swift in Sources */,
 				D8E00C772C16DC66005AEA4D /* MockUsersAvatrs.swift in Sources */,
