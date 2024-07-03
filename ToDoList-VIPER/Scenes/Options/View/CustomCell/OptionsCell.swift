@@ -14,7 +14,7 @@ class OptionsCell: UITableViewCell {
     //MARK: - Outlets
     private lazy var containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemGray5
+        view.backgroundColor = .systemGray6
         view.layer.cornerRadius = 10
         return view
     }()
