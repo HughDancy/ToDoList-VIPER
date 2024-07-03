@@ -109,7 +109,7 @@ extension OptionsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: OptionsCell.reuseIdentifier, for: indexPath) as? OptionsCell else { return UITableViewCell() }
         let data = ["Сменить тему", "Обратная связь", "Выход"]
-        cell.setupCell(title: data[indexPath.row])
+        cell.setupCell(title: data[indexPath.row], index: indexPath.row)
         return cell
     }
 }

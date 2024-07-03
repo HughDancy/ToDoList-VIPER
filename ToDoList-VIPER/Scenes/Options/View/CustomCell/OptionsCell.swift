@@ -10,6 +10,7 @@ import UIKit
 class OptionsCell: UITableViewCell {
     
     static let reuseIdentifier = "OptionsCell"
+    private var index: Int = -1
     
     //MARK: - Outlets
     private lazy var containerView: UIView = {
@@ -24,6 +25,14 @@ class OptionsCell: UITableViewCell {
         label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         label.textColor = .label
         return label
+    }()
+    
+    private lazy var switcher: CustomSwitcher = {
+        let customSwitcher = CustomSwitcher()
+        customSwitcher.offImage = UIImage(named: "nightSky")?.cgImage
+        customSwitcher.onImage = UIImage(named: "daySky")?.cgImage
+        customSwitcher.addTarget(self, action: #selector(changeTheme), for: .touchUpInside)
+        return customSwitcher
     }()
     
     
@@ -48,6 +57,8 @@ class OptionsCell: UITableViewCell {
     private func setupHierarchy() {
         contentView.addSubview(containerView)
         containerView.addSubview(optionTitle)
+        containerView.addSubview(switcher)
+        
     }
     
     //MARK: - Setup Layout
@@ -63,16 +74,34 @@ class OptionsCell: UITableViewCell {
             make.top.equalTo(containerView.snp.top).offset(27)
             make.leading.equalTo(containerView.snp.leading).offset(20)
         }
+        
+        switcher.snp.makeConstraints { make in
+            make.top.equalTo(containerView.snp.top).offset(15)
+            make.trailing.equalTo(containerView.safeAreaLayoutGuide.snp.trailing).inset(10)
+            make.height.equalTo(35)
+            make.width.equalTo(70)
+        }
     }
     
     //MARK: - Setup Cell
-    func setupCell(title: String) {
+    func setupCell(title: String, index: Int) {
         self.optionTitle.text = title
+        self.index = index
+        if self.index == 0 {
+            switcher.isHidden = false
+        } else {
+            switcher.isHidden = true
+        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        
+    }
     
+    //MARK: - Custom Switcher method
+    @objc func changeTheme() {
+        
     }
     
 }
