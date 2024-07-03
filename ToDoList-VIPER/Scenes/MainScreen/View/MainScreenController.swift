@@ -26,12 +26,13 @@ final class MainScreenController: UIViewController {
         return view as? MainScreenView
     }
     
-   //MARK: - Lifecycle
+    //MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigationBar()
         self.mainView?.setupElements(userName: userData.name, userAvatar: userData.avatarUrl)
         subcribeToNotification()
+        self.updateDownloadTask()
     }
     
     override func viewDidLoad() {
@@ -39,6 +40,7 @@ final class MainScreenController: UIViewController {
         presenter?.getToDosCount()
         view = MainScreenView()
         setupCollectionView()
+        
     }
     
     //MARK: - Setup Outlets
@@ -52,7 +54,7 @@ final class MainScreenController: UIViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = false
         self.navigationController?.navigationBar.isHidden = true
     }
- 
+    
     //MARK: - Notification
     func subcribeToNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(mustUpdateData), name: NotificationNames.updateMainScreen.name, object: nil)
@@ -61,8 +63,14 @@ final class MainScreenController: UIViewController {
     @objc func mustUpdateData() {
         self.presenter?.getToDosCount()
     }
+    
+    private func updateDownloadTask() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
+            self.presenter?.getToDosCount()
+        })
+    }
 }
-    //MARK: - CollectionView Delegate
+//MARK: - CollectionView Delegate
 extension MainScreenController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return toDosInfo.count
@@ -92,7 +100,7 @@ extension MainScreenController: UICollectionViewDelegate, UICollectionViewDataSo
     }
 }
 
-  //MARK: - MainScreenViewPtorocol Extension
+//MARK: - MainScreenViewPtorocol Extension
 extension MainScreenController: MainScreenViewProtocol {
     func getUserData(_ userInfo: (name: String, avatarUrl: URL?)) {
         self.userData = userInfo

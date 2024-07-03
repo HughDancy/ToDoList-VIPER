@@ -58,7 +58,7 @@ final class RegistrationInteractor: RegistrationInteractorInputProtocol {
 
                               changeRequest.displayName = name
                                changeRequest.commitChanges { error in
-                                if let error = error {
+                                   if error != nil {
                                   // An error happened.
                                 } else {
                                   // Profile updated.

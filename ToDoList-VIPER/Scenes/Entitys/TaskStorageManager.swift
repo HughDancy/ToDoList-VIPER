@@ -12,7 +12,7 @@ import UIKit.UIColor
 final class TaskStorageManager {
     static let instance = TaskStorageManager()
     
-    //MARK: - Context
+    //MARK: - PersistentContainer and Context
     private lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "ToDoList_VIPER")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
@@ -23,7 +23,19 @@ final class TaskStorageManager {
         return container
     }()
     
-    private lazy var viewContext: NSManagedObjectContext = persistentContainer.viewContext
+    private lazy var privateContext: NSManagedObjectContext =  {
+        let privateContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        privateContext.persistentStoreCoordinator = self.persistentContainer.persistentStoreCoordinator
+        return privateContext
+    }()
+    
+    private lazy var viewContext: NSManagedObjectContext = {
+        let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        context.parent = privateContext
+        context.automaticallyMergesChangesFromParent = true
+        context.shouldDeleteInaccessibleFaults = true
+        return context
+    }()
     
     //MARK: - CoreData create new ToDoObject
     func createNewToDo(title: String, content: String, date: Date, isOverdue: Bool, color: UIColor, iconName: String) {
@@ -36,56 +48,60 @@ final class TaskStorageManager {
         newToDo.isOverdue = isOverdue
         newToDo.doneStatus = false
         newToDo.iconName = iconName
-        do {
-            try viewContext.save()
-        }
-        catch {
-            
-        }
+        self.saveChanges()
+        
     }
     
     //MARK: - CoreData delete ToDoObject
     func deleteToDoObject(item: ToDoObject) {
         viewContext.delete(item)
-        
-        do {
-            try viewContext.save()
-        }
-        catch {
-            
-        }
+        self.saveChanges()
     }
     
     //MARK: - CoreData edit ToDoObject
     func editToDoObject(item: ToDoObject, newTitle: String, newDescription: String, newDate: Date, color: UIColor, iconName: String) {
-        item.title = newTitle
-        item.descriptionTitle = newDescription
-        item.date = newDate
-        item.dateTitle = DateFormatter.getStringFromDate(from: newDate)
-        item.color = color
-        item.iconName = iconName
+        if item.title != newTitle {
+            item.title = newTitle
+        }
         
-        do {
-            try viewContext.save()
+        if item.descriptionTitle != newDescription {
+            item.descriptionTitle = newDescription
         }
-        catch {
-            
+        
+        if item.date != newDate {
+            item.date = newDate
+            item.dateTitle = DateFormatter.getStringFromDate(from: newDate)
         }
+        
+//        item.date = newDate
+//        item.dateTitle = DateFormatter.getStringFromDate(from: newDate)
+        if item.color != color {
+            item.color = color
+            item.iconName = iconName
+        }
+//        item.color = color
+//        item.iconName = iconName
+        self.saveChanges()
+    
     }
     
     //MARK: - CoreData Done ToDoObject
     func doneToDo(item: ToDoObject) {
         item.doneStatus = true
-        do {
-            try viewContext.save()
-        }
-        catch {
-            
-        }
+        self.saveChanges()
+        
     }
     
     //MARK: - CoreData fetch ToDosObject methods
-    func fetchAllToDos() -> [ToDoObject] {
+    func fetchAllToDosCount() -> Int {
+        let fetchRequest = NSFetchRequest<NSNumber>(entityName: "ToDoObject")
+        fetchRequest.resultType = .countResultType
+        let objects = try! viewContext.fetch(fetchRequest)
+        let objectsCount = objects.first?.intValue
+        return objectsCount ?? 0
+    }
+    
+    func fetchAllPrivateToDos() -> [ToDoObject] {
         let fetchRequest: NSFetchRequest<ToDoObject> = ToDoObject.fetchRequest()
         let objects = try! viewContext.fetch(fetchRequest)
         return objects
@@ -111,12 +127,13 @@ final class TaskStorageManager {
         fetchRequest.predicate = predicate
         fetchRequest.fetchBatchSize = 7
         let objects = try! viewContext.fetch(fetchRequest)
+        print("Private context - \(objects)")
         return objects
     }
     
     func fetchDoneToDos(with date: Date) -> [ToDoObject] {
         let fetchRequest: NSFetchRequest<ToDoObject> = ToDoObject.fetchRequest()
-//        let donePredicate = NSPredicate(format: "doneStatus == YES")
+        //        let donePredicate = NSPredicate(format: "doneStatus == YES")
         let donePredicate = NSPredicate(format: "%K == %@", "doneStatus", NSNumber(value: true))
         let datePredicate = NSPredicate(format: "%K == %@", #keyPath(ToDoObject.dateTitle), DateFormatter.getStringFromDate(from: date))
         let subPredicates = [donePredicate, datePredicate]
@@ -134,9 +151,9 @@ final class TaskStorageManager {
         let objects = try! viewContext.fetch(fetchRequest)
         return objects
     }
-    //MARK: - TO-DO: Check this method and rewrite 
+    //MARK: - TO-DO: Check this method and rewrite
     //MARK: - Fetch count ToDosObjects Method
-    func fetchToDosCount(with status: ToDoListStatus) -> Int {
+    func fetchToDosCount(with status: ToDoListStatus)  -> Int {
         let fetchRequest = NSFetchRequest<NSNumber>(entityName: "ToDoObject")
         fetchRequest.resultType = .countResultType
         
@@ -167,7 +184,7 @@ final class TaskStorageManager {
             return objectsCount ?? 0
         }
     }
-
+    
     //MARK: - Create predicates for cathegories
     private func createPredicates(with status: ToDoListStatus, date: Date) -> [NSPredicate] {
         switch status {
@@ -178,7 +195,7 @@ final class TaskStorageManager {
             return [predicate, donePredicate]
         case .done:
             let donePredicate = NSPredicate(format: "%K == %@", "doneStatus", NSNumber(value: true))
-//            let datePredicate = NSPredicate(format: "%K == %@", #keyPath(ToDoObject.dateTitle), DateFormatter.getStringFromDate(from: date))
+            //            let datePredicate = NSPredicate(format: "%K == %@", #keyPath(ToDoObject.dateTitle), DateFormatter.getStringFromDate(from: date))
             return [donePredicate]
         case .overdue:
             let donePredicate = NSPredicate(format: "doneStatus == NO")
@@ -210,6 +227,30 @@ final class TaskStorageManager {
             } catch {
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
+    }
+    
+    func saveChanges() {
+        viewContext.performAndWait {
+            do {
+                if self.viewContext.hasChanges {
+                    try self.viewContext.save()
+                }
+            } catch {
+                print("Unable to Save Changes of Main Managed Object Context")
+                print("\(error), \(error.localizedDescription)")
+            }
+        }
+        
+        privateContext.perform {
+            do {
+                if self.privateContext.hasChanges {
+                    try self.privateContext.save()
+                }
+            } catch {
+                print("Unable to Save Changes of Private Managed Object Context")
+                print("\(error), \(error.localizedDescription)")
             }
         }
     }
