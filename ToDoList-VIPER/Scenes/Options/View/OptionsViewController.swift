@@ -8,6 +8,11 @@
 import UIKit
 
 class OptionsViewController: UIViewController {
+    //MARK: - Properties
+    var presenter: OptionsPresenterProtocol?
+    private var optionsData = [String]()
+    private var userData: (String, URL?) = ("", nil)
+    
     //MARK: - Outlets
     private lazy var avatarImage: UIImageView = {
         let imageView = UIImageView()
@@ -86,21 +91,18 @@ class OptionsViewController: UIViewController {
     }
 }
 
-fileprivate enum OptionsScreenSizes: CGFloat {
-    case avatarSize = 200
-    case avatarCornerRadius = 100
+//MARK: - OptionsView Protocol Extension
+extension OptionsViewController: OptionsViewProtocol {
+    func getOptionsData(_ data: [String]) {
+        self.optionsData = data
+    }
     
-    
-    var value: CGFloat {
-        switch self {
-        case .avatarSize:
-            UIScreen.main.bounds.height > 700 ? rawValue : 140
-        case .avatarCornerRadius:
-            UIScreen.main.bounds.height > 700 ? rawValue : 70
-        }
+    func getUserData(_ userData: (String, URL)) {
+        self.userData = userData
     }
 }
 
+//MARK: - TableView DataSource Extension
 extension OptionsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         3
@@ -114,6 +116,34 @@ extension OptionsViewController: UITableViewDataSource {
     }
 }
 
+   //MARK: - TableView Delegate Extension
 extension OptionsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0:
+            presenter?.changeTheme()
+        case 1:
+            presenter?.getFeedback()
+        case 2:
+            presenter?.logOut()
+        default:
+            break
+        }
+    }
+}
+
+   //MARK: - OptionsScreen Sizes
+fileprivate enum OptionsScreenSizes: CGFloat {
+    case avatarSize = 200
+    case avatarCornerRadius = 100
     
+    
+    var value: CGFloat {
+        switch self {
+        case .avatarSize:
+            UIScreen.main.bounds.height > 700 ? rawValue : 140
+        case .avatarCornerRadius:
+            UIScreen.main.bounds.height > 700 ? rawValue : 70
+        }
+    }
 }

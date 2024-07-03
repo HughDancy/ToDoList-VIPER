@@ -20,8 +20,9 @@ protocol OptionsPresenterProtocol: AnyObject {
     var router: OptionsRouterProtocol? { get set }
     
     func getData()
-    func goToUserOptions(from view: OptionsViewProtocol)
-    func logOut(from view: OptionsViewProtocol)
+    func goToUserOptions()
+    func logOut()
+    func getFeedback()
     func changeTheme()
 }
 
