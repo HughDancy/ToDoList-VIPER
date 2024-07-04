@@ -30,7 +30,7 @@ final class OptionsPresenter: OptionsPresenterProtocol {
     
     func getFeedback() {
         guard let view = view else { return }
-        router?.goToUserOptions(from: view)
+        router?.getFeedback(from: view)
     }
     
     func changeTheme() {

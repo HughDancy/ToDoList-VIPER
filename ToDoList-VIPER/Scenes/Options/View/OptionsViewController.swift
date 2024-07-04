@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import MessageUI
 
 class OptionsViewController: UIViewController {
     //MARK: - Properties
@@ -15,6 +16,13 @@ class OptionsViewController: UIViewController {
     private var userData: (String, URL?) = ("", nil)
     
     //MARK: - Outlets
+    private lazy var backgroundImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "mainBackgroundImage")
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
+    
     private lazy var avatarImage: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = OptionsScreenSizes.avatarCornerRadius.value
@@ -31,14 +39,23 @@ class OptionsViewController: UIViewController {
         let label = UILabel()
         label.text = UserDefaults.standard.string(forKey: NotificationNames.userName.rawValue)
         label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
+        label.textColor = .systemBackground
         return label
     }()
     
     private lazy var changeUserData: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Редактировать", for: .normal)
-        button.backgroundColor = .systemBackground
+        button.tintColor = .systemBackground
+        button.backgroundColor = .clear
         return button
+    }()
+    
+    private lazy var containerView: UIView = {
+       let view = UIView()
+        view.backgroundColor = .systemBackground
+        view.layer.cornerRadius = 40
+        return view
     }()
     
     private lazy var optionsTable: UITableView = {
@@ -64,13 +81,20 @@ class OptionsViewController: UIViewController {
     //MARK: - Setup outlets
     
     private func setupHierarchy() {
+        view.addSubview(backgroundImage)
+        view.sendSubviewToBack(backgroundImage)
         view.addSubview(avatarImage)
         view.addSubview(userName)
         view.addSubview(changeUserData)
-        view.addSubview(optionsTable)
+        view.addSubview(containerView)
+        containerView.addSubview(optionsTable)
     }
     
     private func setupLayout() {
+        backgroundImage.snp.makeConstraints { make in
+            make.top.leading.trailing.bottom.equalToSuperview()
+        }
+        
         avatarImage.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(15)
             make.centerX.equalToSuperview()
@@ -88,9 +112,14 @@ class OptionsViewController: UIViewController {
             make.height.equalTo(20)
         }
         
-        optionsTable.snp.makeConstraints { make in
+        containerView.snp.makeConstraints { make in
             make.top.equalTo(changeUserData.snp.bottom).offset(15)
             make.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        optionsTable.snp.makeConstraints { make in
+            make.top.equalTo(containerView.snp.top).offset(35)
+            make.leading.trailing.bottom.equalTo(containerView)
         }
     }
 }
@@ -129,6 +158,7 @@ extension OptionsViewController: UITableViewDelegate {
             print(0)
         case 1:
             presenter?.getFeedback()
+//            self.sendEmail()
             print(1)
         case 2:
             presenter?.logOut()
@@ -136,6 +166,27 @@ extension OptionsViewController: UITableViewDelegate {
         default:
             break
         }
+    }
+}
+
+extension OptionsViewController: MFMailComposeViewControllerDelegate {
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
+    }
+    
+    func sendEmail() {
+        if MFMailComposeViewController.canSendMail() {
+                let mail = MFMailComposeViewController()
+                mail.mailComposeDelegate = self
+                mail.setToRecipients(["you@yoursite.com"])
+                mail.setMessageBody("<p>You're so awesome!</p>", isHTML: true)
+
+                present(mail, animated: true)
+            } else {
+                print("Email not work")
+                // show failure alert
+            }
     }
 }
 

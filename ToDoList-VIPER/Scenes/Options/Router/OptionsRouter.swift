@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MessageUI
 
 final class OptionsRouter: OptionsRouterProtocol {
     //MARK: -
@@ -37,5 +38,18 @@ final class OptionsRouter: OptionsRouterProtocol {
         parrentView.navigationController?.pushViewController(loginModule, animated: true)
     }
     
-    
+    func getFeedback(from view: OptionsViewProtocol) {
+        guard let parrentView = view as? UIViewController else { return }
+        if MFMailComposeViewController.canSendMail() {
+                let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = parrentView as? any MFMailComposeViewControllerDelegate
+                mail.setToRecipients(["hugh.dancy@icloud.com"])
+                mail.setMessageBody("<p>Привет! Я пользуюсь твоим приложением ToDoList-VIPER</p>", isHTML: true)
+
+              parrentView.present(mail, animated: true)
+            } else {
+                print("Email not work")
+                // show failure alert
+            }
+    }
 }
