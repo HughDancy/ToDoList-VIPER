@@ -42,8 +42,10 @@ final class OptionsInteractor: OptionsInputInteractorProtocol {
     func changeTheme() {
         if self.theme == .light {
             self.theme = .dark
+            print(self.theme)
         } else {
             self.theme = .light
+            print(self.theme)
         }
     }
     

@@ -10,6 +10,7 @@ import UIKit
 class OptionsCell: UITableViewCell {
     
     static let reuseIdentifier = "OptionsCell"
+    weak var delegate: OptionCellDelegate?
     private var index: Int = -1
     
     //MARK: - Outlets
@@ -105,7 +106,7 @@ class OptionsCell: UITableViewCell {
     
     //MARK: - Custom Switcher method
     @objc func changeTheme() {
-        
+        delegate?.changeTheme()
+        print("Hello")
     }
-    
 }

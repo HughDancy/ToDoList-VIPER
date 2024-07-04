@@ -53,7 +53,8 @@ class OptionsViewController: UIViewController {
     
     private lazy var containerView: UIView = {
        let view = UIView()
-        view.backgroundColor = .systemBackground
+//        view.backgroundColor = .systemBackground
+        view.overrideUserInterfaceStyle = Theme.light.getUserInterfaceStyle()
         view.layer.cornerRadius = 40
         return view
     }()
@@ -63,17 +64,23 @@ class OptionsViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(OptionsCell.self, forCellReuseIdentifier: OptionsCell.reuseIdentifier)
-        tableView.backgroundColor = .systemBackground
+        tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
+        tableView.isScrollEnabled = false
         return tableView
     }()
     
     //MARK: - Lifecycle
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        view.overrideUserInterfaceStyle = Theme.light.getUserInterfaceStyle()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.getData()
-        view.backgroundColor = .systemBackground
+        view.overrideUserInterfaceStyle = Theme.light.getUserInterfaceStyle()
+//        view.backgroundColor = .systemBackground
         setupHierarchy()
         setupLayout()
     }
@@ -143,8 +150,8 @@ extension OptionsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: OptionsCell.reuseIdentifier, for: indexPath) as? OptionsCell else { return UITableViewCell() }
-        let data = ["Сменить тему", "Обратная связь", "Выход"]
         cell.setupCell(title: optionsData[indexPath.row], index: indexPath.row)
+        cell.delegate = self
         return cell
     }
 }
@@ -187,6 +194,12 @@ extension OptionsViewController: MFMailComposeViewControllerDelegate {
                 print("Email not work")
                 // show failure alert
             }
+    }
+}
+
+extension OptionsViewController: OptionCellDelegate {
+    func changeTheme() {
+        self.presenter?.changeTheme()
     }
 }
 

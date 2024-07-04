@@ -46,3 +46,7 @@ protocol OptionsRouterProtocol: AnyObject {
     func logOut(from view: OptionsViewProtocol)
     func getFeedback(from view: OptionsViewProtocol)
 }
+
+protocol OptionCellDelegate: AnyObject {
+    func changeTheme()
+}
