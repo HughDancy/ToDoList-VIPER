@@ -28,6 +28,8 @@
 		D85C583C2B5A771A00023B04 /* OnboardingItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C583B2B5A771A00023B04 /* OnboardingItems.swift */; };
 		D85C5DB02B614E2F00F548AA /* LoginProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C5DAF2B614E2F00F548AA /* LoginProtocols.swift */; };
 		D86422D22C36A841000A0BDF /* ToDoUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86422D12C36A840000A0BDF /* ToDoUserDefaults.swift */; };
+		D86422DC2C37D3FA000A0BDF /* UserOptionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86422DB2C37D3FA000A0BDF /* UserOptionController.swift */; };
+		D86422DE2C37E118000A0BDF /* UserOptionProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86422DD2C37E118000A0BDF /* UserOptionProtocols.swift */; };
 		D864B5F62BAC0B7100650E8A /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B5F52BAC0B7100650E8A /* MainScreenView.swift */; };
 		D86D44E22AFB932E00894774 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D44E12AFB932E00894774 /* AppDelegate.swift */; };
 		D86D44E42AFB932E00894774 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D44E32AFB932E00894774 /* SceneDelegate.swift */; };
@@ -178,6 +180,8 @@
 		D85C583B2B5A771A00023B04 /* OnboardingItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingItems.swift; sourceTree = "<group>"; };
 		D85C5DAF2B614E2F00F548AA /* LoginProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProtocols.swift; sourceTree = "<group>"; };
 		D86422D12C36A840000A0BDF /* ToDoUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoUserDefaults.swift; sourceTree = "<group>"; };
+		D86422DB2C37D3FA000A0BDF /* UserOptionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOptionController.swift; sourceTree = "<group>"; };
+		D86422DD2C37E118000A0BDF /* UserOptionProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOptionProtocols.swift; sourceTree = "<group>"; };
 		D864B5F52BAC0B7100650E8A /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
 		D86D44DE2AFB932E00894774 /* ToDoList-VIPER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ToDoList-VIPER.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D86D44E12AFB932E00894774 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -475,6 +479,7 @@
 		D86422D72C37D39A000A0BDF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D86422DB2C37D3FA000A0BDF /* UserOptionController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -482,6 +487,7 @@
 		D86422D82C37D39E000A0BDF /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				D86422DD2C37E118000A0BDF /* UserOptionProtocols.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1346,6 +1352,7 @@
 				D86D44E22AFB932E00894774 /* AppDelegate.swift in Sources */,
 				D8B1E9B62BA2F46C00D455AF /* MainScreenController.swift in Sources */,
 				D8E9F8BC2B109DB800A3F3FC /* TaskStorageManager.swift in Sources */,
+				D86422DE2C37E118000A0BDF /* UserOptionProtocols.swift in Sources */,
 				D8E8406C2B6789F8005A0936 /* RegistrationRouter.swift in Sources */,
 				D8F11C5E2B5660C900D2282D /* AnimationLoadingInteractor.swift in Sources */,
 				D8AB92232BBBF8A200826A4E /* ToDosDetailController.swift in Sources */,
@@ -1404,6 +1411,7 @@
 				D8E72F072C354457007FF819 /* OptionsViewController.swift in Sources */,
 				D8B1E9BF2BA4212A00D455AF /* MainScreenPresenter.swift in Sources */,
 				D8E9F8D02B18A56200A3F3FC /* ToDoObjectSorter.swift in Sources */,
+				D86422DC2C37D3FA000A0BDF /* UserOptionController.swift in Sources */,
 				D85C57EE2B57D16300023B04 /* OnboardingRouter.swift in Sources */,
 				D874745D2B99A95600BF4866 /* RegistrationController.swift in Sources */,
 				D8B1E9DB2BA8479E00D455AF /* AddNewToDoPresenter.swift in Sources */,

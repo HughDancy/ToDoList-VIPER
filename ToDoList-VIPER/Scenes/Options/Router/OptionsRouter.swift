@@ -29,7 +29,8 @@ final class OptionsRouter: OptionsRouterProtocol {
     //MARK: - Router Methods
     func goToUserOptions(from view: OptionsViewProtocol) {
         guard let parrentView = view as? UIViewController else { return }
-        parrentView.navigationController?.pushViewController(MockViewController(), animated: true)
+        let userOptionModule = UserOptionController()
+        parrentView.navigationController?.pushViewController(userOptionModule, animated: true)
     }
     
     func logOut(from view:  OptionsViewProtocol) {

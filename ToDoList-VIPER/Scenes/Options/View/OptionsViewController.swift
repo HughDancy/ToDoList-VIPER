@@ -48,6 +48,7 @@ class OptionsViewController: UIViewController {
         button.setTitle("Редактировать", for: .normal)
         button.tintColor = .systemOrange
         button.backgroundColor = .clear
+        button.addTarget(self, action: #selector(goToUserOptions), for: .touchDown)
         return button
     }()
     
@@ -131,6 +132,11 @@ class OptionsViewController: UIViewController {
             make.top.equalTo(containerView.snp.top).offset(35)
             make.leading.trailing.bottom.equalTo(containerView)
         }
+    }
+    
+    //MARK: - Button's action
+    @objc func goToUserOptions() {
+        presenter?.goToUserOptions()
     }
 }
 
