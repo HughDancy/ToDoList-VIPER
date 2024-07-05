@@ -8,6 +8,8 @@
 import UIKit
 
 final class UserOptionController: UIViewController {
+    var presenter: UserOptionPresenterProtocol?
+    private var userData: (String, URL?) = ("Temp", nil)
     
     //MARK: - Outlets
     private lazy var backButton: UIButton = {
@@ -25,14 +27,18 @@ final class UserOptionController: UIViewController {
        let imageView = UIImageView()
         imageView.layer.cornerRadius = UserOptionsSizes.avatar.value / 2
         imageView.clipsToBounds = true
-        imageView.image = UIImage(named: "mockUser_1")
+        imageView.kf.setImage(with: userData.1,
+                              placeholder: UIImage(named: "mockUser_3"),
+                              options: [
+                                .cacheOriginalImage
+                              ])
         imageView.isUserInteractionEnabled = true
         return imageView
     }()
     
     private lazy var userNameField: UITextField = {
        let textField = UITextField()
-        textField.text = "User name"
+        textField.text = userData.0
         textField.borderStyle = .roundedRect
         return textField
     }()
@@ -50,6 +56,7 @@ final class UserOptionController: UIViewController {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter?.retriveData()
         view.backgroundColor = .systemBackground
         view.overrideUserInterfaceStyle = ToDoUserDefaults.shares.theme.getUserInterfaceStyle()
         self.setupView()
@@ -114,6 +121,12 @@ final class UserOptionController: UIViewController {
         print("Choose avatar")
     }
 
+}
+
+extension UserOptionController: UserOptionViewProtocol {
+    func getUserData(_ data: (String, URL?)) {
+        self.userData = data
+    }
 }
 
 fileprivate enum UserOptionsSizes: CGFloat {

@@ -32,6 +32,7 @@
 		D86422DE2C37E118000A0BDF /* UserOptionProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86422DD2C37E118000A0BDF /* UserOptionProtocols.swift */; };
 		D86422E02C37E308000A0BDF /* UserOptionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86422DF2C37E308000A0BDF /* UserOptionPresenter.swift */; };
 		D86422E42C37E4AA000A0BDF /* UserOptionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86422E32C37E4AA000A0BDF /* UserOptionInteractor.swift */; };
+		D86422E62C37E6A2000A0BDF /* UserOptionRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86422E52C37E6A2000A0BDF /* UserOptionRouter.swift */; };
 		D864B5F62BAC0B7100650E8A /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B5F52BAC0B7100650E8A /* MainScreenView.swift */; };
 		D86D44E22AFB932E00894774 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D44E12AFB932E00894774 /* AppDelegate.swift */; };
 		D86D44E42AFB932E00894774 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D44E32AFB932E00894774 /* SceneDelegate.swift */; };
@@ -186,6 +187,7 @@
 		D86422DD2C37E118000A0BDF /* UserOptionProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOptionProtocols.swift; sourceTree = "<group>"; };
 		D86422DF2C37E308000A0BDF /* UserOptionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOptionPresenter.swift; sourceTree = "<group>"; };
 		D86422E32C37E4AA000A0BDF /* UserOptionInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserOptionInteractor.swift; path = "ToDoList-VIPER/Scenes/Options/UserOptionModule/UserOptionInteractor.swift"; sourceTree = SOURCE_ROOT; };
+		D86422E52C37E6A2000A0BDF /* UserOptionRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOptionRouter.swift; sourceTree = "<group>"; };
 		D864B5F52BAC0B7100650E8A /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
 		D86D44DE2AFB932E00894774 /* ToDoList-VIPER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ToDoList-VIPER.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D86D44E12AFB932E00894774 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -462,6 +464,7 @@
 		D86422D42C37D385000A0BDF /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				D86422E52C37E6A2000A0BDF /* UserOptionRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -1391,6 +1394,7 @@
 				D8E9F87C2B03537A00A3F3FC /* HomeTabBarRouter.swift in Sources */,
 				D8900F112B5135F7008E0E34 /* AnimationLoadingController.swift in Sources */,
 				D8B1E9D92BA8376100D455AF /* AddNewToDosProtocols.swift in Sources */,
+				D86422E62C37E6A2000A0BDF /* UserOptionRouter.swift in Sources */,
 				D8BDEABC2BDC9C8E00C3BE55 /* CategoryTableView.swift in Sources */,
 				D8E840682B678183005A0936 /* RegistrationInteractor.swift in Sources */,
 				D8C19ED22B90B494004BCDDD /* LoginController.swift in Sources */,
