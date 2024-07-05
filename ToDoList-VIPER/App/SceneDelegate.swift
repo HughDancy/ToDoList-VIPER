@@ -28,6 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let loadingController = AppConfigurator.configuator.configureApp()
         window?.rootViewController = loadingController
+        window?.overrideUserInterfaceStyle = ToDoUserDefaults.shares.theme.getUserInterfaceStyle()
         window?.makeKeyAndVisible()
     }
 

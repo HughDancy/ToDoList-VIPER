@@ -51,6 +51,7 @@ class OptionsCell: UITableViewCell {
         self.contentView.backgroundColor = .systemBackground
         setupHierarchy()
         setupLayout()
+        setupSwitcher()
         self.selectionStyle = .none
     }
     
@@ -71,12 +72,12 @@ class OptionsCell: UITableViewCell {
         containerView.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview().inset(5)
             make.leading.trailing.equalToSuperview().inset(15)
-            make.height.equalTo(70)
+            make.height.equalTo(CellSizes.cellHeight.value)
         }
         
         optionTitle.snp.makeConstraints { make in
             make.centerX.equalTo(containerView.snp.centerX)
-            make.top.equalTo(containerView.snp.top).offset(27)
+            make.top.equalTo(containerView.snp.top).offset(CellSizes.cellHeight.value / 2 - 11)
             make.leading.equalTo(containerView.snp.leading).offset(20)
         }
         
@@ -99,6 +100,15 @@ class OptionsCell: UITableViewCell {
         }
     }
     
+    //MARK: - Setup Switcher
+    private func setupSwitcher() {
+        if ToDoUserDefaults.shares.theme.getUserInterfaceStyle() == .dark {
+            switcher.isOn = true
+        } else {
+            switcher.isOn = false
+        }
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
@@ -106,7 +116,18 @@ class OptionsCell: UITableViewCell {
     
     //MARK: - Custom Switcher method
     @objc func changeTheme() {
-        delegate?.changeTheme()
+        delegate?.changeTheme(switcher.isOn)
         print("Hello")
+    }
+}
+
+fileprivate enum CellSizes: CGFloat {
+    case cellHeight = 70
+    
+    var value: CGFloat {
+        switch self {
+        case .cellHeight:
+            UIScreen.main.bounds.height > 700 ? 70 : 60
+        }
     }
 }

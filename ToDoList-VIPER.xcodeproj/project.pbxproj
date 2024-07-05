@@ -27,6 +27,7 @@
 		D85C58392B5A595400023B04 /* OnboardingPagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C58382B5A595400023B04 /* OnboardingPagesController.swift */; };
 		D85C583C2B5A771A00023B04 /* OnboardingItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C583B2B5A771A00023B04 /* OnboardingItems.swift */; };
 		D85C5DB02B614E2F00F548AA /* LoginProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C5DAF2B614E2F00F548AA /* LoginProtocols.swift */; };
+		D86422D22C36A841000A0BDF /* ToDoUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86422D12C36A840000A0BDF /* ToDoUserDefaults.swift */; };
 		D864B5F62BAC0B7100650E8A /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B5F52BAC0B7100650E8A /* MainScreenView.swift */; };
 		D86D44E22AFB932E00894774 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D44E12AFB932E00894774 /* AppDelegate.swift */; };
 		D86D44E42AFB932E00894774 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D44E32AFB932E00894774 /* SceneDelegate.swift */; };
@@ -176,6 +177,7 @@
 		D85C58382B5A595400023B04 /* OnboardingPagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPagesController.swift; sourceTree = "<group>"; };
 		D85C583B2B5A771A00023B04 /* OnboardingItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingItems.swift; sourceTree = "<group>"; };
 		D85C5DAF2B614E2F00F548AA /* LoginProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProtocols.swift; sourceTree = "<group>"; };
+		D86422D12C36A840000A0BDF /* ToDoUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoUserDefaults.swift; sourceTree = "<group>"; };
 		D864B5F52BAC0B7100650E8A /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
 		D86D44DE2AFB932E00894774 /* ToDoList-VIPER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ToDoList-VIPER.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D86D44E12AFB932E00894774 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -1045,6 +1047,7 @@
 				D8900F162B55435A008E0E34 /* NewUserCheck.swift */,
 				D82B8B6D2B6B8CCB00A006F2 /* AppConfigurator.swift */,
 				D8CE4B712B8739D900E473AC /* RegistrationStatus.swift */,
+				D86422D12C36A840000A0BDF /* ToDoUserDefaults.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -1362,6 +1365,7 @@
 				D8E00C712C1345D5005AEA4D /* ForgettPasswortPresenter.swift in Sources */,
 				D85C5DB02B614E2F00F548AA /* LoginProtocols.swift in Sources */,
 				D8F11C602B5660DA00D2282D /* AnimationLoadingPresenter.swift in Sources */,
+				D86422D22C36A841000A0BDF /* ToDoUserDefaults.swift in Sources */,
 				D8B1E9CB2BA465A300D455AF /* AddNewToDoController.swift in Sources */,
 				D8E00C6D2C131425005AEA4D /* ForgottPasswordController.swift in Sources */,
 				D8E9F8AF2B0B40FE00A3F3FC /* UIDatePicker + EXT.swift in Sources */,

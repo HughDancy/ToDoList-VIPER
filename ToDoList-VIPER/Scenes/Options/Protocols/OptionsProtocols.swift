@@ -23,14 +23,14 @@ protocol OptionsPresenterProtocol: AnyObject {
     func goToUserOptions()
     func logOut()
     func getFeedback()
-    func changeTheme()
+    func changeTheme(_ bool: Bool)
 }
 
 protocol OptionsInputInteractorProtocol: AnyObject {
     var presenter: OptionsOutputInteractorProtocol? { get set }
     func fetchOptionsData()
     func fetchUserData()
-    func changeTheme()
+    func changeTheme(_ bool: Bool)
     func loggedOut()
 }
 
@@ -48,5 +48,5 @@ protocol OptionsRouterProtocol: AnyObject {
 }
 
 protocol OptionCellDelegate: AnyObject {
-    func changeTheme()
+    func changeTheme(_ bool: Bool)
 }

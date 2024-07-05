@@ -46,15 +46,15 @@ class OptionsViewController: UIViewController {
     private lazy var changeUserData: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Редактировать", for: .normal)
-        button.tintColor = .systemBackground
+        button.tintColor = .systemOrange
         button.backgroundColor = .clear
         return button
     }()
     
     private lazy var containerView: UIView = {
        let view = UIView()
-//        view.backgroundColor = .systemBackground
-        view.overrideUserInterfaceStyle = Theme.light.getUserInterfaceStyle()
+        view.backgroundColor = .systemBackground
+//        view.overrideUserInterfaceStyle = Theme.light.getUserInterfaceStyle()
         view.layer.cornerRadius = 40
         return view
     }()
@@ -64,7 +64,7 @@ class OptionsViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(OptionsCell.self, forCellReuseIdentifier: OptionsCell.reuseIdentifier)
-        tableView.backgroundColor = .clear
+        tableView.backgroundColor = .systemBackground
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
         tableView.isScrollEnabled = false
@@ -74,12 +74,15 @@ class OptionsViewController: UIViewController {
     //MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        view.overrideUserInterfaceStyle = Theme.light.getUserInterfaceStyle()
+        view.overrideUserInterfaceStyle = ToDoUserDefaults.shares.theme.getUserInterfaceStyle()
+        containerView.overrideUserInterfaceStyle = ToDoUserDefaults.shares.theme.getUserInterfaceStyle()
     }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.getData()
-        view.overrideUserInterfaceStyle = Theme.light.getUserInterfaceStyle()
+        view.overrideUserInterfaceStyle = ToDoUserDefaults.shares.theme.getUserInterfaceStyle()
 //        view.backgroundColor = .systemBackground
         setupHierarchy()
         setupLayout()
@@ -160,16 +163,10 @@ extension OptionsViewController: UITableViewDataSource {
 extension OptionsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
-        case 0:
-            presenter?.changeTheme()
-            print(0)
         case 1:
             presenter?.getFeedback()
-//            self.sendEmail()
-            print(1)
         case 2:
             presenter?.logOut()
-            print(2)
         default:
             break
         }
@@ -177,29 +174,17 @@ extension OptionsViewController: UITableViewDelegate {
 }
 
 extension OptionsViewController: MFMailComposeViewControllerDelegate {
-    
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
     }
-    
-    func sendEmail() {
-        if MFMailComposeViewController.canSendMail() {
-                let mail = MFMailComposeViewController()
-                mail.mailComposeDelegate = self
-                mail.setToRecipients(["you@yoursite.com"])
-                mail.setMessageBody("<p>You're so awesome!</p>", isHTML: true)
-
-                present(mail, animated: true)
-            } else {
-                print("Email not work")
-                // show failure alert
-            }
-    }
 }
 
+//MARK: - OptionCell delegate method
 extension OptionsViewController: OptionCellDelegate {
-    func changeTheme() {
-        self.presenter?.changeTheme()
+    func changeTheme(_ bool: Bool) {
+        self.presenter?.changeTheme(bool)
+        view.overrideUserInterfaceStyle = ToDoUserDefaults.shares.theme.getUserInterfaceStyle()
+        containerView.overrideUserInterfaceStyle = ToDoUserDefaults.shares.theme.getUserInterfaceStyle()
     }
 }
 

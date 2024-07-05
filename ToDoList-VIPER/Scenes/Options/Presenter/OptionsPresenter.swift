@@ -8,6 +8,7 @@
 import UIKit
 
 final class OptionsPresenter: OptionsPresenterProtocol {
+
     weak var view: OptionsViewProtocol?
     var interactor: OptionsInputInteractorProtocol?
     var router: OptionsRouterProtocol?
@@ -33,8 +34,8 @@ final class OptionsPresenter: OptionsPresenterProtocol {
         router?.getFeedback(from: view)
     }
     
-    func changeTheme() {
-        interactor?.changeTheme()
+    func changeTheme(_ bool: Bool) {
+        interactor?.changeTheme(bool)
     }
 }
 

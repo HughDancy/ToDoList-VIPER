@@ -10,17 +10,11 @@ import UIKit
 import FirebaseAuth
 
 final class OptionsInteractor: OptionsInputInteractorProtocol {
+ 
     //MARK: - Properties
     var presenter: OptionsOutputInteractorProtocol?
     let firebaseAuth = Auth.auth()
-    private var theme: Theme {
-        get {
-            Theme(rawValue: UserDefaults.standard.string(forKey: "selectedTheme") ?? "light") ?? .light
-        }
-        set {
-            UserDefaults.standard.setValue(newValue.rawValue, forKey: "selectedTheme")
-        }
-    }
+    private var toDoUserDefaults = ToDoUserDefaults.shares
     
     //MARK: - Interactor Methods
     func fetchOptionsData() {
@@ -39,15 +33,20 @@ final class OptionsInteractor: OptionsInputInteractorProtocol {
         presenter?.getUserData((userName, userAvatar))
     }
     
-    func changeTheme() {
-        if self.theme == .light {
-            self.theme = .dark
-            print(self.theme)
-        } else {
-            self.theme = .light
-            print(self.theme)
-        }
+    func changeTheme(_ bool: Bool) {
+        if bool {
+                 toDoUserDefaults.theme = Theme(rawValue: "dark") ?? .dark
+             } else {
+                 toDoUserDefaults.theme = Theme(rawValue: "light") ?? .light
+             }
+             
+             let allScenes = UIApplication.shared.connectedScenes
+             for scene in allScenes {
+                 guard let windowScene = scene as? UIWindowScene else { continue }
+                 windowScene.windows.forEach({$0.overrideUserInterfaceStyle = ToDoUserDefaults.shares.theme.getUserInterfaceStyle()})
+             }
     }
+    
     
     func loggedOut() {
         do {
@@ -57,18 +56,4 @@ final class OptionsInteractor: OptionsInputInteractorProtocol {
         }
     }
     
-}
-
-enum Theme: String  {
-   case light
-   case dark
-    
-    func getUserInterfaceStyle() -> UIUserInterfaceStyle  {
-        switch self {
-        case .light:
-            return .light
-        case .dark:
-            return .dark
-        }
-    }
 }
