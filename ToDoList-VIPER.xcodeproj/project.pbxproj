@@ -30,6 +30,7 @@
 		D86422D22C36A841000A0BDF /* ToDoUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86422D12C36A840000A0BDF /* ToDoUserDefaults.swift */; };
 		D86422DC2C37D3FA000A0BDF /* UserOptionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86422DB2C37D3FA000A0BDF /* UserOptionController.swift */; };
 		D86422DE2C37E118000A0BDF /* UserOptionProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86422DD2C37E118000A0BDF /* UserOptionProtocols.swift */; };
+		D86422E02C37E308000A0BDF /* UserOptionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86422DF2C37E308000A0BDF /* UserOptionPresenter.swift */; };
 		D864B5F62BAC0B7100650E8A /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B5F52BAC0B7100650E8A /* MainScreenView.swift */; };
 		D86D44E22AFB932E00894774 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D44E12AFB932E00894774 /* AppDelegate.swift */; };
 		D86D44E42AFB932E00894774 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D44E32AFB932E00894774 /* SceneDelegate.swift */; };
@@ -182,6 +183,7 @@
 		D86422D12C36A840000A0BDF /* ToDoUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoUserDefaults.swift; sourceTree = "<group>"; };
 		D86422DB2C37D3FA000A0BDF /* UserOptionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOptionController.swift; sourceTree = "<group>"; };
 		D86422DD2C37E118000A0BDF /* UserOptionProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOptionProtocols.swift; sourceTree = "<group>"; };
+		D86422DF2C37E308000A0BDF /* UserOptionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOptionPresenter.swift; sourceTree = "<group>"; };
 		D864B5F52BAC0B7100650E8A /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
 		D86D44DE2AFB932E00894774 /* ToDoList-VIPER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ToDoList-VIPER.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D86D44E12AFB932E00894774 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -465,6 +467,7 @@
 		D86422D52C37D38A000A0BDF /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				D86422DF2C37E308000A0BDF /* UserOptionPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -1369,6 +1372,7 @@
 				D8E9F8A52B04D32B00A3F3FC /* UITextField + EXT.swift in Sources */,
 				D8473BE52BB415BB0063F87A /* HorizontalCalendarView.swift in Sources */,
 				D85C57E52B57C71900023B04 /* OnboardingPage.swift in Sources */,
+				D86422E02C37E308000A0BDF /* UserOptionPresenter.swift in Sources */,
 				D8AB92292BBD593700826A4E /* ToDosDetailProtocols.swift in Sources */,
 				D8E9F8B92B0CC0CB00A3F3FC /* ToDoObject+CoreDataClass.swift in Sources */,
 				D8DD85D12B9F4AD8003E7F89 /* CustomTabBar.swift in Sources */,
