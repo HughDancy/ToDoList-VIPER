@@ -21,14 +21,16 @@ protocol UserOptionPresenterProtocol: AnyObject {
     func retriveData()
     func goBack()
     func chooseAvatar()
-    func saveUserInfo()
+    func setImage(_ image: UIImage?)
+    func saveUserInfo(name: String)
     
 }
 
 protocol UserOptionInputInteractorProtocol: AnyObject {
     var presenter: UserOptionOutputInteractorProtocol? { get set }
     
-    func saveUserInfo()
+    func setTempAvatar(_ image: UIImage?)
+    func saveUserInfo(name: String)
     func getUserInfo()
 }
 

@@ -8,10 +8,12 @@
 import UIKit
 
 final class UserOptionPresenter: UserOptionPresenterProtocol {
+   //MARK: - Properties
     weak var view: UserOptionViewProtocol?
     var interactor: UserOptionInputInteractorProtocol?
     var router: UserOptionRouterProtocol?
     
+   //MARK: - Protocols Method's
     func retriveData() {
         interactor?.getUserInfo()
     }
@@ -26,9 +28,14 @@ final class UserOptionPresenter: UserOptionPresenterProtocol {
         router?.chooseAvatarSource(from: view)
     }
     
-    func saveUserInfo() {
-        interactor?.saveUserInfo()
+    func saveUserInfo(name: String) {
+        interactor?.saveUserInfo(name: name)
     }
+    
+    func setImage(_ image: UIImage?) {
+        interactor?.setTempAvatar(image)
+    }
+    
 }
 
 extension UserOptionPresenter: UserOptionOutputInteractorProtocol {
