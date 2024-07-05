@@ -24,6 +24,8 @@ protocol UserOptionPresenterProtocol: AnyObject {
     func setImage(_ image: UIImage?)
     func saveUserInfo(name: String)
     
+    func checkPermission(with status: PermissionStatus)
+    
 }
 
 protocol UserOptionInputInteractorProtocol: AnyObject {
@@ -32,16 +34,24 @@ protocol UserOptionInputInteractorProtocol: AnyObject {
     func setTempAvatar(_ image: UIImage?)
     func saveUserInfo(name: String)
     func getUserInfo()
+    
+    func checkPermission(with status: PermissionStatus)
 }
 
 protocol UserOptionOutputInteractorProtocol: AnyObject {
     func loadUserData(_ data: (String, URL?))
     func dismiss()
+    
+    func goToOptions(with label: String)
+    func goToImagePicker(with status: PermissionStatus)
 }
 
 protocol UserOptionRouterProtocol: AnyObject {
+    var presenter: UserOptionPresenterProtocol? { get set }
     static func createUserOptionModule() -> UIViewController
     
     func goBack(from view: UserOptionViewProtocol)
-    func chooseAvatarSource(from view: UserOptionViewProtocol)
+    func showImageSourceAlert(from view: UserOptionViewProtocol)
+    func goToOption(from view: UserOptionViewProtocol, with label: String)
+    func goToImagePicker(from view: UserOptionViewProtocol, status: PermissionStatus)
 }

@@ -25,7 +25,7 @@ final class UserOptionPresenter: UserOptionPresenterProtocol {
     
     func chooseAvatar() {
         guard let view = view else { return }
-        router?.chooseAvatarSource(from: view)
+        router?.showImageSourceAlert(from: view)
     }
     
     func saveUserInfo(name: String) {
@@ -36,10 +36,23 @@ final class UserOptionPresenter: UserOptionPresenterProtocol {
         interactor?.setTempAvatar(image)
     }
     
+    func checkPermission(with status: PermissionStatus) {
+        interactor?.checkPermission(with: status)
+    }
     
 }
 
 extension UserOptionPresenter: UserOptionOutputInteractorProtocol {
+    func goToOptions(with label: String) {
+        guard let view = view else { return }
+        router?.goToOption(from: view, with: label)
+    }
+    
+    func goToImagePicker(with status: PermissionStatus) {
+        guard let view = view else { return }
+        router?.goToImagePicker(from: view, status: status)
+    }
+    
     func loadUserData(_ data: (String, URL?)) {
         view?.getUserData(data)
     }

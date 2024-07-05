@@ -119,7 +119,7 @@ final class UserOptionController: UIViewController {
     }
     
     @objc func chooseAvatar() {
-        print("Choose avatar")
+        self.presenter?.chooseAvatar()
     }
 
 }
@@ -127,6 +127,21 @@ final class UserOptionController: UIViewController {
 extension UserOptionController: UserOptionViewProtocol {
     func getUserData(_ data: (String, URL?)) {
         self.userData = data
+    }
+}
+
+
+extension UserOptionController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true)
+        
+        guard let image = info[.editedImage] as? UIImage else {
+            print("No image found")
+            presenter?.setImage(self.userAvatar.image ?? UIImage(named: "mockUser_3")!)
+            return
+        }
+        self.userAvatar.image = image
+        presenter?.setImage(image)
     }
 }
 

@@ -149,6 +149,11 @@ class OptionsViewController: UIViewController {
     @objc func updateUserInfo() {
         self.presenter?.updateUserData()
         self.userName.text = userData.0
+        avatarImage.kf.setImage(with: userData.1,
+                              placeholder: UIImage(named: "mockUser_3"),
+                              options: [
+                                .cacheOriginalImage
+                              ])
     }
 }
 
