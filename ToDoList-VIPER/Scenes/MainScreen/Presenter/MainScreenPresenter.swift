@@ -17,6 +17,10 @@ final class MainScreenPresenter: MainScreenPresenterProtocol {
         interactor?.retriveUserData()
     }
     
+    func updateUserData() {
+        interactor?.retriveUserData()
+    }
+    
     func goToTodayToDos() {
         guard let view = view else { return }
         router?.goTodayToDos(from: view)

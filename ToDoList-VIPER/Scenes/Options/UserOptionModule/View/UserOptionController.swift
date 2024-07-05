@@ -114,7 +114,8 @@ final class UserOptionController: UIViewController {
     }
     
     @objc func saveChanges() {
-        
+        guard let name = userNameField.text else { return }
+        presenter?.saveUserInfo(name: name)
     }
     
     @objc func chooseAvatar() {

@@ -19,6 +19,7 @@ final class MainScreenInteractor: MainScreenInteractorInputProtocol {
             presenter?.didRetriveUserData(( "User", imageUrl))
             return
         }
+        print("USER NAME IN USER DEFAULTS - \(name)")
             presenter?.didRetriveUserData((name, imageUrl))
     }
     

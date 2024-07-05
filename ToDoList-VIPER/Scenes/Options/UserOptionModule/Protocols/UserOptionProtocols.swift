@@ -36,6 +36,7 @@ protocol UserOptionInputInteractorProtocol: AnyObject {
 
 protocol UserOptionOutputInteractorProtocol: AnyObject {
     func loadUserData(_ data: (String, URL?))
+    func dismiss()
 }
 
 protocol UserOptionRouterProtocol: AnyObject {

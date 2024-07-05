@@ -82,11 +82,13 @@ class OptionsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNotificationObserver()
         presenter?.getData()
         view.overrideUserInterfaceStyle = ToDoUserDefaults.shares.theme.getUserInterfaceStyle()
 //        view.backgroundColor = .systemBackground
         setupHierarchy()
         setupLayout()
+       
     }
     
     //MARK: - Setup outlets
@@ -137,6 +139,16 @@ class OptionsViewController: UIViewController {
     //MARK: - Button's action
     @objc func goToUserOptions() {
         presenter?.goToUserOptions()
+    }
+    
+    //MARK: - Notification Observer
+    private func setupNotificationObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(updateUserInfo), name: NotificationNames.updateUserData.name, object: nil)
+    }
+    
+    @objc func updateUserInfo() {
+        self.presenter?.updateUserData()
+        self.userName.text = userData.0
     }
 }
 

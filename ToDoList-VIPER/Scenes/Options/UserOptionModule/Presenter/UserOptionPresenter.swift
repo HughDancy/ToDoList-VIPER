@@ -36,10 +36,16 @@ final class UserOptionPresenter: UserOptionPresenterProtocol {
         interactor?.setTempAvatar(image)
     }
     
+    
 }
 
 extension UserOptionPresenter: UserOptionOutputInteractorProtocol {
     func loadUserData(_ data: (String, URL?)) {
         view?.getUserData(data)
+    }
+    
+    func dismiss() {
+        guard let view = view else { return }
+        router?.goBack(from: view)
     }
 }

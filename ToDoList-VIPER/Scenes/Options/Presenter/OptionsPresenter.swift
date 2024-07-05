@@ -37,6 +37,10 @@ final class OptionsPresenter: OptionsPresenterProtocol {
     func changeTheme(_ bool: Bool) {
         interactor?.changeTheme(bool)
     }
+    
+    func updateUserData() {
+        interactor?.fetchUserData()
+    }
 }
 
 extension OptionsPresenter: OptionsOutputInteractorProtocol {
