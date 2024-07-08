@@ -66,6 +66,7 @@ final class UserOptionController: UIViewController {
     private func setupView() {
         setupHierarchy()
         setupLayout()
+        userNameField.delegate = self
         navigationItem.backBarButtonItem?.isHidden = true
         userAvatar.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(chooseAvatar)))
     }
@@ -88,7 +89,8 @@ final class UserOptionController: UIViewController {
 //        }
 //        
         userAvatar.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(40)
             make.height.width.equalTo(UserOptionsSizes.avatar.value)
         }
         
@@ -142,6 +144,16 @@ extension UserOptionController: UIImagePickerControllerDelegate, UINavigationCon
         }
         self.userAvatar.image = image
         presenter?.setImage(image)
+    }
+}
+
+extension UserOptionController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return userNameField.resignFirstResponder()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 }
 

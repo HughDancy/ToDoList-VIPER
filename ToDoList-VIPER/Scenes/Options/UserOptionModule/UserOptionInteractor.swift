@@ -25,11 +25,13 @@ final class UserOptionInteractor: UserOptionInputInteractorProtocol {
         let mockAvatar = UIImage(named: "mockUser_1")!
         UserDefaults.standard.set(name, forKey: NotificationNames.userName.rawValue)
         db.collection("users").document(userUid).setData(["displayName" : name, "name": name], merge: true)
+        
         if tempAvatar != nil {
             storageManager.saveImage(image: tempAvatar ?? mockAvatar, name: userUid)
         }
         NotificationCenter.default.post(name: NotificationNames.updateUserData.name, object: nil)
         presenter?.dismiss()
+        
     }
     
     func getUserInfo() {
