@@ -48,7 +48,7 @@ extension OptionsPresenter: OptionsOutputInteractorProtocol {
         view?.getOptionsData(data)
     }
     
-    func getUserData(_ userData: (String, URL)) {
+    func getUserData(_ userData: (String, URL?)) {
         view?.getUserData(userData)
     }
 }

@@ -166,7 +166,7 @@ extension OptionsViewController: OptionsViewProtocol {
         self.optionsData = data
     }
     
-    func getUserData(_ userData: (String, URL)) {
+    func getUserData(_ userData: (String, URL?)) {
         self.userData = userData
     }
 }

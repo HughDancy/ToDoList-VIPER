@@ -11,7 +11,7 @@ protocol OptionsViewProtocol: AnyObject {
     var presenter: OptionsPresenterProtocol? { get set }
     
     func getOptionsData(_ data: [String])
-    func getUserData(_ userData: (String, URL))
+    func getUserData(_ userData: (String, URL?))
 }
 
 protocol OptionsPresenterProtocol: AnyObject {
@@ -38,7 +38,7 @@ protocol OptionsInputInteractorProtocol: AnyObject {
 
 protocol OptionsOutputInteractorProtocol: AnyObject {
     func getOptionsData(_ data: [String])
-    func getUserData(_ userData: (String, URL))
+    func getUserData(_ userData: (String, URL?))
 }
 
 protocol OptionsRouterProtocol: AnyObject {

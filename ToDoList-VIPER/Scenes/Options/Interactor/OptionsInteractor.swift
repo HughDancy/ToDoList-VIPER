@@ -25,9 +25,7 @@ final class OptionsInteractor: OptionsInputInteractorProtocol {
     func fetchUserData() {
         guard let userName = UserDefaults.standard.string(forKey: NotificationNames.userName.rawValue),
               let userAvatar = UserDefaults.standard.url(forKey: "UserAvatar") else {
-            //TO-DO - FIX OPTIONAL TO SAVE METHOD
-            let url = URL(string: "")!
-            presenter?.getUserData(("User", url))
+            presenter?.getUserData(("User", nil))
             return
         }
         presenter?.getUserData((userName, userAvatar))

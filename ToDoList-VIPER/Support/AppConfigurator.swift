@@ -12,10 +12,11 @@ import GoogleSignInSwift
 
 final class AppConfigurator {
     static let configuator = AppConfigurator()
-    let authManager = AuthKeychainManager()
+    private let authManager = AuthKeychainManager()
     
     func configureApp() -> UIViewController {
         let isNewUser = NewUserCheck.shared.isNewUser()
+        print("APP CONFIGURE METHOD NEW USER CHECK IS - \(isNewUser)")
         
         switch isNewUser {
         case true:
@@ -23,6 +24,10 @@ final class AppConfigurator {
         case false:
             return AnimationLoadingRouter.createLoadingModule(startMainModule())
         }
+    }
+    
+    func logOut() -> UIViewController {
+         self.startOnboardingModule()
     }
     
     private func startOnboardingModule() -> UIViewController {
@@ -41,6 +46,7 @@ final class AppConfigurator {
 //            appDelegate.window?.rootViewController = navLoginModule
             let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate
             sceneDelegate.window?.rootViewController = navLoginModule
+            print("!!!!!!!Onboarding state is false and work method StartOnboardingModule")
             return navLoginModule
         } else {
             let onboardingModule = OnboardingRouter.createOnboardingModule()
@@ -70,6 +76,5 @@ final class AppConfigurator {
             let loginModule = LoginRouter.createLoginModule()
             return loginModule
         }
-       
     }
 }

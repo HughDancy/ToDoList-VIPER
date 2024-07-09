@@ -35,8 +35,14 @@ final class OptionsRouter: OptionsRouterProtocol {
     
     func logOut(from view:  OptionsViewProtocol) {
         guard let parrentView = view as? UIViewController else { return }
-        let loginModule = LoginRouter.createLoginModule()
-        parrentView.navigationController?.pushViewController(loginModule, animated: true)
+        parrentView.tabBarController?.tabBar.isHidden = true
+//        NewUserCheck.shared.setIsNewUser()
+        NewUserCheck.shared.setIsLoginScrren()
+        NewUserCheck.shared.setIsNotFirstStartOnboarding()
+        let loginModule = AppConfigurator.configuator.logOut()
+        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate
+        sceneDelegate.window?.rootViewController = loginModule
+        parrentView.navigationController?.popToRootViewController(animated: true)
     }
     
     func getFeedback(from view: OptionsViewProtocol) {
