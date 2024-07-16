@@ -22,7 +22,8 @@ final class MainScreenRouter: MainScreenRouterProtocol {
         presenter.router = router
         interactor.presenter = presenter
         
-        return navVc
+//        return navVc
+        return viewController
     }
     
     func goTodayToDos(from view: any MainScreenViewProtocol) {

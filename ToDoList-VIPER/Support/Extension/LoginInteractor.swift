@@ -42,6 +42,7 @@ final class LoginInteractor: LoginInteractorInputProtocol {
                     }
                     let uid = dataResult?.user.uid ?? UUID().uuidString
                     let name = Auth.auth().currentUser?.displayName
+                    print("USER NAME IS - \(name)")
                     UserDefaults.standard.set(name, forKey: NotificationNames.userName.rawValue)
                    
                     self.keyChainedManager.persist(id: uid)

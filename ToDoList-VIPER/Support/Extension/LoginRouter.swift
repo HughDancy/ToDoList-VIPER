@@ -40,8 +40,11 @@ final class LoginRouter: LoginRouterProtocol {
     
     func goToMainScreen(from view: LoginViewProtocol) {
         guard let view = view as? UIViewController else { return}
-        let mainModule = HomeTabBarRouter.createHomeTabBar()
+//        let mainModule = HomeTabBarRouter.createHomeTabBar()
         NewUserCheck.shared.setIsNotNewUser()
+        let mainScreen = MainScreenRouter.createMainScreenModule()
+        let optionScreen = OptionsRouter.createOptionsModule()
+        let mainModule = HomeTabBarRouter.createNewTabBarRouter(tabOne: mainScreen, tabTwo: optionScreen)
         view.navigationController?.pushViewController(mainModule, animated: true)
     }
     

@@ -16,12 +16,13 @@ final class AppConfigurator {
     
     func configureApp() -> UIViewController {
         let isNewUser = NewUserCheck.shared.isNewUser()
-        print("APP CONFIGURE METHOD NEW USER CHECK IS - \(isNewUser)")
         
         switch isNewUser {
         case true:
+            print("-!!!- Is new user")
             return AnimationLoadingRouter.createLoadingModule(startOnboardingModule())
         case false:
+            print("-!!!- Is not new user")
             return AnimationLoadingRouter.createLoadingModule(startMainModule())
         }
     }
@@ -46,7 +47,6 @@ final class AppConfigurator {
 //            appDelegate.window?.rootViewController = navLoginModule
             let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate
             sceneDelegate.window?.rootViewController = navLoginModule
-            print("!!!!!!!Onboarding state is false and work method StartOnboardingModule")
             return navLoginModule
         } else {
             let onboardingModule = OnboardingRouter.createOnboardingModule()
@@ -57,23 +57,29 @@ final class AppConfigurator {
     private func startMainModule() -> UIViewController {
         let currentUser = Auth.auth().currentUser?.uid
         let googleSingInUser = GIDSignIn.sharedInstance.currentUser?.userID
-        print(currentUser)
+        print("-!-!-!!!currentUser id is - \(currentUser)")
 //        guard let keychainId = try? authManager.fetchId() else {
 //            let loginModule = LoginRouter.createLoginModule()
 //            print("Something went wrong")
 //            return loginModule
 //        }
         let currentId = authManager.id
-        print(currentId)
+        print("-!-!-!!!currentId is - \(currentId)")
         if currentUser == currentId || currentId == googleSingInUser{
-            let mainModule = HomeTabBarRouter.createHomeTabBar()
+            let mainScreen = UINavigationController(rootViewController: MainScreenRouter.createMainScreenModule())
+            let optionsScreen = OptionsRouter.createOptionsModule()
+//            let mainModule = HomeTabBarRouter.createHomeTabBar()
+            let mainModule = HomeTabBarRouter.createNewTabBarRouter(tabOne: mainScreen, tabTwo: optionsScreen)
     //        let mainMockModule = CustomHomeTabBarController()
             let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate
             sceneDelegate.window?.rootViewController = mainModule
             TaskStorageManager.instance.checkOverdueToDos()
+            print("!!!!Method Satrt Main Module is worked fine user id and current id is equal")
             return mainModule
         } else {
-            let loginModule = LoginRouter.createLoginModule()
+            print("!!!Method Start Main Module is worked not good - user id and current id not equal")
+            let loginModule = UINavigationController(rootViewController: LoginRouter.createLoginModule())
+        
             return loginModule
         }
     }

@@ -58,6 +58,24 @@ final class TaskStorageManager {
         self.saveChanges()
     }
     
+    func deleteAllEntities() {
+        let entities = persistentContainer.managedObjectModel.entities
+        for entity in entities {
+            delete(entityName: entity.name!)
+        }
+    }
+
+    private func delete(entityName: String) {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        do {
+            try persistentContainer.viewContext.execute(deleteRequest)
+            saveChanges()
+        } catch let error as NSError {
+            debugPrint(error)
+        }
+    }
+    
     //MARK: - CoreData edit ToDoObject
     func editToDoObject(item: ToDoObject, newTitle: String, newDescription: String, newDate: Date, color: UIColor, iconName: String) {
         if item.title != newTitle {

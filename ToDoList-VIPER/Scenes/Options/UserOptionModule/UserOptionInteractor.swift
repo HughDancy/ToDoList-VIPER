@@ -25,6 +25,17 @@ final class UserOptionInteractor: UserOptionInputInteractorProtocol {
         let mockAvatar = UIImage(named: "mockUser_1")!
         UserDefaults.standard.set(name, forKey: NotificationNames.userName.rawValue)
         db.collection("users").document(userUid).setData(["displayName" : name, "name": name], merge: true)
+        let user = Auth.auth().currentUser
+        let changeRequest = user?.createProfileChangeRequest()
+        changeRequest?.displayName = name
+        changeRequest?.commitChanges(completion: { error in
+            if error != nil {
+                print("error when try save changed user name")
+            } else {
+                print("Saving changed user name was succes")
+            }
+        })
+        
         
         if tempAvatar != nil {
             storageManager.saveImage(image: tempAvatar ?? mockAvatar, name: userUid)
