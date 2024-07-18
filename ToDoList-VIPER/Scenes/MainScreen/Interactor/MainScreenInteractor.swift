@@ -14,12 +14,10 @@ final class MainScreenInteractor: MainScreenInteractorInputProtocol {
     
     func retriveUserData() {
         let imageUrl = UserDefaults.standard.url(forKey: "UserAvatar")
-//        print("Main Screen Interactor image url us - \(imageUrl)")
         guard let name = UserDefaults.standard.string(forKey: NotificationNames.userName.rawValue) else {
             presenter?.didRetriveUserData(( "User", imageUrl))
             return
         }
-        print("USER NAME IN USER DEFAULTS - \(name)")
             presenter?.didRetriveUserData((name, imageUrl))
     }
     
@@ -28,9 +26,7 @@ final class MainScreenInteractor: MainScreenInteractorInputProtocol {
             let tommorowToDosCount = self.storage.fetchToDosCount(with: .tommorow)
             let overdueToDosCount = self.storage.fetchToDosCount(with: .overdue)
             let doneToDosCount =  self.storage.fetchToDosCount(with: .done)
-            let allToDos = self.storage.fetchAllPrivateToDos()
-//        print("It's all toDos count -\(allToDos)")
-            
+
             let toDosInfo = [
                 [String(todayToDosCount), "Сегодня"],
                 [String(overdueToDosCount), "Просрочено"],

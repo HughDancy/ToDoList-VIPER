@@ -57,29 +57,18 @@ final class AppConfigurator {
     private func startMainModule() -> UIViewController {
         let currentUser = Auth.auth().currentUser?.uid
         let googleSingInUser = GIDSignIn.sharedInstance.currentUser?.userID
-        print("-!-!-!!!currentUser id is - \(currentUser)")
-//        guard let keychainId = try? authManager.fetchId() else {
-//            let loginModule = LoginRouter.createLoginModule()
-//            print("Something went wrong")
-//            return loginModule
-//        }
         let currentId = authManager.id
-        print("-!-!-!!!currentId is - \(currentId)")
+        
         if currentUser == currentId || currentId == googleSingInUser{
             let mainScreen = UINavigationController(rootViewController: MainScreenRouter.createMainScreenModule())
             let optionsScreen = OptionsRouter.createOptionsModule()
-//            let mainModule = HomeTabBarRouter.createHomeTabBar()
             let mainModule = HomeTabBarRouter.createNewTabBarRouter(tabOne: mainScreen, tabTwo: optionsScreen)
-    //        let mainMockModule = CustomHomeTabBarController()
             let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate
             sceneDelegate.window?.rootViewController = mainModule
             TaskStorageManager.instance.checkOverdueToDos()
-            print("!!!!Method Satrt Main Module is worked fine user id and current id is equal")
             return mainModule
         } else {
-            print("!!!Method Start Main Module is worked not good - user id and current id not equal")
             let loginModule = UINavigationController(rootViewController: LoginRouter.createLoginModule())
-        
             return loginModule
         }
     }

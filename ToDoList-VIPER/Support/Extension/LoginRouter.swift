@@ -10,9 +10,7 @@ import UIKit
 final class LoginRouter: LoginRouterProtocol {
   
     static func createLoginModule() -> UIViewController {
-//        let viewController = LoginController()
         let viewController = LoginController()
-//        let navController = UINavigationController(rootViewController: viewController)
         let presenter: LoginPresenterProtocol & LoginInteractorOutputProtocol = LoginPresenter()
         let interactor: LoginInteractorInputProtocol = LoginInteractor()
         let router: LoginRouterProtocol = LoginRouter()
@@ -40,7 +38,6 @@ final class LoginRouter: LoginRouterProtocol {
     
     func goToMainScreen(from view: LoginViewProtocol) {
         guard let view = view as? UIViewController else { return}
-//        let mainModule = HomeTabBarRouter.createHomeTabBar()
         NewUserCheck.shared.setIsNotNewUser()
         let mainScreen = MainScreenRouter.createMainScreenModule()
         let optionScreen = OptionsRouter.createOptionsModule()
