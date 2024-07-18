@@ -12,17 +12,23 @@ import GoogleSignInSwift
 
 final class AppConfigurator {
     static let configuator = AppConfigurator()
-    let authManager = AuthKeychainManager()
+    private let authManager = AuthKeychainManager()
     
     func configureApp() -> UIViewController {
         let isNewUser = NewUserCheck.shared.isNewUser()
         
         switch isNewUser {
         case true:
+            print("-!!!- Is new user")
             return AnimationLoadingRouter.createLoadingModule(startOnboardingModule())
         case false:
+            print("-!!!- Is not new user")
             return AnimationLoadingRouter.createLoadingModule(startMainModule())
         }
+    }
+    
+    func logOut() -> UIViewController {
+         self.startOnboardingModule()
     }
     
     private func startOnboardingModule() -> UIViewController {
@@ -51,25 +57,19 @@ final class AppConfigurator {
     private func startMainModule() -> UIViewController {
         let currentUser = Auth.auth().currentUser?.uid
         let googleSingInUser = GIDSignIn.sharedInstance.currentUser?.userID
-        print(currentUser)
-//        guard let keychainId = try? authManager.fetchId() else {
-//            let loginModule = LoginRouter.createLoginModule()
-//            print("Something went wrong")
-//            return loginModule
-//        }
         let currentId = authManager.id
-        print(currentId)
+        
         if currentUser == currentId || currentId == googleSingInUser{
-            let mainModule = HomeTabBarRouter.createHomeTabBar()
-    //        let mainMockModule = CustomHomeTabBarController()
+            let mainScreen = UINavigationController(rootViewController: MainScreenRouter.createMainScreenModule())
+            let optionsScreen = OptionsRouter.createOptionsModule()
+            let mainModule = HomeTabBarRouter.createNewTabBarRouter(tabOne: mainScreen, tabTwo: optionsScreen)
             let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate
             sceneDelegate.window?.rootViewController = mainModule
             TaskStorageManager.instance.checkOverdueToDos()
             return mainModule
         } else {
-            let loginModule = LoginRouter.createLoginModule()
+            let loginModule = UINavigationController(rootViewController: LoginRouter.createLoginModule())
             return loginModule
         }
-       
     }
 }

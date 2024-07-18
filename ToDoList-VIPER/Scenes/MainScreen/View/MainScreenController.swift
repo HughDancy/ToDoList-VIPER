@@ -40,7 +40,6 @@ final class MainScreenController: UIViewController {
         presenter?.getToDosCount()
         view = MainScreenView()
         setupCollectionView()
-        
     }
     
     //MARK: - Setup Outlets
@@ -52,16 +51,20 @@ final class MainScreenController: UIViewController {
     private func setupNavigationBar() {
         self.navigationItem.largeTitleDisplayMode = .never
         self.navigationController?.navigationBar.prefersLargeTitles = false
-        self.navigationController?.navigationBar.isHidden = true
     }
     
     //MARK: - Notification
     func subcribeToNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(mustUpdateData), name: NotificationNames.updateMainScreen.name, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateUserData), name: NotificationNames.updateUserData.name, object: nil)
     }
     
     @objc func mustUpdateData() {
         self.presenter?.getToDosCount()
+    }
+    
+    @objc func updateUserData() {
+        self.presenter?.updateUserData()
     }
     
     private func updateDownloadTask() {

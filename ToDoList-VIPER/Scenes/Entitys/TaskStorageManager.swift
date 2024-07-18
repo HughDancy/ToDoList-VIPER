@@ -58,6 +58,24 @@ final class TaskStorageManager {
         self.saveChanges()
     }
     
+    func deleteAllEntities() {
+        let entities = persistentContainer.managedObjectModel.entities
+        for entity in entities {
+            delete(entityName: entity.name!)
+        }
+    }
+
+    private func delete(entityName: String) {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        do {
+            try persistentContainer.viewContext.execute(deleteRequest)
+            saveChanges()
+        } catch let error as NSError {
+            debugPrint(error)
+        }
+    }
+    
     //MARK: - CoreData edit ToDoObject
     func editToDoObject(item: ToDoObject, newTitle: String, newDescription: String, newDate: Date, color: UIColor, iconName: String) {
         if item.title != newTitle {
@@ -72,24 +90,19 @@ final class TaskStorageManager {
             item.date = newDate
             item.dateTitle = DateFormatter.getStringFromDate(from: newDate)
         }
-        
-//        item.date = newDate
-//        item.dateTitle = DateFormatter.getStringFromDate(from: newDate)
+
         if item.color != color {
             item.color = color
             item.iconName = iconName
         }
-//        item.color = color
-//        item.iconName = iconName
+        
         self.saveChanges()
-    
     }
     
     //MARK: - CoreData Done ToDoObject
     func doneToDo(item: ToDoObject) {
         item.doneStatus = true
         self.saveChanges()
-        
     }
     
     //MARK: - CoreData fetch ToDosObject methods
@@ -133,7 +146,6 @@ final class TaskStorageManager {
     
     func fetchDoneToDos(with date: Date) -> [ToDoObject] {
         let fetchRequest: NSFetchRequest<ToDoObject> = ToDoObject.fetchRequest()
-        //        let donePredicate = NSPredicate(format: "doneStatus == YES")
         let donePredicate = NSPredicate(format: "%K == %@", "doneStatus", NSNumber(value: true))
         let datePredicate = NSPredicate(format: "%K == %@", #keyPath(ToDoObject.dateTitle), DateFormatter.getStringFromDate(from: date))
         let subPredicates = [donePredicate, datePredicate]
@@ -195,7 +207,6 @@ final class TaskStorageManager {
             return [predicate, donePredicate]
         case .done:
             let donePredicate = NSPredicate(format: "%K == %@", "doneStatus", NSNumber(value: true))
-            //            let datePredicate = NSPredicate(format: "%K == %@", #keyPath(ToDoObject.dateTitle), DateFormatter.getStringFromDate(from: date))
             return [donePredicate]
         case .overdue:
             let donePredicate = NSPredicate(format: "doneStatus == NO")

@@ -10,6 +10,7 @@ import Foundation
 public enum NotificationNames: String {
     case updateTables = "UpdateTables"
     case updateMainScreen = "UpdateMainScreenData" 
+    case updateUserData = "UpdateUserData"
     case doneToDo = "DoneTask"
     case tapEditButton = "TapEditButton"
     case googleSignIn = "GoogleSignIn"

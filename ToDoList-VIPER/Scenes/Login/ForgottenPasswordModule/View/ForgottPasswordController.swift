@@ -51,6 +51,7 @@ final class ForgottPasswordController: UIViewController, ForgetPasswordViewProto
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        emailTextField.delegate = self
         view.backgroundColor = .systemBackground
         setupHierarchy()
         setupLayout()
@@ -97,6 +98,16 @@ final class ForgottPasswordController: UIViewController, ForgetPasswordViewProto
     //MARK: - Button Action
     @objc func getResetPassword() {
         presenter?.resetPassword(with: emailTextField.text ?? "")
+    }
+}
+
+extension ForgottPasswordController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return emailTextField.resignFirstResponder()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 }
 

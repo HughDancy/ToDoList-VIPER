@@ -39,7 +39,6 @@ extension OnboardingItems {
         OnboardingItems(title: "Начнем?",
                         buttonText: "Начать",
                         imageName: "onboarding_6",
-                        state: .option),
-    
+                        state: .option)
     ]
 }

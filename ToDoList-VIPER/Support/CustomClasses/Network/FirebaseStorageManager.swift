@@ -33,6 +33,7 @@ final class FirebaseStorageManager {
                 print("Meta data not found or somehow another error")
                 return
             }
+            NotificationCenter.default.post(name: NotificationNames.updateUserData.name, object: nil)
         }
     }
     

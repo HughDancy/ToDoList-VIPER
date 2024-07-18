@@ -117,7 +117,7 @@ extension AuthKeychainManager: AuthKeychainManagerProtocol {
         if status == errSecSuccess {
             cachedId = id
         }
-//        UserDefaults.standard.setValue(OnboardingStatesService.UserDefaultsValues.inputName.rawValue, forKey: "test")
+        
         print("Your id - \(id) was saved!")
     }
 

@@ -24,6 +24,7 @@ protocol MainScreenPresenterProtocol: AnyObject {
     func goToTommorowToDos()
     func goToDoneToDos()
     func goToOverdueToDos()
+    func updateUserData()
 }
 
 protocol MainScreenInteractorInputProtocol: AnyObject {
