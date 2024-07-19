@@ -9,7 +9,6 @@ import UIKit
 
 protocol AnimationLoadingPresenterProtocol: AnyObject {
     var view: AnimationLoadingControllerProtocol? { get set }
-    var interactor: AnimationLoadingInteractorInputProtocol? { get set }
     var router: AnimationLoadingRouterProtocol? { get set }
     
     func goToNextScreen(_ nextScreen: UIViewController)
@@ -18,7 +17,6 @@ protocol AnimationLoadingPresenterProtocol: AnyObject {
 
 final class AnimationLoadingPresenter: AnimationLoadingPresenterProtocol {
     weak var view: AnimationLoadingControllerProtocol?
-    var interactor: AnimationLoadingInteractorInputProtocol?
     var router: AnimationLoadingRouterProtocol?
     
     func goToNextScreen(_ nextScreen: UIViewController) {

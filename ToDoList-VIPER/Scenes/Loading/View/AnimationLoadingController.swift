@@ -14,9 +14,9 @@ protocol AnimationLoadingControllerProtocol: AnyObject {
 }
 
 final class AnimationLoadingController: UIViewController, AnimationLoadingControllerProtocol {
-     var presenter: AnimationLoadingPresenterProtocol?
-     var nextScreen: UIViewController?
-   
+    var presenter: AnimationLoadingPresenterProtocol?
+    var nextScreen: UIViewController?
+    
     //MARK: - Outlets
     private lazy var loadingBackground: UIImageView = {
         let imageView = UIImageView()
@@ -62,16 +62,6 @@ final class AnimationLoadingController: UIViewController, AnimationLoadingContro
         print("AnimationLoadingControoler is ☠️")
     }
     
-    //MARK: - Init
-//    init(_ nextScreen: UIViewController) {
-//        self.nextScreen = nextScreen
-//        super.init(nibName: nil, bundle: nil)
-//    }
-//    
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-    
     //MARK: - Setup Outlets
     private func setupHierarcy() {
         view.addSubview(loadingBackground)
@@ -91,9 +81,16 @@ final class AnimationLoadingController: UIViewController, AnimationLoadingContro
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(20)
         }
     }
-    
-    //MARK: - Animate Method
+}
+
+    //MARK: - Animate Method Extension
+extension AnimationLoadingController {
     private func animate() {
+        guard let view = self.nextScreen else {
+            print("Next Screen View Controller is not initialized")
+            return
+        }
+        
         UIView.animate(withDuration: 1) {
             let size = self.view.frame.size.width * 1.5
             let diffX = size - self.view.frame.size.width
@@ -110,47 +107,11 @@ final class AnimationLoadingController: UIViewController, AnimationLoadingContro
             self.loadingImage.alpha = 0
             self.activityIndicator.stopAnimating()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-                guard let view = self.nextScreen else {
-                    print("Next Screen View Controller is not initialized")
-                    return
-                }
                 self.presenter?.goToNextScreen(view)
             })
-        }) { (succes) in
-//            window.switchRootViewController(to: loginVC)
-//            let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
-//            appDelegate.window?.rootViewController = LoginRouter.createLoginModule()
-//            appDelegate.window?.makeKeyAndVisible()
-//            let allScenes = UIApplication.shared.connectedScenes
-//            let scene = allScenes.first { $0.activationState == .foregroundActive }
-//            if let windowScene = scene as? UIWindowScene {
-//                windowScene.keyWindow?.rootViewController = LoginRouter.createLoginModule()
-//            }
-//            let vc = LoginRouter.createLoginModule()
-//            let navVc = UINavigationController(rootViewController: vc)
-//            let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate
-//            sceneDelegate.window?.rootViewController = navVc
-//            guard let view = self.nextScreen else {
-//                print("Next Screen View Controller is not initialized")
-//                return
-//            }
-//            self.presenter?.changeRootController(view)
+        }) { _ in
+            self.presenter?.changeRootController(view)
         }
-        
-        
-//        { done  in
-//            if done {
-//                DispatchQueue.main.asyncAfter(deadline: .now()+0.0, execute: {
-//                    let mainModule = HomeTabBarRouter.createHomeTabBar()
-//                    
-//                    mainModule.modalTransitionStyle = .crossDissolve
-//                    mainModule.modalPresentationStyle = .fullScreen
-//                    self.present(mainModule, animated: true)
-//                    self.presenter?.goToNextScreen()
-//                    self.navigationController?.pushViewController(mainModule, animated: true)
-//                })
-//            }
-//        }
     }
 }
 

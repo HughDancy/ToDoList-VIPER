@@ -136,7 +136,6 @@
 		D8E9F8BC2B109DB800A3F3FC /* TaskStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8BB2B109DB800A3F3FC /* TaskStorageManager.swift */; };
 		D8E9F8BE2B17427F00A3F3FC /* Date + EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8BD2B17427F00A3F3FC /* Date + EXT.swift */; };
 		D8E9F8D02B18A56200A3F3FC /* ToDoObjectSorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8CF2B18A56200A3F3FC /* ToDoObjectSorter.swift */; };
-		D8F11C5E2B5660C900D2282D /* AnimationLoadingInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F11C5D2B5660C900D2282D /* AnimationLoadingInteractor.swift */; };
 		D8F11C602B5660DA00D2282D /* AnimationLoadingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F11C5F2B5660DA00D2282D /* AnimationLoadingPresenter.swift */; };
 		D8F11C622B5669AC00D2282D /* MockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F11C612B5669AC00D2282D /* MockViewController.swift */; };
 		D8F33E322B7E17F70008FE91 /* LoadingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F33E312B7E17F70008FE91 /* LoadingButton.swift */; };
@@ -280,7 +279,6 @@
 		D8E9F8BB2B109DB800A3F3FC /* TaskStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStorageManager.swift; sourceTree = "<group>"; };
 		D8E9F8BD2B17427F00A3F3FC /* Date + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + EXT.swift"; sourceTree = "<group>"; };
 		D8E9F8CF2B18A56200A3F3FC /* ToDoObjectSorter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoObjectSorter.swift; sourceTree = "<group>"; };
-		D8F11C5D2B5660C900D2282D /* AnimationLoadingInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationLoadingInteractor.swift; sourceTree = "<group>"; };
 		D8F11C5F2B5660DA00D2282D /* AnimationLoadingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationLoadingPresenter.swift; sourceTree = "<group>"; };
 		D8F11C612B5669AC00D2282D /* MockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockViewController.swift; sourceTree = "<group>"; };
 		D8F33E312B7E17F70008FE91 /* LoadingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingButton.swift; sourceTree = "<group>"; };
@@ -591,7 +589,6 @@
 			isa = PBXGroup;
 			children = (
 				D8F11C582B565F5B00D2282D /* View */,
-				D8F11C5B2B565F8700D2282D /* Interactor */,
 				D8F11C5C2B565F9300D2282D /* Presenter */,
 				D8F11C5A2B565F7B00D2282D /* Router */,
 			);
@@ -1142,14 +1139,6 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
-		D8F11C5B2B565F8700D2282D /* Interactor */ = {
-			isa = PBXGroup;
-			children = (
-				D8F11C5D2B5660C900D2282D /* AnimationLoadingInteractor.swift */,
-			);
-			path = Interactor;
-			sourceTree = "<group>";
-		};
 		D8F11C5C2B565F9300D2282D /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
@@ -1357,7 +1346,6 @@
 				D8E9F8BC2B109DB800A3F3FC /* TaskStorageManager.swift in Sources */,
 				D86422DE2C37E118000A0BDF /* UserOptionProtocols.swift in Sources */,
 				D8E8406C2B6789F8005A0936 /* RegistrationRouter.swift in Sources */,
-				D8F11C5E2B5660C900D2282D /* AnimationLoadingInteractor.swift in Sources */,
 				D8AB92232BBBF8A200826A4E /* ToDosDetailController.swift in Sources */,
 				D8E00C732C1346DF005AEA4D /* ForgettPasswordInteractor.swift in Sources */,
 				D8B1E9D02BA46A0E00D455AF /* HomeTabBarProtocols.swift in Sources */,
