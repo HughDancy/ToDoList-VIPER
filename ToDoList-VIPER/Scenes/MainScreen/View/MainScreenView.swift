@@ -27,7 +27,7 @@ final class MainScreenView: UIView {
         return userAvatar
     }()
     
-    private lazy var userName = UILabel.createSimpleLabel(text: "", size: 25, width: .semibold, color: .white)
+    private lazy var userName = UILabel.createSimpleLabel(text: "", size: 25, width: .semibold, color: .white, aligment: .center, numberLines: 0)
     
     private lazy var containerView: UIView = {
         let view = UIView()

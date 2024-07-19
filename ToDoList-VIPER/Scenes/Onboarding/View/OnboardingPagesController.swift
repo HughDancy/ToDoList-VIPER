@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OnboardingPagesController: UIPageViewController {
+final class OnboardingPagesController: UIPageViewController {
  
     //MARK: - Elements
     var presenter: OnboardingPresenterProtocol?
@@ -23,10 +23,14 @@ class OnboardingPagesController: UIPageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        setupOnboardingController()
+    }
+    
+    //MARK: - Setup View
+    private func setupOnboardingController() {
         presenter?.viewWillAppear()
         setupPages()
         setupFirstPage()
-        print(currentPage)
         self.dataSource = self
     }
     
@@ -60,7 +64,7 @@ class OnboardingPagesController: UIPageViewController {
     }
 }
 
-//MARK: - OnboardingViewProtocol Extension
+    //MARK: - OnboardingViewProtocol Extension
 extension OnboardingPagesController: OnboardingViewProtocol {
     func getOnboardingData(_ data: [OnboardingItems]) {
         self.data = data

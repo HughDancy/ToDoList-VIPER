@@ -19,10 +19,8 @@ final class AppConfigurator {
         
         switch isNewUser {
         case true:
-            print("-!!!- Is new user")
             return AnimationLoadingRouter.createLoadingModule(startOnboardingModule())
         case false:
-            print("-!!!- Is not new user")
             return AnimationLoadingRouter.createLoadingModule(startMainModule())
         }
     }
@@ -43,8 +41,6 @@ final class AppConfigurator {
         if onboardingState == false {
             let loginModule = LoginRouter.createLoginModule()
             let navLoginModule = UINavigationController(rootViewController: loginModule)
-//            let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
-//            appDelegate.window?.rootViewController = navLoginModule
             let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate
             sceneDelegate.window?.rootViewController = navLoginModule
             return navLoginModule

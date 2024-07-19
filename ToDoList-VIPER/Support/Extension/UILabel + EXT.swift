@@ -8,11 +8,13 @@
 import UIKit
 
 extension UILabel {
-    static func createSimpleLabel(text: String, size: CGFloat, width: UIFont.Weight, color: UIColor) -> UILabel {
+    static func createSimpleLabel(text: String, size: CGFloat, width: UIFont.Weight, color: UIColor, aligment: NSTextAlignment, numberLines: Int) -> UILabel {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: size, weight: width)
         label.text = text
         label.textColor = color
+        label.textAlignment = aligment
+        label.numberOfLines = numberLines
         return label
     }
 }

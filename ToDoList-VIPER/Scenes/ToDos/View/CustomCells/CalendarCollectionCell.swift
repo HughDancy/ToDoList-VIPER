@@ -20,8 +20,8 @@ final class CalendarCollectionCell: UICollectionViewCell {
         return view
     }()
     
-    private lazy var dayOfWeekLabel = UILabel.createSimpleLabel(text: "", size: 15.0, width: .semibold, color: .label)
-    private lazy var dayNumberLabel = UILabel.createSimpleLabel(text: "", size: 15.0, width: .semibold, color: .label)
+    private lazy var dayOfWeekLabel = UILabel.createSimpleLabel(text: "", size: 15.0, width: .semibold, color: .label, aligment: .center, numberLines: 0)
+    private lazy var dayNumberLabel = UILabel.createSimpleLabel(text: "", size: 15.0, width: .semibold, color: .label, aligment: .center, numberLines: 0)
 
     private lazy var circlesStack: UIStackView = {
         let stack = UIStackView()

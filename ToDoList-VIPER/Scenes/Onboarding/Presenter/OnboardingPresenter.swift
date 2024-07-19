@@ -20,23 +20,10 @@ final class OnboardingPresenter: OnboardingPresenterProtocol {
         guard let view = view else { return }
         router?.goToLoginModule(from: view)
     }
-    
-    func presentRequestAcess() {
-        guard let view = view else { return }
-        router?.presentRequestAcess(from: view)
-    }
-    
-    func checkAccess() {
-        interactor?.checkPermissions()
-    }
 }
 
 extension OnboardingPresenter: OnboardingInteractorOutputProtocol {
     func didRetriveData(_ data: [OnboardingItems]) {
         view?.getOnboardingData(data)
-    }
-    func goToOptions(with: String) {
-        guard let view = view else { return }
-        router?.openSettings(from: view, label: with)
     }
 }

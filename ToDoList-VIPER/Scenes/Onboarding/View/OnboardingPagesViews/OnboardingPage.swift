@@ -7,8 +7,7 @@
 
 import UIKit
 
-class OnboardingPage: UIViewController {
-    
+final class OnboardingPage: UIViewController {
     var state: OnboardingStates?
     
     //MARK: - Outlets
@@ -19,15 +18,12 @@ class OnboardingPage: UIViewController {
         return picture
     }()
     
-    private lazy var descriptionTitle: UILabel = {
-        let label = UILabel.createSimpleLabel(text: "", 
-                                              size: OnboardingSizes.textSize.getTextSize(),
-                                              width: .bold,
-                                              color: .label)
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        return label
-    }()
+    private lazy var descriptionTitle = UILabel.createSimpleLabel(text: "",
+                                                                  size: OnboardingSizes.textSize.value,
+                                                                  width: .bold,
+                                                                  color: .label,
+                                                                  aligment: .center,
+                                                                  numberLines: 0)
     
     lazy var nextScreenButton: BaseButton = {
         let button = BaseButton(text: "", color: .systemCyan)
@@ -44,6 +40,11 @@ class OnboardingPage: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupOnboardingPage()
+    }
+    
+    //MARK: - Setup PageView
+    private func setupOnboardingPage() {
         view.backgroundColor = .systemBackground
         setupHierarchy()
         setupLayout()
@@ -66,18 +67,19 @@ class OnboardingPage: UIViewController {
         }
         
         descriptionTitle.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(OnboardingSizes.labelBottomOffset.getOffsetSize())
+            make.bottom.equalToSuperview().inset(OnboardingSizes.labelBottomOffset.value)
             make.centerX.equalToSuperview()
-            make.leading.trailing.equalToSuperview().inset(10)
+            make.leading.trailing.equalToSuperview().inset(OnboardingSizes.defaultOffset.value)
         }
-
+        
         nextScreenButton.snp.makeConstraints { make in
-            make.top.equalTo(descriptionTitle.snp.bottom).offset(10)
-            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(40)
-            make.height.equalTo(OnboardingSizes.buttonSize.getButtonSize())
+            make.top.equalTo(descriptionTitle.snp.bottom).offset(OnboardingSizes.defaultOffset.value)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(OnboardingSizes.buttonLeadingTrailing.value)
+            make.height.equalTo(OnboardingSizes.buttonSize.value)
         }
     }
     
+    //MARK: - Setup Elements
     func setupElements(with data: OnboardingItems) {
         self.descriptionTitle.text = data.title
         self.picture.image = UIImage(named: data.imageName)
@@ -85,20 +87,26 @@ class OnboardingPage: UIViewController {
     }
 }
 
+//MARK: - Sizes and constraint enum
 enum OnboardingSizes: CGFloat {
     case textSize = 28
     case labelBottomOffset = 110
     case buttonSize = 45
+    case defaultOffset = 10
+    case buttonLeadingTrailing = 40
     
-    func getTextSize() -> CGFloat {
-        UIScreen.main.bounds.height > 700 ? rawValue : rawValue - 8.0
-    }
-    
-    func getOffsetSize() -> CGFloat {
-        UIScreen.main.bounds.height > 700 ? rawValue : rawValue - 55.0
-    }
-    
-    func getButtonSize() -> CGFloat {
-        UIScreen.main.bounds.height > 700 ? rawValue : rawValue - 10.0
+    var value: CGFloat {
+        switch self {
+        case .textSize:
+            UIScreen.main.bounds.height > 700 ? rawValue : rawValue - 8.0
+        case .labelBottomOffset:
+            UIScreen.main.bounds.height > 700 ? rawValue : rawValue - 55.0
+        case .buttonSize:
+            UIScreen.main.bounds.height > 700 ? rawValue : rawValue - 10.0
+        case .defaultOffset:
+            10
+        case .buttonLeadingTrailing:
+            UIScreen.main.bounds.height > 700 ? rawValue : 30
+        }
     }
 }

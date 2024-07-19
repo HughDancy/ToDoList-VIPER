@@ -32,7 +32,7 @@ class ToDoCell: UITableViewCell {
     }()
     
     private lazy var taskName: UILabel = {
-        let label = UILabel.createSimpleLabel(text: "", size: 15, width: .semibold, color: .label)
+        let label = UILabel.createSimpleLabel(text: "", size: 15, width: .semibold, color: .label, aligment: .left, numberLines: 0)
         label.numberOfLines = 0
         label.lineBreakMode = .byClipping
         return label

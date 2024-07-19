@@ -23,7 +23,7 @@ class CategoryCell: UITableViewCell {
         return view
     }()
     
-    private lazy var categoryLabel = UILabel.createSimpleLabel(text: "", size: 15, width: .semibold, color: .label)
+    private lazy var categoryLabel = UILabel.createSimpleLabel(text: "", size: 15, width: .semibold, color: .label, aligment: .center, numberLines: 0)
     
     private lazy var circleView: UIView = {
         let view = UIView()

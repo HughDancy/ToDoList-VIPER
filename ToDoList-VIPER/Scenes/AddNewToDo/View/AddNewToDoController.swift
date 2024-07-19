@@ -20,7 +20,7 @@ final class AddNewToDoController: SingleToDoController, AddNewToDoViewProtocol {
     }()
 
     private lazy var titleOfScreen: UILabel = {
-        let label = UILabel.createSimpleLabel(text: "Добавить задачу", size: 35, width: .bold, color: .systemBackground)
+        let label = UILabel.createSimpleLabel(text: "Добавить задачу", size: 35, width: .bold, color: .systemBackground, aligment: .center, numberLines: 0)
         return label
     }()
     

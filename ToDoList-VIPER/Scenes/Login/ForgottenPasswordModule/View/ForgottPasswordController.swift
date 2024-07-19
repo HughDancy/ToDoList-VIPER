@@ -24,7 +24,9 @@ final class ForgottPasswordController: UIViewController, ForgetPasswordViewProto
         let label = UILabel.createSimpleLabel(text: "Введите адрес Вашей электронной почты для сброса пароля",
                                               size: 25,
                                               width: .bold,
-                                              color: .label)
+                                              color: .label,
+                                              aligment: .center,
+                                              numberLines: 0)
         label.numberOfLines = 0
         label.textAlignment = .center
         return label

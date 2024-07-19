@@ -130,8 +130,6 @@
 		D8E9F87C2B03537A00A3F3FC /* HomeTabBarRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F87B2B03537A00A3F3FC /* HomeTabBarRouter.swift */; };
 		D8E9F8A32B04D23900A3F3FC /* UILabel + EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8A22B04D23900A3F3FC /* UILabel + EXT.swift */; };
 		D8E9F8A52B04D32B00A3F3FC /* UITextField + EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8A42B04D32B00A3F3FC /* UITextField + EXT.swift */; };
-		D8E9F8A72B04D58900A3F3FC /* UIButton + EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8A62B04D58900A3F3FC /* UIButton + EXT.swift */; };
-		D8E9F8AF2B0B40FE00A3F3FC /* UIDatePicker + EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8AE2B0B40FE00A3F3FC /* UIDatePicker + EXT.swift */; };
 		D8E9F8B12B0B47FB00A3F3FC /* DateFormatter + EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8B02B0B47FB00A3F3FC /* DateFormatter + EXT.swift */; };
 		D8E9F8B92B0CC0CB00A3F3FC /* ToDoObject+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8B72B0CC0CB00A3F3FC /* ToDoObject+CoreDataClass.swift */; };
 		D8E9F8BA2B0CC0CB00A3F3FC /* ToDoObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8B82B0CC0CB00A3F3FC /* ToDoObject+CoreDataProperties.swift */; };
@@ -276,8 +274,6 @@
 		D8E9F87B2B03537A00A3F3FC /* HomeTabBarRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarRouter.swift; sourceTree = "<group>"; };
 		D8E9F8A22B04D23900A3F3FC /* UILabel + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel + EXT.swift"; sourceTree = "<group>"; };
 		D8E9F8A42B04D32B00A3F3FC /* UITextField + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField + EXT.swift"; sourceTree = "<group>"; };
-		D8E9F8A62B04D58900A3F3FC /* UIButton + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton + EXT.swift"; sourceTree = "<group>"; };
-		D8E9F8AE2B0B40FE00A3F3FC /* UIDatePicker + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDatePicker + EXT.swift"; sourceTree = "<group>"; };
 		D8E9F8B02B0B47FB00A3F3FC /* DateFormatter + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter + EXT.swift"; sourceTree = "<group>"; };
 		D8E9F8B72B0CC0CB00A3F3FC /* ToDoObject+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToDoObject+CoreDataClass.swift"; sourceTree = "<group>"; };
 		D8E9F8B82B0CC0CB00A3F3FC /* ToDoObject+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToDoObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -1120,8 +1116,6 @@
 			children = (
 				D8E9F8A22B04D23900A3F3FC /* UILabel + EXT.swift */,
 				D8E9F8A42B04D32B00A3F3FC /* UITextField + EXT.swift */,
-				D8E9F8A62B04D58900A3F3FC /* UIButton + EXT.swift */,
-				D8E9F8AE2B0B40FE00A3F3FC /* UIDatePicker + EXT.swift */,
 				D8E9F8B02B0B47FB00A3F3FC /* DateFormatter + EXT.swift */,
 				D8E9F8BD2B17427F00A3F3FC /* Date + EXT.swift */,
 				D8E840532B63A8F0005A0936 /* String + EXT.swift */,
@@ -1428,7 +1422,6 @@
 				D874745D2B99A95600BF4866 /* RegistrationController.swift in Sources */,
 				D8B1E9DB2BA8479E00D455AF /* AddNewToDoPresenter.swift in Sources */,
 				D87087D42BEA35BB00EEDDD7 /* NotificationNames.swift in Sources */,
-				D8E9F8A72B04D58900A3F3FC /* UIButton + EXT.swift in Sources */,
 				D8C19ED02B90B333004BCDDD /* SignInController.swift in Sources */,
 				D8E00C712C1345D5005AEA4D /* ForgettPasswortPresenter.swift in Sources */,
 				D85C5DB02B614E2F00F548AA /* LoginProtocols.swift in Sources */,
@@ -1436,7 +1429,6 @@
 				D86422D22C36A841000A0BDF /* ToDoUserDefaults.swift in Sources */,
 				D8B1E9CB2BA465A300D455AF /* AddNewToDoController.swift in Sources */,
 				D8E00C6D2C131425005AEA4D /* ForgottPasswordController.swift in Sources */,
-				D8E9F8AF2B0B40FE00A3F3FC /* UIDatePicker + EXT.swift in Sources */,
 				D86D44E42AFB932E00894774 /* SceneDelegate.swift in Sources */,
 				D8E8405C2B63B2D1005A0936 /* LoginRouter.swift in Sources */,
 				D8E840562B63AA69005A0936 /* CABasicAnimation + EXT.swift in Sources */,
