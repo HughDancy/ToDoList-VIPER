@@ -16,7 +16,7 @@ final class UserOptionInteractor: UserOptionInputInteractorProtocol {
   //MARK: - Properties
     var presenter: UserOptionOutputInteractorProtocol?
     private let db = Firestore.firestore()
-    private var storageManager = FirebaseStorageManager.shared
+    private var storageManager = FirebaseStorageManager()
     private var tempAvatar: UIImage? = nil
     
     //MARK: - Protocol Method's
@@ -39,6 +39,7 @@ final class UserOptionInteractor: UserOptionInputInteractorProtocol {
         
         if tempAvatar != nil {
             storageManager.saveImage(image: tempAvatar ?? mockAvatar, name: userUid)
+            print(userUid)
         }
         NotificationCenter.default.post(name: NotificationNames.updateUserData.name, object: nil)
         presenter?.dismiss()

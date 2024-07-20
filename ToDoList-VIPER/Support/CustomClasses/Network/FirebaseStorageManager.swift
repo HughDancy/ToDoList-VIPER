@@ -13,16 +13,12 @@ import FirebaseFirestore
 import Kingfisher
 
 final class FirebaseStorageManager {
-    static let shared = FirebaseStorageManager()
+//    static let shared = FirebaseStorageManager()
     
     //MARK: - Property's
     private let storage = Storage.storage().reference()
     private let db = Firestore.firestore()
     private var authManager = AuthKeychainManager()
-    
-    init() {
-        self.loadAvatar()
-    }
     
     //MARK: - Upload and load avatar to/from server
     func saveImage(image: UIImage, name: String) {
@@ -37,16 +33,16 @@ final class FirebaseStorageManager {
         }
     }
     
-    func loadAvatar() {
-        guard let userId = authManager.id else { return  }
+    func newLoadAvatar(compelition: @escaping (_ imageUrl : URL?) -> Void) { 
+        guard let userId = authManager.id else  { return  }
         let avatarRef = storage.child(userId)
         
         avatarRef.downloadURL { url, error in
             if error != nil {
                 print("When download avatar url something went wrong")
             } else {
-                print("LoadAvatar method avatar id is - \(url)")
                 UserDefaults.standard.set(url, forKey: "UserAvatar")
+                compelition(url)
             }
         }
     }

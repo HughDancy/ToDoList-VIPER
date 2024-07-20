@@ -15,6 +15,7 @@ final class OptionsInteractor: OptionsInputInteractorProtocol {
     var presenter: OptionsOutputInteractorProtocol?
     let firebaseAuth = Auth.auth()
     private var toDoUserDefaults = ToDoUserDefaults.shares
+    private var authMangaer = AuthKeychainManager()
     
     //MARK: - Interactor Methods
     func fetchOptionsData() {
@@ -49,6 +50,7 @@ final class OptionsInteractor: OptionsInputInteractorProtocol {
     func loggedOut() {
         do {
             try? firebaseAuth.signOut()
+            authMangaer.clear()
         } catch {
             print("Some error when logged out from Options screen")
         }

@@ -101,14 +101,16 @@ final class MainScreenView: UIView {
     }
     
     //MARK: - Setup elements
-    func setupElements(userName: String, userAvatar: URL?) {
+    func setupName(userName: String) {
+        self.userName.text = "Привет, \(userName)!"
+    }
+    
+    func setupAvatar(url: URL?) {
         self.userAvatar.kf.setImage(
-            with: userAvatar,
+            with: url,
             placeholder: UIImage(named: "mockUser_3"),
             options: [
-                .cacheOriginalImage
-            ])
-        self.userName.text = "Привет, \(userName)!"
+                .cacheOriginalImage])
     }
 }
 

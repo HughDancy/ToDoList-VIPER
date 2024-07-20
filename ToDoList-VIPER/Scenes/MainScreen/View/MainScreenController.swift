@@ -13,8 +13,8 @@ final class MainScreenController: UIViewController {
     
     //MARK: - Outelts
     let mockColors: [UIColor] = [.systemOrange, .systemRed, .systemTeal, .systemGreen]
-    
-    var userData: (name: String, avatarUrl: URL?) = ("", nil)
+    var userName: String = ""
+    var userAvatar: URL? = nil
     var toDosInfo: [[String]] = [[]] {
         didSet {
             self.mainView?.toDosCollection.reloadData()
@@ -30,7 +30,6 @@ final class MainScreenController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigationBar()
-        self.mainView?.setupElements(userName: userData.name, userAvatar: userData.avatarUrl)
         subcribeToNotification()
         self.updateDownloadTask()
     }
@@ -39,6 +38,7 @@ final class MainScreenController: UIViewController {
         super.viewDidLoad()
         presenter?.getToDosCount()
         view = MainScreenView()
+        self.setupMainViewElements()
         setupCollectionView()
     }
     
@@ -51,6 +51,11 @@ final class MainScreenController: UIViewController {
     private func setupNavigationBar() {
         self.navigationItem.largeTitleDisplayMode = .never
         self.navigationController?.navigationBar.prefersLargeTitles = false
+    }
+    
+    func setupMainViewElements() {
+        self.mainView?.setupName(userName: userName)
+        self.mainView?.setupAvatar(url: userAvatar)
     }
     
     //MARK: - Notification
@@ -105,10 +110,15 @@ extension MainScreenController: UICollectionViewDelegate, UICollectionViewDataSo
 
 //MARK: - MainScreenViewPtorocol Extension
 extension MainScreenController: MainScreenViewProtocol {
-    func getUserData(_ userInfo: (name: String, avatarUrl: URL?)) {
-        self.userData = userInfo
+    func getUserName(_ userName: String) {
+        self.userName = userName
     }
     
+    func getUserAvatar(_ userAvatar: URL?) {
+        self.userAvatar = userAvatar
+        self.mainView?.setupAvatar(url: userAvatar)
+    }
+
     func getToDosCount(_ toDosCount: [[String]]) {
         self.toDosInfo = toDosCount
     }

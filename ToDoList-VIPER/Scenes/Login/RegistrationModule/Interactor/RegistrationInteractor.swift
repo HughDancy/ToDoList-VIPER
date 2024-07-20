@@ -14,7 +14,7 @@ import Photos
 final class RegistrationInteractor: RegistrationInteractorInputProtocol {
     var presenter: RegistrationInteractorOutputProtocol?
     private let db = Firestore.firestore()
-    private var storageManager = FirebaseStorageManager.shared
+    private var storageManager = FirebaseStorageManager()
     var avatarTemp = UIImage()
     
     func registerNewUser(name: String, email: String, password: String) {

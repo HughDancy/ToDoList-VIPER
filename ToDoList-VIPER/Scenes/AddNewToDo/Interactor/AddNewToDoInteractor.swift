@@ -12,7 +12,7 @@ final class AddNewToDoInteractor: AddNewToDoInteractorProtocol {
     
     //MARK: - Property's
     private var localStorage = TaskStorageManager.instance
-    private var networkStorage = FirebaseStorageManager.shared
+    private var networkStorage = FirebaseStorageManager()
     private var categoryManger = TaskCategoryManager()
     
     func addNewToDo(with name: String?, description: String?, date: Date?, colorCategory: UIColor, iconName: String) {

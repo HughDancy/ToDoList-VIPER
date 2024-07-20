@@ -35,36 +35,16 @@ final class LoginController: SingInController {
                                                      returnKey: .done,
                                                      secure: true)
     
+    private lazy var orLabel = UILabel.createSimpleLabel(text: "или войти с помощью",
+                                                         size: 15,
+                                                         width: .semibold,
+                                                         color: .systemGray2,
+                                                         aligment: .center,
+                                                         numberLines: 1)
+
     private lazy var loginButton = LoadingButton(originalText: "Войти", type: .custom)
-    
-    private lazy var forgottPasswordButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Забыли пароль?", for: .normal)
-        button.backgroundColor = .systemBackground
-        button.tintColor = .systemCyan
-        button.addTarget(self, action: #selector(goToForgottenPassword), for: .touchDown)
-        return button
-    }()
-    
-    private lazy var registerButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Зарегестрироваться", for: .normal)
-        button.backgroundColor = .systemBackground
-        button.tintColor = .systemCyan
-        button.layer.cornerRadius = 10
-        button.clipsToBounds = true
-        button.addTarget(self, action: #selector(registerUser), for: .touchDown)
-        return button
-    }()
-    
-    private lazy var orLabel: UILabel = {
-        let label = UILabel()
-        label.text = "или войти с помощью"
-        label.textColor = .systemGray2
-        label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
-        return label
-    }()
-    
+    private lazy var forgottPasswordButton = UIButton.createPlainButton(text: "Забыли пароль?", tintColor: .systemCyan, backgoroundColor: .systemBackground)
+    private lazy var registerButton = UIButton.createPlainButton(text: "Зарегестрироваться", tintColor: .systemCyan, backgoroundColor: .systemBackground)
     private lazy var googleLoginButton = CircleBaseButton(imageName: "googleLogo", typeOfImage: .customImage, color: .systemFill, cornerRadius: 30)
     private lazy var appleLoginButton = CircleBaseButton(imageName: "apple.logo", typeOfImage: .systemImage, color: .systemFill, cornerRadius: 30)
     
@@ -167,6 +147,7 @@ final class LoginController: SingInController {
     private func setupButtons() {
         loginButton.addTarget(self, action: #selector(loginApp), for: .touchDown)
         registerButton.addTarget(self, action: #selector(registerUser), for: .touchDown)
+        forgottPasswordButton.addTarget(self, action: #selector(goToForgottenPassword), for: .touchDown)
         googleLoginButton.addTarget(self, action: #selector(googleLogin), for: .touchDown)
         appleLoginButton.addTarget(self, action: #selector(appleLogIn), for: .touchDown)
     }
@@ -194,8 +175,10 @@ final class LoginController: SingInController {
         presenter?.appleSignIn()
         print("You login with Apple")
     }
-    
-    //MARK: - Notification
+}
+
+   //MARK: - Notification Subscribe Extension
+extension LoginController {
     private func subscribeToNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(startAnimateLoginButton), name: NotificationNames.googleSignIn.name, object: nil)
     }
@@ -205,6 +188,7 @@ final class LoginController: SingInController {
     }
 }
 
+   //MARK: - LoginView Protocol Extension
 extension LoginController: LoginViewProtocol {
     func makeAnimateTextField(with state: LogInStatus) {
         if state == .emptyLogin {

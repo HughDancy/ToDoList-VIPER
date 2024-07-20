@@ -9,7 +9,8 @@ import UIKit
 
 protocol MainScreenViewProtocol: AnyObject {
     var presenter: MainScreenPresenterProtocol? { get set }
-    func getUserData(_ userInfo: (name: String, avatarUrl: URL?))
+    func getUserName(_ userName: String)
+    func getUserAvatar(_ userAvatar: URL?)
     func getToDosCount(_ toDosCount: [[String]])
 }
 
@@ -37,7 +38,8 @@ protocol MainScreenInteractorInputProtocol: AnyObject {
 
 protocol MainScreenInteractorOutputProtocol: AnyObject {
     //INTERACTOR -> PRESENTER
-    func didRetriveUserData(_ info: (name: String, avatarUrl: URL?))
+    func didRetriveUserName(_ name: String)
+    func didRetriveUserAvatar(_ avatarUrl: URL?)
     func didRetriveToDosCount(_ info: [[String]])
 }
 

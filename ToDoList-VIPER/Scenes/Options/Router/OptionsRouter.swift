@@ -39,6 +39,7 @@ final class OptionsRouter: OptionsRouterProtocol {
         NewUserCheck.shared.setIsLoginScrren()
         NewUserCheck.shared.setIsNotFirstStartOnboarding()
         TaskStorageManager.instance.deleteAllEntities()
+        UserDefaults.standard.removeObject(forKey: "UserAvatar")
         let loginModule = AppConfigurator.configuator.logOut()
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate
         sceneDelegate.window?.rootViewController = loginModule

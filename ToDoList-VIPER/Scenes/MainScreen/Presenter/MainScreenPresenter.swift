@@ -43,8 +43,12 @@ final class MainScreenPresenter: MainScreenPresenterProtocol {
 }
 
 extension MainScreenPresenter: MainScreenInteractorOutputProtocol {
-    func didRetriveUserData(_ info: (name: String, avatarUrl: URL?)) {
-        view?.getUserData(info)
+    func didRetriveUserName(_ name: String) {
+        view?.getUserName(name)
+    }
+    
+    func didRetriveUserAvatar(_ avatarUrl: URL?) {
+        view?.getUserAvatar(avatarUrl)
     }
         
     func didRetriveToDosCount(_ info: [[String]]) {

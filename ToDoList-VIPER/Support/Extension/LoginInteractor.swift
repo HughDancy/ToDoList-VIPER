@@ -16,10 +16,9 @@ final class LoginInteractor: LoginInteractorInputProtocol {
     //MARK: - Properties
     private var keyChainedManager = AuthKeychainManager()
     private let db = Firestore.firestore()
-    private let firebaseStorage = FirebaseStorageManager.shared
-    private let taskManager = FirebaseStorageManager()
+//    private let firebaseStorage = FirebaseStorageManager()
     
-    //MARK: - Login
+    //MARK: - Login with email and password
     func checkAutorizationData(login: String?, password: String?) {
         switch (login != nil) && (password != nil) {
         case (login == "") || (password == ""):
@@ -33,23 +32,7 @@ final class LoginInteractor: LoginInteractorInputProtocol {
         default:
             guard let nickname = login,
                   let pass = password else { return }
-            Auth.auth().signIn(withEmail: nickname, password: pass) { dataResult, error in
-                if error != nil {
-                    self.presenter?.getVerificationResult(with: .wrongEnteredData)
-                } else {
-                    Task {
-                        await self.taskManager.loadTaskFromFirestore()
-                    }
-                    let uid = dataResult?.user.uid ?? UUID().uuidString
-                    let name = Auth.auth().currentUser?.displayName
-                    print("USER NAME IS - \(name)")
-                    UserDefaults.standard.set(name, forKey: NotificationNames.userName.rawValue)
-                   
-                    self.keyChainedManager.persist(id: uid)
-                   
-                    self.presenter?.getVerificationResult(with: .success)
-                }
-            }
+            self.logInWithEmailAndPassword(email: nickname, password: pass)
         }
     }
     
@@ -64,54 +47,81 @@ final class LoginInteractor: LoginInteractorInputProtocol {
             }
             
             let uuid = signInResult?.user.userID ?? UUID().uuidString
-            var userName = signInResult?.user.profile?.name
-            let docRef = self.db.collection("users").whereField("uid", isEqualTo: uuid)
-            
-            docRef.getDocuments { snapshot, error in
-                if error != nil {
-                    print(error?.localizedDescription as Any)
-        
-                } else {
-                    if let doc = snapshot?.documents, !doc.isEmpty {
-                        NotificationCenter.default.post(name: NotificationNames.googleSignIn.name, object: nil)
-                        self.setUserName(userName)
-                        self.presenter?.getVerificationResult(with: .googleSignInSucces)
-                        print("Seems all is alright")
-                    } else {
-                        userName = signInResult?.user.profile?.name
-                        self.db.collection("users").addDocument(data: [
-                            "email" : signInResult?.user.profile?.email ?? "",
-                            "name" : signInResult?.user.profile?.name ?? "",
-                            "password" : "",
-                            "uid": uuid
-                        ], completion: { error in
-                            if error != nil {
-                                self.presenter?.getVerificationResult(with: .wrongEnteredData)
-                            } else {
-                                DispatchQueue.main.async {
-                                    let image = UIImage(named: "mockUser_3")!
-                                    self.firebaseStorage.saveImage(image: image, name: uuid)
-                                }
-                                self.keyChainedManager.persist(id: uuid)
-                                NotificationCenter.default.post(name: NotificationNames.googleSignIn.name, object: nil)
-                                self.setUserName(userName)
-                                self.firebaseStorage.loadAvatar()
-                                Task {
-                                    await self.taskManager.loadTaskFromFirestore()
-                                }
-                                self.presenter?.getVerificationResult(with: .googleSignInSucces)
-                            }})
-                    }
-                }
-            }
+            let userName = signInResult?.user.profile?.name
+            self.writeUserDataGoogleSingIn(signInResult: signInResult, userName: userName, uuid: uuid)
         }
     }
     
     func changeOnboardingState() {
         NewUserCheck.shared.setIsLoginScrren()
     }
-    
-    //MARK: - Get user name
+}
+
+   //MARK: - SingIn with email and password method
+extension LoginInteractor {
+    private func logInWithEmailAndPassword(email: String, password: String) {
+        let taskManager = FirebaseStorageManager()
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] dataResult, error in
+            if error != nil {
+                self?.presenter?.getVerificationResult(with: .wrongEnteredData)
+            } else {
+                Task {
+                    await taskManager.loadTaskFromFirestore()
+                }
+                let uid = dataResult?.user.uid ?? UUID().uuidString
+                let name = Auth.auth().currentUser?.displayName
+                UserDefaults.standard.set(name, forKey: NotificationNames.userName.rawValue)
+                self?.keyChainedManager.persist(id: uid)
+                self?.presenter?.getVerificationResult(with: .success)
+            }
+        }
+    }
+}
+    //MARK: - Google SingIn Method extension
+extension LoginInteractor {
+    private func writeUserDataGoogleSingIn(signInResult: GIDSignInResult?, userName: String?, uuid: String) {
+        let docRef = db.collection("users").whereField("uid", isEqualTo: uuid)
+        let taskManager = FirebaseStorageManager()
+        docRef.getDocuments { snapshot, error in
+            if error != nil {
+                print(error?.localizedDescription as Any)
+            } else {
+                if let doc = snapshot?.documents, !doc.isEmpty {
+                    NotificationCenter.default.post(name: NotificationNames.googleSignIn.name, object: nil)
+                    self.setUserName(userName)
+                    self.presenter?.getVerificationResult(with: .googleSignInSucces)
+                    print("Seems all is alright")
+                } else {
+                    let newUserName = signInResult?.user.profile?.name ?? "Some User"
+                    self.db.collection("users").addDocument(data: [
+                        "email" : signInResult?.user.profile?.email ?? "",
+                        "name" : signInResult?.user.profile?.name ?? "",
+                        "password" : "",
+                        "uid": uuid
+                    ], completion: { error in
+                        if error != nil {
+                            self.presenter?.getVerificationResult(with: .wrongEnteredData)
+                        } else {
+                            DispatchQueue.main.async {
+                                let image = UIImage(named: "mockUser_3")!
+                                taskManager.saveImage(image: image, name: uuid)
+                            }
+                            self.keyChainedManager.persist(id: uuid)
+                            NotificationCenter.default.post(name: NotificationNames.googleSignIn.name, object: nil)
+                            self.setUserName(newUserName)
+                            Task {
+                                await taskManager.loadTaskFromFirestore()
+                            }
+                            self.presenter?.getVerificationResult(with: .googleSignInSucces)
+                        }})
+                }
+            }
+        }
+    }
+}
+
+   //MARK: - Get user name method
+extension LoginInteractor {
     private func setUserName(_ name: String?) {
         guard let userName = name else {
             UserDefaults.standard.setValue("Test", forKeyPath: "UserName")
@@ -120,4 +130,3 @@ final class LoginInteractor: LoginInteractorInputProtocol {
         UserDefaults.standard.setValue(userName, forKeyPath: "UserName")
     }
 }
-
