@@ -81,7 +81,6 @@ extension LoginInteractor {
 extension LoginInteractor {
     private func writeUserDataGoogleSingIn(signInResult: GIDSignInResult?, userName: String?, uuid: String) {
         let docRef = db.collection("users").whereField("uid", isEqualTo: uuid)
-        let taskManager = FirebaseStorageManager()
         docRef.getDocuments { snapshot, error in
             if error != nil {
                 print(error?.localizedDescription as Any)
@@ -89,11 +88,12 @@ extension LoginInteractor {
                 if let doc = snapshot?.documents, !doc.isEmpty {
                     NotificationCenter.default.post(name: NotificationNames.googleSignIn.name, object: nil)
                     self.setUserName(userName)
+                    self.keyChainedManager.persist(id: uuid)
                     self.presenter?.getVerificationResult(with: .googleSignInSucces)
                     print("Seems all is alright")
                 } else {
                     let newUserName = signInResult?.user.profile?.name ?? "Some User"
-                    self.db.collection("users").addDocument(data: [
+                    self.db.collection("users").document(uuid).setData( [
                         "email" : signInResult?.user.profile?.email ?? "",
                         "name" : signInResult?.user.profile?.name ?? "",
                         "password" : "",
@@ -102,21 +102,26 @@ extension LoginInteractor {
                         if error != nil {
                             self.presenter?.getVerificationResult(with: .wrongEnteredData)
                         } else {
-                            DispatchQueue.main.async {
-                                let image = UIImage(named: "mockUser_3")!
-                                taskManager.saveImage(image: image, name: uuid)
-                            }
-                            self.keyChainedManager.persist(id: uuid)
-                            NotificationCenter.default.post(name: NotificationNames.googleSignIn.name, object: nil)
-                            self.setUserName(newUserName)
-                            Task {
-                                await taskManager.loadTaskFromFirestore()
-                            }
-                            self.presenter?.getVerificationResult(with: .googleSignInSucces)
+                            self.saveGoogleUserData(name: newUserName, uid: uuid)
                         }})
                 }
             }
         }
+    }
+    
+    private func saveGoogleUserData(name: String, uid: String) {
+        let taskManager = FirebaseStorageManager()
+        DispatchQueue.main.async {
+            let image = UIImage(named: "mockUser_3")!
+            taskManager.saveImage(image: image, name: uid)
+        }
+        self.keyChainedManager.persist(id: uid)
+        NotificationCenter.default.post(name: NotificationNames.googleSignIn.name, object: nil)
+        self.setUserName(name)
+        Task {
+            await taskManager.loadTaskFromFirestore()
+        }
+        self.presenter?.getVerificationResult(with: .googleSignInSucces)
     }
 }
 

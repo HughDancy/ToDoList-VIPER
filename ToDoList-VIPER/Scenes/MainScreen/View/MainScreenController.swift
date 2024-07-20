@@ -70,6 +70,7 @@ final class MainScreenController: UIViewController {
     
     @objc func updateUserData() {
         self.presenter?.updateUserData()
+        self.mainView?.setupName(userName: userName)
     }
     
     private func updateDownloadTask() {

@@ -110,7 +110,7 @@ extension AnimationLoadingController {
                 self.presenter?.goToNextScreen(view)
             })
         }) { _ in
-            self.presenter?.changeRootController(view)
+//            self.presenter?.changeRootController(view)
         }
     }
 }

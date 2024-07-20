@@ -10,7 +10,6 @@ import UIKit
 protocol AnimationLoadingRouterProtocol: AnyObject {
     static func createLoadingModule(_ nextViewController: UIViewController) -> UIViewController
     func goToTheApp(fromView: AnimationLoadingControllerProtocol, to nextViewController: UIViewController)
-    func changeRootContorller(_ nextViewController: UIViewController)
 }
 
 final class AnimationLoadingRouter: AnimationLoadingRouterProtocol {
@@ -33,11 +32,6 @@ final class AnimationLoadingRouter: AnimationLoadingRouterProtocol {
         nextViewController.modalTransitionStyle = .crossDissolve
         nextViewController.modalPresentationStyle = .fullScreen
         parrentView.present(nextViewController, animated: true)
-    }
-    
-    func changeRootContorller(_ nextViewController: UIViewController) {
-        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate
-        sceneDelegate.window?.rootViewController = nextViewController
     }
 }
 

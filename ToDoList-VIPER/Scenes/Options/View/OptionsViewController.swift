@@ -45,7 +45,13 @@ class OptionsViewController: UIViewController {
     
     private lazy var changeUserData: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Редактировать", for: .normal)
+        let titleFont = UIFont.systemFont(ofSize: OptionsScreenSizes.redacrButtonFont.value, weight: .medium)
+        let attributes: [NSAttributedString.Key: Any] = [
+                   .font: titleFont
+               ]
+        let atributeTitle = NSAttributedString(string: "Редактировать", attributes: attributes)
+        button.setAttributedTitle(atributeTitle, for: .normal)
+//        button.setTitle("Редактировать", for: .normal)
         button.tintColor = .systemOrange
         button.backgroundColor = .clear
         button.addTarget(self, action: #selector(goToUserOptions), for: .touchDown)
@@ -85,7 +91,6 @@ class OptionsViewController: UIViewController {
         setupNotificationObserver()
         presenter?.getData()
         view.overrideUserInterfaceStyle = ToDoUserDefaults.shares.theme.getUserInterfaceStyle()
-//        view.backgroundColor = .systemBackground
         setupHierarchy()
         setupLayout()
        
@@ -150,7 +155,7 @@ class OptionsViewController: UIViewController {
         self.presenter?.updateUserData()
         self.userName.text = userData.0
         DispatchQueue.main.asyncAfter(deadline: .now() + 4.5, execute: {
-            self.avatarImage.kf.setImage(with: self.userData.1,
+            self.avatarImage.kf.setImage(with: UserDefaults.standard.url(forKey: "UserAvatar"),
                                   placeholder: UIImage(named: "mockUser_3"),
                                   options: [
                                     .cacheOriginalImage
@@ -218,6 +223,8 @@ extension OptionsViewController: OptionCellDelegate {
 fileprivate enum OptionsScreenSizes: CGFloat {
     case avatarSize = 200
     case avatarCornerRadius = 100
+    case userNameFont = 35
+    case redacrButtonFont = 18
     
     
     var value: CGFloat {
@@ -226,6 +233,10 @@ fileprivate enum OptionsScreenSizes: CGFloat {
             UIScreen.main.bounds.height > 700 ? rawValue : 140
         case .avatarCornerRadius:
             UIScreen.main.bounds.height > 700 ? rawValue : 70
+        case .userNameFont:
+            UIScreen.main.bounds.height > 700 ? rawValue : 25
+        case .redacrButtonFont:
+            UIScreen.main.bounds.height > 700 ? rawValue : 15
         }
     }
 }

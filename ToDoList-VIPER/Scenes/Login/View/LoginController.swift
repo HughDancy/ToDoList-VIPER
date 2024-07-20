@@ -119,7 +119,6 @@ final class LoginController: SingInController {
         registerButton.snp.makeConstraints { make in
             make.top.equalTo(loginButton.snp.bottom).offset(7)
             make.leading.trailing.equalTo(scrollView.safeAreaLayoutGuide).inset(40)
-            make.height.equalTo(35)
         }
         
         forgottPasswordButton.snp.makeConstraints { make in

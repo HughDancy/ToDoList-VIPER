@@ -110,7 +110,8 @@ final class MainScreenView: UIView {
             with: url,
             placeholder: UIImage(named: "mockUser_3"),
             options: [
-                .cacheOriginalImage])
+                .cacheOriginalImage
+            ])
     }
 }
 

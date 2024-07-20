@@ -21,24 +21,27 @@ final class UserOptionInteractor: UserOptionInputInteractorProtocol {
     
     //MARK: - Protocol Method's
     func saveUserInfo(name: String) {
-        let userUid = Auth.auth().currentUser?.uid ?? UUID().uuidString
+        let keychainManager = AuthKeychainManager()
+        let userUid = keychainManager.id
         let mockAvatar = UIImage(named: "mockUser_1")!
-        UserDefaults.standard.set(name, forKey: NotificationNames.userName.rawValue)
-        db.collection("users").document(userUid).setData(["displayName" : name, "name": name], merge: true)
-        let user = Auth.auth().currentUser
-        let changeRequest = user?.createProfileChangeRequest()
-        changeRequest?.displayName = name
-        changeRequest?.commitChanges(completion: { error in
-            if error != nil {
-                print("error when try save changed user name")
-            } else {
-                print("Saving changed user name was succes")
-            }
-        })
+        if name != UserDefaults.standard.string(forKey: NotificationNames.userName.rawValue) {
+            UserDefaults.standard.set(name, forKey: NotificationNames.userName.rawValue)
+            db.collection("users").document(userUid ?? UUID().uuidString).setData(["displayName" : name, "name": name], merge: true)
+            let user = Auth.auth().currentUser
+            let changeRequest = user?.createProfileChangeRequest()
+            changeRequest?.displayName = name
+            changeRequest?.commitChanges(completion: { error in
+                if error != nil {
+                    print("error when try save changed user name")
+                } else {
+                    print("Saving changed user name was succes")
+                }
+            })
+        }
         
         
         if tempAvatar != nil {
-            storageManager.saveImage(image: tempAvatar ?? mockAvatar, name: userUid)
+            storageManager.saveImage(image: tempAvatar ?? mockAvatar, name: userUid ?? UUID().uuidString)
             print(userUid)
         }
         NotificationCenter.default.post(name: NotificationNames.updateUserData.name, object: nil)
