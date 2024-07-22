@@ -42,6 +42,7 @@ final class LoginPresenter: LoginPresenterProtocol {
     }
 }
 
+   //MARK: - Output Presenter methods
 extension LoginPresenter: LoginInteractorOutputProtocol {
     func getVerificationResult(with: LogInStatus) {
         guard let view = view else { return }

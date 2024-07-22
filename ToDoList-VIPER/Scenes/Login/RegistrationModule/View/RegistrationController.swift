@@ -12,19 +12,17 @@ final class RegistrationController: SingInController {
     var presenter: RegistrationPresenterPtorocol?
     
     //MARK: - OUTLETS
-    private lazy var createNewUserLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Создайте аккаунт"
-        label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
-        label.textColor = .systemCyan
-        return label
-    }()
-    
-    
+    private lazy var createNewUserLabel = UILabel.createSimpleLabel(text: "Создайте аккаунт", 
+                                                                    size: 25,
+                                                                    width: .semibold,
+                                                                    color: .systemCyan,
+                                                                    aligment: .center,
+                                                                    numberLines: 1)
+
     private lazy var image: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: MockUsersAvatrs.collection.randomElement()?.imageName ?? "mockUser_1")
-        imageView.layer.cornerRadius = RegistrationSizes.imageSize.getImageSize() / 2
+        imageView.layer.cornerRadius = RegistrationSizes.imageSize.value / 2
         imageView.clipsToBounds = true
         imageView.isUserInteractionEnabled = true
         return imageView
@@ -32,7 +30,7 @@ final class RegistrationController: SingInController {
     
     private lazy var choosePictureLabel: UIButton = {
         let button = UIButton(type: .system)
-        let titleFont = UIFont.systemFont(ofSize: RegistrationSizes.avatarFontSize.getAvatarFontSize(), weight: .medium)
+        let titleFont = UIFont.systemFont(ofSize: RegistrationSizes.avatarFontSize.value, weight: .medium)
         let attributes: [NSAttributedString.Key: Any] = [
                    .font: titleFont
                ]
@@ -102,13 +100,13 @@ final class RegistrationController: SingInController {
         image.snp.makeConstraints { make in
             make.top.equalTo(createNewUserLabel.snp.bottom).offset(15)
             make.centerX.equalTo(scrollView.safeAreaLayoutGuide.snp.centerX)
-            make.height.width.equalTo(RegistrationSizes.imageSize.getImageSize())
+            make.height.width.equalTo(RegistrationSizes.imageSize.value)
         }
         
         choosePictureLabel.snp.makeConstraints { make in
             make.top.equalTo(image.snp.bottom).offset(10)
             make.centerX.equalTo(scrollView.snp.centerX)
-            make.height.equalTo(RegistrationSizes.avatarFontSize.getAvatarFontSize())
+            make.height.equalTo(RegistrationSizes.avatarFontSize.value)
         }
         
         nameField.snp.makeConstraints { make in
@@ -162,13 +160,14 @@ final class RegistrationController: SingInController {
         presenter?.chooseImageSource()
     }
 }
-//MARK: - RegistrationViewProtocol Extension
+     //MARK: - RegistrationViewProtocol Extension
 extension RegistrationController: RegistrationViewProtocol {
     func stopAnimateRegisterButton() {
         self.registerButton.hideLoading()
     }
 }
 
+    //MARK: - ImagePicker and UINavigationController Extension
 extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true)
@@ -183,15 +182,16 @@ extension RegistrationController: UIImagePickerControllerDelegate, UINavigationC
     }
 }
 
-enum RegistrationSizes: CGFloat {
+fileprivate enum RegistrationSizes: CGFloat {
     case imageSize = 300
     case avatarFontSize = 20
     
-    func getImageSize() -> CGFloat {
-        UIScreen.main.bounds.height > 700 ? rawValue : 200
-    }
-    
-    func getAvatarFontSize() -> CGFloat {
-        UIScreen.main.bounds.height > 700 ? rawValue : 15
+    var value: CGFloat {
+        switch self {
+        case .imageSize:
+            UIScreen.main.bounds.height > 700 ? rawValue : 200
+        case .avatarFontSize:
+            UIScreen.main.bounds.height > 700 ? rawValue : 15
+        }
     }
 }

@@ -73,27 +73,27 @@ final class ForgottPasswordController: UIViewController, ForgetPasswordViewProto
     
     private func setupLayout() {
         resetPasswordImage.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(ResetPassSizes.imageTopOffset.getImageOffset())
+            make.top.equalToSuperview().offset(ResetPassSizes.imageTopOffset.value)
             make.height.width.equalTo(250)
-            make.leading.trailing.equalToSuperview().inset(30)
+            make.leading.trailing.equalToSuperview().inset(ResetPassSizes.imageAndFieldHorizontalOffset.value)
         }
         
         forgottLabel.snp.makeConstraints { make in
-            make.top.equalTo(resetPasswordImage.snp.bottom).offset(15)
+            make.top.equalTo(resetPasswordImage.snp.bottom).offset(ResetPassSizes.labelAndFontTopOffset.value)
             make.centerX.equalToSuperview()
-            make.leading.trailing.equalToSuperview().inset(20)
+            make.leading.trailing.equalToSuperview().inset(ResetPassSizes.labelHorizontalOffset.value)
         }
         
         emailTextField.snp.makeConstraints { make in
-            make.top.equalTo(forgottLabel.snp.bottom).offset(15)
-            make.leading.trailing.equalToSuperview().inset(30)
-            make.height.equalTo(40)
+            make.top.equalTo(forgottLabel.snp.bottom).offset(ResetPassSizes.labelAndFontTopOffset.value)
+            make.leading.trailing.equalToSuperview().inset(ResetPassSizes.imageAndFieldHorizontalOffset.value)
+            make.height.equalTo(ResetPassSizes.buttonAndFieldHeight.value)
         }
         
         acceptButton.snp.makeConstraints { make in
             make.top.equalTo(emailTextField.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(40)
-            make.height.equalTo(40)
+            make.height.equalTo(ResetPassSizes.buttonAndFieldHeight.value)
         }
     }
     
@@ -102,7 +102,7 @@ final class ForgottPasswordController: UIViewController, ForgetPasswordViewProto
         presenter?.resetPassword(with: emailTextField.text ?? "")
     }
 }
-
+    //MARK: - TextField Extension
 extension ForgottPasswordController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return emailTextField.resignFirstResponder()
@@ -113,11 +113,25 @@ extension ForgottPasswordController: UITextFieldDelegate {
     }
 }
 
-enum ResetPassSizes: CGFloat {
+fileprivate enum ResetPassSizes: CGFloat {
     case imageTopOffset = 100
+    case imageAndFieldHorizontalOffset = 30
+    case buttonAndFieldHeight = 40
+    case labelAndFontTopOffset = 15
+    case labelHorizontalOffset = 20
     
-    func getImageOffset() -> CGFloat {
-        (UIScreen.main.bounds.height / 5.0) - (UIScreen.main.bounds.width / 5.0)
+    var value: CGFloat {
+        switch self {
+        case .imageTopOffset:
+             (UIScreen.main.bounds.height / 5.0) - (UIScreen.main.bounds.width / 5.0)
+        case .imageAndFieldHorizontalOffset:
+             30
+        case .buttonAndFieldHeight:
+            40
+        case .labelAndFontTopOffset:
+            15
+        case .labelHorizontalOffset:
+            20
+        }
     }
-    
 }

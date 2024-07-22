@@ -25,6 +25,7 @@ final class RegistrationRouter: RegistrationRouterProtocol {
         return view
     }
     
+    //MARK: - Alert method to show allert with registration status
     func showAlert(with result: RegistrationStatus, and view: RegistrationViewProtocol) {
         let alertController = UIAlertController(title: "", message: nil, preferredStyle: .alert)
         guard let view = view as? UIViewController else { return }
@@ -54,6 +55,7 @@ final class RegistrationRouter: RegistrationRouterProtocol {
         }
     }
     
+    //MARK: - Alert for choose avatar source
     func showImageSourceAlert(from view:  RegistrationViewProtocol) {
         guard let registrationView = view as? UIViewController else { return }
         let allertController = UIAlertController(title: "Выберете источник",
@@ -66,7 +68,6 @@ final class RegistrationRouter: RegistrationRouterProtocol {
                 self.goToImagePicker(from: view, status: .camera)
             } else {
                 self.presenter?.checkPermission(with: .camera)
-                print("User choose camera")
             }
            
         }))
@@ -77,18 +78,16 @@ final class RegistrationRouter: RegistrationRouterProtocol {
                 self.goToImagePicker(from: view, status: .gallery)
             } else  {
                 self.presenter?.checkPermission(with: .gallery)
-                print("User choose gallery")
             }
            
         }))
         allertController.addAction(UIAlertAction(title: "Позже",
                                                  style: .cancel,
-                                                 handler: {_ in
-            print("User choose cancel")
-        }))
+                                                 handler: {_ in }))
         registrationView.present(allertController, animated: true)
     }
     
+    //MARK: - Go to the options for permission method
     func goToOption(from view: any RegistrationViewProtocol, with label: String) {
         guard let registrationView = view as? UIViewController else { return }
         let alert = UIAlertController(title: "Открыть настройки",
@@ -102,6 +101,7 @@ final class RegistrationRouter: RegistrationRouterProtocol {
         registrationView.present(alert, animated: true)
     }
     
+    //MARK: - Present ImagePicker method
     func goToImagePicker(from view: any RegistrationViewProtocol, status: PermissionStatus) {
         guard let registrationView = view as? UIViewController else { return }
         let imagePicker = UIImagePickerController()
