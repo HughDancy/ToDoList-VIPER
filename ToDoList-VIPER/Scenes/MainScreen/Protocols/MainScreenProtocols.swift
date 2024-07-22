@@ -21,10 +21,7 @@ protocol MainScreenPresenterProtocol: AnyObject {
     
     //VIEW -> PRESETNER
     func getToDosCount()
-    func goToTodayToDos()
-    func goToTommorowToDos()
-    func goToDoneToDos()
-    func goToOverdueToDos()
+    func goToTodos(with status: ToDoListStatus)
     func updateUserData()
 }
 
@@ -47,8 +44,5 @@ protocol MainScreenRouterProtocol: AnyObject {
     static func createMainScreenModule() -> UIViewController
     
     //PRESENTER -> ROUTER
-    func goTodayToDos(from view: MainScreenViewProtocol)
-    func goTomoorowToDos(from view: MainScreenViewProtocol)
-    func goToOverdueToDos(from view: MainScreenViewProtocol)
-    func goToDoneToDos(from view: MainScreenViewProtocol)
+    func goToToDos(from view: MainScreenViewProtocol, status: ToDoListStatus)
 }

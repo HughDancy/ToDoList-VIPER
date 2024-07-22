@@ -115,7 +115,7 @@ final class MainScreenView: UIView {
     }
 }
 
-enum MainScreenSizes: CGFloat {
+fileprivate enum MainScreenSizes: CGFloat {
     case avatar = 80
     case backgroundImage = 350
     case backgrounImageOffset = -65

@@ -97,13 +97,13 @@ extension MainScreenController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            self.presenter?.goToTodayToDos()
+            self.presenter?.goToTodos(with: .today)
         case 1:
-            self.presenter?.goToOverdueToDos()
+            self.presenter?.goToTodos(with: .overdue)
         case 2:
-            self.presenter?.goToTommorowToDos()
+            self.presenter?.goToTodos(with: .tommorow)
         case 3:
-            self.presenter?.goToDoneToDos()
+            self.presenter?.goToTodos(with: .done)
         default:
             print("No cell action")
         }

@@ -14,31 +14,15 @@ final class MainScreenPresenter: MainScreenPresenterProtocol {
     
     func getToDosCount() {
         interactor?.getToDosCount()
-//        interactor?.retriveUserData()
+    }
+    
+    func goToTodos(with status: ToDoListStatus) {
+        guard let view = view else { return }
+        router?.goToToDos(from: view, status: status)
     }
     
     func updateUserData() {
         interactor?.retriveUserData()
-    }
-    
-    func goToTodayToDos() {
-        guard let view = view else { return }
-        router?.goTodayToDos(from: view)
-    }
-    
-    func goToTommorowToDos() {
-        guard let view = view else { return }
-        router?.goTomoorowToDos(from: view)
-    }
-    
-    func goToDoneToDos() {
-        guard let view = view else { return }
-        router?.goToDoneToDos(from: view)
-    }
-    
-    func goToOverdueToDos() {
-        guard let view = view else { return }
-        router?.goToOverdueToDos(from: view)
     }
 }
 

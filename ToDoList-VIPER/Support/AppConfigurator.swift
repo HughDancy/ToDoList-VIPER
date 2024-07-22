@@ -59,7 +59,7 @@ final class AppConfigurator {
             print(" Start main module. CurrentId is - \(currentId), google id is - \(googleSingInUser). Current user is - \(currentUser)")
             let mainScreen = UINavigationController(rootViewController: MainScreenRouter.createMainScreenModule())
             let optionsScreen = OptionsRouter.createOptionsModule()
-            let mainModule = HomeTabBarRouter.createNewTabBarRouter(tabOne: mainScreen, tabTwo: optionsScreen)
+            let mainModule = HomeTabBarRouter.createHomeTabBar(tabOne: mainScreen, tabTwo: optionsScreen)
             let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate
             sceneDelegate.window?.rootViewController = mainModule
             TaskStorageManager.instance.checkOverdueToDos()

@@ -41,7 +41,7 @@ final class LoginRouter: LoginRouterProtocol {
         NewUserCheck.shared.setIsNotNewUser()
         let mainScreen = MainScreenRouter.createMainScreenModule()
         let optionScreen = OptionsRouter.createOptionsModule()
-        let mainModule = HomeTabBarRouter.createNewTabBarRouter(tabOne: mainScreen, tabTwo: optionScreen)
+        let mainModule = HomeTabBarRouter.createHomeTabBar(tabOne: mainScreen, tabTwo: optionScreen)
         view.navigationController?.pushViewController(mainModule, animated: true)
     }
     

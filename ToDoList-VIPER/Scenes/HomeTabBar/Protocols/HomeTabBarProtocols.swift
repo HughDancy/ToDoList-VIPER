@@ -20,7 +20,7 @@ protocol HomeTabBarPresenterProtocol: AnyObject {
 }
 
 protocol HomeTabBarRouterProtocol: AnyObject {
-    static func createHomeTabBar() -> UIViewController
+    static func createHomeTabBar(tabOne: UIViewController, tabTwo: UIViewController) -> UIViewController
     
     //PRESENTER -> ROUTER
     func presentAddNewToDooScreen(from view: HomeTabBarViewProtocol)

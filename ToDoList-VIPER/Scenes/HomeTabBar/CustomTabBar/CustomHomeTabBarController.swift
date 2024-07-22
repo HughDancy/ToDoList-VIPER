@@ -10,9 +10,7 @@ import UIKit
 
 final class CustomHomeTabBarController: UITabBarController, UITabBarControllerDelegate, HomeTabBarViewProtocol {
     var presenter: HomeTabBarPresenterProtocol?
-    
     private var customTabBar = CustomTabBar()
-    
     private var transition = CircularTransition()
     
     //MARK: - Lifecycle
@@ -61,7 +59,6 @@ final class CustomHomeTabBarController: UITabBarController, UITabBarControllerDe
     
     //MARK: - Middle button
     lazy var middleButton: UIButton = {
-        //        let middleButton = UIButton(frame: CGRect(x: (self.view.bounds.width / 2) - 25 , y: self.view.bounds.height * 0.87, width: 60, height: 60))
         let middleButton = UIButton()
         middleButton.layer.cornerRadius = 30
         middleButton.clipsToBounds = true
@@ -86,7 +83,7 @@ final class CustomHomeTabBarController: UITabBarController, UITabBarControllerDe
         presenter?.presentAddNewToDo()
     }
 }
-
+    //MARK: - UIViewControllerTransitioningDelegate Extension
 extension CustomHomeTabBarController: UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> (any UIViewControllerAnimatedTransitioning)? {
         transition.transitionMode = .present
