@@ -117,14 +117,12 @@ final class AddNewToDoController: SingleToDoController, AddNewToDoViewProtocol {
         descriptionText.textColor = .lightGray
         descriptionText.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         
-        descriptionText.delegate = self
         descriptionText.returnKeyType = .done
     }
     
     //MARK: - Buttons Action
     @objc func addNewToDo() {
         let selectedDate = datePicker.date
-//        Calendar.current.startOfDay(for: datePicker.date)
         print("Date picker selected date is - \(selectedDate)")
         presenter?.addNewToDo(with: nameOfTaskField.text,
                               description: descriptionText.text,
@@ -158,31 +156,5 @@ extension AddNewToDoController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         nameOfTaskField.resignFirstResponder()
         return true
-    }
-}
-
-    //MARK: - UITextView Delegate
-extension AddNewToDoController: UITextViewDelegate {
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if descriptionText.text == "Описание задачи"  {
-            descriptionText.text = ""
-            textView.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
-            textView.textColor = UIColor.label
-        }
-    }
-    
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if text == "\n" {
-            descriptionText.resignFirstResponder()
-        }
-        return true
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if descriptionText.text == "" {
-            descriptionText.text = "Описание задачи"
-            descriptionText.textColor = .lightGray
-            descriptionText.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
-        }
     }
 }

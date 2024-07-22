@@ -21,6 +21,8 @@ final class ToDosDetailController: SingleToDoController {
         textView.backgroundColor = UIColor(named: "coralColor")
         textView.isScrollEnabled = false
         textView.isUserInteractionEnabled = false
+        textView.delegate = self
+        textView.returnKeyType = .continue
         return textView
     }()
     
@@ -203,6 +205,19 @@ extension ToDosDetailController: UITableViewDelegate {
         let categories = TaskCategoryManager.manager.fetchCategories()
         let category = categories[indexPath.row]
         self.setupColorAndIcon(color: category.color, icon: category.iconName)
+    }
+}
+
+extension ToDosDetailController {
+    override func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            if taskName.isFirstResponder {
+                descriptionText.becomeFirstResponder()
+            } else {
+                descriptionText.resignFirstResponder()
+            }
+        }
+        return true
     }
 }
 

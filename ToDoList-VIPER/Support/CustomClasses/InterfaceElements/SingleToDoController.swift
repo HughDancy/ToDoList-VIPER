@@ -18,6 +18,7 @@ class SingleToDoController: UIViewController {
         textView.layer.cornerRadius = 10
         textView.clipsToBounds = true
         textView.textColor = .label
+        textView.delegate = self
         return textView
     }()
     
@@ -83,6 +84,31 @@ class SingleToDoController: UIViewController {
         descriptionText.isUserInteractionEnabled = bool
         datePicker.isUserInteractionEnabled = bool
         categoryTableView.isUserInteractionEnabled = bool
+    }
+}
+
+extension SingleToDoController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if descriptionText.text == "Описание задачи"  {
+            descriptionText.text = ""
+            textView.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+            textView.textColor = UIColor.label
+        }
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            descriptionText.resignFirstResponder()
+        }
+        return true
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if descriptionText.text == "" {
+            descriptionText.text = "Описание задачи"
+            descriptionText.textColor = .lightGray
+            descriptionText.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        }
     }
 }
 
