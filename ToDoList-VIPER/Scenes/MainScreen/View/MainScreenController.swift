@@ -37,6 +37,7 @@ final class MainScreenController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.getToDosCount()
+        presenter?.updateUserData()
         view = MainScreenView()
         self.setupMainViewElements()
         setupCollectionView()

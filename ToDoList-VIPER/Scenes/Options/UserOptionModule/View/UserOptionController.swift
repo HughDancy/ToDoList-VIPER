@@ -81,13 +81,6 @@ final class UserOptionController: UIViewController {
     
     //MARK: - Setup Layout
     private func setupLayout() {
-//        backButton.snp.makeConstraints { make in
-//            make.top.equalToSuperview().offset(25)
-//            make.leading.equalToSuperview().offset(20)
-//            make.height.equalTo(40)
-//            make.width.equalTo(50)
-//        }
-//        
         userAvatar.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(40)

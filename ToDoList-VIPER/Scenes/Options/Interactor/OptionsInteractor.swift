@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 import FirebaseAuth
+import GoogleSignIn
+import GoogleSignInSwift
 
 final class OptionsInteractor: OptionsInputInteractorProtocol {
  
@@ -51,6 +53,7 @@ final class OptionsInteractor: OptionsInputInteractorProtocol {
         do {
             try? firebaseAuth.signOut()
             authMangaer.clear()
+            GIDSignIn.sharedInstance.disconnect()
         } catch {
             print("Some error when logged out from Options screen")
         }

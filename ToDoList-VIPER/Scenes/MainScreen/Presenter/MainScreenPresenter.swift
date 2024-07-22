@@ -14,7 +14,7 @@ final class MainScreenPresenter: MainScreenPresenterProtocol {
     
     func getToDosCount() {
         interactor?.getToDosCount()
-        interactor?.retriveUserData()
+//        interactor?.retriveUserData()
     }
     
     func updateUserData() {

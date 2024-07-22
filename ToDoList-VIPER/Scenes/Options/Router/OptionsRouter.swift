@@ -51,7 +51,7 @@ final class OptionsRouter: OptionsRouterProtocol {
         guard let parrentView = view as? UIViewController else { return }
         if MFMailComposeViewController.canSendMail() {
                 let mail = MFMailComposeViewController()
-            mail.mailComposeDelegate = parrentView as? any MFMailComposeViewControllerDelegate
+                mail.mailComposeDelegate = parrentView as? any MFMailComposeViewControllerDelegate
                 mail.setToRecipients(["hugh.dancy@icloud.com"])
                 mail.setMessageBody("<p>Привет! Я пользуюсь твоим приложением ToDoList-VIPER</p>", isHTML: true)
 

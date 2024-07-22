@@ -106,7 +106,7 @@ extension AnimationLoadingController {
         UIView.animate(withDuration: 1.5, animations: {
             self.loadingImage.alpha = 0
             self.activityIndicator.stopAnimating()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6, execute: {
                 self.presenter?.goToNextScreen(view)
             })
         }) { _ in

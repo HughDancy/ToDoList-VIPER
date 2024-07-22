@@ -72,7 +72,7 @@ final class ToDosInteractor: ToDosInteractorInputProtocol {
         print("Converted task is -  \(deletedTask)")
         firebaseStorage.deleteTaskFromServer(deletedTask)
         storage.deleteToDoObject(item: task)
-       
+        NotificationCenter.default.post(name: NotificationNames.updateMainScreen.name, object: nil)
     }
 }
 

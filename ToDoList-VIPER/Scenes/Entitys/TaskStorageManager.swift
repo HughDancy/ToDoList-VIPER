@@ -114,6 +114,7 @@ final class TaskStorageManager {
         return objectsCount ?? 0
     }
     
+    //MARK: - TO-DO Delete this method
     func fetchAllPrivateToDos() -> [ToDoObject] {
         let fetchRequest: NSFetchRequest<ToDoObject> = ToDoObject.fetchRequest()
         let objects = try! viewContext.fetch(fetchRequest)

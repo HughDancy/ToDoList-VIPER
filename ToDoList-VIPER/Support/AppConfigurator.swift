@@ -55,7 +55,8 @@ final class AppConfigurator {
         let googleSingInUser = GIDSignIn.sharedInstance.currentUser?.userID
         let currentId = authManager.id
         
-        if currentUser == currentId || currentId == googleSingInUser{
+        if currentUser == currentId && currentId != nil || currentId == googleSingInUser && currentId != nil && googleSingInUser != nil {
+            print(" Start main module. CurrentId is - \(currentId), google id is - \(googleSingInUser). Current user is - \(currentUser)")
             let mainScreen = UINavigationController(rootViewController: MainScreenRouter.createMainScreenModule())
             let optionsScreen = OptionsRouter.createOptionsModule()
             let mainModule = HomeTabBarRouter.createNewTabBarRouter(tabOne: mainScreen, tabTwo: optionsScreen)
