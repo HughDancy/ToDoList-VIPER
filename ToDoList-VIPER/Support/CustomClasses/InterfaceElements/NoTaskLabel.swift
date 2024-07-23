@@ -11,8 +11,8 @@ final class NoTaskLabel: UILabel {
     var status: ToDoListStatus
 
     //MARK: - Init
-    init(status: ToDoListStatus, size: CGFloat, weight: UIFont.Weight, color: UIColor) {
-        self.status = status
+    init(status: ToDoListStatus?, size: CGFloat, weight: UIFont.Weight, color: UIColor) {
+        self.status = status ?? .today
         super.init(frame: .zero)
         self.font = UIFont.systemFont(ofSize: size, weight: weight)
         self.textColor = color

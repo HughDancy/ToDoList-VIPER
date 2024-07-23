@@ -18,44 +18,17 @@ final class ToDoController: UIViewController {
     private var toDoTasks: [ToDoObject] = [] {
         didSet {
             if toDoTasks.count == 0 {
-                noTaskView.isHidden = false
+                mainView?.noTaskView.isHidden = false
             } else {
-                noTaskView.isHidden = true
+                mainView?.noTaskView.isHidden = true
             }
         }
     }
-        
-    //MARK: - Outlets
-    private lazy var calendarView: HorizontalCalendarView = {
-        let calendar = HorizontalCalendarView()
-        return calendar
-    }()
     
-    private lazy var toDoTable: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .plain)
-        tableView.backgroundColor = UIColor(named: "tasksBackground")
-        tableView.register(ToDoCell.self, forCellReuseIdentifier: ToDoCell.reuseIdentifier)
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.separatorStyle = .none
-        tableView.showsVerticalScrollIndicator = false
-        return tableView
-    }()
-    
-    private lazy var taskImage: UIImageView = {
-       let imageView = UIImageView()
-        imageView.image = UIImage(named: "noTasks")
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
-    
-    private lazy var tasksLabel = NoTaskLabel(status: presenter?.status ?? .today, size: 25, weight: .bold, color: .white)
-    
-    private lazy var noTaskView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .clear
-        return view
-    }()
+    private var mainView: ToDosView? {
+        guard isViewLoaded else { return nil }
+        return view as? ToDosView
+    }
     
     //MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
@@ -66,6 +39,7 @@ final class ToDoController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print(toDoTasks)
+        view = ToDosView(status: presenter?.status)
         setupView()
     }
     
@@ -86,67 +60,26 @@ final class ToDoController: UIViewController {
     //MARK: - Setup outlets
     private func setupOtlets() {
         updateData(day: 0, index: 10)
-        setupHierarchy()
-        setupLayot()
-        calendarView.calendar.calendarDelegate = self
+        mainView?.tasksLabel.status = presenter?.status ?? .today
+        mainView?.calendarView.calendar.calendarDelegate = self
         setupNotificationObserver()
         setupNoTaskStack()
+        mainView?.toDoTable.delegate = self
+        mainView?.toDoTable.dataSource = self
     }
     
     private func setupCalendarColletcion() {
         DispatchQueue.main.async {
             let calendarModel = CalendarModel()
             let daysArray = calendarModel.getWeekForCalendar(date: self.selectedDate)
-            self.calendarView.calendar.setDaysArray(days: daysArray)
-            self.calendarView.calendar.scrollToItem(at: [0, 10], at: .centeredHorizontally, animated: false)
+            self.mainView?.calendarView.calendar.setDaysArray(days: daysArray)
+            self.mainView?.calendarView.calendar.scrollToItem(at: [0, 10], at: .centeredHorizontally, animated: false)
         }
     }
     
     private func setupNavigationBar() {
         self.navigationItem.largeTitleDisplayMode = .never
         self.navigationController?.navigationBar.prefersLargeTitles = false
-    }
-    
-    //MARK: - Setup Hierarchy
-    private func setupHierarchy() {
-        view.addSubview(calendarView)
-        view.addSubview(toDoTable)
-        view.addSubview(noTaskView)
-        noTaskView.addSubview(taskImage)
-        noTaskView.addSubview(tasksLabel)
-    }
-    
-    //MARK: - Setup Layout
-    private func setupLayot() {
-        noTaskView.snp.makeConstraints { make in
-            make.centerX.centerY.equalTo(view.safeAreaLayoutGuide)
-            make.height.equalTo(300)
-            make.width.equalTo(270)
-        }
-        
-        taskImage.snp.makeConstraints { make in
-            make.top.leading.trailing.equalTo(noTaskView).inset(10)
-        }
-        
-        tasksLabel.snp.makeConstraints { make in
-            make.top.equalTo(taskImage.snp.bottom).offset(10)
-            make.leading.trailing.equalToSuperview().inset(1)
-        }
-        
-        tasksLabel.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(5)
-        }
-        
-        calendarView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(5)
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(130)
-        }
-        
-        toDoTable.snp.makeConstraints { make in
-            make.top.equalTo(calendarView.snp.bottom).offset(15)
-            make.leading.trailing.bottom.equalToSuperview()
-        }
     }
     
     //MARK: - Current date configure for start module
@@ -165,20 +98,20 @@ final class ToDoController: UIViewController {
     
     private func defaultCalendarSetup(date: Date) {
         self.selectedDate = date
-        self.calendarView.calendar.centerDate = date
+        mainView?.calendarView.calendar.centerDate = date
     }
 
     //MARK: - No tasks setup method
     private func setupNoTaskStack() {
         if toDoTasks.count == 0 {
-            noTaskView.isHidden = false
+            mainView?.noTaskView.isHidden = false
         } else {
-            noTaskView.isHidden = true
+            mainView?.noTaskView.isHidden = true
         }
     }
 }
 
-//MARK: - TableView Extension
+    //MARK: - TableView Data Source Extension
 extension ToDoController:  UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return toDoTasks.count
@@ -193,6 +126,7 @@ extension ToDoController:  UITableViewDataSource {
     }
 }
 
+    //MARK: - TableView Delegate Extension
 extension ToDoController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let toDo = toDoTasks[indexPath.row]
@@ -236,7 +170,7 @@ extension ToDoController {
     @objc func updateTables(notification: Notification) {
         DispatchQueue.main.async {
             self.presenter?.updateToDosForDay(self.selectedDate)
-            self.toDoTable.reloadData()
+            self.mainView?.toDoTable.reloadData()
             self.updateCalendar()
             self.tabBarController?.tabBar.isHidden = false
         }
@@ -245,8 +179,8 @@ extension ToDoController {
     private func updateCalendar() {
         let calendarModel = CalendarModel()
         let daysArray = calendarModel.getWeekForCalendar(date: selectedDate)
-        self.calendarView.calendar.setDaysArray(days: daysArray)
-        self.calendarView.calendar.scrollToItem(at: [0, 10], at: .centeredHorizontally, animated: false)
+        mainView?.calendarView.calendar.setDaysArray(days: daysArray)
+        mainView?.calendarView.calendar.scrollToItem(at: [0, 10], at: .centeredHorizontally, animated: false)
     }
     
     
@@ -257,7 +191,8 @@ extension ToDoController {
         guard let index = toDoTasks.firstIndex(of: item) else { return }
         let doneItem = toDoTasks.remove(at: index)
         toDoTasks.append(doneItem)
-        toDoTable.reloadData()
+        mainView?.toDoTable.reloadData()
+        NotificationCenter.default.post(name: NotificationNames.updateMainScreen.name, object: nil)
     }
 }
 
@@ -277,22 +212,22 @@ extension ToDoController: CalendarCollectionViewDelegate {
 
     private func updateData(day offset: Int, index: Int, scrollToItem: Bool = true) {
         selectedDate = selectedDate.getDayOffset(with: offset)
-        calendarView.calendar.centerDate = self.selectedDate
+        mainView?.calendarView.calendar.centerDate = self.selectedDate
         let daysArray = calendarModel.getWeekForCalendar(date: selectedDate)
         guard daysArray.count > index else { return }
         
-        calendarView.calendar.setDaysArray(days: daysArray)
-        calendarView.calendar.reloadData()
-        calendarView.setupMonthLabel(with: daysArray[index].monthName.changeWordEnding().capitalized)
+        mainView?.calendarView.calendar.setDaysArray(days: daysArray)
+        mainView?.calendarView.calendar.reloadData()
+        mainView?.calendarView.setupMonthLabel(with: daysArray[index].monthName.changeWordEnding().capitalized)
         
         guard scrollToItem else { return }
-        calendarView.calendar.scrollToItem(at: [0, 10], at: .centeredHorizontally, animated: false)
+        mainView?.calendarView.calendar.scrollToItem(at: [0, 10], at: .centeredHorizontally, animated: false)
     }
     
     func updateTasks(with data: Date) {
         self.selectedDate = data
         presenter?.updateToDosForDay(data)
-        toDoTable.reloadData()
+        mainView?.toDoTable.reloadData()
     }
 }
 

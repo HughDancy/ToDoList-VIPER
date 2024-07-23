@@ -140,6 +140,7 @@
 		D8F11C602B5660DA00D2282D /* AnimationLoadingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F11C5F2B5660DA00D2282D /* AnimationLoadingPresenter.swift */; };
 		D8F11C622B5669AC00D2282D /* MockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F11C612B5669AC00D2282D /* MockViewController.swift */; };
 		D8F33E322B7E17F70008FE91 /* LoadingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F33E312B7E17F70008FE91 /* LoadingButton.swift */; };
+		D8F8B3622C4E6C8400A0B491 /* ToDosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8B3612C4E6C8400A0B491 /* ToDosView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -284,6 +285,7 @@
 		D8F11C5F2B5660DA00D2282D /* AnimationLoadingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationLoadingPresenter.swift; sourceTree = "<group>"; };
 		D8F11C612B5669AC00D2282D /* MockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockViewController.swift; sourceTree = "<group>"; };
 		D8F33E312B7E17F70008FE91 /* LoadingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingButton.swift; sourceTree = "<group>"; };
+		D8F8B3612C4E6C8400A0B491 /* ToDosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDosView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -336,8 +338,8 @@
 		D8473BE12BB2C5800063F87A /* CustomCells */ = {
 			isa = PBXGroup;
 			children = (
-				D8DC23D32BB1771700C3E220 /* ToDoCell */,
 				D8473BE22BB2C5DF0063F87A /* CalendarCollectionCell.swift */,
+				D8DC23D32BB1771700C3E220 /* ToDoCell */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -804,11 +806,11 @@
 		D8DC23CD2BB1769D00C3E220 /* ToDos */ = {
 			isa = PBXGroup;
 			children = (
+				D8DC23CE2BB176B400C3E220 /* Protocols */,
 				D8DC23D22BB176DB00C3E220 /* View */,
 				D8DC23D12BB176D500C3E220 /* Interactor */,
 				D8DC23D02BB176C400C3E220 /* Presenter */,
 				D8DC23CF2BB176BD00C3E220 /* Router */,
-				D8DC23CE2BB176B400C3E220 /* Protocols */,
 			);
 			path = ToDos;
 			sourceTree = "<group>";
@@ -849,6 +851,7 @@
 			isa = PBXGroup;
 			children = (
 				D8473BE12BB2C5800063F87A /* CustomCells */,
+				D8F8B3612C4E6C8400A0B491 /* ToDosView.swift */,
 				D8DC23D62BB17B8300C3E220 /* ToDoController.swift */,
 			);
 			path = View;
@@ -1345,6 +1348,7 @@
 				D8E9F8B12B0B47FB00A3F3FC /* DateFormatter + EXT.swift in Sources */,
 				D8AB92272BBD46AD00826A4E /* UINavigationController + EXT.swift in Sources */,
 				D86D44E22AFB932E00894774 /* AppDelegate.swift in Sources */,
+				D8F8B3622C4E6C8400A0B491 /* ToDosView.swift in Sources */,
 				D8B1E9B62BA2F46C00D455AF /* MainScreenController.swift in Sources */,
 				D8E9F8BC2B109DB800A3F3FC /* TaskStorageManager.swift in Sources */,
 				D86422DE2C37E118000A0BDF /* UserOptionProtocols.swift in Sources */,

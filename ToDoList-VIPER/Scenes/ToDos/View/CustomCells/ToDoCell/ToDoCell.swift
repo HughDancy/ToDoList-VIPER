@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ToDoCell: UITableViewCell {
+final class ToDoCell: UITableViewCell {
     
     //MARK: - Class custom properties
     static let reuseIdentifier = "ToDoCell"
@@ -166,7 +166,7 @@ class ToDoCell: UITableViewCell {
 }
 
 //MARK: - Tap Gesture to Checkbox image Extension
-extension ToDoCell {
+fileprivate extension ToDoCell {
     private func addTapRecognizerToImage() {
         self.checkboxImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapToImage)))
     }

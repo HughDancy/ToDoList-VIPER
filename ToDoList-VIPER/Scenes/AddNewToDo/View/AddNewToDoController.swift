@@ -143,6 +143,7 @@ final class AddNewToDoController: SingleToDoController, AddNewToDoViewProtocol {
     }
 }
 
+   //MARK: - UItableView Delegate Extension
 extension AddNewToDoController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let categories = TaskCategoryManager.manager.fetchCategories()

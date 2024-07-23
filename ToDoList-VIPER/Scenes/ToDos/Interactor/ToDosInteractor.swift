@@ -8,9 +8,9 @@
 import UIKit
 
 final class ToDosInteractor: ToDosInteractorInputProtocol {
-   weak var presenter: ToDosInteractorOutputProtocol?
-    let storage = TaskStorageManager.instance
-    let firebaseStorage = FirebaseStorageManager()
+    weak var presenter: ToDosInteractorOutputProtocol?
+    private let storage = TaskStorageManager.instance
+    private let firebaseStorage = FirebaseStorageManager()
     
     func fetchFirstTasks(_ status: ToDoListStatus) {
         self.fetchSortedToDos(with: status, and: nil)
@@ -22,31 +22,22 @@ final class ToDosInteractor: ToDosInteractorInputProtocol {
     
     //MAYBE REFACTOR
     func fetchSortedToDos(with status: ToDoListStatus, and date: Date?) {
+        let mockDate = Date.getDateFromStatus(status)
+        
         switch status {
-        case .today:
-        guard let date = date else {
-            var todayTasks = storage.fetchConcreteToDos(with: Date.today)
-            todayTasks = self.sortByDone(items: todayTasks)
-            self.presenter?.getTask(todayTasks)
-            return
-        }
-            var todayTasks = storage.fetchConcreteToDos(with: date)
-            todayTasks = self.sortByDone(items: todayTasks)
-            presenter?.getTask(todayTasks)
-        case .tommorow:
+        case .today, .tommorow:
             guard let date = date else {
-                var tommorowTasks = storage.fetchConcreteToDos(with: Date.tomorrow)
-                tommorowTasks = self.sortByDone(items: tommorowTasks)
-                self.presenter?.getTask(tommorowTasks)
+                var toDos = storage.fetchConcreteToDos(with: mockDate)
+                toDos = self.sortByDone(items: toDos)
+                self.presenter?.getTask(toDos)
                 return
             }
-            var tommorowTasks = storage.fetchConcreteToDos(with: date)
-            tommorowTasks = self.sortByDone(items: tommorowTasks)
-            presenter?.getTask(tommorowTasks)
+            var toDos = storage.fetchConcreteToDos(with: date)
+            toDos = self.sortByDone(items: toDos)
+            self.presenter?.getTask(toDos)
         case .overdue:
-            //MARK: - Change methods
             guard let date = date else {
-                let overdueTasks = storage.fetchOverdueToDos(with: Date.yesterday)
+                let overdueTasks = storage.fetchOverdueToDos(with: mockDate)
                 self.presenter?.getTask(overdueTasks)
                 return
             }
@@ -54,7 +45,7 @@ final class ToDosInteractor: ToDosInteractorInputProtocol {
                 presenter?.getTask(overdueTasks)
         case .done:
             guard let date = date else {
-                let doneTasks = storage.fetchDoneToDos(with: Date.today)
+                let doneTasks = storage.fetchDoneToDos(with: mockDate)
                 self.presenter?.getTask(doneTasks)
                 return
             }
@@ -76,7 +67,7 @@ final class ToDosInteractor: ToDosInteractorInputProtocol {
     }
 }
 
-extension ToDosInteractor {
+fileprivate extension ToDosInteractor {
     private func sortByDone(items: [ToDoObject]) -> [ToDoObject] {
         let doneItems = items.filter { $0.doneStatus == true }
         let notDoneItems  = items.filter { $0.doneStatus != true }

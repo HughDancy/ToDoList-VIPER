@@ -31,7 +31,6 @@ final class AddNewToDoInteractor: AddNewToDoInteractorProtocol {
                                   color: colorCategory,
                                   iconName: iconName)
             let newToDo = ToDoTask(title: name ?? "Temp", descriptionTitle: description ?? "Temp", date: date ?? Date.today, category: category, status: status)
-//            let newToDo = ToDoTask(title: name ?? "Temp", descriptionTitle: description ?? "Temp", date: date ?? Date.today, category: category)
             networkStorage.uploadTaskToServer(with: newToDo)
             presenter?.goBackToMain()
         } else {

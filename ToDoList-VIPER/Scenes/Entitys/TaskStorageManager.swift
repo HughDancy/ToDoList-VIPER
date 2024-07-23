@@ -114,13 +114,6 @@ final class TaskStorageManager {
         return objectsCount ?? 0
     }
     
-    //MARK: - TO-DO Delete this method
-    func fetchAllPrivateToDos() -> [ToDoObject] {
-        let fetchRequest: NSFetchRequest<ToDoObject> = ToDoObject.fetchRequest()
-        let objects = try! viewContext.fetch(fetchRequest)
-        return objects
-    }
-    
     func fetchDateRangeToDos(date: [Date]) -> [ToDoObject] {
         let fetchRequest: NSFetchRequest<ToDoObject> = ToDoObject.fetchRequest()
         let fromDate = date.first ?? Date.today
@@ -227,7 +220,7 @@ final class TaskStorageManager {
         fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateDate, donePredicate, overduePredicate])
         let objects = try! viewContext.fetch(fetchRequest)
         objects.forEach { $0.isOverdue = true }
-        self.saveContext()
+        self.saveChanges()
     }
     
     //MARK: - CoreData Saving support

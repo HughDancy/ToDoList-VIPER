@@ -95,3 +95,16 @@ extension Date {
         return test
     }
 }
+
+extension Date {
+    static func getDateFromStatus(_ status: ToDoListStatus) -> Date {
+        switch status {
+        case .today, .done:
+            Date.today
+        case .tommorow:
+            Date.tomorrow
+        case .overdue:
+            Date.yesterday
+        }
+    }
+}
