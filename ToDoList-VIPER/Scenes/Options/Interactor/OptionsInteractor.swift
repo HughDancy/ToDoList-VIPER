@@ -16,7 +16,7 @@ final class OptionsInteractor: OptionsInputInteractorProtocol {
     //MARK: - Properties
     var presenter: OptionsOutputInteractorProtocol?
     let firebaseAuth = Auth.auth()
-    private var toDoUserDefaults = ToDoUserDefaults.shares
+    private var toDoUserDefaults = ToDoThemeDefaults.shared
     private var authMangaer = AuthKeychainManager()
     
     //MARK: - Interactor Methods
@@ -44,19 +44,15 @@ final class OptionsInteractor: OptionsInputInteractorProtocol {
              let allScenes = UIApplication.shared.connectedScenes
              for scene in allScenes {
                  guard let windowScene = scene as? UIWindowScene else { continue }
-                 windowScene.windows.forEach({$0.overrideUserInterfaceStyle = ToDoUserDefaults.shares.theme.getUserInterfaceStyle()})
+                 windowScene.windows.forEach({$0.overrideUserInterfaceStyle = ToDoThemeDefaults.shared.theme.getUserInterfaceStyle()})
              }
     }
-    
     
     func loggedOut() {
         do {
             try? firebaseAuth.signOut()
             authMangaer.clear()
             GIDSignIn.sharedInstance.disconnect()
-        } catch {
-            print("Some error when logged out from Options screen")
         }
     }
-    
 }

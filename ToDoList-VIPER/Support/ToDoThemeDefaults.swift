@@ -21,9 +21,8 @@ enum Theme: String  {
     }
 }
 
-
-struct ToDoUserDefaults {
-    static var shares = ToDoUserDefaults()
+struct ToDoThemeDefaults {
+    static var shared = ToDoThemeDefaults()
     
     var theme: Theme {
         get {

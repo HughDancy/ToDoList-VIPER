@@ -58,7 +58,7 @@ final class UserOptionController: UIViewController {
         super.viewDidLoad()
         presenter?.retriveData()
         view.backgroundColor = .systemBackground
-        view.overrideUserInterfaceStyle = ToDoUserDefaults.shares.theme.getUserInterfaceStyle()
+        view.overrideUserInterfaceStyle = ToDoThemeDefaults.shared.theme.getUserInterfaceStyle()
         self.setupView()
   
     }

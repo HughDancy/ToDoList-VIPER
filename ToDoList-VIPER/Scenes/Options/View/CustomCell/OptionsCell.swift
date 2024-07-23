@@ -102,7 +102,7 @@ class OptionsCell: UITableViewCell {
     
     //MARK: - Setup Switcher
     private func setupSwitcher() {
-        if ToDoUserDefaults.shares.theme.getUserInterfaceStyle() == .dark {
+        if ToDoThemeDefaults.shared.theme.getUserInterfaceStyle() == .dark {
             switcher.isOn = true
         } else {
             switcher.isOn = false

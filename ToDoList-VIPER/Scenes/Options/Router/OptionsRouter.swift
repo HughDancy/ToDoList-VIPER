@@ -9,7 +9,6 @@ import UIKit
 import MessageUI
 
 final class OptionsRouter: OptionsRouterProtocol {
-    //MARK: -
     
     static func createOptionsModule() -> UIViewController {
         let view = OptionsViewController()
@@ -36,14 +35,10 @@ final class OptionsRouter: OptionsRouterProtocol {
     func logOut(from view:  OptionsViewProtocol) {
         guard let parrentView = view as? UIViewController else { return }
         parrentView.tabBarController?.tabBar.isHidden = true
-        NewUserCheck.shared.setIsLoginScrren()
-        NewUserCheck.shared.setIsNotFirstStartOnboarding()
-        TaskStorageManager.instance.deleteAllEntities()
-        UserDefaults.standard.removeObject(forKey: "UserAvatar")
+        self.clearUserData()
         let loginModule = AppConfigurator.configuator.logOut()
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate
         sceneDelegate.window?.rootViewController = loginModule
-    
         parrentView.navigationController?.popToRootViewController(animated: true)
     }
     
@@ -53,12 +48,21 @@ final class OptionsRouter: OptionsRouterProtocol {
                 let mail = MFMailComposeViewController()
                 mail.mailComposeDelegate = parrentView as? any MFMailComposeViewControllerDelegate
                 mail.setToRecipients(["hugh.dancy@icloud.com"])
-                mail.setMessageBody("<p>Привет! Я пользуюсь твоим приложением ToDoList-VIPER</p>", isHTML: true)
+                mail.setMessageBody("<p>Привет! Я пользуюсь твоим приложением ToDoList-VIPER и хотел бы дать обратную связь:</p>", isHTML: true)
 
               parrentView.present(mail, animated: true)
             } else {
                 print("Email not work")
                 // show failure alert
             }
+    }
+}
+
+fileprivate extension OptionsRouter {
+    private func clearUserData() {
+        NewUserCheck.shared.setIsLoginScrren()
+        NewUserCheck.shared.setIsNotFirstStartOnboarding()
+        TaskStorageManager.instance.deleteAllEntities()
+        UserDefaults.standard.removeObject(forKey: "UserAvatar")
     }
 }

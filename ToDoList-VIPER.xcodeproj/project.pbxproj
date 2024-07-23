@@ -27,7 +27,7 @@
 		D85C58392B5A595400023B04 /* OnboardingPagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C58382B5A595400023B04 /* OnboardingPagesController.swift */; };
 		D85C583C2B5A771A00023B04 /* OnboardingItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C583B2B5A771A00023B04 /* OnboardingItems.swift */; };
 		D85C5DB02B614E2F00F548AA /* LoginProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C5DAF2B614E2F00F548AA /* LoginProtocols.swift */; };
-		D86422D22C36A841000A0BDF /* ToDoUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86422D12C36A840000A0BDF /* ToDoUserDefaults.swift */; };
+		D86422D22C36A841000A0BDF /* ToDoThemeDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86422D12C36A840000A0BDF /* ToDoThemeDefaults.swift */; };
 		D86422DC2C37D3FA000A0BDF /* UserOptionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86422DB2C37D3FA000A0BDF /* UserOptionController.swift */; };
 		D86422DE2C37E118000A0BDF /* UserOptionProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86422DD2C37E118000A0BDF /* UserOptionProtocols.swift */; };
 		D86422E02C37E308000A0BDF /* UserOptionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86422DF2C37E308000A0BDF /* UserOptionPresenter.swift */; };
@@ -141,6 +141,7 @@
 		D8F11C622B5669AC00D2282D /* MockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F11C612B5669AC00D2282D /* MockViewController.swift */; };
 		D8F33E322B7E17F70008FE91 /* LoadingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F33E312B7E17F70008FE91 /* LoadingButton.swift */; };
 		D8F8B3622C4E6C8400A0B491 /* ToDosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8B3612C4E6C8400A0B491 /* ToDosView.swift */; };
+		D8F8B3642C4FA72C00A0B491 /* OptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8B3632C4FA72C00A0B491 /* OptionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -181,7 +182,7 @@
 		D85C58382B5A595400023B04 /* OnboardingPagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPagesController.swift; sourceTree = "<group>"; };
 		D85C583B2B5A771A00023B04 /* OnboardingItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingItems.swift; sourceTree = "<group>"; };
 		D85C5DAF2B614E2F00F548AA /* LoginProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProtocols.swift; sourceTree = "<group>"; };
-		D86422D12C36A840000A0BDF /* ToDoUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoUserDefaults.swift; sourceTree = "<group>"; };
+		D86422D12C36A840000A0BDF /* ToDoThemeDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoThemeDefaults.swift; sourceTree = "<group>"; };
 		D86422DB2C37D3FA000A0BDF /* UserOptionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOptionController.swift; sourceTree = "<group>"; };
 		D86422DD2C37E118000A0BDF /* UserOptionProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOptionProtocols.swift; sourceTree = "<group>"; };
 		D86422DF2C37E308000A0BDF /* UserOptionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOptionPresenter.swift; sourceTree = "<group>"; };
@@ -286,6 +287,7 @@
 		D8F11C612B5669AC00D2282D /* MockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockViewController.swift; sourceTree = "<group>"; };
 		D8F33E312B7E17F70008FE91 /* LoadingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingButton.swift; sourceTree = "<group>"; };
 		D8F8B3612C4E6C8400A0B491 /* ToDosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDosView.swift; sourceTree = "<group>"; };
+		D8F8B3632C4FA72C00A0B491 /* OptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -728,11 +730,11 @@
 		D8B1E9C42BA45F2C00D455AF /* AddNewToDo */ = {
 			isa = PBXGroup;
 			children = (
+				D8B1E9C52BA45F3B00D455AF /* Protocols */,
 				D8B1E9C92BA45F5B00D455AF /* View */,
 				D8B1E9C82BA45F5200D455AF /* Interactor */,
 				D8B1E9C72BA45F4B00D455AF /* Presenter */,
 				D8B1E9C62BA45F4400D455AF /* Router */,
-				D8B1E9C52BA45F3B00D455AF /* Protocols */,
 			);
 			path = AddNewToDo;
 			sourceTree = "<group>";
@@ -998,6 +1000,7 @@
 			isa = PBXGroup;
 			children = (
 				D8E72F082C354632007FF819 /* CustomCell */,
+				D8F8B3632C4FA72C00A0B491 /* OptionView.swift */,
 				D8E72F062C354457007FF819 /* OptionsViewController.swift */,
 			);
 			path = View;
@@ -1108,7 +1111,7 @@
 				D8900F162B55435A008E0E34 /* NewUserCheck.swift */,
 				D82B8B6D2B6B8CCB00A006F2 /* AppConfigurator.swift */,
 				D8CE4B712B8739D900E473AC /* RegistrationStatus.swift */,
-				D86422D12C36A840000A0BDF /* ToDoUserDefaults.swift */,
+				D86422D12C36A840000A0BDF /* ToDoThemeDefaults.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -1406,6 +1409,7 @@
 				D8B1E9C32BA421A600D455AF /* MainScreenRouter.swift in Sources */,
 				D8473BE92BB581A00063F87A /* DateItem.swift in Sources */,
 				D8E840662B6780A6005A0936 /* RegistrationPresenter.swift in Sources */,
+				D8F8B3642C4FA72C00A0B491 /* OptionView.swift in Sources */,
 				D8DD85CF2B9F370C003E7F89 /* CustomHomeTabBarController.swift in Sources */,
 				D8E9F8A32B04D23900A3F3FC /* UILabel + EXT.swift in Sources */,
 				D846B8622C14606A00AA8775 /* AuthKeychainManager.swift in Sources */,
@@ -1422,7 +1426,7 @@
 				D8E00C712C1345D5005AEA4D /* ForgettPasswortPresenter.swift in Sources */,
 				D85C5DB02B614E2F00F548AA /* LoginProtocols.swift in Sources */,
 				D8F11C602B5660DA00D2282D /* AnimationLoadingPresenter.swift in Sources */,
-				D86422D22C36A841000A0BDF /* ToDoUserDefaults.swift in Sources */,
+				D86422D22C36A841000A0BDF /* ToDoThemeDefaults.swift in Sources */,
 				D8B1E9CB2BA465A300D455AF /* AddNewToDoController.swift in Sources */,
 				D8E00C6D2C131425005AEA4D /* ForgottPasswordController.swift in Sources */,
 				D86D44E42AFB932E00894774 /* SceneDelegate.swift in Sources */,
