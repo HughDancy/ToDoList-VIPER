@@ -23,7 +23,7 @@ final class UserOptionInteractor: UserOptionInputInteractorProtocol {
     func saveUserInfo(name: String) {
         let keychainManager = AuthKeychainManager()
         let userUid = keychainManager.id
-        let mockAvatar = UIImage(named: "mockUser_1")!
+
         if name != UserDefaults.standard.string(forKey: NotificationNames.userName.rawValue) {
             UserDefaults.standard.set(name, forKey: NotificationNames.userName.rawValue)
             db.collection("users").document(userUid ?? UUID().uuidString).setData(["displayName" : name, "name": name], merge: true)
@@ -39,14 +39,11 @@ final class UserOptionInteractor: UserOptionInputInteractorProtocol {
             })
         }
         
-        
         if tempAvatar != nil {
-            storageManager.saveImage(image: tempAvatar ?? mockAvatar, name: userUid ?? UUID().uuidString)
-            print(userUid)
+            storageManager.saveImage(image: tempAvatar ?? UIImage(named: "mockUser_1")!, name: userUid ?? UUID().uuidString)
         }
         NotificationCenter.default.post(name: NotificationNames.updateUserData.name, object: nil)
         presenter?.dismiss()
-        
     }
     
     func getUserInfo() {

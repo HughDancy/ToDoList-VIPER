@@ -142,6 +142,7 @@
 		D8F33E322B7E17F70008FE91 /* LoadingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F33E312B7E17F70008FE91 /* LoadingButton.swift */; };
 		D8F8B3622C4E6C8400A0B491 /* ToDosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8B3612C4E6C8400A0B491 /* ToDosView.swift */; };
 		D8F8B3642C4FA72C00A0B491 /* OptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8B3632C4FA72C00A0B491 /* OptionView.swift */; };
+		D8F8B3662C50ED0900A0B491 /* OverdueStatusRefresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8B3652C50ED0800A0B491 /* OverdueStatusRefresher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -288,6 +289,7 @@
 		D8F33E312B7E17F70008FE91 /* LoadingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingButton.swift; sourceTree = "<group>"; };
 		D8F8B3612C4E6C8400A0B491 /* ToDosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDosView.swift; sourceTree = "<group>"; };
 		D8F8B3632C4FA72C00A0B491 /* OptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionView.swift; sourceTree = "<group>"; };
+		D8F8B3652C50ED0800A0B491 /* OverdueStatusRefresher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverdueStatusRefresher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1161,6 +1163,7 @@
 			children = (
 				D8E72EFB2C217FC1007FF819 /* Network */,
 				D8E72EFA2C217E63007FF819 /* InterfaceElements */,
+				D8F8B3652C50ED0800A0B491 /* OverdueStatusRefresher.swift */,
 			);
 			path = CustomClasses;
 			sourceTree = "<group>";
@@ -1396,6 +1399,7 @@
 				D8BDEABA2BDA178200C3BE55 /* CustomAlertView.swift in Sources */,
 				D8C19ED62B91C037004BCDDD /* BaseButton.swift in Sources */,
 				D8E72F0E2C3555BE007FF819 /* CustomSwitcher.swift in Sources */,
+				D8F8B3662C50ED0900A0B491 /* OverdueStatusRefresher.swift in Sources */,
 				D8A54EC02BB6D61000D9B15F /* ToDosPresenter.swift in Sources */,
 				D8E72F142C3562C5007FF819 /* OptionsRouter.swift in Sources */,
 				D8E72F0A2C354658007FF819 /* OptionsCell.swift in Sources */,

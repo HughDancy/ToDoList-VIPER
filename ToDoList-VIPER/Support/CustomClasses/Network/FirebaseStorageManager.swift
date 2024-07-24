@@ -13,7 +13,7 @@ import FirebaseFirestore
 import Kingfisher
 
 final class FirebaseStorageManager {
-//    static let shared = FirebaseStorageManager()
+    //    static let shared = FirebaseStorageManager()
     
     //MARK: - Property's
     private let storage = Storage.storage().reference()
@@ -33,7 +33,7 @@ final class FirebaseStorageManager {
         }
     }
     
-    func newLoadAvatar(compelition: @escaping (_ imageUrl : URL?) -> Void) { 
+    func newLoadAvatar(compelition: @escaping (_ imageUrl : URL?) -> Void) {
         guard let userId = authManager.id else  { return  }
         let avatarRef = storage.child(userId)
         
@@ -70,17 +70,21 @@ extension FirebaseStorageManager {
                 let task = document.data()
                 let categoryFromServer = Category(rawValue: task["category"] as? String ?? "work")
                 let category = TaskCategoryManager.manager.getCategoryData(from: categoryFromServer ?? Category.work)
-                let statusFromServer = task["status"] as? ProgressStatus ?? ProgressStatus.inProgress
+                let statusFromServerString = task["status"] as? String
+                let statusFromServer = ProgressStatus(rawValue: statusFromServerString ?? "In Progress")
                 let timestamp = task["date"] as! Timestamp
                 let date = timestamp.dateValue()
-                let status = ProgressStatus.convertStatusFromServer(serverStatus: statusFromServer, date: date)
+                let overdueStatus = statusFromServer == .fail ? true : false
+                print("For task name - \(task["title"] ?? ""), his date is - \(date) overdue status is - \(overdueStatus)")
+                let doneStatus = statusFromServer == .done ? true : false
                 
                 TaskStorageManager.instance.createNewToDo(title: task["title"] as? String ?? "Temp",
                                                           content: task["description"] as? String ?? "Description",
                                                           date: date,
-                                                          isOverdue: status,
+                                                          isOverdue: overdueStatus,
                                                           color: category.1,
-                                                          iconName: category.0)
+                                                          iconName: category.0,
+                                                          doneStatus: doneStatus)
                 
                 
             }
@@ -141,6 +145,39 @@ extension FirebaseStorageManager {
                     self.db.collection("toDos").document(uid).collection("tasks").document("\(document.documentID)").delete()
                 }
             }})
+    }
+}
+
+extension FirebaseStorageManager {
+    func makeToDoDone(_ task: ToDoTask) {
+        let uid = Auth.auth().currentUser?.uid ?? UUID().uuidString
+        db.collection("toDos").document(uid).collection("tasks").whereField("title", isEqualTo: task.title).getDocuments { result, error in
+            if error == nil {
+                guard let documents = result?.documents.first else { return }
+                documents.reference.updateData(["status" : ProgressStatus.done.value])
+            }
+        }
+    }
+}
+
+extension FirebaseStorageManager  {
+    func chekOverdueTasks()  {
+        let uid = Auth.auth().currentUser?.uid ?? UUID().uuidString
+        db.collection("toDos").document(uid).collection("tasks").getDocuments { result, error in
+            if error == nil {
+                guard let documents = result?.documents else { return }
+                documents.forEach { document in
+                    let serverDate = document["date"] as? Timestamp
+                    let date = serverDate?.dateValue()
+                    let statusFromServer = document["status"] as? String
+                    if date ?? Date.today < Date.today && (statusFromServer ?? "In Progress") != "Done" && (statusFromServer ?? "In Progress") != "Fail" {
+                        document.reference.updateData(["status" : "Fail"])
+                    }
+                }
+            } else {
+                print("Some eeror happen in FirebaseStorageManager check overdue tasks")
+            }
+        }
     }
 }
 

@@ -29,7 +29,8 @@ final class AddNewToDoInteractor: AddNewToDoInteractorProtocol {
                                   date: date ?? Date.today,
                                   isOverdue: overdueStatus,
                                   color: colorCategory,
-                                  iconName: iconName)
+                                  iconName: iconName,
+                                  doneStatus: false)
             let newToDo = ToDoTask(title: name ?? "Temp", descriptionTitle: description ?? "Temp", date: date ?? Date.today, category: category, status: status)
             networkStorage.uploadTaskToServer(with: newToDo)
             presenter?.goBackToMain()

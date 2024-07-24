@@ -10,6 +10,7 @@ import SnapKit
 
 final class MainScreenController: UIViewController {
     var presenter: MainScreenPresenterProtocol?
+
     
     //MARK: - Outelts
     let mockColors: [UIColor] = [.systemOrange, .systemRed, .systemTeal, .systemGreen]

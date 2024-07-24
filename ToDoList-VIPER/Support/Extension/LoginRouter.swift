@@ -39,6 +39,8 @@ final class LoginRouter: LoginRouterProtocol {
     func goToMainScreen(from view: LoginViewProtocol) {
         guard let view = view as? UIViewController else { return}
         NewUserCheck.shared.setIsNotNewUser()
+        let startDate = Calendar.current.startOfDay(for: Date.today)
+        UserDefaults.standard.setValue(startDate, forKey: "lastOverdueRefresh")
         let mainScreen = MainScreenRouter.createMainScreenModule()
         let optionScreen = OptionsRouter.createOptionsModule()
         let mainModule = HomeTabBarRouter.createHomeTabBar(tabOne: mainScreen, tabTwo: optionScreen)

@@ -12,17 +12,6 @@ final class UserOptionController: UIViewController {
     private var userData: (String, URL?) = ("Temp", nil)
     
     //MARK: - Outlets
-    private lazy var backButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Назад", for: .normal)
-        button.tintColor = .systemBackground
-        button.backgroundColor = .systemCyan
-        button.layer.cornerRadius = 10
-        button.addTarget(self, action: #selector(goBack), for: .touchDown)
-        return button
-    }()
-    
-    
     private lazy var userAvatar: UIImageView = {
        let imageView = UIImageView()
         imageView.layer.cornerRadius = UserOptionsSizes.avatar.value / 2
@@ -60,7 +49,6 @@ final class UserOptionController: UIViewController {
         view.backgroundColor = .systemBackground
         view.overrideUserInterfaceStyle = ToDoThemeDefaults.shared.theme.getUserInterfaceStyle()
         self.setupView()
-  
     }
     
     private func setupView() {
@@ -73,7 +61,6 @@ final class UserOptionController: UIViewController {
     
     //MARK: - Setup Hierarchy
     private func setupHierarchy() {
-//        view.addSubview(backButton)
         view.addSubview(userAvatar)
         view.addSubview(userNameField)
         view.addSubview(saveChangeButton)
@@ -102,12 +89,7 @@ final class UserOptionController: UIViewController {
         }
     }
     
-    
     //MARK: - Button's action
-    @objc func goBack() {
-        
-    }
-    
     @objc func saveChanges() {
         guard let name = userNameField.text else { return }
         presenter?.saveUserInfo(name: name)

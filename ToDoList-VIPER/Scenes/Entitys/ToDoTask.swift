@@ -46,7 +46,9 @@ enum ProgressStatus: String, Codable {
     
     static func convertStatusFromServer(serverStatus: ProgressStatus, date: Date) -> Bool {
         let statusFromServer = serverStatus != ProgressStatus.done && serverStatus != ProgressStatus.inProgress
+        print("Convert Status task  From Server is - \(statusFromServer)")
         let dateStatus = date >= Date.today
+        print("Date status in convert status from server is - \(dateStatus)")
         return statusFromServer == dateStatus
     }
     

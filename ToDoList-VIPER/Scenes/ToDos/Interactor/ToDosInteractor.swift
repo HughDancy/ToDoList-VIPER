@@ -55,7 +55,10 @@ final class ToDosInteractor: ToDosInteractorInputProtocol {
     }
     
     func doneTask(_ task: ToDoObject) {
+        let donedToDo = ToDoTask.convertToToDoTask(task: task)
         storage.doneToDo(item: task)
+        firebaseStorage.makeToDoDone(donedToDo)
+        
     }
     
     func deleteTask(_ task: ToDoObject) {

@@ -11,6 +11,7 @@ import UIKit.UIColor
 
 final class TaskStorageManager {
     static let instance = TaskStorageManager()
+    private let overdueRefresher = OverdueStatusRefresher()
     
     //MARK: - PersistentContainer and Context
     private lazy var persistentContainer: NSPersistentContainer = {
@@ -38,7 +39,7 @@ final class TaskStorageManager {
     }()
     
     //MARK: - CoreData create new ToDoObject
-    func createNewToDo(title: String, content: String, date: Date, isOverdue: Bool, color: UIColor, iconName: String) {
+    func createNewToDo(title: String, content: String, date: Date, isOverdue: Bool, color: UIColor, iconName: String, doneStatus: Bool) {
         let newToDo = ToDoObject(context: viewContext)
         newToDo.title = title
         newToDo.descriptionTitle = content
@@ -46,10 +47,9 @@ final class TaskStorageManager {
         newToDo.dateTitle = DateFormatter.getStringFromDate(from: date)
         newToDo.color = color
         newToDo.isOverdue = isOverdue
-        newToDo.doneStatus = false
+        newToDo.doneStatus = doneStatus
         newToDo.iconName = iconName
         self.saveChanges()
-        
     }
     
     //MARK: - CoreData delete ToDoObject
@@ -169,6 +169,7 @@ final class TaskStorageManager {
             fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicate)
             let objects = try! viewContext.fetch(fetchRequest)
             let objectsCount = objects.first?.intValue
+            self.checkOverdueTasksInServer()
             return objectsCount ?? 0
         case .tommorow:
             let predicate = self.createPredicates(with: .tommorow, date: Date.tomorrow)
@@ -257,6 +258,21 @@ final class TaskStorageManager {
                 print("Unable to Save Changes of Private Managed Object Context")
                 print("\(error), \(error.localizedDescription)")
             }
+        }
+    }
+}
+
+private extension TaskStorageManager {
+    func checkOverdueTasksInServer() {
+        overdueRefresher.loadDataIfNeeded { bool in
+            if bool {
+                let firebaseStorage = FirebaseStorageManager()
+                Task {
+                    print("CheckOverdueTasksIn Server is work")
+                    await firebaseStorage.chekOverdueTasks()
+                }
+            }
+           
         }
     }
 }

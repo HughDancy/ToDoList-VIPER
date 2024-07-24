@@ -25,7 +25,6 @@ protocol UserOptionPresenterProtocol: AnyObject {
     func saveUserInfo(name: String)
     
     func checkPermission(with status: PermissionStatus)
-    
 }
 
 protocol UserOptionInputInteractorProtocol: AnyObject {

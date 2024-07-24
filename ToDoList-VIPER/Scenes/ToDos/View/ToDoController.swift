@@ -66,6 +66,7 @@ final class ToDoController: UIViewController {
         setupNoTaskStack()
         mainView?.toDoTable.delegate = self
         mainView?.toDoTable.dataSource = self
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     private func setupCalendarColletcion() {
@@ -172,7 +173,7 @@ extension ToDoController {
             self.presenter?.updateToDosForDay(self.selectedDate)
             self.mainView?.toDoTable.reloadData()
             self.updateCalendar()
-            self.tabBarController?.tabBar.isHidden = false
+//            self.tabBarController?.tabBar.isHidden = false
         }
     }
     
