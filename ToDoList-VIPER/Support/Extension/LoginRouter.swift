@@ -41,10 +41,12 @@ final class LoginRouter: LoginRouterProtocol {
         NewUserCheck.shared.setIsNotNewUser()
         let startDate = Calendar.current.startOfDay(for: Date.today)
         UserDefaults.standard.setValue(startDate, forKey: "lastOverdueRefresh")
-        let mainScreen = MainScreenRouter.createMainScreenModule()
+        let mainScreen = UINavigationController(rootViewController:  MainScreenRouter.createMainScreenModule())
         let optionScreen = OptionsRouter.createOptionsModule()
         let mainModule = HomeTabBarRouter.createHomeTabBar(tabOne: mainScreen, tabTwo: optionScreen)
-        view.navigationController?.pushViewController(mainModule, animated: true)
+        mainModule.modalTransitionStyle = .crossDissolve
+        mainModule.modalPresentationStyle = .fullScreen
+        view.present(mainModule, animated: true)
     }
     
     func showAllert(from view: LoginViewProtocol, title: String, message: String) {
