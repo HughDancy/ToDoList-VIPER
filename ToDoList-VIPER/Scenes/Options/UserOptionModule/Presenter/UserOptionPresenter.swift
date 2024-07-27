@@ -13,6 +13,10 @@ final class UserOptionPresenter: UserOptionPresenterProtocol {
     var interactor: UserOptionInputInteractorProtocol?
     var router: UserOptionRouterProtocol?
     
+    deinit {
+           debugPrint("? deinit \(self)")
+       }
+    
    //MARK: - Protocols Method's
     func retriveData() {
         interactor?.getUserInfo()
@@ -39,7 +43,6 @@ final class UserOptionPresenter: UserOptionPresenterProtocol {
     func checkPermission(with status: PermissionStatus) {
         interactor?.checkPermission(with: status)
     }
-    
 }
 
 extension UserOptionPresenter: UserOptionOutputInteractorProtocol {

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainToDoCell: UICollectionViewCell {
+final class MainToDoCell: UICollectionViewCell {
     static let reuseIdentifier = "MainToDoCell"
     
     //MARK: - Outlets

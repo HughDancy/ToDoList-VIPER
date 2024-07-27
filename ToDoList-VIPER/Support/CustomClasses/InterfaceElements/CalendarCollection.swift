@@ -13,7 +13,7 @@ protocol CalendarCollectionViewDelegate: AnyObject {
     func updateTasks(with data: Date)
 }
 
-class CalendarCollectionView: UICollectionView {
+final class CalendarCollectionView: UICollectionView {
     //MARK: - Properties
     private let layoutCollection = UICollectionViewFlowLayout()
     var selectedUserCell = 10

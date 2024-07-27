@@ -14,15 +14,19 @@ import Photos
 final class UserOptionInteractor: UserOptionInputInteractorProtocol {
    
   //MARK: - Properties
-    var presenter: UserOptionOutputInteractorProtocol?
-    private let db = Firestore.firestore()
-    private var storageManager = FirebaseStorageManager()
+    weak var presenter: UserOptionOutputInteractorProtocol?
     private var tempAvatar: UIImage? = nil
+    
+    deinit {
+           debugPrint("? deinit \(self)")
+       }
     
     //MARK: - Protocol Method's
     func saveUserInfo(name: String) {
+        let storageManager = FirebaseStorageManager()
         let keychainManager = AuthKeychainManager()
         let userUid = keychainManager.id
+        let db = Firestore.firestore()
 
         if name != UserDefaults.standard.string(forKey: NotificationNames.userName.rawValue) {
             UserDefaults.standard.set(name, forKey: NotificationNames.userName.rawValue)
@@ -81,13 +85,13 @@ final class UserOptionInteractor: UserOptionInputInteractorProtocol {
                 fatalError()
             }
         case .gallery:
-            PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
+            PHPhotoLibrary.requestAuthorization(for: .readWrite) { [weak self] status in
                 switch status {
                 case .authorized:
-                    self.presenter?.goToImagePicker(with: .gallery)
+                    self?.presenter?.goToImagePicker(with: .gallery)
                     print("Authorized")
                 case .denied:
-                    self.presenter?.goToOptions(with: "медиа библиотеке")
+                    self?.presenter?.goToOptions(with: "медиа библиотеке")
                 case .limited:
                     print("Limited")
                 case .notDetermined:

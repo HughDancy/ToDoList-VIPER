@@ -269,10 +269,9 @@ private extension TaskStorageManager {
                 let firebaseStorage = FirebaseStorageManager()
                 Task {
                     print("CheckOverdueTasksIn Server is work")
-                    await firebaseStorage.chekOverdueTasks()
+                    firebaseStorage.chekOverdueTasks()
                 }
             }
-           
         }
     }
 }

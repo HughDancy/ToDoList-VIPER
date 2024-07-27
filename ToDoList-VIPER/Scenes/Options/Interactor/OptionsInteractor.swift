@@ -15,7 +15,7 @@ final class OptionsInteractor: OptionsInputInteractorProtocol {
  
     //MARK: - Properties
     var presenter: OptionsOutputInteractorProtocol?
-    let firebaseAuth = Auth.auth()
+    private let firebaseAuth = Auth.auth()
     private var toDoUserDefaults = ToDoThemeDefaults.shared
     private var authMangaer = AuthKeychainManager()
     

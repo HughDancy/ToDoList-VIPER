@@ -67,6 +67,7 @@ extension LoginInteractor {
             } else {
                 Task {
                     await taskManager.loadTaskFromFirestore()
+                    taskManager.chekOverdueTasks()
                 }
                 let uid = dataResult?.user.uid ?? UUID().uuidString
                 let name = Auth.auth().currentUser?.displayName
@@ -120,6 +121,7 @@ extension LoginInteractor {
         self.setUserName(name)
         Task {
             await taskManager.loadTaskFromFirestore()
+            taskManager.chekOverdueTasks()
         }
         self.presenter?.getVerificationResult(with: .googleSignInSucces)
     }

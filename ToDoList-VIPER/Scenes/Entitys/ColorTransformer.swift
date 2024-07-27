@@ -7,7 +7,7 @@
 
 import UIKit.UIColor
 
-class ColorTransformer: NSSecureUnarchiveFromDataTransformer {
+final class ColorTransformer: NSSecureUnarchiveFromDataTransformer {
     override static var allowedTopLevelClasses: [AnyClass] {
         [UIColor.self]
     }

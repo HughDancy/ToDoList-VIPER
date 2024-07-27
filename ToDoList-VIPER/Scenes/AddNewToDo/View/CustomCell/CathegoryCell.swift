@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CategoryCell: UITableViewCell {
+final class CategoryCell: UITableViewCell {
     static let reuseIdentifier = "CategoryCell"
     
     //MARK: - OUTELTS

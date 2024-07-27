@@ -33,6 +33,7 @@ final class MainScreenController: UIViewController {
         setupNavigationBar()
         subcribeToNotification()
         self.updateDownloadTask()
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     override func viewDidLoad() {

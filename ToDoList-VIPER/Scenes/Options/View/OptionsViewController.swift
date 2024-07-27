@@ -9,7 +9,7 @@ import UIKit
 import Kingfisher
 import MessageUI
 
-class OptionsViewController: UIViewController {
+final class OptionsViewController: UIViewController {
     //MARK: - Properties
     var presenter: OptionsPresenterProtocol?
     private var optionsData = [String]()
@@ -24,6 +24,7 @@ class OptionsViewController: UIViewController {
         super.viewWillAppear(animated)
         view.overrideUserInterfaceStyle = ToDoThemeDefaults.shared.theme.getUserInterfaceStyle()
         mainView?.containerView.overrideUserInterfaceStyle = ToDoThemeDefaults.shared.theme.getUserInterfaceStyle()
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     override func viewDidLoad() {

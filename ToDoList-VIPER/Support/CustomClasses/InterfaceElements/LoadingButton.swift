@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoadingButton: UIButton {
+final class LoadingButton: UIButton {
     
     var indicatorColor : UIColor = .systemBackground
     var originalButtonText: String?

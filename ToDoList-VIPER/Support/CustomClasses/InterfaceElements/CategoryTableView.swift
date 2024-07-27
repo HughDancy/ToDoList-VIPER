@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CategoryTableView: UITableView {
+final class CategoryTableView: UITableView {
     
     lazy var categories: [TaskCategory] = {
         let categories = TaskCategoryManager.manager.fetchCategories()

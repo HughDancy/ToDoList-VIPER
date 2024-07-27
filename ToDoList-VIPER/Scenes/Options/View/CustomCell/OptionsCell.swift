@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OptionsCell: UITableViewCell {
+final class OptionsCell: UITableViewCell {
     
     static let reuseIdentifier = "OptionsCell"
     weak var delegate: OptionCellDelegate?
@@ -111,13 +111,11 @@ class OptionsCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
     }
     
     //MARK: - Custom Switcher method
     @objc func changeTheme() {
         delegate?.changeTheme(switcher.isOn)
-        print("Hello")
     }
 }
 

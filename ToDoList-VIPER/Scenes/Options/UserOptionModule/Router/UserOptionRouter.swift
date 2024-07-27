@@ -9,31 +9,31 @@ import UIKit
 
 final class UserOptionRouter: UserOptionRouterProtocol {
     
-    var presenter: UserOptionPresenterProtocol?
+    weak var presenter: UserOptionPresenterProtocol?
     
-    static func createUserOptionModule() -> UIViewController {
-        let view = UserOptionController()
-        let presenter: UserOptionPresenterProtocol & UserOptionOutputInteractorProtocol = UserOptionPresenter()
-        let interactor: UserOptionInputInteractorProtocol = UserOptionInteractor()
-        let router: UserOptionRouterProtocol = UserOptionRouter()
-        
-        view.presenter = presenter
-        presenter.view = view
-        presenter.interactor = interactor
-        presenter.router = router
-        interactor.presenter = presenter
-        router.presenter = presenter
-        
-        return view
-    }
+//    static func createUserOptionModule() -> UIViewController {
+//        let view = UserOptionController()
+//        let presenter: UserOptionPresenterProtocol & UserOptionOutputInteractorProtocol = UserOptionPresenter()
+//        let interactor: UserOptionInputInteractorProtocol = UserOptionInteractor()
+//        let router: UserOptionRouterProtocol = UserOptionRouter()
+//        
+//        view.presenter = presenter
+//        presenter.view = view
+//        presenter.interactor = interactor
+//        presenter.router = router
+//        interactor.presenter = presenter
+//        router.presenter = presenter
+//        
+//        return view
+//    }
     
-    func goBack(from view: any UserOptionViewProtocol) {
+    deinit {
+           debugPrint("? deinit \(self)")
+       }
+    
+    func goBack(from view: UserOptionViewProtocol) {
         guard let view = view as? UIViewController else { return }
         view.navigationController?.popViewController(animated: true)
-    }
-    
-    func chooseAvatarSource(from view: any UserOptionViewProtocol) {
-        print("Dome fincl ")
     }
     
     func showImageSourceAlert(from view:  UserOptionViewProtocol) {
@@ -50,7 +50,6 @@ final class UserOptionRouter: UserOptionRouterProtocol {
                 self.presenter?.checkPermission(with: .camera)
                 print("User choose camera")
             }
-           
         }))
         allertController.addAction(UIAlertAction(title: "Галлерея",
                                                  style: .default,
@@ -71,7 +70,7 @@ final class UserOptionRouter: UserOptionRouterProtocol {
         registrationView.present(allertController, animated: true)
     }
     
-    func goToOption(from view: any UserOptionViewProtocol, with label: String) {
+    func goToOption(from view: UserOptionViewProtocol, with label: String) {
         guard let registrationView = view as? UIViewController else { return }
         let alert = UIAlertController(title: "Открыть настройки",
                                       message: "Доступ к \(label) не предоставлен. Открыть настройки для предоставления доступа?",
@@ -84,7 +83,7 @@ final class UserOptionRouter: UserOptionRouterProtocol {
         registrationView.present(alert, animated: true)
     }
     
-    func goToImagePicker(from view: any UserOptionViewProtocol, status: PermissionStatus) {
+    func goToImagePicker(from view: UserOptionViewProtocol, status: PermissionStatus) {
         guard let registrationView = view as? UIViewController else { return }
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = registrationView as? any UIImagePickerControllerDelegate & UINavigationControllerDelegate

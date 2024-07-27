@@ -51,11 +51,15 @@ final class UserOptionController: UIViewController {
         self.setupView()
     }
     
+    deinit {
+           debugPrint("? deinit \(self)")
+       }
+    
     private func setupView() {
         setupHierarchy()
         setupLayout()
         userNameField.delegate = self
-        navigationItem.backBarButtonItem?.isHidden = true
+        self.tabBarController?.tabBar.isHidden = true
         userAvatar.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(chooseAvatar)))
     }
     
@@ -117,6 +121,7 @@ extension UserOptionController: UIImagePickerControllerDelegate, UINavigationCon
             presenter?.setImage(self.userAvatar.image ?? UIImage(named: "mockUser_3")!)
             return
         }
+        
         self.userAvatar.image = image
         presenter?.setImage(image)
     }

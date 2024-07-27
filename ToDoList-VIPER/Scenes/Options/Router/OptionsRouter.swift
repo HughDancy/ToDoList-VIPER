@@ -28,7 +28,9 @@ final class OptionsRouter: OptionsRouterProtocol {
     //MARK: - Router Methods
     func goToUserOptions(from view: OptionsViewProtocol) {
         guard let parrentView = view as? UIViewController else { return }
-        let userOptionModule = UserOptionRouter.createUserOptionModule()
+//        let userOptionModule = UserOptionRouter.createUserOptionModule()
+        let builder = AssemblyBuilder()
+        let userOptionModule =  builder.createUserOptionModule()
         parrentView.navigationController?.pushViewController(userOptionModule, animated: true)
     }
     
@@ -45,16 +47,15 @@ final class OptionsRouter: OptionsRouterProtocol {
     func getFeedback(from view: OptionsViewProtocol) {
         guard let parrentView = view as? UIViewController else { return }
         if MFMailComposeViewController.canSendMail() {
-                let mail = MFMailComposeViewController()
-                mail.mailComposeDelegate = parrentView as? any MFMailComposeViewControllerDelegate
-                mail.setToRecipients(["hugh.dancy@icloud.com"])
-                mail.setMessageBody("<p>Привет! Я пользуюсь твоим приложением ToDoList-VIPER и хотел бы дать обратную связь:</p>", isHTML: true)
-
-              parrentView.present(mail, animated: true)
-            } else {
-                print("Email not work")
-                // show failure alert
-            }
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = parrentView as? any MFMailComposeViewControllerDelegate
+            mail.setToRecipients(["hugh.dancy@icloud.com"])
+            mail.setMessageBody("<p>Привет! Я пользуюсь твоим приложением ToDoList-VIPER и хотел бы дать обратную связь:</p>", isHTML: true)
+            
+            parrentView.present(mail, animated: true)
+        } else {
+            print("Email not work")
+        }
     }
 }
 

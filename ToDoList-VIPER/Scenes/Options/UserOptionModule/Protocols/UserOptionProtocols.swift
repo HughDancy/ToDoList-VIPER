@@ -47,7 +47,7 @@ protocol UserOptionOutputInteractorProtocol: AnyObject {
 
 protocol UserOptionRouterProtocol: AnyObject {
     var presenter: UserOptionPresenterProtocol? { get set }
-    static func createUserOptionModule() -> UIViewController
+//    static func createUserOptionModule() -> UIViewController
     
     func goBack(from view: UserOptionViewProtocol)
     func showImageSourceAlert(from view: UserOptionViewProtocol)

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit.UIColor
 
-class CalendarModel {
+final class CalendarModel {
     func getDaysArray(date: Date) -> [Date] {
         var daysArray = [Date]()
         for day in -10...10 {
