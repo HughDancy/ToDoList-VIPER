@@ -41,8 +41,6 @@ protocol MainScreenInteractorOutputProtocol: AnyObject {
 }
 
 protocol MainScreenRouterProtocol: AnyObject {
-    static func createMainScreenModule() -> UIViewController
-    
     //PRESENTER -> ROUTER
     func goToToDos(from view: MainScreenViewProtocol, status: ToDoListStatus)
 }

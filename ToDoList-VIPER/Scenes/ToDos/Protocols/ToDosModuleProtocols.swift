@@ -45,8 +45,6 @@ protocol ToDosInteractorOutputProtocol: AnyObject {
 }
 
 protocol ToDosRouterProtocol: AnyObject {
-    static func createToDosModule(with status: ToDoListStatus) -> UIViewController
-    
     //PRESENTER -> ROUTER
     func goToTask(_ task: ToDoObject, from view: ToDosViewProtocol)
 }

@@ -33,8 +33,6 @@ protocol ForgettPasswordInreractorOutputProtocol: AnyObject {
 }
 
 protocol ForgettPasswordRouterProtocol: AnyObject {
-    static func createForgettPasswordModule() -> UIViewController
-    
     func dismissToLoginScreen(from view: ForgetPasswordViewProtocol)
     func showAlert(from view: ForgetPasswordViewProtocol, status: ResetStatus)
 }

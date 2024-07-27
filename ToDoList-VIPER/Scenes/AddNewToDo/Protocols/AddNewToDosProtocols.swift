@@ -30,8 +30,6 @@ protocol AddNewToDoInteractorProtocol: AnyObject {
 }
 
 protocol AddNewToDoRouterProtocol: AnyObject {
-    static func createAddNewToDoModule() -> UIViewController
-    
     //PRESENTER -> ROUTER
     func dismiss(from view: AddNewToDoViewProtocol)
     func showAlert(from view: AddNewToDoViewProtocol)

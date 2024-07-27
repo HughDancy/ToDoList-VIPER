@@ -13,15 +13,16 @@ import GoogleSignInSwift
 final class AppConfigurator {
     static let configuator = AppConfigurator()
     private let authManager = AuthKeychainManager()
+    private let moduleBuilder = AssemblyBuilder()
     
     func configureApp() -> UIViewController {
         let isNewUser = NewUserCheck.shared.isNewUser()
         
         switch isNewUser {
         case true:
-            return AnimationLoadingRouter.createLoadingModule(startOnboardingModule())
+            return moduleBuilder.createLoadingModule(startOnboardingModule())
         case false:
-            return AnimationLoadingRouter.createLoadingModule(startMainModule())
+            return moduleBuilder.createLoadingModule(startMainModule())
         }
     }
     
@@ -39,13 +40,13 @@ final class AppConfigurator {
         }
         
         if onboardingState == false {
-            let loginModule = LoginRouter.createLoginModule()
+            let loginModule = moduleBuilder.createLoginModule()
             let navLoginModule = UINavigationController(rootViewController: loginModule)
             let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate
             sceneDelegate.window?.rootViewController = navLoginModule
             return navLoginModule
         } else {
-            let onboardingModule = OnboardingRouter.createOnboardingModule()
+            let onboardingModule = moduleBuilder.createOnboardingModule()
             return onboardingModule
         }
     }
@@ -56,15 +57,16 @@ final class AppConfigurator {
         let currentId = authManager.id
         
         if currentUser == currentId && currentId != nil || currentId == googleSingInUser && currentId != nil && googleSingInUser != nil {
-            let mainScreen = UINavigationController(rootViewController: MainScreenRouter.createMainScreenModule())
-            let optionsScreen = OptionsRouter.createOptionsModule()
-            let mainModule = HomeTabBarRouter.createHomeTabBar(tabOne: mainScreen, tabTwo: optionsScreen)
+            let moduleBuilder = AssemblyBuilder()
+            let mainScreen = UINavigationController(rootViewController: moduleBuilder.createMainScreenModule())
+            let optionsScreen = moduleBuilder.createOptionsModule()
+            let mainModule = moduleBuilder.createHomeTabBar(tabOne: mainScreen, tabTwo: optionsScreen)
             let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate
             sceneDelegate.window?.rootViewController = mainModule
             TaskStorageManager.instance.checkOverdueToDos()
             return mainModule
         } else {
-            let loginModule = UINavigationController(rootViewController: LoginRouter.createLoginModule())
+            let loginModule = UINavigationController(rootViewController: moduleBuilder.createLoginModule())
             return loginModule
         }
     }

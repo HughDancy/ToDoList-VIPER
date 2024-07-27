@@ -8,31 +8,18 @@
 import UIKit
 
 final class LoginRouter: LoginRouterProtocol {
-  
-    static func createLoginModule() -> UIViewController {
-        let viewController = LoginController()
-        let presenter: LoginPresenterProtocol & LoginInteractorOutputProtocol = LoginPresenter()
-        let interactor: LoginInteractorInputProtocol = LoginInteractor()
-        let router: LoginRouterProtocol = LoginRouter()
-        viewController.presenter = presenter
-        presenter.view = viewController
-        presenter.interactor = interactor
-        presenter.router = router
-        interactor.presenter = presenter
-        viewController.navigationItem.hidesBackButton = true
-        return viewController
-    }
+    private let moduleBuilder = AssemblyBuilder()
     
     func goToForgottPasswordModule(from view: any LoginViewProtocol) {
         guard let view = view as? UIViewController else { return }
-        let forgottPasswordModule = ForgettPasswordRouter.createForgettPasswordModule()
+        let forgottPasswordModule = moduleBuilder.createForgettPasswordModule()
         view.navigationController?.pushViewController(forgottPasswordModule, animated: true)
     }
     
     
     func goToRegistration(from view: LoginViewProtocol) {
         guard let view = view as? UIViewController else { return }
-        let registrationModule = RegistrationRouter.createRegistrationModule()
+        let registrationModule = moduleBuilder.createRegistrationModule()
         view.navigationController?.pushViewController(registrationModule, animated: true)
     }
     
@@ -41,9 +28,9 @@ final class LoginRouter: LoginRouterProtocol {
         NewUserCheck.shared.setIsNotNewUser()
         let startDate = Calendar.current.startOfDay(for: Date.today)
         UserDefaults.standard.setValue(startDate, forKey: "lastOverdueRefresh")
-        let mainScreen = UINavigationController(rootViewController:  MainScreenRouter.createMainScreenModule())
-        let optionScreen = OptionsRouter.createOptionsModule()
-        let mainModule = HomeTabBarRouter.createHomeTabBar(tabOne: mainScreen, tabTwo: optionScreen)
+        let mainScreen = UINavigationController(rootViewController:  moduleBuilder.createMainScreenModule())
+        let optionScreen = moduleBuilder.createOptionsModule()
+        let mainModule = moduleBuilder.createHomeTabBar(tabOne: mainScreen, tabTwo: optionScreen)
         mainModule.modalTransitionStyle = .crossDissolve
         mainModule.modalPresentationStyle = .fullScreen
         view.present(mainModule, animated: true)

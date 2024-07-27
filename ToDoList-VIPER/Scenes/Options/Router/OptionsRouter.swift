@@ -9,26 +9,9 @@ import UIKit
 import MessageUI
 
 final class OptionsRouter: OptionsRouterProtocol {
-    
-    static func createOptionsModule() -> UIViewController {
-        let view = OptionsViewController()
-        let presenter: OptionsPresenterProtocol & OptionsOutputInteractorProtocol = OptionsPresenter()
-        let interactor: OptionsInputInteractorProtocol = OptionsInteractor()
-        let router: OptionsRouterProtocol = OptionsRouter()
-        let navCon = UINavigationController(rootViewController: view)
-        view.presenter = presenter
-        presenter.interactor = interactor
-        presenter.view = view
-        presenter.router = router
-        interactor.presenter = presenter
-        
-        return navCon
-    }
-    
-    //MARK: - Router Methods
+
     func goToUserOptions(from view: OptionsViewProtocol) {
         guard let parrentView = view as? UIViewController else { return }
-//        let userOptionModule = UserOptionRouter.createUserOptionModule()
         let builder = AssemblyBuilder()
         let userOptionModule =  builder.createUserOptionModule()
         parrentView.navigationController?.pushViewController(userOptionModule, animated: true)

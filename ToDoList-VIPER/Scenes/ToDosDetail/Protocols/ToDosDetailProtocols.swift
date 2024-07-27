@@ -43,8 +43,7 @@ protocol ToDosDetailInteractorOutputProtocol: AnyObject {
 
 protocol ToDosDetailRouterProtocol: AnyObject {
     var presenter: ToDosDetailInteractorOutputProtocol? { get set }
-    static func createModule(with toDo: ToDoObject) -> UIViewController
-    
+
     //PRESENTER -> ROUTER
     func showAllert(with view: ToDosDetailViewProtocol, status: ToDoDetailStatus, toDo: ToDoObject?)
     func goBackToTasks(with view: ToDosDetailViewProtocol)

@@ -42,7 +42,6 @@ protocol OptionsOutputInteractorProtocol: AnyObject {
 }
 
 protocol OptionsRouterProtocol: AnyObject {
-    static func createOptionsModule() -> UIViewController
     func goToUserOptions(from view: OptionsViewProtocol)
     func logOut(from view: OptionsViewProtocol)
     func getFeedback(from view: OptionsViewProtocol)

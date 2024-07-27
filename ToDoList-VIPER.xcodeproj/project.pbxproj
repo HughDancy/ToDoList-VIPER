@@ -136,13 +136,13 @@
 		D8E9F8BA2B0CC0CB00A3F3FC /* ToDoObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8B82B0CC0CB00A3F3FC /* ToDoObject+CoreDataProperties.swift */; };
 		D8E9F8BC2B109DB800A3F3FC /* TaskStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8BB2B109DB800A3F3FC /* TaskStorageManager.swift */; };
 		D8E9F8BE2B17427F00A3F3FC /* Date + EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8BD2B17427F00A3F3FC /* Date + EXT.swift */; };
-		D8E9F8D02B18A56200A3F3FC /* ToDoObjectSorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E9F8CF2B18A56200A3F3FC /* ToDoObjectSorter.swift */; };
 		D8F11C602B5660DA00D2282D /* AnimationLoadingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F11C5F2B5660DA00D2282D /* AnimationLoadingPresenter.swift */; };
 		D8F11C622B5669AC00D2282D /* MockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F11C612B5669AC00D2282D /* MockViewController.swift */; };
 		D8F33E322B7E17F70008FE91 /* LoadingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F33E312B7E17F70008FE91 /* LoadingButton.swift */; };
 		D8F8B3622C4E6C8400A0B491 /* ToDosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8B3612C4E6C8400A0B491 /* ToDosView.swift */; };
 		D8F8B3642C4FA72C00A0B491 /* OptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8B3632C4FA72C00A0B491 /* OptionView.swift */; };
 		D8F8B3662C50ED0900A0B491 /* OverdueStatusRefresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8B3652C50ED0800A0B491 /* OverdueStatusRefresher.swift */; };
+		D8F8B38E2C54D42500A0B491 /* AssemblyBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8B38D2C54D42500A0B491 /* AssemblyBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -283,13 +283,13 @@
 		D8E9F8B82B0CC0CB00A3F3FC /* ToDoObject+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToDoObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D8E9F8BB2B109DB800A3F3FC /* TaskStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStorageManager.swift; sourceTree = "<group>"; };
 		D8E9F8BD2B17427F00A3F3FC /* Date + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + EXT.swift"; sourceTree = "<group>"; };
-		D8E9F8CF2B18A56200A3F3FC /* ToDoObjectSorter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoObjectSorter.swift; sourceTree = "<group>"; };
 		D8F11C5F2B5660DA00D2282D /* AnimationLoadingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationLoadingPresenter.swift; sourceTree = "<group>"; };
 		D8F11C612B5669AC00D2282D /* MockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockViewController.swift; sourceTree = "<group>"; };
 		D8F33E312B7E17F70008FE91 /* LoadingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingButton.swift; sourceTree = "<group>"; };
 		D8F8B3612C4E6C8400A0B491 /* ToDosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDosView.swift; sourceTree = "<group>"; };
 		D8F8B3632C4FA72C00A0B491 /* OptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionView.swift; sourceTree = "<group>"; };
 		D8F8B3652C50ED0800A0B491 /* OverdueStatusRefresher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverdueStatusRefresher.swift; sourceTree = "<group>"; };
+		D8F8B38D2C54D42500A0B491 /* AssemblyBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1109,11 +1109,11 @@
 			children = (
 				D8F33E302B7E17E30008FE91 /* CustomClasses */,
 				D8E9F8A12B04D22400A3F3FC /* Extension */,
-				D8E9F8CF2B18A56200A3F3FC /* ToDoObjectSorter.swift */,
 				D8900F162B55435A008E0E34 /* NewUserCheck.swift */,
 				D82B8B6D2B6B8CCB00A006F2 /* AppConfigurator.swift */,
 				D8CE4B712B8739D900E473AC /* RegistrationStatus.swift */,
 				D86422D12C36A840000A0BDF /* ToDoThemeDefaults.swift */,
+				D8F8B38D2C54D42500A0B491 /* AssemblyBuilder.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -1337,6 +1337,7 @@
 				D8B1E9BD2BA4178B00D455AF /* MainScreenProtocols.swift in Sources */,
 				D8E840642B677C31005A0936 /* RegistrationProtocols.swift in Sources */,
 				D8473BF12BB7E73C0063F87A /* ToDosRouter.swift in Sources */,
+				D8F8B38E2C54D42500A0B491 /* AssemblyBuilder.swift in Sources */,
 				D8900F172B55435A008E0E34 /* NewUserCheck.swift in Sources */,
 				D8BDEAC02BE3658200C3BE55 /* ColorTransformer.swift in Sources */,
 				D8AB922D2BBD5D9700826A4E /* ToDosDetailInteractor.swift in Sources */,
@@ -1420,7 +1421,6 @@
 				D87474552B97176C00BF4866 /* CircleBaseButton.swift in Sources */,
 				D8E72F072C354457007FF819 /* OptionsViewController.swift in Sources */,
 				D8B1E9BF2BA4212A00D455AF /* MainScreenPresenter.swift in Sources */,
-				D8E9F8D02B18A56200A3F3FC /* ToDoObjectSorter.swift in Sources */,
 				D86422DC2C37D3FA000A0BDF /* UserOptionController.swift in Sources */,
 				D85C57EE2B57D16300023B04 /* OnboardingRouter.swift in Sources */,
 				D874745D2B99A95600BF4866 /* RegistrationController.swift in Sources */,

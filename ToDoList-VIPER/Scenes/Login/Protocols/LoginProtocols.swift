@@ -44,7 +44,6 @@ protocol LoginInteractorOutputProtocol: AnyObject {
 }
 
 protocol LoginRouterProtocol: AnyObject {
-    static func createLoginModule() -> UIViewController
     func goToForgottPasswordModule(from view: LoginViewProtocol)
     func goToRegistration(from view: LoginViewProtocol)
     func goToMainScreen(from view: LoginViewProtocol)

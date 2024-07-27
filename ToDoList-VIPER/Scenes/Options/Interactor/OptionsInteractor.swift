@@ -14,11 +14,8 @@ import GoogleSignInSwift
 final class OptionsInteractor: OptionsInputInteractorProtocol {
  
     //MARK: - Properties
-    var presenter: OptionsOutputInteractorProtocol?
-    private let firebaseAuth = Auth.auth()
-    private var toDoUserDefaults = ToDoThemeDefaults.shared
-    private var authMangaer = AuthKeychainManager()
-    
+    weak var presenter: OptionsOutputInteractorProtocol?
+
     //MARK: - Interactor Methods
     func fetchOptionsData() {
         let optionsData = ["Сменить тему", "Обратная связь", "Выход"]
@@ -35,6 +32,7 @@ final class OptionsInteractor: OptionsInputInteractorProtocol {
     }
     
     func changeTheme(_ bool: Bool) {
+        var toDoUserDefaults = ToDoThemeDefaults.shared
         if bool {
                  toDoUserDefaults.theme = Theme(rawValue: "dark") ?? .dark
              } else {
@@ -49,6 +47,8 @@ final class OptionsInteractor: OptionsInputInteractorProtocol {
     }
     
     func loggedOut() {
+        let firebaseAuth = Auth.auth()
+        let authMangaer = AuthKeychainManager()
         do {
             try? firebaseAuth.signOut()
             authMangaer.clear()

@@ -11,22 +11,6 @@ final class UserOptionRouter: UserOptionRouterProtocol {
     
     weak var presenter: UserOptionPresenterProtocol?
     
-//    static func createUserOptionModule() -> UIViewController {
-//        let view = UserOptionController()
-//        let presenter: UserOptionPresenterProtocol & UserOptionOutputInteractorProtocol = UserOptionPresenter()
-//        let interactor: UserOptionInputInteractorProtocol = UserOptionInteractor()
-//        let router: UserOptionRouterProtocol = UserOptionRouter()
-//        
-//        view.presenter = presenter
-//        presenter.view = view
-//        presenter.interactor = interactor
-//        presenter.router = router
-//        interactor.presenter = presenter
-//        router.presenter = presenter
-//        
-//        return view
-//    }
-    
     deinit {
            debugPrint("? deinit \(self)")
        }

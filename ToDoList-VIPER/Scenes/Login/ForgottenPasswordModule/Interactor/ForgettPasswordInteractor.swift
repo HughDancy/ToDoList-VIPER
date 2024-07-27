@@ -9,7 +9,7 @@ import Foundation
 import FirebaseAuth
 
 final class ForgettPasswordInteractor: ForgettPasswordInreractorInputProtocol {
-    var presenter: ForgettPasswordInreractorOutputProtocol?
+    weak var presenter: ForgettPasswordInreractorOutputProtocol?
     
     func resetPassword(with email: String) {
         if  email == "" || email.isValidEmail() == false {

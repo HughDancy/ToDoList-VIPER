@@ -10,23 +10,6 @@ import UIKit
 final class ToDosDetailRouter: ToDosDetailRouterProtocol {
     weak var presenter: ToDosDetailInteractorOutputProtocol?
     
-    static func createModule(with toDo: ToDoObject) -> UIViewController {
-        let viewController: ToDosDetailViewProtocol = ToDosDetailController()
-        let presenter: ToDosDetailPresenterProtocol & ToDosDetailInteractorOutputProtocol = ToDosDetailPresenter()
-        let interactor: ToDosDetailInteractorInputProtocol = ToDosDetailInteractor()
-        let router: ToDosDetailRouterProtocol = ToDosDetailRouter()
-        
-        viewController.presenter = presenter
-        presenter.view = viewController
-        presenter.interactor = interactor
-        presenter.router = router
-        interactor.presenter = presenter
-        interactor.toDoItem = toDo
-        router.presenter = presenter
-        
-        return viewController as! UIViewController
-    }
-    
     func showAllert(with view: any ToDosDetailViewProtocol, status: ToDoDetailStatus, toDo: ToDoObject?) {
         guard let currentView = view as? UIViewController else { return }
         let allertController = CustomAlertController()

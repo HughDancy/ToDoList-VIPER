@@ -12,10 +12,8 @@ import AVFoundation
 import Photos
 
 final class RegistrationInteractor: RegistrationInteractorInputProtocol {
-    var presenter: RegistrationInteractorOutputProtocol?
-    private let db = Firestore.firestore()
-    private var storageManager = FirebaseStorageManager()
-    var avatarTemp = UIImage()
+    weak var presenter: RegistrationInteractorOutputProtocol?
+    private var avatarTemp = UIImage()
     
     //MARK: - Register from presenter method
     func registerNewUser(name: String, email: String, password: String) {
@@ -36,13 +34,14 @@ final class RegistrationInteractor: RegistrationInteractorInputProtocol {
     
     //MARK: -  Support register method
     private func registerUser(name: String, email: String, password: String) {
+        let storageManager = FirebaseStorageManager()
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
             if error != nil {
                 self.presenter?.getRegistrationResult(result: .error)
                 print(error?.localizedDescription as Any)
             } else {
                 let uid = result!.user.uid
-                self.storageManager.saveImage(image: self.avatarTemp, name: uid)
+                storageManager.saveImage(image: self.avatarTemp, name: uid)
                 print("Login give me that result - result!.user.uid")
                 self.addNewUserToServer(uid: uid, email: email, name: name, password: password)
             }
@@ -100,7 +99,8 @@ final class RegistrationInteractor: RegistrationInteractorInputProtocol {
     //MARK: - Register new user support method and write his data to server
 fileprivate extension RegistrationInteractor {
     private func addNewUserToServer(uid: String, email: String, name: String, password: String) {
-        self.db.collection("users").document(uid).setData([
+        let db = Firestore.firestore()
+        db.collection("users").document(uid).setData([
             "email" : email,
             "name" : name,
             "password" : password,

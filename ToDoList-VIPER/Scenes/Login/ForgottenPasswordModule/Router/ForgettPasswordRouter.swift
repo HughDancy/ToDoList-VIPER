@@ -8,21 +8,7 @@
 import UIKit
 
 final class ForgettPasswordRouter: ForgettPasswordRouterProtocol {
-    static func createForgettPasswordModule() -> UIViewController {
-        let view = ForgottPasswordController()
-        let presenter: ForgettPasswordPresenterProtocol & ForgettPasswordInreractorOutputProtocol = ForgettPasswortPresenter()
-        let interactor: ForgettPasswordInreractorInputProtocol = ForgettPasswordInteractor()
-        let router: ForgettPasswordRouterProtocol = ForgettPasswordRouter()
-        
-        view.presenter = presenter
-        presenter.view = view
-        presenter.interactor = interactor
-        presenter.router = router
-        interactor.presenter = presenter
-        
-        return view
-    }
-    
+  
     func dismissToLoginScreen(from view: ForgetPasswordViewProtocol) {
         guard let currentView = view as? UIViewController else { return }
         currentView.navigationController?.popViewController(animated: true)

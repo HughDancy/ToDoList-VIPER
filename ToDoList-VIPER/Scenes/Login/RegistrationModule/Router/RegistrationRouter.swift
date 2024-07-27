@@ -8,22 +8,7 @@
 import UIKit
 
 final class RegistrationRouter: RegistrationRouterProtocol {
-    var presenter: RegistrationPresenterPtorocol?
-    
-    static func createRegistrationModule() -> UIViewController {
-        let view = RegistrationController()
-        let presenter: RegistrationPresenterPtorocol & RegistrationInteractorOutputProtocol = RegistrationPresenter()
-        let interactor: RegistrationInteractorInputProtocol = RegistrationInteractor()
-        let router: RegistrationRouterProtocol = RegistrationRouter()
-        
-        view.presenter = presenter
-        presenter.view = view
-        presenter.interactor = interactor
-        presenter.router = router
-        interactor.presenter = presenter
-        router.presenter = presenter
-        return view
-    }
+    weak var presenter: RegistrationPresenterPtorocol?
     
     //MARK: - Alert method to show allert with registration status
     func showAlert(with result: RegistrationStatus, and view: RegistrationViewProtocol) {

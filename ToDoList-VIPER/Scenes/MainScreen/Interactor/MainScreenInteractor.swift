@@ -9,7 +9,7 @@ import Foundation
 import FirebaseFirestore
 
 final class MainScreenInteractor: MainScreenInteractorInputProtocol {
-    var presenter: MainScreenInteractorOutputProtocol?
+    weak var presenter: MainScreenInteractorOutputProtocol?
     private var storage = TaskStorageManager.instance
     private var firebaseStorageManager = FirebaseStorageManager()
     
