@@ -32,7 +32,6 @@ final class UserOptionRouter: UserOptionRouterProtocol {
                 self.goToImagePicker(from: view, status: .camera)
             } else {
                 self.presenter?.checkPermission(with: .camera)
-                print("User choose camera")
             }
         }))
         allertController.addAction(UIAlertAction(title: "Галлерея",
@@ -42,15 +41,11 @@ final class UserOptionRouter: UserOptionRouterProtocol {
                 self.goToImagePicker(from: view, status: .gallery)
             } else  {
                 self.presenter?.checkPermission(with: .gallery)
-                print("User choose gallery")
             }
-           
         }))
         allertController.addAction(UIAlertAction(title: "Позже",
                                                  style: .cancel,
-                                                 handler: {_ in
-            print("User choose cancel")
-        }))
+                                                 handler: {_ in }))
         registrationView.present(allertController, animated: true)
     }
     

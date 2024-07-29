@@ -172,7 +172,6 @@ final class LoginController: SingInController {
     
     @objc func appleLogIn() {
         presenter?.appleSignIn()
-        print("You login with Apple")
     }
 }
 

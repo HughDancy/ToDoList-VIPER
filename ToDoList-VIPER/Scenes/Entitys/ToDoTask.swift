@@ -24,17 +24,6 @@ struct ToDoTask: Codable {
         case status = "status"
         case id = "id"
     }
-    
-   static func convertToToDoTask(task: ToDoObject) -> ToDoTask {
-       let category = TaskCategoryManager.manager.getCategory(from: task.color ?? .systemOrange)
-       let status = ProgressStatus.convertStatusForServer(task: task)
-       let task = ToDoTask(title: task.title ?? "Temp",
-                           descriptionTitle: task.descriptionTitle ?? "Description",
-                           date: task.date ?? Date.today,
-                            category: category,
-                           status: status, id: task.id ?? UUID.init())
-       return task
-    }
 }
 
 enum ProgressStatus: String, Codable {
@@ -48,9 +37,7 @@ enum ProgressStatus: String, Codable {
     
     static func convertStatusFromServer(serverStatus: ProgressStatus, date: Date) -> Bool {
         let statusFromServer = serverStatus != ProgressStatus.done && serverStatus != ProgressStatus.inProgress
-        print("Convert Status task  From Server is - \(statusFromServer)")
         let dateStatus = date >= Date.today
-        print("Date status in convert status from server is - \(dateStatus)")
         return statusFromServer == dateStatus
     }
     

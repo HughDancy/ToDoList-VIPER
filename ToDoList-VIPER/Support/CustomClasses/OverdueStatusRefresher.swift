@@ -16,7 +16,6 @@ final class OverdueStatusRefresher {
     func loadDataIfNeeded(completion: (Bool) -> Void) {
 
         if isRefreshRequired() {
-            // load the data
             defaults.set(Date.today, forKey: defaultsKey)
             print("Refresher is change data")
             completion(true)

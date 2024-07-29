@@ -146,7 +146,6 @@ final class TaskStorageManager {
         fetchRequest.predicate = predicate
         fetchRequest.fetchBatchSize = 7
         let objects = try! viewContext.fetch(fetchRequest)
-        print("Private context - \(objects)")
         return objects
     }
     

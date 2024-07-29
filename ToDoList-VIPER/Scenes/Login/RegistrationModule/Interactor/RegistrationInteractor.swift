@@ -42,7 +42,6 @@ final class RegistrationInteractor: RegistrationInteractorInputProtocol {
             } else {
                 let uid = result!.user.uid
                 storageManager.saveImage(image: self.avatarTemp, name: uid)
-                print("Login give me that result - result!.user.uid")
                 self.addNewUserToServer(uid: uid, email: email, name: name, password: password)
             }
         }

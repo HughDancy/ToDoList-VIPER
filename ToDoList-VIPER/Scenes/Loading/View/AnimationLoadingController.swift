@@ -86,11 +86,6 @@ final class AnimationLoadingController: UIViewController, AnimationLoadingContro
     //MARK: - Animate Method Extension
 extension AnimationLoadingController {
     private func animate() {
-//        guard let view = self.nextScreen else {
-//            print("Next Screen View Controller is not initialized")
-//            return
-//        }
-        
         UIView.animate(withDuration: 1) {
             let size = self.view.frame.size.width * 1.5
             let diffX = size - self.view.frame.size.width

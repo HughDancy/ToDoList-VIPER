@@ -75,7 +75,6 @@ extension FirebaseStorageManager {
                 let timestamp = task["date"] as! Timestamp
                 let date = timestamp.dateValue()
                 let overdueStatus = statusFromServer == .fail ? true : false
-                print("For task name - \(task["title"] ?? ""), his date is - \(date) overdue status is - \(overdueStatus)")
                 let doneStatus = statusFromServer == .done ? true : false
                 let id = task["id"] as? String
                 let taskUid = UUID(uuidString: id ?? "")

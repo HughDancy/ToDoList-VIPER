@@ -39,7 +39,6 @@ final class ToDoController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(toDoTasks)
         view = ToDosView(status: presenter?.status)
         setupView()
     }

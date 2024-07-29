@@ -91,7 +91,6 @@ extension LoginInteractor {
                     self.setUserName(userName)
                     self.keyChainedManager.persist(id: uuid)
                     self.presenter?.getVerificationResult(with: .googleSignInSucces)
-                    print("Seems all is alright")
                 } else {
                     let newUserName = signInResult?.user.profile?.name ?? "Some User"
                     self.db.collection("users").document(uuid).setData( [
