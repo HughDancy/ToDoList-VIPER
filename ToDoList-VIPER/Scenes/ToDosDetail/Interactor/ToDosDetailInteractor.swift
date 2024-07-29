@@ -8,6 +8,7 @@
 import UIKit
 
 final class ToDosDetailInteractor: ToDosDetailInteractorInputProtocol {
+   
     weak var presenter: ToDosDetailInteractorOutputProtocol?
     var toDoItem: ToDoObject?
     var localStorage = TaskStorageManager.instance
@@ -35,13 +36,12 @@ final class ToDosDetailInteractor: ToDosDetailInteractorInputProtocol {
         }
     }
     
-    func deleteTask(_ toDo: ToDoObject) {
+    func deleteTask() {
         guard let task = toDoItem else { return }
-        let deletedTask = ToDoTask.convertToToDoTask(task: task)
-        firebaseStorage.deleteTaskFromServer(deletedTask)
-        localStorage.deleteToDoObject(item: task)
+        firebaseStorage.deleteTaskIdFormSever(task.id?.uuidString ?? UUID().uuidString)
+        localStorage.deleteTaskWithId(task.id ?? UUID.init())
         presenter?.didDeleteToDo()
-        
+        NotificationCenter.default.post(name: NotificationNames.updateMainScreen.name, object: nil)
     }
 }
 

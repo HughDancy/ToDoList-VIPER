@@ -65,7 +65,7 @@ final class TaskStorageManager {
             delete(entityName: entity.name!)
         }
     }
-
+    
     private func delete(entityName: String) {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
@@ -75,6 +75,17 @@ final class TaskStorageManager {
         } catch let error as NSError {
             debugPrint(error)
         }
+    }
+    
+    func deleteTaskWithId(_ uid: UUID) {
+        let fetchRequest: NSFetchRequest<ToDoObject> = ToDoObject.fetchRequest()
+        let idPredicate = NSPredicate(format: "%K == %@", "id", uid as CVarArg)
+        fetchRequest.predicate = idPredicate
+        let objects = try! viewContext.fetch(fetchRequest)
+        let date = objects.first
+        viewContext.delete(date ?? ToDoObject())
+        self.saveChanges()
+        
     }
     
     //MARK: - CoreData edit ToDoObject
@@ -91,7 +102,7 @@ final class TaskStorageManager {
             item.date = newDate
             item.dateTitle = DateFormatter.getStringFromDate(from: newDate)
         }
-
+        
         if item.color != color {
             item.color = color
             item.iconName = iconName

@@ -151,6 +151,21 @@ extension FirebaseStorageManager {
                 }
             }})
     }
+    
+    func deleteTaskIdFormSever(_ id: String) {
+        let uid = Auth.auth().currentUser?.uid ?? UUID().uuidString
+        let collectionReference = db.collection("toDos").document(uid).collection("tasks")
+        let query: Query = collectionReference.whereField("id", isEqualTo: id)
+        query.getDocuments { snapshot, error in
+            if let error = error {
+                print("Some error went wehn try deleting task from server")
+            } else {
+                snapshot!.documents.forEach { document in
+                    self.db.collection("toDos").document(uid).collection("tasks").document(document.documentID).delete()
+                }
+            }
+        }
+    }
 }
 
 extension FirebaseStorageManager {
