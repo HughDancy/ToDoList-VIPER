@@ -20,7 +20,6 @@ final class ToDosInteractor: ToDosInteractorInputProtocol {
         self.fetchSortedToDos(with: status, and: date)
     }
     
-    //MAYBE REFACTOR
     func fetchSortedToDos(with status: ToDoListStatus, and date: Date?) {
         let mockDate = Date.getDateFromStatus(status)
         
@@ -54,18 +53,14 @@ final class ToDosInteractor: ToDosInteractorInputProtocol {
         }
     }
     
-    func doneTask(_ task: ToDoObject) {
-        let donedToDo = ToDoTask.convertToToDoTask(task: task)
-        storage.doneToDo(item: task)
-        firebaseStorage.makeToDoDone(donedToDo)
-        
+    func doneTask(_ taskId: UUID) {
+        storage.doneToDo(taskId)
+        firebaseStorage.makeTaskDone(taskId)
     }
     
-    func deleteTask(_ task: ToDoObject) {
-        let deletedTask = ToDoTask.convertToToDoTask(task: task)
-        print("Converted task is -  \(deletedTask)")
-        firebaseStorage.deleteTaskFromServer(deletedTask)
-        storage.deleteToDoObject(item: task)
+    func deleteTask(_ taskId: UUID) {
+        firebaseStorage.deleteTaskFromServer(taskId.uuidString)
+        storage.deleteTaskWithId(taskId)
         NotificationCenter.default.post(name: NotificationNames.updateMainScreen.name, object: nil)
     }
 }

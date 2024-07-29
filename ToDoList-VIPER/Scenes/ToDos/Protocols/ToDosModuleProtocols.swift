@@ -24,8 +24,8 @@ protocol ToDosPresenterProtocol: AnyObject {
     func getToDos()
     func fetchToDos(date: Date)
     func updateToDosForDay(_ date: Date)
-    func doneToDo(_ task: ToDoObject)
-    func deleteToDo(_ task: ToDoObject)
+    func doneToDo(_ taskId: UUID)
+    func deleteToDo(_ taskId: UUID)
     func goToTask(_ task: ToDoObject)
 }
 
@@ -35,8 +35,8 @@ protocol ToDosInteractorInputProtocol: AnyObject {
     //PRESENTER -> INTERACTOR
     func fetchFirstTasks(_ status: ToDoListStatus)
     func fetchTask(date: Date, status: ToDoListStatus)
-    func doneTask(_ task: ToDoObject)
-    func deleteTask(_ task: ToDoObject)
+    func doneTask(_ taskId: UUID)
+    func deleteTask(_ taskId: UUID)
 }
 
 protocol ToDosInteractorOutputProtocol: AnyObject {

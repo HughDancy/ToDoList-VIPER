@@ -12,7 +12,8 @@ final class ToDoCell: UITableViewCell {
     
     //MARK: - Class custom properties
     static let reuseIdentifier = "ToDoCell"
-    var toDoItem: ToDoObject?
+    private var taskId: UUID?
+    private var doneStatus: Bool?
     
     //MARK: - Outlets
     private lazy var container: UIView = {
@@ -151,7 +152,8 @@ final class ToDoCell: UITableViewCell {
     private func basicSetupCell(with item: ToDoObject) {
         self.taskName.text = item.title
         self.iconBox.backgroundColor = item.color
-        self.toDoItem = item
+        self.taskId = item.id
+        self.doneStatus = item.doneStatus
         self.icon.image = UIImage(systemName: item.iconName ?? "moon.fill")
     }
     
@@ -172,9 +174,9 @@ fileprivate extension ToDoCell {
     }
     
     @objc private func tapToImage(_ sender: UIGestureRecognizer) {
-        if self.toDoItem?.doneStatus == false {
+        if self.doneStatus == false {
             self.makeItDone()
-            let userInfo: [String: ToDoObject?] = ["doneItem" : self.toDoItem]
+            let userInfo: [String: UUID?] = ["doneItem" : self.taskId]
             NotificationCenter.default.post(name: NotificationNames.doneToDo.name, object: nil, userInfo: userInfo as [AnyHashable : Any])
         }
     }

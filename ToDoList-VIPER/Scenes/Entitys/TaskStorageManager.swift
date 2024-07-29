@@ -54,11 +54,6 @@ final class TaskStorageManager {
     }
     
     //MARK: - CoreData delete ToDoObject
-    func deleteToDoObject(item: ToDoObject) {
-        viewContext.delete(item)
-        self.saveChanges()
-    }
-    
     func deleteAllEntities() {
         let entities = persistentContainer.managedObjectModel.entities
         for entity in entities {
@@ -82,8 +77,8 @@ final class TaskStorageManager {
         let idPredicate = NSPredicate(format: "%K == %@", "id", uid as CVarArg)
         fetchRequest.predicate = idPredicate
         let objects = try! viewContext.fetch(fetchRequest)
-        let date = objects.first
-        viewContext.delete(date ?? ToDoObject())
+        let object = objects.first
+        viewContext.delete(object ?? ToDoObject())
         self.saveChanges()
         
     }
@@ -112,8 +107,13 @@ final class TaskStorageManager {
     }
     
     //MARK: - CoreData Done ToDoObject
-    func doneToDo(item: ToDoObject) {
-        item.doneStatus = true
+    func doneToDo(_ id: UUID) {
+        let fetchRequest: NSFetchRequest<ToDoObject> = ToDoObject.fetchRequest()
+        let idPredicate = NSPredicate(format: "%K == %@", "id", id as CVarArg)
+        fetchRequest.predicate = idPredicate
+        let objects = try! viewContext.fetch(fetchRequest)
+        let object = objects.first
+        object?.doneStatus = true
         self.saveChanges()
     }
     

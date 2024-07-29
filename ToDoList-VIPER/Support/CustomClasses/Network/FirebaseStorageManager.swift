@@ -137,28 +137,13 @@ extension FirebaseStorageManager {
 
 //MARK: - Delete function
 extension FirebaseStorageManager {
-    func deleteTaskFromServer(_ task: ToDoTask) {
-        let uid = Auth.auth().currentUser?.uid ?? UUID().uuidString
-        
-        let collectionReference = db.collection("toDos").document(uid).collection("tasks")
-        let query : Query = collectionReference.whereField("title", isEqualTo: task.title)
-        query.getDocuments(completion: { (snapshot, error) in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                for document in snapshot!.documents {
-                    self.db.collection("toDos").document(uid).collection("tasks").document("\(document.documentID)").delete()
-                }
-            }})
-    }
-    
-    func deleteTaskIdFormSever(_ id: String) {
+    func deleteTaskFromServer(_ id: String) {
         let uid = Auth.auth().currentUser?.uid ?? UUID().uuidString
         let collectionReference = db.collection("toDos").document(uid).collection("tasks")
         let query: Query = collectionReference.whereField("id", isEqualTo: id)
         query.getDocuments { snapshot, error in
             if let error = error {
-                print("Some error went wehn try deleting task from server")
+                print("Some error went wehn try deleting task from server - \(error)")
             } else {
                 snapshot!.documents.forEach { document in
                     self.db.collection("toDos").document(uid).collection("tasks").document(document.documentID).delete()
@@ -169,9 +154,10 @@ extension FirebaseStorageManager {
 }
 
 extension FirebaseStorageManager {
-    func makeToDoDone(_ task: ToDoTask) {
+    func makeTaskDone(_ id: UUID) {
         let uid = Auth.auth().currentUser?.uid ?? UUID().uuidString
-        db.collection("toDos").document(uid).collection("tasks").whereField("title", isEqualTo: task.title).getDocuments { result, error in
+        let taskId = id.uuidString
+        db.collection("toDos").document(uid).collection("tasks").whereField("id", isEqualTo: taskId).getDocuments { result, error in
             if error == nil {
                 guard let documents = result?.documents.first else { return }
                 documents.reference.updateData(["status" : ProgressStatus.done.value])

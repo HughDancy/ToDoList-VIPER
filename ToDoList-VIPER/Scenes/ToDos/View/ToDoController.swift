@@ -151,7 +151,7 @@ extension ToDoController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let itemToDelete = toDoTasks[indexPath.row]
-            presenter?.deleteToDo(itemToDelete)
+            presenter?.deleteToDo(itemToDelete.id ?? UUID.init())
             tableView.beginUpdates()
             toDoTasks.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .right)
@@ -174,7 +174,6 @@ extension ToDoController {
             self.presenter?.updateToDosForDay(self.selectedDate)
             self.mainView?.toDoTable.reloadData()
             self.updateCalendar()
-//            self.tabBarController?.tabBar.isHidden = false
         }
     }
     
@@ -188,9 +187,9 @@ extension ToDoController {
     
     @objc func makeItDone(notification: Notification) {
         guard let doneInfo = notification.userInfo else { return }
-        guard let item = doneInfo["doneItem"] as? ToDoObject else { return }
-        self.presenter?.doneToDo(item)
-        guard let index = toDoTasks.firstIndex(of: item) else { return }
+        guard let taskId = doneInfo["taskID"] as? UUID else { return }
+        self.presenter?.doneToDo(taskId)
+        guard let index = toDoTasks.firstIndex(where: { $0.id == taskId }) else { return }
         let doneItem = toDoTasks.remove(at: index)
         toDoTasks.append(doneItem)
         mainView?.toDoTable.reloadData()
