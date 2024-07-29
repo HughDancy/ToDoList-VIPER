@@ -21,16 +21,16 @@ final class ToDosDetailPresenter: ToDosDetailPresenterProtocol {
         interactor?.editTask(title: title, descriprion: descriprion, date: date , color: color, iconName: iconName)
     }
     
-    func whantDeleteToDo(_ toDoId: UUID) {
+    func whantDeleteToDo() {
         guard let view = view else { return }
-        router?.showAllert(with: view, status: .delete, toDoId: toDoId)
+        router?.showAllert(with: view, status: .delete)
     }
 }
 
 extension ToDosDetailPresenter: ToDosDetailInteractorOutputProtocol {
     func showAllert(with status: ToDoDetailStatus) {
         guard let view = view else { return }
-        router?.showAllert(with: view, status: status, toDoId: nil)
+        router?.showAllert(with: view, status: status)
     }
     
     func deleteToDo() {
@@ -40,9 +40,5 @@ extension ToDosDetailPresenter: ToDosDetailInteractorOutputProtocol {
     func didDeleteToDo() {
         guard let view = view else { return }
         router?.goBackToTasks(with: view)
-    }
-    
-    func didEditToDo(_ toDo: ToDoObject) {
-        view?.showToDoItem(toDo)
     }
 }

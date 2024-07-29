@@ -169,8 +169,7 @@ final class ToDosDetailController: SingleToDoController {
     }
     
     @objc func deleteToDo() {
-        guard let task = item else { return }
-        presenter?.whantDeleteToDo(task.id ?? UUID.init())
+        presenter?.whantDeleteToDo()
     }
 }
 

@@ -10,7 +10,7 @@ import UIKit
 final class ToDosDetailRouter: ToDosDetailRouterProtocol {
     weak var presenter: ToDosDetailInteractorOutputProtocol?
     
-    func showAllert(with view: any ToDosDetailViewProtocol, status: ToDoDetailStatus, toDoId: UUID?) {
+    func showAllert(with view: any ToDosDetailViewProtocol, status: ToDoDetailStatus) {
         guard let currentView = view as? UIViewController else { return }
         let allertController = CustomAlertController()
         allertController.modalPresentationStyle = .overCurrentContext
@@ -41,7 +41,6 @@ final class ToDosDetailRouter: ToDosDetailRouterProtocol {
                 buttonText: "Отмена",
                 buttonTextTwo: "Да") { state in
                     if state == true {
-                        guard let id = toDoId else { return }
                         self.presenter?.deleteToDo()
                     }
                 }
