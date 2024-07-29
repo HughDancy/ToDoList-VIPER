@@ -10,12 +10,12 @@ import SnapKit
 
 protocol AnimationLoadingControllerProtocol: AnyObject {
     var presenter: AnimationLoadingPresenterProtocol? { get set }
-    var nextScreen: UIViewController? { get set }
+//    var nextScreen: UIViewController? { get set }
 }
 
 final class AnimationLoadingController: UIViewController, AnimationLoadingControllerProtocol {
     var presenter: AnimationLoadingPresenterProtocol?
-    var nextScreen: UIViewController?
+//    var nextScreen: UIViewController?
     
     //MARK: - Outlets
     private lazy var loadingBackground: UIImageView = {
@@ -86,10 +86,10 @@ final class AnimationLoadingController: UIViewController, AnimationLoadingContro
     //MARK: - Animate Method Extension
 extension AnimationLoadingController {
     private func animate() {
-        guard let view = self.nextScreen else {
-            print("Next Screen View Controller is not initialized")
-            return
-        }
+//        guard let view = self.nextScreen else {
+//            print("Next Screen View Controller is not initialized")
+//            return
+//        }
         
         UIView.animate(withDuration: 1) {
             let size = self.view.frame.size.width * 1.5
@@ -107,7 +107,7 @@ extension AnimationLoadingController {
             self.loadingImage.alpha = 0
             self.activityIndicator.stopAnimating()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.6, execute: {
-                self.presenter?.goToNextScreen(view)
+                self.presenter?.goToNextScreen()
             })
         }) { _ in
 //            self.presenter?.changeRootController(view)

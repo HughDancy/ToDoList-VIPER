@@ -9,13 +9,12 @@ import UIKit
 
 final class AssemblyBuilder {
     //MARK: - Create base screen's
-    func createLoadingModule(_ nextViewComtroller: UIViewController) -> UIViewController {
+    func createLoadingModule() -> UIViewController {
         let vc = AnimationLoadingController()
         let presenter: AnimationLoadingPresenterProtocol = AnimationLoadingPresenter()
         let router = AnimationLoadingRouter()
         
         vc.presenter = presenter
-        vc.nextScreen = nextViewComtroller
         presenter.view = vc
         presenter.router = router
         

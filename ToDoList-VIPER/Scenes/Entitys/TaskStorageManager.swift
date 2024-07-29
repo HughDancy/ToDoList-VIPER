@@ -39,7 +39,7 @@ final class TaskStorageManager {
     }()
     
     //MARK: - CoreData create new ToDoObject
-    func createNewToDo(title: String, content: String, date: Date, isOverdue: Bool, color: UIColor, iconName: String, doneStatus: Bool) {
+    func createNewToDo(title: String, content: String, date: Date, isOverdue: Bool, color: UIColor, iconName: String, doneStatus: Bool, uid: UUID) {
         let newToDo = ToDoObject(context: viewContext)
         newToDo.title = title
         newToDo.descriptionTitle = content
@@ -49,6 +49,7 @@ final class TaskStorageManager {
         newToDo.isOverdue = isOverdue
         newToDo.doneStatus = doneStatus
         newToDo.iconName = iconName
+        newToDo.id = uid
         self.saveChanges()
     }
     

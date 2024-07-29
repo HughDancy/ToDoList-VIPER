@@ -91,8 +91,8 @@ extension SingleToDoController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if descriptionText.text == "Описание задачи"  {
             descriptionText.text = ""
-            textView.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
-            textView.textColor = UIColor.label
+            descriptionText.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+            descriptionText.textColor = UIColor.label
         }
     }
     

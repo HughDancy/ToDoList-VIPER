@@ -20,9 +20,9 @@ final class AppConfigurator {
         
         switch isNewUser {
         case true:
-            return moduleBuilder.createLoadingModule(startOnboardingModule())
+            return self.startOnboardingModule()
         case false:
-            return moduleBuilder.createLoadingModule(startMainModule())
+            return self.startMainModule()
         }
     }
     

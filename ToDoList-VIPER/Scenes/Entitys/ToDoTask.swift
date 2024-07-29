@@ -14,6 +14,7 @@ struct ToDoTask: Codable {
     var date: Date
     var category: Category
     var status: ProgressStatus
+    var id: UUID
     
     enum CodingKeys: String, CodingKey {
         case title = "title"
@@ -21,6 +22,7 @@ struct ToDoTask: Codable {
         case date = "date"
         case category = "category"
         case status = "status"
+        case id = "id"
     }
     
    static func convertToToDoTask(task: ToDoObject) -> ToDoTask {
@@ -30,7 +32,7 @@ struct ToDoTask: Codable {
                            descriptionTitle: task.descriptionTitle ?? "Description",
                            date: task.date ?? Date.today,
                             category: category,
-                            status: status)
+                           status: status, id: task.id ?? UUID.init())
        return task
     }
 }

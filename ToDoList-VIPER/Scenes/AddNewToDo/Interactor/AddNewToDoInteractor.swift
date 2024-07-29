@@ -21,7 +21,7 @@ final class AddNewToDoInteractor: AddNewToDoInteractorProtocol {
         let overdueStatus: Bool = choosenDate >= compareDate ? false : true
         let status = overdueStatus ? ProgressStatus.fail : ProgressStatus.inProgress
         let category = categoryManger.getCategory(from: colorCategory)
-        
+        let uid = UUID.init()
         
         if name != "" {
             localStorage.createNewToDo(title: name ?? "Temp",
@@ -30,8 +30,9 @@ final class AddNewToDoInteractor: AddNewToDoInteractorProtocol {
                                   isOverdue: overdueStatus,
                                   color: colorCategory,
                                   iconName: iconName,
-                                  doneStatus: false)
-            let newToDo = ToDoTask(title: name ?? "Temp", descriptionTitle: description ?? "Temp", date: date ?? Date.today, category: category, status: status)
+                                  doneStatus: false,
+                                  uid: uid)
+            let newToDo = ToDoTask(title: name ?? "Temp", descriptionTitle: description ?? "Temp", date: date ?? Date.today, category: category, status: status, id: uid)
             networkStorage.uploadTaskToServer(with: newToDo)
             presenter?.goBackToMain()
         } else {

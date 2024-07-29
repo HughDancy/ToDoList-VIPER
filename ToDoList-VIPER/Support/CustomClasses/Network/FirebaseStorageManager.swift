@@ -77,6 +77,8 @@ extension FirebaseStorageManager {
                 let overdueStatus = statusFromServer == .fail ? true : false
                 print("For task name - \(task["title"] ?? ""), his date is - \(date) overdue status is - \(overdueStatus)")
                 let doneStatus = statusFromServer == .done ? true : false
+                let id = task["id"] as? String
+                let taskUid = UUID(uuidString: id ?? "")
                 
                 TaskStorageManager.instance.createNewToDo(title: task["title"] as? String ?? "Temp",
                                                           content: task["description"] as? String ?? "Description",
@@ -84,7 +86,8 @@ extension FirebaseStorageManager {
                                                           isOverdue: overdueStatus,
                                                           color: category.1,
                                                           iconName: category.0,
-                                                          doneStatus: doneStatus)
+                                                          doneStatus: doneStatus, 
+                                                          uid: taskUid ?? UUID.init())
                 
                 
             }
@@ -99,7 +102,7 @@ extension FirebaseStorageManager {
     func uploadChanges(task: ToDoTask) {
         let uid = Auth.auth().currentUser?.uid ?? UUID().uuidString
         
-        db.collection("toDos").document(uid).collection("tasks").whereField("title", isEqualTo: task.title).getDocuments { result, error in
+        db.collection("toDos").document(uid).collection("tasks").whereField("id", isEqualTo: task.id.uuidString).getDocuments { result, error in
             if error == nil {
                 guard let documents = result?.documents.first else { return }
                 let serverDate = documents["date"] as? Timestamp
@@ -124,6 +127,8 @@ extension FirebaseStorageManager {
                 if documents["category"] as? String != task.category.value {
                     documents.reference.updateData(["category" : task.category.value])
                 }
+            } else {
+                print("Went some error when try save editing task to server!")
             }
         }
     }

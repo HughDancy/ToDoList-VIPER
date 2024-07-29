@@ -27,8 +27,8 @@ final class ToDosDetailInteractor: ToDosDetailInteractorInputProtocol {
                                    iconName: iconName)
             let category = TaskCategoryManager.manager.getCategory(from: color)
             let status = ProgressStatus.convertStatusForServer(task: task)
-            let task = ToDoTask(title: title ?? defaultData.title, descriptionTitle: descriprion ?? defaultData.description, date: date ?? defaultData.date, category: category, status: status)
-            firebaseStorage.uploadChanges(task: task)
+            let editTask = ToDoTask(title: title ?? defaultData.title, descriptionTitle: descriprion ?? defaultData.description, date: date ?? defaultData.date, category: category, status: status, id: task.id ?? UUID.init())
+            firebaseStorage.uploadChanges(task: editTask)
             presenter?.showAllert(with: .allSave)
         } else {
             presenter?.showAllert(with: .error)

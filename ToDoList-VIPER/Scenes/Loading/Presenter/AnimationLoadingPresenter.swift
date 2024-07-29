@@ -11,15 +11,15 @@ protocol AnimationLoadingPresenterProtocol: AnyObject {
     var view: AnimationLoadingControllerProtocol? { get set }
     var router: AnimationLoadingRouterProtocol? { get set }
     
-    func goToNextScreen(_ nextScreen: UIViewController)
+    func goToNextScreen()
 }
 
 final class AnimationLoadingPresenter: AnimationLoadingPresenterProtocol {
     weak var view: AnimationLoadingControllerProtocol?
     var router: AnimationLoadingRouterProtocol?
     
-    func goToNextScreen(_ nextScreen: UIViewController) {
+    func goToNextScreen() {
         guard let view = view else { return }
-        router?.goToTheApp(fromView: view, to: nextScreen)
+        router?.goToTheApp(fromView: view)
     }
 }

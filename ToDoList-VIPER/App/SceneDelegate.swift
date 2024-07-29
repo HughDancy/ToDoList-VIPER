@@ -26,7 +26,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
           }
         
-        let loadingController = AppConfigurator.configuator.configureApp()
+//        let loadingController = AppConfigurator.configuator.configureApp()
+        let moduleBuilder = AssemblyBuilder()
+        let loadingController = moduleBuilder.createLoadingModule()
         window?.rootViewController = loadingController
         window?.overrideUserInterfaceStyle = ToDoThemeDefaults.shared.theme.getUserInterfaceStyle()
         window?.makeKeyAndVisible()
