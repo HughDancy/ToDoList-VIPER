@@ -40,6 +40,7 @@ class SingleToDoController: UIViewController {
         picker.preferredDatePickerStyle = .compact
         picker.locale = Locale(identifier: "ru_RU")
         picker.backgroundColor = UIColor(named: "coralColor")
+        picker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
         return picker
     }()
     
@@ -76,6 +77,10 @@ class SingleToDoController: UIViewController {
     func setupColorAndIcon(color: UIColor, icon: String) {
         self.color = color
         self.iconName = icon
+    }
+    
+    @objc func dateChanged(_ datePicker: UIDatePicker) {
+        self.dismiss(animated: true)
     }
 
     //MARK: - Setup elements user interaction
