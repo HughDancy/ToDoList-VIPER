@@ -17,7 +17,6 @@ class SingleToDoController: UIViewController {
         textView.backgroundColor = .systemGray6
         textView.layer.cornerRadius = 10
         textView.clipsToBounds = true
-        textView.textColor = .label
         textView.delegate = self
         return textView
     }()
@@ -89,7 +88,7 @@ class SingleToDoController: UIViewController {
 
 extension SingleToDoController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if descriptionText.text == "Описание задачи"  {
+        if descriptionText.text == "Описание задачи" || descriptionText.text == "Описание задачи не установлено" && descriptionText.isFirstResponder  {
             descriptionText.text = ""
             descriptionText.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
             descriptionText.textColor = UIColor.label

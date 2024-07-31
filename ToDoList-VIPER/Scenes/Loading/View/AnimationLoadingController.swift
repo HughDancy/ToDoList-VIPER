@@ -10,12 +10,10 @@ import SnapKit
 
 protocol AnimationLoadingControllerProtocol: AnyObject {
     var presenter: AnimationLoadingPresenterProtocol? { get set }
-//    var nextScreen: UIViewController? { get set }
 }
 
 final class AnimationLoadingController: UIViewController, AnimationLoadingControllerProtocol {
     var presenter: AnimationLoadingPresenterProtocol?
-//    var nextScreen: UIViewController?
     
     //MARK: - Outlets
     private lazy var loadingBackground: UIImageView = {

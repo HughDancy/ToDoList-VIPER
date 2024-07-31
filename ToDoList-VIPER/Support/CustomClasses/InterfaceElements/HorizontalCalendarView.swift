@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SnapKit
 
 final class HorizontalCalendarView: UIView {
     //MARK: - OUTLETS

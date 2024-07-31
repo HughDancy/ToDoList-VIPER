@@ -51,11 +51,15 @@ final class ToDosDetailController: SingleToDoController {
     //MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presenter?.getToDo()
         tabBarController?.tabBar.isHidden = true
         self.navigationController?.addCustomBackButton()
         self.color = item?.color
         NotificationCenter.default.addObserver(self, selector: #selector(changeEditButtonState), name: NotificationNames.tapEditButton.name, object: nil)
+    }
+    
+    override func viewDidLoad() {
+        presenter?.getToDo()
+        super.viewDidLoad()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -131,11 +135,10 @@ final class ToDosDetailController: SingleToDoController {
     
     //MARK: - Setup TextView
     override func setupTextView() {
-        descriptionText.text = item?.descriptionTitle
-        descriptionText.textColor = .label
         descriptionText.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         descriptionText.returnKeyType = .done
         descriptionText.text = item?.descriptionTitle ?? "Описание задачи не установлено"
+        descriptionText.textColor = descriptionText.text == "Описание задачи не установлено" ? .lightGray : .label
     }
     
     //MARK: - Button's Actions

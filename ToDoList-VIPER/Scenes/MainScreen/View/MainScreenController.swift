@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SnapKit
 
 final class MainScreenController: UIViewController {
     var presenter: MainScreenPresenterProtocol?

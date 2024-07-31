@@ -16,7 +16,6 @@ final class LoginInteractor: LoginInteractorInputProtocol {
     //MARK: - Properties
     private var keyChainedManager = AuthKeychainManager()
     private let db = Firestore.firestore()
-//    private let firebaseStorage = FirebaseStorageManager()
     
     //MARK: - Login with email and password
     func checkAutorizationData(login: String?, password: String?) {

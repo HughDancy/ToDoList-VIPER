@@ -116,7 +116,6 @@ final class AddNewToDoController: SingleToDoController, AddNewToDoViewProtocol {
         descriptionText.text = "Описание задачи"
         descriptionText.textColor = .lightGray
         descriptionText.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
-        
         descriptionText.returnKeyType = .done
     }
     
@@ -157,4 +156,9 @@ extension AddNewToDoController: UITextFieldDelegate {
         nameOfTaskField.resignFirstResponder()
         return true
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }
+
