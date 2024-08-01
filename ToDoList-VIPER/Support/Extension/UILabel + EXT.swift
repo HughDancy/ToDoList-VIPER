@@ -24,18 +24,18 @@ extension UILabel {
         guard let text = self.text else {
             return
         }
-        
+
         if isStrikeThrough {
             let attributeString =  NSMutableAttributedString(string: text)
             attributeString.addAttributes([
                 NSAttributedString.Key.strikethroughStyle: NSUnderlineStyle.thick.rawValue,
                 NSAttributedString.Key.strikethroughColor: UIColor.label,
                 NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15.0, weight: .semibold)
-            ], range: NSMakeRange(0, attributeString.length))
+            ], range: NSRange(location: 0, length: attributeString.length))
             self.attributedText = attributeString
         } else {
             let attributeString =  NSMutableAttributedString(string: text)
-            attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: [], range: NSMakeRange(0,attributeString.length))
+            attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: [], range: NSRange(location: 0, length: attributeString.length))
             self.attributedText = attributeString
         }
     }

@@ -9,7 +9,7 @@ import UIKit
 
 protocol OnboardingViewProtocol: AnyObject {
     var presenter: OnboardingPresenterProtocol? { get set }
-    
+
     func getOnboardingData(_ data: [OnboardingItems])
 }
 
@@ -17,21 +17,21 @@ protocol OnboardingPresenterProtocol: AnyObject {
     var view: OnboardingViewProtocol? { get set }
     var interactor: OnboardingInteractorInputProtocol? { get set }
     var router: OnboardingRouterProtocol? { get set }
-    
-    //VIEW -> PRESENTER
+
+    // VIEW -> PRESENTER
     func viewWillAppear()
     func goToLoginModule()
 }
 
 protocol OnboardingInteractorInputProtocol: AnyObject {
     var presenter: OnboardingInteractorOutputProtocol? { get set }
-    
-    //PRESENTER -> INTERACTOR
+
+    // PRESENTER -> INTERACTOR
     func retriveData()
 }
 
 protocol OnboardingInteractorOutputProtocol: AnyObject {
-    //INTERACTOR -> PRESENTER
+    // INTERACTOR -> PRESENTER
     func didRetriveData(_ data: [OnboardingItems])
 }
 

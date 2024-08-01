@@ -13,11 +13,11 @@ import GoogleSignInSwift
 
 final class LoginInteractor: LoginInteractorInputProtocol {
     var presenter: LoginInteractorOutputProtocol?
-    //MARK: - Properties
+    // MARK: - Properties
     private var keyChainedManager = AuthKeychainManager()
-    private let db = Firestore.firestore()
-    
-    //MARK: - Login with email and password
+    private let firebaseDataBase = Firestore.firestore()
+
+    // MARK: - Login with email and password
     func checkAutorizationData(login: String?, password: String?) {
         switch (login != nil) && (password != nil) {
         case (login == "") || (password == ""):
@@ -34,8 +34,8 @@ final class LoginInteractor: LoginInteractorInputProtocol {
             self.logInWithEmailAndPassword(email: nickname, password: pass)
         }
     }
-    
-    //MARK: - Google SignIn
+
+    // MARK: - Google SignIn
     func googleLogIn(with: LoginViewProtocol) {
         guard let viewController = with as? UIViewController else { return }
         GIDSignIn.sharedInstance.signIn(withPresenting: viewController) { signInResult, error in
@@ -44,19 +44,19 @@ final class LoginInteractor: LoginInteractorInputProtocol {
                 self.presenter?.getVerificationResult(with: .wrongEnteredData)
                 return
             }
-            
+
             let uuid = signInResult?.user.userID ?? UUID().uuidString
             let userName = signInResult?.user.profile?.name
             self.writeUserDataGoogleSingIn(signInResult: signInResult, userName: userName, uuid: uuid)
         }
     }
-    
+
     func changeOnboardingState() {
         NewUserCheck.shared.setIsLoginScrren()
     }
 }
 
-   //MARK: - SingIn with email and password method
+   // MARK: - SingIn with email and password method
 extension LoginInteractor {
     private func logInWithEmailAndPassword(email: String, password: String) {
         let taskManager = FirebaseStorageManager()
@@ -77,10 +77,10 @@ extension LoginInteractor {
         }
     }
 }
-    //MARK: - Google SingIn Method extension
+    // MARK: - Google SingIn Method extension
 extension LoginInteractor {
     private func writeUserDataGoogleSingIn(signInResult: GIDSignInResult?, userName: String?, uuid: String) {
-        let docRef = db.collection("users").whereField("uid", isEqualTo: uuid)
+        let docRef = firebaseDataBase.collection("users").whereField("uid", isEqualTo: uuid)
         docRef.getDocuments { snapshot, error in
             if error != nil {
                 print(error?.localizedDescription as Any)
@@ -92,7 +92,7 @@ extension LoginInteractor {
                     self.presenter?.getVerificationResult(with: .googleSignInSucces)
                 } else {
                     let newUserName = signInResult?.user.profile?.name ?? "Some User"
-                    self.db.collection("users").document(uuid).setData( [
+                    self.firebaseDataBase.collection("users").document(uuid).setData( [
                         "email" : signInResult?.user.profile?.email ?? "",
                         "name" : signInResult?.user.profile?.name ?? "",
                         "password" : "",
@@ -107,7 +107,7 @@ extension LoginInteractor {
             }
         }
     }
-    
+
     private func saveGoogleUserData(name: String, uid: String) {
         let taskManager = FirebaseStorageManager()
         DispatchQueue.main.async {
@@ -125,7 +125,7 @@ extension LoginInteractor {
     }
 }
 
-   //MARK: - Get user name method
+   // MARK: - Get user name method
 extension LoginInteractor {
     private func setUserName(_ name: String?) {
         guard let userName = name else {

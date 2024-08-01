@@ -16,5 +16,5 @@ struct DateItem {
     var isWorkTask: Bool?
     var isPersonalTask: Bool?
     var isOtherTask: Bool?
-    
+
 }

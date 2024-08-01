@@ -8,12 +8,12 @@
 import UIKit
 
 class ToDoDetailRouter: ToDoDetailRouterProtocol {
-    
+
     func navigateBackToListViewController(from view: ToDoDetailViewProtocol) {
         guard let view = view as? UIViewController else { return }
         view.navigationController?.popViewController(animated: true)
     }
-    
+
     static func createToDoDetailModule(with toDo: ToDoObject) -> UIViewController {
         let view = ToDoDetailController()
         let presenter: ToDoDetailPresenterProtocol & TodoDetailInteractorOutputProtocol = ToDoDetailPresenter()
@@ -26,10 +26,7 @@ class ToDoDetailRouter: ToDoDetailRouterProtocol {
         presenter.interactor = interactor
         presenter.router = router
         return view
-    
+
     }
-    
- 
-    
-    
+
 }

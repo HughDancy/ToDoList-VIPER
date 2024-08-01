@@ -9,7 +9,7 @@ import UIKit
 
 protocol ToDosViewProtocol: AnyObject {
     var presenter: ToDosPresenterProtocol? { get set }
-    
+
     func fetchToDos(date: Date)
     func showToDos(_ toDos: [ToDoObject])
 }
@@ -19,8 +19,8 @@ protocol ToDosPresenterProtocol: AnyObject {
     var interactor: ToDosInteractorInputProtocol? { get set }
     var router: ToDosRouterProtocol? { get set }
     var status: ToDoListStatus? { get set }
-    
-    //VIEW -> PRESENTER
+
+    // VIEW -> PRESENTER
     func getToDos()
     func fetchToDos(date: Date)
     func updateToDosForDay(_ date: Date)
@@ -31,8 +31,8 @@ protocol ToDosPresenterProtocol: AnyObject {
 
 protocol ToDosInteractorInputProtocol: AnyObject {
     var presenter: ToDosInteractorOutputProtocol? { get set }
-    
-    //PRESENTER -> INTERACTOR
+
+    // PRESENTER -> INTERACTOR
     func fetchFirstTasks(_ status: ToDoListStatus)
     func fetchTask(date: Date, status: ToDoListStatus)
     func doneTask(_ taskId: UUID)
@@ -40,12 +40,12 @@ protocol ToDosInteractorInputProtocol: AnyObject {
 }
 
 protocol ToDosInteractorOutputProtocol: AnyObject {
-    //INTERACTOR -> PRESENTER
+    // INTERACTOR -> PRESENTER
     func getTask(_ tasks: [ToDoObject])
 }
 
 protocol ToDosRouterProtocol: AnyObject {
-    //PRESENTER -> ROUTER
+    // PRESENTER -> ROUTER
     func goToTask(_ task: ToDoObject, from view: ToDosViewProtocol)
 }
 

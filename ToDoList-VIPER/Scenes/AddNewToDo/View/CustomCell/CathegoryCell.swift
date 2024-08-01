@@ -9,8 +9,8 @@ import UIKit
 
 final class CategoryCell: UITableViewCell {
     static let reuseIdentifier = "CategoryCell"
-    
-    //MARK: - OUTELTS
+
+    // MARK: - OUTELTS
     private lazy var containerView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemGray6
@@ -19,30 +19,30 @@ final class CategoryCell: UITableViewCell {
         view.layer.shadowRadius = 3
         view.layer.shadowColor = UIColor.systemBackground.cgColor
         view.layer.shadowOpacity = 0.2
-        
+
         return view
     }()
-    
+
     private lazy var categoryLabel = UILabel.createSimpleLabel(text: "", size: 15, width: .semibold, color: .label, aligment: .center, numberLines: 0)
-    
+
     private lazy var circleView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = UIScreen.main.bounds.height > 700 ? 20 :  15
         view.clipsToBounds = true
         return view
     }()
-    
-    //MARK: - Init
+
+    // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupOutlets()
         self.selectionStyle = .none
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         if self.isSelected {
@@ -52,30 +52,30 @@ final class CategoryCell: UITableViewCell {
             containerView.layer.borderWidth = 0
         }
     }
-    
+
     private func setupOutlets() {
         setupHierarcy()
         setupLayout()
     }
-    
-    //MARK: - Setup Hierarchy
+
+    // MARK: - Setup Hierarchy
     private func setupHierarcy() {
         contentView.addSubview(containerView)
         containerView.addSubview(categoryLabel)
         containerView.addSubview(circleView)
     }
-    
-    //MARK: - Setup Layout
+
+    // MARK: - Setup Layout
     private func setupLayout() {
         containerView.snp.makeConstraints { make in
             make.top.leading.trailing.bottom.equalToSuperview().inset(5)
         }
-        
+
         categoryLabel.snp.makeConstraints { make in
             make.centerY.equalTo(containerView.safeAreaLayoutGuide.snp.centerY)
             make.leading.equalTo(containerView.safeAreaLayoutGuide.snp.leading).offset(10)
         }
-        
+
         circleView.snp.makeConstraints { make in
             make.top.equalTo(containerView.snp.top).offset(5)
             make.trailing.equalTo(containerView.snp.trailing).inset(10)
@@ -83,10 +83,9 @@ final class CategoryCell: UITableViewCell {
             make.height.width.equalTo(UIScreen.main.bounds.height > 700 ? 40 :  30)
         }
     }
-    
+
     func setupCell(with color: UIColor, title: String) {
         self.circleView.backgroundColor = color
         self.categoryLabel.text = title
     }
 }
-

@@ -28,6 +28,6 @@ extension ToDoObject {
 
 }
 
-extension ToDoObject : Identifiable {
+extension ToDoObject: Identifiable {
 
 }

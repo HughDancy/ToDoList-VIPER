@@ -8,7 +8,7 @@
 import UIKit
 
 final class MainScreenRouter: MainScreenRouterProtocol {
-    
+
     func goToToDos(from view: any MainScreenViewProtocol, status: ToDoListStatus) {
         guard let parrentView = view as? UIViewController else { return }
         let moduleBuilder = AssemblyBuilder()
@@ -16,4 +16,3 @@ final class MainScreenRouter: MainScreenRouterProtocol {
         parrentView.navigationController?.pushViewController(toDosModule, animated: true)
     }
 }
-

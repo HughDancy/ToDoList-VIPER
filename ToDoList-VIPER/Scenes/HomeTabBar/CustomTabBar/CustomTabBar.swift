@@ -10,7 +10,7 @@ import UIKit
 class CustomTabBar: UITabBar {
 
     private var shapeLayer: CALayer?
-    
+
      func addShape() {
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = createPath()
@@ -26,16 +26,16 @@ class CustomTabBar: UITabBar {
         } else {
             self.layer.insertSublayer(shapeLayer, at: 0)
         }
-        
+
         self.shapeLayer = shapeLayer
     }
-    
+
     override func draw(_ rect: CGRect) {
         self.addShape()
         self.unselectedItemTintColor = UIColor.white
         self.tintColor = UIColor(named: "PeachColor")
     }
-    
+
     private func createPath() -> CGPath {
         let height: CGFloat = 15
         let path = UIBezierPath()
@@ -53,8 +53,8 @@ class CustomTabBar: UITabBar {
         path.addQuadCurve(to: CGPoint(x: centerWidth + 50, y: 0),
                                        controlPoint: CGPoint(x: centerWidth + 41, y: 5))
         path.addLine(to: CGPoint(x: self.frame.width, y: -20))
-                     
-        //close the path
+
+        // close the path
         path.addLine(to: CGPoint(x: self.frame.width, y: self.frame.height + 50))
         path.addLine(to: CGPoint(x: 0, y: self.frame.height + 50))
         path.close()

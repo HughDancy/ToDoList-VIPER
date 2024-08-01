@@ -11,7 +11,7 @@ final class ToDosInteractor: ToDosInteractorInputProtocol {
     weak var presenter: ToDosInteractorOutputProtocol?
     private let storage = TaskStorageManager.instance
     private let firebaseStorage = FirebaseStorageManager()
-    
+
     func fetchFirstTasks(_ status: ToDoListStatus) {
         self.fetchSortedToDos(with: status, and: nil)
     }
@@ -19,10 +19,10 @@ final class ToDosInteractor: ToDosInteractorInputProtocol {
     func fetchTask(date: Date, status: ToDoListStatus) {
         self.fetchSortedToDos(with: status, and: date)
     }
-    
+
     func fetchSortedToDos(with status: ToDoListStatus, and date: Date?) {
         let mockDate = Date.getDateFromStatus(status)
-        
+
         switch status {
         case .today, .tommorow:
             guard let date = date else {
@@ -52,12 +52,12 @@ final class ToDosInteractor: ToDosInteractorInputProtocol {
             presenter?.getTask(doneTasks)
         }
     }
-    
+
     func doneTask(_ taskId: UUID) {
         storage.doneToDo(taskId)
         firebaseStorage.makeTaskDone(taskId)
     }
-    
+
     func deleteTask(_ taskId: UUID) {
         firebaseStorage.deleteTaskFromServer(taskId.uuidString)
         storage.deleteTaskWithId(taskId)

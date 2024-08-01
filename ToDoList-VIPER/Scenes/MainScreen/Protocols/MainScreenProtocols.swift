@@ -18,8 +18,8 @@ protocol MainScreenPresenterProtocol: AnyObject {
     var view: MainScreenViewProtocol? { get set }
     var interactor: MainScreenInteractorInputProtocol? { get set }
     var router: MainScreenRouterProtocol? { get set }
-    
-    //VIEW -> PRESETNER
+
+    // VIEW -> PRESETNER
     func getToDosCount()
     func goToTodos(with status: ToDoListStatus)
     func updateUserData()
@@ -27,20 +27,20 @@ protocol MainScreenPresenterProtocol: AnyObject {
 
 protocol MainScreenInteractorInputProtocol: AnyObject {
     var presenter: MainScreenInteractorOutputProtocol? { get set }
-    
-    //PRESENTER -> INTERACTOR
+
+    // PRESENTER -> INTERACTOR
     func retriveUserData()
     func getToDosCount()
 }
 
 protocol MainScreenInteractorOutputProtocol: AnyObject {
-    //INTERACTOR -> PRESENTER
+    // INTERACTOR -> PRESENTER
     func didRetriveUserName(_ name: String)
     func didRetriveUserAvatar(_ avatarUrl: URL?)
     func didRetriveToDosCount(_ info: [[String]])
 }
 
 protocol MainScreenRouterProtocol: AnyObject {
-    //PRESENTER -> ROUTER
+    // PRESENTER -> ROUTER
     func goToToDos(from view: MainScreenViewProtocol, status: ToDoListStatus)
 }

@@ -9,13 +9,13 @@ import UIKit
 
 final class ToDosDetailRouter: ToDosDetailRouterProtocol {
     weak var presenter: ToDosDetailInteractorOutputProtocol?
-    
+
     func showAllert(with view: any ToDosDetailViewProtocol, status: ToDoDetailStatus) {
         guard let currentView = view as? UIViewController else { return }
         let allertController = CustomAlertController()
         allertController.modalPresentationStyle = .overCurrentContext
         allertController.modalTransitionStyle = .crossDissolve
-        
+
         switch status {
         case .allSave:
             currentView.present(allertController, animated: true)
@@ -59,7 +59,7 @@ final class ToDosDetailRouter: ToDosDetailRouterProtocol {
             )
         }
     }
-    
+
     func goBackToTasks(with view: any ToDosDetailViewProtocol) {
         guard let currentView = view as? UIViewController else { return }
         currentView.navigationController?.popViewController(animated: true)

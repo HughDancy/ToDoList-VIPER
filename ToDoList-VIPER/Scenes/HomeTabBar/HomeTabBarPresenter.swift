@@ -8,9 +8,9 @@
 import UIKit
 
 final class HomeTabBarPresenter: HomeTabBarPresenterProtocol {
-    weak var view:  HomeTabBarViewProtocol?
-    var router:  HomeTabBarRouterProtocol?
-    
+    weak var view: HomeTabBarViewProtocol?
+    var router: HomeTabBarRouterProtocol?
+
     func presentAddNewToDo() {
         guard let view = view else { return }
         router?.presentAddNewToDooScreen(from: view)

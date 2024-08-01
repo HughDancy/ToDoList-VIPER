@@ -8,7 +8,7 @@
 import UIKit
 
 class MockViewController: UIViewController {
-    
+
     private lazy var mockImage: UIImageView = {
         let imageView = UIImageView()
         let image = UIImage(systemName: "wrench.and.screwdriver.fill")
@@ -18,13 +18,13 @@ class MockViewController: UIViewController {
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemPink
         setupMockImage()
     }
-    
+
     private func setupMockImage() {
         view.addSubview(mockImage)
         mockImage.snp.makeConstraints { make in

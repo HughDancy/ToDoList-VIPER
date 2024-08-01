@@ -9,55 +9,55 @@ import UIKit
 
 final class OnboardingPage: UIViewController {
     var state: OnboardingStates?
-    
-    //MARK: - Outlets
+
+    // MARK: - Outlets
     private lazy var picture: UIImageView = {
         let picture = UIImageView()
         picture.contentMode = .scaleAspectFill
         picture.backgroundColor = .clear
         return picture
     }()
-    
+
     private lazy var descriptionTitle = UILabel.createSimpleLabel(text: "",
                                                                   size: OnboardingSizes.textSize.value,
                                                                   width: .bold,
                                                                   color: .label,
                                                                   aligment: .center,
                                                                   numberLines: 0)
-    
+
     lazy var nextScreenButton: BaseButton = {
         let button = BaseButton(text: "", color: .systemCyan)
         button.setupShadows(with: .label)
         button.isHidden = true
         return button
     }()
-    
-    //MARK: - Lifecycle
+
+    // MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UserDefaults.standard.setValue(state?.rawValue, forKey: "onboardingState")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupOnboardingPage()
     }
-    
-    //MARK: - Setup PageView
+
+    // MARK: - Setup PageView
     private func setupOnboardingPage() {
         view.backgroundColor = .systemBackground
         setupHierarchy()
         setupLayout()
     }
-    
-    //MARK: - Setup Outlets
+
+    // MARK: - Setup Outlets
     private func setupHierarchy() {
         view.addSubview(picture)
         view.sendSubviewToBack(picture)
         view.addSubview(descriptionTitle)
         view.addSubview(nextScreenButton)
     }
-    
+
     private func setupLayout() {
         picture.snp.makeConstraints { make in
             make.centerX.centerY.equalTo(view)
@@ -65,21 +65,21 @@ final class OnboardingPage: UIViewController {
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
         }
-        
+
         descriptionTitle.snp.makeConstraints { make in
             make.bottom.equalToSuperview().inset(OnboardingSizes.labelBottomOffset.value)
             make.centerX.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(OnboardingSizes.defaultOffset.value)
         }
-        
+
         nextScreenButton.snp.makeConstraints { make in
             make.top.equalTo(descriptionTitle.snp.bottom).offset(OnboardingSizes.defaultOffset.value)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(OnboardingSizes.buttonLeadingTrailing.value)
             make.height.equalTo(OnboardingSizes.buttonSize.value)
         }
     }
-    
-    //MARK: - Setup Elements
+
+    // MARK: - Setup Elements
     func setupElements(with data: OnboardingItems) {
         self.descriptionTitle.text = data.title
         self.picture.image = UIImage(named: data.imageName)
@@ -87,14 +87,14 @@ final class OnboardingPage: UIViewController {
     }
 }
 
-//MARK: - Sizes and constraint enum
+// MARK: - Sizes and constraint enum
 enum OnboardingSizes: CGFloat {
     case textSize = 28
     case labelBottomOffset = 110
     case buttonSize = 45
     case defaultOffset = 10
     case buttonLeadingTrailing = 40
-    
+
     var value: CGFloat {
         switch self {
         case .textSize:

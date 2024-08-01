@@ -15,8 +15,8 @@ protocol AddToDoPresenterProtocol: AnyObject {
     var view: AddToDoViewProtocol? { get set }
     var interactor: AddToDoInteractorInputProtocol? { get set }
     var router: AddToDoRouterProtocol? { get set }
-    
-    //VIEW -> PRESENTER
+
+    // VIEW -> PRESENTER
     func addToDo(title: String, content: String, date: Date, done: Bool)
     func goBack()
 
@@ -24,13 +24,13 @@ protocol AddToDoPresenterProtocol: AnyObject {
 
 protocol AddToDoInteractorInputProtocol: AnyObject {
     var presenter: AddToDoPresenterProtocol? { get set }
-    
-    //PRESENTER -> INTERACTOR
+
+    // PRESENTER -> INTERACTOR
     func saveToDo(title: String, content: String, date: Date, done: Bool)
 }
 
 protocol AddToDoInteractorOutputProtocol: AnyObject {
-    //INTERACTOR -> PRESENTER
+    // INTERACTOR -> PRESENTER
     func backToMain()
 }
 
@@ -38,4 +38,3 @@ protocol AddToDoRouterProtocol: AnyObject {
     static func createAddToDoModule(with parrentView: ToDoListViewProtocol) -> UIViewController
     func navigateBackToListViewController(from view: AddToDoViewProtocol)
 }
-

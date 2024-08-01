@@ -11,11 +11,11 @@ final class AddToDoPresenter: AddToDoPresenterProtocol {
     weak var view: AddToDoViewProtocol?
     var interactor: AddToDoInteractorInputProtocol?
     var router: AddToDoRouterProtocol?
-    
+
     func addToDo(title: String, content: String, date: Date, done: Bool) {
         interactor?.saveToDo(title: title, content: content, date: date, done: done)
     }
-    
+
     func goBack() {
         guard let view = view else { return }
         router?.navigateBackToListViewController(from: view)
@@ -28,8 +28,5 @@ extension AddToDoPresenter: AddToDoInteractorOutputProtocol {
             router?.navigateBackToListViewController(from: view)
         }
     }
-    
-    
+
 }
-
-

@@ -12,7 +12,7 @@ protocol AnimationLoadingRouterProtocol: AnyObject {
 }
 
 final class AnimationLoadingRouter: AnimationLoadingRouterProtocol {
-  
+
     func goToTheApp(fromView: AnimationLoadingControllerProtocol) {
         guard let parrentView = fromView as? UIViewController else { return }
         let appConfigurator = AppConfigurator()
@@ -22,4 +22,3 @@ final class AnimationLoadingRouter: AnimationLoadingRouterProtocol {
         parrentView.present(nextViewController, animated: true)
     }
 }
-

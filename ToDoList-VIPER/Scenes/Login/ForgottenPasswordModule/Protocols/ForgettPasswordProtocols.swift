@@ -15,20 +15,20 @@ protocol ForgettPasswordPresenterProtocol: AnyObject {
     var view: ForgetPasswordViewProtocol? { get set }
     var interactor: ForgettPasswordInreractorInputProtocol? { get set }
     var router: ForgettPasswordRouterProtocol? { get set }
-    
-    //VIEW -> PRESENTER
+
+    // VIEW -> PRESENTER
     func resetPassword(with email: String)
 }
 
 protocol ForgettPasswordInreractorInputProtocol: AnyObject {
     var presenter: ForgettPasswordInreractorOutputProtocol? { get set }
-    
-    //PRESENTER -> INTERACTOR
+
+    // PRESENTER -> INTERACTOR
     func resetPassword(with email: String)
 }
 
 protocol ForgettPasswordInreractorOutputProtocol: AnyObject {
-    //INTERACTOR -> PRESENTER
+    // INTERACTOR -> PRESENTER
     func returnResult(with status: ResetStatus)
 }
 

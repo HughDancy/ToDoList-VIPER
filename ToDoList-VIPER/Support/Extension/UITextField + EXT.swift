@@ -22,7 +22,7 @@ extension UITextField {
     }
 }
 
-//MARK: - Add bottom border extension
+// MARK: - Add bottom border extension
 
 extension UITextField {
     func addBottomLine(width: CGFloat, color: UIColor) {
@@ -33,4 +33,3 @@ extension UITextField {
         self.layer.masksToBounds = true
     }
 }
-

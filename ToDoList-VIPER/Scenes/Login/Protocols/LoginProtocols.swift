@@ -9,18 +9,18 @@ import UIKit
 
 protocol LoginViewProtocol: AnyObject {
     var presenter: LoginPresenterProtocol? { get set }
-    //PRESENTER -> VIEW
+    // PRESENTER -> VIEW
     func makeAnimateTextField(with state: LogInStatus)
     func stopAnimateLoginButton()
-    
+
 }
 
 protocol LoginPresenterProtocol: AnyObject {
     var view: LoginViewProtocol? { get set }
     var interactor: LoginInteractorInputProtocol? { get set }
     var router: LoginRouterProtocol? { get set }
-    
-    //VIEW -> PRESENTER
+
+    // VIEW -> PRESENTER
     func chekTheLogin(login: String?, password: String?)
     func goToForgottPassword()
     func goToRegistration()
@@ -31,15 +31,15 @@ protocol LoginPresenterProtocol: AnyObject {
 
 protocol LoginInteractorInputProtocol: AnyObject {
     var presenter: LoginInteractorOutputProtocol? { get set }
-    
-    //PRESENTER -> INTERACTOR
+
+    // PRESENTER -> INTERACTOR
     func checkAutorizationData(login: String?, password: String?)
     func changeOnboardingState()
     func googleLogIn(with contoller: LoginViewProtocol)
 }
 
 protocol LoginInteractorOutputProtocol: AnyObject {
-    //INTERACTOR -> PRESENTER
+    // INTERACTOR -> PRESENTER
     func getVerificationResult(with: LogInStatus)
 }
 
@@ -50,7 +50,6 @@ protocol LoginRouterProtocol: AnyObject {
     func showAllert(from view: LoginViewProtocol, title: String, message: String)
     func signInWithApple(with: LoginViewProtocol)
 }
-
 
 enum LogInStatus {
     case success

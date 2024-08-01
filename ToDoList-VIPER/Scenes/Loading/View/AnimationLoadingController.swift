@@ -14,8 +14,8 @@ protocol AnimationLoadingControllerProtocol: AnyObject {
 
 final class AnimationLoadingController: UIViewController, AnimationLoadingControllerProtocol {
     var presenter: AnimationLoadingPresenterProtocol?
-    
-    //MARK: - Outlets
+
+    // MARK: - Outlets
     private lazy var loadingBackground: UIImageView = {
         let imageView = UIImageView()
         let picture = UIImage(named: "loadingBackground")
@@ -23,7 +23,7 @@ final class AnimationLoadingController: UIViewController, AnimationLoadingContro
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
-    
+
     private lazy var loadingImage: UIImageView = {
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 240, height: 128))
         let picture = UIImage(named: "loadingAnimate")
@@ -31,49 +31,49 @@ final class AnimationLoadingController: UIViewController, AnimationLoadingContro
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
-    
+
     private lazy var activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .large)
         indicator.startAnimating()
         return indicator
     }()
-    
-    //MARK: - Lifecycle
+
+    // MARK: - Lifecycle
     override func viewDidLayoutSubviews() {
         loadingImage.center = view.center
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         DispatchQueue.main.asyncAfter(deadline: .now()+0.5, execute: {
             self.animate()
         })
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupHierarcy()
         setupLayout()
     }
-    
+
     deinit {
         print("AnimationLoadingControoler is ☠️")
     }
-    
-    //MARK: - Setup Outlets
+
+    // MARK: - Setup Outlets
     private func setupHierarcy() {
         view.addSubview(loadingBackground)
         view.sendSubviewToBack(loadingBackground)
         view.addSubview(loadingImage)
         view.addSubview(activityIndicator)
     }
-    
+
     private func setupLayout() {
         loadingBackground.snp.makeConstraints { make in
             make.top.bottom.equalTo(view)
             make.leading.trailing.equalTo(view)
         }
-        
+
         activityIndicator.snp.makeConstraints { make in
             make.centerX.equalTo(view.safeAreaLayoutGuide.snp.centerX)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(20)
@@ -81,7 +81,7 @@ final class AnimationLoadingController: UIViewController, AnimationLoadingContro
     }
 }
 
-    //MARK: - Animate Method Extension
+    // MARK: - Animate Method Extension
 extension AnimationLoadingController {
     private func animate() {
         UIView.animate(withDuration: 1) {
@@ -95,17 +95,13 @@ extension AnimationLoadingController {
                 height: size
             )
         }
-        
+
         UIView.animate(withDuration: 1.5, animations: {
             self.loadingImage.alpha = 0
             self.activityIndicator.stopAnimating()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.6, execute: {
                 self.presenter?.goToNextScreen()
             })
-        }) { _ in
-//            self.presenter?.changeRootController(view)
-        }
+        })
     }
 }
-
-

@@ -14,7 +14,7 @@ final class LoginTest: XCTestCase {
     var loginViewInteractor: LoginInteractorInputProtocol!
     var loginRouter: LoginRouterProtocol!
     var authKeyChainManager: AuthKeychainManagerProtocol!
-    
+
     override func setUpWithError() throws {
         try super.setUpWithError()
         loginView = LoginController()
@@ -23,7 +23,7 @@ final class LoginTest: XCTestCase {
         loginRouter = LoginRouter()
         authKeyChainManager = AuthKeychainManager()
     }
-    
+
     override func tearDownWithError() throws {
         loginView = nil
         loginPresenter = nil
@@ -31,21 +31,21 @@ final class LoginTest: XCTestCase {
         loginRouter = nil
         try  super.tearDownWithError()
     }
-    
+
     func testEmptyField() {
         loginView.presenter?.chekTheLogin(login: "", password: "")
         let userUid = authKeyChainManager.id
 //        XCTAssertNil(userUid)
 
     }
-    
+
     func testNotEmptyField() {
         loginView.presenter?.chekTheLogin(login: "boba96@mail.ru", password: "qwerty")
         let usetUid = authKeyChainManager.id
         XCTAssertNotNil(usetUid)
-        
+
     }
-    
+
     func testExample() throws {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
@@ -53,12 +53,12 @@ final class LoginTest: XCTestCase {
         // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
         // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
     }
-    
+
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         self.measure {
             // Put the code you want to measure the time of here.
         }
     }
-    
+
 }

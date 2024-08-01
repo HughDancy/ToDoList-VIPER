@@ -30,7 +30,7 @@ extension UIColor {
             return .systemMint
         }
     }
-    
+
     static func convertColorToString(_ color: UIColor) -> String {
         switch color {
         case .systemOrange:
@@ -43,8 +43,8 @@ extension UIColor {
             return "systemBlue"
         }
     }
-    
-    static func getColorFromDict(dict: [String : Any]) -> UIColor? {
+
+    static func getColorFromDict(dict: [String: Any]) -> UIColor? {
         guard let red = dict["red"] as? NSNumber,
               let green = dict["green"] as? NSNumber,
               let blue = dict["blue"] as? NSNumber,
@@ -52,19 +52,19 @@ extension UIColor {
             return nil
         }
 
-        return UIColor(red: CGFloat(truncating: red) ,
-                       green: CGFloat(truncating: green) ,
-                       blue: CGFloat(truncating: blue) ,
+        return UIColor(red: CGFloat(truncating: red),
+                       green: CGFloat(truncating: green),
+                       blue: CGFloat(truncating: blue),
                        alpha: CGFloat(truncating: alpha))
     }
-    
-    static func getDictFromColor(color: UIColor) -> [String : Any] {
+
+    static func getDictFromColor(color: UIColor) -> [String: Any] {
         let color = color.coreImageColor
         let redValue = color.red
         let greenValue = color.green
         let blueValue = color.blue
         let alphaValue = color.alpha
-        
+
         return ["red" : redValue,
                 "green" : greenValue,
                 "blue" : blueValue,

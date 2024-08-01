@@ -9,15 +9,15 @@ import UIKit
 import Kingfisher
 
 final class MainScreenView: UIView {
-    
-    //MARK: - Outlets
+
+    // MARK: - Outlets
     private lazy var backgroundImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "mainBackgroundImage")
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
-    
+
     private lazy var userAvatar: UIImageView = {
         let userAvatar = UIImageView()
         userAvatar.image = UIImage(named: "mockUserAvatar")
@@ -26,9 +26,9 @@ final class MainScreenView: UIView {
         userAvatar.clipsToBounds = true
         return userAvatar
     }()
-    
+
     private lazy var userName = UILabel.createSimpleLabel(text: "", size: 25, width: .semibold, color: .white, aligment: .center, numberLines: 0)
-    
+
     private lazy var containerView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemBackground
@@ -39,27 +39,27 @@ final class MainScreenView: UIView {
         view.layer.cornerRadius = 50
         return view
     }()
-    
+
     lazy var toDosCollection = MainScreenCollectionView()
-    
-    //MARK: - Init
+
+    // MARK: - Init
     init() {
         super.init(frame: .zero)
         commonInit()
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         commonInit()
     }
-    
+
     private func commonInit() {
         setupHierarchy()
         setupLayout()
         self.backgroundColor = .systemBackground
     }
-    
-    //MARK: - Setup Hierarchy
+
+    // MARK: - Setup Hierarchy
     private func setupHierarchy() {
         self.addSubview(backgroundImage)
         self.sendSubviewToBack(backgroundImage)
@@ -68,43 +68,43 @@ final class MainScreenView: UIView {
         self.addSubview(containerView)
         containerView.addSubview(toDosCollection)
     }
-    
-    //MARK: - Setup Layout
+
+    // MARK: - Setup Layout
     private func setupLayout() {
         backgroundImage.snp.makeConstraints { make in
             make.top.equalTo(self.snp.top).offset(MainScreenSizes.backgrounImageOffset.size)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(MainScreenSizes.backgroundImage.size)
         }
-        
+
         userAvatar.snp.makeConstraints { make in
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(MainScreenSizes.userAvatarTopOffset.size)
             make.centerX.equalToSuperview()
             make.height.width.equalTo(MainScreenSizes.avatar.size)
         }
-        
+
         userName.snp.makeConstraints { make in
             make.top.equalTo(userAvatar.snp.bottom).offset(MainScreenSizes.userNameTopOffset.size)
             make.centerX.equalToSuperview()
         }
-        
+
         containerView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(MainScreenSizes.containerTopOffset.size)
         }
-        
+
         toDosCollection.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(MainScreenSizes.toDoTopOffset.size)
             make.leading.trailing.equalToSuperview()
             make.bottom.equalToSuperview().inset(MainScreenSizes.toDoBottomOffset.size)
         }
     }
-    
-    //MARK: - Setup elements
+
+    // MARK: - Setup elements
     func setupName(userName: String) {
         self.userName.text = "Привет, \(userName)!"
     }
-    
+
     func setupAvatar(url: URL?) {
         self.userAvatar.kf.setImage(
             with: url,
@@ -115,7 +115,7 @@ final class MainScreenView: UIView {
     }
 }
 
-fileprivate enum MainScreenSizes: CGFloat {
+private enum MainScreenSizes: CGFloat {
     case avatar = 80
     case backgroundImage = 350
     case backgrounImageOffset = -65
@@ -124,7 +124,7 @@ fileprivate enum MainScreenSizes: CGFloat {
     case containerTopOffset = 130
     case toDoTopOffset = 40
     case toDoBottomOffset = 70
-    
+
     var size: CGFloat {
         switch self {
         case .avatar:

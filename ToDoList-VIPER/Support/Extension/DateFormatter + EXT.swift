@@ -16,7 +16,7 @@ extension DateFormatter {
         let date = formatter.string(from: date)
         return date
     }
-    
+
     static func getDateFromString(_ date: String) -> Date {
         let formatter = DateFormatter()
         formatter.timeStyle = .none

@@ -49,10 +49,10 @@ enum ProgressStatus: String, Codable {
 }
 
 enum Category: String, Codable {
-    case work = "work"
-    case personal = "personal"
-    case other = "other"
-    
+    case work
+    case personal
+    case other 
+
     var value: String {
         return rawValue
     }

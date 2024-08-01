@@ -10,7 +10,7 @@ import Foundation
 final class OnboardingInteractor: OnboardingInteractorInputProtocol {
     var presenter: OnboardingInteractorOutputProtocol?
     let onboardingData = OnboardingItems.pagesData
-    
+
     func retriveData() {
         presenter?.didRetriveData(onboardingData)
     }

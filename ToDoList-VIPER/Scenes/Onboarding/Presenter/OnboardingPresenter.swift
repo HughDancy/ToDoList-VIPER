@@ -11,11 +11,11 @@ final class OnboardingPresenter: OnboardingPresenterProtocol {
     weak var view: OnboardingViewProtocol?
     var interactor: OnboardingInteractorInputProtocol?
     var router: OnboardingRouterProtocol?
-    
+
     func viewWillAppear() {
         interactor?.retriveData()
     }
-    
+
     func goToLoginModule() {
         guard let view = view else { return }
         router?.goToLoginModule(from: view)

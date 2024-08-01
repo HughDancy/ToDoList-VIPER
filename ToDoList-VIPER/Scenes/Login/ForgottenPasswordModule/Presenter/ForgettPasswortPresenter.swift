@@ -10,8 +10,8 @@ import UIKit
 final class ForgettPasswortPresenter: ForgettPasswordPresenterProtocol {
     weak var view: ForgetPasswordViewProtocol?
     var interactor: ForgettPasswordInreractorInputProtocol?
-    var router:  ForgettPasswordRouterProtocol?
-    
+    var router: ForgettPasswordRouterProtocol?
+
     func resetPassword(with email: String) {
         interactor?.resetPassword(with: email)
     }

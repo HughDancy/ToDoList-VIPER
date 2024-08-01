@@ -13,11 +13,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        
+
         GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
             if error != nil || user == nil {
               // Show the app's signed-out state.
@@ -25,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
               // Show the app's signed-in state.
             }
           }
-        
+
 //        let loadingController = AppConfigurator.configuator.configureApp()
         let moduleBuilder = AssemblyBuilder()
         let loadingController = moduleBuilder.createLoadingModule()
@@ -65,6 +64,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
 
-
 }
-

@@ -12,8 +12,8 @@ final class CustomHomeTabBarController: UITabBarController, UITabBarControllerDe
     var presenter: HomeTabBarPresenterProtocol?
     private var customTabBar = CustomTabBar()
     private var transition = CircularTransition()
-    
-    //MARK: - Lifecycle
+
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
@@ -23,7 +23,7 @@ final class CustomHomeTabBarController: UITabBarController, UITabBarControllerDe
         self.navigationItem.largeTitleDisplayMode = .never
         navigationItem.setHidesBackButton(true, animated: false)
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         var tabBarFrame = self.tabBar.frame
@@ -31,18 +31,18 @@ final class CustomHomeTabBarController: UITabBarController, UITabBarControllerDe
         tabBarFrame.origin.y = UIScreen.main.bounds.height - 107
         self.tabBar.frame = tabBarFrame
     }
-    
-    //MARK: - Setup Layout
+
+    // MARK: - Setup Layout
     func setupLayoutCustomTabBar() {
         tabBar.addSubview(customTabBar)
         self.tabBar.addSubview(middleButton)
-        
+
         customTabBar.snp.makeConstraints {
             $0.bottom.equalToSuperview()
             $0.width.equalToSuperview()
             $0.height.equalToSuperview().offset(-50)
         }
-        
+
         middleButton.snp.makeConstraints {
             $0.width.equalTo(60)
             $0.height.equalTo(60)
@@ -50,14 +50,14 @@ final class CustomHomeTabBarController: UITabBarController, UITabBarControllerDe
             $0.centerY.equalTo(self.customTabBar.snp.top).offset(-5)
         }
     }
-    
+
     private func setupPositionTabBarItem() {
         self.tabBar.itemWidth = 50
         self.tabBar.itemPositioning = .centered
         self.tabBar.itemSpacing = self.view.bounds.width / 1.8
     }
-    
-    //MARK: - Middle button
+
+    // MARK: - Middle button
     lazy var middleButton: UIButton = {
         let middleButton = UIButton()
         middleButton.layer.cornerRadius = 30
@@ -78,12 +78,12 @@ final class CustomHomeTabBarController: UITabBarController, UITabBarControllerDe
         middleButton.addTarget(self, action: #selector(openAddNewToDo), for: .touchUpInside)
         return middleButton
     }()
-    
+
     @objc func openAddNewToDo() {
         presenter?.presentAddNewToDo()
     }
 }
-    //MARK: - UIViewControllerTransitioningDelegate Extension
+    // MARK: - UIViewControllerTransitioningDelegate Extension
 extension CustomHomeTabBarController: UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> (any UIViewControllerAnimatedTransitioning)? {
         transition.transitionMode = .present
@@ -91,7 +91,7 @@ extension CustomHomeTabBarController: UIViewControllerTransitioningDelegate {
         transition.circleColor = middleButton.backgroundColor ?? UIColor.systemCyan
         return transition
     }
-    
+
     func animationController(forDismissed dismissed: UIViewController) -> (any UIViewControllerAnimatedTransitioning)? {
         transition.transitionMode = .dismiss
         transition.startingPoint = CGPoint(x: (tabBar.center.x + 5.0), y: (tabBar.center.y - 15.0))
@@ -99,4 +99,3 @@ extension CustomHomeTabBarController: UIViewControllerTransitioningDelegate {
         return transition
     }
 }
-
