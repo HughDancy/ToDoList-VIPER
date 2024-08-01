@@ -25,8 +25,8 @@ var window: UIWindow?
         ColorTransformer.register()
         return true
     }
-    
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
       var handled: Bool
 
       handled = GIDSignIn.sharedInstance.handle(url)
@@ -64,11 +64,11 @@ var window: UIWindow?
          error conditions that could cause the creation of the store to fail.
         */
         let container = NSPersistentContainer(name: "ToDoList_VIPER")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+        container.loadPersistentStores(completionHandler: { (_, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                 
+
                 /*
                  Typical reasons for an error here include:
                  * The parent directory does not exist, cannot be created, or disallows writing.
@@ -90,7 +90,6 @@ var window: UIWindow?
         if context.hasChanges {
             do {
                 try context.save()
-                print("APP DELEGATE SAVE CONTEXT METHOD IS SAVING")
             } catch {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -101,4 +100,3 @@ var window: UIWindow?
     }
 
 }
-

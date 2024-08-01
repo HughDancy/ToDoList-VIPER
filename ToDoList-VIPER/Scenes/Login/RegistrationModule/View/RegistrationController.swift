@@ -6,33 +6,30 @@
 //
 
 import UIKit
-import SnapKit
 
 final class RegistrationController: SingInController {
     var presenter: RegistrationPresenterPtorocol?
-    
-    //MARK: - OUTLETS
-    private lazy var createNewUserLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Создайте аккаунт"
-        label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
-        label.textColor = .systemCyan
-        return label
-    }()
-    
-    
+
+    // MARK: - OUTLETS
+    private lazy var createNewUserLabel = UILabel.createSimpleLabel(text: "Создайте аккаунт",
+                                                                    size: 25,
+                                                                    width: .semibold,
+                                                                    color: .systemCyan,
+                                                                    aligment: .center,
+                                                                    numberLines: 1)
+
     private lazy var image: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: MockUsersAvatrs.collection.randomElement()?.imageName ?? "mockUser_1")
-        imageView.layer.cornerRadius = RegistrationSizes.imageSize.getImageSize() / 2
+        imageView.layer.cornerRadius = RegistrationSizes.imageSize.value / 2
         imageView.clipsToBounds = true
         imageView.isUserInteractionEnabled = true
         return imageView
     }()
-    
+
     private lazy var choosePictureLabel: UIButton = {
         let button = UIButton(type: .system)
-        let titleFont = UIFont.systemFont(ofSize: RegistrationSizes.avatarFontSize.getAvatarFontSize(), weight: .medium)
+        let titleFont = UIFont.systemFont(ofSize: RegistrationSizes.avatarFontSize.value, weight: .medium)
         let attributes: [NSAttributedString.Key: Any] = [
                    .font: titleFont
                ]
@@ -41,10 +38,10 @@ final class RegistrationController: SingInController {
         button.backgroundColor = .systemBackground
         button.tintColor = .systemCyan
         button.addTarget(self, action: #selector(chooseSource), for: .touchDown)
-        
+
         return button
     }()
-    
+
     private lazy var nameField = SignInTextField(placeholder: "Имя",
                                                  nameOfImage: "person.fill",
                                                  tag: 0,
@@ -66,10 +63,10 @@ final class RegistrationController: SingInController {
                                                      capitalizationType: .none,
                                                      returnKey: .done,
                                                      secure: false)
-    
+
     private lazy var registerButton = LoadingButton(originalText: "Зарегистрироваться", type: .system)
-    
-    //MARK: - Lifecycle
+
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupButton()
@@ -78,8 +75,8 @@ final class RegistrationController: SingInController {
         super.viewDidLayoutSubviews()
         setupTextFieldBorders()
     }
-    
-    //MARK: - Setup Hierarchy
+
+    // MARK: - Setup Hierarchy
     override func setupHierarchy() {
         super.setupHierarchy()
         scrollView.addSubview(createNewUserLabel)
@@ -90,64 +87,64 @@ final class RegistrationController: SingInController {
         scrollView.addSubview(passwordField)
         scrollView.addSubview(registerButton)
     }
-    
-    //MARK: - Setup Layout
+
+    // MARK: - Setup Layout
     override func setupLayout() {
         super.setupLayout()
         createNewUserLabel.snp.makeConstraints { make in
             make.top.equalTo(scrollView.snp.top).offset(20)
             make.centerX.equalTo(scrollView.safeAreaLayoutGuide.snp.centerX)
         }
-        
+
         image.snp.makeConstraints { make in
             make.top.equalTo(createNewUserLabel.snp.bottom).offset(15)
             make.centerX.equalTo(scrollView.safeAreaLayoutGuide.snp.centerX)
-            make.height.width.equalTo(RegistrationSizes.imageSize.getImageSize())
+            make.height.width.equalTo(RegistrationSizes.imageSize.value)
         }
-        
+
         choosePictureLabel.snp.makeConstraints { make in
             make.top.equalTo(image.snp.bottom).offset(10)
             make.centerX.equalTo(scrollView.snp.centerX)
-            make.height.equalTo(RegistrationSizes.avatarFontSize.getAvatarFontSize())
+            make.height.equalTo(RegistrationSizes.avatarFontSize.value)
         }
-        
+
         nameField.snp.makeConstraints { make in
             make.top.equalTo(choosePictureLabel.snp.bottom).offset(30)
             make.leading.trailing.equalTo(scrollView.safeAreaLayoutGuide).inset(30)
             make.height.equalTo(45)
-            
+
         }
-        
+
         emailField.snp.makeConstraints { make in
             make.top.equalTo(nameField.snp.bottom).offset(10)
             make.leading.trailing.equalTo(scrollView.safeAreaLayoutGuide).inset(30)
             make.height.equalTo(45)
         }
-        
+
         passwordField.snp.makeConstraints { make in
             make.top.equalTo(emailField.snp.bottom).offset(10)
             make.leading.trailing.equalTo(scrollView.safeAreaLayoutGuide).inset(30)
             make.height.equalTo(45)
         }
-        
+
         registerButton.snp.makeConstraints { make in
             make.bottom.equalTo(scrollView.safeAreaLayoutGuide.snp.bottom).inset(50)
             make.leading.trailing.equalTo(scrollView.safeAreaLayoutGuide).inset(35)
         }
     }
-    //MARK: - Outlets Configuration
+    // MARK: - Outlets Configuration
     private func setupTextFieldBorders() {
         nameField.addBottomLine(width: 1.5, color: .systemGray3)
         emailField.addBottomLine(width: 1.5, color: .systemGray3)
         passwordField.addBottomLine(width: 1.5, color: .systemGray3)
     }
-    
+
     private func setupButton() {
         registerButton.addTarget(self, action: #selector(registerNewUser), for: .touchDown)
         self.image.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(chooseSource)))
     }
-    
-    //MARK: - Button's Action
+
+    // MARK: - Button's Action
     @objc func registerNewUser() {
         if (nameField.text != nil) && (emailField.text != nil) && (passwordField.text != nil) {
             let name = nameField.text ?? "Temp"
@@ -157,22 +154,23 @@ final class RegistrationController: SingInController {
             presenter?.registerNewUser(with: name, email: email, password: password)
         }
     }
-    
+
     @objc func chooseSource() {
         presenter?.chooseImageSource()
     }
 }
-//MARK: - RegistrationViewProtocol Extension
+     // MARK: - RegistrationViewProtocol Extension
 extension RegistrationController: RegistrationViewProtocol {
     func stopAnimateRegisterButton() {
         self.registerButton.hideLoading()
     }
 }
 
+    // MARK: - ImagePicker and UINavigationController Extension
 extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         picker.dismiss(animated: true)
-        
+
         guard let image = info[.editedImage] as? UIImage else {
             print("No image found")
             presenter?.setImage(self.image.image ?? UIImage(named: "mockUser_3")!)
@@ -183,15 +181,16 @@ extension RegistrationController: UIImagePickerControllerDelegate, UINavigationC
     }
 }
 
-enum RegistrationSizes: CGFloat {
+private enum RegistrationSizes: CGFloat {
     case imageSize = 300
     case avatarFontSize = 20
-    
-    func getImageSize() -> CGFloat {
-        UIScreen.main.bounds.height > 700 ? rawValue : 200
-    }
-    
-    func getAvatarFontSize() -> CGFloat {
-        UIScreen.main.bounds.height > 700 ? rawValue : 15
+
+    var value: CGFloat {
+        switch self {
+        case .imageSize:
+            UIScreen.main.bounds.height > 700 ? rawValue : 200
+        case .avatarFontSize:
+            UIScreen.main.bounds.height > 700 ? rawValue : 15
+        }
     }
 }

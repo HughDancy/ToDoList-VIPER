@@ -2,21 +2,18 @@
 //  UIButton + EXT.swift
 //  ToDoList-VIPER
 //
-//  Created by Борис Киселев on 15.11.2023.
+//  Created by Борис Киселев on 19.07.2024.
 //
 
-import UIKit
+import UIKit.UIButton
+import UIKit.UIColor
 
 extension UIButton {
-    static func createToDoButton(title: String, backColor: UIColor, tintColor: UIColor) -> UIButton {
+    static func createPlainButton(text: String, tintColor: UIColor, backgoroundColor: UIColor) -> UIButton {
         let button = UIButton(type: .system)
-        button.setTitle(title, for: .normal)
-        button.backgroundColor = backColor
+        button.setTitle(text, for: .normal)
+        button.backgroundColor = backgoroundColor
         button.tintColor = tintColor
-        button.layer.cornerRadius = 10
-        button.clipsToBounds = true
         return button
     }
 }
-
-

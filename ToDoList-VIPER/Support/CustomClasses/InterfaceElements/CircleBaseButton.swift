@@ -6,12 +6,11 @@
 //
 
 import UIKit
-import SnapKit
 
 final class CircleBaseButton: UIButton {
     var imageName: String?
     var typeOfImage: ImageTypeForButton?
-    
+
     init(imageName: String?, typeOfImage: ImageTypeForButton, color: UIColor, cornerRadius: CGFloat) {
         super.init(frame: .zero)
         self.imageName = imageName
@@ -20,11 +19,11 @@ final class CircleBaseButton: UIButton {
         self.layer.cornerRadius = cornerRadius
         self.setupButton()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private func setupButton() {
         self.tintColor = .systemBackground
         self.clipsToBounds = true
@@ -33,7 +32,7 @@ final class CircleBaseButton: UIButton {
             make.height.width.equalTo(60)
         }
     }
-    
+
     private func setupLefImageView() {
         switch typeOfImage {
         case .customImage:

@@ -9,30 +9,13 @@ import UIKit
 
 final class ToDosDetailRouter: ToDosDetailRouterProtocol {
     weak var presenter: ToDosDetailInteractorOutputProtocol?
-    
-    static func createModule(with toDo: ToDoObject) -> UIViewController {
-        let viewController: ToDosDetailViewProtocol = ToDosDetailController()
-        let presenter: ToDosDetailPresenterProtocol & ToDosDetailInteractorOutputProtocol = ToDosDetailPresenter()
-        let interactor: ToDosDetailInteractorInputProtocol = ToDosDetailInteractor()
-        let router: ToDosDetailRouterProtocol = ToDosDetailRouter()
-        
-        viewController.presenter = presenter
-        presenter.view = viewController
-        presenter.interactor = interactor
-        presenter.router = router
-        interactor.presenter = presenter
-        interactor.toDoItem = toDo
-        router.presenter = presenter
-        
-        return viewController as! UIViewController
-    }
-    
-    func showAllert(with view: any ToDosDetailViewProtocol, status: ToDoDetailStatus, toDo: ToDoObject?) {
+
+    func showAllert(with view: any ToDosDetailViewProtocol, status: ToDoDetailStatus) {
         guard let currentView = view as? UIViewController else { return }
         let allertController = CustomAlertController()
         allertController.modalPresentationStyle = .overCurrentContext
         allertController.modalTransitionStyle = .crossDissolve
-        
+
         switch status {
         case .allSave:
             currentView.present(allertController, animated: true)
@@ -58,8 +41,7 @@ final class ToDosDetailRouter: ToDosDetailRouterProtocol {
                 buttonText: "Отмена",
                 buttonTextTwo: "Да") { state in
                     if state == true {
-                        guard let toDoItem = toDo else { return }
-                        self.presenter?.deleteToDo(toDoItem)
+                        self.presenter?.deleteToDo()
                     }
                 }
         case .error:
@@ -77,7 +59,7 @@ final class ToDosDetailRouter: ToDosDetailRouterProtocol {
             )
         }
     }
-    
+
     func goBackToTasks(with view: any ToDosDetailViewProtocol) {
         guard let currentView = view as? UIViewController else { return }
         currentView.navigationController?.popViewController(animated: true)

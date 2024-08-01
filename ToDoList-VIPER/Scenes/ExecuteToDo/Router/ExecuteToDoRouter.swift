@@ -14,13 +14,13 @@ class ExecuteToDoRouter: ExecuteToDoRouterProtocol {
         let router: ExecuteToDoRouter = ExecuteToDoRouter()
         let vc = ExecuteToDoController()
         let navCon = UINavigationController(rootViewController: vc)
-        
+
         vc.presenter = presenter
         presenter.view = vc
         presenter.interactor = interactor
         presenter.router = router
         interactor.presenter = presenter
-        
+
         return vc
     }
 }

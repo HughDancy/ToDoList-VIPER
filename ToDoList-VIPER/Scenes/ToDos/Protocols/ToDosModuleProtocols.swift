@@ -9,7 +9,7 @@ import UIKit
 
 protocol ToDosViewProtocol: AnyObject {
     var presenter: ToDosPresenterProtocol? { get set }
-    
+
     func fetchToDos(date: Date)
     func showToDos(_ toDos: [ToDoObject])
 }
@@ -19,35 +19,33 @@ protocol ToDosPresenterProtocol: AnyObject {
     var interactor: ToDosInteractorInputProtocol? { get set }
     var router: ToDosRouterProtocol? { get set }
     var status: ToDoListStatus? { get set }
-    
-    //VIEW -> PRESENTER
+
+    // VIEW -> PRESENTER
     func getToDos()
     func fetchToDos(date: Date)
     func updateToDosForDay(_ date: Date)
-    func doneToDo(_ task: ToDoObject)
-    func deleteToDo(_ task: ToDoObject)
+    func doneToDo(_ taskId: UUID)
+    func deleteToDo(_ taskId: UUID)
     func goToTask(_ task: ToDoObject)
 }
 
 protocol ToDosInteractorInputProtocol: AnyObject {
     var presenter: ToDosInteractorOutputProtocol? { get set }
-    
-    //PRESENTER -> INTERACTOR
+
+    // PRESENTER -> INTERACTOR
     func fetchFirstTasks(_ status: ToDoListStatus)
     func fetchTask(date: Date, status: ToDoListStatus)
-    func doneTask(_ task: ToDoObject)
-    func deleteTask(_ task: ToDoObject)
+    func doneTask(_ taskId: UUID)
+    func deleteTask(_ taskId: UUID)
 }
 
 protocol ToDosInteractorOutputProtocol: AnyObject {
-    //INTERACTOR -> PRESENTER
+    // INTERACTOR -> PRESENTER
     func getTask(_ tasks: [ToDoObject])
 }
 
 protocol ToDosRouterProtocol: AnyObject {
-    static func createToDosModule(with status: ToDoListStatus) -> UIViewController
-    
-    //PRESENTER -> ROUTER
+    // PRESENTER -> ROUTER
     func goToTask(_ task: ToDoObject, from view: ToDosViewProtocol)
 }
 

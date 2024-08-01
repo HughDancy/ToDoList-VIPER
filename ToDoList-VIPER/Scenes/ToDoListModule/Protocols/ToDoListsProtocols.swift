@@ -9,7 +9,7 @@ import UIKit
 
 protocol ToDoListViewProtocol: AnyObject {
     var presenter: ToDoListPresenterProtocol? { get set }
-    
+
     func showToDos(_ toDos: [[ToDoObject]])
 }
 
@@ -17,8 +17,8 @@ protocol ToDoListPresenterProtocol: AnyObject {
     var view: ToDoListViewProtocol? { get set }
     var interactor: ToDoListInteractorInputProtocol? { get set }
     var router: ToDoListRouterProtocol? { get set }
-    
-    //VIEW -> PRESENTER
+
+    // VIEW -> PRESENTER
     func viewWillAppear()
     func showToDoDetail(_ toDoItem: ToDoObject)
     func showAddToDo()
@@ -28,24 +28,24 @@ protocol ToDoListPresenterProtocol: AnyObject {
 
 protocol ToDoListInteractorInputProtocol: AnyObject {
     var presenter: ToDoListInteractorOutputProtocol? { get set }
-    
-    //PRESENTER -> INTERACTOR
+
+    // PRESENTER -> INTERACTOR
     func retriveToDos()
     func deleteToDo(_ toDoItem: ToDoObject)
     func doneToDo(_ toDoItem: ToDoObject)
 }
 
 protocol ToDoListInteractorOutputProtocol: AnyObject {
-    
-    //INTERACTOR -> PRESENTER
+
+    // INTERACTOR -> PRESENTER
     func didRemoveToDo(_ toDoItem: ToDoObject)
     func didRetriveToDos(_ toDoItems: [[ToDoObject]])
 }
 
 protocol ToDoListRouterProtocol: AnyObject {
     static func createToDoListModule() -> UIViewController
-    
-    //PRESENTER->ROUTER
+
+    // PRESENTER->ROUTER
     func presentToDoDetailScreen(from view: ToDoListViewProtocol, for: ToDoObject)
     func goAddToDoScreen(from view: ToDoListViewProtocol)
 }

@@ -9,7 +9,7 @@ import UIKit
 
 class SignInTextField: UITextField {
     var nameOfImage: String?
-    
+
     init(placeholder: String, nameOfImage: String?, tag: Int, delegate: UITextFieldDelegate, capitalizationType: UITextAutocapitalizationType, returnKey: UIReturnKeyType, secure: Bool) {
         self.nameOfImage = nameOfImage
         super.init(frame: .zero)
@@ -22,11 +22,11 @@ class SignInTextField: UITextField {
         self.autocorrectionType = .no
         self.setupTextField()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private func setupTextField() {
         self.borderStyle = .none
         if nameOfImage != nil {

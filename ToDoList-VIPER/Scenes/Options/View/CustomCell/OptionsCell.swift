@@ -7,27 +7,27 @@
 
 import UIKit
 
-class OptionsCell: UITableViewCell {
-    
+final class OptionsCell: UITableViewCell {
+
     static let reuseIdentifier = "OptionsCell"
     weak var delegate: OptionCellDelegate?
     private var index: Int = -1
-    
-    //MARK: - Outlets
+
+    // MARK: - Outlets
     private lazy var containerView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemGray6
         view.layer.cornerRadius = 10
         return view
     }()
-    
+
     private lazy var optionTitle: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         label.textColor = .label
         return label
     }()
-    
+
     private lazy var switcher: CustomSwitcher = {
         let customSwitcher = CustomSwitcher()
         customSwitcher.offImage = UIImage(named: "nightSky")?.cgImage
@@ -35,18 +35,17 @@ class OptionsCell: UITableViewCell {
         customSwitcher.addTarget(self, action: #selector(changeTheme), for: .touchUpInside)
         return customSwitcher
     }()
-    
-    
-    //MARK: - Init
+
+    // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.commonInit()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private func commonInit() {
         self.contentView.backgroundColor = .systemBackground
         setupHierarchy()
@@ -54,33 +53,33 @@ class OptionsCell: UITableViewCell {
         setupSwitcher()
         self.selectionStyle = .none
     }
-    
+
     override func prepareForReuse() {
         self.optionTitle.text = nil
     }
-    
-    //MARK: - Setup Hierarchy
+
+    // MARK: - Setup Hierarchy
     private func setupHierarchy() {
         contentView.addSubview(containerView)
         containerView.addSubview(optionTitle)
         containerView.addSubview(switcher)
-        
+
     }
-    
-    //MARK: - Setup Layout
+
+    // MARK: - Setup Layout
     private func setupLayout() {
         containerView.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview().inset(5)
             make.leading.trailing.equalToSuperview().inset(15)
             make.height.equalTo(CellSizes.cellHeight.value)
         }
-        
+
         optionTitle.snp.makeConstraints { make in
             make.centerX.equalTo(containerView.snp.centerX)
             make.top.equalTo(containerView.snp.top).offset(CellSizes.cellHeight.value / 2 - 11)
             make.leading.equalTo(containerView.snp.leading).offset(20)
         }
-        
+
         switcher.snp.makeConstraints { make in
             make.top.equalTo(containerView.snp.top).offset(15)
             make.trailing.equalTo(containerView.safeAreaLayoutGuide.snp.trailing).inset(10)
@@ -88,8 +87,8 @@ class OptionsCell: UITableViewCell {
             make.width.equalTo(70)
         }
     }
-    
-    //MARK: - Setup Cell
+
+    // MARK: - Setup Cell
     func setupCell(title: String, index: Int) {
         self.optionTitle.text = title
         self.index = index
@@ -99,31 +98,25 @@ class OptionsCell: UITableViewCell {
             switcher.isHidden = true
         }
     }
-    
-    //MARK: - Setup Switcher
+
+    // MARK: - Setup Switcher
     private func setupSwitcher() {
-        if ToDoUserDefaults.shares.theme.getUserInterfaceStyle() == .dark {
+        if ToDoThemeDefaults.shared.theme.getUserInterfaceStyle() == .dark {
             switcher.isOn = true
         } else {
             switcher.isOn = false
         }
     }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-    }
-    
-    //MARK: - Custom Switcher method
+
+    // MARK: - Custom Switcher method
     @objc func changeTheme() {
         delegate?.changeTheme(switcher.isOn)
-        print("Hello")
     }
 }
 
-fileprivate enum CellSizes: CGFloat {
+private enum CellSizes: CGFloat {
     case cellHeight = 70
-    
+
     var value: CGFloat {
         switch self {
         case .cellHeight:

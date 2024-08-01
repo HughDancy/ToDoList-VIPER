@@ -8,20 +8,20 @@
 import Foundation
 import UIKit
 import FirebaseAuth
+import GoogleSignIn
+import GoogleSignInSwift
 
 final class OptionsInteractor: OptionsInputInteractorProtocol {
- 
-    //MARK: - Properties
-    var presenter: OptionsOutputInteractorProtocol?
-    let firebaseAuth = Auth.auth()
-    private var toDoUserDefaults = ToDoUserDefaults.shares
-    
-    //MARK: - Interactor Methods
+
+    // MARK: - Properties
+    weak var presenter: OptionsOutputInteractorProtocol?
+
+    // MARK: - Interactor Methods
     func fetchOptionsData() {
         let optionsData = ["Сменить тему", "Обратная связь", "Выход"]
         presenter?.getOptionsData(optionsData)
     }
-    
+
     func fetchUserData() {
         guard let userName = UserDefaults.standard.string(forKey: NotificationNames.userName.rawValue),
               let userAvatar = UserDefaults.standard.url(forKey: "UserAvatar") else {
@@ -30,28 +30,29 @@ final class OptionsInteractor: OptionsInputInteractorProtocol {
         }
         presenter?.getUserData((userName, userAvatar))
     }
-    
+
     func changeTheme(_ bool: Bool) {
+        var toDoUserDefaults = ToDoThemeDefaults.shared
         if bool {
                  toDoUserDefaults.theme = Theme(rawValue: "dark") ?? .dark
              } else {
                  toDoUserDefaults.theme = Theme(rawValue: "light") ?? .light
              }
-             
+
              let allScenes = UIApplication.shared.connectedScenes
              for scene in allScenes {
                  guard let windowScene = scene as? UIWindowScene else { continue }
-                 windowScene.windows.forEach({$0.overrideUserInterfaceStyle = ToDoUserDefaults.shares.theme.getUserInterfaceStyle()})
+                 windowScene.windows.forEach({$0.overrideUserInterfaceStyle = ToDoThemeDefaults.shared.theme.getUserInterfaceStyle()})
              }
     }
-    
-    
+
     func loggedOut() {
+        let firebaseAuth = Auth.auth()
+        let authMangaer = AuthKeychainManager()
         do {
             try? firebaseAuth.signOut()
-        } catch {
-            print("Some error when logged out from Options screen")
+            authMangaer.clear()
+            GIDSignIn.sharedInstance.disconnect()
         }
     }
-    
 }

@@ -7,10 +7,10 @@
 
 import UIKit
 
-class MainToDoCell: UICollectionViewCell {
+final class MainToDoCell: UICollectionViewCell {
     static let reuseIdentifier = "MainToDoCell"
-    
-    //MARK: - Outlets
+
+    // MARK: - Outlets
     private lazy var containerView: UIView = {
         let container = UIView()
         container.backgroundColor = .systemGray5
@@ -28,7 +28,7 @@ class MainToDoCell: UICollectionViewCell {
         numbers.textColor = .systemBackground
         return numbers
     }()
-    
+
     private lazy var toDosLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
@@ -38,48 +38,48 @@ class MainToDoCell: UICollectionViewCell {
         label.textColor = .systemBackground
         return label
     }()
-    
-    //MARK: - Init
+
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private func setupView() {
         self.backgroundColor = .clear
         setupHierarchy()
         setupLayout()
     }
-    
-    //MARK: - Setup Hierarchy
+
+    // MARK: - Setup Hierarchy
     private func setupHierarchy() {
         contentView.addSubview(containerView)
         containerView.addSubview(numbersLabel)
         containerView.addSubview(toDosLabel)
     }
-    
-    //MARK: - Setup Layout
+
+    // MARK: - Setup Layout
     private func setupLayout() {
         containerView.snp.makeConstraints { make in
             make.top.leading.trailing.bottom.equalToSuperview().inset(5)
         }
-        
+
         numbersLabel.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
         }
-        
+
         toDosLabel.snp.makeConstraints { make in
             make.top.equalTo(numbersLabel.snp.bottom)
             make.centerX.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(10)
         }
     }
-    
-    //MARK: - Output setup outlets method
+
+    // MARK: - Output setup outlets method
     func setupElements(numbers: Int, dayLabel: String, backgroundColor: UIColor) {
         numbersLabel.text = String(numbers)
         toDosLabel.text = dayLabel

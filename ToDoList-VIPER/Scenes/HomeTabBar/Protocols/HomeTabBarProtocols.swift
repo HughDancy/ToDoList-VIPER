@@ -14,14 +14,13 @@ protocol HomeTabBarViewProtocol: AnyObject {
 protocol HomeTabBarPresenterProtocol: AnyObject {
     var view: HomeTabBarViewProtocol? { get set}
     var router: HomeTabBarRouterProtocol? { get set }
-    
-    //VIEW -> PRESENTER
+
+    // VIEW -> PRESENTER
     func presentAddNewToDo()
 }
 
 protocol HomeTabBarRouterProtocol: AnyObject {
-    static func createHomeTabBar() -> UIViewController
-    
-    //PRESENTER -> ROUTER
+
+    // PRESENTER -> ROUTER
     func presentAddNewToDooScreen(from view: HomeTabBarViewProtocol)
 }

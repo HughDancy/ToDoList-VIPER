@@ -9,7 +9,7 @@ import UIKit
 
 protocol ToDosDetailViewProtocol: AnyObject {
     var presenter: ToDosDetailPresenterProtocol? { get set }
-    
+
     func showToDoItem(_ toDo: ToDoObject)
 }
 
@@ -17,36 +17,34 @@ protocol ToDosDetailPresenterProtocol: AnyObject {
     var view: ToDosDetailViewProtocol? { get set }
     var interactor: ToDosDetailInteractorInputProtocol? { get set }
     var router: ToDosDetailRouterProtocol? { get set }
-    
-    //VIEW -> PRESENTER
+
+    // VIEW -> PRESENTER
     func getToDo()
     func editToDo(title: String?, descriprion: String?, date: Date?, color: UIColor, iconName: String)
-    func whantDeleteToDo(_ toDo: ToDoObject)
+    func whantDeleteToDo()
 }
 
 protocol ToDosDetailInteractorInputProtocol: AnyObject {
     var presenter: ToDosDetailInteractorOutputProtocol? { get set }
     var toDoItem: ToDoObject? { get set }
-    
-    //PRESENTER -> INTERACTOR
+
+    // PRESENTER -> INTERACTOR
     func editTask(title: String?, descriprion: String?, date: Date?, color: UIColor, iconName: String)
-    func deleteTask(_ toDo: ToDoObject)
+    func deleteTask()
 }
 
 protocol ToDosDetailInteractorOutputProtocol: AnyObject {
-    //INTERACTOR -> PRESTNER
-    func deleteToDo(_ toDo: ToDoObject)
+    // INTERACTOR -> PRESTNER
+    func deleteToDo()
     func didDeleteToDo()
-    func didEditToDo(_ toDo: ToDoObject)
     func showAllert(with status: ToDoDetailStatus)
 }
 
 protocol ToDosDetailRouterProtocol: AnyObject {
     var presenter: ToDosDetailInteractorOutputProtocol? { get set }
-    static func createModule(with toDo: ToDoObject) -> UIViewController
-    
-    //PRESENTER -> ROUTER
-    func showAllert(with view: ToDosDetailViewProtocol, status: ToDoDetailStatus, toDo: ToDoObject?)
+
+    // PRESENTER -> ROUTER
+    func showAllert(with view: ToDosDetailViewProtocol, status: ToDoDetailStatus)
     func goBackToTasks(with view: ToDosDetailViewProtocol)
 }
 

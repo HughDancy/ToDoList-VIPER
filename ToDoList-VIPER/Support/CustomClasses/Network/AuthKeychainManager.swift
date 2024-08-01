@@ -18,19 +18,16 @@ enum KeychainError: Error {
 protocol AuthKeychainManagerProtocol {
     var id: String? { get }
     var isAuth: Bool { get }
-    
+
     func persist(id: String)
     func clear()
-    
     func fetchId() throws -> String
 }
 
 final class AuthKeychainManager {
     private let secureItemDescription = "Auth id"
-    
     private var accountName: String = "ToDoList-VIPER"
     private var serviceName: String = "-.ToDoList-VIPER"
-    
     private var cachedId: String?
 
     private lazy var searchQuery = [
@@ -117,7 +114,7 @@ extension AuthKeychainManager: AuthKeychainManagerProtocol {
         if status == errSecSuccess {
             cachedId = id
         }
-        
+
         print("Your id - \(id) was saved!")
     }
 

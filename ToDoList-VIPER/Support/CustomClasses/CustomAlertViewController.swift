@@ -8,14 +8,14 @@
 import UIKit
 
 final class CustomAlertViewController {
-    //MARK: - Outlets
+    // MARK: - Outlets
     private let backgroundView: UIView =  {
        let view = UIView()
         view.backgroundColor = .black
         view.alpha = 0
         return view
     }()
-    
+
     private let alertView: UIView = {
        let alertView = UIView()
         alertView.backgroundColor = .systemBackground
@@ -23,8 +23,7 @@ final class CustomAlertViewController {
         alertView.layer.cornerRadius = 12
         return alertView
     }()
-    
-    
+
     func showAlert(with title: String, message: String, on viewController: UIViewController) {
         guard let targetView = viewController.view else { return }
         backgroundView.frame = targetView.bounds
@@ -34,8 +33,8 @@ final class CustomAlertViewController {
             self.backgroundView.alpha = 0.6
         }
     }
-    
+
     func dismissAlert() {
-        
+
     }
 }

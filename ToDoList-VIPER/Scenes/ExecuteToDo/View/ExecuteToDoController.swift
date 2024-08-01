@@ -8,8 +8,8 @@
 import UIKit
 
 class ExecuteToDoController: UITableViewController {
-    
-    //MARK: - Elements
+
+    // MARK: - Elements
     var presenter: ExecuteToDoPresenterProtocol?
     var executeToDos: [[ToDoObject]] = [[]] {
         didSet {
@@ -17,17 +17,17 @@ class ExecuteToDoController: UITableViewController {
         }
     }
 
-    //MARK: - Lifecycle
+    // MARK: - Lifecycle
     override func viewDidAppear(_ animated: Bool) {
         presenter?.viewWillAppear()
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
     }
-    
-    //MARK: - Setup Elements
+
+    // MARK: - Setup Elements
     private func setupView() {
         view.backgroundColor = .systemBackground
         title = "Завершено"
@@ -45,7 +45,7 @@ class ExecuteToDoController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return executeToDos[section].count
     }
-    
+
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
@@ -63,7 +63,7 @@ class ExecuteToDoController: UITableViewController {
         cell?.executeToDo()
         return cell ?? UITableViewCell()
     }
-    
+
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let toDo = executeToDos[indexPath.section][indexPath.row]
