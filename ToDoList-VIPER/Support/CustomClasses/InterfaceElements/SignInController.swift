@@ -8,8 +8,8 @@
 import UIKit
 
 class SingInController: UIViewController {
-    
-    //MARK: - OUTLETS
+
+    // MARK: - OUTLETS
     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.isScrollEnabled = true
@@ -17,20 +17,14 @@ class SingInController: UIViewController {
         scrollView.showsVerticalScrollIndicator = false
         return scrollView
     }()
-    
-    
-    //MARK: - Lifecycle
+
+    // MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 200)
         subscribeKeyboardEvents()
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self)
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -38,14 +32,17 @@ class SingInController: UIViewController {
         setupHierarchy()
         setupLayout()
         view.layoutIfNeeded()
-        
     }
-    
-    //MARK: - Setup Outlets
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    // MARK: - Setup Outlets
     func setupHierarchy() {
         view.addSubview(scrollView)
     }
-    
+
     func setupLayout() {
         scrollView.snp.makeConstraints { make in
             make.centerX.equalTo(view.safeAreaLayoutGuide.snp.centerX)
@@ -54,26 +51,26 @@ class SingInController: UIViewController {
             make.height.equalTo(view.snp.height)
         }
     }
-    
-    //MARK: - ScrollView keyboard functions
+
+    // MARK: - ScrollView keyboard functions
     func subscribeKeyboardEvents() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-    
+
     @objc func keyboardWillShow(_ notification: NSNotification) {
-        guard let ks = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        guard let ksp = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
         DispatchQueue.main.async {
-            self.scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom:  ks.height - self.view.safeAreaInsets.bottom + 110, right: 0)
+            self.scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: ksp.height - self.view.safeAreaInsets.bottom + 110, right: 0)
         }
     }
-    
+
     @objc func keyboardWillHide(_ notification: NSNotification) {
         scrollView.contentInset = .zero
     }
 }
 
-//MARK: - TextField Delegate
+// MARK: - TextField Delegate
 extension SingInController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let nextTag = textField.tag + 1
@@ -85,7 +82,7 @@ extension SingInController: UITextFieldDelegate {
         }
         return true
     }
-    
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }

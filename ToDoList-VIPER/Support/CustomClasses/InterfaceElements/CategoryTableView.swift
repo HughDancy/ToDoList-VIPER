@@ -8,12 +8,12 @@
 import UIKit
 
 final class CategoryTableView: UITableView {
-    
+
     lazy var categories: [TaskCategory] = {
         let categories = TaskCategoryManager.manager.fetchCategories()
         return categories
     }()
-    
+
     init(frame: CGRect, style: UITableView.Style, color: UIColor) {
         super.init(frame: frame, style: style)
         self.backgroundColor = color
@@ -22,8 +22,8 @@ final class CategoryTableView: UITableView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    //MARK: - Setup Table
+
+    // MARK: - Setup Table
     private func setupTable() {
         dataSource = self
         isScrollEnabled = false
@@ -37,7 +37,7 @@ extension CategoryTableView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return categories.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CategoryCell.reuseIdentifier, for: indexPath) as? CategoryCell else {
             return UITableViewCell()

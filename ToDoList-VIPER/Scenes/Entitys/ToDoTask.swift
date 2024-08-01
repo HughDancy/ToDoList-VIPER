@@ -15,7 +15,6 @@ struct ToDoTask: Codable {
     var category: Category
     var status: ProgressStatus
     var id: UUID
-    
     enum CodingKeys: String, CodingKey {
         case title = "title"
         case descriptionTitle = "description"
@@ -30,17 +29,14 @@ enum ProgressStatus: String, Codable {
     case inProgress = "In progress"
     case done = "Done"
     case fail = "Fail"
-    
     var value: String {
         return rawValue
     }
-    
     static func convertStatusFromServer(serverStatus: ProgressStatus, date: Date) -> Bool {
         let statusFromServer = serverStatus != ProgressStatus.done && serverStatus != ProgressStatus.inProgress
         let dateStatus = date >= Date.today
         return statusFromServer == dateStatus
     }
-    
     static func convertStatusForServer(task: ToDoObject) -> ProgressStatus {
         if task.isOverdue == true {
             return .fail

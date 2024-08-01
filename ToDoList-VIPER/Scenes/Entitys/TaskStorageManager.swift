@@ -13,7 +13,7 @@ final class TaskStorageManager {
     static let instance = TaskStorageManager()
     private let overdueRefresher = OverdueStatusRefresher()
     
-    //MARK: - PersistentContainer and Context
+    // MARK: - PersistentContainer and Context
     private lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "ToDoList_VIPER")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
@@ -38,7 +38,7 @@ final class TaskStorageManager {
         return context
     }()
     
-    //MARK: - CoreData create new ToDoObject
+    // MARK: - CoreData create new ToDoObject
     func createNewToDo(title: String, content: String, date: Date, isOverdue: Bool, color: UIColor, iconName: String, doneStatus: Bool, uid: UUID) {
         let newToDo = ToDoObject(context: viewContext)
         newToDo.title = title
@@ -53,7 +53,7 @@ final class TaskStorageManager {
         self.saveChanges()
     }
     
-    //MARK: - CoreData delete ToDoObject
+    // MARK: - CoreData delete ToDoObject
     func deleteAllEntities() {
         let entities = persistentContainer.managedObjectModel.entities
         for entity in entities {
@@ -80,10 +80,9 @@ final class TaskStorageManager {
         let object = objects.first
         viewContext.delete(object ?? ToDoObject())
         self.saveChanges()
-        
     }
     
-    //MARK: - CoreData edit ToDoObject
+    // MARK: - CoreData edit ToDoObject
     func editToDoObject(item: ToDoObject, newTitle: String, newDescription: String, newDate: Date, color: UIColor, iconName: String) {
         if item.title != newTitle {
             item.title = newTitle
@@ -106,7 +105,7 @@ final class TaskStorageManager {
         self.saveChanges()
     }
     
-    //MARK: - CoreData Done ToDoObject
+    // MARK: - CoreData Done ToDoObject
     func doneToDo(_ id: UUID) {
         let fetchRequest: NSFetchRequest<ToDoObject> = ToDoObject.fetchRequest()
         let idPredicate = NSPredicate(format: "%K == %@", "id", id as CVarArg)
@@ -117,7 +116,7 @@ final class TaskStorageManager {
         self.saveChanges()
     }
     
-    //MARK: - CoreData fetch ToDosObject methods
+    // MARK: - CoreData fetch ToDosObject methods
     func fetchAllToDosCount() -> Int {
         let fetchRequest = NSFetchRequest<NSNumber>(entityName: "ToDoObject")
         fetchRequest.resultType = .countResultType
@@ -168,8 +167,8 @@ final class TaskStorageManager {
         let objects = try! viewContext.fetch(fetchRequest)
         return objects
     }
-    //MARK: - TO-DO: Check this method and rewrite
-    //MARK: - Fetch count ToDosObjects Method
+    // MARK: - TO-DO: Check this method and rewrite
+    // MARK: - Fetch count ToDosObjects Method
     func fetchToDosCount(with status: ToDoListStatus)  -> Int {
         let fetchRequest = NSFetchRequest<NSNumber>(entityName: "ToDoObject")
         fetchRequest.resultType = .countResultType
@@ -202,8 +201,7 @@ final class TaskStorageManager {
             return objectsCount ?? 0
         }
     }
-    
-    //MARK: - Create predicates for cathegories
+    // MARK: - Create predicates for cathegories
     private func createPredicates(with status: ToDoListStatus, date: Date) -> [NSPredicate] {
         switch status {
         case .today, .tommorow:
@@ -235,7 +233,7 @@ final class TaskStorageManager {
         self.saveChanges()
     }
     
-    //MARK: - CoreData Saving support
+    // MARK: - CoreData Saving support
     func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {

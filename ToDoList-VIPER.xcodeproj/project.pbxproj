@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		D82B8B6E2B6B8CCB00A006F2 /* AppConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82B8B6D2B6B8CCB00A006F2 /* AppConfigurator.swift */; };
+		D83015562C5A1E46006BC9FA /* SwiftLintFramework in Frameworks */ = {isa = PBXBuildFile; productRef = D83015552C5A1E46006BC9FA /* SwiftLintFramework */; };
+		D83015582C5A1E46006BC9FA /* swiftlint in Frameworks */ = {isa = PBXBuildFile; productRef = D83015572C5A1E46006BC9FA /* swiftlint */; };
 		D846B8622C14606A00AA8775 /* AuthKeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D846B8612C14606A00AA8775 /* AuthKeychainManager.swift */; };
 		D846B8652C14609C00AA8775 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D846B8642C14609C00AA8775 /* Security.framework */; };
 		D846B8692C18518F00AA8775 /* FirebaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D846B8682C18518F00AA8775 /* FirebaseStorageManager.swift */; };
@@ -312,7 +314,9 @@
 				D86D45162AFB947B00894774 /* SnapKit in Frameworks */,
 				D8CCF2CD2B62725400C1E358 /* FirebaseAuth in Frameworks */,
 				D8CCF2D32B62725400C1E358 /* FirebaseFirestore in Frameworks */,
+				D83015582C5A1E46006BC9FA /* swiftlint in Frameworks */,
 				D8CCF2D52B62725400C1E358 /* FirebaseFirestoreSwift in Frameworks */,
+				D83015562C5A1E46006BC9FA /* SwiftLintFramework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1185,6 +1189,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D830155A2C5A1E7C006BC9FA /* PBXTargetDependency */,
 			);
 			name = "ToDoList-VIPER";
 			packageProductDependencies = (
@@ -1201,6 +1206,8 @@
 				D8C19EC52B8DC3FF004BCDDD /* GoogleSignIn */,
 				D8C19EC72B8DC3FF004BCDDD /* GoogleSignInSwift */,
 				D8CED8692C19EBFC00A98181 /* Kingfisher */,
+				D83015552C5A1E46006BC9FA /* SwiftLintFramework */,
+				D83015572C5A1E46006BC9FA /* swiftlint */,
 			);
 			productName = "ToDoList-VIPER";
 			productReference = D86D44DE2AFB932E00894774 /* ToDoList-VIPER.app */;
@@ -1279,6 +1286,7 @@
 				D8CCF2C72B62725400C1E358 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				D8C19EC42B8DC3FF004BCDDD /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				D8CED8682C19EBFC00A98181 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				D83015542C5A1E46006BC9FA /* XCRemoteSwiftPackageReference "SwiftLint" */,
 			);
 			productRefGroup = D86D44DF2AFB932E00894774 /* Products */;
 			projectDirPath = "";
@@ -1463,6 +1471,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		D830155A2C5A1E7C006BC9FA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = D83015592C5A1E7C006BC9FA /* SwiftLintBuildToolPlugin */;
+		};
 		D86D44F92AFB933000894774 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D86D44DD2AFB932E00894774 /* ToDoList-VIPER */;
@@ -1782,6 +1794,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		D83015542C5A1E46006BC9FA /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/SwiftLint";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.55.1;
+			};
+		};
 		D86D45142AFB947B00894774 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -1817,6 +1837,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D83015552C5A1E46006BC9FA /* SwiftLintFramework */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D83015542C5A1E46006BC9FA /* XCRemoteSwiftPackageReference "SwiftLint" */;
+			productName = SwiftLintFramework;
+		};
+		D83015572C5A1E46006BC9FA /* swiftlint */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D83015542C5A1E46006BC9FA /* XCRemoteSwiftPackageReference "SwiftLint" */;
+			productName = swiftlint;
+		};
+		D83015592C5A1E7C006BC9FA /* SwiftLintBuildToolPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D83015542C5A1E46006BC9FA /* XCRemoteSwiftPackageReference "SwiftLint" */;
+			productName = "plugin:SwiftLintBuildToolPlugin";
+		};
 		D86D45152AFB947B00894774 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D86D45142AFB947B00894774 /* XCRemoteSwiftPackageReference "SnapKit" */;
