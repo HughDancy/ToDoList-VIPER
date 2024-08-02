@@ -45,7 +45,7 @@ final class LoginController: SingInController {
     private lazy var forgottPasswordButton = UIButton.createPlainButton(text: "Забыли пароль?", tintColor: .systemCyan, backgoroundColor: .systemBackground)
     private lazy var registerButton = UIButton.createPlainButton(text: "Зарегестрироваться", tintColor: .systemCyan, backgoroundColor: .systemBackground)
     private lazy var googleLoginButton = CircleBaseButton(imageName: "googleLogo", typeOfImage: .customImage, color: .systemFill, cornerRadius: 30)
-    private lazy var appleLoginButton = CircleBaseButton(imageName: "apple.logo", typeOfImage: .systemImage, color: .systemFill, cornerRadius: 30)
+    lazy var appleLoginButton = CircleBaseButton(imageName: "apple.logo", typeOfImage: .systemImage, color: .systemFill, cornerRadius: 30)
 
     private lazy var sigInButtonStack: UIStackView = {
         let stack = UIStackView()
