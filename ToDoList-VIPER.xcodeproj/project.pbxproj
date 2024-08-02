@@ -23,6 +23,10 @@
 		D857BABC2C5CD39C00806F87 /* LoginInteractorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D857BABB2C5CD39C00806F87 /* LoginInteractorTest.swift */; };
 		D857BABE2C5CDB9C00806F87 /* MockAddNewToDoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D857BABD2C5CDB9C00806F87 /* MockAddNewToDoPresenter.swift */; };
 		D857BAC02C5CDC8200806F87 /* AddNewToDoInteractorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D857BABF2C5CDC8200806F87 /* AddNewToDoInteractorTest.swift */; };
+		D857BAC22C5CE65B00806F87 /* MockMainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D857BAC12C5CE65B00806F87 /* MockMainPresenter.swift */; };
+		D857BAC42C5CE7DB00806F87 /* MainScreenInteractorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D857BAC32C5CE7DB00806F87 /* MainScreenInteractorTest.swift */; };
+		D857BAC62C5CEABD00806F87 /* MockToDosPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D857BAC52C5CEABD00806F87 /* MockToDosPresenter.swift */; };
+		D857BAC82C5CEB8900806F87 /* ToDosInteractorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D857BAC72C5CEB8900806F87 /* ToDosInteractorTest.swift */; };
 		D85C57E52B57C71900023B04 /* OnboardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C57E42B57C71900023B04 /* OnboardingPage.swift */; };
 		D85C57E72B57CCA600023B04 /* OnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C57E62B57CCA600023B04 /* OnboardingPresenter.swift */; };
 		D85C57EA2B57CD1E00023B04 /* OnboardingProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C57E92B57CD1E00023B04 /* OnboardingProtocols.swift */; };
@@ -183,6 +187,10 @@
 		D857BABB2C5CD39C00806F87 /* LoginInteractorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractorTest.swift; sourceTree = "<group>"; };
 		D857BABD2C5CDB9C00806F87 /* MockAddNewToDoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAddNewToDoPresenter.swift; sourceTree = "<group>"; };
 		D857BABF2C5CDC8200806F87 /* AddNewToDoInteractorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewToDoInteractorTest.swift; sourceTree = "<group>"; };
+		D857BAC12C5CE65B00806F87 /* MockMainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMainPresenter.swift; sourceTree = "<group>"; };
+		D857BAC32C5CE7DB00806F87 /* MainScreenInteractorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenInteractorTest.swift; sourceTree = "<group>"; };
+		D857BAC52C5CEABD00806F87 /* MockToDosPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockToDosPresenter.swift; sourceTree = "<group>"; };
+		D857BAC72C5CEB8900806F87 /* ToDosInteractorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDosInteractorTest.swift; sourceTree = "<group>"; };
 		D85C57E42B57C71900023B04 /* OnboardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPage.swift; sourceTree = "<group>"; };
 		D85C57E62B57CCA600023B04 /* OnboardingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPresenter.swift; sourceTree = "<group>"; };
 		D85C57E92B57CD1E00023B04 /* OnboardingProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingProtocols.swift; sourceTree = "<group>"; };
@@ -344,6 +352,9 @@
 			children = (
 				D84044152C5B971700493480 /* LoginMidule */,
 				D857BABD2C5CDB9C00806F87 /* MockAddNewToDoPresenter.swift */,
+				D857BAC12C5CE65B00806F87 /* MockMainPresenter.swift */,
+				D857BAC32C5CE7DB00806F87 /* MainScreenInteractorTest.swift */,
+				D857BAC52C5CEABD00806F87 /* MockToDosPresenter.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -570,6 +581,7 @@
 				D86D44FB2AFB933000894774 /* ToDoList_VIPERTests.swift */,
 				D857BABB2C5CD39C00806F87 /* LoginInteractorTest.swift */,
 				D857BABF2C5CDC8200806F87 /* AddNewToDoInteractorTest.swift */,
+				D857BAC72C5CEB8900806F87 /* ToDosInteractorTest.swift */,
 			);
 			path = "ToDoList-VIPERTests";
 			sourceTree = "<group>";
@@ -1474,9 +1486,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				D857BABA2C5CD21D00806F87 /* LoginMockPresenter.swift in Sources */,
+				D857BAC22C5CE65B00806F87 /* MockMainPresenter.swift in Sources */,
 				D857BABC2C5CD39C00806F87 /* LoginInteractorTest.swift in Sources */,
+				D857BAC42C5CE7DB00806F87 /* MainScreenInteractorTest.swift in Sources */,
+				D857BAC82C5CEB8900806F87 /* ToDosInteractorTest.swift in Sources */,
 				D86D44FC2AFB933000894774 /* ToDoList_VIPERTests.swift in Sources */,
 				D857BABE2C5CDB9C00806F87 /* MockAddNewToDoPresenter.swift in Sources */,
+				D857BAC62C5CEABD00806F87 /* MockToDosPresenter.swift in Sources */,
 				D857BAC02C5CDC8200806F87 /* AddNewToDoInteractorTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
