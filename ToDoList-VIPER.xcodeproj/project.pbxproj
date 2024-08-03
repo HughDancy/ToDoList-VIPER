@@ -647,6 +647,7 @@
 		D86D451B2AFB970400894774 /* Entitys */ = {
 			isa = PBXGroup;
 			children = (
+				D857BACD2C5DFB8A00806F87 /* TaskStorageProtocols.swift */,
 				D8E9F8BB2B109DB800A3F3FC /* TaskStorageManager.swift */,
 				D85C583B2B5A771A00023B04 /* OnboardingItems.swift */,
 				D8473BE82BB581A00063F87A /* DateItem.swift */,
@@ -656,7 +657,6 @@
 				D87087D32BEA35BB00EEDDD7 /* NotificationNames.swift */,
 				D8E00C762C16DC66005AEA4D /* MockUsersAvatrs.swift */,
 				D8E72EFC2C2181E3007FF819 /* ToDoTask.swift */,
-				D857BACD2C5DFB8A00806F87 /* TaskStorageProtocols.swift */,
 			);
 			path = Entitys;
 			sourceTree = "<group>";

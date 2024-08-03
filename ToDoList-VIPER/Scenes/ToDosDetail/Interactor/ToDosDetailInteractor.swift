@@ -37,7 +37,7 @@ final class ToDosDetailInteractor: ToDosDetailInteractorInputProtocol {
 
     func deleteTask() {
         guard let task = toDoItem else { return }
-        firebaseStorage?.deleteTaskFromServer(task.id?.uuidString ?? UUID().uuidString)
+        firebaseStorage?.deleteTask(task.id?.uuidString ?? UUID().uuidString)
         localStorage?.deleteTask(task.id ?? UUID.init())
         presenter?.didDeleteToDo()
         NotificationCenter.default.post(name: NotificationNames.updateMainScreen.name, object: nil)

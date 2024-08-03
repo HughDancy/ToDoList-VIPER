@@ -89,71 +89,18 @@ extension FirebaseStorageManager {
             print("Some error when download task from server on private context: \(error)")
         }
     }
-}
 
-// MARK: - Save editing task
-//extension FirebaseStorageManager {
-//    func uploadChanges(task: ToDoTask) {
-//        let uid = Auth.auth().currentUser?.uid ?? UUID().uuidString
-//
-//        firestoreDataBase.collection("toDos").document(uid).collection("tasks").whereField("id", isEqualTo: task.id.uuidString).getDocuments { result, error in
-//            if error == nil {
-//                guard let documents = result?.documents.first else { return }
-//                let serverDate = documents["date"] as? Timestamp
-//                let date = serverDate?.dateValue()
-//
-//                if documents["title"] as? String != task.title {
-//                    documents.reference.updateData(["title" : task.title])
-//                }
-//
-//                if documents["description"] as? String != task.descriptionTitle {
-//                    documents.reference.updateData(["description" : task.descriptionTitle])
-//                }
-//
-//                if date != task.date {
-//                    documents.reference.updateData(["date" : task.date])
-//                }
-//
-//                if documents["status"] as? String != task.status.value {
-//                    documents.reference.updateData(["status" : task.status.value])
-//                }
-//
-//                if documents["category"] as? String != task.category.value {
-//                    documents.reference.updateData(["category" : task.category.value])
-//                }
-//            } else {
-//                print("Went some error when try save editing task to server!")
-//            }
-//        }
-//    }
-//}
-
-// MARK: - Delete function
-//extension FirebaseStorageManager {
-//    func deleteTaskFromServer(_ id: String) {
-//        let uid = Auth.auth().currentUser?.uid ?? UUID().uuidString
-//        let collectionReference = firestoreDataBase.collection("toDos").document(uid).collection("tasks")
-//        let query: Query = collectionReference.whereField("id", isEqualTo: id)
-//        query.getDocuments { snapshot, error in
-//            if let error = error {
-//                print("Some error went wehn try deleting task from server - \(error)")
-//            } else {
-//                snapshot!.documents.forEach { document in
-//                    self.firestoreDataBase.collection("toDos").document(uid).collection("tasks").document(document.documentID).delete()
-//                }
-//            }
-//        }
-//    }
-//}
-
-extension FirebaseStorageManager {
-    func makeTaskDone(_ id: UUID) {
+    func deleteTaskFromServer(_ id: String) {
         let uid = Auth.auth().currentUser?.uid ?? UUID().uuidString
-        let taskId = id.uuidString
-        firestoreDataBase.collection("toDos").document(uid).collection("tasks").whereField("id", isEqualTo: taskId).getDocuments { result, error in
-            if error == nil {
-                guard let documents = result?.documents.first else { return }
-                documents.reference.updateData(["status" : ProgressStatus.done.value])
+        let collectionReference = firestoreDataBase.collection("toDos").document(uid).collection("tasks")
+        let query: Query = collectionReference.whereField("id", isEqualTo: id)
+        query.getDocuments { snapshot, error in
+            if let error = error {
+                print("Some error went wehn try deleting task from server - \(error)")
+            } else {
+                snapshot!.documents.forEach { document in
+                    self.firestoreDataBase.collection("toDos").document(uid).collection("tasks").document(document.documentID).delete()
+                }
             }
         }
     }
@@ -177,6 +124,24 @@ extension FirebaseStorageManager {
                 print("Some eeror happen in FirebaseStorageManager check overdue tasks")
             }
         }
+    }
+}
+
+// MARK: - Interface for ToDos Module
+extension FirebaseStorageManager: ServerToDosProtocol {
+    func makeTaskDone(_ id: UUID) {
+        let uid = Auth.auth().currentUser?.uid ?? UUID().uuidString
+        let taskId = id.uuidString
+        firestoreDataBase.collection("toDos").document(uid).collection("tasks").whereField("id", isEqualTo: taskId).getDocuments { result, error in
+            if error == nil {
+                guard let documents = result?.documents.first else { return }
+                documents.reference.updateData(["status" : ProgressStatus.done.value])
+            }
+        }
+    }
+
+    func deleteToDoFromServer(_ id: String) {
+        self.deleteTaskFromServer(id)
     }
 }
 
@@ -216,18 +181,7 @@ extension FirebaseStorageManager: ServerDetailEditProtocol {
         }
     }
 
-    func deleteTaskFromServer(_ id: String) {
-        let uid = Auth.auth().currentUser?.uid ?? UUID().uuidString
-        let collectionReference = firestoreDataBase.collection("toDos").document(uid).collection("tasks")
-        let query: Query = collectionReference.whereField("id", isEqualTo: id)
-        query.getDocuments { snapshot, error in
-            if let error = error {
-                print("Some error went wehn try deleting task from server - \(error)")
-            } else {
-                snapshot!.documents.forEach { document in
-                    self.firestoreDataBase.collection("toDos").document(uid).collection("tasks").document(document.documentID).delete()
-                }
-            }
-        }
+    func deleteTask(_ id: String) {
+        self.deleteTaskFromServer(id)
     }
 }

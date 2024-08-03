@@ -9,8 +9,8 @@ import UIKit
 
 final class ToDosInteractor: ToDosInteractorInputProtocol {
     weak var presenter: ToDosInteractorOutputProtocol?
-    private let storage = TaskStorageManager.instance
-    private let firebaseStorage = FirebaseStorageManager()
+    var storage: ToDosLocalStorageProtocol?
+    var firebaseStorage: ServerToDosProtocol?
 
     func fetchFirstTasks(_ status: ToDoListStatus) {
         self.fetchSortedToDos(with: status, and: nil)
@@ -26,47 +26,48 @@ final class ToDosInteractor: ToDosInteractorInputProtocol {
         switch status {
         case .today, .tommorow:
             guard let date = date else {
-                var toDos = storage.fetchConcreteToDos(with: mockDate)
+                var toDos = storage?.fetchConcreteToDos(with: mockDate)
                 toDos = self.sortByDone(items: toDos)
                 self.presenter?.getTask(toDos)
                 return
             }
-            var toDos = storage.fetchConcreteToDos(with: date)
+            var toDos = storage?.fetchConcreteToDos(with: date)
             toDos = self.sortByDone(items: toDos)
             self.presenter?.getTask(toDos)
         case .overdue:
             guard let date = date else {
-                let overdueTasks = storage.fetchOverdueToDos(with: mockDate)
+                let overdueTasks = storage?.fetchOverdueToDos(with: mockDate)
                 self.presenter?.getTask(overdueTasks)
                 return
             }
-            let overdueTasks = storage.fetchOverdueToDos(with: date)
+            let overdueTasks = storage?.fetchOverdueToDos(with: date)
                 presenter?.getTask(overdueTasks)
         case .done:
             guard let date = date else {
-                let doneTasks = storage.fetchDoneToDos(with: mockDate)
+                let doneTasks = storage?.fetchDoneToDos(with: mockDate)
                 self.presenter?.getTask(doneTasks)
                 return
             }
-            let doneTasks = storage.fetchDoneToDos(with: date)
+            let doneTasks = storage?.fetchDoneToDos(with: date)
             presenter?.getTask(doneTasks)
         }
     }
 
     func doneTask(_ taskId: UUID) {
-        storage.doneToDo(taskId)
-        firebaseStorage.makeTaskDone(taskId)
+        storage?.doneToDo(taskId)
+        firebaseStorage?.makeTaskDone(taskId)
     }
 
     func deleteTask(_ taskId: UUID) {
-        firebaseStorage.deleteTaskFromServer(taskId.uuidString)
-        storage.deleteTaskWithId(taskId)
+        firebaseStorage?.deleteToDoFromServer(taskId.uuidString)
+        storage?.deleteToDo(taskId)
         NotificationCenter.default.post(name: NotificationNames.updateMainScreen.name, object: nil)
     }
 }
 
 fileprivate extension ToDosInteractor {
-    private func sortByDone(items: [ToDoObject]) -> [ToDoObject] {
+    private func sortByDone(items: [ToDoObject]?) -> [ToDoObject] {
+        guard let items = items else { return [TaskStorageManager.instance.createMockObject()]}
         let doneItems = items.filter { $0.doneStatus == true }
         let notDoneItems  = items.filter { $0.doneStatus != true }
         let result = notDoneItems + doneItems

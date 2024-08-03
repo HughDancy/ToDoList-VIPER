@@ -9,5 +9,10 @@ import Foundation
 
 protocol ServerDetailEditProtocol: AnyObject {
     func uploadChanges(task: ToDoTask)
-    func deleteTaskFromServer(_ id: String)
+    func deleteTask(_ id: String)
+}
+
+protocol ServerToDosProtocol: AnyObject {
+    func makeTaskDone(_ id: UUID)
+    func deleteToDoFromServer(_ id: String)
 }

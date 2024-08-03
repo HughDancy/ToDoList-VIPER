@@ -184,6 +184,8 @@ extension AssemblyBuilder {
         presenter.interactor = interactor
         presenter.router = router
         interactor.presenter = presenter
+        interactor.storage = TaskStorageManager.instance
+        interactor.firebaseStorage = FirebaseStorageManager()
 
         return view
     }
