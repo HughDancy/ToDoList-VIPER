@@ -11,6 +11,10 @@ protocol MainScreenServerStorageProtocol: AnyObject {
     func newLoadAvatar(compelition: @escaping (_ imageUrl: URL?) -> Void)
 }
 
+protocol AddNewToDoServerStorageProtocol: AnyObject {
+    func uploadTaskToServer(with task: ToDoTask)
+}
+
 protocol ToDoSDetailServerStorageProtocol: AnyObject {
     func uploadChanges(task: ToDoTask)
     func deleteTask(_ id: String)

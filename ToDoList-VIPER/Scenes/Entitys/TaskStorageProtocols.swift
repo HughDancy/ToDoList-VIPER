@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol AddNewToDoLocalStorageProtocol: AnyObject {
+    func createNewToDo(title: String, content: String, date: Date, isOverdue: Bool, color: UIColor, iconName: String, doneStatus: Bool, uid: UUID)
+}
+
 protocol MainScreenLocalStorageProtocol: AnyObject {
     func fetchToDosCount(with status: ToDoListStatus) -> Int
 }
@@ -23,5 +27,3 @@ protocol ToDosDetailLocalStorageProtocol: AnyObject {
     func editToDoObject(item: ToDoObject, newTitle: String, newDescription: String, newDate: Date, color: UIColor, iconName: String)
     func deleteTask(_ uid: UUID)
 }
-
-

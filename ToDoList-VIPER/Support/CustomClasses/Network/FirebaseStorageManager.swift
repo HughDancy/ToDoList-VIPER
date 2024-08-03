@@ -31,17 +31,6 @@ final class FirebaseStorageManager {
         }
     }
 }
-// MARK: - Upload task to server
-extension FirebaseStorageManager {
-    func uploadTaskToServer(with task: ToDoTask) {
-        let uid = Auth.auth().currentUser?.uid ?? UUID().uuidString
-        do {
-            try firestoreDataBase.collection("toDos").document(uid).collection("tasks").addDocument(from: task)
-        } catch {
-            print(error)
-        }
-    }
-}
 
 // MARK: - Download tasks
 extension FirebaseStorageManager {
@@ -126,6 +115,18 @@ extension FirebaseStorageManager: MainScreenServerStorageProtocol {
                 UserDefaults.standard.set(url, forKey: "UserAvatar")
                 compelition(url)
             }
+        }
+    }
+}
+
+// MARK: - Interface for AddNewToDo Module
+extension FirebaseStorageManager: AddNewToDoServerStorageProtocol {
+    func uploadTaskToServer(with task: ToDoTask) {
+        let uid = Auth.auth().currentUser?.uid ?? UUID().uuidString
+        do {
+            try firestoreDataBase.collection("toDos").document(uid).collection("tasks").addDocument(from: task)
+        } catch {
+            print(error)
         }
     }
 }

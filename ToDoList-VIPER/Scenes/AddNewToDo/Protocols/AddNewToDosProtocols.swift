@@ -24,6 +24,8 @@ protocol AddNewToDoPresenterProtocol: AnyObject {
 
 protocol AddNewToDoInteractorProtocol: AnyObject {
     var presenter: AddNewToDoPresenterProtocol? { get set }
+    var localStorage: AddNewToDoLocalStorageProtocol? { get set }
+    var networkStorage: AddNewToDoServerStorageProtocol? { get set }
 
     // PRESENTER -> INTERACTOR
     func addNewToDo(with name: String?, description: String?, date: Date?, colorCategory: UIColor, iconName: String)

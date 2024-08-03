@@ -38,20 +38,6 @@ final class TaskStorageManager {
         return context
     }()
 
-    // MARK: - CoreData create new ToDoObject
-    func createNewToDo(title: String, content: String, date: Date, isOverdue: Bool, color: UIColor, iconName: String, doneStatus: Bool, uid: UUID) {
-        let newToDo = ToDoObject(context: viewContext)
-        newToDo.title = title
-        newToDo.descriptionTitle = content
-        newToDo.date = date
-        newToDo.dateTitle = DateFormatter.getStringFromDate(from: date)
-        newToDo.color = color
-        newToDo.isOverdue = isOverdue
-        newToDo.doneStatus = doneStatus
-        newToDo.iconName = iconName
-        newToDo.id = uid
-        self.saveChanges()
-    }
 
     // MARK: - CoreData delete ToDoObject
     func deleteAllEntities() {
@@ -228,6 +214,23 @@ extension TaskStorageManager: MainScreenLocalStorageProtocol {
             let objectsCount = objects.first?.intValue
             return objectsCount ?? 0
         }
+    }
+}
+
+   // MARK: - Interface for AddNewToDo Module
+extension TaskStorageManager: AddNewToDoLocalStorageProtocol {
+    func createNewToDo(title: String, content: String, date: Date, isOverdue: Bool, color: UIColor, iconName: String, doneStatus: Bool, uid: UUID) {
+        let newToDo = ToDoObject(context: viewContext)
+        newToDo.title = title
+        newToDo.descriptionTitle = content
+        newToDo.date = date
+        newToDo.dateTitle = DateFormatter.getStringFromDate(from: date)
+        newToDo.color = color
+        newToDo.isOverdue = isOverdue
+        newToDo.doneStatus = doneStatus
+        newToDo.iconName = iconName
+        newToDo.id = uid
+        self.saveChanges()
     }
 }
 
