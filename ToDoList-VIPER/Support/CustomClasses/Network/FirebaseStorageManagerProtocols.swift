@@ -7,12 +7,16 @@
 
 import Foundation
 
-protocol ServerDetailEditProtocol: AnyObject {
+protocol MainScreenServerStorageProtocol: AnyObject {
+    func newLoadAvatar(compelition: @escaping (_ imageUrl: URL?) -> Void)
+}
+
+protocol ToDoSDetailServerStorageProtocol: AnyObject {
     func uploadChanges(task: ToDoTask)
     func deleteTask(_ id: String)
 }
 
-protocol ServerToDosProtocol: AnyObject {
+protocol ToDosServerStorageProtocol: AnyObject {
     func makeTaskDone(_ id: UUID)
     func deleteToDoFromServer(_ id: String)
 }

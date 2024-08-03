@@ -107,44 +107,6 @@ final class TaskStorageManager {
         return objects
     }
 
-    // MARK: - TO-DO: Check this method and rewrite
-    // MARK: - Fetch count ToDosObjects Method
-    func fetchToDosCount(with status: ToDoListStatus) -> Int {
-        let fetchRequest = NSFetchRequest<NSNumber>(entityName: "ToDoObject")
-        fetchRequest.resultType = .countResultType
-
-        switch status {
-        case .today:
-            let predicate = self.createPredicates(with: .today, date: Date.today)
-            fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicate)
-            // swiftlint:disable:next force_try
-            let objects = try! viewContext.fetch(fetchRequest)
-            let objectsCount = objects.first?.intValue
-            self.checkOverdueTasksInServer()
-            return objectsCount ?? 0
-        case .tommorow:
-            let predicate = self.createPredicates(with: .tommorow, date: Date.tomorrow)
-            fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicate)
-            // swiftlint:disable:next force_try
-            let objects = try! viewContext.fetch(fetchRequest)
-            let objectsCount = objects.first?.intValue
-            return objectsCount ?? 0
-        case .overdue:
-            let predicate = self.createPredicates(with: .overdue, date: .yesterday)
-            fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate[0], predicate[1]])
-            // swiftlint:disable:next force_try
-            let objects = try! viewContext.fetch(fetchRequest)
-            let objectsCount = objects.first?.intValue
-            return objectsCount ?? 0
-        case .done:
-            let predicate = self.createPredicates(with: .done, date: .today)
-            fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicate)
-            // swiftlint:disable:next force_try
-            let objects = try! viewContext.fetch(fetchRequest)
-            let objectsCount = objects.first?.intValue
-            return objectsCount ?? 0
-        }
-    }
     // MARK: - Create predicates for cathegories
     private func createPredicates(with status: ToDoListStatus, date: Date) -> [NSPredicate] {
         switch status {
@@ -229,7 +191,47 @@ private extension TaskStorageManager {
         }
     }
 }
-   // MARK: - Interface for ToDos Modile
+   // MARK: - Interface for MainScreen Module
+extension TaskStorageManager: MainScreenLocalStorageProtocol {
+    func fetchToDosCount(with status: ToDoListStatus) -> Int {
+        let fetchRequest = NSFetchRequest<NSNumber>(entityName: "ToDoObject")
+        fetchRequest.resultType = .countResultType
+
+        switch status {
+        case .today:
+            let predicate = self.createPredicates(with: .today, date: Date.today)
+            fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicate)
+            // swiftlint:disable:next force_try
+            let objects = try! viewContext.fetch(fetchRequest)
+            let objectsCount = objects.first?.intValue
+            self.checkOverdueTasksInServer()
+            return objectsCount ?? 0
+        case .tommorow:
+            let predicate = self.createPredicates(with: .tommorow, date: Date.tomorrow)
+            fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicate)
+            // swiftlint:disable:next force_try
+            let objects = try! viewContext.fetch(fetchRequest)
+            let objectsCount = objects.first?.intValue
+            return objectsCount ?? 0
+        case .overdue:
+            let predicate = self.createPredicates(with: .overdue, date: .yesterday)
+            fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate[0], predicate[1]])
+            // swiftlint:disable:next force_try
+            let objects = try! viewContext.fetch(fetchRequest)
+            let objectsCount = objects.first?.intValue
+            return objectsCount ?? 0
+        case .done:
+            let predicate = self.createPredicates(with: .done, date: .today)
+            fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicate)
+            // swiftlint:disable:next force_try
+            let objects = try! viewContext.fetch(fetchRequest)
+            let objectsCount = objects.first?.intValue
+            return objectsCount ?? 0
+        }
+    }
+}
+
+   // MARK: - Interface for ToDos Module
 extension TaskStorageManager: ToDosLocalStorageProtocol {
     func fetchConcreteToDos(with date: Date) -> [ToDoObject] {
         let fetchRequest: NSFetchRequest<ToDoObject> = ToDoObject.fetchRequest()

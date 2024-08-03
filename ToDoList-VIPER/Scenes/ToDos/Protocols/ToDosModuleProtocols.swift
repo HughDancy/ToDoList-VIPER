@@ -32,7 +32,7 @@ protocol ToDosPresenterProtocol: AnyObject {
 protocol ToDosInteractorInputProtocol: AnyObject {
     var presenter: ToDosInteractorOutputProtocol? { get set }
     var storage: ToDosLocalStorageProtocol? { get set }
-    var firebaseStorage: ServerToDosProtocol? { get set }
+    var firebaseStorage: ToDosServerStorageProtocol? { get set }
 
     // PRESENTER -> INTERACTOR
     func fetchFirstTasks(_ status: ToDoListStatus)

@@ -27,6 +27,8 @@ protocol MainScreenPresenterProtocol: AnyObject {
 
 protocol MainScreenInteractorInputProtocol: AnyObject {
     var presenter: MainScreenInteractorOutputProtocol? { get set }
+    var storage: MainScreenLocalStorageProtocol? { get set }
+    var firebaseStorageManager: MainScreenServerStorageProtocol? { get set }
 
     // PRESENTER -> INTERACTOR
     func retriveUserData()

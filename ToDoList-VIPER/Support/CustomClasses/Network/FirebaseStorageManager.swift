@@ -30,20 +30,6 @@ final class FirebaseStorageManager {
             NotificationCenter.default.post(name: NotificationNames.updateUserData.name, object: nil)
         }
     }
-
-    func newLoadAvatar(compelition: @escaping (_ imageUrl: URL?) -> Void) {
-        guard let userId = authManager.id else { return  }
-        let avatarRef = storage.child(userId)
-
-        avatarRef.downloadURL { url, error in
-            if error != nil {
-                print("When download avatar url something went wrong")
-            } else {
-                UserDefaults.standard.set(url, forKey: "UserAvatar")
-                compelition(url)
-            }
-        }
-    }
 }
 // MARK: - Upload task to server
 extension FirebaseStorageManager {
@@ -127,8 +113,25 @@ extension FirebaseStorageManager {
     }
 }
 
+// MARK: - Interface for MainScreen Module
+extension FirebaseStorageManager: MainScreenServerStorageProtocol {
+    func newLoadAvatar(compelition: @escaping (_ imageUrl: URL?) -> Void) {
+        guard let userId = authManager.id else { return  }
+        let avatarRef = storage.child(userId)
+
+        avatarRef.downloadURL { url, error in
+            if error != nil {
+                print("When download avatar url something went wrong")
+            } else {
+                UserDefaults.standard.set(url, forKey: "UserAvatar")
+                compelition(url)
+            }
+        }
+    }
+}
+
 // MARK: - Interface for ToDos Module
-extension FirebaseStorageManager: ServerToDosProtocol {
+extension FirebaseStorageManager: ToDosServerStorageProtocol {
     func makeTaskDone(_ id: UUID) {
         let uid = Auth.auth().currentUser?.uid ?? UUID().uuidString
         let taskId = id.uuidString
@@ -146,7 +149,7 @@ extension FirebaseStorageManager: ServerToDosProtocol {
 }
 
 // MARK: - Interface for ToDos Detail Module
-extension FirebaseStorageManager: ServerDetailEditProtocol {
+extension FirebaseStorageManager: ToDoSDetailServerStorageProtocol {
     func uploadChanges(task: ToDoTask) {
         let uid = Auth.auth().currentUser?.uid ?? UUID().uuidString
 

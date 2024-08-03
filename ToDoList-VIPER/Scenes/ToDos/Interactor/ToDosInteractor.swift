@@ -10,7 +10,7 @@ import UIKit
 final class ToDosInteractor: ToDosInteractorInputProtocol {
     weak var presenter: ToDosInteractorOutputProtocol?
     var storage: ToDosLocalStorageProtocol?
-    var firebaseStorage: ServerToDosProtocol?
+    var firebaseStorage: ToDosServerStorageProtocol?
 
     func fetchFirstTasks(_ status: ToDoListStatus) {
         self.fetchSortedToDos(with: status, and: nil)

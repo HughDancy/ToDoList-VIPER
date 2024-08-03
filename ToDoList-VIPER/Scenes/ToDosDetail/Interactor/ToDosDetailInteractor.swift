@@ -12,7 +12,7 @@ final class ToDosDetailInteractor: ToDosDetailInteractorInputProtocol {
     weak var presenter: ToDosDetailInteractorOutputProtocol?
     var toDoItem: ToDoObject?
     var localStorage: ToDosDetailLocalStorageProtocol?
-    var firebaseStorage: ServerDetailEditProtocol?
+    var firebaseStorage: ToDoSDetailServerStorageProtocol?
 
     func editTask(title: String?, descriprion: String?, date: Date?, color: UIColor, iconName: String) {
         guard let task = toDoItem else { return }
