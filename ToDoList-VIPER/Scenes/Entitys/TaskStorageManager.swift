@@ -83,29 +83,6 @@ final class TaskStorageManager {
         self.saveChanges()
     }
 
-    // MARK: - CoreData edit ToDoObject
-    func editToDoObject(item: ToDoObject, newTitle: String, newDescription: String, newDate: Date, color: UIColor, iconName: String) {
-        if item.title != newTitle {
-            item.title = newTitle
-        }
-
-        if item.descriptionTitle != newDescription {
-            item.descriptionTitle = newDescription
-        }
-
-        if item.date != newDate {
-            item.date = newDate
-            item.dateTitle = DateFormatter.getStringFromDate(from: newDate)
-        }
-
-        if item.color != color {
-            item.color = color
-            item.iconName = iconName
-        }
-
-        self.saveChanges()
-    }
-
     // MARK: - CoreData Done ToDoObject
     func doneToDo(_ id: UUID) {
         let fetchRequest: NSFetchRequest<ToDoObject> = ToDoObject.fetchRequest()
@@ -294,5 +271,51 @@ private extension TaskStorageManager {
                 }
             }
         }
+    }
+}
+
+   // MARK: - Interface for ToDoDetail Module
+extension TaskStorageManager: ToDosDetailLocalStorageProtocol {
+    func editToDoObject(item: ToDoObject, newTitle: String, newDescription: String, newDate: Date, color: UIColor, iconName: String) {
+        if item.title != newTitle {
+            item.title = newTitle
+        }
+
+        if item.descriptionTitle != newDescription {
+            item.descriptionTitle = newDescription
+        }
+
+        if item.date != newDate {
+            item.date = newDate
+            item.dateTitle = DateFormatter.getStringFromDate(from: newDate)
+        }
+
+        if item.color != color {
+            item.color = color
+            item.iconName = iconName
+        }
+
+        self.saveChanges()
+    }
+
+    func deleteTask(_ uid: UUID) {
+        self.deleteTaskWithId(uid)
+    }
+}
+
+  // MARK: - Method for unit-test
+extension TaskStorageManager {
+    func createMockObject() -> ToDoObject {
+        let newToDo = ToDoObject(context: viewContext)
+        newToDo.title = "title"
+        newToDo.descriptionTitle = "content"
+        newToDo.date = Date.today
+        newToDo.dateTitle = DateFormatter.getStringFromDate(from: Date.today)
+        newToDo.color = .taskGreen
+        newToDo.isOverdue = false
+        newToDo.doneStatus = false
+        newToDo.iconName = "person"
+        newToDo.id = UUID.init()
+        return newToDo
     }
 }

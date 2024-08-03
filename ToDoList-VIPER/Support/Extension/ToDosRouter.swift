@@ -11,7 +11,7 @@ final class ToDosRouter: ToDosRouterProtocol {
     func goToTask(_ task: ToDoObject, from view: any ToDosViewProtocol) {
         guard let parrentView = view as? UIViewController else { return }
         let moduleBuilder = AssemblyBuilder()
-        let toDoDetailModule = moduleBuilder.createModule(with: task)
+        let toDoDetailModule = moduleBuilder.createToDosDetailModule(with: task)
         let detailModule = ToDosDetailController()
         detailModule.item = task
         parrentView.navigationController?.pushViewController(toDoDetailModule, animated: true)

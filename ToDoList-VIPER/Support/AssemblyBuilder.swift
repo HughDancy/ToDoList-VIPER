@@ -84,7 +84,6 @@ final class AssemblyBuilder {
 }
   // MARK: - Create Home screen method's
 extension AssemblyBuilder {
-
     func createHomeTabBar(tabOne: UIViewController, tabTwo: UIViewController) -> UIViewController {
         let tabBar = CustomHomeTabBarController()
         let presenter: HomeTabBarPresenterProtocol = HomeTabBarPresenter()
@@ -189,7 +188,7 @@ extension AssemblyBuilder {
         return view
     }
 
-    func createModule(with toDo: ToDoObject) -> UIViewController {
+    func createToDosDetailModule(with toDo: ToDoObject) -> UIViewController {
         let viewController: ToDosDetailViewProtocol = ToDosDetailController()
         let presenter: ToDosDetailPresenterProtocol & ToDosDetailInteractorOutputProtocol = ToDosDetailPresenter()
         let interactor: ToDosDetailInteractorInputProtocol = ToDosDetailInteractor()
@@ -201,6 +200,8 @@ extension AssemblyBuilder {
         presenter.router = router
         interactor.presenter = presenter
         interactor.toDoItem = toDo
+        interactor.localStorage = TaskStorageManager.instance
+        interactor.firebaseStorage = FirebaseStorageManager()
         router.presenter = presenter
 
         return viewController as? UIViewController ?? MockViewController()

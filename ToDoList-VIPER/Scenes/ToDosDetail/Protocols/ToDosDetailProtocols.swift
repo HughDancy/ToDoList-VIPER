@@ -26,6 +26,8 @@ protocol ToDosDetailPresenterProtocol: AnyObject {
 
 protocol ToDosDetailInteractorInputProtocol: AnyObject {
     var presenter: ToDosDetailInteractorOutputProtocol? { get set }
+    var localStorage: ToDosDetailLocalStorageProtocol? { get set }
+    var firebaseStorage: ServerDetailEditProtocol? { get set }
     var toDoItem: ToDoObject? { get set }
 
     // PRESENTER -> INTERACTOR
