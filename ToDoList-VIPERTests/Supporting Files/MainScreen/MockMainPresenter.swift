@@ -13,6 +13,7 @@ class MockMainPresenter: MainScreenPresenterProtocol {
     var nameIsRetrive = false
     var userAvatarIsRetrive = false
     var todosCoutnIsRetrive = false
+    var toDosCount: [[String]] = [[""]]
     // MARK: - Protocol props
     weak var view: ToDoList_VIPER.MainScreenViewProtocol?
     var interactor: ToDoList_VIPER.MainScreenInteractorInputProtocol?
@@ -40,5 +41,6 @@ extension MockMainPresenter: MainScreenInteractorOutputProtocol {
     
     func didRetriveToDosCount(_ info: [[String]]) {
         self.todosCoutnIsRetrive = true
+        self.toDosCount = info
     }
 }

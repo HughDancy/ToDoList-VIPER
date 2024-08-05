@@ -55,10 +55,18 @@ final class MainScreenInteractorTest: XCTestCase {
         mainPresenter.interactor = mainInteractor
         mainPresenter.router = mainRouter
         mainInteractor.presenter = mainPresenter
+        mainInteractor.storage = MockMainStorage()
+        mainInteractor.firebaseStorageManager = MockMainScreenServerStorage()
 
         let testPresenter = mainPresenter as! MockMainPresenter
-        mainView.presenter?.getToDosCount()
-        let result = testPresenter.todosCoutnIsRetrive
-        XCTAssertTrue(result)
+        mainInteractor.getToDosCount()
+        let todayToDos = testPresenter.toDosCount[0][0]
+        let overdueToDos = testPresenter.toDosCount[1][0]
+        let tommorowToDos = testPresenter.toDosCount[2][0]
+        let doneToDos = testPresenter.toDosCount[3][0]
+        XCTAssertEqual(todayToDos, "4")
+        XCTAssertEqual(overdueToDos, "3")
+        XCTAssertEqual(tommorowToDos, "6")
+        XCTAssertEqual(doneToDos, "5")
     }
 }
