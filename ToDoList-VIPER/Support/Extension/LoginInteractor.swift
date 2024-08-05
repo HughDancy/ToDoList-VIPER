@@ -70,7 +70,7 @@ extension LoginInteractor {
                 }
                 let uid = dataResult?.user.uid ?? UUID().uuidString
                 let name = Auth.auth().currentUser?.displayName
-                UserDefaults.standard.set(name, forKey: NotificationNames.userName.rawValue)
+                UserDefaults.standard.set(name, forKey: UserDefaultsNames.userName.name)
                 self?.keyChainedManager.persist(id: uid)
                 self?.presenter?.getVerificationResult(with: .success)
             }
@@ -129,9 +129,9 @@ extension LoginInteractor {
 extension LoginInteractor {
     private func setUserName(_ name: String?) {
         guard let userName = name else {
-            UserDefaults.standard.setValue("Test", forKeyPath: "UserName")
+            UserDefaults.standard.setValue("Test", forKeyPath: UserDefaultsNames.userName.name)
             return
         }
-        UserDefaults.standard.setValue(userName, forKeyPath: "UserName")
+        UserDefaults.standard.setValue(userName, forKeyPath: UserDefaultsNames.userName.name)
     }
 }

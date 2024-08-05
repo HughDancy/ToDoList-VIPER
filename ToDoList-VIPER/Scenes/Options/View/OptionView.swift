@@ -34,7 +34,7 @@ final class OptionView: UIView {
 
     lazy var userName: UILabel = {
         let label = UILabel()
-        label.text = UserDefaults.standard.string(forKey: NotificationNames.userName.rawValue)
+        label.text = UserDefaults.standard.string(forKey: UserDefaultsNames.userName.name)
         label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
         label.textColor = .systemBackground
         label.text = self.name

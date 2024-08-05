@@ -19,7 +19,7 @@ final class MainScreenInteractor: MainScreenInteractorInputProtocol {
             self?.presenter?.didRetriveUserAvatar(newImageUrl)
         }
 
-        guard let name = UserDefaults.standard.string(forKey: NotificationNames.userName.rawValue) else {
+        guard let name = UserDefaults.standard.string(forKey: UserDefaultsNames.userName.name) else {
             self.presenter?.didRetriveUserName("Test User")
             return
         }

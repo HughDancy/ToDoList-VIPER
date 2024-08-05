@@ -20,7 +20,6 @@ final class OptionsRouter: OptionsRouterProtocol {
     func logOut(from view: OptionsViewProtocol) {
         guard let parrentView = view as? UIViewController else { return }
         parrentView.tabBarController?.tabBar.isHidden = true
-        self.clearUserData()
         let loginModule = AppConfigurator.configuator.logOut()
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
         sceneDelegate?.window?.rootViewController = loginModule
@@ -42,11 +41,3 @@ final class OptionsRouter: OptionsRouterProtocol {
     }
 }
 
-fileprivate extension OptionsRouter {
-    private func clearUserData() {
-        NewUserCheck.shared.setIsLoginScrren()
-        NewUserCheck.shared.setIsNotFirstStartOnboarding()
-        TaskStorageManager.instance.deleteAllEntities()
-        UserDefaults.standard.removeObject(forKey: "UserAvatar")
-    }
-}

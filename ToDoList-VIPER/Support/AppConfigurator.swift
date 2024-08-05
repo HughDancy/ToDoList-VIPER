@@ -35,7 +35,7 @@ final class AppConfigurator {
         let firstLaunchOnboardingStatus = NewUserCheck.shared.isOnboardingFirstStart()
 
         if firstLaunchOnboardingStatus == true {
-            UserDefaults.standard.setValue(OnboardingStates.welcome.rawValue, forKey: "onboardingState")
+            UserDefaults.standard.setValue(OnboardingStates.welcome.rawValue, forKey: UserDefaultsNames.onboardingState.name)
             NewUserCheck.shared.setIsNotFirstStartOnboarding()
         }
 

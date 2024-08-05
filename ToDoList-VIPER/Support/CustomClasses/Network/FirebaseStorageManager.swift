@@ -100,7 +100,7 @@ extension FirebaseStorageManager: MainScreenServerStorageProtocol {
             if error != nil {
                 print("When download avatar url something went wrong")
             } else {
-                UserDefaults.standard.set(url, forKey: "UserAvatar")
+                UserDefaults.standard.set(url, forKey: UserDefaultsNames.userAvatar.name)
                 compelition(url)
             }
         }

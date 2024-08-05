@@ -28,8 +28,8 @@ final class UserOptionInteractor: UserOptionInputInteractorProtocol {
         let userUid = keychainManager.id
         let firebaseDataBase = Firestore.firestore()
 
-        if name != UserDefaults.standard.string(forKey: NotificationNames.userName.rawValue) {
-            UserDefaults.standard.set(name, forKey: NotificationNames.userName.rawValue)
+        if name != UserDefaults.standard.string(forKey: UserDefaultsNames.userName.name) {
+            UserDefaults.standard.set(name, forKey: UserDefaultsNames.userName.name)
             firebaseDataBase.collection("users").document(userUid ?? UUID().uuidString).setData(["displayName" : name, "name": name], merge: true)
             let user = Auth.auth().currentUser
             let changeRequest = user?.createProfileChangeRequest()
@@ -51,8 +51,8 @@ final class UserOptionInteractor: UserOptionInputInteractorProtocol {
     }
 
     func getUserInfo() {
-        guard let userName = UserDefaults.standard.string(forKey: NotificationNames.userName.rawValue),
-              let userAvatar = UserDefaults.standard.url(forKey: "UserAvatar") else {
+        guard let userName = UserDefaults.standard.string(forKey: UserDefaultsNames.userName.name),
+              let userAvatar = UserDefaults.standard.url(forKey: UserDefaultsNames.userAvatar.name) else {
             presenter?.loadUserData(("UserAvatar", nil))
             return
         }
