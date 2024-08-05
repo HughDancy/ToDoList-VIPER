@@ -13,6 +13,7 @@ class MockToDosDetailPresenter: ToDosDetailPresenterProtocol {
     var status: ToDoList_VIPER.ToDoDetailStatus? = nil
     var deleteIsSucces = false
     var succes = false
+    
     // MARK: - Protocol Props
     weak var view: ToDoList_VIPER.ToDosDetailViewProtocol?
     var interactor: ToDoList_VIPER.ToDosDetailInteractorInputProtocol?

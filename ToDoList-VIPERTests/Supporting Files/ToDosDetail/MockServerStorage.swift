@@ -9,6 +9,8 @@ import Foundation
 @testable import ToDoList_VIPER
 
 final class MockServerStorage: ToDoSDetailServerStorageProtocol {
+    func deleteTask(_ id: String) {}
+    
     func uploadChanges(task: ToDoList_VIPER.ToDoTask) {}
     
     func deleteTaskFromServer(_ id: String) {}

@@ -17,7 +17,7 @@ final class ToDosDetailInteractor: ToDosDetailInteractorInputProtocol {
     func editTask(title: String?, descriprion: String?, date: Date?, color: UIColor, iconName: String) {
         guard let task = toDoItem else { return }
         let defaultData = self.getDefaultData()
-        if title != nil && descriprion != nil && date != nil {
+        if title != nil && title != "" && descriprion != nil && date != nil {
             localStorage?.editToDoObject(item: task,
                                         newTitle: title ?? defaultData.title,
                                         newDescription: descriprion ?? defaultData.description,

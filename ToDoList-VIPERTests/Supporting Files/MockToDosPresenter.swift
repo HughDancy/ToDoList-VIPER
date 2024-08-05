@@ -38,7 +38,7 @@ class MockToDosPresenter: ToDosPresenterProtocol {
 }
 
 extension MockToDosPresenter: ToDosInteractorOutputProtocol {
-    func getTask(_ tasks: [ToDoList_VIPER.ToDoObject]) {
+    func getTask(_ tasks: [ToDoList_VIPER.ToDoObject]?) {
         self.taskIsRerive = true
     }
 }

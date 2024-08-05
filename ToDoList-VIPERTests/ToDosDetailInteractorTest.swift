@@ -73,4 +73,53 @@ final class ToDosDetailInteractorTest: XCTestCase {
         let result = testPresenter.succes
         XCTAssertTrue(result)
     }
+
+    func testInteractorEditEror() {
+        view.presenter = presenter
+        presenter.view = view
+        presenter.interactor = interactor
+        presenter.router = router
+        interactor.presenter = presenter
+        router.presenter = presenter
+        interactor.toDoItem = TaskStorageManager.instance.createMockObject()
+        interactor.localStorage = MockLocalStorage()
+        interactor.firebaseStorage = MockServerStorage()
+        let testPresenter = presenter as! MockToDosDetailPresenter
+        interactor?.editTask(title: "", descriprion: "", date: Date.today, color: .taskGreen, iconName: "person")
+        let result = testPresenter.status
+        XCTAssertEqual(result, .error)
+    }
+
+    func testInteractorEdit() {
+        view.presenter = presenter
+        presenter.view = view
+        presenter.interactor = interactor
+        presenter.router = router
+        interactor.presenter = presenter
+        router.presenter = presenter
+        interactor.toDoItem = TaskStorageManager.instance.createMockObject()
+        interactor.localStorage = MockLocalStorage()
+        interactor.firebaseStorage = MockServerStorage()
+        let testPresenter = presenter as! MockToDosDetailPresenter
+        interactor?.editTask(title: "Bro", descriprion: "bro", date: Date.today, color: .taskGreen, iconName: "person")
+        let result = testPresenter.status
+        XCTAssertEqual(result, .allSave)
+    }
+
+    func testInteractorDeleteTask() {
+        view.presenter = presenter
+        presenter.view = view
+        presenter.interactor = interactor
+        presenter.router = router
+        interactor.presenter = presenter
+        router.presenter = presenter
+        interactor.toDoItem = TaskStorageManager.instance.createMockObject()
+        interactor.localStorage = MockLocalStorage()
+        interactor.firebaseStorage = MockServerStorage()
+        let testPresenter = presenter as! MockToDosDetailPresenter
+        interactor?.deleteTask()
+        let result = testPresenter.succes
+        XCTAssert(result)
+    }
 }
+
