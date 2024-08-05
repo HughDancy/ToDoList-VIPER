@@ -60,6 +60,9 @@ final class LoginController: SingInController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter?.changeState()
+        loginButton.hideLoading()
+        loginField.text = nil
+        passwordField.text = nil
     }
 
     override func viewDidLoad() {

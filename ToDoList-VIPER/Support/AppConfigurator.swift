@@ -64,6 +64,7 @@ final class AppConfigurator {
             let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
             sceneDelegate?.window?.rootViewController = mainModule
             TaskStorageManager.instance.checkOverdueToDos()
+            UserDefaults.standard.setValue(false, forKey: UserDefaultsNames.firstWorkLaunch.name)
             return mainModule
         } else {
             let loginModule = UINavigationController(rootViewController: moduleBuilder.createLoginModule())

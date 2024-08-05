@@ -20,10 +20,15 @@ final class OptionsRouter: OptionsRouterProtocol {
     func logOut(from view: OptionsViewProtocol) {
         guard let parrentView = view as? UIViewController else { return }
         parrentView.tabBarController?.tabBar.isHidden = true
-        let loginModule = AppConfigurator.configuator.logOut()
-        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
-        sceneDelegate?.window?.rootViewController = loginModule
-        parrentView.navigationController?.popToRootViewController(animated: true)
+        print("WHEN LOG OUT METHOD WORK USERDEFAULTS VALUE IS - \(UserDefaults.standard.bool(forKey: UserDefaultsNames.firstWorkLaunch.name))")
+        if UserDefaults.standard.bool(forKey: UserDefaultsNames.firstWorkLaunch.name) {
+            parrentView.dismiss(animated: true)
+        } else {
+            let loginModule = AppConfigurator.configuator.logOut()
+            let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+            sceneDelegate?.window?.rootViewController = loginModule
+            parrentView.navigationController?.popToRootViewController(animated: true)
+        }
     }
 
     func getFeedback(from view: OptionsViewProtocol) {
@@ -40,4 +45,3 @@ final class OptionsRouter: OptionsRouterProtocol {
         }
     }
 }
-

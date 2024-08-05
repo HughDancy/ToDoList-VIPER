@@ -54,6 +54,13 @@ var window: UIWindow?
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
+    func applicationWillTerminate(_ application: UIApplication) {
+        UserDefaults.standard.setValue(false, forKey: UserDefaultsNames.firstWorkLaunch.name)
+        print("App end's his lifecycle")
+//        UserDefaults.standard.set(false, forKey: UserDefaultsNames.firstWorkLaunch.name)
+//        UserDefaults.standard.setValue(false, forKey: UserDefaultsNames.firstWorkLaunch.name)
+    }
+
     // MARK: - Core Data stack
 
     lazy var persistentContainer: NSPersistentContainer = {
