@@ -13,6 +13,7 @@ class LoginMockPresenter: LoginPresenterProtocol {
     var emptyLogin = false
     var emptyPass = false
     var notValidEmail = false
+    var result: ToDoList_VIPER.LogInStatus? = nil
 
     // MARK: - Protocol props
     weak var view: ToDoList_VIPER.LoginViewProtocol?
@@ -42,7 +43,7 @@ extension LoginMockPresenter: LoginInteractorOutputProtocol {
         case .notValidEmail:
             self.notValidEmail = true
         case .success:
-             break
+            self.result = .success
         case .wrongEnteredData:
             break
         }

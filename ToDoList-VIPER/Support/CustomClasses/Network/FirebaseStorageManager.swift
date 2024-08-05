@@ -18,18 +18,6 @@ final class FirebaseStorageManager {
     private let storage = Storage.storage().reference()
     private let firestoreDataBase = Firestore.firestore()
     private var authManager = AuthKeychainManager()
-    // MARK: - Upload and load avatar to/from server
-    func saveImage(image: UIImage, name: String) {
-        guard let data = image.jpegData(compressionQuality: 8.0) else { return }
-        let avatarRef = storage.child(name)
-        avatarRef.putData(data, metadata: StorageMetadata(dictionary: ["contentType" : "image/jpeg"])) { (metaData, _) in
-            guard metaData != nil else {
-                print("Meta data not found or somehow another error")
-                return
-            }
-            NotificationCenter.default.post(name: NotificationNames.updateUserData.name, object: nil)
-        }
-    }
 }
 
 // MARK: - Download tasks
@@ -187,5 +175,21 @@ extension FirebaseStorageManager: ToDoSDetailServerStorageProtocol {
 
     func deleteTask(_ id: String) {
         self.deleteTaskFromServer(id)
+    }
+}
+
+// MARK: - User Avatar Saving In Server
+extension FirebaseStorageManager: UserAvatarSaveInServerProtocol {
+    // MARK: - Upload and load avatar to/from server
+    func saveImage(image: UIImage, name: String) {
+        guard let data = image.jpegData(compressionQuality: 8.0) else { return }
+        let avatarRef = storage.child(name)
+        avatarRef.putData(data, metadata: StorageMetadata(dictionary: ["contentType" : "image/jpeg"])) { (metaData, _) in
+            guard metaData != nil else {
+                print("Meta data not found or somehow another error")
+                return
+            }
+            NotificationCenter.default.post(name: NotificationNames.updateUserData.name, object: nil)
+        }
     }
 }

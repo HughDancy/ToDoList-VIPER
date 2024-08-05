@@ -16,6 +16,7 @@ final class UserOptionInteractor: UserOptionInputInteractorProtocol {
   // MARK: - Properties
     weak var presenter: UserOptionOutputInteractorProtocol?
     private var tempAvatar: UIImage?
+    var firebaseStorageManager: UserAvatarSaveInServerProtocol?
 
     deinit {
            debugPrint("? deinit \(self)")
@@ -23,7 +24,6 @@ final class UserOptionInteractor: UserOptionInputInteractorProtocol {
 
     // MARK: - Protocol Method's
     func saveUserInfo(name: String) {
-        let storageManager = FirebaseStorageManager()
         let keychainManager = AuthKeychainManager()
         let userUid = keychainManager.id
         let firebaseDataBase = Firestore.firestore()
@@ -44,7 +44,7 @@ final class UserOptionInteractor: UserOptionInputInteractorProtocol {
         }
 
         if tempAvatar != nil {
-            storageManager.saveImage(image: tempAvatar ?? UIImage(named: "mockUser_1")!, name: userUid ?? UUID().uuidString)
+            firebaseStorageManager?.saveImage(image: tempAvatar ?? UIImage(named: "mockUser_1")!, name: userUid ?? UUID().uuidString)
         }
         NotificationCenter.default.post(name: NotificationNames.updateUserData.name, object: nil)
         presenter?.dismiss()

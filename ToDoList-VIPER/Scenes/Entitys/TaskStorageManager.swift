@@ -38,7 +38,6 @@ final class TaskStorageManager {
         return context
     }()
 
-
     // MARK: - CoreData delete ToDoObject
     func deleteAllEntities() {
         let entities = persistentContainer.managedObjectModel.entities

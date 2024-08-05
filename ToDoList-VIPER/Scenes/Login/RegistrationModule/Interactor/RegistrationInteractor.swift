@@ -14,6 +14,7 @@ import Photos
 final class RegistrationInteractor: RegistrationInteractorInputProtocol {
     weak var presenter: RegistrationInteractorOutputProtocol?
     private var avatarTemp = UIImage()
+    var firebaseStorageManager: UserAvatarSaveInServerProtocol?
 
     // MARK: - Register from presenter method
     func registerNewUser(name: String, email: String, password: String) {
@@ -34,14 +35,13 @@ final class RegistrationInteractor: RegistrationInteractorInputProtocol {
 
     // MARK: - Support register method
     private func registerUser(name: String, email: String, password: String) {
-        let storageManager = FirebaseStorageManager()
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
             if error != nil {
                 self.presenter?.getRegistrationResult(result: .error)
                 print(error?.localizedDescription as Any)
             } else {
                 let uid = result!.user.uid
-                storageManager.saveImage(image: self.avatarTemp, name: uid)
+                self.firebaseStorageManager?.saveImage(image: self.avatarTemp, name: uid)
                 self.addNewUserToServer(uid: uid, email: email, name: name, password: password)
             }
         }

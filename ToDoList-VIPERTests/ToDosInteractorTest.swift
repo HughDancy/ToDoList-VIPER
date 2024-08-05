@@ -39,7 +39,7 @@ final class ToDosInteractorTest: XCTestCase {
         interactor.presenter = presenter
         presenter.status = .today
         let testPresenter = presenter as! MockToDosPresenter
-        view.presenter?.getToDos()
+        interactor?.fetchFirstTasks(.today)
         let result = testPresenter.taskIsRerive
         XCTAssertTrue(result)
     }
@@ -52,7 +52,7 @@ final class ToDosInteractorTest: XCTestCase {
         interactor.presenter = presenter
         presenter.status = .tommorow
         let testPresenter = presenter as! MockToDosPresenter
-        view.presenter?.getToDos()
+        interactor?.fetchTask(date: Date.tomorrow, status: .tommorow)
         let result = testPresenter.taskIsRerive
         XCTAssertTrue(result)
     }

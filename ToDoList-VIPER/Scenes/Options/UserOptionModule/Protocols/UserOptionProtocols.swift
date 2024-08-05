@@ -29,6 +29,7 @@ protocol UserOptionPresenterProtocol: AnyObject {
 
 protocol UserOptionInputInteractorProtocol: AnyObject {
     var presenter: UserOptionOutputInteractorProtocol? { get set }
+    var firebaseStorageManager: UserAvatarSaveInServerProtocol? { get set }
 
     func setTempAvatar(_ image: UIImage?)
     func saveUserInfo(name: String)

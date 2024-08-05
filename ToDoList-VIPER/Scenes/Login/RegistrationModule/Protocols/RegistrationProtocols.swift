@@ -28,6 +28,7 @@ protocol RegistrationPresenterPtorocol: AnyObject {
 
 protocol RegistrationInteractorInputProtocol: AnyObject {
     var presenter: RegistrationInteractorOutputProtocol? { get set }
+    var firebaseStorageManager: UserAvatarSaveInServerProtocol? { get set }
 
     // PRESENTER -> INTERACTOR
     func registerNewUser(name: String, email: String, password: String)

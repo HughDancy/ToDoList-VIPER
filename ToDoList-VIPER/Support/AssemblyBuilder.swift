@@ -63,6 +63,7 @@ final class AssemblyBuilder {
         presenter.interactor = interactor
         presenter.router = router
         interactor.presenter = presenter
+        interactor.firebaseStorageManager = FirebaseStorageManager()
         router.presenter = presenter
         return view
     }
@@ -169,6 +170,7 @@ extension AssemblyBuilder {
         presenter.interactor = interactor
         presenter.router = router
         interactor.presenter = presenter
+        interactor.firebaseStorageManager = FirebaseStorageManager()
         router.presenter = presenter
 
         return view

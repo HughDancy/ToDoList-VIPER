@@ -5,7 +5,7 @@
 //  Created by Борис Киселев on 03.08.2024.
 //
 
-import Foundation
+import UIKit.UIImage
 
 protocol MainScreenServerStorageProtocol: AnyObject {
     func newLoadAvatar(compelition: @escaping (_ imageUrl: URL?) -> Void)
@@ -23,4 +23,8 @@ protocol ToDoSDetailServerStorageProtocol: AnyObject {
 protocol ToDosServerStorageProtocol: AnyObject {
     func makeTaskDone(_ id: UUID)
     func deleteToDoFromServer(_ id: String)
+}
+
+protocol UserAvatarSaveInServerProtocol: AnyObject {
+   func saveImage(image: UIImage, name: String)
 }
