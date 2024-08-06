@@ -17,6 +17,7 @@ final class CategoryTableView: UITableView {
     init(frame: CGRect, style: UITableView.Style, color: UIColor) {
         super.init(frame: frame, style: style)
         self.backgroundColor = color
+        self.accessibilityLabel = "CategoryTable"
         setupTable()
     }
     required init?(coder: NSCoder) {

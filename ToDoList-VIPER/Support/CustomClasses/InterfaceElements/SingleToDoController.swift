@@ -18,6 +18,7 @@ class SingleToDoController: UIViewController {
         textView.layer.cornerRadius = 10
         textView.clipsToBounds = true
         textView.delegate = self
+        textView.accessibilityLabel = "DescriptionTextView"
         return textView
     }()
 
@@ -41,6 +42,7 @@ class SingleToDoController: UIViewController {
         picker.locale = Locale(identifier: "ru_RU")
         picker.backgroundColor = UIColor(named: "coralColor")
         picker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
+        picker.accessibilityLabel = "DatePicker"
         return picker
     }()
 

@@ -37,6 +37,7 @@ final class CalendarCollectionView: UICollectionView {
     // MARK: - Settings
     private func commonInit() {
         setupView()
+        self.accessibilityLabel = "CalendarCollectionView"
     }
 
     private func setupView() {

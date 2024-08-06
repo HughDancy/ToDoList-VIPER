@@ -36,7 +36,16 @@ final class LoginScreenUITest: XCTestCase {
         }
     }
 
-    func testExample() throws {
+    func testAppleSignIn() {
+        let app = XCUIApplication()
+        app.launch()
+        if app.buttons["Войти"].waitForExistence(timeout: 2.0) {
+            app.buttons["apple.logo"].tap()
+            XCTAssertTrue(app.alerts["Сорян"].waitForExistence(timeout: 2.0))
+        }
+    }
+
+    func testEnterToMainScreen() throws {
         let app = XCUIApplication()
         app.launch()
         if app.buttons["Войти"].waitForExistence(timeout: 2.0) {
@@ -48,7 +57,6 @@ final class LoginScreenUITest: XCTestCase {
             app.buttons["Войти"].tap()
             XCTAssertTrue(app.collectionViews["MainCollectionView"].waitForExistence(timeout: 3.0))
         }
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
 
 

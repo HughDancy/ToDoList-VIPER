@@ -68,6 +68,7 @@ final class OptionView: UIView {
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
         tableView.isScrollEnabled = false
+        tableView.accessibilityLabel = "OptionsTable"
         return tableView
     }()
 
