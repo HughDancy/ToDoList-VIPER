@@ -40,6 +40,7 @@ final class ForgottPasswordController: UIViewController, ForgetPasswordViewProto
                                                         returnKey: .done)
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
+        textField.accessibilityLabel = "ForggotenField"
         return textField
     }()
 

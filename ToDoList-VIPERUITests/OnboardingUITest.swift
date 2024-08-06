@@ -26,7 +26,7 @@ final class OnboardingUITest: XCTestCase {
     func testExample() throws {
         let app = XCUIApplication()
         app.launch()
-        if app.images["OnboardingPicture"].exists {
+        if app.images["OnboardingPicture"].waitForExistence(timeout: 2.0) {
             app.swipeLeft()
             app.swipeLeft()
             app.swipeLeft()

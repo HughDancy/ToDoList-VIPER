@@ -22,10 +22,24 @@ final class LoginScreenUITest: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
+    func testNotValidEmail() {
+        let app = XCUIApplication()
+        app.launch()
+        if app.buttons["Войти"].waitForExistence(timeout: 2.0) {
+            app.textFields["Логин"].tap()
+            app.textFields["Логин"].typeText("boba6@mailru")
+            app.keyboards.buttons["next"].tap()
+            XCUIApplication()/*@START_MENU_TOKEN@*/.secureTextFields["Пароль"]/*[[".scrollViews.secureTextFields[\"Пароль\"]",".secureTextFields[\"Пароль\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+            XCUIApplication()/*@START_MENU_TOKEN@*/.secureTextFields["Пароль"]/*[[".scrollViews.secureTextFields[\"Пароль\"]",".secureTextFields[\"Пароль\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.typeText("qwerty")
+            app.buttons["Войти"].tap()
+            XCTAssertTrue(app.alerts["Ошибка"].waitForExistence(timeout: 2.0))
+        }
+    }
+
     func testExample() throws {
         let app = XCUIApplication()
         app.launch()
-        if app.buttons["Войти"].exists {
+        if app.buttons["Войти"].waitForExistence(timeout: 2.0) {
             app.textFields["Логин"].tap()
             app.textFields["Логин"].typeText("boba96@mail.ru")
             app.keyboards.buttons["next"].tap()
@@ -36,6 +50,8 @@ final class LoginScreenUITest: XCTestCase {
         }
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
+
+
 
     func testLaunchPerformance() throws {
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {

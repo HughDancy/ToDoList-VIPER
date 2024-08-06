@@ -124,6 +124,7 @@
 		D8DD85CF2B9F370C003E7F89 /* CustomHomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DD85CE2B9F370C003E7F89 /* CustomHomeTabBarController.swift */; };
 		D8DD85D12B9F4AD8003E7F89 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DD85D02B9F4AD8003E7F89 /* CustomTabBar.swift */; };
 		D8DDFC4D2C61F22200E5E511 /* LoginScreenUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DDFC4C2C61F22200E5E511 /* LoginScreenUITest.swift */; };
+		D8DDFC4F2C61F76900E5E511 /* ForggotPasswordUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DDFC4E2C61F76900E5E511 /* ForggotPasswordUITest.swift */; };
 		D8E00C6D2C131425005AEA4D /* ForgottPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E00C6C2C131425005AEA4D /* ForgottPasswordController.swift */; };
 		D8E00C6F2C133B96005AEA4D /* ForgettPasswordProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E00C6E2C133B96005AEA4D /* ForgettPasswordProtocols.swift */; };
 		D8E00C712C1345D5005AEA4D /* ForgettPasswortPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E00C702C1345D5005AEA4D /* ForgettPasswortPresenter.swift */; };
@@ -290,6 +291,7 @@
 		D8DD85CE2B9F370C003E7F89 /* CustomHomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHomeTabBarController.swift; sourceTree = "<group>"; };
 		D8DD85D02B9F4AD8003E7F89 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		D8DDFC4C2C61F22200E5E511 /* LoginScreenUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenUITest.swift; sourceTree = "<group>"; };
+		D8DDFC4E2C61F76900E5E511 /* ForggotPasswordUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForggotPasswordUITest.swift; sourceTree = "<group>"; };
 		D8E00C6C2C131425005AEA4D /* ForgottPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgottPasswordController.swift; sourceTree = "<group>"; };
 		D8E00C6E2C133B96005AEA4D /* ForgettPasswordProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgettPasswordProtocols.swift; sourceTree = "<group>"; };
 		D8E00C702C1345D5005AEA4D /* ForgettPasswortPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgettPasswortPresenter.swift; sourceTree = "<group>"; };
@@ -637,6 +639,7 @@
 				D86D45052AFB933000894774 /* ToDoList_VIPERUITests.swift */,
 				D857BAE02C60E14200806F87 /* OnboardingUITest.swift */,
 				D8DDFC4C2C61F22200E5E511 /* LoginScreenUITest.swift */,
+				D8DDFC4E2C61F76900E5E511 /* ForggotPasswordUITest.swift */,
 			);
 			path = "ToDoList-VIPERUITests";
 			sourceTree = "<group>";
@@ -1563,6 +1566,7 @@
 				D8DDFC4D2C61F22200E5E511 /* LoginScreenUITest.swift in Sources */,
 				D86D45062AFB933000894774 /* ToDoList_VIPERUITests.swift in Sources */,
 				D857BAE12C60E14200806F87 /* OnboardingUITest.swift in Sources */,
+				D8DDFC4F2C61F76900E5E511 /* ForggotPasswordUITest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
