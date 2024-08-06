@@ -24,6 +24,7 @@ final class RegistrationController: SingInController {
         imageView.layer.cornerRadius = RegistrationSizes.imageSize.value / 2
         imageView.clipsToBounds = true
         imageView.isUserInteractionEnabled = true
+        imageView.accessibilityLabel = "RegistrationUserAvatar"
         return imageView
     }()
 

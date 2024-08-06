@@ -19,7 +19,7 @@ final class RegistrationInteractor: RegistrationInteractorInputProtocol {
     // MARK: - Register from presenter method
     func registerNewUser(name: String, email: String, password: String) {
         if Reachability.isConnectedToNetwork() {
-            if name != "" || email != "" || password != "" {
+            if name != "" && email != "" && password != "" {
                 if email.isValidEmail() {
                     self.registerUser(name: name, email: email, password: password)
                 } else {
