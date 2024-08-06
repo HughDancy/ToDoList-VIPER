@@ -37,6 +37,7 @@
 		D857BADB2C60AE1E00806F87 /* MockMainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D857BADA2C60AE1E00806F87 /* MockMainStorage.swift */; };
 		D857BADD2C60AE7500806F87 /* MockMainScreenServerStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D857BADC2C60AE7500806F87 /* MockMainScreenServerStorage.swift */; };
 		D857BADF2C60BE4F00806F87 /* UserDefaultsNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = D857BADE2C60BE4F00806F87 /* UserDefaultsNames.swift */; };
+		D857BAE12C60E14200806F87 /* OnboardingUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D857BAE02C60E14200806F87 /* OnboardingUITest.swift */; };
 		D85C57E52B57C71900023B04 /* OnboardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C57E42B57C71900023B04 /* OnboardingPage.swift */; };
 		D85C57E72B57CCA600023B04 /* OnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C57E62B57CCA600023B04 /* OnboardingPresenter.swift */; };
 		D85C57EA2B57CD1E00023B04 /* OnboardingProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C57E92B57CD1E00023B04 /* OnboardingProtocols.swift */; };
@@ -59,7 +60,6 @@
 		D86D44F12AFB933000894774 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D86D44EF2AFB933000894774 /* LaunchScreen.storyboard */; };
 		D86D44FC2AFB933000894774 /* ToDoList_VIPERTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D44FB2AFB933000894774 /* ToDoList_VIPERTests.swift */; };
 		D86D45062AFB933000894774 /* ToDoList_VIPERUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D45052AFB933000894774 /* ToDoList_VIPERUITests.swift */; };
-		D86D45082AFB933000894774 /* ToDoList_VIPERUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D45072AFB933000894774 /* ToDoList_VIPERUITestsLaunchTests.swift */; };
 		D86D45162AFB947B00894774 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D86D45152AFB947B00894774 /* SnapKit */; };
 		D87087D42BEA35BB00EEDDD7 /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87087D32BEA35BB00EEDDD7 /* NotificationNames.swift */; };
 		D87474552B97176C00BF4866 /* CircleBaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87474542B97176C00BF4866 /* CircleBaseButton.swift */; };
@@ -123,6 +123,7 @@
 		D8DC23D72BB17B8300C3E220 /* ToDoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DC23D62BB17B8300C3E220 /* ToDoController.swift */; };
 		D8DD85CF2B9F370C003E7F89 /* CustomHomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DD85CE2B9F370C003E7F89 /* CustomHomeTabBarController.swift */; };
 		D8DD85D12B9F4AD8003E7F89 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DD85D02B9F4AD8003E7F89 /* CustomTabBar.swift */; };
+		D8DDFC4D2C61F22200E5E511 /* LoginScreenUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DDFC4C2C61F22200E5E511 /* LoginScreenUITest.swift */; };
 		D8E00C6D2C131425005AEA4D /* ForgottPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E00C6C2C131425005AEA4D /* ForgottPasswordController.swift */; };
 		D8E00C6F2C133B96005AEA4D /* ForgettPasswordProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E00C6E2C133B96005AEA4D /* ForgettPasswordProtocols.swift */; };
 		D8E00C712C1345D5005AEA4D /* ForgettPasswortPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E00C702C1345D5005AEA4D /* ForgettPasswortPresenter.swift */; };
@@ -211,6 +212,7 @@
 		D857BADA2C60AE1E00806F87 /* MockMainStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMainStorage.swift; sourceTree = "<group>"; };
 		D857BADC2C60AE7500806F87 /* MockMainScreenServerStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMainScreenServerStorage.swift; sourceTree = "<group>"; };
 		D857BADE2C60BE4F00806F87 /* UserDefaultsNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsNames.swift; sourceTree = "<group>"; };
+		D857BAE02C60E14200806F87 /* OnboardingUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingUITest.swift; sourceTree = "<group>"; };
 		D85C57E42B57C71900023B04 /* OnboardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPage.swift; sourceTree = "<group>"; };
 		D85C57E62B57CCA600023B04 /* OnboardingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPresenter.swift; sourceTree = "<group>"; };
 		D85C57E92B57CD1E00023B04 /* OnboardingProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingProtocols.swift; sourceTree = "<group>"; };
@@ -237,7 +239,6 @@
 		D86D44FB2AFB933000894774 /* ToDoList_VIPERTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoList_VIPERTests.swift; sourceTree = "<group>"; };
 		D86D45012AFB933000894774 /* ToDoList-VIPERUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ToDoList-VIPERUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D86D45052AFB933000894774 /* ToDoList_VIPERUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoList_VIPERUITests.swift; sourceTree = "<group>"; };
-		D86D45072AFB933000894774 /* ToDoList_VIPERUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoList_VIPERUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D87087D32BEA35BB00EEDDD7 /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
 		D87474542B97176C00BF4866 /* CircleBaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleBaseButton.swift; sourceTree = "<group>"; };
 		D87474582B99A28200BF4866 /* credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = credentials.plist; sourceTree = "<group>"; };
@@ -288,6 +289,7 @@
 		D8DC23D62BB17B8300C3E220 /* ToDoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoController.swift; sourceTree = "<group>"; };
 		D8DD85CE2B9F370C003E7F89 /* CustomHomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHomeTabBarController.swift; sourceTree = "<group>"; };
 		D8DD85D02B9F4AD8003E7F89 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		D8DDFC4C2C61F22200E5E511 /* LoginScreenUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenUITest.swift; sourceTree = "<group>"; };
 		D8E00C6C2C131425005AEA4D /* ForgottPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgottPasswordController.swift; sourceTree = "<group>"; };
 		D8E00C6E2C133B96005AEA4D /* ForgettPasswordProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgettPasswordProtocols.swift; sourceTree = "<group>"; };
 		D8E00C702C1345D5005AEA4D /* ForgettPasswortPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgettPasswortPresenter.swift; sourceTree = "<group>"; };
@@ -633,7 +635,8 @@
 			isa = PBXGroup;
 			children = (
 				D86D45052AFB933000894774 /* ToDoList_VIPERUITests.swift */,
-				D86D45072AFB933000894774 /* ToDoList_VIPERUITestsLaunchTests.swift */,
+				D857BAE02C60E14200806F87 /* OnboardingUITest.swift */,
+				D8DDFC4C2C61F22200E5E511 /* LoginScreenUITest.swift */,
 			);
 			path = "ToDoList-VIPERUITests";
 			sourceTree = "<group>";
@@ -1557,8 +1560,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8DDFC4D2C61F22200E5E511 /* LoginScreenUITest.swift in Sources */,
 				D86D45062AFB933000894774 /* ToDoList_VIPERUITests.swift in Sources */,
-				D86D45082AFB933000894774 /* ToDoList_VIPERUITestsLaunchTests.swift in Sources */,
+				D857BAE12C60E14200806F87 /* OnboardingUITest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

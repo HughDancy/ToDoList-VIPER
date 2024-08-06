@@ -1,13 +1,14 @@
 //
-//  ToDoList_VIPERUITests.swift
+//  OnboardingUITest.swift
 //  ToDoList-VIPERUITests
 //
-//  Created by Борис Киселев on 08.11.2023.
+//  Created by Борис Киселев on 05.08.2024.
 //
 
 import XCTest
 
-final class ToDoList_VIPERUITests: XCTestCase {
+
+final class OnboardingUITest: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -23,9 +24,17 @@ final class ToDoList_VIPERUITests: XCTestCase {
     }
 
     func testExample() throws {
-        // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
+        if app.images["OnboardingPicture"].exists {
+            app.swipeLeft()
+            app.swipeLeft()
+            app.swipeLeft()
+            app.swipeLeft()
+            app.swipeLeft()
+            app.buttons["Начать"].tap()
+            XCTAssertTrue(app.buttons["Войти"].exists)
+        }
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
 

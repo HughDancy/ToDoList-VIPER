@@ -14,6 +14,7 @@ final class MainScreenCollectionView: UICollectionView {
         super.init(frame: .zero, collectionViewLayout: UICollectionViewLayout())
         self.setupCollectionView()
         self.collectionViewLayout = self.setupCollectionLayout()
+        self.accessibilityLabel = "MainCollectionView"
     }
 
     required init?(coder: NSCoder) {

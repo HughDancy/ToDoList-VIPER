@@ -15,6 +15,7 @@ final class OnboardingPage: UIViewController {
         let picture = UIImageView()
         picture.contentMode = .scaleAspectFill
         picture.backgroundColor = .clear
+        picture.accessibilityLabel = "OnboardingPicture"
         return picture
     }()
 

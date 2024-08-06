@@ -1,13 +1,13 @@
 //
-//  ToDoList_VIPERUITests.swift
+//  LoginScreenUITest.swift
 //  ToDoList-VIPERUITests
 //
-//  Created by Борис Киселев on 08.11.2023.
+//  Created by Борис Киселев on 06.08.2024.
 //
 
 import XCTest
 
-final class ToDoList_VIPERUITests: XCTestCase {
+final class LoginScreenUITest: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -23,9 +23,17 @@ final class ToDoList_VIPERUITests: XCTestCase {
     }
 
     func testExample() throws {
-        // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
+        if app.buttons["Войти"].exists {
+            app.textFields["Логин"].tap()
+            app.textFields["Логин"].typeText("boba96@mail.ru")
+            app.keyboards.buttons["next"].tap()
+            XCUIApplication()/*@START_MENU_TOKEN@*/.secureTextFields["Пароль"]/*[[".scrollViews.secureTextFields[\"Пароль\"]",".secureTextFields[\"Пароль\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+            XCUIApplication()/*@START_MENU_TOKEN@*/.secureTextFields["Пароль"]/*[[".scrollViews.secureTextFields[\"Пароль\"]",".secureTextFields[\"Пароль\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.typeText("qwerty")
+            app.buttons["Войти"].tap()
+            XCTAssertTrue(app.collectionViews["MainCollectionView"].waitForExistence(timeout: 3.0))
+        }
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
 
