@@ -23,6 +23,7 @@ final class ToDosDetailController: SingleToDoController {
         textView.isUserInteractionEnabled = false
         textView.delegate = self
         textView.returnKeyType = .continue
+        textView.accessibilityLabel = "TaskName"
         return textView
     }()
 
@@ -34,6 +35,7 @@ final class ToDosDetailController: SingleToDoController {
         button.layer.cornerRadius = 35
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(editToDo), for: .touchDown)
+        button.accessibilityLabel = "EditButton"
         return button
     }()
 
@@ -45,6 +47,7 @@ final class ToDosDetailController: SingleToDoController {
         button.layer.cornerRadius = 35
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(deleteToDo), for: .touchDown)
+        button.accessibilityLabel = "DeleteButton"
         return button
     }()
 
