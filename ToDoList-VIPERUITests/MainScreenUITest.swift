@@ -46,16 +46,16 @@ final class MainScreenUITest: XCTestCase {
         let app = XCUIApplication()
         app.launch()
         if app.collectionViews["MainCollectionView"].waitForExistence(timeout: 2.0) {
-            self.openTasks(with: app, identifier: 0)
-            self.openTasks(with: app, identifier: 1)
-            self.openTasks(with: app, identifier: 2)
-            self.openTasks(with: app, identifier: 3)
+            self.openTasks(with: app, identifier: "Сегодня")
+            self.openTasks(with: app, identifier: "Завтра")
+            self.openTasks(with: app, identifier: "Просрочено")
+            self.openTasks(with: app, identifier: "Завершено")
         }
     }
 
     // MARK: - Support method for open tasks method
-    private func openTasks(with  app: XCUIApplication, identifier: Int) {
-        app.collectionViews["MainCollectionView"].cells.element(boundBy: identifier).tap()
+    private func openTasks(with  app: XCUIApplication, identifier: String) {
+        app.collectionViews["MainCollectionView"]/*@START_MENU_TOKEN@*/.cells/*[[".scrollViews.cells",".cells"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.staticTexts[identifier].tap()
         XCTAssert(app.collectionViews["CalendarCollectionView"].waitForExistence(timeout: 3.0))
         app.navigationBars.buttons.element(boundBy: 0).tap()
     }
@@ -92,7 +92,6 @@ final class MainScreenUITest: XCTestCase {
             XCTAssert(app.staticTexts["Ошибка"].waitForExistence(timeout: 3.0))
         }
     }
-
 
     func testLaunchPerformance() throws {
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
