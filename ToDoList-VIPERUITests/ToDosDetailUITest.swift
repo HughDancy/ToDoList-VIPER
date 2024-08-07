@@ -40,7 +40,6 @@ final class ToDosDetailUITest: XCTestCase {
             app.tables["CategoryTable"].cells.element(boundBy: 1).tap()
             app.buttons["EditButton"].tap()
             XCTAssert(app.staticTexts["Сохранено"].waitForExistence(timeout: 2.0))
-
         }
     }
 

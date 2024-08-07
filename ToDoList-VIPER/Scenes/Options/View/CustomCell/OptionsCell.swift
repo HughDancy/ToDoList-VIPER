@@ -33,6 +33,7 @@ final class OptionsCell: UITableViewCell {
         customSwitcher.offImage = UIImage(named: "nightSky")?.cgImage
         customSwitcher.onImage = UIImage(named: "daySky")?.cgImage
         customSwitcher.addTarget(self, action: #selector(changeTheme), for: .touchUpInside)
+        customSwitcher.accessibilityLabel = "ThemeSwitcher"
         return customSwitcher
     }()
 
