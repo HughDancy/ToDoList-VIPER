@@ -44,11 +44,15 @@ final class OptionsPresenter: OptionsPresenterProtocol {
 }
 
 extension OptionsPresenter: OptionsOutputInteractorProtocol {
-    func getOptionsData(_ data: [String]) {
-        view?.getOptionsData(data)
+    func getUserName(_ name: String) {
+        view?.getUserName(name)
     }
 
-    func getUserData(_ userData: (String, URL?)) {
-        view?.getUserData(userData)
+    func getUserAvatar(_ url: URL?) {
+        view?.getUserAvatar(url)
+    }
+
+    func getOptionsData(_ data: [String]) {
+        view?.getOptionsData(data)
     }
 }

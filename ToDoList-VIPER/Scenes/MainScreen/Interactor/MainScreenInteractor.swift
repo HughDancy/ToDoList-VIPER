@@ -13,12 +13,14 @@ final class MainScreenInteractor: MainScreenInteractorInputProtocol {
     var storage: MainScreenLocalStorageProtocol?
     var firebaseStorageManager: MainScreenServerStorageProtocol?
 
-    func retriveUserData() {
+    func retriveUserAvatar() {
         firebaseStorageManager?.newLoadAvatar { [weak self] imageUrl in
             let newImageUrl = imageUrl
             self?.presenter?.didRetriveUserAvatar(newImageUrl)
         }
+    }
 
+    func retriveUserName() {
         guard let name = UserDefaults.standard.string(forKey: UserDefaultsNames.userName.name) else {
             self.presenter?.didRetriveUserName("Test User")
             return

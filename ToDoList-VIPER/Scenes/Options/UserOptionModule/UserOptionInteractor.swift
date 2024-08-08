@@ -51,12 +51,17 @@ final class UserOptionInteractor: UserOptionInputInteractorProtocol {
     }
 
     func getUserInfo() {
-        guard let userName = UserDefaults.standard.string(forKey: UserDefaultsNames.userName.name),
-              let userAvatar = UserDefaults.standard.url(forKey: UserDefaultsNames.userAvatar.name) else {
-            presenter?.loadUserData(("UserAvatar", nil))
+        guard let userName = UserDefaults.standard.string(forKey: UserDefaultsNames.userName.name) else {
+            presenter?.loadUserName("TestUser")
             return
         }
-        presenter?.loadUserData((userName, userAvatar))
+        presenter?.loadUserName(userName)
+
+        guard let userAvatar = UserDefaults.standard.url(forKey: UserDefaultsNames.userAvatar.name) else {
+            presenter?.loadUserAvatar(nil)
+            return
+        }
+        presenter?.loadUserAvatar(userAvatar)
     }
 
     func setTempAvatar(_ image: UIImage?) {

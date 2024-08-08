@@ -31,7 +31,8 @@ protocol MainScreenInteractorInputProtocol: AnyObject {
     var firebaseStorageManager: MainScreenServerStorageProtocol? { get set }
 
     // PRESENTER -> INTERACTOR
-    func retriveUserData()
+    func retriveUserAvatar()
+    func retriveUserName()
     func getToDosCount()
 }
 

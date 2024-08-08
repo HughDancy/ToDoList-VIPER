@@ -23,12 +23,17 @@ final class OptionsInteractor: OptionsInputInteractorProtocol {
     }
 
     func fetchUserData() {
-        guard let userName = UserDefaults.standard.string(forKey: UserDefaultsNames.userName.name),
-              let userAvatar = UserDefaults.standard.url(forKey: UserDefaultsNames.userAvatar.name) else {
-            presenter?.getUserData(("User", nil))
+        guard let userName = UserDefaults.standard.string(forKey: UserDefaultsNames.userName.name) else {
+            presenter?.getUserName("Test User")
             return
         }
-        presenter?.getUserData((userName, userAvatar))
+        guard let userAvatar = UserDefaults.standard.url(forKey: UserDefaultsNames.userAvatar.name) else {
+            presenter?.getUserAvatar(nil)
+            return
+        }
+
+        presenter?.getUserName(userName)
+        presenter?.getUserAvatar(userAvatar)
     }
 
     func changeTheme(_ bool: Bool) {

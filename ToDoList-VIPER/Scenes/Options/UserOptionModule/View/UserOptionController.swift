@@ -9,14 +9,15 @@ import UIKit
 
 final class UserOptionController: UIViewController {
     var presenter: UserOptionPresenterProtocol?
-    private var userData: (String, URL?) = ("Temp", nil)
+    private var userName: String = ""
+    private var userAvatarUrl: URL?
 
     // MARK: - Outlets
     private lazy var userAvatar: UIImageView = {
-       let imageView = UIImageView()
+        let imageView = UIImageView()
         imageView.layer.cornerRadius = UserOptionsSizes.avatar.value / 2
         imageView.clipsToBounds = true
-        imageView.kf.setImage(with: userData.1,
+        imageView.kf.setImage(with: userAvatarUrl,
                               placeholder: UIImage(named: "mockUser_3"),
                               options: [
                                 .cacheOriginalImage
@@ -26,14 +27,14 @@ final class UserOptionController: UIViewController {
     }()
 
     private lazy var userNameField: UITextField = {
-       let textField = UITextField()
-        textField.text = userData.0
+        let textField = UITextField()
+        textField.text = userName
         textField.borderStyle = .roundedRect
         return textField
     }()
 
     private lazy var saveChangeButton: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.setTitle("Сохранить изменения", for: .normal)
         button.tintColor = .systemBackground
         button.backgroundColor = .systemGreen
@@ -52,8 +53,8 @@ final class UserOptionController: UIViewController {
     }
 
     deinit {
-           debugPrint("? deinit \(self)")
-       }
+        debugPrint("? deinit \(self)")
+    }
 
     private func setupView() {
         setupHierarchy()
@@ -102,12 +103,15 @@ final class UserOptionController: UIViewController {
     @objc func chooseAvatar() {
         self.presenter?.chooseAvatar()
     }
-
 }
 
 extension UserOptionController: UserOptionViewProtocol {
-    func getUserData(_ data: (String, URL?)) {
-        self.userData = data
+    func getUserName(_ name: String) {
+        self.userName = name
+    }
+
+    func getUserAvatar(_ url: URL?) {
+        self.userAvatarUrl = url
     }
 }
 

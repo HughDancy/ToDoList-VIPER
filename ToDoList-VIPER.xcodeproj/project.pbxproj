@@ -109,6 +109,7 @@
 		D8C3C7E72C62339100DD8354 /* ToDosUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C3C7E62C62339100DD8354 /* ToDosUITest.swift */; };
 		D8C3C7E92C63529600DD8354 /* ToDosDetailUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C3C7E82C63529600DD8354 /* ToDosDetailUITest.swift */; };
 		D8C3C7EB2C63565C00DD8354 /* OptionsUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C3C7EA2C63565C00DD8354 /* OptionsUITest.swift */; };
+		D8C3C7ED2C635A6D00DD8354 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C3C7EC2C635A6D00DD8354 /* AuthManager.swift */; };
 		D8CCF2C92B62725400C1E358 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D8CCF2C82B62725400C1E358 /* FirebaseAnalytics */; };
 		D8CCF2CB2B62725400C1E358 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = D8CCF2CA2B62725400C1E358 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		D8CCF2CD2B62725400C1E358 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D8CCF2CC2B62725400C1E358 /* FirebaseAuth */; };
@@ -291,6 +292,7 @@
 		D8C3C7E62C62339100DD8354 /* ToDosUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDosUITest.swift; sourceTree = "<group>"; };
 		D8C3C7E82C63529600DD8354 /* ToDosDetailUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDosDetailUITest.swift; sourceTree = "<group>"; };
 		D8C3C7EA2C63565C00DD8354 /* OptionsUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsUITest.swift; sourceTree = "<group>"; };
+		D8C3C7EC2C635A6D00DD8354 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		D8CE4B6F2B87362500E473AC /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		D8CE4B712B8739D900E473AC /* RegistrationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationStatus.swift; sourceTree = "<group>"; };
 		D8D439352C4A176600F75A90 /* UIButton + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton + EXT.swift"; sourceTree = "<group>"; };
@@ -1064,6 +1066,7 @@
 				D846B8612C14606A00AA8775 /* AuthKeychainManager.swift */,
 				D846B8682C18518F00AA8775 /* FirebaseStorageManager.swift */,
 				D857BACF2C5DFE7100806F87 /* FirebaseStorageManagerProtocols.swift */,
+				D8C3C7EC2C635A6D00DD8354 /* AuthManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1522,6 +1525,7 @@
 				D8C19ED42B90F3D4004BCDDD /* SignInTextField.swift in Sources */,
 				D8AB92252BBC063400826A4E /* SingleToDoController.swift in Sources */,
 				D8E72EFD2C2181E3007FF819 /* ToDoTask.swift in Sources */,
+				D8C3C7ED2C635A6D00DD8354 /* AuthManager.swift in Sources */,
 				D8B1E9C32BA421A600D455AF /* MainScreenRouter.swift in Sources */,
 				D8473BE92BB581A00063F87A /* DateItem.swift in Sources */,
 				D8E840662B6780A6005A0936 /* RegistrationPresenter.swift in Sources */,
@@ -1754,8 +1758,7 @@
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "\"Разрешить доступ к медиа библиотеки, чтобы использовать сохраненные фото в качестве аватара?\"";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1783,8 +1786,7 @@
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "\"Разрешить доступ к медиа библиотеки, чтобы использовать сохраненные фото в качестве аватара?\"";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

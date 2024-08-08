@@ -7,6 +7,12 @@
 
 import UIKit.UIImage
 
+protocol LoginServerStorageProtocol: AnyObject {
+    func loadTaskFromFirestore() async
+    func chekOverdueToDos()
+    func checkAvatar(avatar: UIImage, uid: String)
+}
+
 protocol MainScreenServerStorageProtocol: AnyObject {
     func newLoadAvatar(compelition: @escaping (_ imageUrl: URL?) -> Void)
 }
