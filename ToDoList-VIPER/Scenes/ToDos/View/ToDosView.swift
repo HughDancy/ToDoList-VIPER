@@ -21,6 +21,7 @@ final class ToDosView: UIView {
         tableView.register(ToDoCell.self, forCellReuseIdentifier: ToDoCell.reuseIdentifier)
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
+        tableView.accessibilityLabel = "ToDoTable"
         return tableView
     }()
 

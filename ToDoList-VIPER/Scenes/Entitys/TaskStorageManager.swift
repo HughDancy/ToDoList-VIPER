@@ -38,21 +38,6 @@ final class TaskStorageManager {
         return context
     }()
 
-    // MARK: - CoreData create new ToDoObject
-    func createNewToDo(title: String, content: String, date: Date, isOverdue: Bool, color: UIColor, iconName: String, doneStatus: Bool, uid: UUID) {
-        let newToDo = ToDoObject(context: viewContext)
-        newToDo.title = title
-        newToDo.descriptionTitle = content
-        newToDo.date = date
-        newToDo.dateTitle = DateFormatter.getStringFromDate(from: date)
-        newToDo.color = color
-        newToDo.isOverdue = isOverdue
-        newToDo.doneStatus = doneStatus
-        newToDo.iconName = iconName
-        newToDo.id = uid
-        self.saveChanges()
-    }
-
     // MARK: - CoreData delete ToDoObject
     func deleteAllEntities() {
         let entities = persistentContainer.managedObjectModel.entities
@@ -83,41 +68,6 @@ final class TaskStorageManager {
         self.saveChanges()
     }
 
-    // MARK: - CoreData edit ToDoObject
-    func editToDoObject(item: ToDoObject, newTitle: String, newDescription: String, newDate: Date, color: UIColor, iconName: String) {
-        if item.title != newTitle {
-            item.title = newTitle
-        }
-
-        if item.descriptionTitle != newDescription {
-            item.descriptionTitle = newDescription
-        }
-
-        if item.date != newDate {
-            item.date = newDate
-            item.dateTitle = DateFormatter.getStringFromDate(from: newDate)
-        }
-
-        if item.color != color {
-            item.color = color
-            item.iconName = iconName
-        }
-
-        self.saveChanges()
-    }
-
-    // MARK: - CoreData Done ToDoObject
-    func doneToDo(_ id: UUID) {
-        let fetchRequest: NSFetchRequest<ToDoObject> = ToDoObject.fetchRequest()
-        let idPredicate = NSPredicate(format: "%K == %@", "id", id as CVarArg)
-        fetchRequest.predicate = idPredicate
-        // swiftlint:disable:next force_try
-        let objects = try! viewContext.fetch(fetchRequest)
-        let object = objects.first
-        object?.doneStatus = true
-        self.saveChanges()
-    }
-
     // MARK: - CoreData fetch ToDosObject methods
     func fetchAllToDosCount() -> Int {
         let fetchRequest = NSFetchRequest<NSNumber>(entityName: "ToDoObject")
@@ -142,76 +92,6 @@ final class TaskStorageManager {
         return objects
     }
 
-    func fetchConcreteToDos(with date: Date) -> [ToDoObject] {
-        let fetchRequest: NSFetchRequest<ToDoObject> = ToDoObject.fetchRequest()
-        let predicate = NSPredicate(format: "%K == %@",
-                                    #keyPath(ToDoObject.dateTitle), DateFormatter.getStringFromDate(from: date))
-        fetchRequest.predicate = predicate
-        fetchRequest.fetchBatchSize = 7
-        // swiftlint:disable:next force_try
-        let objects = try! viewContext.fetch(fetchRequest)
-        return objects
-    }
-
-    func fetchDoneToDos(with date: Date) -> [ToDoObject] {
-        let fetchRequest: NSFetchRequest<ToDoObject> = ToDoObject.fetchRequest()
-        let donePredicate = NSPredicate(format: "%K == %@", "doneStatus", NSNumber(value: true))
-        let datePredicate = NSPredicate(format: "%K == %@", #keyPath(ToDoObject.dateTitle), DateFormatter.getStringFromDate(from: date))
-        let subPredicates = [donePredicate, datePredicate]
-        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: subPredicates)
-        fetchRequest.fetchBatchSize = 7
-        // swiftlint:disable:next force_try
-        let objects = try! viewContext.fetch(fetchRequest)
-        return objects
-    }
-
-    func fetchOverdueToDos(with date: Date) -> [ToDoObject] {
-        let fetchRequest: NSFetchRequest<ToDoObject> = ToDoObject.fetchRequest()
-        let subPredicates = self.createPredicates(with: .overdue, date: date)
-        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: subPredicates)
-        fetchRequest.fetchBatchSize = 7
-        // swiftlint:disable:next force_try
-        let objects = try! viewContext.fetch(fetchRequest)
-        return objects
-    }
-    // MARK: - TO-DO: Check this method and rewrite
-    // MARK: - Fetch count ToDosObjects Method
-    func fetchToDosCount(with status: ToDoListStatus) -> Int {
-        let fetchRequest = NSFetchRequest<NSNumber>(entityName: "ToDoObject")
-        fetchRequest.resultType = .countResultType
-
-        switch status {
-        case .today:
-            let predicate = self.createPredicates(with: .today, date: Date.today)
-            fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicate)
-            // swiftlint:disable:next force_try
-            let objects = try! viewContext.fetch(fetchRequest)
-            let objectsCount = objects.first?.intValue
-            self.checkOverdueTasksInServer()
-            return objectsCount ?? 0
-        case .tommorow:
-            let predicate = self.createPredicates(with: .tommorow, date: Date.tomorrow)
-            fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicate)
-            // swiftlint:disable:next force_try
-            let objects = try! viewContext.fetch(fetchRequest)
-            let objectsCount = objects.first?.intValue
-            return objectsCount ?? 0
-        case .overdue:
-            let predicate = self.createPredicates(with: .overdue, date: .yesterday)
-            fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate[0], predicate[1]])
-            // swiftlint:disable:next force_try
-            let objects = try! viewContext.fetch(fetchRequest)
-            let objectsCount = objects.first?.intValue
-            return objectsCount ?? 0
-        case .done:
-            let predicate = self.createPredicates(with: .done, date: .today)
-            fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicate)
-            // swiftlint:disable:next force_try
-            let objects = try! viewContext.fetch(fetchRequest)
-            let objectsCount = objects.first?.intValue
-            return objectsCount ?? 0
-        }
-    }
     // MARK: - Create predicates for cathegories
     private func createPredicates(with status: ToDoListStatus, date: Date) -> [NSPredicate] {
         switch status {
@@ -294,5 +174,159 @@ private extension TaskStorageManager {
                 }
             }
         }
+    }
+}
+   // MARK: - Interface for MainScreen Module
+extension TaskStorageManager: MainScreenLocalStorageProtocol {
+    func fetchToDosCount(with status: ToDoListStatus) -> Int {
+        let fetchRequest = NSFetchRequest<NSNumber>(entityName: "ToDoObject")
+        fetchRequest.resultType = .countResultType
+
+        switch status {
+        case .today:
+            let predicate = self.createPredicates(with: .today, date: Date.today)
+            fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicate)
+            // swiftlint:disable:next force_try
+            let objects = try! viewContext.fetch(fetchRequest)
+            let objectsCount = objects.first?.intValue
+            self.checkOverdueTasksInServer()
+            return objectsCount ?? 0
+        case .tommorow:
+            let predicate = self.createPredicates(with: .tommorow, date: Date.tomorrow)
+            fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicate)
+            // swiftlint:disable:next force_try
+            let objects = try! viewContext.fetch(fetchRequest)
+            let objectsCount = objects.first?.intValue
+            return objectsCount ?? 0
+        case .overdue:
+            let predicate = self.createPredicates(with: .overdue, date: .yesterday)
+            fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate[0], predicate[1]])
+            // swiftlint:disable:next force_try
+            let objects = try! viewContext.fetch(fetchRequest)
+            let objectsCount = objects.first?.intValue
+            return objectsCount ?? 0
+        case .done:
+            let predicate = self.createPredicates(with: .done, date: .today)
+            fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicate)
+            // swiftlint:disable:next force_try
+            let objects = try! viewContext.fetch(fetchRequest)
+            let objectsCount = objects.first?.intValue
+            return objectsCount ?? 0
+        }
+    }
+}
+
+   // MARK: - Interface for AddNewToDo Module
+extension TaskStorageManager: AddNewToDoLocalStorageProtocol {
+    func createNewToDo(title: String, content: String, date: Date, isOverdue: Bool, color: UIColor, iconName: String, doneStatus: Bool, uid: UUID) {
+        let newToDo = ToDoObject(context: viewContext)
+        newToDo.title = title
+        newToDo.descriptionTitle = content
+        newToDo.date = date
+        newToDo.dateTitle = DateFormatter.getStringFromDate(from: date)
+        newToDo.color = color
+        newToDo.isOverdue = isOverdue
+        newToDo.doneStatus = doneStatus
+        newToDo.iconName = iconName
+        newToDo.id = uid
+        self.saveChanges()
+    }
+}
+
+   // MARK: - Interface for ToDos Module
+extension TaskStorageManager: ToDosLocalStorageProtocol {
+    func fetchConcreteToDos(with date: Date) -> [ToDoObject] {
+        let fetchRequest: NSFetchRequest<ToDoObject> = ToDoObject.fetchRequest()
+        let predicate = NSPredicate(format: "%K == %@",
+                                    #keyPath(ToDoObject.dateTitle), DateFormatter.getStringFromDate(from: date))
+        fetchRequest.predicate = predicate
+        fetchRequest.fetchBatchSize = 7
+        // swiftlint:disable:next force_try
+        let objects = try! viewContext.fetch(fetchRequest)
+        return objects
+    }
+
+    func fetchDoneToDos(with date: Date) -> [ToDoObject] {
+        let fetchRequest: NSFetchRequest<ToDoObject> = ToDoObject.fetchRequest()
+        let donePredicate = NSPredicate(format: "%K == %@", "doneStatus", NSNumber(value: true))
+        let datePredicate = NSPredicate(format: "%K == %@", #keyPath(ToDoObject.dateTitle), DateFormatter.getStringFromDate(from: date))
+        let subPredicates = [donePredicate, datePredicate]
+        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: subPredicates)
+        fetchRequest.fetchBatchSize = 7
+        // swiftlint:disable:next force_try
+        let objects = try! viewContext.fetch(fetchRequest)
+        return objects
+    }
+
+    func fetchOverdueToDos(with date: Date) -> [ToDoObject] {
+        let fetchRequest: NSFetchRequest<ToDoObject> = ToDoObject.fetchRequest()
+        let subPredicates = self.createPredicates(with: .overdue, date: date)
+        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: subPredicates)
+        fetchRequest.fetchBatchSize = 7
+        // swiftlint:disable:next force_try
+        let objects = try! viewContext.fetch(fetchRequest)
+        return objects
+    }
+
+    // MARK: - CoreData Done ToDoObject
+    func doneToDo(_ id: UUID) {
+        let fetchRequest: NSFetchRequest<ToDoObject> = ToDoObject.fetchRequest()
+        let idPredicate = NSPredicate(format: "%K == %@", "id", id as CVarArg)
+        fetchRequest.predicate = idPredicate
+        // swiftlint:disable:next force_try
+        let objects = try! viewContext.fetch(fetchRequest)
+        let object = objects.first
+        object?.doneStatus = true
+        self.saveChanges()
+    }
+
+    func deleteToDo(_ uid: UUID) {
+        self.deleteTask(uid)
+    }
+}
+
+   // MARK: - Interface for ToDoDetail Module
+extension TaskStorageManager: ToDosDetailLocalStorageProtocol {
+    func editToDoObject(item: ToDoObject, newTitle: String, newDescription: String, newDate: Date, color: UIColor, iconName: String) {
+        if item.title != newTitle {
+            item.title = newTitle
+        }
+
+        if item.descriptionTitle != newDescription {
+            item.descriptionTitle = newDescription
+        }
+
+        if item.date != newDate {
+            item.date = newDate
+            item.dateTitle = DateFormatter.getStringFromDate(from: newDate)
+        }
+
+        if item.color != color {
+            item.color = color
+            item.iconName = iconName
+        }
+
+        self.saveChanges()
+    }
+
+    func deleteTask(_ uid: UUID) {
+        self.deleteTaskWithId(uid)
+    }
+}
+
+  // MARK: - Method for unit-test
+extension TaskStorageManager {
+    func createMockObject() -> ToDoObject {
+        let newToDo = ToDoObject(context: viewContext)
+        newToDo.title = "title"
+        newToDo.descriptionTitle = "content"
+        newToDo.date = Date.today
+        newToDo.dateTitle = DateFormatter.getStringFromDate(from: Date.today)
+        newToDo.color = .taskGreen
+        newToDo.isOverdue = false
+        newToDo.doneStatus = false
+        newToDo.iconName = "person"
+        newToDo.id = UUID.init()
+        return newToDo
     }
 }

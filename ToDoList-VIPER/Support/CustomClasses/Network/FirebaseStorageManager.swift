@@ -11,6 +11,8 @@ import FirebaseStorage
 import FirebaseAuth
 import FirebaseFirestore
 import Kingfisher
+import GoogleSignIn
+import GoogleSignInSwift
 
 final class FirebaseStorageManager {
 
@@ -18,51 +20,51 @@ final class FirebaseStorageManager {
     private let storage = Storage.storage().reference()
     private let firestoreDataBase = Firestore.firestore()
     private var authManager = AuthKeychainManager()
-    // MARK: - Upload and load avatar to/from server
-    func saveImage(image: UIImage, name: String) {
-        guard let data = image.jpegData(compressionQuality: 8.0) else { return }
-        let avatarRef = storage.child(name)
-        avatarRef.putData(data, metadata: StorageMetadata(dictionary: ["contentType" : "image/jpeg"])) { (metaData, _) in
-            guard metaData != nil else {
-                print("Meta data not found or somehow another error")
-                return
-            }
-            NotificationCenter.default.post(name: NotificationNames.updateUserData.name, object: nil)
-        }
-    }
 
-    func newLoadAvatar(compelition: @escaping (_ imageUrl: URL?) -> Void) {
-        guard let userId = authManager.id else { return  }
-        let avatarRef = storage.child(userId)
-
-        avatarRef.downloadURL { url, error in
-            if error != nil {
-                print("When download avatar url something went wrong")
+    func chekOverdueTasks() {
+        let uid = Auth.auth().currentUser?.uid ?? GIDSignIn.sharedInstance.currentUser?.userID
+        guard let uuid = uid else { return }
+        firestoreDataBase.collection("toDos").document(uuid).collection("tasks").getDocuments { result, error in
+            if error == nil {
+                guard let documents = result?.documents else { return }
+                documents.forEach { document in
+                    let serverDate = document["date"] as? Timestamp
+                    let date = serverDate?.dateValue()
+                    let statusFromServer = document["status"] as? String
+                    if date ?? Date.today < Date.today && (statusFromServer ?? "In Progress") != "Done" && (statusFromServer ?? "In Progress") != "Fail" {
+                        document.reference.updateData(["status": "Fail"])
+                    }
+                }
             } else {
-                UserDefaults.standard.set(url, forKey: "UserAvatar")
-                compelition(url)
+                print("Some eeror happen in FirebaseStorageManager check overdue tasks")
             }
         }
     }
-}
-// MARK: - Upload task to server
-extension FirebaseStorageManager {
-    func uploadTaskToServer(with task: ToDoTask) {
-        let uid = Auth.auth().currentUser?.uid ?? UUID().uuidString
-        do {
-            try firestoreDataBase.collection("toDos").document(uid).collection("tasks").addDocument(from: task)
-        } catch {
-            print(error)
+
+    func deleteTaskFromServer(_ id: String) {
+        let uid = Auth.auth().currentUser?.uid ?? GIDSignIn.sharedInstance.currentUser?.userID
+        guard let uuid = uid else { return }
+        let collectionReference = firestoreDataBase.collection("toDos").document(uuid).collection("tasks")
+        let query: Query = collectionReference.whereField("id", isEqualTo: id)
+        query.getDocuments { snapshot, error in
+            if let error = error {
+                print("Some error went wehn try deleting task from server - \(error)")
+            } else {
+                snapshot!.documents.forEach { document in
+                    self.firestoreDataBase.collection("toDos").document(uuid).collection("tasks").document(document.documentID).delete()
+                }
+            }
         }
     }
 }
 
 // MARK: - Download tasks
-extension FirebaseStorageManager {
+extension FirebaseStorageManager: LoginServerStorageProtocol {
     func loadTaskFromFirestore() async {
-        let uid = Auth.auth().currentUser?.uid ?? UUID().uuidString
+        let uid = Auth.auth().currentUser?.uid ?? GIDSignIn.sharedInstance.currentUser?.userID
         do {
-            let querySnapshot = try await firestoreDataBase.collection("toDos").document(uid).collection("tasks").getDocuments()
+            guard let uuid = uid else { return }
+            let querySnapshot = try await firestoreDataBase.collection("toDos").document(uuid).collection("tasks").getDocuments()
             querySnapshot.documents.forEach { document in
                 let task = document.data()
                 let categoryFromServer = Category(rawValue: task["category"] as? String ?? "work")
@@ -89,14 +91,75 @@ extension FirebaseStorageManager {
             print("Some error when download task from server on private context: \(error)")
         }
     }
+
+    func chekOverdueToDos() {
+        self.chekOverdueTasks()
+    }
+
+    func checkAvatar(avatar: UIImage, uid: String) {
+        let avatarRef = storage.child(uid)
+        if avatarRef.bucket.isEmpty {
+            self.saveImage(image: avatar, name: uid)
+        }
+    }
 }
 
-// MARK: - Save editing task
-extension FirebaseStorageManager {
-    func uploadChanges(task: ToDoTask) {
-        let uid = Auth.auth().currentUser?.uid ?? UUID().uuidString
+// MARK: - Interface for MainScreen Module
+extension FirebaseStorageManager: MainScreenServerStorageProtocol {
+    func newLoadAvatar(compelition: @escaping (_ imageUrl: URL?) -> Void) {
+        guard let userId = authManager.id else { return  }
+        let avatarRef = storage.child(userId)
 
-        firestoreDataBase.collection("toDos").document(uid).collection("tasks").whereField("id", isEqualTo: task.id.uuidString).getDocuments { result, error in
+        avatarRef.downloadURL { url, error in
+            if error != nil {
+                print("When download avatar url something went wrong")
+            } else {
+                UserDefaults.standard.set(url, forKey: UserDefaultsNames.userAvatar.name)
+                compelition(url)
+            }
+        }
+    }
+}
+
+// MARK: - Interface for AddNewToDo Module
+extension FirebaseStorageManager: AddNewToDoServerStorageProtocol {
+    func uploadTaskToServer(with task: ToDoTask) {
+        let uid = Auth.auth().currentUser?.uid ?? GIDSignIn.sharedInstance.currentUser?.userID
+        guard let uuid = uid else { return }
+        do {
+            try firestoreDataBase.collection("toDos").document(uuid).collection("tasks").addDocument(from: task)
+        } catch {
+            print(error)
+        }
+    }
+}
+
+// MARK: - Interface for ToDos Module
+extension FirebaseStorageManager: ToDosServerStorageProtocol {
+    func makeTaskDone(_ id: UUID) {
+        let uid = Auth.auth().currentUser?.uid ?? GIDSignIn.sharedInstance.currentUser?.userID
+        guard let uuid = uid else { return }
+        let taskId = id.uuidString
+        firestoreDataBase.collection("toDos").document(uuid).collection("tasks").whereField("id", isEqualTo: taskId).getDocuments { result, error in
+            if error == nil {
+                guard let documents = result?.documents.first else { return }
+                documents.reference.updateData(["status" : ProgressStatus.done.value])
+            }
+        }
+    }
+
+    func deleteToDoFromServer(_ id: String) {
+        self.deleteTaskFromServer(id)
+    }
+}
+
+// MARK: - Interface for ToDos Detail Module
+extension FirebaseStorageManager: ToDoSDetailServerStorageProtocol {
+    func uploadChanges(task: ToDoTask) {
+        let uid = Auth.auth().currentUser?.uid ?? GIDSignIn.sharedInstance.currentUser?.userID
+        guard let uuid = uid else { return }
+
+        firestoreDataBase.collection("toDos").document(uuid).collection("tasks").whereField("id", isEqualTo: task.id.uuidString).getDocuments { result, error in
             if error == nil {
                 guard let documents = result?.documents.first else { return }
                 let serverDate = documents["date"] as? Timestamp
@@ -126,56 +189,24 @@ extension FirebaseStorageManager {
             }
         }
     }
-}
 
-// MARK: - Delete function
-extension FirebaseStorageManager {
-    func deleteTaskFromServer(_ id: String) {
-        let uid = Auth.auth().currentUser?.uid ?? UUID().uuidString
-        let collectionReference = firestoreDataBase.collection("toDos").document(uid).collection("tasks")
-        let query: Query = collectionReference.whereField("id", isEqualTo: id)
-        query.getDocuments { snapshot, error in
-            if let error = error {
-                print("Some error went wehn try deleting task from server - \(error)")
-            } else {
-                snapshot!.documents.forEach { document in
-                    self.firestoreDataBase.collection("toDos").document(uid).collection("tasks").document(document.documentID).delete()
-                }
-            }
-        }
+    func deleteTask(_ id: String) {
+        self.deleteTaskFromServer(id)
     }
 }
 
-extension FirebaseStorageManager {
-    func makeTaskDone(_ id: UUID) {
-        let uid = Auth.auth().currentUser?.uid ?? UUID().uuidString
-        let taskId = id.uuidString
-        firestoreDataBase.collection("toDos").document(uid).collection("tasks").whereField("id", isEqualTo: taskId).getDocuments { result, error in
-            if error == nil {
-                guard let documents = result?.documents.first else { return }
-                documents.reference.updateData(["status" : ProgressStatus.done.value])
+// MARK: - User Avatar Saving In Server
+extension FirebaseStorageManager: UserAvatarSaveInServerProtocol {
+    // MARK: - Upload and load avatar to/from server
+    func saveImage(image: UIImage, name: String) {
+        guard let data = image.jpegData(compressionQuality: 8.0) else { return }
+        let avatarRef = storage.child(name)
+        avatarRef.putData(data, metadata: StorageMetadata(dictionary: ["contentType" : "image/jpeg"])) { (metaData, _) in
+            guard metaData != nil else {
+                print("Meta data not found or somehow another error")
+                return
             }
-        }
-    }
-}
-
-extension FirebaseStorageManager {
-    func chekOverdueTasks() {
-        let uid = Auth.auth().currentUser?.uid ?? UUID().uuidString
-        firestoreDataBase.collection("toDos").document(uid).collection("tasks").getDocuments { result, error in
-            if error == nil {
-                guard let documents = result?.documents else { return }
-                documents.forEach { document in
-                    let serverDate = document["date"] as? Timestamp
-                    let date = serverDate?.dateValue()
-                    let statusFromServer = document["status"] as? String
-                    if date ?? Date.today < Date.today && (statusFromServer ?? "In Progress") != "Done" && (statusFromServer ?? "In Progress") != "Fail" {
-                        document.reference.updateData(["status": "Fail"])
-                    }
-                }
-            } else {
-                print("Some eeror happen in FirebaseStorageManager check overdue tasks")
-            }
+            NotificationCenter.default.post(name: NotificationNames.updateUserData.name, object: nil)
         }
     }
 }

@@ -16,6 +16,7 @@ final class UserOptionInteractor: UserOptionInputInteractorProtocol {
   // MARK: - Properties
     weak var presenter: UserOptionOutputInteractorProtocol?
     private var tempAvatar: UIImage?
+    var firebaseStorageManager: UserAvatarSaveInServerProtocol?
 
     deinit {
            debugPrint("? deinit \(self)")
@@ -23,13 +24,12 @@ final class UserOptionInteractor: UserOptionInputInteractorProtocol {
 
     // MARK: - Protocol Method's
     func saveUserInfo(name: String) {
-        let storageManager = FirebaseStorageManager()
         let keychainManager = AuthKeychainManager()
         let userUid = keychainManager.id
         let firebaseDataBase = Firestore.firestore()
 
-        if name != UserDefaults.standard.string(forKey: NotificationNames.userName.rawValue) {
-            UserDefaults.standard.set(name, forKey: NotificationNames.userName.rawValue)
+        if name != UserDefaults.standard.string(forKey: UserDefaultsNames.userName.name) {
+            UserDefaults.standard.set(name, forKey: UserDefaultsNames.userName.name)
             firebaseDataBase.collection("users").document(userUid ?? UUID().uuidString).setData(["displayName" : name, "name": name], merge: true)
             let user = Auth.auth().currentUser
             let changeRequest = user?.createProfileChangeRequest()
@@ -44,19 +44,24 @@ final class UserOptionInteractor: UserOptionInputInteractorProtocol {
         }
 
         if tempAvatar != nil {
-            storageManager.saveImage(image: tempAvatar ?? UIImage(named: "mockUser_1")!, name: userUid ?? UUID().uuidString)
+            firebaseStorageManager?.saveImage(image: tempAvatar ?? UIImage(named: "mockUser_1")!, name: userUid ?? UUID().uuidString)
         }
         NotificationCenter.default.post(name: NotificationNames.updateUserData.name, object: nil)
         presenter?.dismiss()
     }
 
     func getUserInfo() {
-        guard let userName = UserDefaults.standard.string(forKey: NotificationNames.userName.rawValue),
-              let userAvatar = UserDefaults.standard.url(forKey: "UserAvatar") else {
-            presenter?.loadUserData(("UserAvatar", nil))
+        guard let userName = UserDefaults.standard.string(forKey: UserDefaultsNames.userName.name) else {
+            presenter?.loadUserName("TestUser")
             return
         }
-        presenter?.loadUserData((userName, userAvatar))
+        presenter?.loadUserName(userName)
+
+        guard let userAvatar = UserDefaults.standard.url(forKey: UserDefaultsNames.userAvatar.name) else {
+            presenter?.loadUserAvatar(nil)
+            return
+        }
+        presenter?.loadUserAvatar(userAvatar)
     }
 
     func setTempAvatar(_ image: UIImage?) {

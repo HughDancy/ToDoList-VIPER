@@ -13,6 +13,8 @@
 			</array>
 		</dict>
 	</array>
+	<key>CLIENT_ID</key>
+	<string>100122040481-tsb14jr2najr7kkv74pf97k4grispi5p.apps.googleusercontent.com</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -30,7 +32,5 @@
 			</array>
 		</dict>
 	</dict>
-	<key>CLIENT_ID</key>
-	<string>100122040481-tsb14jr2najr7kkv74pf97k4grispi5p.apps.googleusercontent.com</string>
 </dict>
 </plist>

@@ -10,7 +10,8 @@ import UIKit
 protocol UserOptionViewProtocol: AnyObject {
     var presenter: UserOptionPresenterProtocol? { get set }
 
-    func getUserData(_ data: (String, URL?))
+    func getUserName(_ name: String)
+    func getUserAvatar(_ url: URL?)
 }
 
 protocol UserOptionPresenterProtocol: AnyObject {
@@ -29,6 +30,7 @@ protocol UserOptionPresenterProtocol: AnyObject {
 
 protocol UserOptionInputInteractorProtocol: AnyObject {
     var presenter: UserOptionOutputInteractorProtocol? { get set }
+    var firebaseStorageManager: UserAvatarSaveInServerProtocol? { get set }
 
     func setTempAvatar(_ image: UIImage?)
     func saveUserInfo(name: String)
@@ -38,7 +40,8 @@ protocol UserOptionInputInteractorProtocol: AnyObject {
 }
 
 protocol UserOptionOutputInteractorProtocol: AnyObject {
-    func loadUserData(_ data: (String, URL?))
+    func loadUserAvatar(_ avatar: URL?)
+    func loadUserName(_ name: String)
     func dismiss()
 
     func goToOptions(with label: String)

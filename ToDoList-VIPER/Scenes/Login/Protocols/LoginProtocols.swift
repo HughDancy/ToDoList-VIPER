@@ -31,6 +31,8 @@ protocol LoginPresenterProtocol: AnyObject {
 
 protocol LoginInteractorInputProtocol: AnyObject {
     var presenter: LoginInteractorOutputProtocol? { get set }
+    var authManager: LoginProtocol? { get set }
+    var firebaseStorage: (LoginServerStorageProtocol & UserAvatarSaveInServerProtocol)? { get set }
 
     // PRESENTER -> INTERACTOR
     func checkAutorizationData(login: String?, password: String?)

@@ -22,7 +22,8 @@ final class MainScreenPresenter: MainScreenPresenterProtocol {
     }
 
     func updateUserData() {
-        interactor?.retriveUserData()
+        interactor?.retriveUserAvatar()
+        interactor?.retriveUserName()
     }
 }
 

@@ -25,20 +25,17 @@ final class CalendarModel {
 
         let tempDateModelsArray = dateModelsArray
         for task in tasks {
-            for (index, date) in tempDateModelsArray.enumerated() {
+            for (index, date) in tempDateModelsArray.enumerated() where date.dateString == task.dateTitle ?? "" {
+                switch task.color {
+                case .systemOrange:
+                    dateModelsArray[index].isWorkTask = true
+                case .taskGreen:
+                    dateModelsArray[index].isPersonalTask = true
+                case .systemPurple:
+                    dateModelsArray[index].isOtherTask = true
+                default:
+                    dateModelsArray[index].isOtherTask = true
 
-                if date.dateString == task.dateTitle ?? "" {
-                    if task.color == .systemOrange {
-                        dateModelsArray[index].isWorkTask = true
-                    }
-
-                    if task.color == .taskGreen {
-                        dateModelsArray[index].isPersonalTask = true
-                    }
-
-                    if task.color == .systemPurple {
-                        dateModelsArray[index].isOtherTask = true
-                    }
                 }
             }
         }

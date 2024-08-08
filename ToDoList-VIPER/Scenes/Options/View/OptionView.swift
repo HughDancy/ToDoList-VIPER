@@ -8,10 +8,6 @@
 import UIKit
 
 final class OptionView: UIView {
-    // MARK: - Properties
-    private var name: String = ""
-    private var url: URL?
-
     // MARK: - Outlets
     lazy var backgroundImage: UIImageView = {
         let imageView = UIImageView()
@@ -24,7 +20,7 @@ final class OptionView: UIView {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = OptionsScreenSizes.avatarCornerRadius.value
         imageView.clipsToBounds = true
-        imageView.kf.setImage(with: url,
+        imageView.kf.setImage(with: UserDefaults.standard.url(forKey: UserDefaultsNames.userAvatar.name),
                               placeholder: UIImage(named: "mockUser_3"),
                               options: [
                                 .cacheOriginalImage
@@ -34,10 +30,9 @@ final class OptionView: UIView {
 
     lazy var userName: UILabel = {
         let label = UILabel()
-        label.text = UserDefaults.standard.string(forKey: NotificationNames.userName.rawValue)
+        label.text = UserDefaults.standard.string(forKey: UserDefaultsNames.userName.name)
         label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
         label.textColor = .systemBackground
-        label.text = self.name
         return label
     }()
 
@@ -68,14 +63,13 @@ final class OptionView: UIView {
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
         tableView.isScrollEnabled = false
+        tableView.accessibilityLabel = "OptionsTable"
         return tableView
     }()
 
     // MARK: - Init
-    init(name: String, url: URL?) {
+    init() {
         super.init(frame: .zero)
-        self.name = name
-        self.url = url
         commonInit()
     }
 
@@ -133,6 +127,18 @@ final class OptionView: UIView {
             make.top.equalTo(containerView.snp.top).offset(35)
             make.leading.trailing.bottom.equalTo(containerView)
         }
+    }
+
+    func setupUserName(_ name: String) {
+        self.userName.text = name
+    }
+
+    func setupUserAvatar(_ url: URL?) {
+        self.avatarImage.kf.setImage(with: url,
+                                     placeholder: UIImage(named: "mockUser_3"),
+                                     options: [
+                                       .cacheOriginalImage
+                                     ])
     }
 }
 

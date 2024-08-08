@@ -23,27 +23,32 @@ final class OptionsInteractor: OptionsInputInteractorProtocol {
     }
 
     func fetchUserData() {
-        guard let userName = UserDefaults.standard.string(forKey: NotificationNames.userName.rawValue),
-              let userAvatar = UserDefaults.standard.url(forKey: "UserAvatar") else {
-            presenter?.getUserData(("User", nil))
+        guard let userName = UserDefaults.standard.string(forKey: UserDefaultsNames.userName.name) else {
+            presenter?.getUserName("Test User")
             return
         }
-        presenter?.getUserData((userName, userAvatar))
+        guard let userAvatar = UserDefaults.standard.url(forKey: UserDefaultsNames.userAvatar.name) else {
+            presenter?.getUserAvatar(nil)
+            return
+        }
+
+        presenter?.getUserName(userName)
+        presenter?.getUserAvatar(userAvatar)
     }
 
     func changeTheme(_ bool: Bool) {
         var toDoUserDefaults = ToDoThemeDefaults.shared
         if bool {
-                 toDoUserDefaults.theme = Theme(rawValue: "dark") ?? .dark
-             } else {
-                 toDoUserDefaults.theme = Theme(rawValue: "light") ?? .light
-             }
+            toDoUserDefaults.theme = Theme(rawValue: "dark") ?? .dark
+        } else {
+            toDoUserDefaults.theme = Theme(rawValue: "light") ?? .light
+        }
 
-             let allScenes = UIApplication.shared.connectedScenes
-             for scene in allScenes {
-                 guard let windowScene = scene as? UIWindowScene else { continue }
-                 windowScene.windows.forEach({$0.overrideUserInterfaceStyle = ToDoThemeDefaults.shared.theme.getUserInterfaceStyle()})
-             }
+        let allScenes = UIApplication.shared.connectedScenes
+        for scene in allScenes {
+            guard let windowScene = scene as? UIWindowScene else { continue }
+            windowScene.windows.forEach({$0.overrideUserInterfaceStyle = ToDoThemeDefaults.shared.theme.getUserInterfaceStyle()})
+        }
     }
 
     func loggedOut() {
@@ -53,6 +58,10 @@ final class OptionsInteractor: OptionsInputInteractorProtocol {
             try? firebaseAuth.signOut()
             authMangaer.clear()
             GIDSignIn.sharedInstance.disconnect()
+            NewUserCheck.shared.setIsLoginScrren()
+            NewUserCheck.shared.setIsNotFirstStartOnboarding()
+            TaskStorageManager.instance.deleteAllEntities()
+            UserDefaults.standard.removeObject(forKey: UserDefaultsNames.userAvatar.name)
         }
     }
 }

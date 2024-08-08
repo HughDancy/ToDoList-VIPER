@@ -15,6 +15,7 @@ final class OnboardingPage: UIViewController {
         let picture = UIImageView()
         picture.contentMode = .scaleAspectFill
         picture.backgroundColor = .clear
+        picture.accessibilityLabel = "OnboardingPicture"
         return picture
     }()
 
@@ -35,7 +36,7 @@ final class OnboardingPage: UIViewController {
     // MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UserDefaults.standard.setValue(state?.rawValue, forKey: "onboardingState")
+        UserDefaults.standard.setValue(state?.rawValue, forKey: UserDefaultsNames.onboardingState.name)
     }
 
     override func viewDidLoad() {

@@ -20,11 +20,14 @@ final class OptionsRouter: OptionsRouterProtocol {
     func logOut(from view: OptionsViewProtocol) {
         guard let parrentView = view as? UIViewController else { return }
         parrentView.tabBarController?.tabBar.isHidden = true
-        self.clearUserData()
-        let loginModule = AppConfigurator.configuator.logOut()
-        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
-        sceneDelegate?.window?.rootViewController = loginModule
-        parrentView.navigationController?.popToRootViewController(animated: true)
+        if UserDefaults.standard.bool(forKey: UserDefaultsNames.firstWorkLaunch.name) {
+            parrentView.dismiss(animated: true)
+        } else {
+            let loginModule = AppConfigurator.configuator.logOut()
+            let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+            sceneDelegate?.window?.rootViewController = loginModule
+            parrentView.navigationController?.popToRootViewController(animated: true)
+        }
     }
 
     func getFeedback(from view: OptionsViewProtocol) {
@@ -39,14 +42,5 @@ final class OptionsRouter: OptionsRouterProtocol {
         } else {
             print("Email not work")
         }
-    }
-}
-
-fileprivate extension OptionsRouter {
-    private func clearUserData() {
-        NewUserCheck.shared.setIsLoginScrren()
-        NewUserCheck.shared.setIsNotFirstStartOnboarding()
-        TaskStorageManager.instance.deleteAllEntities()
-        UserDefaults.standard.removeObject(forKey: "UserAvatar")
     }
 }

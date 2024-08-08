@@ -10,16 +10,18 @@ import FirebaseFirestore
 
 final class MainScreenInteractor: MainScreenInteractorInputProtocol {
     weak var presenter: MainScreenInteractorOutputProtocol?
-    private var storage = TaskStorageManager.instance
-    private var firebaseStorageManager = FirebaseStorageManager()
+    var storage: MainScreenLocalStorageProtocol?
+    var firebaseStorageManager: MainScreenServerStorageProtocol?
 
-    func retriveUserData() {
-        firebaseStorageManager.newLoadAvatar { [weak self] imageUrl in
+    func retriveUserAvatar() {
+        firebaseStorageManager?.newLoadAvatar { [weak self] imageUrl in
             let newImageUrl = imageUrl
             self?.presenter?.didRetriveUserAvatar(newImageUrl)
         }
+    }
 
-        guard let name = UserDefaults.standard.string(forKey: NotificationNames.userName.rawValue) else {
+    func retriveUserName() {
+        guard let name = UserDefaults.standard.string(forKey: UserDefaultsNames.userName.name) else {
             self.presenter?.didRetriveUserName("Test User")
             return
         }
@@ -27,17 +29,17 @@ final class MainScreenInteractor: MainScreenInteractorInputProtocol {
     }
 
     func getToDosCount() {
-            let todayToDosCount = self.storage.fetchToDosCount(with: .today)
-            let tommorowToDosCount = self.storage.fetchToDosCount(with: .tommorow)
-            let overdueToDosCount = self.storage.fetchToDosCount(with: .overdue)
-            let doneToDosCount =  self.storage.fetchToDosCount(with: .done)
+        guard let todayToDosCount = self.storage?.fetchToDosCount(with: .today),
+              let tommorowToDosCount = self.storage?.fetchToDosCount(with: .tommorow),
+              let overdueToDosCount = self.storage?.fetchToDosCount(with: .overdue),
+              let doneToDosCount =  self.storage?.fetchToDosCount(with: .done) else { return }
 
-            let toDosInfo = [
-                [String(todayToDosCount), "Сегодня"],
-                [String(overdueToDosCount), "Просрочено"],
-                [String(tommorowToDosCount), "Завтра"],
-                [String(doneToDosCount), "Завершено"]
-            ]
-            self.presenter?.didRetriveToDosCount(toDosInfo)
+        let toDosInfo = [
+            [String(todayToDosCount), "Сегодня"],
+            [String(overdueToDosCount), "Просрочено"],
+            [String(tommorowToDosCount), "Завтра"],
+            [String(doneToDosCount), "Завершено"]
+        ]
+        self.presenter?.didRetriveToDosCount(toDosInfo)
     }
 }

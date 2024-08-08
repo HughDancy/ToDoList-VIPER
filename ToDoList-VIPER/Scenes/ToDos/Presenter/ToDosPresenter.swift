@@ -44,7 +44,8 @@ final class ToDosPresenter: ToDosPresenterProtocol {
 }
 
 extension ToDosPresenter: ToDosInteractorOutputProtocol {
-    func getTask(_ tasks: [ToDoObject]) {
+    func getTask(_ tasks: [ToDoObject]?) {
+        guard let tasks = tasks else { return }
         view?.showToDos(tasks)
     }
 }

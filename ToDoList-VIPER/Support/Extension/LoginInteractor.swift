@@ -5,17 +5,13 @@
 //  Created by Борис Киселев on 26.01.2024.
 //
 
-import Foundation
-import FirebaseAuth
-import FirebaseFirestore
-import GoogleSignIn
-import GoogleSignInSwift
+import UIKit.UIViewController
 
 final class LoginInteractor: LoginInteractorInputProtocol {
     var presenter: LoginInteractorOutputProtocol?
     // MARK: - Properties
-    private var keyChainedManager = AuthKeychainManager()
-    private let firebaseDataBase = Firestore.firestore()
+    var firebaseStorage: (LoginServerStorageProtocol & UserAvatarSaveInServerProtocol)?
+    var authManager: LoginProtocol?
 
     // MARK: - Login with email and password
     func checkAutorizationData(login: String?, password: String?) {
@@ -38,16 +34,21 @@ final class LoginInteractor: LoginInteractorInputProtocol {
     // MARK: - Google SignIn
     func googleLogIn(with: LoginViewProtocol) {
         guard let viewController = with as? UIViewController else { return }
-        GIDSignIn.sharedInstance.signIn(withPresenting: viewController) { signInResult, error in
-            guard error == nil else {
-                print("some auth error in googleLogin method")
-                self.presenter?.getVerificationResult(with: .wrongEnteredData)
-                return
+        self.authManager?.googleSignIn(viewController: viewController) { [weak self] status, uid in
+            switch status {
+            case .googleSignInSucces:
+                DispatchQueue.main.async {
+                    let image = UIImage(named: "mockUser_3")!
+                    let tempUid = UUID().uuidString
+                    self?.firebaseStorage?.checkAvatar(avatar: image, uid: uid ?? tempUid)
+                    self?.loadTaskFromServer()
+                }
+                self?.presenter?.getVerificationResult(with: .googleSignInSucces)
+            case .wrongEnteredData:
+                self?.presenter?.getVerificationResult(with: .wrongEnteredData)
+            default:
+                self?.presenter?.getVerificationResult(with: .wrongEnteredData)
             }
-
-            let uuid = signInResult?.user.userID ?? UUID().uuidString
-            let userName = signInResult?.user.profile?.name
-            self.writeUserDataGoogleSingIn(signInResult: signInResult, userName: userName, uuid: uuid)
         }
     }
 
@@ -56,82 +57,29 @@ final class LoginInteractor: LoginInteractorInputProtocol {
     }
 }
 
-   // MARK: - SingIn with email and password method
+// MARK: - SingIn with email and password method
 extension LoginInteractor {
     private func logInWithEmailAndPassword(email: String, password: String) {
-        let taskManager = FirebaseStorageManager()
-        Auth.auth().signIn(withEmail: email, password: password) { [weak self] dataResult, error in
-            if error != nil {
+        self.authManager?.signIn(email: email, password: password) { [weak self] status in
+            switch status {
+            case .wrongEnteredData:
                 self?.presenter?.getVerificationResult(with: .wrongEnteredData)
-            } else {
-                Task {
-                    await taskManager.loadTaskFromFirestore()
-                    taskManager.chekOverdueTasks()
-                }
-                let uid = dataResult?.user.uid ?? UUID().uuidString
-                let name = Auth.auth().currentUser?.displayName
-                UserDefaults.standard.set(name, forKey: NotificationNames.userName.rawValue)
-                self?.keyChainedManager.persist(id: uid)
+            case .success:
+                self?.loadTaskFromServer()
                 self?.presenter?.getVerificationResult(with: .success)
+            default:
+                self?.presenter?.getVerificationResult(with: .wrongEnteredData)
             }
         }
     }
 }
-    // MARK: - Google SingIn Method extension
-extension LoginInteractor {
-    private func writeUserDataGoogleSingIn(signInResult: GIDSignInResult?, userName: String?, uuid: String) {
-        let docRef = firebaseDataBase.collection("users").whereField("uid", isEqualTo: uuid)
-        docRef.getDocuments { snapshot, error in
-            if error != nil {
-                print(error?.localizedDescription as Any)
-            } else {
-                if let doc = snapshot?.documents, !doc.isEmpty {
-                    NotificationCenter.default.post(name: NotificationNames.googleSignIn.name, object: nil)
-                    self.setUserName(userName)
-                    self.keyChainedManager.persist(id: uuid)
-                    self.presenter?.getVerificationResult(with: .googleSignInSucces)
-                } else {
-                    let newUserName = signInResult?.user.profile?.name ?? "Some User"
-                    self.firebaseDataBase.collection("users").document(uuid).setData( [
-                        "email" : signInResult?.user.profile?.email ?? "",
-                        "name" : signInResult?.user.profile?.name ?? "",
-                        "password" : "",
-                        "uid": uuid
-                    ], completion: { error in
-                        if error != nil {
-                            self.presenter?.getVerificationResult(with: .wrongEnteredData)
-                        } else {
-                            self.saveGoogleUserData(name: newUserName, uid: uuid)
-                        }})
-                }
-            }
-        }
-    }
 
-    private func saveGoogleUserData(name: String, uid: String) {
-        let taskManager = FirebaseStorageManager()
-        DispatchQueue.main.async {
-            let image = UIImage(named: "mockUser_3")!
-            taskManager.saveImage(image: image, name: uid)
-        }
-        self.keyChainedManager.persist(id: uid)
-        NotificationCenter.default.post(name: NotificationNames.googleSignIn.name, object: nil)
-        self.setUserName(name)
+extension LoginInteractor {
+    private func loadTaskFromServer() {
+        let taskManager = self.firebaseStorage
         Task {
-            await taskManager.loadTaskFromFirestore()
-            taskManager.chekOverdueTasks()
+            await taskManager?.loadTaskFromFirestore()
+            taskManager?.chekOverdueToDos()
         }
-        self.presenter?.getVerificationResult(with: .googleSignInSucces)
-    }
-}
-
-   // MARK: - Get user name method
-extension LoginInteractor {
-    private func setUserName(_ name: String?) {
-        guard let userName = name else {
-            UserDefaults.standard.setValue("Test", forKeyPath: "UserName")
-            return
-        }
-        UserDefaults.standard.setValue(userName, forKeyPath: "UserName")
     }
 }

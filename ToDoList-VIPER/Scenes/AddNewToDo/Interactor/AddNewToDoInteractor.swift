@@ -11,8 +11,8 @@ final class AddNewToDoInteractor: AddNewToDoInteractorProtocol {
     weak var presenter: AddNewToDoPresenterProtocol?
 
     // MARK: - Property's
-    private var localStorage = TaskStorageManager.instance
-    private var networkStorage = FirebaseStorageManager()
+    var localStorage: AddNewToDoLocalStorageProtocol?
+    var networkStorage: AddNewToDoServerStorageProtocol?
     private var categoryManger = TaskCategoryManager()
 
     func addNewToDo(with name: String?, description: String?, date: Date?, colorCategory: UIColor, iconName: String) {
@@ -24,7 +24,7 @@ final class AddNewToDoInteractor: AddNewToDoInteractorProtocol {
         let uid = UUID.init()
 
         if name != "" {
-            localStorage.createNewToDo(title: name ?? "Temp",
+            localStorage?.createNewToDo(title: name ?? "Temp",
                                        content: self.cehckDescription(description ?? "Описание задачи"),
                                        date: date ?? Date.today,
                                        isOverdue: overdueStatus,
@@ -34,7 +34,7 @@ final class AddNewToDoInteractor: AddNewToDoInteractorProtocol {
                                        uid: uid)
             let newToDo = ToDoTask(title: name ?? "Temp", descriptionTitle: description ?? "Temp", date: date ?? Date.today,
                                    category: category, status: status, id: uid)
-            networkStorage.uploadTaskToServer(with: newToDo)
+            networkStorage?.uploadTaskToServer(with: newToDo)
             presenter?.goBackToMain()
         } else {
             presenter?.showAlert()

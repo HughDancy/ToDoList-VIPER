@@ -22,6 +22,7 @@ protocol ForgettPasswordPresenterProtocol: AnyObject {
 
 protocol ForgettPasswordInreractorInputProtocol: AnyObject {
     var presenter: ForgettPasswordInreractorOutputProtocol? { get set }
+    var authManager: ForgottPasswordProtocol? { get set }
 
     // PRESENTER -> INTERACTOR
     func resetPassword(with email: String)

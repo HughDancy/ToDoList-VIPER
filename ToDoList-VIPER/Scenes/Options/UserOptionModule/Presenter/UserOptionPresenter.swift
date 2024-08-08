@@ -56,8 +56,12 @@ extension UserOptionPresenter: UserOptionOutputInteractorProtocol {
         router?.goToImagePicker(from: view, status: status)
     }
 
-    func loadUserData(_ data: (String, URL?)) {
-        view?.getUserData(data)
+    func loadUserAvatar(_ avatar: URL?) {
+        view?.getUserAvatar(avatar)
+    }
+
+    func loadUserName(_ name: String) {
+        view?.getUserName(name)
     }
 
     func dismiss() {

@@ -65,6 +65,7 @@ final class CustomHomeTabBarController: UITabBarController, UITabBarControllerDe
         middleButton.backgroundColor = UIColor(named: "coralColor")
         middleButton.tintColor = .systemBackground
         let buttonImage = UIImageView(image: UIImage(systemName: "plus"))
+        middleButton.accessibilityLabel = "CircleButton"
         middleButton.addSubview(buttonImage)
         buttonImage.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()

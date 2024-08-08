@@ -40,6 +40,7 @@ final class ForgottPasswordController: UIViewController, ForgetPasswordViewProto
                                                         returnKey: .done)
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
+        textField.accessibilityLabel = "ForggotenField"
         return textField
     }()
 
@@ -87,13 +88,13 @@ final class ForgottPasswordController: UIViewController, ForgetPasswordViewProto
         emailTextField.snp.makeConstraints { make in
             make.top.equalTo(forgottLabel.snp.bottom).offset(ResetPassSizes.labelAndFontTopOffset.value)
             make.leading.trailing.equalToSuperview().inset(ResetPassSizes.imageAndFieldHorizontalOffset.value)
-            make.height.equalTo(ResetPassSizes.buttonAndFieldHeight.value)
+            make.height.equalTo(ResetPassSizes.fieldHeight.value)
         }
 
         acceptButton.snp.makeConstraints { make in
             make.top.equalTo(emailTextField.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(40)
-            make.height.equalTo(ResetPassSizes.buttonAndFieldHeight.value)
+            make.height.equalTo(ResetPassSizes.buttonHeight.value)
         }
     }
 
@@ -116,7 +117,8 @@ extension ForgottPasswordController: UITextFieldDelegate {
 private enum ResetPassSizes: CGFloat {
     case imageTopOffset = 100
     case imageAndFieldHorizontalOffset = 30
-    case buttonAndFieldHeight = 40
+    case fieldHeight = 40
+    case buttonHeight = 45
     case labelAndFontTopOffset = 15
     case labelHorizontalOffset = 20
 
@@ -126,8 +128,10 @@ private enum ResetPassSizes: CGFloat {
              (UIScreen.main.bounds.height / 5.0) - (UIScreen.main.bounds.width / 5.0)
         case .imageAndFieldHorizontalOffset:
              30
-        case .buttonAndFieldHeight:
-            40
+        case .fieldHeight:
+            UIScreen.main.bounds.height > 700 ? 45 : 40
+        case .buttonHeight:
+            UIScreen.main.bounds.height > 700 ? 55 : 45
         case .labelAndFontTopOffset:
             15
         case .labelHorizontalOffset:

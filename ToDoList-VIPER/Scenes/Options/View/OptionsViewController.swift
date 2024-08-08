@@ -13,7 +13,8 @@ final class OptionsViewController: UIViewController {
     // MARK: - Properties
     var presenter: OptionsPresenterProtocol?
     private var optionsData = [String]()
-    private var userData: (String, URL?) = ("", nil)
+    private var userName: String = ""
+    private var userAvatarUrl: URL?
     private var mainView: OptionView? {
         guard isViewLoaded else { return nil }
         return view as? OptionView
@@ -24,14 +25,14 @@ final class OptionsViewController: UIViewController {
         super.viewWillAppear(animated)
         view.overrideUserInterfaceStyle = ToDoThemeDefaults.shared.theme.getUserInterfaceStyle()
         mainView?.containerView.overrideUserInterfaceStyle = ToDoThemeDefaults.shared.theme.getUserInterfaceStyle()
+        setupNotificationObserver()
         self.tabBarController?.tabBar.isHidden = false
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNotificationObserver()
         presenter?.getData()
-        self.view = OptionView(name: userData.0, url: userData.1)
+        self.view = OptionView()
         view.overrideUserInterfaceStyle = ToDoThemeDefaults.shared.theme.getUserInterfaceStyle()
         setupMainView()
     }
@@ -54,25 +55,27 @@ final class OptionsViewController: UIViewController {
 
     @objc func updateUserInfo() {
         self.presenter?.updateUserData()
-        self.mainView?.userName.text = userData.0
         DispatchQueue.main.asyncAfter(deadline: .now() + 4.5, execute: {
-            self.mainView?.avatarImage.kf.setImage(with: UserDefaults.standard.url(forKey: "UserAvatar"),
-                                  placeholder: UIImage(named: "mockUser_3"),
-                                  options: [
-                                    .cacheOriginalImage
-                                  ])
+            self.mainView?.setupUserAvatar(UserDefaults.standard.url(forKey: UserDefaultsNames.userAvatar.name))
         })
+        self.mainView?.setupUserName(self.userName)
     }
 }
 
 // MARK: - OptionsView Protocol Extension
 extension OptionsViewController: OptionsViewProtocol {
-    func getOptionsData(_ data: [String]) {
-        self.optionsData = data
+    func getUserName(_ name: String) {
+        self.userName = name
+        self.mainView?.setupUserName(self.userName)
     }
 
-    func getUserData(_ userData: (String, URL?)) {
-        self.userData = userData
+    func getUserAvatar(_ url: URL?) {
+        self.userAvatarUrl = url
+        self.mainView?.setupUserAvatar(url)
+    }
+
+    func getOptionsData(_ data: [String]) {
+        self.optionsData = data
     }
 }
 
@@ -83,7 +86,7 @@ extension OptionsViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: OptionsCell.reuseIdentifier, for: indexPath) as? OptionsCell 
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: OptionsCell.reuseIdentifier, for: indexPath) as? OptionsCell
         else { return UITableViewCell() }
         cell.setupCell(title: optionsData[indexPath.row], index: indexPath.row)
         cell.delegate = self

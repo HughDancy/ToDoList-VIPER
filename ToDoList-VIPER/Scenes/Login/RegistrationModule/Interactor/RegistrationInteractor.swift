@@ -5,20 +5,20 @@
 //  Created by Борис Киселев on 29.01.2024.
 //
 
-import Foundation
-import FirebaseAuth
-import FirebaseFirestore
+import UIKit.UIImage
 import AVFoundation
 import Photos
 
 final class RegistrationInteractor: RegistrationInteractorInputProtocol {
     weak var presenter: RegistrationInteractorOutputProtocol?
+    var firebaseStorageManager: UserAvatarSaveInServerProtocol?
+    var authManager: RegistrationProtocol?
     private var avatarTemp = UIImage()
 
     // MARK: - Register from presenter method
     func registerNewUser(name: String, email: String, password: String) {
         if Reachability.isConnectedToNetwork() {
-            if name != "" || email != "" || password != "" {
+            if name != "" && email != "" && password != "" {
                 if email.isValidEmail() {
                     self.registerUser(name: name, email: email, password: password)
                 } else {
@@ -34,15 +34,17 @@ final class RegistrationInteractor: RegistrationInteractorInputProtocol {
 
     // MARK: - Support register method
     private func registerUser(name: String, email: String, password: String) {
-        let storageManager = FirebaseStorageManager()
-        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
-            if error != nil {
-                self.presenter?.getRegistrationResult(result: .error)
-                print(error?.localizedDescription as Any)
-            } else {
-                let uid = result!.user.uid
-                storageManager.saveImage(image: self.avatarTemp, name: uid)
-                self.addNewUserToServer(uid: uid, email: email, name: name, password: password)
+        authManager?.registerUser(name: name, email: email, password: password) { [weak self] status, uid in
+            switch status {
+            case .error:
+                self?.presenter?.getRegistrationResult(result: .error)
+            case .complete:
+                let tempImage = UIImage(named: "mockUser_1")!
+                let tempUID = UUID().uuidString
+                self?.firebaseStorageManager?.saveImage(image: self?.avatarTemp ?? tempImage, name: uid ?? tempUID)
+                self?.presenter?.getRegistrationResult(result: .complete)
+            default:
+                self?.presenter?.getRegistrationResult(result: .error)
             }
         }
     }
@@ -93,37 +95,5 @@ final class RegistrationInteractor: RegistrationInteractorInputProtocol {
     // MARK: - Set temp avatar for upload to server
     func setTempAvatar(_ image: UIImage) {
         self.avatarTemp = image
-    }
-}
-    // MARK: - Register new user support method and write his data to server
-fileprivate extension RegistrationInteractor {
-    private func addNewUserToServer(uid: String, email: String, name: String, password: String) {
-        let firebaseDataBase = Firestore.firestore()
-        firebaseDataBase.collection("users").document(uid).setData([
-            "email" : email,
-            "name" : name,
-            "password" : password,
-            "uid": uid
-        ]) { error in
-            if error != nil {
-                print("Error save new user in data base ")
-                self.presenter?.getRegistrationResult(result: .error)
-            } else {
-                let user = Auth.auth().currentUser
-                if let user = user {
-                    let changeRequest = user.createProfileChangeRequest()
-
-                    changeRequest.displayName = name
-                    changeRequest.commitChanges { error in
-                        if error != nil {
-                            // An error happened.
-                        } else {
-                            // Profile updated.
-                        }
-                    }
-                }
-                self.presenter?.getRegistrationResult(result: .complete)
-            }
-        }
     }
 }

@@ -48,6 +48,8 @@ final class AssemblyBuilder {
         presenter.interactor = interactor
         presenter.router = router
         interactor.presenter = presenter
+        interactor.authManager = AuthManager()
+        interactor.firebaseStorage = FirebaseStorageManager()
         viewController.navigationItem.hidesBackButton = true
         return viewController
     }
@@ -63,6 +65,8 @@ final class AssemblyBuilder {
         presenter.interactor = interactor
         presenter.router = router
         interactor.presenter = presenter
+        interactor.firebaseStorageManager = FirebaseStorageManager()
+        interactor.authManager = AuthManager()
         router.presenter = presenter
         return view
     }
@@ -78,13 +82,13 @@ final class AssemblyBuilder {
         presenter.interactor = interactor
         presenter.router = router
         interactor.presenter = presenter
+        interactor.authManager = AuthManager()
 
         return view
     }
 }
   // MARK: - Create Home screen method's
 extension AssemblyBuilder {
-
     func createHomeTabBar(tabOne: UIViewController, tabTwo: UIViewController) -> UIViewController {
         let tabBar = CustomHomeTabBarController()
         let presenter: HomeTabBarPresenterProtocol = HomeTabBarPresenter()
@@ -122,6 +126,8 @@ extension AssemblyBuilder {
         presenter.interactor = interactor
         presenter.router = router
         interactor.presenter = presenter
+        interactor.localStorage = TaskStorageManager.instance
+        interactor.networkStorage = FirebaseStorageManager()
         return view
     }
 
@@ -136,6 +142,8 @@ extension AssemblyBuilder {
         presenter.interactor = interactor
         presenter.router = router
         interactor.presenter = presenter
+        interactor.storage = TaskStorageManager.instance
+        interactor.firebaseStorageManager = FirebaseStorageManager()
 
         return viewController
     }
@@ -166,6 +174,7 @@ extension AssemblyBuilder {
         presenter.interactor = interactor
         presenter.router = router
         interactor.presenter = presenter
+        interactor.firebaseStorageManager = FirebaseStorageManager()
         router.presenter = presenter
 
         return view
@@ -185,11 +194,13 @@ extension AssemblyBuilder {
         presenter.interactor = interactor
         presenter.router = router
         interactor.presenter = presenter
+        interactor.storage = TaskStorageManager.instance
+        interactor.firebaseStorage = FirebaseStorageManager()
 
         return view
     }
 
-    func createModule(with toDo: ToDoObject) -> UIViewController {
+    func createToDosDetailModule(with toDo: ToDoObject) -> UIViewController {
         let viewController: ToDosDetailViewProtocol = ToDosDetailController()
         let presenter: ToDosDetailPresenterProtocol & ToDosDetailInteractorOutputProtocol = ToDosDetailPresenter()
         let interactor: ToDosDetailInteractorInputProtocol = ToDosDetailInteractor()
@@ -201,6 +212,8 @@ extension AssemblyBuilder {
         presenter.router = router
         interactor.presenter = presenter
         interactor.toDoItem = toDo
+        interactor.localStorage = TaskStorageManager.instance
+        interactor.firebaseStorage = FirebaseStorageManager()
         router.presenter = presenter
 
         return viewController as? UIViewController ?? MockViewController()

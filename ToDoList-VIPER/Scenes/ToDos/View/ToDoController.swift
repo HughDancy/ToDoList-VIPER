@@ -183,7 +183,7 @@ extension ToDoController {
 
     @objc func makeItDone(notification: Notification) {
         guard let doneInfo = notification.userInfo else { return }
-        guard let taskId = doneInfo["taskID"] as? UUID else { return }
+        guard let taskId = doneInfo["doneItem"] as? UUID else { return }
         self.presenter?.doneToDo(taskId)
         guard let index = toDoTasks.firstIndex(where: { $0.id == taskId }) else { return }
         let doneItem = toDoTasks.remove(at: index)

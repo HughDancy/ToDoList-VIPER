@@ -17,6 +17,7 @@ final class CircleBaseButton: UIButton {
         self.typeOfImage = typeOfImage
         self.backgroundColor = color
         self.layer.cornerRadius = cornerRadius
+        self.accessibilityLabel = imageName ?? "circleButton"
         self.setupButton()
     }
 
