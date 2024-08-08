@@ -11,14 +11,17 @@ import GoogleSignIn
 import GoogleSignInSwift
 
 protocol LoginProtocol: AnyObject {
-    var result: Bool { get set }
     func signIn(email: String, password: String, compelitionHandler: @escaping (LogInStatus) -> Void)
-    func googleSignIn(viewController: UIViewController, compelitionHadler: @escaping (LogInStatus) -> Void)
+    func googleSignIn(viewController: UIViewController, compelitionHadler: @escaping (LogInStatus, String?) -> Void)
 }
 
+protocol RegistrationProtocol: AnyObject {
+    func registerUser(name: String, email: String, password: String, compelition: @escaping(RegistrationStatus, String?) -> Void)
+}
+
+// MARK: - Login Method's
 final class AuthManager: LoginProtocol {
     private let keyChainedManager = AuthKeychainManager()
-    var result: Bool = false
 
     func signIn(email: String, password: String, compelitionHandler: @escaping (LogInStatus) -> Void) {
         let keychainManager = AuthKeychainManager()
@@ -35,17 +38,17 @@ final class AuthManager: LoginProtocol {
         }
     }
 
-    func googleSignIn(viewController: UIViewController, compelitionHadler: @escaping (LogInStatus) -> Void) {
+    func googleSignIn(viewController: UIViewController, compelitionHadler: @escaping (LogInStatus, String?) -> Void) {
         GIDSignIn.sharedInstance.signIn(withPresenting: viewController) { signInResult, error in
             guard error == nil else {
                 print("some auth error in googleLogin method")
-                compelitionHadler(.wrongEnteredData)
+                compelitionHadler(.wrongEnteredData, nil)
                 return
             }
             let uuid = signInResult?.user.userID ?? UUID().uuidString
             let userName = signInResult?.user.profile?.name
             self.writeUserDataGoogleSingIn(signInResult: signInResult, userName: userName, uuid: uuid, viewController: viewController)
-            compelitionHadler(.googleSignInSucces)
+            compelitionHadler(.googleSignInSucces, uuid)
         }
     }
 }
@@ -83,7 +86,7 @@ extension AuthManager {
             }
         }
     }
-
+// MARK: - Support mehtod
     private func setUserName(_ name: String?) {
         guard let userName = name else {
             UserDefaults.standard.set("Test", forKey: UserDefaultsNames.userName.name)
@@ -91,10 +94,48 @@ extension AuthManager {
         }
         UserDefaults.standard.set(userName, forKey: UserDefaultsNames.userName.name)
     }
+}
 
-    private func saveBaseUserInfo(name: String, uid: String) {
-        self.keyChainedManager.persist(id: uid)
-        NotificationCenter.default.post(name: NotificationNames.googleSignIn.name, object: nil)
-        self.setUserName(name)
+// MARK: - Registration Method's
+extension AuthManager: RegistrationProtocol {
+    func registerUser(name: String, email: String, password: String, compelition: @escaping (RegistrationStatus, String?) -> Void) {
+        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+            if error != nil {
+                compelition(.error, nil)
+                print(error?.localizedDescription as Any)
+            } else {
+                let uid = result!.user.uid
+                self.addNewUserToServer(uid: uid, email: email, name: name, password: password)
+                compelition(.complete, uid)
+            }
+        }
+    }
+
+    private func addNewUserToServer(uid: String, email: String, name: String, password: String) {
+        let firebaseDataBase = Firestore.firestore()
+        firebaseDataBase.collection("users").document(uid).setData([
+            "email" : email,
+            "name" : name,
+            "password" : password,
+            "uid": uid
+        ]) { error in
+            if error != nil {
+                print("Error save new user in data base ")
+            } else {
+                let user = Auth.auth().currentUser
+                if let user = user {
+                    let changeRequest = user.createProfileChangeRequest()
+
+                    changeRequest.displayName = name
+                    changeRequest.commitChanges { error in
+                        if error != nil {
+                            // An error happened.
+                        } else {
+                            // Profile updated.
+                        }
+                    }
+                }
+            }
+        }
     }
 }

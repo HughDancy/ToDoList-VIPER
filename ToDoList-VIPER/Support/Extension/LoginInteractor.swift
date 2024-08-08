@@ -5,9 +5,7 @@
 //  Created by Борис Киселев on 26.01.2024.
 //
 
-import Foundation
-import GoogleSignIn
-import GoogleSignInSwift
+import UIKit.UIViewController
 
 final class LoginInteractor: LoginInteractorInputProtocol {
     var presenter: LoginInteractorOutputProtocol?
@@ -36,13 +34,13 @@ final class LoginInteractor: LoginInteractorInputProtocol {
     // MARK: - Google SignIn
     func googleLogIn(with: LoginViewProtocol) {
         guard let viewController = with as? UIViewController else { return }
-        self.authManager?.googleSignIn(viewController: viewController) { [weak self] status in
+        self.authManager?.googleSignIn(viewController: viewController) { [weak self] status, uid in
             switch status {
             case .googleSignInSucces:
-                let uid = GIDSignIn.sharedInstance.currentUser?.userID ?? UUID.init().uuidString
                 DispatchQueue.main.async {
                     let image = UIImage(named: "mockUser_3")!
-                    self?.firebaseStorage?.checkAvatar(avatar: image, uid: uid)
+                    let tempUid = UUID().uuidString
+                    self?.firebaseStorage?.checkAvatar(avatar: image, uid: uid ?? tempUid)
                     self?.loadTaskFromServer()
                 }
                 self?.presenter?.getVerificationResult(with: .googleSignInSucces)

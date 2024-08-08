@@ -66,6 +66,7 @@ final class AssemblyBuilder {
         presenter.router = router
         interactor.presenter = presenter
         interactor.firebaseStorageManager = FirebaseStorageManager()
+        interactor.authManager = AuthManager()
         router.presenter = presenter
         return view
     }

@@ -56,12 +56,7 @@ final class OptionsViewController: UIViewController {
     @objc func updateUserInfo() {
         self.presenter?.updateUserData()
         DispatchQueue.main.asyncAfter(deadline: .now() + 4.5, execute: {
-            self.mainView?.setupUserAvatar(self.userAvatarUrl)
-            self.mainView?.avatarImage.kf.setImage(with: UserDefaults.standard.url(forKey: UserDefaultsNames.userAvatar.name),
-                                                   placeholder: UIImage(named: "mockUser_3"),
-                                                   options: [
-                                                    .cacheOriginalImage
-                                                   ])
+            self.mainView?.setupUserAvatar(UserDefaults.standard.url(forKey: UserDefaultsNames.userAvatar.name))
         })
         self.mainView?.setupUserName(self.userName)
     }
