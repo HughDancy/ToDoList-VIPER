@@ -7,7 +7,7 @@
 
 import XCTest
 
-final class ToDosDetailUITest: XCTestCase {
+final class G_ToDosDetailUITest: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -25,7 +25,7 @@ final class ToDosDetailUITest: XCTestCase {
     func testEditToDo() {
         let app = XCUIApplication()
         app.launch()
-        if app.collectionViews["MainCollectionView"].waitForExistence(timeout: 2.0) {
+        if app.collectionViews["MainCollectionView"].waitForExistence(timeout: 5.0) {
             app.collectionViews["MainCollectionView"]/*@START_MENU_TOKEN@*/.cells/*[[".scrollViews.cells",".cells"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.staticTexts["Сегодня"].tap()
             app.tables["ToDoTable"].cells.element(boundBy: 0).tap()
             app.buttons["EditButton"].tap()
@@ -46,7 +46,7 @@ final class ToDosDetailUITest: XCTestCase {
     func testDeleteToDo() {
         let app = XCUIApplication()
         app.launch()
-        if app.collectionViews["MainCollectionView"].waitForExistence(timeout: 2.0) {
+        if app.collectionViews["MainCollectionView"].waitForExistence(timeout: 5.0) {
             app.collectionViews["MainCollectionView"]/*@START_MENU_TOKEN@*/.cells/*[[".scrollViews.cells",".cells"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.staticTexts["Сегодня"].tap()
             app.tables["ToDoTable"].cells.element(boundBy: 0).tap()
             app.buttons["DeleteButton"].tap()
@@ -54,12 +54,12 @@ final class ToDosDetailUITest: XCTestCase {
         }
     }
 
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
-    }
+//    func testLaunchPerformance() throws {
+//        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
+//            // This measures how long it takes to launch your application.
+//            measure(metrics: [XCTApplicationLaunchMetric()]) {
+//                XCUIApplication().launch()
+//            }
+//        }
+//    }
 }

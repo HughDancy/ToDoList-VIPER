@@ -17,7 +17,7 @@ final class LoginInteractorTest: XCTestCase {
 
     override func setUp() {
         loginView = LoginController()
-        presenter = LoginMockPresenter()
+        presenter = MockLoginPresenter()
         interactor = LoginInteractor()
         router = LoginRouter()
         super.setUp()
@@ -37,9 +37,11 @@ final class LoginInteractorTest: XCTestCase {
         presenter.interactor = interactor
         presenter.router = router
         interactor.presenter = presenter
-        let testPresenter = presenter as! LoginMockPresenter
-        loginView.presenter?.chekTheLogin(login: "", password: "bobasport")
-        let result = testPresenter.emptyLogin
+        interactor.authManager = MockLoginAuthManager()
+        interactor.firebaseStorage = MockLoginFirebaseStorageManager()
+        let testPresenter = presenter as! MockLoginPresenter
+        interactor.checkAutorizationData(login: "", password: "bobasport")
+        let result = testPresenter.isLoginEmpty
         XCTAssertTrue((result))
     }
 
@@ -49,9 +51,11 @@ final class LoginInteractorTest: XCTestCase {
         presenter.interactor = interactor
         presenter.router = router
         interactor.presenter = presenter
-        let testPresenter = presenter as! LoginMockPresenter
-        loginView.presenter?.chekTheLogin(login: "user@mail.ru", password: "")
-        let result = testPresenter.emptyPass
+        interactor.authManager = MockLoginAuthManager()
+        interactor.firebaseStorage = MockLoginFirebaseStorageManager()
+        let testPresenter = presenter as! MockLoginPresenter
+        interactor.checkAutorizationData(login: "user@mail.ru", password: "")
+        let result = testPresenter.isEmptyPassword
         XCTAssertTrue(result)
     }
 
@@ -61,9 +65,39 @@ final class LoginInteractorTest: XCTestCase {
         presenter.interactor = interactor
         presenter.router = router
         interactor.presenter = presenter
-        let testPresenter = presenter as! LoginMockPresenter
-        loginView.presenter?.chekTheLogin(login: "str_mailru", password: "grekorome")
-        let result = testPresenter.notValidEmail
+        interactor.authManager = MockLoginAuthManager()
+        interactor.firebaseStorage = MockLoginFirebaseStorageManager()
+        let testPresenter = presenter as! MockLoginPresenter
+        interactor.checkAutorizationData(login: "str_mailru", password: "grekorome")
+        let result = testPresenter.isEmailNotValid
+        XCTAssertTrue(result)
+    }
+
+    func testWrongUserData() {
+        loginView.presenter = presenter
+        presenter.view = loginView
+        presenter.interactor = interactor
+        presenter.router = router
+        interactor.presenter = presenter
+        interactor.authManager = MockLoginAuthManager()
+        interactor.firebaseStorage = MockLoginFirebaseStorageManager()
+        let testPresenter = presenter as! MockLoginPresenter
+        interactor.checkAutorizationData(login: "someDude@mail.com", password: "qWeRTy")
+        let result = testPresenter.isDataWrong
+        XCTAssertTrue(result)
+    }
+
+    func testCorrectUserData() {
+        loginView.presenter = presenter
+        presenter.view = loginView
+        presenter.interactor = interactor
+        presenter.router = router
+        interactor.presenter = presenter
+        interactor.authManager = MockLoginAuthManager()
+        interactor.firebaseStorage = MockLoginFirebaseStorageManager()
+        let testPresenter = presenter as! MockLoginPresenter
+        interactor.checkAutorizationData(login: "user@mail.ru", password: "1234")
+        let result = testPresenter.isSucces
         XCTAssertTrue(result)
     }
 }

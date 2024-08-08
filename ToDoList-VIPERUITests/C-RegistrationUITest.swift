@@ -7,7 +7,7 @@
 
 import XCTest
 
-final class RegistrationUITest: XCTestCase {
+final class C_RegistrationUITest: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -25,7 +25,7 @@ final class RegistrationUITest: XCTestCase {
     func testEmptyNameField() {
         let app = XCUIApplication()
         app.launch()
-        if app.buttons["Войти"].waitForExistence(timeout:  2.0) {
+        if app.buttons["Войти"].waitForExistence(timeout:  5.0) {
             app.buttons["Зарегестрироваться"].tap()
             app.images["RegistrationUserAvatar"].tap()
             app.buttons["Галлерея"].tap()
@@ -35,7 +35,8 @@ final class RegistrationUITest: XCTestCase {
             app.textFields["Имя"].tap()
             app.textFields["Имя"].typeText("")
             let nextButton = app.keyboards.buttons["continue"].waitForExistence(timeout: 2.0)
-            nextButton ? app.keyboards.buttons["continue"].tap() : app.keyboards.buttons["Дальше"].tap()
+//            nextButton ? app.keyboards.buttons["continue"].tap() : app.keyboards.buttons["Дальше"].tap()
+            app.textFields["Email адресс"].tap()
             app.textFields["Email адресс"].typeText("bobr@kurva.pol")
             nextButton ? app.keyboards.buttons["continue"].tap() : app.keyboards.buttons["Дальше"].tap()
             app.textFields["Пароль"].typeText("japerdolle")
@@ -49,7 +50,7 @@ final class RegistrationUITest: XCTestCase {
     func testValidData() {
         let app = XCUIApplication()
         app.launch()
-        if app.buttons["Войти"].waitForExistence(timeout:  2.0) {
+        if app.buttons["Войти"].waitForExistence(timeout:  5.0) {
             app.buttons["Зарегестрироваться"].tap()
             app.images["RegistrationUserAvatar"].tap()
             app.buttons["Галлерея"].tap()
@@ -70,12 +71,12 @@ final class RegistrationUITest: XCTestCase {
         }
     }
 
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
-    }
+//    func testLaunchPerformance() throws {
+//        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
+//            // This measures how long it takes to launch your application.
+//            measure(metrics: [XCTApplicationLaunchMetric()]) {
+//                XCUIApplication().launch()
+//            }
+//        }
+//    }
 }

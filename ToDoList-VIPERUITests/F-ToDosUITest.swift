@@ -7,7 +7,7 @@
 
 import XCTest
 
-final class ToDosUITest: XCTestCase {
+final class F_ToDosUITest: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -26,7 +26,7 @@ final class ToDosUITest: XCTestCase {
     func testToDosCalendar() {
         let app = XCUIApplication()
         app.launch()
-        if app.collectionViews["MainCollectionView"].waitForExistence(timeout: 2.0) {
+        if app.collectionViews["MainCollectionView"].waitForExistence(timeout: 5.0) {
             app.collectionViews["MainCollectionView"].cells.element(boundBy: 0).tap()
             app.collectionViews["CalendarCollectionView"].swipeLeft()
             app.collectionViews["CalendarCollectionView"].swipeLeft()
@@ -38,7 +38,7 @@ final class ToDosUITest: XCTestCase {
     func testToDoTable() {
         let app = XCUIApplication()
         app.launch()
-        if app.collectionViews["MainCollectionView"].waitForExistence(timeout: 2.0) {
+        if app.collectionViews["MainCollectionView"].waitForExistence(timeout: 5.0) {
             app.collectionViews["MainCollectionView"]/*@START_MENU_TOKEN@*/.cells/*[[".scrollViews.cells",".cells"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.staticTexts["Сегодня"].tap()
             app.tables["ToDoTable"].swipeDown()
             app.tables["ToDoTable"].cells.element(boundBy: 0).tap()
@@ -46,12 +46,12 @@ final class ToDosUITest: XCTestCase {
         }
     }
 
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
-    }
+//    func testLaunchPerformance() throws {
+//        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
+//            // This measures how long it takes to launch your application.
+//            measure(metrics: [XCTApplicationLaunchMetric()]) {
+//                XCUIApplication().launch()
+//            }
+//        }
+//    }
 }

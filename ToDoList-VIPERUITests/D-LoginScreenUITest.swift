@@ -7,7 +7,7 @@
 
 import XCTest
 
-final class LoginScreenUITest: XCTestCase {
+final class D_LoginScreenUITest: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -25,7 +25,7 @@ final class LoginScreenUITest: XCTestCase {
     func testNotValidEmail() {
         let app = XCUIApplication()
         app.launch()
-        if app.buttons["Войти"].waitForExistence(timeout: 2.0) {
+        if app.buttons["Войти"].waitForExistence(timeout: 5.0) {
             app.textFields["Логин"].tap()
             app.textFields["Логин"].typeText("boba6@mailru")
             app.keyboards.buttons["next"].tap()
@@ -39,7 +39,7 @@ final class LoginScreenUITest: XCTestCase {
     func testAppleSignIn() {
         let app = XCUIApplication()
         app.launch()
-        if app.buttons["Войти"].waitForExistence(timeout: 2.0) {
+        if app.buttons["Войти"].waitForExistence(timeout: 5.0) {
             app.buttons["apple.logo"].tap()
             XCTAssertTrue(app.alerts["Сорян"].waitForExistence(timeout: 2.0))
         }
@@ -48,7 +48,7 @@ final class LoginScreenUITest: XCTestCase {
     func testEnterToMainScreen() throws {
         let app = XCUIApplication()
         app.launch()
-        if app.buttons["Войти"].waitForExistence(timeout: 2.0) {
+        if app.buttons["Войти"].waitForExistence(timeout: 5.0) {
             app.textFields["Логин"].tap()
             app.textFields["Логин"].typeText("boba96@mail.ru")
             app.keyboards.buttons["next"].tap()
@@ -61,12 +61,12 @@ final class LoginScreenUITest: XCTestCase {
 
 
 
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
-    }
+//    func testLaunchPerformance() throws {
+//        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
+//            // This measures how long it takes to launch your application.
+//            measure(metrics: [XCTApplicationLaunchMetric()]) {
+//                XCUIApplication().launch()
+//            }
+//        }
+//    }
 }

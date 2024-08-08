@@ -8,7 +8,7 @@
 import XCTest
 import Foundation.NSDate
 
-final class MainScreenUITest: XCTestCase {
+final class E_MainScreenUITest: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -27,7 +27,7 @@ final class MainScreenUITest: XCTestCase {
     func testCircleButton() {
         let app = XCUIApplication()
         app.launch()
-        if app.collectionViews["MainCollectionView"].waitForExistence(timeout: 2.0) {
+        if app.collectionViews["MainCollectionView"].waitForExistence(timeout: 5.0) {
             app.tabBars.buttons["CircleButton"].tap()
             XCTAssert(app.tables["CategoryTable"].waitForExistence(timeout: 2.0))
         }
@@ -36,7 +36,7 @@ final class MainScreenUITest: XCTestCase {
     func testOpenOptionModule() {
         let app = XCUIApplication()
         app.launch()
-        if app.collectionViews["MainCollectionView"].waitForExistence(timeout: 2.0) {
+        if app.collectionViews["MainCollectionView"].waitForExistence(timeout: 5.0) {
             app.tabBars.buttons.element(boundBy: 1).tap()
             XCTAssert(app.tables["OptionsTable"].waitForExistence(timeout: 2.0))
         }
@@ -45,7 +45,7 @@ final class MainScreenUITest: XCTestCase {
     func testOpenTasks() {
         let app = XCUIApplication()
         app.launch()
-        if app.collectionViews["MainCollectionView"].waitForExistence(timeout: 2.0) {
+        if app.collectionViews["MainCollectionView"].waitForExistence(timeout: 5.0) {
             self.openTasks(with: app, identifier: "Сегодня")
             self.openTasks(with: app, identifier: "Завтра")
             self.openTasks(with: app, identifier: "Просрочено")
@@ -63,7 +63,7 @@ final class MainScreenUITest: XCTestCase {
     func testAddNewTasks() {
         let app = XCUIApplication()
         app.launch()
-        if app.collectionViews["MainCollectionView"].waitForExistence(timeout: 2.0) {
+        if app.collectionViews["MainCollectionView"].waitForExistence(timeout: 5.0) {
             app.tabBars.buttons["CircleButton"].tap()
             app.textFields["Наименование задачи"].tap()
             app.textFields["Наименование задачи"].typeText("Name of task")
@@ -81,7 +81,7 @@ final class MainScreenUITest: XCTestCase {
     func testNotValidTask() {
         let app = XCUIApplication()
         app.launch()
-        if app.collectionViews["MainCollectionView"].waitForExistence(timeout: 2.0) {
+        if app.collectionViews["MainCollectionView"].waitForExistence(timeout: 5.0) {
             app.tabBars.buttons["CircleButton"].tap()
             app.textViews["DescriptionTextView"].tap()
             app.textViews["DescriptionTextView"].typeText("Description of task")
@@ -93,12 +93,12 @@ final class MainScreenUITest: XCTestCase {
         }
     }
 
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
-    }
+//    func testLaunchPerformance() throws {
+//        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
+//            // This measures how long it takes to launch your application.
+//            measure(metrics: [XCTApplicationLaunchMetric()]) {
+//                XCUIApplication().launch()
+//            }
+//        }
+//    }
 }

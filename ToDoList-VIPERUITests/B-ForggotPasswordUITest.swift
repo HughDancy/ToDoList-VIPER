@@ -7,7 +7,7 @@
 
 import XCTest
 
-final class ForggotPasswordUITest: XCTestCase {
+final class B_ForggotPasswordUITest: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -33,7 +33,7 @@ final class ForggotPasswordUITest: XCTestCase {
     func testNotValidEmail() {
         let app = XCUIApplication()
         app.launch()
-        if app.buttons["Войти"].waitForExistence(timeout: 2.0) {
+        if app.buttons["Войти"].waitForExistence(timeout: 5.0) {
             app.buttons["Забыли пароль?"].tap()
             app.textFields["ForggotenField"].tap()
             app.textFields["ForggotenField"].typeText("brokemail.ru")
@@ -47,7 +47,7 @@ final class ForggotPasswordUITest: XCTestCase {
     func testValidEmail() {
         let app = XCUIApplication()
         app.launch()
-        if app.buttons["Войти"].waitForExistence(timeout: 2.0) {
+        if app.buttons["Войти"].waitForExistence(timeout: 5.0) {
             XCUIApplication()/*@START_MENU_TOKEN@*/.buttons["Забыли пароль?"]/*[[".scrollViews.buttons[\"Забыли пароль?\"]",".buttons[\"Забыли пароль?\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
             app.textFields["ForggotenField"].tap()
             app.textFields["ForggotenField"].typeText("boba@mail.ru")

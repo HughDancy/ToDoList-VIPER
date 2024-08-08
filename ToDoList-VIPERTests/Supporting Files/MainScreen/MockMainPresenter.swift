@@ -26,7 +26,8 @@ class MockMainPresenter: MainScreenPresenterProtocol {
     func goToTodos(with status: ToDoList_VIPER.ToDoListStatus) { }
 
     func updateUserData() {
-        interactor?.retriveUserData()
+        interactor?.retriveUserAvatar()
+        interactor?.retriveUserName()
     }
 }
 
