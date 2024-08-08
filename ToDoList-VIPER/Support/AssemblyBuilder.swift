@@ -82,6 +82,7 @@ final class AssemblyBuilder {
         presenter.interactor = interactor
         presenter.router = router
         interactor.presenter = presenter
+        interactor.authManager = AuthManager()
 
         return view
     }

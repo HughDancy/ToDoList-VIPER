@@ -19,6 +19,10 @@ protocol RegistrationProtocol: AnyObject {
     func registerUser(name: String, email: String, password: String, compelition: @escaping(RegistrationStatus, String?) -> Void)
 }
 
+protocol ForgottPasswordProtocol: AnyObject {
+    func resetPassword(email: String, compelition: @escaping (ResetStatus) -> Void)
+}
+
 // MARK: - Login Method's
 final class AuthManager: LoginProtocol {
     private let keyChainedManager = AuthKeychainManager()
@@ -136,6 +140,25 @@ extension AuthManager: RegistrationProtocol {
                     }
                 }
             }
+        }
+    }
+}
+
+// MARK: - Reset Password method
+extension AuthManager: ForgottPasswordProtocol {
+    func resetPassword(email: String, compelition: @escaping (ResetStatus) -> Void) {
+        if Reachability.isConnectedToNetwork() {
+            Auth.auth().sendPasswordReset(withEmail: email, completion: { (error) in
+                if error == nil {
+//                    self.presenter?.returnResult(with: .wellDone)
+                    compelition(.wellDone)
+                } else {
+                    compelition(.failure)
+//                    self.presenter?.returnResult(with: .failure)
+                }})
+        } else {
+            compelition(.networkError)
+//            presenter?.returnResult(with: .networkError)
         }
     }
 }

@@ -6,26 +6,25 @@
 //
 
 import Foundation
-import FirebaseAuth
 
 final class ForgettPasswordInteractor: ForgettPasswordInreractorInputProtocol {
     weak var presenter: ForgettPasswordInreractorOutputProtocol?
+    var authManager: ForgottPasswordProtocol?
 
     func resetPassword(with email: String) {
         if  email == "" || email.isValidEmail() == false {
             presenter?.returnResult(with: .failure)
         }
 
-        if Reachability.isConnectedToNetwork() {
-            Auth.auth().sendPasswordReset(withEmail: email, completion: { (error) in
-                if error == nil {
-                    self.presenter?.returnResult(with: .wellDone)
-                } else {
-                    self.presenter?.returnResult(with: .failure)
-                }
-            })
-        } else {
-            presenter?.returnResult(with: .networkError)
-        }
+        authManager?.resetPassword(email: email, compelition: { [weak self] status in
+            switch status {
+            case .failure:
+                self?.presenter?.returnResult(with: .failure)
+            case .networkError:
+                self?.presenter?.returnResult(with: .networkError)
+            case .wellDone:
+                self?.presenter?.returnResult(with: .wellDone)
+            }
+        })
     }
 }
