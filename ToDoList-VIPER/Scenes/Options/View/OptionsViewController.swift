@@ -56,7 +56,7 @@ final class OptionsViewController: UIViewController {
     @objc func updateUserInfo() {
         self.presenter?.updateUserData()
         DispatchQueue.main.asyncAfter(deadline: .now() + 4.5, execute: {
-            self.mainView?.setupUserAvatar(UserDefaults.standard.url(forKey: UserDefaultsNames.userAvatar.name))
+            self.mainView?.setupUserAvatar(UserDefaults.standard.url(forKey: UserDefaults.Keys.userAvatar))
         })
         self.mainView?.setupUserName(self.userName)
     }

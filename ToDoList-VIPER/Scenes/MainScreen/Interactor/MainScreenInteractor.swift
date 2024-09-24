@@ -21,7 +21,7 @@ final class MainScreenInteractor: MainScreenInteractorInputProtocol {
     }
 
     func retriveUserName() {
-        guard let name = UserDefaults.standard.string(forKey: UserDefaultsNames.userName.name) else {
+        guard let name = UserDefaults.standard.string(forKey: UserDefaults.Keys.userName) else {
             self.presenter?.didRetriveUserName("Test User")
             return
         }

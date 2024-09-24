@@ -35,7 +35,7 @@ final class AuthManager: LoginProtocol {
             } else {
                 let uid = dataResult?.user.uid ?? UUID().uuidString
                 let name = Auth.auth().currentUser?.displayName
-                UserDefaults.standard.set(name, forKey: UserDefaultsNames.userName.name)
+                UserDefaults.standard.set(name, forKey: UserDefaults.Keys.userName)
                 keychainManager.persist(id: uid)
                 compelitionHandler(.success)
             }
@@ -93,10 +93,10 @@ extension AuthManager {
 // MARK: - Support mehtod
     private func setUserName(_ name: String?) {
         guard let userName = name else {
-            UserDefaults.standard.set("Test", forKey: UserDefaultsNames.userName.name)
+            UserDefaults.standard.set("Test", forKey: UserDefaults.Keys.userName)
             return
         }
-        UserDefaults.standard.set(userName, forKey: UserDefaultsNames.userName.name)
+        UserDefaults.standard.set(userName, forKey: UserDefaults.Keys.userName)
     }
 }
 

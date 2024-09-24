@@ -35,7 +35,7 @@ final class AppConfigurator {
         let firstLaunchOnboardingStatus = NewUserCheck.shared.isOnboardingFirstStart()
 
         if firstLaunchOnboardingStatus == true {
-            UserDefaults.standard.setValue(OnboardingStates.welcome.rawValue, forKey: UserDefaultsNames.onboardingState.name)
+            UserDefaults.standard.setValue(OnboardingStates.welcome.rawValue, forKey: UserDefaults.Keys.onboardingState)
             NewUserCheck.shared.setIsNotFirstStartOnboarding()
         }
 
@@ -64,7 +64,7 @@ final class AppConfigurator {
             let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
             sceneDelegate?.window?.rootViewController = mainModule
             TaskStorageManager.instance.checkOverdueToDos()
-            UserDefaults.standard.setValue(false, forKey: UserDefaultsNames.firstWorkLaunch.name)
+            UserDefaults.standard.setValue(false, forKey: UserDefaults.Keys.firstWorkLaunch)
             return mainModule
         } else {
             let loginModule = UINavigationController(rootViewController: moduleBuilder.createLoginModule())

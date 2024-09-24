@@ -36,7 +36,7 @@ final class OnboardingPage: UIViewController {
     // MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UserDefaults.standard.setValue(state?.rawValue, forKey: UserDefaultsNames.onboardingState.name)
+        UserDefaults.standard.setValue(state?.rawValue, forKey: UserDefaults.Keys.onboardingState)
     }
 
     override func viewDidLoad() {

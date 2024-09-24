@@ -20,7 +20,7 @@ final class OptionView: UIView {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = OptionsScreenSizes.avatarCornerRadius.value
         imageView.clipsToBounds = true
-        imageView.kf.setImage(with: UserDefaults.standard.url(forKey: UserDefaultsNames.userAvatar.name),
+        imageView.kf.setImage(with: UserDefaults.standard.url(forKey: UserDefaults.Keys.userAvatar),
                               placeholder: UIImage(named: "mockUser_3"),
                               options: [
                                 .cacheOriginalImage
@@ -30,7 +30,7 @@ final class OptionView: UIView {
 
     lazy var userName: UILabel = {
         let label = UILabel()
-        label.text = UserDefaults.standard.string(forKey: UserDefaultsNames.userName.name)
+        label.text = UserDefaults.standard.string(forKey: UserDefaults.Keys.userName)
         label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
         label.textColor = .systemBackground
         return label

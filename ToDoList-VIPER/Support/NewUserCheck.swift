@@ -11,26 +11,26 @@ final class NewUserCheck {
     static let shared = NewUserCheck()
 
     func isNewUser() -> Bool {
-        return !(UserDefaults.standard.value(forKey: UserDefaultsNames.isNewUser.name) != nil)
+        return !(UserDefaults.standard.value(forKey: UserDefaults.Keys.isNewUser) != nil)
     }
 
     func setIsNotNewUser() {
-        UserDefaults.standard.set(false, forKey: UserDefaultsNames.isNewUser.name)
+        UserDefaults.standard.set(false, forKey: UserDefaults.Keys.isNewUser)
     }
 
     func isOnboardingFirstStart() -> Bool {
-        return !UserDefaults.standard.bool(forKey: UserDefaultsNames.firstStartOnboarding.name)
+        return !UserDefaults.standard.bool(forKey: UserDefaults.Keys.firstStartOnboarding)
     }
 
     func setIsNotFirstStartOnboarding() {
-        return UserDefaults.standard.setValue(true, forKey: UserDefaultsNames.firstStartOnboarding.name)
+        return UserDefaults.standard.setValue(true, forKey: UserDefaults.Keys.firstStartOnboarding)
     }
 
     func isLoginScreen() -> Bool {
-        return !UserDefaults.standard.bool(forKey: UserDefaultsNames.isLoginScreen.name)
+        return !UserDefaults.standard.bool(forKey: UserDefaults.Keys.isLoginScreen)
     }
 
     func setIsLoginScrren() {
-        return UserDefaults.standard.setValue(true, forKey: UserDefaultsNames.isLoginScreen.name)
+        return UserDefaults.standard.setValue(true, forKey:  UserDefaults.Keys.isLoginScreen)
     }
 }

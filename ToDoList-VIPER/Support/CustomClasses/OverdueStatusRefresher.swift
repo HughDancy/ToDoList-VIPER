@@ -10,7 +10,7 @@ import Foundation
 final class OverdueStatusRefresher {
     static let shared = OverdueStatusRefresher()
     private let defaults = UserDefaults.standard
-    private let defaultsKey = UserDefaultsNames.lastOverdueRefresh.name
+    private let defaultsKey = UserDefaults.Keys.lastOverdueRefresh
     private let calender = Calendar.current
 
     func loadDataIfNeeded(completion: (Bool) -> Void) {

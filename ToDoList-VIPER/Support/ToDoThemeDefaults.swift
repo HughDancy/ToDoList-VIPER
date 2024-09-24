@@ -26,10 +26,10 @@ struct ToDoThemeDefaults {
 
     var theme: Theme {
         get {
-            Theme(rawValue: UserDefaults.standard.string(forKey: UserDefaultsNames.selectedTheme.name) ?? "light") ?? .light
+            Theme(rawValue: UserDefaults.standard.string(forKey: UserDefaults.Keys.selectedTheme) ?? "light") ?? .light
         }
         set {
-            UserDefaults.standard.setValue(newValue.rawValue, forKey: UserDefaultsNames.selectedTheme.name)
+            UserDefaults.standard.setValue(newValue.rawValue, forKey: UserDefaults.Keys.selectedTheme)
         }
     }
 

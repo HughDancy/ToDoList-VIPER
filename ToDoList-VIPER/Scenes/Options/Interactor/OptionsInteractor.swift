@@ -23,11 +23,11 @@ final class OptionsInteractor: OptionsInputInteractorProtocol {
     }
 
     func fetchUserData() {
-        guard let userName = UserDefaults.standard.string(forKey: UserDefaultsNames.userName.name) else {
+        guard let userName = UserDefaults.standard.string(forKey: UserDefaults.Keys.userName) else {
             presenter?.getUserName("Test User")
             return
         }
-        guard let userAvatar = UserDefaults.standard.url(forKey: UserDefaultsNames.userAvatar.name) else {
+        guard let userAvatar = UserDefaults.standard.url(forKey: UserDefaults.Keys.userAvatar) else {
             presenter?.getUserAvatar(nil)
             return
         }
@@ -61,7 +61,7 @@ final class OptionsInteractor: OptionsInputInteractorProtocol {
             NewUserCheck.shared.setIsLoginScrren()
             NewUserCheck.shared.setIsNotFirstStartOnboarding()
             TaskStorageManager.instance.deleteAllEntities()
-            UserDefaults.standard.removeObject(forKey: UserDefaultsNames.userAvatar.name)
+            UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.userAvatar)
         }
     }
 }

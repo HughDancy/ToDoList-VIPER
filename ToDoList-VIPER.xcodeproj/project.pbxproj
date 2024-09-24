@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D82B8B6E2B6B8CCB00A006F2 /* AppConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82B8B6D2B6B8CCB00A006F2 /* AppConfigurator.swift */; };
+		D8464AEF2CA2A68A001FD788 /* UserDefaults + EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8464AEE2CA2A68A001FD788 /* UserDefaults + EXT.swift */; };
 		D846B8622C14606A00AA8775 /* AuthKeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D846B8612C14606A00AA8775 /* AuthKeychainManager.swift */; };
 		D846B8652C14609C00AA8775 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D846B8642C14609C00AA8775 /* Security.framework */; };
 		D846B8692C18518F00AA8775 /* FirebaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D846B8682C18518F00AA8775 /* FirebaseStorageManager.swift */; };
@@ -35,7 +36,6 @@
 		D857BAD82C5E024700806F87 /* MockLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D857BAD72C5E024700806F87 /* MockLocalStorage.swift */; };
 		D857BADB2C60AE1E00806F87 /* MockMainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D857BADA2C60AE1E00806F87 /* MockMainStorage.swift */; };
 		D857BADD2C60AE7500806F87 /* MockMainScreenServerStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D857BADC2C60AE7500806F87 /* MockMainScreenServerStorage.swift */; };
-		D857BADF2C60BE4F00806F87 /* UserDefaultsNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = D857BADE2C60BE4F00806F87 /* UserDefaultsNames.swift */; };
 		D857BAE12C60E14200806F87 /* A-OnboardingUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D857BAE02C60E14200806F87 /* A-OnboardingUITest.swift */; };
 		D85C57E52B57C71900023B04 /* OnboardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C57E42B57C71900023B04 /* OnboardingPage.swift */; };
 		D85C57E72B57CCA600023B04 /* OnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C57E62B57CCA600023B04 /* OnboardingPresenter.swift */; };
@@ -192,6 +192,7 @@
 
 /* Begin PBXFileReference section */
 		D82B8B6D2B6B8CCB00A006F2 /* AppConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigurator.swift; sourceTree = "<group>"; };
+		D8464AEE2CA2A68A001FD788 /* UserDefaults + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults + EXT.swift"; sourceTree = "<group>"; };
 		D846B8612C14606A00AA8775 /* AuthKeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthKeychainManager.swift; sourceTree = "<group>"; };
 		D846B8642C14609C00AA8775 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		D846B8682C18518F00AA8775 /* FirebaseStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageManager.swift; sourceTree = "<group>"; };
@@ -219,7 +220,6 @@
 		D857BAD72C5E024700806F87 /* MockLocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocalStorage.swift; sourceTree = "<group>"; };
 		D857BADA2C60AE1E00806F87 /* MockMainStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMainStorage.swift; sourceTree = "<group>"; };
 		D857BADC2C60AE7500806F87 /* MockMainScreenServerStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMainScreenServerStorage.swift; sourceTree = "<group>"; };
-		D857BADE2C60BE4F00806F87 /* UserDefaultsNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsNames.swift; sourceTree = "<group>"; };
 		D857BAE02C60E14200806F87 /* A-OnboardingUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "A-OnboardingUITest.swift"; sourceTree = "<group>"; };
 		D85C57E42B57C71900023B04 /* OnboardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPage.swift; sourceTree = "<group>"; };
 		D85C57E62B57CCA600023B04 /* OnboardingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPresenter.swift; sourceTree = "<group>"; };
@@ -690,7 +690,6 @@
 				D8BDEABF2BE3658200C3BE55 /* ColorTransformer.swift */,
 				D8B85D692BE3891B0015F2B2 /* TaskCategoryManager.swift */,
 				D87087D32BEA35BB00EEDDD7 /* NotificationNames.swift */,
-				D857BADE2C60BE4F00806F87 /* UserDefaultsNames.swift */,
 				D8E00C762C16DC66005AEA4D /* MockUsersAvatrs.swift */,
 				D8E72EFC2C2181E3007FF819 /* ToDoTask.swift */,
 			);
@@ -1246,6 +1245,7 @@
 				D8473BEC2BB6BE860063F87A /* UIStackView + EXT.swift */,
 				D8AB92262BBD46AD00826A4E /* UINavigationController + EXT.swift */,
 				D8D439352C4A176600F75A90 /* UIButton + EXT.swift */,
+				D8464AEE2CA2A68A001FD788 /* UserDefaults + EXT.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1533,6 +1533,7 @@
 				D8E72EFD2C2181E3007FF819 /* ToDoTask.swift in Sources */,
 				D8C3C7ED2C635A6D00DD8354 /* AuthManager.swift in Sources */,
 				D8B1E9C32BA421A600D455AF /* MainScreenRouter.swift in Sources */,
+				D8464AEF2CA2A68A001FD788 /* UserDefaults + EXT.swift in Sources */,
 				D8473BE92BB581A00063F87A /* DateItem.swift in Sources */,
 				D8E840662B6780A6005A0936 /* RegistrationPresenter.swift in Sources */,
 				D8F8B3642C4FA72C00A0B491 /* OptionView.swift in Sources */,
@@ -1541,7 +1542,6 @@
 				D846B8622C14606A00AA8775 /* AuthKeychainManager.swift in Sources */,
 				D87474552B97176C00BF4866 /* CircleBaseButton.swift in Sources */,
 				D8E72F072C354457007FF819 /* OptionsViewController.swift in Sources */,
-				D857BADF2C60BE4F00806F87 /* UserDefaultsNames.swift in Sources */,
 				D8B1E9BF2BA4212A00D455AF /* MainScreenPresenter.swift in Sources */,
 				D86422DC2C37D3FA000A0BDF /* UserOptionController.swift in Sources */,
 				D85C57EE2B57D16300023B04 /* OnboardingRouter.swift in Sources */,

@@ -55,10 +55,8 @@ var window: UIWindow?
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        UserDefaults.standard.setValue(false, forKey: UserDefaultsNames.firstWorkLaunch.name)
+        UserDefaults.standard.setValue(false, forKey: UserDefaults.Keys.firstWorkLaunch)
         print("App end's his lifecycle")
-//        UserDefaults.standard.set(false, forKey: UserDefaultsNames.firstWorkLaunch.name)
-//        UserDefaults.standard.setValue(false, forKey: UserDefaultsNames.firstWorkLaunch.name)
     }
 
     // MARK: - Core Data stack

@@ -20,7 +20,7 @@ final class OptionsRouter: OptionsRouterProtocol {
     func logOut(from view: OptionsViewProtocol) {
         guard let parrentView = view as? UIViewController else { return }
         parrentView.tabBarController?.tabBar.isHidden = true
-        if UserDefaults.standard.bool(forKey: UserDefaultsNames.firstWorkLaunch.name) {
+        if UserDefaults.standard.bool(forKey: UserDefaults.Keys.firstWorkLaunch) {
             parrentView.dismiss(animated: true)
         } else {
             let loginModule = AppConfigurator.configuator.logOut()

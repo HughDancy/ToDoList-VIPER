@@ -45,7 +45,7 @@ final class OnboardingPagesController: UIPageViewController {
 
     private func setupFirstPage() {
         if let firstPage = pages.first(where: { page in
-            page.state?.rawValue ?? OnboardingStates.welcome.rawValue == UserDefaults.standard.string(forKey: UserDefaultsNames.onboardingState.name)
+            page.state?.rawValue ?? OnboardingStates.welcome.rawValue == UserDefaults.standard.string(forKey: UserDefaults.Keys.onboardingState)
               }) {
                   setViewControllers([firstPage], direction: .forward, animated: true, completion: nil)
             self.currentPage = pages.firstIndex(of: firstPage) ?? 0
